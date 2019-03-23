@@ -1,0 +1,19 @@
+This file collets links to coverage-related information,
+
+OGC Coverages.DWG wiki (good for a start - references to authoritative documents, educational material, etc.)
+- http://myogc.org/go/coveragesDWG 
+- start here for an overview: http://external.opengeospatial.org/twiki_public/CoveragesDWG/CoveragesBigPicture
+
+OGC authoritative standards page
+- Coverage standard: http://docs.opengeospatial.org/is/09-146r6/09-146r6.html
+- WCS standard: http://www.opengeospatial.org/standards/wcs
+- WCPS standard: http://www.opengeospatial.org/standards/wcps
+- schemas, including many examples: http://schemas.opengis.net/cis , http://schemas.opengis.net/wcs 
+
+Training material
+- Wikipedia: http://en.wikipedia.org/wiki/Data_cube, http://en.wikipedia.org/wiki/Coverage_data, http://en.wikipedia.org/wiki/Web_Coverage_Service, http://en.wikipedia.org/wiki/Web_Coverage_Processing_Service
+- Webinars: www.earthserver.eu/webinars 
+- Tutorials: http://tutorial.rasdaman.org/rasdaman-and-ogc-ws-tutorial/ 
+- Online interactive demos & sandbox: http://standards.rasdaman.com/ 
+- Jupyter notebooks: http://nbviewer.jupyter.org/github/earthserver-eu/ 
+
