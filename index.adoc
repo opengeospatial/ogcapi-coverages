@@ -80,13 +80,14 @@ Without any subsetting parameter the whole coverage extent is the target resourc
 Coverage subsetting is indicated through the SUBSET parameter name. The value following the "=" symbol is built as follows:
 
 Each SubsetSpec shall adhere to this EBNF syntax:
+
     SubsetSpec:            +++<u>SUBSET</u>+++ +++<u>=</u>+++ axisName ( intervalOrPoint )
     axisName:              NCName
     intervalOrPoint:       interval | point
     interval:              low +++<u>:</u>+++ high
     low:                   point | +++<u>*</u>+++
     high:                  point | +++<u>*</u>+++
-    point:                 number | +++<u>"</u>+++ text +++<u>"</u>+++    //" = ASCII code 0x42
+    point:                 number | +++<u>"</u>+++ text +++<u>"</u>+++    //" = double quote = ASCII code 0x42
 
 In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified. For the detailed semantics of subsetting, trimming, and slicing see OGC WCS [2].
 
@@ -114,6 +115,7 @@ This section contains examples for coverage access, subsetting, and encoding. It
 --------------------
 
 The first part is about service metadata. Currently this is wild speculation as it will mainly be defined through OpenAPI Common.
+
 * http://acme.com/oapi/ServiceDescription/FormatsSupported -- returns a list of formats in which coverage representations can be requested
 
 4.2 Coverage Access
