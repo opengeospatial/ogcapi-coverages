@@ -150,6 +150,8 @@ References
 ==========
 
 [1] Coverage Implementation Schema (CIS) 1.1
+
 [2] Web Coverge Serviec - Core 2.0 
+
 [3] RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax", https://tools.ietf.org/html/rfc3986 .
 
