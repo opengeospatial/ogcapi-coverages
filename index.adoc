@@ -1,8 +1,8 @@
 index.adoc
 
 
-1. Introduction
-===============
+1 Introduction
+==============
 
 This OpenAPI - Coverages specification establishes how to access coverages [1] through OpenAPI.
 
@@ -13,8 +13,9 @@ Current limitations:
 * Only coverage extraction functionality is considered, not general processing (as is provided with WCS extensions such as WCPS). Exceptions from this rule are subsetting and data format encoding, given their practical relevance.
  As such, the functionality provided with WCS Core [2] is defined below.
 
-2. Principles
-=============
+
+2 Principles
+============
 
 OpenAPI establishes URL-based access patterns following a syntax like
         http://www.acme.com/path/to/resource?query-parameters
@@ -37,21 +38,21 @@ referenced in CIS, is not followed by OpenAPI, so here deviations will occur.
 
 For path expressions abbreviations (i.e., aliases) may be defined for convenience.
 
-3. OpenAPI Coverage Requests
-============================
+3 OpenAPI Coverage Requests
+===========================
 
 This clause defines the basics of accessing OGC coverages via OpenAPI.
 
 3.1 General
 -----------
 
-Requirement:
+Requirement: 
 A service offering OpenAPI coverage access shall be accessible via a URL as service endpoint (subsequently referred to as Base URL).
 
 Example:
         http://acme.com/oapi/coverages
 
-Requirement:
+Requirement: 
 Coverage access paths, as defined in the next clause, are concatenated to the Base URL via a "/" character, followed (optionally) by a query part.
 
 Example:
@@ -106,8 +107,8 @@ At most one FORMAT aprameter may be present in a coverage access request. The fo
 
 For the detailed semantics of format encoding see OGC WCS [2].
 
-4. Examples
-===========
+4 Examples
+==========
 
 This section contains examples for coverage access, subsetting, and encoding. It assumes a service endpoint of http://acme.com/oapi/ .
 
@@ -138,8 +139,8 @@ The third part is about query parameters:
 * http://acme.com/oapi/coverages/MyLittleCoverage?FORMAT=text/json -- returns the coverage in JSON format
 
 
-5. Open Issues
-==============
+5 Open Issues
+=============
 
 * establish service parameter access, based on OpenAPI Common
 * what is the output format of items typically returnd as XML or JSON, such as DomainSet and RangeType? Should maybe FORMAT be applicable here as well? If so, should it be listed as a possible output format (which might be confusing)?
