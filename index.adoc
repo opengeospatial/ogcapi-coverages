@@ -45,13 +45,13 @@ This clause defines the basics of accessing OGC coverages via OpenAPI.
 3.1 General
 -----------
 
-**Requirement:**
+Requirement:
 A service offering OpenAPI coverage access shall be accessible via a URL as service endpoint (subsequently referred to as Base URL).
 
 Example:
         http://acme.com/oapi/coverages
 
-**Requirement:**
+Requirement:
 Coverage access paths, as defined in the next clause, are concatenated to the Base URL via a "/" character, followed (optionally) by a query part.
 
 Example:
