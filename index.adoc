@@ -7,6 +7,7 @@ index.adoc
 This OpenAPI - Coverages specification establishes how to access coverages [1] through OpenAPI.
 
 Current limitations:
+
 * Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SOlidCoverages. Reason is that gridded coverages receive most attention today whereas the other types are not currently practically relevant.
 * Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
 * Only coverage extraction functionality is considered, not general processing (as is provided with WCS extensions such as WCPS). Exceptions from this rule are subsetting and data format encoding, given their practical relevance.
@@ -18,6 +19,7 @@ Current limitations:
 OpenAPI establishes URL-based access patterns following a syntax like
         http://www.acme.com/path/to/resource?query-parameters
 whereby
+
 * /path/to/resource defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com.
 * the query-parameters represent key/value pairs with further parameters passed to the request.
 
@@ -26,6 +28,7 @@ er, which makes positional parameters like established with a path unsuitable. T
 nflicted here.
 
 As a general rule,
+
 * accessing a coverage component is done in the path section,
 * subsetting and format encoding is done in the query parameter section.
 
@@ -86,8 +89,7 @@ Each SubsetSpec shall adhere to this EBNF syntax:
     high:                  point | +++<u>*</u>+++
     point:                 number | +++<u>"</u>+++ text +++<u>"</u>+++    //" = ASCII code 0x42
 
-In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified.
-For the detailed semantics of subsetting, trimming, and slicing see OGC WCS [2].
+In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified. For the detailed semantics of subsetting, trimming, and slicing see OGC WCS [2].
 
 A coverage access request may have any number of SUBSET parameters, however for each axis of the coverage at most one SUBSET parameter may be provided.
 
@@ -118,6 +120,7 @@ The first part is about service metadata. Currently this is wild speculation as 
 4.2 Coverage Access
 -------------------
 The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
+
 * http://acme.com/oapi/coverages/MyLittleCoverage -- returns coverage MyLittleCoverage in its Native Format
 * http://acme.com/oapi/coverages/MyLittleCoverage/DomainSet -- returns the coverage's domain set definition
 * http://acme.com/oapi/coverages/MyLittleCoverage/DomainSet/GeneralGrid/srsName -- returns the srsName value, i.e.: the coverage's (spatio-temporal) CRS
@@ -129,6 +132,7 @@ The second part is about coverage access, which (as described earlier) is driven
 -------------------------------------------
 
 The third part is about query parameters:
+
 * http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=Lat(40,50)&SUBSET=LONG(10,20)  -- returns a coverage coutout between (40,10) and (50,20)
 * http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=time("2019-03-27") -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
 * http://acme.com/oapi/coverages/MyLittleCoverage?FORMAT=text/json -- returns the coverage in JSON format
