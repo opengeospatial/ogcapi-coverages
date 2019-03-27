@@ -11,7 +11,7 @@ Current limitations:
 * Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SOlidCoverages. Reason is that gridded coverages receive most attention today whereas the other types are not currently practically relevant.
 * Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
 * Only coverage extraction functionality is considered, not general processing (as is provided with WCS extensions such as WCPS). Exceptions from this rule are subsetting and data format encoding, given their practical relevance.
- As such, the functionality provided with WCS Core [2] is defined below.
+ As such, the functionality provided below resembles WCS Core [2].
 
 
 2 Principles
@@ -24,9 +24,7 @@ whereby
 * /path/to/resource defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com.
 * the query-parameters represent key/value pairs with further parameters passed to the request.
 
-Given the hierarchical nature of the path component it is clear that subsetting does not fit there - after all, all dimensions in a coverage are of same importance. Further, subsetting may reference any axis and leave out any oth
-er, which makes positional parameters like established with a path unsuitable. The second query parameter defined currently is the output format; this is (surprisingly) already the case in RESTful approaches, hence no change is i
-nflicted here.
+Given the hierarchical nature of the path component it is clear that subsetting does not fit there - after all, all dimensions in a coverage are of same importance. Further, subsetting may reference any axis and leave out any other, which makes positional parameters like established with a path unsuitable. The second query parameter defined currently is the output format; this is (surprisingly) already the case in RESTful approaches, hence no change is inflicted here.
 
 As a general rule,
 
