@@ -81,7 +81,7 @@ Without any subsetting parameter the whole coverage extent is the target resourc
 
 Coverage subsetting is indicated through the SUBSET parameter name. The value following the "=" symbol is built as follows:
 
-    SubsetSpec:            UBSET = axisName ( intervalOrPoint )
+    SubsetSpec:            SUBSET = axisName ( intervalOrPoint )
     axisName:              {NCName}
     intervalOrPoint:       interval | point
     interval:              low :  high
