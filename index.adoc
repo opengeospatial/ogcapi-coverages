@@ -89,7 +89,7 @@ Coverage subsetting is indicated through the SUBSET parameter name. The value fo
     high:                  point | *
     point:                 {number} | " {text} "    //" = double quote = ASCII code 0x42
 
-where {NCName} is an XML-style identiier not containing ":" (colon) characters, {number} is an integer or floating-point number, and {text} is some general ASCII text (such as a time and date notation in ISO 8601). A coverage access request may have any number of SUBSET parameters, however for each axis of the coverage at most one SUBSET parameter may be provided.
+where {NCName} is an XML-style identifier not containing ":" (colon) characters, {number} is an integer or floating-point number, and {text} is some general ASCII text (such as a time and date notation in ISO 8601). A coverage access request may have any number of SUBSET parameters, however for each axis of the coverage at most one SUBSET parameter may be provided.
 
 In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified. For the detailed semantics of subsetting, trimming, and slicing see OGC WCS [2].
 
