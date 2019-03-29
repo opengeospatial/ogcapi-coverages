@@ -65,6 +65,8 @@ In this clause, the path component of OpenAPI coverage access is established.
 
 Access paths follow the XML Schema of CIS [1] in their structure.
 
+To access coverage service constituents, such as formats supported, OGC 14-121 Web Query Service provides guidance, see https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf .
+
 3.3 Coverage Query Parameters
 -----------------------------
 
@@ -79,19 +81,18 @@ Without any subsetting parameter the whole coverage extent is the target resourc
 
 Coverage subsetting is indicated through the SUBSET parameter name. The value following the "=" symbol is built as follows:
 
-Each SubsetSpec shall adhere to this EBNF syntax:
-
-    SubsetSpec:            +++<u>SUBSET</u>+++ +++<u>=</u>+++ axisName ( intervalOrPoint )
-    axisName:              NCName
+    SubsetSpec:            UBSET = axisName ( intervalOrPoint )
+    axisName:              {NCName}
     intervalOrPoint:       interval | point
-    interval:              low +++<u>:</u>+++ high
-    low:                   point | +++<u>*</u>+++
-    high:                  point | +++<u>*</u>+++
-    point:                 number | +++<u>"</u>+++ text +++<u>"</u>+++    //" = double quote = ASCII code 0x42
+    interval:              low :  high
+    low:                   point | *
+    high:                  point | *
+    point:                 {number} | " {text} "    //" = double quote = ASCII code 0x42
+
+where {NCName} is an XML-style identiier not containing ":" (colon) characters, {number} is an integer or floating-point number, and {text} is some general ASCII text (such as a time and date notation in ISO 8601). A coverage access request may have any number of SUBSET parameters, however for each axis of the coverage at most one SUBSET parameter may be provided.
 
 In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified. For the detailed semantics of subsetting, trimming, and slicing see OGC WCS [2].
 
-A coverage access request may have any number of SUBSET parameters, however for each axis of the coverage at most one SUBSET parameter may be provided.
 
 3.3.2 Coverage Encoding
 -----------------------
@@ -102,7 +103,7 @@ The syntax for format encoding is
 
 where {format-identifier} is defined elsewhere.
 
-At most one FORMAT aprameter may be present in a coverage access request. The format chosen must be able to represent the output of the request.
+At most one FORMAT parameter may be present in a coverage access request. The format chosen must be able to represent the output of the request.
 
 For the detailed semantics of format encoding see OGC WCS [2].
 
@@ -134,7 +135,7 @@ The second part is about coverage access, which (as described earlier) is driven
 
 The third part is about query parameters:
 
-* http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=Lat(40,50)&SUBSET=LONG(10,20)  -- returns a coverage coutout between (40,10) and (50,20)
+* http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=Lat(40,50)&SUBSET=LONG(10,20)  -- returns a coverage coutout between (40,10) and (50,20), in the coverage's Native Format
 * http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=time("2019-03-27") -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
 * http://acme.com/oapi/coverages/MyLittleCoverage?FORMAT=text/json -- returns the coverage in JSON format
 
@@ -144,7 +145,7 @@ The third part is about query parameters:
 
 * establish service parameter access, based on OpenAPI Common
 * what is the output format of items typically returnd as XML or JSON, such as DomainSet and RangeType? Should maybe FORMAT be applicable here as well? If so, should it be listed as a possible output format (which might be confusing)?
-
+* [OGC 14-121 Web Query Service](https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf) provides a definition of path syntax, but adds more functionality (such as selection predicates), all based on the XPath standard. Such extra functionality might come handy.
 
 References
 ==========
