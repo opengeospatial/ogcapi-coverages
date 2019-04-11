@@ -15,12 +15,12 @@ As such, the functionality provided below resembles [OGC Web Coverage Service (W
 2 Principles
 ============
 
-OpenAPI establishes URL-based access patterns, as defined by [RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax"](https://tools.ietf.org/html/rfc3986), following a syntax like
-        http://www.acme.com/path/to/resource?query-parameters
+[OpenAPI](https://www.openapis.org/) establishes URL-based access patterns, as defined by [RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax"](https://tools.ietf.org/html/rfc3986), [RFC 3987 "Internationalized Resource Identifiers (IRIs)"](https://tools.ietf.org/html/rfc3987), and [RFC 6570 "URI Template"](https://tools.ietf.org/html/rfc6570) following a syntax like
+        http://www.acme.com/path/to/resource/{id}{?query,parameters}
 whereby
 
-* /path/to/resource defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com.
-* the query-parameters represent key/value pairs with further parameters passed to the request.
+* `/path/to/resource/{id}` defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com.
+* the `{?query,parameters}` represent key/value pairs with further parameters passed to the request.
 
 As a general rule,
 
@@ -28,8 +28,8 @@ As a general rule,
 * subsetting is done in the query parameter section
 * format encoding is controlled via HTTP headers
 
-As the coverage model normatively is given by the corresponding XML schema (JSON and RDF are built in sync with XML) specification of the OpenAPI access paths follows this schema. Note, though, that OWS Common, while normatively
-referenced in CIS, is not followed by OpenAPI, so here deviations will occur.
+As the coverage model normatively is given by the corresponding XML schema (JSON and RDF are built in sync with XML) specification of the [OpenAPI](https://www.openapis.org/) access paths follows this schema. Note, though, that OWS Common, while normatively
+referenced in CIS, is not followed by [OpenAPI](https://www.openapis.org/), so here deviations will occur.
 
 For path expressions abbreviations (i.e., aliases) may be defined for convenience.
 
@@ -51,7 +51,7 @@ Requirement:
 Coverage access paths, as defined in the next clause, are concatenated to the Base URL via a "/" character, followed (optionally) by a query part.
 
 Example:
-        http://acme.com/oapi/collections/{collectionid}/{coverageid}/rangeset?FORMAT=image/png
+        http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset
 
 A request may be denied for server-specific reasons, such as quota.
 
@@ -95,7 +95,7 @@ In case of an interval a trim operation is specified, with lower and upper bound
 -----------------------
 
 Without any format encoding HTTP header (Accept and Accept-Encoding) a representation of the coverage in its Native Format will be returned. If an encoding HTTP header is provided then a representation of the coverage in the format indicated will be returned.
-The syntax for format encoding HTTP headers is defined in [RFC 2616 "Hypertext Transfer Protocol -- HTTP/1.1"](https://tools.ietf.org/html/rfc2616).
+The syntax for format encoding HTTP headers is defined in [RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"](https://tools.ietf.org/html/rfc7231).
 
 The format chosen must be able to represent the output of the request.
 
@@ -116,10 +116,11 @@ The first part is about service metadata. Currently this is wild speculation as 
 4.2 Coverage Finding
 --------------------
 
-* http://acme.com/oapi/collections  -- returns a list including links of all collections
-* http://acme.com/oapi/collections/mycollection  -- returns a description of collection mycollection
-* http://acme.com/oapi/collections/mycollection/coverages  --  returns a list of all coverages included in mycollection
-* http://acme.com/oapi/collections/mycollection/coverages/MyLittleCoverage  --  returns a list of all content included in MyLittleCoverage
+* http://acme.com/oapi/collections  -- returns a list including links to all collections
+* http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection
+* http://acme.com/oapi/collections/{collectionid}/coverages  --  returns a list of all coverages included in a specific collection
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage as multipart coverage including DomainSet, RangeType, and RangeSet in the coverage's Native Format
+* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages included in a specific collection that is in the New Zealand economic zone
 
 
 4.2 Coverage Access
@@ -127,19 +128,21 @@ The first part is about service metadata. Currently this is wild speculation as 
 
 The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
 
-* http://acme.com/oapi/collections/mycollection/coverages/MyLittleCoverage/domainset  -- returns the coverage's domain set definition
-* http://acme.com/oapi/collections/mycollection/coverages/MyLittleCoverage/domainset/generalgrid/srsname  -- returns the srsName value, i.e.: the coverage's (spatio-temporal) CRS
-* http://acme.com/oapi/collections/mycollection/coverages/MyLittleCoverage/domainset/generalgrid/axislabels  -- returns a list o the coverage's axis names
-* http://acme.com/oapi/collections/mycollection/coverages/MyLittleCoverage/rangetype  -- returns the coverage's range type information (i.e., a description of the pixel semantics)
-* http://acme.com/oapi/collections/mycollection/coverages/MyLittleCoverage/metadata  -- returns the coverage's metadata (may be empty)
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset  -- returns the coverage's domain set definition
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/srsname  -- returns the srsName value, i.e.: the coverage's (spatio-temporal) CRS
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/axislabels  -- returns a list o the coverage's axis names
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangetype  -- returns the coverage's range type information (i.e., a description of the pixel semantics)
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/metadata  -- returns the coverage's metadata (may be empty)
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format
 
 4.3 Coverage Subsetting
 -----------------------
 
 The third part is about query parameters:
 
-* http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
-* http://acme.com/oapi/coverages/MyLittleCoverage?SUBSET=time("2019-03-27")  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=time("2019-03-27")  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
 
 
 5 Open Issues
