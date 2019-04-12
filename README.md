@@ -120,10 +120,10 @@ The first part is about service metadata. Currently this is wild speculation as 
 * http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection
 * http://acme.com/oapi/collections/{collectionid}/coverages  --  returns a list of all coverages included in a specific collection
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage as multipart coverage including DomainSet, RangeType, and RangeSet in the coverage's Native Format
-* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages included in a specific collection that is in the New Zealand economic zone
+* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone
 
 
-4.2 Coverage Access
+4.3 Coverage Access
 -------------------
 
 The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
@@ -135,7 +135,7 @@ The second part is about coverage access, which (as described earlier) is driven
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/metadata  -- returns the coverage's metadata (may be empty)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format
 
-4.3 Coverage Subsetting
+4.4 Coverage Subsetting
 -----------------------
 
 The third part is about query parameters:
