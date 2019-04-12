@@ -131,7 +131,7 @@ The second part is about coverage access, which (as described earlier) is driven
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset  -- returns the coverage's domain set definition
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/srsname  -- returns the srsName value, i.e.: the coverage's (spatio-temporal) CRS
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/axislabels  -- returns a list o the coverage's axis names
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangetype  -- returns the coverage's range type information (i.e., a description of the pixel semantics)
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/metadata  -- returns the coverage's metadata (may be empty)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format
 
