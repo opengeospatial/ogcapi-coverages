@@ -2,7 +2,7 @@
 
 [NOTE]
 ========
-The OAS requirements class should be limited to OpenAPI 3.0 requirements that specific to coverage resources. These requirements are an extension to the OpenAPI requirements in OAPI Common.
+The OAS requirements class should be limited to OpenAPI 3.0 requirements that are specific to coverage resources. These requirements are an extension to the OpenAPI requirements in OAPI Common.
 
 What follows is from OAPI common.  It should be replaced with approapriate coverage centered requirements.
 ========
