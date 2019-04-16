@@ -1,0 +1,17 @@
+[[rc_core]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class 4.0: Encoding*
+{set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/OAPI_Coverage/core/1.0/req/encoding
+{set:cellbgcolor:#FFFFFF}
+|Target type {set:cellbgcolor:#CACCCE}|Web API{set:cellbgcolor:#FFFFFF}
+|Requirement 4.1 {set:cellbgcolor:#CACCCE}|If an encoding HTTP header (Accept and Accept-Encoding) is provided then a representation of the coverage in the format indicated SHALL be returned. 
+{set:cellbgcolor:#FFFFFF}
+|Requirement 4.2 {set:cellbgcolor:#CACCCE}|Negotiation of the format of a returned coverage SHALL be conducted through HTTP headers as defined in  (https://tools.ietf.org/html/rfc7231)[RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"]. 
+{set:cellbgcolor:#FFFFFF}
+|Requirement 4.3 {set:cellbgcolor:#CACCCE}|If an encoding HTTP header (Accept and Accept-Encoding) is not provided then the coverage SHALL be returne in its native format. 
+{set:cellbgcolor:#FFFFFF}
+|===
+
+The detailed semantics of format encoding is described in (http://docs.opengeospatial.org/is/17-089r1/17-089r1.html)[OGC WCS].

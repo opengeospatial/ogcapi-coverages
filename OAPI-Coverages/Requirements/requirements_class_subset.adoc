@@ -1,0 +1,30 @@
+[[rc_core]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class 3.0: Subsetting*
+{set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/OAPI_Coverage/core/1.0/req/subsetting
+{set:cellbgcolor:#FFFFFF}
+|Target type {set:cellbgcolor:#CACCCE}|Web API{set:cellbgcolor:#FFFFFF}
+|Requirement 3.1 {set:cellbgcolor:#CACCCE}|An implementation of the OGC Coverage API shall support subsetting of a coverage through the SUBSET query parameter. 
+{set:cellbgcolor:#FFFFFF}
+|Requirement 3.2 {set:cellbgcolor:#CACCCE}|The SUBSET query parameter SHALL be implemented according to the following BNF: +
+    SubsetSpec:            SUBSET = axisName  (intervalOrPoint) +
+    axisName:              {NCName} +
+    intervalOrPoint:       interval \| point +
+    interval:              low : high +
+    low:                   point \| * +
+    high:                  point \| * +
+    point:                 {number} \| "{text}" +
+    +
+    Where: +
+    " = double quote = ASCII code 0x42, +
+    {NCName} is an XML-style identifier not containing ":" (colon) characters, +
+    {number} is an integer or floating-point number, and +
+    {text} is some general ASCII text (such as a time and date notation in ISO 8601). + 
+{set:cellbgcolor:#FFFFFF}
+|Requirement 3.3 {set:cellbgcolor:#CACCCE}|If the subsetting query parameter is not provided then the whole coverage extent of the target resource SHALL be returned. 
+{set:cellbgcolor:#FFFFFF}
+|Requirement 3.4 {set:cellbgcolor:#CACCCE}|A coverage access request may have any number of SUBSET  parameters, however for each axis of the coverage at most one SUBSET parameter SHALL be provided. 
+{set:cellbgcolor:#FFFFFF}
+|===

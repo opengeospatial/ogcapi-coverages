@@ -1,4 +1,4 @@
-:Title: OGC (add title text)
+:Title: OGC API Coverages
 :titletext: OGC API Coverages
 :doctype: book
 :encoding: utf-8

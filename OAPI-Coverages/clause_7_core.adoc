@@ -1,26 +1,65 @@
 == Clause containing normative material
 Paragraph
 
-=== Requirement Class A or Requirement A Example
+=== Requirement Class Common
 Paragraph – intro text for the requirement class.
 
 Use the following table for Requirements Classes.
 
-include::requirements/requirements_class.adoc[]
+include::requirements/requirements_class_common.adoc[]
 
-==== Requirement 1
-Paragraph - intro text for the requirement.
+==== Examples of Common applied to Coverages 
 
-Use the following table for Requirements, number sequentially.
+include::examples/examples_boundingbox.adoc[]
 
-include::requirements/requirement.adoc[]
+=== Requirement Class Path
+An API exposes resources though a resource path. 
 
-Dictionary tables for requirements can be added as necessary. Modify the following example as needed.
+General Template: 
 
-[width="90%",options="header"]
-|===
-|Names |Definition |Data types and values |Multiplicity and use
-|name 1 |definition of name 1 |float |One or more (mandatory)
-|name 2 |definition of name 2 |character string type, not empty |Zero or one (optional)
-|name 3 |definition of name 3 |GML:: Point PropertyType |One (mandatory)
-|===
+    {root}/collections/{collectionid}/coverages/{coverageid/{a}
+    
+    protocol := "http" | "https"
+    server   := server DNS name
+    root     := {protocol}:{server}
+    a := {b} | "rangetype" | "metadata" | "rangeset"
+    b := /domainset | /domainset/{c}
+    c := generalgrid/{d}
+    d := "srsname" | "axislabels"
+
+Use the following table for Requirements Classes.
+
+include::requirements/requirements_class_path.adoc[]
+
+=== Requirement Class Subset
+Without any subsetting parameter the whole coverage extent is the target resource addressed. If a subsetting operation is provided then the coverage subset indicated is the target resource addressed.
+
+Coverage subsetting is indicated through the SUBSET parameter name. The value following the "=" symbol is built as follows:
+
+    SubsetSpec:            SUBSET = axisName (intervalOrPoint)
+    axisName:              {NCName}
+    intervalOrPoint:       interval | point
+    interval:              low : high
+    low:                   point | *
+    high:                  point | *
+    point:                 {number} | "{text}"
+    
+    Where:
+    " = double quote = ASCII code 0x42,
+    {NCName} is an XML-style identifier not containing ":" (colon) characters, 
+    {number} is an integer or floating-point number, and
+    {text} is some general ASCII text (such as a time and date notation in ISO 8601). 
+    
+include::requirements/requirements_class_subset.adoc[]
+
+==== Subsetting Examples
+
+include::examples/examples_subsetting.adoc[]
+
+=== Requirements Class Encodings
+
+include::requirements/requirements_class_encoding.adoc[]
+
+
+
+
