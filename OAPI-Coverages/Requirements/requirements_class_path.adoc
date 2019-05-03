@@ -19,21 +19,21 @@ Where: +
 {set:cellbgcolor:#FFFFFF}
 |Requirement 2.3 {set:cellbgcolor:#CACCCE}|A coverage accessed according to requirement 2.2 SHALL be returned as multipart coverage including the DomainSet, RangeType, and RangeSet in the coverage's Native Format.
 {set:cellbgcolor:#FFFFFF}
-|Requirement 2.4 {set:cellbgcolor:#CACCCE}|A coverage's domain set definition SHALL be accessible using the following URL template: +
+|Requirement 2.4 {set:cellbgcolor:#CACCCE}|A coverage's domain set SHALL be accessible using the following URL template: +
 {root}/collections/{collectionid}/coverages/{coverageid}/domainset +
 Where: +
     collectionid := TBD +
     coverageid := TBD +
 {set:cellbgcolor:#FFFFFF}
 |Requirement 2.5 {set:cellbgcolor:#CACCCE}|
-TBD SHALL be accessible using the following URL template: +
+The grid of a coverage's domain set  SHALL be accessible using the following URL template: +
 {root}/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid +
 Where: +
     collectionid := TBD + 
     coverageid := TBD +
 {set:cellbgcolor:#FFFFFF}
 |Requirement 2.6 {set:cellbgcolor:#CACCCE}|
-The spatial-temporal coordinate reference system for a coverage SHALL be accessible using the following URL template: +
+The spatio-temporal coordinate reference system used in the domain set of a coverage SHALL be accessible using the following URL template: +
 {root}/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/srsname +
 Where: +
     collectionid := TBD +
@@ -47,14 +47,14 @@ Where: +
     coverageid := TBD +
 {set:cellbgcolor:#FFFFFF}
 |Requirement 2.8 {set:cellbgcolor:#CACCCE}|
-The range type information for a coverage SHALL be accessible using the following URL template: +
+The range type information of a coverage SHALL be accessible using the following URL template: +
 {root}/collections/{collectionid}/coverages/{coverageid}/rangetype. +
 Where: +
     collectionid := TBD +
     coverageid := TBD +
 {set:cellbgcolor:#FFFFFF}
 |Requirement 2.9 {set:cellbgcolor:#CACCCE}|
-The metadata describing a coverage SHALL be accessible using the following URL template: +
+The metadata of a coverage SHALL be accessible using the following URL template: +
 {root}/collections/{collectionid}/coverages/{coverageid}/metadata +
 Where: +
     collectionid := TBD +
