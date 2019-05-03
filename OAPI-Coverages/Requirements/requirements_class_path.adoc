@@ -17,7 +17,7 @@ Where: +
     collectionid := TBD +
     coverageid := TBD
 {set:cellbgcolor:#FFFFFF}
-|Requirement 2.3 {set:cellbgcolor:#CACCCE}|A coverage accessed according to requirement 2.2 SHALL be returned as multipart coverage including the DomainSet, RangeType, and RangeSet in the coverage's Native Format.
+|Requirement 2.3 {set:cellbgcolor:#CACCCE}|A coverage SHALL be returned encoded as defined in OGC CIS 1.1 and WCS 2.0.
 {set:cellbgcolor:#FFFFFF}
 |Requirement 2.4 {set:cellbgcolor:#CACCCE}|A coverage's domain set SHALL be accessible using the following URL template: +
 {root}/collections/{collectionid}/coverages/{coverageid}/domainset +
