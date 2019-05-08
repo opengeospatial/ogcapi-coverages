@@ -70,11 +70,8 @@ Where: +
 |===
 
 
-    General Template: {root}/collections/{collectionid}/coverages/{coverageid/{a}
+    General Template: /collections/{collectionid}/coverages/{coverageid}/{a}
     
-    protocol := "http" | "https"
-    server   := server DNS name
-    root     := {protocol}:{server}
     a := {b} | "rangetype" | "metadata" | "rangeset"
     b := /domainset | /domainset/{c}
     c := generalgrid/{d}
