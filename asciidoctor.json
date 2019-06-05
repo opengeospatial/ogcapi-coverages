@@ -1,0 +1,12 @@
+{
+        "1": {
+                "OGC_doc_number": "19-yyy",
+                "urn":"http://www.opengis.net/doc/DRAFT/ogc_api_coverages",
+                "title":"OGC API Coverages",
+                "path":"OAPI-Coverages/OAPI_Coverages.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri"
+                ]
+        }
+}
