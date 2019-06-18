@@ -78,7 +78,7 @@ Update the following content once a coverage example has been agreed on.
 The following set of examples is proposed, taken from link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[OGC CIS] standard's suite of link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] examples.
 ========
 
-This document uses a simple example throughout the document: a link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D single-band orthoimage coverage]. Further examples provided in XML, JSON, and RDF include:
+This document uses a simple example throughout the document: a link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D single-band orthoimage coverage]. Further examples provided in link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] include:
 
 * link:http://schemas.opengis.net/cis/1.1/json/examples/00_metadata.json[metadata]
 * link:http://schemas.opengis.net/cis/1.1/json/examples/05_2D_index.json[2D_index]
