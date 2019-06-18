@@ -2,19 +2,19 @@
 
 [NOTE]
 ========
-The following content is from the OAPI Common specification and should be modified for Coverage APIs. Keep in mind that both coverages and metadata are supplied by the API. So HTML and GeoJSON encoding may be retained for the metadata responses.
+The following content is from the OAPI Common specification and should be modified for Coverage APIs. Keep in mind that both coverages and metadata are supplied by the API. link:https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/09-146r6_Coverage_Implementation_Schema_CIS_1.1.pdf[OGC CIS] defines how to encode coverages with their data and metadata; for pure metadata responses HTML and GeoJSON encoding may be retained.
 ========
 
 === Overview
 
-This clause specifies four pre-defined requirements classes for encodings to be used by an OGC API implementation. These encodings are commonly used encodings for spatial data on the web:
+This clause specifies four pre-defined requirements classes for encodings available for use by an OGC API implementation. These encodings are commonly used encodings for spatial data on the web:
 
 * <<rc_html,HTML>>
 * <<rc_geojson,GeoJSON>>
 * <<rc_gmlsf0,Geography Markup Language (GML), Simple Features Profile, Level 0>>
 * <<rc_gmlsf2,Geography Markup Language (GML), Simple Features Profile, Level 2>>
 
-None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class may also implement none of them but implement another encoding instead.
+None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class may also implement none of them but implement another encoding instead, such as GeoTIFF or NetCDF.
 
 The <<rc_core,Core>> requirements class includes recommendations to support <<rec_html,HTML>> and <<rec_geojson,GeoJSON>> as encodings, where practical. <<overview,Clause 6 (Overview)>> includes a discussion about recommended encodings.
 
@@ -41,7 +41,7 @@ include::requirements/html/REC_schema-org.adoc[]
 
 === Requirement Class "GeoJSON"
 
-GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format supporting GeoJSON is recommended, if the feature data can be represented in GeoJSON for the intended use.
+GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format supporting GeoJSON is recommended, if the feature data can be represented in GeoJSON for the intended use; for coverages a corresponding leve of detail is currently not available. Note, though, that the link:https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/09-146r6_Coverage_Implementation_Schema_CIS_1.1.pdf[OGC Coverage Implementation Schema] defines a JSON encoding that retains all coverage information, see the examples provided in the link:http://schemas.opengis.net/cis/1.1/json/examples/[official standard repository].
 
 include::requirements/requirements_class_geojson.adoc[]
 
