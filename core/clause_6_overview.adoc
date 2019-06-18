@@ -16,14 +16,15 @@ This approach intends to support two types of client developers:
 * Those that have never heard about OGC. Developers should be able to create a client using the API definition without the need to read an OGC standard (they may need to learn a little bit about geometry, etc.);
 * Those that want to write a "generic" client that can access OGC APIs, i.e. are not specific for a particular API.
 
-As a result of this modernization, OGC API implementations are not necessarily always backwards compatible with OWS implementations per se, although - for the protection of implementation and service assets - compatibility will be considered as much as possible. However, a design goal is to define OGC APIs in a way so that an OAPI interface can be mapped to an OWS implementation. OGC APIs are intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
+As a result of this modernization, OGC API implementations are not necessarily always backwards compatible with OWS implementations per se, although - for the protection of implementation and service assets - compatibility will be considered as much as possible. However, a design goal is to define OGC APIs in a way so that an OAPI interface can be mapped to an OWS implementation. OGC APIs are intended to be simpler and more modern, but still an evolution from the previous versions and their implementations. 
 
 The OGC coverage data and service model is well prepared for such a step:
+
 * The modular, simple architecture of CIS and WCS has been embraced by developers (link:http://external.opengeospatial.org/twiki_public/CoveragesDWG/WebHome[source]):
- * "Web developers who have not heard of OGC standards before immediately feel at home with these coverage standards" -- Stephan Siemen, ECMWF
- * "WCS is the natural way to deliver and exploit coverage data." -- Jordi Escriu, Facilitator INSPIRE Thematic Cluster #3: Elevation, Orthoimagery, Reference systems and Geographical grids
- * "As a WCS the data is of most value" -- Perry Peterson, Pyxis Innovation
- * "CIS 1.1 is what I've been waiting for." -- Kathi Schleidt, INSPIRE expert 
+** "Web developers who have not heard of OGC standards before immediately feel at home with these coverage standards" -- Stephan Siemen, ECMWF
+** "WCS is the natural way to deliver and exploit coverage data." -- Jordi Escriu, Facilitator INSPIRE Thematic Cluster #3: Elevation, Orthoimagery, Reference systems and Geographical grids
+** "As a WCS the data is of most value" -- Perry Peterson, Pyxis Innovation
+** "CIS 1.1 is what I've been waiting for." -- Kathi Schleidt, INSPIRE expert 
 * Both the coverage data model (CIS) and the service model (WCS) are modular suites of standards, with a focus on simplicity and ease of use in the CIS and WCS Core and a rich ecosystem of coverage-specific structuring and functionality in the extensions. Application Profiles provide specialized services, e.g., for remote sensing imagery.
 * The WCS Core provides the very basic functionality, coverage access, subsetting, and format encoding. Hence, WCS Core is an ideal starting point for an OAPI Coverages service.
 * The WCS suite has a clear separation in functionality and protocol binding (i.e., request language). For example, all WCS Core and Extension functionality can be expressed equivalently in GET/KVP, POST/XML, and SOAP. Adding an OpenAPI protocol binding, therefore, can easily fit into this ecosystem, thereby avoiding a backwards incompatible change (like "WCS 3.0") and rather establishing incrementally a WCS 2.2.
@@ -49,6 +50,7 @@ GeoJSON is a commonly used format that is simple to understand and well supporte
 
 Some examples of cases that are out-of-scope for GeoJSON are:
 
+* coverages
 * When solids are used for geometries (e.g. in a 3D city model),
 * Geometries that include non-linear curve interpolations
 that cannot be simplified (e.g., use of arcs in authoritative geometries),
