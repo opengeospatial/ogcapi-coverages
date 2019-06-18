@@ -9,7 +9,7 @@ Beside the general alignment with the architecture of the Web (e.g., consistency
 
 * Clear separation between core requirements and more advanced capabilities. This document specifies the requirements that are relevant for almost everyone who wants to share or use coverage data on a fine-grained level. Additional capabilities that several communities are using today will be specified as extensions to the Core API.
 * Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.
-* Modularization is not just about a single "service". OGC APIs will provide building blocks that can be reused in APIs in general. In other words, a server supporting the WCS 3.0 API should not be seen as a standalone WCS service.  Rather it should be viewed as a collection of API building blocks which together implement WCS 3.0 capabilities. A corollary of this is that it should be possible to implement an API that simultaneously conforms to conformance classes from WFS 3.0, WCS 3.0 and other OGC Web API standards.
+* Modularization is not just about a single "service". OGC APIs will provide building blocks that can be reused in APIs in general. In other words, a server supporting the OAPI - Coverages should not be seen as a standalone WCS service.  Rather it should be viewed as a collection of API building blocks which together implement OAPI - Coverages capabilities. A corollary of this is that it should be possible to implement an API that simultaneously conforms to conformance classes from OAPI - Features, OAPI - Coverages and other OGC Web API standards.
 
 This approach intends to support two types of client developers:
 
@@ -19,6 +19,11 @@ This approach intends to support two types of client developers:
 As a result of this modernization, OGC API implementations are not necessarily always backwards compatible with OWS implementations per se, although - for the protection of implementation and service assets - compatibility will be considered as much as possible. However, a design goal is to define OGC APIs in a way so that an OAPI interface can be mapped to an OWS implementation. OGC APIs are intended to be simpler and more modern, but still an evolution from the previous versions and their implementations.
 
 The OGC coverage data and service model is well prepared for such a step:
+* The modular, simple architecture of CIS and WCS has been embraced by developers (link:http://external.opengeospatial.org/twiki_public/CoveragesDWG/WebHome[source]):
+ * "Web developers who have not heard of OGC standards before immediately feel at home with these coverage standards" -- Stephan Siemen, ECMWF
+ * "WCS is the natural way to deliver and exploit coverage data." -- Jordi Escriu, Facilitator INSPIRE Thematic Cluster #3: Elevation, Orthoimagery, Reference systems and Geographical grids
+ * "As a WCS the data is of most value" -- Perry Peterson, Pyxis Innovation
+ * "CIS 1.1 is what I've been waiting for." -- Kathi Schleidt, INSPIRE expert 
 * Both the coverage data model (CIS) and the service model (WCS) are modular suites of standards, with a focus on simplicity and ease of use in the CIS and WCS Core and a rich ecosystem of coverage-specific structuring and functionality in the extensions. Application Profiles provide specialized services, e.g., for remote sensing imagery.
 * The WCS Core provides the very basic functionality, coverage access, subsetting, and format encoding. Hence, WCS Core is an ideal starting point for an OAPI Coverages service.
 * The WCS suite has a clear separation in functionality and protocol binding (i.e., request language). For example, all WCS Core and Extension functionality can be expressed equivalently in GET/KVP, POST/XML, and SOAP. Adding an OpenAPI protocol binding, therefore, can easily fit into this ecosystem, thereby avoiding a backwards incompatible change (like "WCS 3.0") and rather establishing incrementally a WCS 2.2.
