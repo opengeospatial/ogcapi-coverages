@@ -73,9 +73,30 @@ In addition, HTTP supports compression. Therefore the standard HTTP compression 
 ========
 Update the following content once a coverage example has been agreed on.
 ========
+[NOTE]
+========
+The following set of examples is proposed, taken from link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[OGC CIS] standard's suite of link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] examples.
+========
 
-This document uses a simple example throughout the document: The dataset contains buildings and the API provides access to them through a single feature collection ("buildings") and two encodings, GeoJSON and HTML.
+This document uses a simple example throughout the document: a link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D single-band orthoimage coverage]. Further examples provided in XML, JSON, and RDF include:
 
-The buildings have a few (optional) properties: the polygon geometry of the building footprint, a name, the function of the building (residential, commercial or public use), the floor count and the timestamp of the last update of the building feature in the dataset.
-
-This example serves to illustrate the concepts underlying OGC APIs. It does not indicate that OGC APIs are always feature based. Other resource types can and will be implemented as well. But the basic capapablities described in this specification will apply to all.
+* link:http://schemas.opengis.net/cis/1.1/json/examples/00_metadata.json[metadata]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/05_2D_index.json[2D_index]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D regular]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/11_2D_regular_fileref.json[2D regular fileref]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/12_2D_regular_fileref_multiband.json[2D regular fileref multiband]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/15_with-envelope.json[with-envelope]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/20_3D_height.json[3D height]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/25_3D_time.json[3D time]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/30_4D_height+time.json[4D height+time]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/40_1D_regular.json[1D regular]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/45_2D_distorted.json[2D distorted]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/46_irregular+distorted.json[irregular+distorted]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/50_3D_partitioned-1.json[3D partitioned]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/55_1D_timeseries-partitioned.json[1D timeseries partitioned]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/60_3D_timeseries-multipart.json[3D timeseries multipart]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/65_1D_timeseries-interleaved.json[1D timeseries interleaved]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/70_2D_interpolation.json[2D interpolation]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/80_sensormodel.json[sensormodel]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/90_point-cloud.json[point cloud]
+  
