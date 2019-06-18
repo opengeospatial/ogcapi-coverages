@@ -2,18 +2,18 @@
 
 [NOTE]
 ========
-The following content is from the OAPI Common specification and should be modified for Coverage APIs. Keep in mind that both coverages and metadata are supplied by the API. link:https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/09-146r6_Coverage_Implementation_Schema_CIS_1.1.pdf[OGC CIS] defines how to encode coverages with their data and metadata; for pure metadata responses HTML and GeoJSON encoding may be retained.
+The following content is from the OAPI Common specification, but has been modified for Coverage APIs. Keep in mind that both coverages and metadata are supplied by the API. link:https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/09-146r6_Coverage_Implementation_Schema_CIS_1.1.pdf[OGC CIS] defines how to encode coverages with their data and metadata; for pure metadata responses HTML and GeoJSON encoding may be retained.
 ========
 
 === Overview
 
-This clause specifies four pre-defined requirements classes for encodings available for use by an OGC API implementation. These encodings are commonly used encodings for spatial data on the web:
+This clause specifies four pre-defined requirements classes for encodings available for use by an OGC API implementation. These encodings are commonly used encodings for spatial data on the web, albeit not always currently for coverages:
 
 * <<rc_cisjson,OGC CIS JSON>> (OGC CIS 1.1 standard, includes binary encodings)
 * <<rc_html,HTML>> (currently undefined)
 * <<rc_geojson,GeoJSON>> (GeoJSON currently does not support coverages, and "The GeoJSON format differs from other GIS standards in that it was written and is maintained not by a formal standards organization, but by an Internet working group of developers." link:https://everything.explained.today/GeoJSON/[source])
 
-None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class may also implement none of them but implement another encoding instead, such as GeoTIFF or NetCDF.
+None of these encodings are mandatory and an implementation of the <<rc_core,Core>> requirements class may also implement none of them but implement another encoding instead, such as GeoTIFF or NetCDF. In a WCS secnario, therefore, the same coverage can simultaneously be served to different application domains, such as in XML for EU INSPIRE based applications, JSON for direct browser consumption, RDF for ontological domains, GeoTIFF for GISs, and NetCDF for multi-dimensional scientific analysis. All these encodings are specified in OGC CIS and companion standards, see link:http://external.opengeospatial.org/twiki_public/CoveragesDWG/CoveragesBigPicture[this graphic]. 
 
 <<overview,Clause 6 (Overview)>> includes a discussion about recommended encodings.
 
