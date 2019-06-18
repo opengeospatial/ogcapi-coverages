@@ -293,3 +293,18 @@ This requirements class relies on the OGC/ISO Coverage Implementation Schema and
 }
 ----
 
+.A CIS JSON Coverage Object response with file reference (link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[source])
+=================
+In the example below, the range set part of the coverage above has been replaced by a file reference (which should be accessible by the coverage recipient, so likely a URL in practice). All other parts (denoted by "...") remain as above.
+
+[source,JSON]
+----
+...
+        "rangeSet": {
+                "@context": "http://localhost/json-ld/rangeset-context.json",
+                "type": "RangeSetRefType",
+                "id": "examples:CIS_RS_11_2D",
+                "fileReference": ["regular_fileref.tiff"]
+        },
+...
+----
