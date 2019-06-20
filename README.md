@@ -94,7 +94,7 @@ Coverage subsetting is indicated through the SUBSET parameter name. The value fo
     SubsetSpec:            SUBSET = axisName ( intervalOrPoint )
     axisName:              {NCName}
     intervalOrPoint:       interval | point
-    interval:              low :  high
+    interval:              low ,  high
     low:                   point | *
     high:                  point | *
     point:                 {number} | " {text} "    //" = double quote = ASCII code 0x42
