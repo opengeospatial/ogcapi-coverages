@@ -153,7 +153,7 @@ Notes:
 
 The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
 
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description -- whole coverage description consisting of rangetype, domainset, metadata
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description -- returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset  -- returns the coverage's domain set definition
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/metadata  -- returns the coverage's metadata (may be empty)
@@ -167,6 +167,12 @@ The third part is about query parameters:
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=time("2019-03-27")  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
+
+4.5 Coverage Encoding
+---------------------
+If no format encoding is specified then a coverage shall be returned in its Native Format.
+
+In the Core, format encodings different from the target coverage's Native Format shall be requested and delivered as in OAPI Common.
 
 
 5 Open Issues
