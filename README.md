@@ -152,12 +152,7 @@ Notes:
 
 The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
 
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description -- whole coverage description including rangetype, domainset, metadata
-
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description/rangetype
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description/domainset
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description/metadata
-
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description -- whole coverage description consisting of rangetype, domainset, metadata
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset  -- returns the coverage's domain set definition
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/metadata  -- returns the coverage's metadata (may be empty)
