@@ -133,7 +133,7 @@ The first part is about service metadata. Currently this is wild speculation as 
 * http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection
 * http://acme.com/oapi/collections/{collectionid}/coverages  --  returns a list of all coverage identifiers included in a specific collection
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage (see format encoding for ways to retrieve in specific formats)
-* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84
+* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84, defined in Common
 
 Notes:
 * all list results include links (cf. Common)
@@ -152,9 +152,13 @@ Notes:
 
 The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
 
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description -- whole coverage description including rangetype, domainset, metadata
+
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description/rangetype
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description/domainset
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/description/metadata
+
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset  -- returns the coverage's domain set definition
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/srsname  -- returns the srsName value, i.e.: the coverage's (spatio-temporal) CRS
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/domainset/generalgrid/axislabels  -- returns a list o the coverage's axis names
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/metadata  -- returns the coverage's metadata (may be empty)
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format
