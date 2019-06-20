@@ -142,11 +142,10 @@ Notes:
 ** http://acme.com/oapi/coverages/{coverageid} -- returns (complete) coverage with name {coverageid}
 * "coverages" is a specialization of "items"; further names could be defined in future (RectifiedGridCoverage, features, ...)
 * "description of collection" to be clarified (defined in Common?)
-* bbox is Common syntax, it can be expressed through spatio-temporal filtering
-** if filtering dimension is not present in coverage to be tested (ex: elevation): coverage will be discarded from result
-** if filtering axis does not appear in coverage to be tested (ex: Lat vs Northing): 
-*** horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
-*** in Core, no subsetting on vertical and time coordinates 
+* bbox is Common syntax
+** in Core, no subsetting on vertical and time coordinates 
+** horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
+** if filtering dimension is not present in coverage to be tested (due to above restriction not an issue currently): coverage will be discarded from result
 
 4.3 Coverage Access
 -------------------
