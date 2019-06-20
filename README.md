@@ -129,12 +129,20 @@ The first part is about service metadata. Currently this is wild speculation as 
 4.2 Coverage Finding
 --------------------
 
-* http://acme.com/oapi/collections  -- returns a list including links to all collections
+* http://acme.com/oapi/collections  -- returns a list of all collection identifiers
 * http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection
-* http://acme.com/oapi/collections/{collectionid}/coverages  --  returns a list of all coverages included in a specific collection
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage as multipart coverage including DomainSet, RangeType, and RangeSet in the coverage's Native Format
-* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone
+* http://acme.com/oapi/collections/{collectionid}/coverages  --  returns a list of all coverage identifiers included in a specific collection
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage including DomainSet, RangeType, and RangeSet (see format encoding for ways to retrieve in specific formats)
+* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone (any time, any elevation, etc.)
+** Q: what CRS?
 
+Notes:
+* all list results include links (cf. Common)
+* collections can be optional (use case: 1 coverage served)
+** http://acme.com/oapi/coverages -- returns the list of all coverage identifiers on this service 
+** http://acme.com/oapi/coverages/{coverageid} -- returns (complete) coverage with name {coverageid}
+* "coverages" is a specialization of "items"; further names could be defined in future (RectifiedGridCoverage, features, ...)
+* "description of collection" to be clarified (defined in Common?)
 
 4.3 Coverage Access
 -------------------
