@@ -132,9 +132,8 @@ The first part is about service metadata. Currently this is wild speculation as 
 * http://acme.com/oapi/collections  -- returns a list of all collection identifiers
 * http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection
 * http://acme.com/oapi/collections/{collectionid}/coverages  --  returns a list of all coverage identifiers included in a specific collection
-* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage including DomainSet, RangeType, and RangeSet (see format encoding for ways to retrieve in specific formats)
-* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone (any time, any elevation, etc.)
-** Q: what CRS?
+* http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}  --  returns a specific coverage (see format encoding for ways to retrieve in specific formats)
+* http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84
 
 Notes:
 * all list results include links (cf. Common)
@@ -143,6 +142,11 @@ Notes:
 ** http://acme.com/oapi/coverages/{coverageid} -- returns (complete) coverage with name {coverageid}
 * "coverages" is a specialization of "items"; further names could be defined in future (RectifiedGridCoverage, features, ...)
 * "description of collection" to be clarified (defined in Common?)
+* bbox is Common syntax, it can be expressed through spatio-temporal filtering
+** if filtering dimension is not present in coverage to be tested (ex: elevation): coverage will be discarded from result
+** if filtering axis does not appear in coverage to be tested (ex: Lat vs Northing): 
+*** horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
+*** in Core, no subsetting on vertical and time coordinates 
 
 4.3 Coverage Access
 -------------------
