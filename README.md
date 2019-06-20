@@ -107,10 +107,24 @@ In case of an interval a trim operation is specified, with lower and upper bound
 3.4 Coverage Encoding
 -----------------------
 
-Without any format encoding HTTP header (Accept and Accept-Encoding) a representation of the coverage in its Native Format will be returned. If an encoding HTTP header is provided then a representation of the coverage in the format indicated will be returned.
-The syntax for format encoding HTTP headers is defined in [RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"](https://tools.ietf.org/html/rfc7231).
+If no format encoding is specified in the request then a representation of the coverage shall be returned in its Native Format.
 
-The format chosen must be able to represent the output of the request.
+In general, file formats are not always capable of representing all coverage information. This is one reason why applications may prefer receiving a coverage in some format different format.
+
+Note:
+* The notion of Native Format refers to the range set only. Returning a coverage in this format may mean that some coverage constituents cannot be represented appropriately, and consequently will be missing from the coverage result.
+
+An application may request a particular format encoding through one of the following two options:
+
+* By indicating the format's MIME type identifier in the ACCEPT and ACCEPT-ENCODING sections of the HTTP header of the request as per The syntax for format encoding HTTP headers is defined in [RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"](https://tools.ietf.org/html/rfc7231).
+* By appending a query parameter "f=m" where m is the format's MIME type identifier.
+
+If both options are present simultaneously in the request then the f parameter shall have preference.
+
+If the format chosen is not capable of representing the coverage data requested this shall lead to a request error.
+
+Note:
+* Extensions may provide further options, such as full content negotiation as per the HTTP standard.
 
 For the detailed semantics of format encoding see [OGC WCS](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
 
@@ -167,12 +181,6 @@ The third part is about query parameters:
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
 * http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=time("2019-03-27")  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
-
-4.5 Coverage Encoding
----------------------
-If no format encoding is specified then a coverage shall be returned in its Native Format.
-
-In the Core, format encodings different from the target coverage's Native Format shall be requested and delivered as in OAPI Common.
 
 
 5 Open Issues
