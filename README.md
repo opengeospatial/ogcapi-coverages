@@ -136,16 +136,17 @@ The first part is about service metadata. Currently this is wild speculation as 
 * http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84, defined in Common
 
 Notes:
+
 * all list results include links (cf. Common)
 * collections can be optional (use case: 1 coverage served)
-** http://acme.com/oapi/coverages -- returns the list of all coverage identifiers on this service 
-** http://acme.com/oapi/coverages/{coverageid} -- returns (complete) coverage with name {coverageid}
+  * http://acme.com/oapi/coverages -- returns the list of all coverage identifiers on this service 
+  * http://acme.com/oapi/coverages/{coverageid} -- returns (complete) coverage with name {coverageid}
 * "coverages" is a specialization of "items"; further names could be defined in future (RectifiedGridCoverage, features, ...)
 * "description of collection" to be clarified (defined in Common?)
 * bbox is Common syntax
-** in Core, no subsetting on vertical and time coordinates 
-** horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
-** if filtering dimension is not present in coverage to be tested (due to above restriction not an issue currently): coverage will be discarded from result
+  * in Core, no subsetting on vertical and time coordinates 
+  * horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
+  * if filtering dimension is not present in coverage to be tested (due to above restriction not an issue currently): coverage will be discarded from result
 
 4.3 Coverage Access
 -------------------
