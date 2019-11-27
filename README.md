@@ -14,9 +14,9 @@ collections of values located in space/time, such as spatio-temporal sensor,
 image, simulation, and statistics data.
 
 If you are unfamiliar with the term 'coverage', the explanations on
-[Coverages: describing properties that vary with location (and time)](https://www.w3.org/TR/sdw-bp/#coverages)
-in the W3C/OGC Spatial Data on the Web Best Practice document as well as the
-[Coverages DWG Wiki](http://myogc.org/go/coveragesDWG) provide more detail.
+the [Coverages DWG Wiki](http://myogc.org/go/coveragesDWG) provide more detail and links to educational material.
+Additionally, [Coverages: describing properties that vary with location (and time)](https://www.w3.org/TR/sdw-bp/#coverages)
+in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
 
 ## Overview
 
