@@ -15,8 +15,8 @@ image, simulation, and statistics data.
 
 If you are unfamiliar with the term 'coverage', the explanations on
 [Coverages: describing properties that vary with location (and time)](https://www.w3.org/TR/sdw-bp/#coverages)
-in the W3C/OGC Spatial Data on the Web Best Practice document provide more
-detail.
+in the W3C/OGC Spatial Data on the Web Best Practice document as well as the
+[Coverages DWG Wiki](http://myogc.org/go/coveragesDWG) provide more detail.
 
 ## Overview
 
@@ -29,7 +29,7 @@ Current scope:
 * Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SolidCoverages. Reason is that gridded coverages receive most attention today.
 * Only CIS 1.1 GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
 * Only coverage extraction functionality is considered, not general processing (as is provided with Web Coverage Service (WCS) extensions such as the Processing Extension). Exceptions from this rule are subsetting including band subsetting, scaling, and CRS conversion and data format encoding, given their practical relevance.
-* Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the path component. Further, subsetting may reference any axis and leave out any other, which makes positional parameters unsuitable. Nevertheless subsetting in the path component particularly limited to fixed subsets might be considered in a future version. The principles of the `/tiles` path defined in OGC API Maps & Tiles might be a good fit and shall be explored.
+* Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the path component. Further, subsetting may reference any axis and leave out any other, which makes positional parameters unsuitable. Nevertheless subsetting in the path component particularly limited to fixed subsets might be considered in a future version. The principles of the `/tiles` path defined in OGC API - Maps & Tiles might be a good fit and shall be explored.
 
 As such, the functionality provided below resembles [OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
 
@@ -40,7 +40,7 @@ This model consists of a single CoverageOffering resembling the complete WCS dat
 
 ![WCS 2 internal storage model](http://external.opengeospatial.org/twiki_public/pub/CoveragesDWG/CoveragesBigPicture/WCS-internal-organization.png)
 
-Discussion has shown that the OpenAPI functionality also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental moel" of the server store organization on hand to explain the various functionalities introduced below.
+Discussion has shown that the OpenAPI functionality also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental model" of the server store organization on hand to explain the various functionalities introduced below.
 
 
 ## Principles
@@ -63,14 +63,14 @@ referenced in CIS, is not followed by [OpenAPI](https://www.openapis.org/), so h
 
 For path expressions abbreviations (i.e., aliases) may be defined for convenience.
 
-## [OGC API Coverages](https://github.com/opengeospatial/ogc_api_coverages) Requests
+## [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) Requests
 
 This clause defines the basics of accessing OGC coverages via OpenAPI.
 
 ### General
 
 Requirement:
-A service offering [OGC API Coverages](https://github.com/opengeospatial/ogc_api_coverages) access shall be accessible via an URL as service endpoint (subsequently referred to as Base URL).
+A service offering [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) access shall be accessible via an URL as service endpoint (subsequently referred to as Base URL).
 
 Example:
         http://acme.com/oapi
@@ -85,7 +85,7 @@ A request may be denied for server-specific reasons, such as quota.
 
 ### Coverage Access Paths
 
-In this clause, the path component of [OGC API Coverages](https://github.com/opengeospatial/ogc_api_coverages) access is established.
+In this clause, the path component of [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) access is established.
 
 Access paths follow the XML Schema of [CIS](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html) in their structure.
 
@@ -93,7 +93,7 @@ To access coverage service constituents, such as formats supported, OGC 14-121 W
 
 ### Coverage Query Parameters
 
-In this clause, the query component of [OGC API Coverages](https://github.com/opengeospatial/ogc_api_coverages) access is established.
+In this clause, the query component of [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) access is established.
 
 Subsetting parameters may be mixed in a query part, in no particular order.
 
@@ -146,26 +146,24 @@ This section contains examples for coverage access, subsetting, and encoding. It
 
 ### Service Metadata
 
-The first part is about service metadata. Currently this is wild speculation as it will mainly be defined through [OGC API Common](https://github.com/opengeospatial/oapi_common).
+The first part is about service metadata. Currently this is wild speculation as it will mainly be defined through [OGC API - Common](https://github.com/opengeospatial/oapi_common).
 
 * http://acme.com/oapi/servicedescription/formatssupported  -- returns a list of formats in which coverage representations can be requested
 
 ### Coverage Finding
 
 * http://acme.com/oapi/collections  -- returns a list of all collection identifiers
-* http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collection identifiers intersecting with the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84, defined in OGC API Common
+* http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collection identifiers intersecting with the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84, defined in OGC API - Common and likely in a future OGC API - Catalog
 * http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection including links to available sub-paths like /coverage, /tiles, or /map
-* http://acme.com/oapi/collections/{collectionid}/coverage  --  returns a specific coverage (see format encoding for ways to retrieve in specific formats)  #TODO think of huge coverages like Sentinel-2, maybe better to only return some description here
+* http://acme.com/oapi/collections/{collectionid}/coverage  -- returns a general description of the coverage represented by collectionid containing the coverage's envelope (the full domainset might be huge and thus is omitted here), rangetype, and service metadata like the coverage's native format
 
 Notes:
 
-* all list results include links (cf. OGC API Common)
-* collections can be optional (use case: 1 coverage served)
-  * http://acme.com/oapi/coverage -- returns (complete) coverage with name {coverageid}  #TODO is this useful after the recent change?
+* all list results include links (cf. OGC API - Common)
 * "coverage" is a specialization of "items"; further names could be defined in future (RectifiedGridCoverage, features, ...)
-* "description of collection" to be clarified (defined in OGC API Common?)
-* bbox is OGC API Common syntax
-  * in OGC API Coverages Core, no subsetting on vertical and time coordinates
+* "description of collection" to be clarified (defined in OGC API - Common?)
+* bbox is OGC API - Common syntax
+  * in OGC API - Coverages Core, no subsetting on vertical and time coordinates
   * horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
   * if filtering dimension is not present in coverage to be tested (due to above restriction not an issue currently): coverage will be discarded from result
 
@@ -177,7 +175,8 @@ The second part is about coverage access, which (as described earlier) is driven
 * http://acme.com/oapi/collections/{collectionid}/coverage/domainset  -- returns the coverage's domain set definition
 * http://acme.com/oapi/collections/{collectionid}/coverage/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
 * http://acme.com/oapi/collections/{collectionid}/coverage/metadata  -- returns the coverage's metadata (may be empty)
-* http://acme.com/oapi/collections/{collectionid}/coverage/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format
+* http://acme.com/oapi/collections/{collectionid}/coverage/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
+* http://acme.com/oapi/collections/{collectionid}/coverage/all  -- returns all of the above namely the coverage's domainset, rangetype, meatadata, and rangeset comparable to a GetCoverage response
 
 ### Coverage Subsetting
 
@@ -190,6 +189,6 @@ The third part is about query parameters:
 
 ## Open Issues
 
-* Establish service parameter access, based on [OGC API Common](https://github.com/opengeospatial/oapi_common)
+* Establish service parameter access, based on [OGC API - Common](https://github.com/opengeospatial/oapi_common)
 * What is the output format of items typically returned as XML or JSON, such as DomainSet and RangeType? Should maybe FORMAT be applicable here as well? If so, should it be listed as a possible output format (which might be confusing)?
 * [OGC 14-121 Web Query Service](https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf) provides a definition of path syntax, but adds more functionality (such as selection predicates), all based on the XPath standard. Such extra functionality might come handy.
