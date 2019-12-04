@@ -46,16 +46,10 @@ None of these encodings is mandatory and an implementation of the _Core_ require
 
 CAUTION: The search engine point is not valid. HTML describes syntax, not semantics (remember why we introduced XML and RDF?). See link:https://github.com/opengeospatial/ogc_api_coverages/issues/13[Issue 13].
 
-GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format, it is <<rec_geojson,recommended for APIs which expose feature data>> as long as the data can be represented in GeoJSON for the intended use.
-
-Some examples of cases that are out-of-scope for GeoJSON are:
-
-* coverages
-* When solids are used for geometries (e.g. in a 3D city model),
-* Geometries that include non-linear curve interpolations
-that cannot be simplified (e.g., use of arcs in authoritative geometries),
-* Geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g. an authoritative national reference system),
-* Features that have more than one geometric property.
+[NOTE]
+========
+GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format, it is <<rec_geojson,recommended for APIs which expose feature data>> as long as the data can be represented in GeoJSON for the intended use. Explicitly out-of-scope for GeoJSON are coverages. Further, GeoJSON currently does not consider geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g. an authoritative national reference system). Consequently, GeoJSON is not recommended for coverages; rather, for JSON the CIS 1.1 JSON encoding is recommended which can represent coverages in an informationally complete way.
+========
 
 Among the shortcomings of GeoJSON, which have been debated widely, is the substantially restricted support for multi-dimensional coordinates and coordinate reference systems. For exampele, European ETRS89 is not supported.
 
