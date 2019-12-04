@@ -42,7 +42,6 @@ This model consists of a single CoverageOffering resembling the complete WCS dat
 
 Discussion has shown that the OpenAPI functionality also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental model" of the server store organization on hand to explain the various functionalities introduced below.
 
-
 ## Principles
 
 [OpenAPI](https://www.openapis.org/) establishes URL-based access patterns, as defined by [RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax"](https://tools.ietf.org/html/rfc3986), [RFC 3987 "Internationalized Resource Identifiers (IRIs)"](https://tools.ietf.org/html/rfc3987), and [RFC 6570 "URI Template"](https://tools.ietf.org/html/rfc6570) following a syntax like
@@ -115,32 +114,32 @@ where {NCName} is an XML-style identifier not containing ":" (colon) characters,
 
 In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified. For the detailed semantics of subsetting, trimming, and slicing see [OGC WCS](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
 
-
 ### Coverage Encoding
 
 If no format encoding is specified in the request then a representation of the coverage shall be returned in its Native Format.
 
-In general, file formats are not always capable of representing all coverage information. This is one reason why applications may prefer receiving a coverage in some format different format.
+In general, file formats are not always capable of representing all coverage information. This is one reason why applications may prefer receiving a coverage in some different format.
 
 Note:
+
 * The notion of Native Format refers to the range set only. Returning a coverage in this format may mean that some coverage constituents cannot be represented appropriately, and consequently will be missing from the coverage result.
 
 An application may request a particular format encoding through one of the following two options:
 
-* By indicating the format's MIME type identifier in the ACCEPT and ACCEPT-ENCODING sections of the HTTP header of the request as per The syntax for format encoding HTTP headers is defined in [RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"](https://tools.ietf.org/html/rfc7231).
-* By appending a query parameter "f=m" where m is the format's MIME type identifier.
+* By indicating the format's MIME type identifier in the Accept and Accept-Encoding HTTP header of the request. The syntax for format encoding HTTP headers is defined in [RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"](https://tools.ietf.org/html/rfc7231).
+* By appending a query parameter `f=m` where `m` is the format's MIME type identifier.
 
-If both options are present simultaneously in the request then the f parameter shall have preference.
+If both options are present simultaneously in the request then the `f` parameter shall have preference.
 
 If the format chosen is not capable of representing the coverage data requested this shall lead to a request error.
 
 Note:
+
 * Extensions may provide further options, such as full content negotiation as per the HTTP standard.
 
 For the detailed semantics of format encoding see [OGC WCS](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
 
 ## Examples
-
 
 This section contains examples for coverage access, subsetting, and encoding. It assumes a service endpoint of http://acme.com/oapi/ .
 
@@ -185,7 +184,6 @@ The third part is about query parameters:
 * http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
 * http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
 * http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=time("2019-03-27")  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
-
 
 ## Open Issues
 
