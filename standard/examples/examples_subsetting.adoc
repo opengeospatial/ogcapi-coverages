@@ -1,7 +1,5 @@
 
-*   http://acme.com/oapi/collections/%7bcollectionid%7d/coverages/%7bcoverageid%7d?SUBSET=Lat(40,50)&SUBSET=Long(10,20[http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=Lat(40,50)&SUBSET=Long(10,20])
-      -- returns a coverage cutout between (40,10) and (50,20), as multipartcoverage
-*   http://acme.com/oapi/collections/%7bcollectionid%7d/coverages/%7bcoverageid%7d/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20[http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20])
-      -- returns a coverage cutout between (40,10) and (50,20), in the coverage’s Native Format
+*   http://acme.com/oapi/collections/%7bcollectionid%7d/coverages/%7bcoverageid%7d?SUBSET=Lat(40,50)&SUBSET=Long(10,20)[http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=Lat(40,50)&SUBSET=Long(10,20])
+      -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
 *   http://acme.com/oapi/collections/%7bcollectionid%7d/coverages/%7bcoverageid%7d?SUBSET=time([http://acme.com/oapi/collections/{collectionid}/coverages/{coverageid}?SUBSET=time("2019-03-27"])
-      -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
+      -- returns a coverage slice at the timestamp given, with all data available in the other dimensions (in case the coverage is Lat/Long/time the result will be a 2D image with its full Lat/Lon extent)
