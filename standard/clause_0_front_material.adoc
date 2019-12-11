@@ -30,4 +30,5 @@ All questions regarding this submission should be directed to the editor or the 
 |===
 ^|Name  ^|Affiliation
 |Charles Heazel |HeazelTech
+|Stephan Meissl <stephan.meissl@eox.at> |https://eox.at[EOX IT Services GmbH]
 |===

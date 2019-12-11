@@ -1,5 +1,5 @@
 == Scope
-This [OGC API Coverages](https://github.com/opengeospatial/ogc_api_coverages[https://github.com/opengeospatial/ogc_api_coverages]) specification establishes how to access coverages as defined by the [Coverage Implementation  Schema (CIS) 1.1](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]) through [OpenAPI](https://www.openapis.org/[https://www.openapis.org/]).
+This OGC API Coverages (https://github.com/opengeospatial/ogc_api_coverages[https://github.com/opengeospatial/ogc_api_coverages]) specification establishes how to access coverages as defined by the Coverage Implementation  Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]) through OpenAPI (https://www.openapis.org/[https://www.openapis.org/]).
 
 === Current scope:
 
