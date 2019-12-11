@@ -4,6 +4,7 @@ The following normative documents contain provisions that, through reference in 
 * [[rfc2616]] Fielding, R., Gettys, J., Mogul, J., Frystyk, H., Masinter, L., Leach, P., Berners-Lee, T.: IETF RFC 2616, *HTTP/1.1*, http://tools.ietf.org/rfc/rfc2616.txt[RFC 2616]
 * [[rfc2818]]  Rescorla, E.: IETF RFC 2818, *HTTP Over TLS*, http://tools.ietf.org/rfc/rfc2818.txt[RFC 2818]
 * [[rfc3339]] Klyne, G., Newman, C.: IETF RFC 3339, *Date and Time on the Internet: Timestamps*, http://tools.ietf.org/rfc/rfc3339.txt[RFC 3339]
+* [[rfc3986]] Berners-Lee, T., Fielding, R., Masinter, L.: IETF RFC 3986, *Uniform Resource Identifier (URI): Generic Syntax*, https://tools.ietf.org/html/rfc3986[RFC 3986] 
 * [[GeoJSON]] IETF RFC 7946: *The GeoJSON Format*, https://tools.ietf.org/rfc/rfc7946.txt[eoJSON]
 * [[rfc8288]] Nottingham, M.: IETF RFC 8288, *Web Linking*, http://tools.ietf.org/rfc/rfc8288.txt[RFC 8288]
 * [[OAPI_Common]] OGC: *OGC API (OAPI) Common Specification*, (Draft) https://github.com/opengeospatial/oapi_common[API Common] 
