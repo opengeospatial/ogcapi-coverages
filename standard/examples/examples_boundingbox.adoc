@@ -1,2 +1,3 @@
 
-*   http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone
+*   Using OAPI-Common bbox syntax (fixed, 2D axis sequence): http://acme.com/oapi/collections/{collectionid}/coverages?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone
+*   Using OAPI-Coverages subsetting syntax (arbitrary axis sequence, n-D): http://acme.com/oapi/collections/{collectionid}/coverages?SUBET=Lat(160.6,-55.95)&SUBSET=Lon(-170,-25.89)&SUBSET=time("2019-03-27")  -- returns a list of all coverages intersecting in a specific collection that is in the New Zealand economic zone, at a timestamp of March 27, 2019
