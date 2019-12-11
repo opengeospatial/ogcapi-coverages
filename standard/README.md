@@ -1,5 +1,5 @@
-# OGC API (OAPI) Coverages Specification
+# OGC API (OAPI) - Coverages - Part 1: Core Specification
 
-This directory contains the OGC API Specification for Coverages. This specification, working with the parallel OGC API Common specification, define the API analog to the WCS standard.  
+This directory contains the OGC API Specification for Coverages. This specification, working with the parallel OGC API - Common specification, defines the API analog to the WCS standard.
 
-This Coverage specification addressess only those parts of an API which are specific to Coverage resources. Those capabilities which may have applicabilty beyond coverages should be considered for inclusion in Common.
+This Coverage specification addresses only those parts of an API which are specific to Coverage resources. Those capabilities which may have applicability beyond coverages should be considered for inclusion in Common.
