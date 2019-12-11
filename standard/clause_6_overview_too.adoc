@@ -1,0 +1,55 @@
+[[overview]]
+== Overview
+
+=== General
+
+OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. http://openapis.org[OpenAPI] is used to define the reusable API building blocks with responses in JSON and HTML.
+
+The OGC API family of standards is organized by resource type. OGC API-Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time, such as spatio-temporal sensor,image, simulation, and statistics data.
+
+If you are unfamiliar with the term 'coverage', the explanations on the http://myogc.org/go/coveragesDWG[Coverages DWG Wiki] provide more detail and links to educational material. Additionally, https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)] in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
+
+This https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] specification establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs.
+
+==== Current scope
+
+*   Only gridded coverages are addressed, not
+MultiPoint/Curve/Surface/SolidCoverages. Reason is that griddedcoverages receive most attention today.
+*   Only CIS 1.1 GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which showsand allows to evaluate the principles.
+*   Only coverage extraction functionality is considered, not general processing (as is provided with Web Coverage Service (WCS) extensionssuch as the Processing Extension). Exceptions from this rule aresubsetting including band subsetting, scaling, and CRS conversion anddata format encoding, given their practical relevance.
+*   Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the pathcomponent. Further, subsetting may reference any axis and leave out anyother, which makes positional parameters unsuitable. Neverthelesssubsetting in the path component particularly limited to fixed subsetsmight be considered in a future version. The principles of the ``/tiles`` path defined in OGC API - Maps & Tiles might be a good fit and shall be explored.
+
+As such, the functionality provided below resembles http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core].
+
+==== Background Information: WCS Service Model
+
+OGC WCS 2 has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally. This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage's Native CRS).
+
+image::figures/WCS_CoverageOfferings.png[]
+
+Discussion has shown that the OpenAPI functionality also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental model" of the server store organization on hand to explain the various functionalities introduced below.
+
+==== Prinicples
+
+https://www.openapis.org/[OpenAPI] establishes URL-based access patterns, as defined by https://tools.ietf.org/html/rfc3986[RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax"], https://tools.ietf.org/html/rfc3987[RFC 3987 "Internationalized Resource Identifiers (IRIs)"], and https://tools.ietf.org/html/rfc6570[RFC 6570 "URI Template"] following a syntax like
+http://www.acme.com/path/to/resource/%7Bid%7D%7B?query,parameters%7D[http://www.acme.com/path/to/resource/{id}{?query,parameters}]
+whereby
+
+*   ``/path/to/resource/{id}`` defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com[http://www.acme.com].
+*   the ``{?query,parameters}`` represent key/value pairs with further parameters passed to the request.
+
+As a general rule,
+
+*   accessing a coverage component is done in the path section,
+*   subsetting is done in the query parameter section
+*   format encoding is controlled via HTTP headers
+
+As the coverage model normatively is given by the corresponding XML schema (JSON and RDF are built in sync with XML) specification of the https://www.openapis.org/[OpenAPI] access paths follows this schema. Note, though, that OWS Common, while normatively referenced in CIS, is not followed by https://www.openapis.org/[OpenAPI], so here deviations will occur.
+
+For path expressions abbreviations (i.e., aliases) may be defined for convenience.
+
+=== https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] Requests
+
+This clause defines the basics of accessing OGC coverages via OpenAPI.
+
+

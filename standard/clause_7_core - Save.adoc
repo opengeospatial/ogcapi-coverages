@@ -1,0 +1,1029 @@
+== Requirements Class "Core"
+
+[[core-overview]]
+=== Overview
+
+include::requirements/requirements_class_core.adoc[]
+
+NOTE: The following is from the Maps API. Replace with similar content for coverages. 
+
+A map distribution of a dataset is a pictorial representation of the 
+dataset or the collections it has been divided in. To create a pictorial representation a style is added to the data in the collections. Styles are defined internally and have a identifier. New styles can be added or modified if the OGC API - Maps draft specification works in combination with the OGC API - Styles draft specification (also developed in the Testbed-15). After associating collections to styles, a map can be retrieved by specifying a set of parameters that will determine its resolution (width, height, bounding  box and CRS) or can be retrieved as tiles.
+
+This section defines the core part of the OGC API - Maps draft specification that allows defining a map representation for a collection. To retrieve a fragment of the map, this section needs to be combined with an OGC API - Tiles draft specification or with the OGC API - Maps - Map extension draft specification.
+
+To keep the core of the OGC API - Maps draft specification simple, only includes a mechanism to select the default style but it does not define any mechanism to define or select a style other than the default one. The core specification only assumes that the service is capable of knowing which is the default style while the client ignores all the details about it (including its name).
+
+[[path-summary]]
+==== Path Summary
+
+Resources exposed through an OGC API are accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
+
+* Service Offering: The service endpoint (subsequently referred to as Base URL) 
+* Access Paths: Unique paths to Resources
+* Query: Parameters for subsetting a Resource or Resources
+
+<<coverage-paths>> summarizes the access paths defined in this standard.
+
+[#coverage-paths,reftext='{table-caption} {counter:table-num}']
+.Coverage API Paths
+[width="90%",cols="2,4",options="header"]
+|===
+^|**Path Template** ^|**Resource**
+2+^|**Common**
+|/ |Landing page
+|/api |API Description
+|/conformance |Conformance Classes
+|/collections |Metadata describing the spatial collections available from this API.
+|/collections/{collectionId} |Metadata describing the collection which has the unique identifier `{collectionId}`
+2+^|**Coverages**
+|/collections/{collectionId}/coverage |A general description of the coverage identified by {collectionId} including the coverage's envelope.
+|/collections/{collectionid}/coverage/description |returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
+|/collections/{collectionid}/coverage/domainset |returns the coverage's domain set definition
+|/collections/{collectionid}/coverage/rangetype |returns the coverage's range type information (i.e., a description of the data semantics)
+|/collections/{collectionid}/coverage/metadata |returns the coverage's metadata (may be empty)
+|/collections/{collectionid}/coverage/rangeset |returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve inspecific formats)
+|/collections/{collectionid}/coverage/all |returns all of the above namely the coverage's domainset, rangetype, meatadata, and rangeset comparable to a GetCoverage response
+|===
+
+[[dependencies]]
+=== Dependencies
+
+The OGC API-Coverages standard is an extension of the OGC API-Common standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.
+
+include::requirements/core/REQ_api-common.adoc[]
+
+<<mapping-to-common>> Identifies the API-Common Requirements Classes which are applicable to each section of this Standard. Instructions on when and how to apply these Requirements Classes are provided in each section. 
+
+[#mapping-to-common,reftext='{table-caption} {counter:table-num}']
+.Mapping API-Coverages Sections to API-Common Requirements Classes
+[width="90%",cols="2,6"]
+|====
+^|*API-Coverage Section* ^|*API-Common Requirements Class*
+|<<landing-page,API Landing Page>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/core
+|<<api-definition,API Definition>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/core
+|<<conformance-classes,Declaration of Conformance Classes>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/core
+|<<collections,Collections>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/collections
+|<<collections,OpenAPI 3.0>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/oas30
+|<<collections,GeoJSON>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/geojson
+|<<collections,HTML>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/html
+|====
+
+[[landing-page]]
+=== API landing page
+
+The landing page provides links to start exploring the resources offered by the API instance. It mainly consists of a list of links. OGC API-Common already requires some common links. Those links are sufficient for this core.
+
+==== Operation
+
+
+
+https://github.com/opengeospatial/ogcapi-features/blob/master/core/standard/requirements/core/REQ_root-op.adoc[requirements/core/REQ_root-op.adoc]
+
+==== Response
+
+https://github.com/opengeospatial/ogcapi-features/blob/master/core/standard/requirements/core/REQ_root-success.adoc[requirements/core/REQ_root-success.adoc]
+
+NOTE: Schema for the Landing Page
+
+NOTE: Example response document
+
+==== Error situations
+
+See https://github.com/opengeospatial/ogcapi-features/blob/master/core/standard/clause_7_core.adoc#http_status_codes[HTTP status codes] for general guidance.
+
+[[api-definition]]
+=== API definition
+
+==== Operation
+
+Every API is expected to provide a definition that describes the capabilities of the server and which can be used by developers to understand the API, by software clients to connect to the server, or by development tools to support the implementation of servers and clients.
+
+include::requirements/core/REQ_api-definition-op.adoc[]
+
+include::recomendations/core/PER_api-definition-uri.adoc[]
+
+Note that multiple API definition formats can be supported.
+
+==== Response
+
+include::requirements/core/REQ_api-definition-success.adoc[]
+
+include::recomendations/core/REC_api-definition-oas.adoc[]
+
+If the server hosts the API definition under the base path of the API (for example, at path `/api`, see above), there is no need to include the path of the API definition in the API definition itself.
+
+The idea is that any OGC API Features implementation can be used by developers that are familiar with the API definition language(s) supported by the server. For example, if an OpenAPI definition is used, it should be possible to create a working client using the OpenAPI definition. The developer may need to learn a little bit about geometry data types, etc., but it should not be required to read this standard to access the data via the API.
+
+In case the API definition is based on OpenAPI 3.0, consider the <<two_appraoches_oas,two approaches>> discussed in OpenAPI requirements class.
+
+==== Error situations
+
+See <<http_status_codes>> for general guidance.
+
+[[conformance-classes]]
+=== Declaration of conformance classes
+
+To support "generic" clients that want to access multiple OGC API 
+standards and extensions - and not "just" a specific API / server, the 
+API has to declare the requirements classes it implements and conforms 
+to.
+
+==== Response
+
+The conformance page mainly consists of a list of links. OGC API - Common already requires some links.
+
+https://github.com/opengeospatial/OGC-API-Maps/blob/master/standard/requirements/maps/core/REQ_conformance-success.adoc[requirements/maps/core/REQ_conformance-success.adoc]
+
+In the conformance page (typically in JSON format) the links follow 
+the link schema defined in the OGC API - Common. The following is an 
+example fragment of the response of an OGC API maps conformance 
+information page.
+
+Example 1. Conformance Information Page fragment
+
+[source,java]
+----
+{
+  "conformsTo": [
+  [
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core",
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/req/collections",
+    "http://www.opengis.net/spec/ogcapi-maps-1/1.0/req/core"
+  ]
+}
+----
+
+=== https://github.com/opengeospatial/OGC-API-Maps/blob/master/standard/clause_8_map_core.adoc#collections[<svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"></svg>]
+
+==== Response
+
+
+
+==== Coverage Access Paths
+
+In this clause, the path component of https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] access is established.
+
+Access paths follow the XML Schema of http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[CIS] in their structure.
+
+To access coverage service constituents, such as formats supported, OGC 14-121 Web Query Service provides guidance, see https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf[https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf].
+
+=== Coverage Access
+
+The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/description[http://acme.com/oapi/collections/{collectionid}/coverage/description] -- returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/domainset[http://acme.com/oapi/collections/{collectionid}/coverage/domainset]  -- returns the coverage’s domain set definition
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangetype[http://acme.com/oapi/collections/{collectionid}/coverage/rangetype]  -- returns the coverage’s range type information (i.e., a description of the data semantics)
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/metadata[http://acme.com/oapi/collections/{collectionid}/coverage/metadata]  -- returns the coverage’s metadata (may be empty)
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangeset[http://acme.com/oapi/collections/{collectionid}/coverage/rangeset]
+  -- returns the coverage’s range set, i.e., the actual values in the
+coverage’s Native Format (see format encoding for ways to retrieve inspecific formats)
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/all[http://acme.com/oapi/collections/{collectionid}/coverage/all]
+  -- returns all of the above namely the coverage’s domainset,
+rangetype, meatadata, and rangeset comparable to a GetCoverage response
+
+=== Coverage Subsetting
+
+The third part is about query parameters:
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage?SUBSET=Lat(40,50)&SUBSET=Long(10,20)[http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=Lat(40]  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)[http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=Lat(40]  -- returns a coverage cutout between (40,10) and (50,20), in the coverage’s Native Format
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage?SUBSET=time(%222019-03-27%22)[http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=time("2019-03-27")]  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
+
+=== Coverage Query Parameters
+
+In this clause, the query component of https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] access is established.
+
+Subsetting parameters may be mixed in a query part, in no particular order.
+
+
+
+==== General
+
+Requirement:
+A service offering https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] access shall be accessible via an URL as service endpoint (subsequently referred to as Base URL).
+
+Example:
+http://acme.com/oapi[http://acme.com/oapi]
+
+Requirement:
+Coverage access paths, as defined in the next clause, are concatenated to the Base URL via a "/" character, followed (optionally) by a query part.
+
+Example:
+http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangeset[http://acme.com/oapi/collections/{collectionid}/coverage/rangeset]
+
+A request may be denied for server-specific reasons, such as quota.
+
+==== Coverage Access Paths
+
+In this clause, the path component of https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] access is established.
+
+Access paths follow the XML Schema of http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[CIS] in their structure.
+
+To access coverage service constituents, such as formats supported, OGC 14-121 Web Query Service provides guidance, see https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf[https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf].
+
+=== Coverage Access
+
+The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/description[http://acme.com/oapi/collections/{collectionid}/coverage/description] -- returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/domainset[http://acme.com/oapi/collections/{collectionid}/coverage/domainset]  -- returns the coverage's domain set definition
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangetype[http://acme.com/oapi/collections/{collectionid}/coverage/rangetype]  -- returns the coverage's range type information (i.e., a description of the data semantics)
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/metadata[http://acme.com/oapi/collections/{collectionid}/coverage/metadata]  -- returns the coverage's metadata (may be empty)
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangeset[http://acme.com/oapi/collections/{collectionid}/coverage/rangeset]
+  -- returns the coverage's range set, i.e., the actual values in the
+coverage's Native Format (see format encoding for ways to retrieve inspecific formats)
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/all[http://acme.com/oapi/collections/{collectionid}/coverage/all]
+  -- returns all of the above namely the coverage's domainset,
+rangetype, meatadata, and rangeset comparable to a GetCoverage response
+
+=== Coverage Subsetting
+
+The third part is about query parameters:
+
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage?SUBSET=Lat(40,50)&SUBSET=Long(10,20)[http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=Lat(40,50)&SUBSET=Long(10,20)]  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)[http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)]  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
+*   http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage?SUBSET=time(%222019-03-27%22)[http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=time("2019-03-27")]  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
+
+=== Coverage Query Parameters
+
+In this clause, the query component of https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] access is established.
+
+Subsetting parameters may be mixed in a query part, in no particular order.
+
+==== Coverage Subsetting
+
+Without any subsetting parameter the whole coverage extent is the target resource addressed. If a subsetting operation is provided then the coverage subset indicated is the target resource addressed.
+
+Coverage subsetting is indicated through the SUBSET parameter name. The value following the "=" symbol is built as follows:
+
+[source,java]
+----
+SubsetSpec:            SUBSET = axisName ( intervalOrPoint )
+axisName:              {NCName}
+intervalOrPoint:       interval | point
+interval:              low ,  high
+low:                   point | *
+high:                  point | *
+point:                 {number} | " {text} "    //" = double quote = ASCII code 0x42
+
+----
+
+where {NCName} is an XML-style identifier not containing ":" (colon) 
+characters, {number} is an integer or floating-point number, and {text} 
+is some general ASCII text (such as a time and date notation in ISO 
+8601). A coverage access request may have any number of SUBSET 
+parameters, however for each axis of the coverage at most one SUBSET 
+parameter may be provided.
+
+In case of an interval a trim operation is specified, with lower and 
+upper bound. In case of a point a slicing operation is specified. For 
+the detailed semantics of subsetting, trimming, and slicing see http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC WCS].
+An API that implements this conformance class provides access to the coverages in a link:htes of the ``/tiles`` path defined in OGC API - Maps & Tiles might be a good fit and shall be explored.
+
+As such, the functionality provided below resembles http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core].
+
+==== Background Information: WCS Service Model
+
+OGC WCS 2 has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally. This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage's Native CRS).
+
+
+=== Old content
+This document specifies requirements only for collections consisting of coverages. That is, each
+collection considered by this document is a collection of coverages.
+
+This standard does not include any requirements about how the coverages in the dataset have to be aggregated into collections. A typical approach is to aggregate by collection type but any other approach that fits the dataset or the applications using this distribution may also be used.
+
+Accessing `Collections` using HTTP GET returns a response that contains at least the list of collections. For each `Collection`, a link to the items in the collection (`Coverages`, path `/collections/{collectionId}/items`, link relation `items`) as well as key information about the collection. This information includes:
+
+* A local identifier for the collection that is unique for the dataset;
+* A list of coordinate reference systems (CRS) in which geometries may be returned by the API. The first CRS is the default coordinate reference system (in the _Core_, the default is always WGS 84 with axis order longitude/latitude);
+* An optional title and description for the collection;
+* An optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
+* An optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'coverage').
+
+The `Collection` resource is available at path `/collections/{collectionId}`, often with more details than included in the `Collections` response.
+
+Accessing the `Coverages` using HTTP GET returns a document containing a list of coverages in the collection. The coverages included in the response are determined by the API based on the query parameters of the request. To support access to larger collections without overloading the client, the API supports paged access with links to the next page, if more coverages are selected than the page size.
+
+A `bbox` or `datetime` parameter may be used to select only a subset of the coverages in the collection (the coverages that are in the bounding box or time interval). The `bbox` parameter also matches all coverages in the collection that are not associated with a location. The `datetime` parameter also matches all coverages in the collection that are not associated with a time stamp or interval.
+
+The `limit` parameter may be used to control the subset of the selected coverages that should be returned in the response, the page size.
+
+Each page may include information about the number of selected and returned coverages (`numberMatched` and `numberReturned`) as well as links to support paging (link relation `next`).
+
+Each `Coverage` (path `/collections/{collectionId}/items/{coverageId}`) is also a separate resource and may be requested individually using HTTP GET.
+
+In addition to the simple path structures described above, where all coverages are organized in a one-level collection hierarchy, additional parts of the OGC API Coverage series are expected to provide alternate access to the coverages served by the API via additional, deeper collection hierarchies.
+
+[[query_parameters]]
+==== Unknown or invalid query parameters
+
+There are no coverage-specific requirements realated to unknown or invalid query parameters. API-Common requirements are sufficient to describe this capability for the API-Coverages standard. The applicable API-Common requirements are as follows:
+
+include::requirements/core/REQ_query-param-common.adoc[]
+
+===== Unknown query parameters
+
+If an API wants to support vendor specific parameters, these have to be explicitly declared in the API definition.
+
+If OpenAPI is used to represent the API definition, a capability exists to allow additional parameters without explicitly declaring them. That is, parameters that have not been explicitly specified in the API definition for the operation will be ignored.
+
+.OpenAPI schema for additional "free-form" query parameters
+[source,YAML]
+----
+in: query
+name: vendorSpecificParameters
+schema:
+  type: object
+  additionalProperties: true
+style: form
+----
+
+Note that the name of the parameter does not matter as the actual query parameters are the names of the object properties. For example, assume that the value of `vendorSpecificParameters` is this object:
+
+[source,JSON]
+----
+{
+  "my_first_parameter": "some value",
+  "my_other_parameter": 42
+}
+----
+
+In the request URI this would be expressed as `&my_first_parameter=some%20value&my_other_parameter=42`.
+
+===== Invalid query parameters
+
+There is a general rule that applies to all parameters, whether they are specified in this document or in additional parts. A value is invalid if it violates the API definition or any other constraint for that parameter stated in a requirement.
+
+[[encodings]]
+=== Encodings
+
+If no format encoding is specified in the request then a representation of the coverage shall be returned in its Native Format.
+
+In general, file formats are not always capable of representing all coverage information. This is one reason why applications may prefer receiving a coverage in some different format.
+
+Note:
+
+*   The notion of Native Format refers to the range set only. Returning a coverage in this format may mean that some coverage constituents cannot be represented appropriately, and consequently will be missing from the coverage result.
+
+An application may request a particular format encoding through one of the following two options:
+
+*   By indicating the format's MIME type identifier in the Accept and Accept-Encoding HTTP header of the request. The syntax for formatencoding HTTP headers is defined in https://tools.ietf.org/html/rfc7231[RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"].
+*   By appending a query parameter ``f=m`` where ``m`` is the format's MIME type identifier.
+
+If both options are present simultaneously in the request then the ``f`` parameter shall have preference.
+
+If the format chosen is not capable of representing the coverage data requested this shall lead to a request error.
+
+Note:
+
+*   Extensions may provide further options, such as full content negotiation as per the HTTP standard.
+
+For the detailed semantics of format encoding see http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC WCS].
+
+
+==== Old Content
+
+While OGC API Coverages does not specify any mandatory encoding, support for the following encodings is recommended. See <<overview,Clause 6 (Overview)>> for a discussion.
+
+include::recomendations/core/REC_html.adoc[]
+
+include::recomendations/core/REC_geojson.adoc[]
+
+<<_http_1_1,Requirement `/req/core/http`>> implies that the encoding of a server response is determined using content negotiation as specified by the HTTP RFC.
+
+The section <<mediatypes,Media Types>> includes guidance on media types for <<encodings,encodings>> that are specified in this document.
+
+Note that any server that supports multiple encodings will have to support a mechanism to mint encoding-specific URIs for resources in order to express links, for example, to alternate representations of the same resource. This document does not mandate any particular approach how this is supported by the server.
+
+As clients simply need to dereference the URI of the link, the implementation details and the mechanism how the encoding is included in the URI of the link are not important. Developers interested in the approach of a particular implementation, for example, to manipulate ("hack") URIs in the browser address bar, can study the API definition.
+
+[NOTE]
+=====================================================================
+Two common approaches are:
+
+* an additional path for each encoding of each resource (this can be expressed, for example, using format specific suffixes like ".html");
+* an additional query parameter (for example, "accept" or "f") that overrides
+the Accept header of the HTTP request.
+=====================================================================
+
+[[string_i18n]]
+==== String internationalization
+
+If the server supports representing resources in multiple languages, the usual HTTP content negotiation mechanisms apply. The client states its language preferences in the `Accept-Language` header of a request and the server responds with responses that have linguistic text in the language that best matches the requested languages and the capabilities of the server.
+
+include::recomendations/core/REC_string_i18n.adoc[]
+
+For example, if JSON-LD is used as an encoding, the built-in capabilities to link:https://www.w3.org/TR/json-ld/#string-internationalization[annotate a string with its language]
+should be used.
+
+The link:https://raw.githubusercontent.com/opengeospatial/oapi_common/master/core/openapi/schemas/link.yaml[link object] based on <<rfc8228,RFC 8288 (Web Linking)>> includes a `hreflang` attribute that can be used to state the language of the referenced resource. This can be used to include links to the same data in, for example, English or French. Just like with <<encodings,multiple encodings>> a server that wants to use language-specific links will have to support a mechanism to mint language-specific URIs for resources in order to express links to, for example, the same resource in another language. Again, this document does not mandate any particular approach how such a capability is supported by the server.
+
+==== Coordinate reference systems
+
+As discussed in Chapter 9 of the <<SDWBP,W3C/OGC Spatial Data on the Web Best Practices document>>, how to express and share the location of a coverage in a consistent way is one of the most fundamental aspects of coverage data and it is important to be clear about the coordinate reference system that coordinates are in.
+
+For the reasons discussed in the Best Practices, OGC API Coverages uses WGS 84 longitude and latitude as the default coordinate reference system.
+
+include::requirements/core/REQ_crs84-common.adoc[]
+
+=== URL Path Requirements
+
+The following sections describe the formats, behavior and requirements governing the URL Paths used by OGC API-Coverage implementations.
+
+The OGC strives to maintain a consistent look and feel across all of its' API standards. To that end, features which are common across APIs are defined in the OGC API-Common standard. API-Common requirements will be identified wherever applicable.
+
+==== API landing page
+
+he landing page provides links to the API definition, the Conformance statements and the metadata about the feature data in this dataset.
+
+===== Path Template
+
+ /
+
+===== Returns
+
+[[landingPage]]
+.API Landing Page
+=================
+[source,JSON]
+"root" : {
+    "required" : [ "links", "title", "description" ],
+    "type" : "object",
+    "properties" : {
+        "title" : {"type" : "string"}
+        "description" : {"type" : "string"}
+        "links" : {
+            "type" : "array",
+            "example" : [ {
+                "href" : "http://data.example.org/",
+                "rel" : "self",
+                "type" : "application/json",
+                "title" : "this document"
+            }, {
+                "href" : "http://data.example.org/api",
+                "rel" : "service",
+                "type" : "application/openapi+json;version=3.0",
+                "title" : "the API definition"
+            }, {
+                "href" : "http://data.example.org/conformance",
+                "rel" : "conformance",
+                "type" : "application/json",
+                "title" : "WFS 3.0 conformance classes implemented by this server"
+            }, {
+                "href" : "http://data.example.org/collections",
+                "rel" : "data",
+                "type" : "application/json",
+                "title" : "Metadata about the feature collections"
+            } ],
+            "items" : {
+                "$ref" : "#/components/schemas/link"
+                }
+            }
+        }
+    }
+
+=================
+
+===== Requirements
+
+There are no coverage-specific requirements for the API Landing Page. The applicable API-Common requirements are as follows: 
+
+include::requirements/core/REQ_root-common.adoc[]
+
+==== API definition
+
+Every API is expected to provide a definition that describes the capabilities of the server and which can be used by developers to understand the API, by software clients to connect to the server, or by development tools to support the implementation of servers and clients.
+
+===== Path Template
+
+ /api
+
+===== Returns
+
+The resource retured from this path is an API Definition Document. Currently only OpenAPI 3.0 is supported. Other definition document types may be supported in the future
+
+===== Requirements
+
+There are no coverage-specific requirements for the API definition. The applicable API-Common are as follows:
+
+include::requirements/core/REQ_api-common.adoc[]
+
+If multiple API definition formats are supported by a server, use content negotiation to select the desired representation.
+
+The idea is that any OGC API Coverage implementation can be used by developers that are familiar with the API definition language(s) supported by the server. For example, if an OpenAPI definition is used, it should be possible to create a working client using the OpenAPI definition. The developer may need to learn a little bit about geometry data types, etc., but it should not be required to read this standard to access the data via the API.
+
+==== Declaration of conformance classes
+
+To support "generic" clients that want to access multiple OGC API Coverage implementations - and not "just" a specific API / server, the API has to declare the requirements classes it implements and conforms to.
+
+===== Path Template
+
+ /conformance
+
+===== Returns
+
+list all requirements classes specified in a standard (e.g., ) that the API conforms to
+
+[[conformance]]
+.Conformance Information
+=================
+[source,JSON]
+"req-classes" : {
+    "required" : [ "conformsTo" ],
+    "type" : "object",
+    "properties" : {
+        "conformsTo" : {
+            "type" : "array",
+            "example" : [
+                "http://www.opengis.net/spec/oapi-coverages/1.0/req/core",
+                "http://www.opengis.net/spec/oapi-coverages/1.0/req/oas30",
+                "http://www.opengis.net/spec/oapi-coverages/1.0/req/html",
+                "http://www.opengis.net/spec/oapi-coverages/1.0/req/geojson" 
+                ],
+            "items" : {
+                "type" : "string"
+                }
+            }
+        }
+    }
+
+=================
+
+
+===== Requirements
+
+There are no coverage-specific requirements for the API definition. The applicable API-Common are as follows:
+
+include::requirements/core/REQ_conformance-common.adoc[]
+
+==== Collections metadata
+
+Metdata about the coverage collections shared by this API.
+
+===== Path Template: 
+
+/collections
+
+===== Returns:
+
+[[content]]
+.API Content Information
+=================
+[source,JSON]
+"content" : {
+    "required" : [ "collections", "links" ],
+    "type" : "object",
+    "properties" : {
+        "links" : {
+            "type" : "array",
+            "example" : [ {
+                "href" : "http://data.example.org/collections.json",
+                "rel" : "self",
+                "type" : "application/json",
+                "title" : "this document"
+                }, {
+                "href" : "http://data.example.org/collections.html",
+                "rel" : "alternate",
+                "type" : "text/html",
+                "title" : "this document as HTML"
+                }, {
+                "href" : "http://schemas.example.org/1.0/foobar.xsd",
+                "rel" : "describedBy",
+                "type" : "application/xml",
+                "title" : "XML schema for Acme Corporation data"
+                } ],
+            "items" : {
+                "$ref" : "#/components/schemas/link"
+                }
+            },
+        "collections" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "#/components/schemas/collectionInfo"
+                }
+            }
+        }
+    }
+
+=================
+
+===== Requirements:
+
+include::requirements/core/REQ_cc-md-common.adoc[]
+
+==== Collections metadata
+
+Describes the {collectionId} coverage collection
+
+===== Path Template: 
+
+/collections/{collectionId}
+
+===== Path Parameters:
+
+[[collectionId]]
+.CollectionID Parameter
+=================
+[source,JSON]
+"collectionId" : {
+    "name" : "collectionId",
+    "in" : "path",
+    "description" : "Identifier (name) of a specific collection",
+    "required" : true,
+    "style" : "simple",
+    "explode" : false,
+    "schema" : {
+        "type" : "string"
+        }
+    }
+
+=================
+
+===== Returns:
+
+[[collectionInfo]]
+.Collection Information
+=================
+[source,JSON]
+"collectionInfo" : {
+    "required" : [ "links", "name" ],
+    "type" : "object",
+    "properties" : {
+        "name" : {
+            "type" : "string",
+            "description" : "identifier of the collection used, for example, in URIs",
+            "example" : "buildings"
+            },
+        "title" : {
+            "type" : "string",
+            "description" : "human readable title of the collection",
+            "example" : "Buildings"
+            },
+        "description" : {
+            "type" : "string",
+            "description" : "a description of the features in the collection",
+            "example" : "Buildings in the city of Bonn."
+            },
+        "links" : {
+            "type" : "array",
+            "example" : [ {
+                "href" : "http://data.example.org/collections/buildings/items",
+                "rel" : "item",
+                "type" : "application/geo+json",
+                "title" : "Buildings"
+                }, {
+                "href" : "http://example.org/concepts/building.html",
+                "rel" : "describedBy",
+                "type" : "text/html",
+                "title" : "Feature catalogue for buildings"
+                } ],
+            "items" : {
+                "$ref" : "#/components/schemas/link"
+                }
+            },
+        "extent" : {
+            "$ref" : "#/components/schemas/extent"
+            },
+        "crs" : {
+            "type" : "array",
+            "description" : "The coordinate reference systems in which geometries may be retrieved. Coordinate reference systems are identified by a URI. The first coordinate reference system is the coordinate reference system that is used by default. This is always \"http://www.opengis.net/def/crs/OGC/1.3/CRS84\", i.e. WGS84 longitude/latitude.",
+        "items" : {
+            "type" : "string"
+            },
+        "default" : 
+            [ "http://www.opengis.net/def/crs/OGC/1.3/CRS84" ]
+            }
+        }
+    }
+
+=================
+
+==== Coverages Metadata
+
+===== Path Template: 
+
+/collections/{collectionId}/coverages
+
+===== Path Parameters:
+
+collectionId <<collectionId>>
+
+===== Query Parameters:
+
+[[query_parameter_limit]]
+.Limit Query Parameter
+[width="90%",cols="2,6a"]
+|===
+2+|limit
+|description |The optional limit parameter limits the number of items that are presented in the response document. +
+Only items are counted that are on the first level of the collection in the response document. +
+Nested objects contained within the explicitly requested items shall not be counted. 
+|required |false,
+|Schema | {
+    "maximum" : 10000, +
+    "minimum" : 1, +
+    "type" : "integer", +
+    "default" : 10
+    }
+|===
+
+[[query_parameter_bbox]]
+.Bounding Box Query Parameter
+[width="90%",cols="2,6a"]
+|===
+2+|bbox
+|description |Only features that have a geometry that intersects the bounding box are selected. The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth):
+
+. Lower left corner, coordinate axis 1
+. Lower left corner, coordinate axis 2
+. (optional) Lower left corner, coordinate axis 3
+. Upper right corner, coordinate axis 1
+. Upper right corner, coordinate axis 2
+. (optional) Upper right corner, coordinate axis 3
+
+The coordinate reference system of the values is WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter `bbox-crs`. 
+
+For WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).
+
+If a feature has multiple spatial geometry properties, it is the decision of the server whether only a single spatial geometry property is used to determine the extent or all relevant geometries
+|required |false,
+|Schema | {
+    "maxItems" : 6, +
+    "minItems" : 4, +
+    "type" : "array", +
+    "Items" : {"type" : "number" }
+    }
+|===
+
+[[query_parameter_time]]
+.Time Query Parameter
+[width="90%",cols="2,6a"]
+|===
+2+|time
+|description |Either a date-time or a period string that adheres to RFC 3339. Examples:
+
+* A date-time: \"2018-02-12T23:20:50Z\"
+* A period: \"2018-02-12T00:00:00Z/2018-03-18T12:31:12Z\" or \"2018-02-12T00:00:00Z/P1M6DT12H31M12S\"
+
+Only features that have a temporal property that intersects the value of `time` are selected. +
+If a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties. 
+|required |false,
+|Schema | {
+    "type" : "string"
+    }
+|===
+
+===== Returns:
+
+[[collectionGeoJSON]]
+.Collection Information
+=================
+[source,JSON]
+"collectionGeoJSON" : {
+    "required" : [ "features", "type" ],
+    "type" : "object",
+    "properties" : {
+        "type" : {
+            "type" : "string",
+            "enum" : [ "CoverageCollection" ]
+            },
+        "collections" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "#/components/schemas/coverageGeoJSON"
+                }
+            },
+        "links" : {
+            "type" : "array",
+            "items" : {
+                "$ref" : "#/components/schemas/link"
+                }
+            },
+        "timeStamp" : {
+            "type" : "string",
+            "format" : "dateTime"
+            },
+        "numberMatched" : {
+            "minimum" : 0,
+            "type" : "integer"
+            },
+        "numberReturned" : {
+            "minimum" : 0,
+            "type" : "integer"
+            }
+        }
+    }
+    
+=================
+
+===== Requirements
+
+.Get Coverages
+include::requirements/core/REQ_c-op.adoc[]
+
+.Get Coverages Response
+include::requirements/core/REQ_c-success.adoc[]
+
+.Response Links
+include::requirements/core/REQ_c-links.adoc[]
+
+==== Coverage (singular)
+
+Retrieve the specified coverage.
+
+===== Path Template:
+
+/collections/{collectionId}/coverages/{coverageID}
+
+===== Path Parameters:
+
+CollectionId <<collectionId>>
+
+[[coverageId]]
+.CoverageID Parameter
+=================
+[source,JSON]
+"coverageId" : {
+    "name" : "coverageId",
+    "in" : "path",
+    "description" : "Local identifier of a specific coverage",
+    "required" : true,
+    "style" : "simple",
+    "explode" : false,
+    "schema" : {
+        "type" : "string"
+        }
+    }
+    
+=================
+
+===== Returns:
+
+This operation provides direct access to the coverage itself. In the simple case the response can be a file which contains the coverage in the requested format. More complex coverages may require specific protocols for selecting and accessing discrete pixel values within the coverage. Alternately, streaming protocols may be used to access the coverage. Details on the protocols available are provided in the Coverage Metadata.
+
+===== Requirements
+
+.Get Coverage
+include::requirements/core/REQ_c-op.adoc[]
+
+.Get Coverage Response
+include::requirements/core/REQ_c-success.adoc[]
+
+==== Coverage Metadata (Singular)
+
+Retrieve metadata describing the specified coverage.
+
+===== Path Template:
+
+/collections/{collectionId}/coverages/{coverageID}/metadata
+
+===== Path Parameters:
+
+CollectionId <<collectionId>>
+
+coverageId <<coverageId>>
+
+===== Returns
+
+The metadata for this coverage.  This is the same as or an extenstion of the metadata included in the collection metadata.
+
+NOTE: We need to add metadata elements to identify the type of coverage we are dealing with and how to access it. Typically we are just dealing with a file transfer.  Alternatives include streaming (Web Sockets), JPIP, Cloud Optimized GeoTIFF, Pyramids / Tiles, etc.
+
+[[coverageGeoJSON]]
+.Coverage Metadata
+=================
+[source,JSON]
+"coverageGeoJSON" : {
+    "required" : [ "geometry", "properties", "type" ],
+    "type" : "object",
+    "properties" : {
+        "type" : {
+            "type" : "string",
+            "enum" : [ "Coverage" ]
+            },
+        "geometry" : {
+            "$ref" : "#/components/schemas/geometryGeoJSON"
+            },
+        "properties" : {
+            "type" : "object",
+            "nullable" : true
+            },
+        "id" : {
+            "oneOf" : [ {
+                "type" : "string"
+                }, {
+                "type" : "integer"
+                } ]
+            }
+        }
+    }
+        
+=================
+
+[[geometryGeoJSON]]
+.Geometry Information
+=================
+[source,JSON]
+"geometryGeoJSON" : {
+    "required" : [ "type" ],
+    "type" : "object",
+    "properties" : {
+        "type" : {
+            "type" : "string",
+            "enum" : [ "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon", "GeometryCollection" ]
+            }
+        }
+    }
+
+=================
+
+===== Requirements
+
+.Get Coverage Metadata
+include::requirements/core/REQ_c-m-op.adoc[]
+
+.Get Coverage Metadata Response
+include::requirements/core/REQ_c-m-success.adoc[]
+
+.Get Coverage Response Links
+include::requirements/core/REQ_c-m-links.adoc[]
+
+==== Domain Set of a Coverage
+
+===== Path Template 
+
+/collections/{collectionId}/coverages/{coverageID}/domainset
+
+===== Path Parameters
+
+collectionId <<collectionId>>
+
+coverageId <<coverageId>>
+
+===== Returns
+
+[[domainSetJSON]]
+.Domain Set Information
+=================
+[source,JSON]
+"domainSetJSON" : {
+    "required" : [ "type" ],
+    "type" : "object",
+    "properties" : {
+        "type" : {
+            "type" : "string"
+            }
+        }
+    }
+
+=================
+
+===== Requirements
+
+.Get Domain Set
+include::requirements/core/REQ_ds-op.adoc[]
+
+.Get Domain Set Response
+include::requirements/core/REQ_ds-success.adoc[]
+
+==== Range Type of a Coverage
+
+===== Path Template:
+
+/collections/{collectionId}/coverages/{coverageID}/rangetype
+
+===== Path Parameters
+
+collectionId <<collectionId>>
+
+coverageId <<coverageId>>
+
+===== Returns
+
+[[rangeTypeJSON]]
+.Range Type Information
+=================
+[source,JSON]
+"rangeTypeJSON" : {
+    "type" : "object"
+    }
+        
+=================
+
+===== Requirements
+
+.Get Range Type
+include::requirements/core/REQ_rt-op.adoc[]
+
+.Get Range Type Response
+include::requirements/core/REQ_rt-success.adoc[]
