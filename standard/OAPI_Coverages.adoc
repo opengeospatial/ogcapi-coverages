@@ -1,14 +1,23 @@
-:Title: OGC API Coverages
-:titletext: OGC API Coverages
+:Title: OGC API - Coverages - Part 1: Core
+:titletext: OGC API - Coverages - Part 1: Core
 :doctype: book
 :encoding: utf-8
 :lang: en
 :toc:
 :toc-placement!:
 :toclevels: 3
-:numbered:
+:sectnums:
+:sectnumlevels: 4
 :sectanchors:
 :source-highlighter: pygments
+:figure-id: 0
+:table-id: 0
+:req-id: 0
+:rec-id: 0
+:per-id: 0
+:source-highlighter: pygments
+:pygments-style: borland
+:pygments-linenums-mode: table
 
 = {title}
 
@@ -18,13 +27,13 @@
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
-|Approval Date:   <yyyy-mm-dd>
-|Publication Date:   2019-12-11
+|Approval Date: <yyyy-mm-dd>
+|Publication Date: 2019-12-11
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-|Internal reference number of this OGC(R) document:    19-087
+|Internal reference number of this OGC(R) document: 19-087
 |Version: 0.0.5
 |Category: OGC(R) Implementation Specification
-|Editor:   Charles Heazel
+|Editor: Charles Heazel
 |===
 
 [cols = "^", frame = "none"]
