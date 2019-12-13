@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "envelope",
+    "description": "The envelope around a coverage is defined by the lower and upper bound of each axis, respectively. The purpose of the axisLabels attribute, which lists the axis labels of all axisExtent elements in proper sequence, is to enforce axis sequence also in XML systems which do not preserve document order.",
+    "type": "object",
+    "required": [
+        "type",
+        "srsName",
+        "axisLabels",
+        "axis"
+    ],
+    "properties": {
+        "type": {
+            "enum": ["EnvelopeByAxisType"]
+        },
+        "id": {"type": "string"},
+        "srsName": {
+            "type": "string",
+            "format": "uri"
+        },
+        "axisLabels": {
+            "type": "array",
+            "items": {"type": "string"}
+        },
+        "axis": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "type",
+                    "lowerBound",
+                    "upperBound",
+                    "uomLabel"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "type": {
+                        "enum": ["AxisExtentType"]
+                    },
+                    "id": {"type": "string"},
+                    "axisLabel": {"type": "string"},
+                    "lowerBound": {
+                        "type": [
+                            "number",
+                            "string",
+                            "null",
+                            "boolean"
+                        ]
+                    },
+                    "upperBound": {
+                        "type": [
+                            "number",
+                            "string",
+                            "null",
+                            "boolean"
+                        ]
+                    },
+                    "uomLabel": {"type": "string"}
+                }
+            }
+        }
+    }
+}
