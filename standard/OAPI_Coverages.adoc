@@ -19,7 +19,7 @@
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
 |Approval Date:   <yyyy-mm-dd>
-|Publication Date:   2019-12-11
+|Publication Date:   2019-12-18
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
 |Internal reference number of this OGC(R) document:    19-087
 |Version: 0.0.5
@@ -50,8 +50,7 @@ Recipients of this document are invited to submit, with their comments, notifica
 
 [width = "50%", grid = "none"]
 |===
-|Document type:   	OGC®ImplementationSpecification
-|Document subtype:   	if applicable
+|Document type:   OGC(R) Implementation Specification
 |Document stage:   	Draft
 |Document language: 	English
 |===

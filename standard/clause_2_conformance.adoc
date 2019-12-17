@@ -1,14 +1,27 @@
 == Conformance
-This standard defines XXXX.
+Conformance with this standard shall be checked using the tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to claim conformance, are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
 
-Requirements for N standardization target types are considered:
-* AAAA
-* BBBB
+The one Standardization Target for this standard is Web APIs.
 
-Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
+OGC API-Common provides a common foundation for OGC API standards. Therefore, this standard should be viewed as an extension to API-Common. Conformance to this standard requires demonstrated conformance to the applicable Conformance Classes of API-Common. 
 
-In order to conform to this OGC® interface standard, a software implementation shall choose to implement:
-* Any one of the conformance levels specified in Annex A (normative).
-* Any one of the Distributed Computing Platform profiles specified in Annexes TBD through TBD (normative).
+This standard idenfies TBD Conformance Classes. The Conformance Classes implemented by an API are advertised through the `/conformance` path on the landing page. Each Conformance Class has an associated Requirements Class. The Requirements Classes define the functional requirements which an implementation must meet.
 
-All requirements-classes and conformance-classes described in this document are owned by the standard(s) identified.
+The Requirements Classes for OGC API-Coverages are:
+
+* *Core*
+
+The Core Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this reuqirements class are mandatory for all implementations of API-Coverages.
+
+* *HTML*
+* *GeoJSON*
+
+The _Core_ requirements class does not mandate a specific encoding or format for representing resources. The _HTML_ and _GeoJSON_ requirements classes specify representations for these resources in commonly used encodings for spatial data on the web.
+
+Neither of these encodings are mandatory. An implementation of the API-Coverages standard may implement other encodinds instead of, or in addition to, these two.
+
+* *OpenAPI 3.0*
+
+API-Coverages does not mandate any encoding of format for the formal definition of the API. The prefered option is the OpenAPI 3.0 specification. The _OpenAPI 3.0_ requirements class has been specified for APIs implementing OpenAPI 3.0.
+
+
