@@ -1,5 +1,5 @@
-:Title: OGC API-Coverages
-:titletext: OGC API-Coverages
+:Title: OGC API - Coverages - Part 1: Core
+:titletext: OGC API - Coverages - Part 1: Core
 :doctype: book
 :encoding: utf-8
 :lang: en
@@ -25,7 +25,7 @@
 |Submission Date: <yyyy-mm-dd>
 |Approval Date: <yyyy-mm-dd>
 |Publication Date: 2019-12-18
-|External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages/1.0
+|External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0
 |Internal reference number of this OGC(R) document: 19-087
 |Version: 0.0.5
 |Category: OGC(R) Implementation Specification

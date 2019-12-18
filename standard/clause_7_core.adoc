@@ -58,7 +58,7 @@ Resources exposed through an OGC API are accessed through a Universal Resource I
 ^|**Path Template** ^|**Resource**
 2+^|**Common**
 |<<landing-page,{root}/>> |Landing page
-|<<api-definition,{root}/api>> |API Description
+|<<api-definition,{root}/api>> |API Description (optional)
 |<<conformance-classes,{root}/conformance>> |Conformance Classes
 |<<collections,{root}/collections>> |Metadata describing the spatial collections available from this API.
 |<<collectionInfo,{root}/collections/{collectionId}>> |Metadata describing the collection which has the unique identifier `{collectionId}`
@@ -177,7 +177,7 @@ Both techniques are required by API-Common.
 
 include::requirements/core/REQ_core_conformance.adoc[]
 
-The Response to the Conformance operation is a list URLs. Each URL identifies an OGC Conformance Class for which this API claims conformance. The schema for this resource is defined in API-Common and provided for reference in <<conformance-schema>>.
+The Response to the Conformance operation is a list of URLs. Each URL identifies an OGC Conformance Class for which this API claims conformance. The schema for this resource is defined in API-Common and provided for reference in <<conformance-schema>>.
 
 [#conformance-schema,reftext='Conformance Response Schema']
 .Conformance Response Schema
@@ -223,9 +223,9 @@ TBD
 This operation is defined in the `Collections` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Collections` conformance class describes two ways of performing this operation:
 
 . Follow the `/collections` path
-. Follow the `service-desc` link on the landing page
+. Follow the `data` link on the landing page
 
-Support for both the `/collections` path and the `dataset` link is required by API-Common.
+Support for both the `/collections` path and the `data` link is required by API-Common.
 
 ===== Response
 
@@ -265,7 +265,7 @@ TBD
 This operation is defined in the `Collections` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Collections` conformance class describes two ways of performing this operation:
 
 . Follow the `/collections/{collectionId}` path
-. Follow the `service-desc` link on the landing page
+. Follow the `coverage` link on the collections info page
 
 Support for both the `/collections/{collectionId}` path and the `dataset` link is required by API-Common.
 

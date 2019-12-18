@@ -4,13 +4,13 @@ The following conventions will be used in this document. Examples of conventions
 === Identifiers
 The normative provisions in this standard are denoted by the URI
 
-http://www.opengis.net/spec/ogcapi-coverages/1.0
+http://www.opengis.net/spec/ogcapi-coverages-1/1.0
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
 
 === Examples
 
-Most of the examples provided in this standard are encoded in JSON. JSON was chosen because it is widely understood by implementers and easy to include in a text document. This convention should NOT be interpreted as a requirement that JSON must be used. Implementors are free to use any format they desire as long as there is a Conformance Class for that format and the API advertises its support for that Conformance Class. 
+Most of the examples provided in this standard are encoded in JSON. JSON was chosen because it is widely understood by implementers and easy to include in a text document. This convention should NOT be interpreted as a requirement that JSON must be used. Implementors are free to use any format they desire as long as there is a Conformance Class for that format and the API advertises its support for that Conformance Class.
 
 === Schema
 
@@ -28,7 +28,7 @@ Further, in any class where an attribute name or association role name is identi
 
 === Namespace Prefix Conventions
 
-UML diagrams and XML code fragments adhere to the namespace conventions shown in Table 2. The namespace prefixes used in this document are not normative and are merely chosen for convenience. The namespaces to which the prefixes correspond are normative, however. 
+UML diagrams and XML code fragments adhere to the namespace conventions shown in Table 2. The namespace prefixes used in this document are not normative and are merely chosen for convenience. The namespaces to which the prefixes correspond are normative, however.
 
 Whenever a data item from a CIS-external namespace is referenced this constitutes a normative dependency on the data structure imported together with all requirements defined in the namespace referenced.
 
