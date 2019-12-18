@@ -1,9 +1,67 @@
 == Requirements classes for encodings
 
+This standard does not mandate any particular encoding or format. However, it does provide extensions for encodings which are commonly used in OGC APIs. These extensions include:
+
+* Formats commonly used by Web Browsers (HTML and GeoTIFF)
+* Data formats (RDF)
+* Coverage formats (GeoTIFF, JPEG-2000, NetCDF)
+
+None of these encodings are mandatory and an implementor of the _Core_ Requirements Class may choose implement none of them. Alternatively, an implementation of the _Core_ Requirements Class may choose to implement a completely different encodings.
+
+<<rec_html,Support for HTML is recommended>>. HTML is the core language of the World Wide Web. An API that supports HTML will support browsing the spatial resources with a web browser and will also enable search engines to crawl and index those resources.
+
+CAUTION: The search engine point is not valid. HTML describes syntax, not semantics (remember why we introduced XML and RDF?). See link:https://github.com/opengeospatial/ogc_api_coverages/issues/13[Issue 13].
+
+<<rec_geojson,Support for GeoJSON is recommended>>. GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format, it is recommended for use in support data. as long as the data can be represented in GeoJSON for the intended use. Explicitly out-of-scope for GeoJSON are coverages. Further, GeoJSON currently does not consider geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g. an authoritative national reference system). Consequently, GeoJSON is not recommended for coverages; rather, for JSON the CIS 1.1 JSON encoding is recommended which can represent coverages in an informationally complete way.
+
+<<rec_cisjson,Support for CIS 1.1 JSON is recommended>>
+
+Among the shortcomings of GeoJSON, which have been debated widely, is the substantially restricted support for multi-dimensional coordinates and coordinate reference systems. For exampele, European ETRS89 is not supported.
+
+The recommendations for using HTML and GeoJSON reflect the importance of HTML and the current popularity of JSON-based data formats. As the practices in the Web community evolve, the recommendations will likely be updated in future versions of this standard to provide guidance on using other encodings.
+
+This part of the OAPI standard does not provide any guidance on other encodings. The supported encodings, or more precisely the media types of the supported encodings, can be determined from the API definition. The desired encoding is selected using HTTP content negotiation.
+
+For example, if the server supports link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences] an encoding that is based on JSON text sequences, and GeoJSON, and supports streaming by making the data incrementally parseable, could use the media type `application/geo+json-seq` in the header of a corresponding request to the server.
+
+In addition, HTTP supports compression. Therefore the standard HTTP compression mechanisms can be used to reduce the size of messages between the server and the client.
+
+=== Examples
+
 [NOTE]
 ========
-The following content is from the OAPI Common specification, but has been modified for Coverage APIs. Keep in mind that both coverages and metadata are supplied by the API. link:https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/09-146r6_Coverage_Implementation_Schema_CIS_1.1.pdf[OGC CIS] defines how to encode coverages with their data and metadata; for pure metadata responses HTML and GeoJSON encoding may be retained.
+Update the following content once a coverage example has been agreed on.
 ========
+[NOTE]
+========
+The following set of examples is proposed, taken from link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[OGC CIS] standard's suite of link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] examples.
+========
+
+This document uses a simple example throughout the document: a link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D single-band orthoimage coverage]. Further examples provided in link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] include:
+
+* link:http://schemas.opengis.net/cis/1.1/json/examples/00_metadata.json[metadata]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/05_2D_index.json[2D_index]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D regular]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/11_2D_regular_fileref.json[2D regular fileref]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/12_2D_regular_fileref_multiband.json[2D regular fileref multiband]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/15_with-envelope.json[with-envelope]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/20_3D_height.json[3D height]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/25_3D_time.json[3D time]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/30_4D_height+time.json[4D height+time]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/40_1D_regular.json[1D regular]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/45_2D_distorted.json[2D distorted]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/46_irregular+distorted.json[irregular+distorted]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/50_3D_partitioned-1.json[3D partitioned]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/55_1D_timeseries-partitioned.json[1D timeseries partitioned]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/60_3D_timeseries-multipart.json[3D timeseries multipart]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/65_1D_timeseries-interleaved.json[1D timeseries interleaved]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/70_2D_interpolation.json[2D interpolation]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/80_sensormodel.json[sensormodel]
+* link:http://schemas.opengis.net/cis/1.1/json/examples/90_point-cloud.json[point cloud]
+  
+
+
+
 
 === Overview
 

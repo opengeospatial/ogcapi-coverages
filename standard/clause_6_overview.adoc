@@ -1,96 +1,50 @@
 [[overview]]
 == Overview
 
-=== Evolution from OGC Web Services
+=== General
 
-OGC Web Service (OWS) standards implemented a Remote-Procedure-Call-over-HTTP architectural style using XML for payloads. This was the state-of-the-art when OGC Web Services were originally designed in the late 1990s and early 2000s. The OGC API (OAPI) Common specifies the common kernel of an API approach to services that follows the current Web architecture. In particular, the <<SDWBP,W3C/OGC best practices for sharing Spatial Data on the Web>> as well as the <<DWBP,W3C best practices for sharing Data on the Web>>.
+OGC API standards define modular API building blocks to spatially enable Web APIs in a consistent way. http://openapis.org[OpenAPI] is used to define the reusable API building blocks with responses in JSON and HTML.
 
-Beside the general alignment with the architecture of the Web (e.g., consistency with HTTP/HTTPS, hypermedia controls), another goal for OGC API standards is modularization. This goal has several facets:
+The OGC API family of standards is organized by resource type. OGC API-Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time, such as spatio-temporal sensor,image, simulation, and statistics data.
 
-* Clear separation between core requirements and more advanced capabilities. This document specifies the requirements that are relevant for almost everyone who wants to share or use coverage data on a fine-grained level. Additional capabilities that several communities are using today will be specified as extensions to the Core API.
-* Technologies that change more frequently are decoupled and specified in separate modules ("requirements classes" in OGC terminology). This enables, for example, the use/re-use of new encodings for spatial data or API descriptions.
-* Modularization is not just about a single "service". OGC APIs will provide building blocks that can be reused in APIs in general. In other words, a server supporting the OAPI - Coverages should not be seen as a standalone WCS service.  Rather it should be viewed as a collection of API building blocks which together implement OAPI - Coverages capabilities. A corollary of this is that it should be possible to implement an API that simultaneously conforms to conformance classes from OAPI - Features, OAPI - Coverages and other OGC Web API standards.
+If you are unfamiliar with the term 'coverage', the explanations on the http://myogc.org/go/coveragesDWG[Coverages DWG Wiki] provide more detail and links to educational material. Additionally, https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)] in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
 
-This approach intends to support two types of client developers:
+This https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] specification establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs.
 
-* Those that have never heard about OGC. Developers should be able to create a client using the API definition without the need to read an OGC standard (they may need to learn a little bit about geometry, etc.);
-* Those that want to write a "generic" client that can access OGC APIs, i.e. are not specific for a particular API.
+==== Current scope
 
-As a result of this modernization, OGC API implementations are not necessarily always backwards compatible with OWS implementations per se, although - for the protection of implementation and service assets - compatibility will be considered as much as possible. However, a design goal is to define OGC APIs in a way so that an OAPI interface can be mapped to an OWS implementation. OGC APIs are intended to be simpler and more modern, but still an evolution from the previous versions and their implementations. 
+*   Only gridded coverages are addressed, not
+MultiPoint/Curve/Surface/SolidCoverages. Reason is that griddedcoverages receive most attention today.
+*   Only CIS 1.1 GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which showsand allows to evaluate the principles.
+*   Only coverage extraction functionality is considered, not general processing (as is provided with Web Coverage Service (WCS) extensionssuch as the Processing Extension). Exceptions from this rule aresubsetting including band subsetting, scaling, and CRS conversion anddata format encoding, given their practical relevance.
+*   Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the pathcomponent. Further, subsetting may reference any axis and leave out anyother, which makes positional parameters unsuitable. Neverthelesssubsetting in the path component particularly limited to fixed subsetsmight be considered in a future version. The principles of the ``/tiles`` path defined in OGC API - Maps & Tiles might be a good fit and shall be explored.
 
-The OGC coverage data and service model is well prepared for such a step:
+As such, the functionality provided below resembles http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core].
 
-* The modular, simple architecture of CIS and WCS has been embraced by developers (link:http://external.opengeospatial.org/twiki_public/CoveragesDWG/WebHome[source]):
-** "Web developers who have not heard of OGC standards before immediately feel at home with these coverage standards" -- Stephan Siemen, ECMWF
-** "WCS is the natural way to deliver and exploit coverage data." -- Jordi Escriu, Facilitator INSPIRE Thematic Cluster #3: Elevation, Orthoimagery, Reference systems and Geographical grids
-** "As a WCS the data is of most value" -- Perry Peterson, Pyxis Innovation
-** "CIS 1.1 is what I've been waiting for." -- Kathi Schleidt, INSPIRE expert 
-* Both the coverage data model (CIS) and the service model (WCS) are modular suites of standards, with a focus on simplicity and ease of use in the CIS and WCS Core and a rich ecosystem of coverage-specific structuring and functionality in the extensions. Application Profiles provide specialized services, e.g., for remote sensing imagery.
-* The WCS Core provides the very basic functionality, coverage access, subsetting, and format encoding. Hence, WCS Core is an ideal starting point for an OAPI Coverages service.
-* The WCS suite has a clear separation in functionality and protocol binding (i.e., request language). For example, all WCS Core and Extension functionality can be expressed equivalently in GET/KVP, POST/XML, and SOAP. Adding an OpenAPI protocol binding, therefore, can easily fit into this ecosystem, thereby avoiding a backwards incompatible change (like "WCS 3.0") and rather establishing incrementally a WCS 2.2.
+==== Background Information: WCS Service Model
 
-The modernization is discussed in more detail and from a coverage independent view link:https://github.com/opengeospatial/OAPI_Common/blob/master/overview.md[here].
+OGC WCS 2 has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally. This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage's Native CRS).
 
-=== Encodings
+image::standard/figures/WCS_CoverageOfferings.png[]
 
-[NOTE]
-========
-Metadata will be returned as well as complete coverages.  For the former, HTML should be included for this purpose, for the latter some format like should be included.  Additional encodings will be needed to support coverage responses, such as GML and RDF already supported by CIS in addition to JSON.
-========
+Discussion has shown that the OpenAPI functionality also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental model" of the server store organization on hand to explain the various functionalities introduced below.
 
-This standard does not mandate any particular encoding or format. However, it does provide extensions for encodings which are commonly used in OGC APIs.  In addition to HTML as the standard encoding for human-centric Web content, rules for commonly used encodings for spatial data on the web are provided (GeoJSON, GML).
+==== Prinicples
 
-None of these encodings is mandatory and an implementation of the _Core_ requirements class may implement none of them. Alternatively, an implementation of the _Core_ requirements class may choose to implement completely different encodings instead.
+https://www.openapis.org/[OpenAPI] establishes URL-based access patterns, as defined by https://tools.ietf.org/html/rfc3986[RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax"], https://tools.ietf.org/html/rfc3987[RFC 3987 "Internationalized Resource Identifiers (IRIs)"], and https://tools.ietf.org/html/rfc6570[RFC 6570 "URI Template"] following a syntax like
+http://www.acme.com/path/to/resource/%7Bid%7D%7B?query,parameters%7D[http://www.acme.com/path/to/resource/{id}{?query,parameters}]
+whereby
 
-<<rec_html,Support for HTML is recommended>>. HTML is the core language of the World Wide Web. An API that supports HTML will support browsing the spatial resources with a web browser and will also enable search engines to crawl and index those resources.
+*   ``/path/to/resource/{id}`` defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com[http://www.acme.com].
+*   the ``{?query,parameters}`` represent key/value pairs with further parameters passed to the request.
 
-CAUTION: The search engine point is not valid. HTML describes syntax, not semantics (remember why we introduced XML and RDF?). See link:https://github.com/opengeospatial/ogc_api_coverages/issues/13[Issue 13].
+As a general rule,
 
-[NOTE]
-========
-GeoJSON is a commonly used format that is simple to understand and well supported by tools and software libraries. Since most Web developers are comfortable with using a JSON-based format, it is <<rec_geojson,recommended for APIs which expose feature data>> as long as the data can be represented in GeoJSON for the intended use. Explicitly out-of-scope for GeoJSON are coverages. Further, GeoJSON currently does not consider geometries that have to be represented in a coordinate reference system that is not based on WGS 84 longitude/latitude (e.g. an authoritative national reference system). Consequently, GeoJSON is not recommended for coverages; rather, for JSON the CIS 1.1 JSON encoding is recommended which can represent coverages in an informationally complete way.
-========
+*   accessing a coverage component is done in the path section,
+*   subsetting is done in the query parameter section
+*   format encoding is controlled via HTTP headers
 
-Among the shortcomings of GeoJSON, which have been debated widely, is the substantially restricted support for multi-dimensional coordinates and coordinate reference systems. For exampele, European ETRS89 is not supported.
+As the coverage model normatively is given by the corresponding XML schema (JSON and RDF are built in sync with XML) specification of the https://www.openapis.org/[OpenAPI] access paths follows this schema. Note, though, that OWS Common, while normatively referenced in CIS, is not followed by https://www.openapis.org/[OpenAPI], so here deviations will occur.
 
-The recommendations for using HTML and GeoJSON reflect the importance of HTML and the current popularity of JSON-based data formats. As the practices in the Web community evolve, the recommendations will likely be updated in future versions of this standard to provide guidance on using other encodings.
+For path expressions abbreviations (i.e., aliases) may be defined for convenience.
 
-This part of the OAPI standard does not provide any guidance on other encodings. The supported encodings, or more precisely the media types of the supported encodings, can be determined from the API definition. The desired encoding is selected using HTTP content negotiation.
-
-For example, if the server supports link:https://tools.ietf.org/html/rfc8142[GeoJSON Text Sequences] an encoding that is based on JSON text sequences, and GeoJSON, and supports streaming by making the data incrementally parseable, could use the media type `application/geo+json-seq` in the header of a corresponding request to the server.
-
-In addition, HTTP supports compression. Therefore the standard HTTP compression mechanisms can be used to reduce the size of messages between the server and the client.
-
-=== Examples
-
-[NOTE]
-========
-Update the following content once a coverage example has been agreed on.
-========
-[NOTE]
-========
-The following set of examples is proposed, taken from link:http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[OGC CIS] standard's suite of link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] examples.
-========
-
-This document uses a simple example throughout the document: a link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D single-band orthoimage coverage]. Further examples provided in link:http://schemas.opengis.net/cis/1.1/gml[XML], link:http://schemas.opengis.net/cis/1.1/json[JSON], and link:http://schemas.opengis.net/cis/1.1/rdf[RDF] include:
-
-* link:http://schemas.opengis.net/cis/1.1/json/examples/00_metadata.json[metadata]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/05_2D_index.json[2D_index]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/10_2D_regular.json[2D regular]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/11_2D_regular_fileref.json[2D regular fileref]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/12_2D_regular_fileref_multiband.json[2D regular fileref multiband]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/15_with-envelope.json[with-envelope]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/20_3D_height.json[3D height]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/25_3D_time.json[3D time]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/30_4D_height+time.json[4D height+time]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/40_1D_regular.json[1D regular]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/45_2D_distorted.json[2D distorted]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/46_irregular+distorted.json[irregular+distorted]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/50_3D_partitioned-1.json[3D partitioned]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/55_1D_timeseries-partitioned.json[1D timeseries partitioned]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/60_3D_timeseries-multipart.json[3D timeseries multipart]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/65_1D_timeseries-interleaved.json[1D timeseries interleaved]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/70_2D_interpolation.json[2D interpolation]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/80_sensormodel.json[sensormodel]
-* link:http://schemas.opengis.net/cis/1.1/json/examples/90_point-cloud.json[point cloud]
-  

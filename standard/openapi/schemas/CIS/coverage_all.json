@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Coverage object",
+    "description": "Component of OGC Coverage Implementation Schema 1.1. Last updated: 2016-may-18. Copyright (c) 2016 Open Geospatial Consortium, Inc. All Rights Reserved. To obtain additional rights of use, visit http://www.opengeospatial.org/legal/.",
+    "type": "object",
+    "oneOf": [
+        {
+            "required": [
+                "type",
+                "domainSet",
+                "rangeSet",
+                "rangeType"
+            ],
+            "properties": {
+                "id": {"type": "string"},
+                "type": {
+                    "enum": ["CoverageByDomainAndRangeType"]
+                },
+                "envelope": {"$ref": "coverage_envelope.json#/envelope"},
+                "domainSet": {"$ref": "coverage_domainset.json#/domainSet"},
+                "rangeSet": {"$ref": "coverage_rangeset.json#/rangeSet"},
+                "rangeType": {"$ref": "coverage_rangetype.json#/rangeType"},
+                "metadata": {"$ref": "coverage_metadata.json#/metadata"}
+            }
+        },
+        {
+            "required": [
+                "type",
+                "partitionSet",
+                "rangeType"
+            ],
+            "properties": {
+                "id": {"type": "string"},
+                "type": {
+                    "enum": ["CoverageByPartitioningType"]
+                },
+                "envelope": {"$ref": "coverage_envelope.json#/envelope"},
+                "partitionSet": {"$ref": "coverage_partitioningset.json#/partitioningSet"},
+                "rangeType": {"$ref": "coverage_rangetype.json#/rangeType"},
+                "metadata": {"$ref": "coverage_metadata.json#/metadata"}
+            }
+        }
+    ]
+}

@@ -164,7 +164,6 @@ Notes:
 * bbox is OGC API - Common syntax
   * in OGC API - Coverages Core, no subsetting on vertical and time coordinates
   * horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
-  * if filtering dimension is not present in coverage to be tested (due to above restriction not an issue currently): coverage will be discarded from result
 
 ### Coverage Access
 
@@ -175,7 +174,7 @@ The second part is about coverage access, which (as described earlier) is driven
 * http://acme.com/oapi/collections/{collectionid}/coverage/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
 * http://acme.com/oapi/collections/{collectionid}/coverage/metadata  -- returns the coverage's metadata (may be empty)
 * http://acme.com/oapi/collections/{collectionid}/coverage/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
-* http://acme.com/oapi/collections/{collectionid}/coverage/all  -- returns all of the above namely the coverage's domainset, rangetype, meatadata, and rangeset comparable to a GetCoverage response
+* http://acme.com/oapi/collections/{collectionid}/coverage/all  -- returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
 
 ### Coverage Subsetting
 
@@ -190,3 +189,4 @@ The third part is about query parameters:
 * Establish service parameter access, based on [OGC API - Common](https://github.com/opengeospatial/oapi_common)
 * What is the output format of items typically returned as XML or JSON, such as DomainSet and RangeType? Should maybe FORMAT be applicable here as well? If so, should it be listed as a possible output format (which might be confusing)?
 * [OGC 14-121 Web Query Service](https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf) provides a definition of path syntax, but adds more functionality (such as selection predicates), all based on the XPath standard. Such extra functionality might come handy.
+* Add `bbox` and `time` as defined in OGC API - Common as subsetting option.
