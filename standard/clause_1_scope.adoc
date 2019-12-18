@@ -1,7 +1,7 @@
 == Scope
-This https://github.com/opengeospatial/ogc_api_coverages[OGC API-Coverages] specification establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation  Schema (CIS) 1.1] through Web Application Programing Interfaces (API).
+This OGC API Coverages (https://github.com/opengeospatial/ogc_api_coverages[https://github.com/opengeospatial/ogc_api_coverages]) specification establishes how to access coverages as defined by the Coverage Implementation  Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]) through a Web API such as those described by the OpenAPI specification (https://www.openapis.org/[https://www.openapis.org/]).
 
-The functionality provided API-Coverages resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard]. It is expected that Coverage APIs and WCS services will be able to interoperate, allowing developers to pick the solution best suited for their requirements. 
+The functionality provided by API-Coverages resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard]. It is expected that Coverage APIs and WCS services will be able to interoperate, allowing developers to pick the solution best suited for their requirements. 
 
 === Current scope:
 The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors. Additional capabilities will be added based on community demand.

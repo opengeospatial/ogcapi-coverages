@@ -1,14 +1,19 @@
-:Title: OGC API Coverages
-:titletext: OGC API Coverages
+:Title: OGC API-Coverages
+:titletext: OGC API-Coverages
 :doctype: book
 :encoding: utf-8
 :lang: en
 :toc:
 :toc-placement!:
 :toclevels: 3
-:numbered:
+:sectnums:
+:sectnumlevels: 4
 :sectanchors:
-:source-highlighter: pygments
+:figure-id: 0
+:table-id: 0
+:req-id: 0
+:rec-id: 0
+:per-id: 0
 
 = {title}
 
@@ -18,13 +23,13 @@
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
-|Approval Date:   <yyyy-mm-dd>
-|Publication Date:   2019-12-18
-|External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-|Internal reference number of this OGC(R) document:    19-087
+|Approval Date: <yyyy-mm-dd>
+|Publication Date: 2019-12-18
+|External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages/1.0
+|Internal reference number of this OGC(R) document: 19-087
 |Version: 0.0.5
 |Category: OGC(R) Implementation Specification
-|Editor:   Charles Heazel
+|Editor: Charles Heazel
 |===
 
 [cols = "^", frame = "none"]
@@ -91,16 +96,12 @@ include::clause_6_overview.adoc[]
 
 include::clause_7_core.adoc[]
 
-include::clause_8_encodings.adoc[]
-
-include::clause_9_oas.adoc[]
-
 include::clause_10_media_types.adoc[]
 
-include::annex-ats.adoc[]
+include::annex_ats.adoc[]
 
-include::annex-history.adoc[]
+include::annex_history.adoc[]
 
-include::annex-bibliography.adoc[]
+include::annex_bibliography.adoc[]
 
 <<<

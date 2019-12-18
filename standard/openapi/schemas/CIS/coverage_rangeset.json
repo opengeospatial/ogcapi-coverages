@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "rangeSet": {
+        "title": "rangeSet",
+        "description": "The rangeSet lists a value for each of the coverage's direct positions. Values resemble the *payload* information of some particular direct positions. Values can be composite (with a single nesting level, i.e.: composites always consist of atomics), or atomic (emulated through single-component composites) whereby the sequence, structure, and meaning of every value is defined through the rangeType. Values can be represented in-line or by reference to an external file which may have any suitable encoding.",
+        "type": "object",
+        "oneOf": [
+            {
+                "required": [
+                    "type",
+                    "dataBlock"
+                ],
+                "properties": {
+                    "type": {
+                        "enum": ["RangeSetType"]
+                    },
+                    "dataBlock": {
+                        "title": "dataBlock",
+                        "description": "Data block objects",
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "values"
+                        ],
+                        "properties": {
+                            "type": {
+                                "enum": [
+                                    "VDataBlockType",
+                                    "CVDataBlockType"
+                                ]
+                            },
+                            "values": {
+                                "type": "array",
+                                "items": {
+                                    "type": [
+                                        "number",
+                                        "string",
+                                        "null",
+                                        "boolean"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "required": [
+                    "type",
+                    "fileReference"
+                ],
+                "properties": {
+                    "type": {
+                        "enum": ["RangeSetRefType"]
+                    },
+                    "fileReference": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

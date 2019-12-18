@@ -11,14 +11,32 @@ The Requirements Classes for OGC API-Coverages are:
 
 * *Core*
 
-The Core Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this reuqirements class are mandatory for all implementations of API-Coverages.
+The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of API-Coverages.
+
+=== Encodings
+
+The _Core_ Requirements Class does not mandate a specific encoding or format for representing resources. The encoding Requirements Classes defined for this version of API-Coverages are: 
 
 * *HTML*
 * *GeoJSON*
+* *RFD*
+* *NetCDF*
+* *GeoTIFF*
+* *JPEG-2000*
 
-The _Core_ requirements class does not mandate a specific encoding or format for representing resources. The _HTML_ and _GeoJSON_ requirements classes specify representations for these resources in commonly used encodings for spatial data on the web.
+The _HTML_ and _GeoJSON_ Requirements Classes specify commonly used encodings for spatial data on the web. Use of these encodings is recommended for resources which describe the coverage resources. 
 
-Neither of these encodings are mandatory. An implementation of the API-Coverages standard may implement other encodinds instead of, or in addition to, these two.
+Many requirements in this standard include wording similar to the following:
+
+  "encoded using a schema equivalent to the JSON fragment at"
+
+"Equivalent to" shall be interpreted to mean a schema which has the same information content as the JSON fragment.   
+
+NOTE: We may want to re-work the requirements so that they point to an appropriate requirements in the encoding Requirements Class.
+
+NOTE: Question, Can I use a format which is not on the list of recognized Conformance Classes?
+
+=== API Description
 
 * *OpenAPI 3.0*
 
