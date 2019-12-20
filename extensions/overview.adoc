@@ -1,0 +1,19 @@
+== Extension Classs
+
+[[extensions-overview]]
+=== Overview
+In addition to the OAPI - Coverages Core, which every implementation claiming conformance must implement, a number of extensions is defined which an implementation optionally may support. These extensions are as follows.
+
+
+[#mapping-to-common,reftext='{table-caption} {counter:table-num}']
+.Mapping Extensions to API-Coverages Core
+[width="90%",cols="2,6"]
+|====
+^|*Extension* ^|*Purpose*
+| Processing | process WCPS analytics queries in the server
+| Transaction | insert, delete, or update a coverage on a server
+| Range Subsetting | extract range components ("bands", "variables") from a coverage
+| Scaling | change resolution of a gridd coverage
+| CRS | change the projection of a coverage 
+| Interpolation | apply a particular interpolation method when interpolation occurs during request processing 
+|====
