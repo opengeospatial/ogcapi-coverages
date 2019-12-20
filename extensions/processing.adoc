@@ -1,0 +1,19 @@
+== OAPI - Coverages Processing Extension
+
+This extension allows sending a WCPS request to a server for server-side filtering, processing, and fusion, generally: analytics on a coverage server.
+
+To this end, the Processing Extension adds query parameters to the server offering. The query parameter is operating on collection level as any number of coverages can be combined:
+
+    Q={wcps-query}
+
+where {wcps-query} is a syntactically and semantically correct WCPS query.
+
+The output is a (possibly empty) list of coverages or scalars, depending on the query result type.
+
+Example:
+
+    http://acme.com/oapi/collections?Q=for $c in (ERA5-cube) return max( $c.temperature )
+
+Error conditions:
+
+*    The query must be syntactically and semantically correct.
