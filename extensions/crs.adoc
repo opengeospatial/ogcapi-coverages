@@ -1,0 +1,33 @@
+== OAPI - Coverage  CRS Extension
+
+This extension allows modification of a request so that it considers Coordinate Reference Systems (CRSs) provided by the client. Without this extension, all coverage delivery is in the coverage's Native CRS.
+
+To this end, the CRS Extension adds query parameters to the coverage access request, as per Core.
+
+=== Delivery of coverage in a CRS different from Native CRS
+A query parameter
+
+    OUTPUTCRS={crs}
+
+will transform the result coverage into the CRS indicated by {crs}. 
+
+Example:
+
+    http://acme.com/oapi/collections/{collectionid}/coverage/all?OUTPUTCRS=http://www.opengis.net/def/crs/EPSG/0/4326
+
+Error conditions:
+
+*   Transformation between Native CRS and Output CRS must be possible.
+*   {crs} must be a valid CRS definition. OGC requires that CRSs be identified through URLs given by the http://external.opengeospatial.org/twiki_public/CRSdefinitionResolver/WebHome[resolver syntax].
+
+=== Subsetting Coordinates in a CRS different from Native CRS
+A query parameter
+
+    SUBSETTINGCRS={crs}
+
+will interpret the bounding box to be provided in {crs} and transform it into the coverage's Native CRS before applying the subsetting. Note that an axis-parallel bounding box in general may transform into a non-axis-parallel, non-rectangular polygon.
+
+Error conditions:
+
+*   Transformation between Subsetting CRS and Native CRS must be possible.
+*   {crs} must be a valid CRS definition. OGC requires that CRSs be identified through URLs given by the http://external.opengeospatial.org/twiki_public/CRSdefinitionResolver/WebHome[resolver syntax].
