@@ -13,7 +13,7 @@ This https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] sp
 
 [#abstract-coverage-figure,reftext='{figure-caption} {counter:fig-num}']
 .Abstract Coverage
-image::standard/figures/Abstract_Coverage.png[]
+image::figures/Abstract_Coverage.png[]
 
 This `Core` Requirements Class defines the requirements for locating, understanding, sub-setting, and accessing coverage resources. However, it does not specify any formats for the returned resources. The formats available to implementors of this standard are specified in additional Requirements Classes.
 
@@ -43,39 +43,43 @@ include::requirements/core/REQ_api-common.adoc[]
 [[path-summary]]
 === Path Summary
 
-Resources exposed through an OGC API are accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
+Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
 
 * Service Offering: The service endpoint (subsequently referred to as Base URI or {root})
 * Access Paths: Unique paths to Resources
 * Query: Parameters to adjust the representation of a Resource or Resources like encoding format or subsetting
 
-<<coverage-paths>> summarizes the access paths defined in this standard.
+Alternately, most resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.
+
+<<coverage-paths>> summarizes the access paths and relation types defined in this standard.
 
 [#coverage-paths,reftext='{table-caption} {counter:table-num}']
 .Coverage API Paths
-[width="90%",cols="2,4",options="header"]
+[width="90%",cols="2,^1,4",options="header"]
 |===
-^|**Path Template** ^|**Resource**
-2+^|**Common**
-|<<landing-page,{root}/>> |Landing page
-|<<api-definition,{root}/api>> |API Description (optional)
-|<<conformance-classes,{root}/conformance>> |Conformance Classes
-|<<collections,{root}/collections>> |Metadata describing the spatial collections available from this API.
-|<<collectionInfo,{root}/collections/{collectionId}>> |Metadata describing the collection which has the unique identifier `{collectionId}`
-2+^|**Coverages**
-|<<coverage-clause,{root}/collections/{collectionId}/coverage>> |A general description of the coverage identified by {collectionId} including the coverage's envelope.
-|<<coverage-description-clause,{root}/collections/{collectionid}/coverage/description>> |returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
-|<<coverage-domainset-clause,{root}/collections/{collectionid}/coverage/domainset>> |returns the coverage's domain set definition
-|<<coverage-rangetype-clause,root}/collections/{collectionid}/coverage/rangetype>> |returns the coverage's range type information (i.e., a description of the data semantics)
-|<<coverage-metadata-clause,{root}/collections/{collectionid}/coverage/metadata>> |returns the coverage's metadata (may be empty)
-|<<coverage-rangeset-clause,{root}/collections/{collectionid}/coverage/rangeset>> |returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve inspecific formats)
-|<<coverage-all-clause,{root}/collections/{collectionid}/coverage/all>> |returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
+^|**Path Template** ^|**Relation** ^|**Resource**
+3+^|**Common**
+|<<landing-page,{root}/>> |none |Landing page
+|<<api-definition,{root}/api>> |`service-desc` +
+or +
+`service-doc` |API Description (optional)
+|<<conformance-classes,{root}/conformance>> |`conformance` |Conformance Classes
+|<<collections,{root}/collections>> |`data` |Metadata describing the spatial collections (coverages) available from this API.
+|<<collectionInfo,{root}/collections/{coverageId}>> | |Metadata describing the coverge which has the unique identifier `{coverageId}`
+3+^|**Coverages**
+|<<coverage-clause,{root}/collections/{coverageId}/coverage>> |`items` |A general description of the coverage identified by {coverageId} including the coverage's envelope.
+|<<coverage-description-clause,{root}/collections/{coverageId}/coverage/description>> |tbd |returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
+|<<coverage-domainset-clause,{root}/collections/{coverageId}/coverage/domainset>> |tbd |returns the coverage's domain set definition
+|<<coverage-rangetype-clause,{root}/collections/{coverageId}/coverage/rangetype>> |tbd |returns the coverage's range type information (i.e., a description of the data semantics)
+|<<coverage-metadata-clause,{root}/collections/{coverageId}/coverage/metadata>> |tbd |returns the coverage's metadata (may be empty)
+|<<coverage-rangeset-clause,{root}/collections/{coverageId}/coverage/rangeset>> |tbd |returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
+|<<coverage-all-clause,{root}/collections/{coverageId}/coverage/all>> |tbd |returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
 |===
 
 Where:
 
 * {root} = Base URI for the API server
-* {collectionId} = an identifier for a specific collection
+* {coverageId} = an identifier for a specific coverage (collection)
 
 [[api-platform]]
 === Platform
@@ -88,16 +92,16 @@ The landing page provides links to start exploring the resources offered by the 
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common/1.0/req/core
+|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
 |====
 
 ===== Operation
 
-This operation is defined in the `Core` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Core` conformance class describes one way of performing this operation:
+This operation is defined in the `Core` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Core` conformance class specifies only one way of performing this operation:
 
-. Follow the `/` path
+. Follow the `{root}/` path
 
-Support for the `/` path is required by API-Common.
+Support for the `{root}/` path is required by API-Common.
 
 ===== Response
 
@@ -109,7 +113,7 @@ The Response to the Landing Page operation is defined in API-Common. However, th
 .Landing Page Response Schema
 [source,yaml]
 ----
-include::common/schemas/landingPage.yaml[]
+include::openapi/schemas/landingPage.yaml[]
 ----
 
 The following JSON fragment is an example of a response to an OGC API-Coverages Landing Page operation.
@@ -133,7 +137,7 @@ Every API is expected to provide a definition that describes the capabilities of
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common/1.0/req/core
+|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
 |====
 
 ===== Operation
@@ -141,7 +145,7 @@ Every API is expected to provide a definition that describes the capabilities of
 This operation is defined in the `Core` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Core` conformance class describes two ways of performing this operation:
 
 . Follow the /api path
-. Follow the `service-desc` link on the landing page
+. Follow the `service-desc` or `service-doc` link on the landing page
 
 Only the link is required by API-Common.
 
@@ -161,7 +165,7 @@ To support "generic" clients that want to access multiple OGC API standards and 
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common/1.0/req/core
+|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
 |====
 
 ===== Operation
@@ -183,7 +187,7 @@ The Response to the Conformance operation is a list of URLs. Each URL identifies
 .Conformance Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/Common/confClasses.yaml[]
+include::openapi/schemas/common/confClasses.yaml[]
 ----
 
 The following JSON fragment is an example of a response to an OGC API-Coverages conformance operation.
@@ -215,7 +219,7 @@ TBD
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common/1.0/req/collections
+|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections
 |====
 
 ===== Operation
@@ -233,7 +237,7 @@ Support for both the `/collections` path and the `data` link is required by API-
 .Collections Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/Common/collections.yaml[]
+include::openapi/schemas/common/collections.yaml[]
 ----
 
 The following JSON fragment is an example of a response to an OGC API-Coverages Collections operation.
@@ -257,19 +261,21 @@ TBD
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common/1.0/req/collections
+|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections
 |====
 
 ===== Operation
 
-This operation is defined in the `Collections` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Collections` conformance class describes two ways of performing this operation:
+This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `coverageId` is used instead of `collectionId`. The two terms are equivalent. 
 
-. Follow the `/collections/{collectionId}` path
-. Follow the `coverage` link on the collections info page
+The `Collections` conformance class describes two ways of performing this operation:
 
-Support for both the `/collections/{collectionId}` path and the `dataset` link is required by API-Common.
+. Follow the `/collections/{coverageId}` path
+. Follow the `dataset` link on the collections info page
 
-The {collectionId} parameter is the unique identifier for a single collection on the API.
+Support for both the `/collections/{coverageId}` path and the `dataset` link is required by API-Common.
+
+The {coverageId} parameter is the unique identifier for a single coverage on the API.
 
 ===== Response
 
@@ -297,12 +303,12 @@ See <<http_status_codes>> for general guidance.
 
 This section is about coverage access, which is driven by the coverage structure.
 
-The paths discussed in this section are all branches off of the `/collections/{collectionId}/coverage` root.
+The paths discussed in this section are all branches off of the `/collections/{coverageId}/coverage` root.
 
 [[coverage-clause]]
 ==== Coverage Offering
 
-Returns a general coverage offering description consisting of envelop, rangetype, and service metadata like the coverage's native format
+Returns a general coverage offering description consisting of envelope, rangetype, and service metadata such as the coverage's native format
 
 ===== Operation
 
@@ -316,7 +322,7 @@ include::requirements/core/REQ_cov-offer-success.adoc[]
 .Coverage Offering Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_offering.yaml[]
+include::openapi/schemas/coverage_offering.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage Offering request.
@@ -349,7 +355,7 @@ include::requirements/core/REQ_cov-desc-success.adoc[]
 .Coverage Description Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_description.yaml[]
+include::openapi/schemas/coverage_description.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage Description request.
@@ -382,7 +388,7 @@ include::requirements/core/REQ_cov-ds-success.adoc[]
 .Coverage Domain Set Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_domainset.yaml[]
+include::openapi/schemas/coverage_domainset.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage DomainSet request.
@@ -415,7 +421,7 @@ include::requirements/core/REQ_cov-rt-success.adoc[]
 .Coverage Range Type Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_rangetype.yaml[]
+include::openapi/schemas/coverage_rangetype.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage RangeType request.
@@ -448,7 +454,7 @@ include::requirements/core/REQ_cov-rs-success.adoc[]
 .Coverage Range Set Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_rangeset.yaml[]
+include::openapi/schemas/coverage_rangeset.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage RangeSet request.
@@ -481,7 +487,7 @@ include::requirements/core/REQ_cov-md-success.adoc[]
 .Coverage Metadata Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_metadata.yaml[]
+include::openapi/schemas/coverage_metadata.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage Metadata request.
@@ -514,7 +520,7 @@ include::requirements/core/REQ_cov-all-success.adoc[]
 .Coverage Response Schema
 [source,yaml]
 ----
-include::openapi/schemas/CIS/coverage_all.yaml[]
+include::openapi/schemas/coverage_all.yaml[]
 ----
 
 The following JSON fragment is an example of a response to a Coverage All request.
@@ -545,4 +551,38 @@ The third part is about query parameters:
 In this clause, the query component of https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] access is established.
 
 Subsetting parameters may be mixed in a query part, in no particular order.
+
+[[general-section]]
+=== General
+
+[[http_status_codes]]
+==== HTTP status codes
+
+This API standard does not impose any restictions on which features of the HTTP and HTTPS protocols may be used. API clients should be prepared to handle any legal HTTP or HTTPS status code.
+
+The *Status Codes* listed in <<status_codes>> are of particular relevance to implementors of this standard. Status codes 200, 400, and 404 are called out in API requirements. Therefore, support for these status codes is mandatory for all compliant implementations. The remainder of the status codes in <<status_codes>> are not mandatory, but are important for the implementation of a well functioning API. Support for these status codes is strongly encouraged for both client and server implementations.
+
+[#status_codes,reftext='{table-caption} {counter:table-num}']
+.Typical HTTP status codes[[table_2]]
+[cols="15,85",options="header"]
+!===
+|Status code |Description
+|`200` |A successful request.
+|`304` |An <<web_caching,entity tag was provided in the request>> and the resource has not been changed since the previous request.
+|`400` |The server cannot or will not process the request due to an apparent client error. For example, a query parameter had an incorrect value.
+|`401` |The request requires user authentication. The response includes a `WWW-Authenticate` header field containing a challenge applicable to the requested resource.
+|`403` |The server understood the request, but is refusing to fulfill it. While status code `401` indicates missing or bad authentication, status code `403` indicates that authentication is not the issue, but the client is not authorised to perform the requested operation on the resource.
+|`404` |The requested resource does not exist on the server. For example, a path parameter had an incorrect value.
+|`405` |The request method is not supported. For example, a POST request was submitted, but the resource only supports GET requests.
+|`406` |The `Accept` header submitted in the request did not support any of the media types supported by the server for the requested resource.
+|`500` |An internal error occurred in the server.
+!===
+
+More specific guidance is provided for each resource, where applicable.
+
+include::recomendations/core/PER_additional-status-codes.adoc[]
+
+The API Description Document describes the HTTP status codes generated by that API. This should not be an exhaustive list of all possible status codes. It is not reasonable to expect an API designer to control the use of HTTP status codes which are not generated by their software. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations should be prepared to receive HTTP status codes in addition to those described in the API Description Document.
+
+
 

@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/cov-offer-op*
-^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage`.
+^|A |The API SHALL support the HTTP GET operation at the path `/collections/{coverageId}/coverage`.
 
-* `collectionId` is the local identifier for a collection. It serves the same role and is subject to the same requirements as the `collectionId` parameter defined in API-Common.
+* `coverageId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionId` parameter defined in API-Common.
 |===
