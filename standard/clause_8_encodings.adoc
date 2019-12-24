@@ -1,5 +1,9 @@
 == Requirements classes for encodings
 
+NOTE: For encodings which are documented through Conformance Classes, the requirements for those encodings must include explicit requirements for the schema which must be used for validation of each request and response.  The oeprations specified define the scope of this Conformance Class.
+
+NOTE: consider descriminiation between conformance class defined encodings and those which are negotated at a resource level.
+
 This standard does not mandate any particular encoding or format. However, it does provide extensions for encodings which are commonly used in OGC APIs. These extensions include:
 
 * Formats commonly used by Web Browsers (HTML and GeoTIFF)

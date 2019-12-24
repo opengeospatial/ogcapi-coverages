@@ -1,0 +1,8 @@
+[[req_core_cov-datetime-parameter]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/cov-datetime-parameter*
+^|A |A Coverage API SHALL support the Date-Time (datetime) parameter for `/coverages` and `/coverages/{coverageId}` requests.
+^|B |Requests which include the Date-Time parameter SHALL comply with API-Common requirement `/req/core/rc-time-definition`.
+^|C |Responses to Date-Time requests SHALL comply with API-Common requirement `/req/core/rc-time-response`.
+|===
