@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "partitioningSet": {
-        "title": "Partitioning Set",
+    "partitionSet": {
+        "title": "Partition Set",
         "description": "A partition describes how a coverage (*sub-coverage*) referenced is located within referencing coverage (*super-coverage*). The sub-coverage can be represented by referencing a coverage id or a URL pointing to a coverage.  Such sub-coverages referenced may be grouped into the super-coverage document, or reside remote, or mixed. As an additional alternative, single range values can be indicated verbatimg, together with their direct position. All values must share an identical structure and conform to the rangeType definition.",
         "type": "object",
         "required": ["type"],

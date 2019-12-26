@@ -1,2 +1,78 @@
-== Media Types for any data encoding(s)
-A section describing the MIME-types to be used is mandatory for any standard involving data encodings. If no suitable MIME type exists in http://www.iana.org/assignments/media-types/index.html then this section may be used to define a new MIME type for registration with IANA.
+[[requirements-class-json-clause]]
+== Requirements Class JSON
+
+The following requirements apply to an OGC API-Coverage implementation when the following conditions apply:
+
+. The API advertises conformance to the JSON Conformance Class
+. The client negotiates a JSON or GeoJSON format
+
+The JSON Requirements Class restricts requirements defined in the `Core` Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the `Core` requirements which lay within each scope.   
+
+include::requirements/requirements_class_json.adoc[]
+
+=== Common
+
+This section covers the requirements inherited from the API-Common standard. Its scope includes responses for the following operations:
+
+* `{root}/`: Landing Page 
+* `{root}/api`: API Description
+* `{root}/conformance`: Conformance Classes
+* `{root}/collections`: Collections
+* `{root}/collections/{coverageId}`: Collection Information
+
+include::requirements/json/REQ_api-common.adoc[]
+
+It is also necessary to advertise conformance with this Requirements Class.
+
+include::requirements/json/REQ_json-conformance.adoc[]
+
+=== Coverage Offering
+
+This section covers the <<coverage-clause,Coverage Offering>> response for the
+`{root}/collections/{coverageId}/coverage` operation.
+
+include::requirements/json/REQ_cov-offer-success.adoc[]
+
+=== Coverage Description
+
+This section covers the <<coverage-description-clause,Coverage Description>> response for the
+`{root}/collections/{coverageId}/coverage/description` operation.
+
+include::requirements/json/REQ_cov-desc-success.adoc[]
+
+=== Coverage Domain Set
+
+This section covers the <<coverage-domainset-clause,Coverage Domain Set>> response for the
+`{root}/collections/{coverageId}/coverage/domainset` operation.
+
+include::requirements/json/REQ_cov-ds-success.adoc[]
+
+=== Coverage Range Type
+
+This section covers the <<coverage-rangetype-clause,Coverage Range Type>> response for the
+`{root}/collections/{coverageId}/coverage/rangetype` operation.
+
+include::requirements/json/REQ_cov-rt-success.adoc[]
+
+=== Coverage Range Set
+
+This section covers the <<coverage-rangeset-clause,Coverage Range Set>> response for the
+`{root}/collections/{coverageId}/coverage/rangeset` operation.
+
+include::requirements/json/REQ_cov-rs-success.adoc[]
+
+=== Coverage Metadata
+
+This section covers the <<coverage-metadata-clause,Coverage Metadata>> response for the
+`{root}/collections/{coverageId}/coverage/metadata` operation.
+
+include::requirements/json/REQ_cov-md-success.adoc[]
+
+=== Coverage All
+
+This section covers the <<coverage-all-clause,Coverage All>> response for the
+`{root}/collections/{coverageId}/coverage/all` operation.
+
+include::requirements/json/REQ_cov-all-success.adoc[]
+
+

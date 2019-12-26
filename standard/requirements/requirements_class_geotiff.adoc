@@ -1,9 +1,0 @@
-[[rc_geotiff]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages/1.0/req/geotiff
-|Target type |Web API
-|Dependency |<<rc_core,Conformance Class "Core">>
-|Dependency |<<GeoTIFF,GeoTIFF>>
-|===

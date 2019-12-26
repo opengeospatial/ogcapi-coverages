@@ -1,0 +1,14 @@
+[[requirements-class-openapi_3_0-clause]]
+== Requirements class "OpenAPI 3.0"
+
+include::requirements/requirements_class_oas30.adoc[]
+
+The following requirements apply to an OGC API-Coverage implementation supports OpenAPI 3.0 for its' API Definition Document format.
+
+Add the OpenAPI 3.0 Requirements Class to the set of API-Coverage Requirements Classes.
+
+include::requirements/oas30/REQ_oas-common.adoc[]
+
+Advertise conformance with this Requirements Class.
+
+include::requirements/oas30/REQ_oas-conformance.adoc[]

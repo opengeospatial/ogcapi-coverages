@@ -3,21 +3,11 @@
     "title": "Link Schema",
     "description": "Schema for external references",
     "type": "object",
-    "required": [
-        "href"
-        ],
-    "properties": {    
-        "href": {
-            "type": "string"
-            },
-        "rel": {
-            "type": "string"
-            },
-        "hreflang": {
-            "type": "string"
-            },
-        "title": {
-            "type": "string"    
-            }
-        }
+    "required": ["href"],
+    "properties": {
+        "href": {"type": "string"},
+        "rel": {"type": "string"},
+        "hreflang": {"type": "string"},
+        "title": {"type": "string"}
     }
+}
