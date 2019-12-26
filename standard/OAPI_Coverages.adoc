@@ -96,7 +96,15 @@ include::clause_6_overview.adoc[]
 
 include::clause_7_core.adoc[]
 
-include::clause_10_media_types.adoc[]
+include::clause_8_subset.adoc[]
+
+include::clause_9_oas.adoc[]
+
+include::clause_10_HTML.adoc[]
+
+include::clause_11_JSON.adoc[]
+
+include::clause_12_encodings.adoc[]
 
 include::annex_ats.adoc[]
 

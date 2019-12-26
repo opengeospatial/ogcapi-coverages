@@ -146,7 +146,7 @@ Every API is required to provide a definition document that describes the capabi
 
 This operation is defined in the `Core` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Core` conformance class describes two ways of performing this operation:
 
-. Follow the `{root}/api` path
+. Issue a `GET` request on the `{root}/api` path
 . Follow the `service-desc` or `service-doc` link on the landing page
 
 Only the link is required by API-Common.
@@ -174,7 +174,7 @@ To support "generic" clients that want to access multiple OGC API standards and 
 
 This operation is defined in the `Core` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Core` conformance class describes two ways of performing this operation:
 
-. Follow the `{root}/conformance` path
+. Issue a `GET` request on the `{root}/conformance` path
 . Follow the `conformance` link on the landing page
 
 Both techniques are required by API-Common.
@@ -230,7 +230,7 @@ The `Collections` operation returns a set of metadata which describes the collec
 
 This operation is defined in the `Collections` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Collections` conformance class describes two ways of performing this operation:
 
-. Follow the `{root}/collections` path
+. Issue a `GET` request on `{root}/collections` path
 . Follow the `data` link on the landing page
 
 Support for both the `{root}/collections` path and the `data` link is required by API-Common.
@@ -274,9 +274,7 @@ Collection Information is the set of metadata which describes a single collectio
 
 This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `coverageId` is used instead of `collectionId`. The two terms are equivalent. 
 
-The `Collections` conformance class describes one way of performing this operation:
-
-. Follow the `{root}/collections/{coverageId}` path
+. Issue a `GET` request on the `{root}/collections/{coverageId}` path
  
 The {coverageId} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageId} is provided in the /collections response. 
 
