@@ -306,7 +306,17 @@ The requirements for handeling unsuccesful requests are provided in <<http-respo
 
 === Coverage Access
 
-This section is about coverage access, which is driven by the coverage structure.
+This section is about coverage access, which is driven by the coverage structure. That structure contains four principle components:
+
+* A `DomainSet` component describing the coverage’s domain (the set of “direct positions”, i.e., the locations for which values are stored in the coverage) 
+* A `RangeType` component which describes the coverage's `RangeSet` data structure (in the case of images usually called the “pixel data type”). 
+* A `RangeSet` component containing the stored values (often referred to as “pixels”, “voxels”) of the coverage. 
+* A `Metadata` component which represents an extensible slot for metadata. The intended use is to hold any kind of application-specific metadata structures.
+
+Each component is directly accessible through the API using standard paths. In addition, collections of elements can be accessed through the following paths:
+
+* `/description`: Returns `DomainSet`, `RangeType`, and `Metadata` 
+* `/all`: Returns `DomainSet`, `RangeType`, `RangeSet`, and `Metadata`
 
 The paths discussed in this section are all branches off of the `/collections/{coverageId}` root.
 
