@@ -6,15 +6,15 @@
     "required": [
         "links",
         "collections"
-        ],
+    ],
     "properties": {
         "links": {
             "type": "array",
             "items": {"$href": "link.json"}
-            },
+        },
         "collections": {
             "type": "array",
             "items": {"$href": "collectionInfo.json"}
-            }
         }
     }
+}

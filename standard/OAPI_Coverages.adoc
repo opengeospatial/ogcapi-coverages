@@ -24,7 +24,7 @@
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
 |Approval Date: <yyyy-mm-dd>
-|Publication Date: 2019-12-18
+|Publication Date: 2019-12-26
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0
 |Internal reference number of this OGC(R) document: 19-087
 |Version: 0.0.5
@@ -96,7 +96,15 @@ include::clause_6_overview.adoc[]
 
 include::clause_7_core.adoc[]
 
-include::clause_10_media_types.adoc[]
+include::clause_8_subset.adoc[]
+
+include::clause_9_media_types.adoc[]
+
+include::clause_10_HTML.adoc[]
+
+include::clause_11_JSON.adoc[]
+
+include::clause_12_oas.adoc[]
 
 include::annex_ats.adoc[]
 

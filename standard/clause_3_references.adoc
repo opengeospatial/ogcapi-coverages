@@ -9,7 +9,7 @@ The following normative documents contain provisions that, through reference in 
 * [[rfc8288]] Nottingham, M.: IETF RFC 8288, *Web Linking*, http://tools.ietf.org/rfc/rfc8288.txt[RFC 8288]
 * [[J2K]] International Telecommunication Union, *ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system*, June, 2019, https://www.itu.int/rec/T-REC-T.800-201906-I/en 
 * [[OAPI_Common]] OGC 19-072: *OGC API (OAPI) Common Specification*, (Draft) https://github.com/opengeospatial/oapi_common[API Common]
-* [[CIS_1.1]] OGC 09-146: *OGC Coverage Implementation Schema (CIS)*, version 1.1, https://portal.opengeospatial.org/files/?artifact_id=72392&version=2[CIS]
+* [[CIS_1_1]] OGC 09-146: *OGC Coverage Implementation Schema (CIS)*, version 1.1, https://portal.opengeospatial.org/files/?artifact_id=72392&version=2[CIS]
 * [[GeoTIFF]] OGC 19-008: *OGC GeoTIFF Standard*, Version 1.1, http://docs.opengeospatial.org/is/19-008r4/19-008r4.html
 * [[CIS_JSON_Schema]] OGC Schema: *OGC JSON Schema for Coverage Implementation Schema*, version 1.1, 2017, http://schemas.opengis.net/cis/1.1/json/coverage-schema.json//[CIS Schema]
 * [[NETCDF]] OGC 10-090: *OGC Network Common Data Form (NetCDF) Core Encoding Standard*, Version 1.0, http://portal.opengeospatial.org/files/?artifact_id=43732

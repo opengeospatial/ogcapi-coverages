@@ -18,23 +18,15 @@ The _Core_ Requirements Class is the minimal useful service interface for an OGC
 The _Core_ Requirements Class does not mandate a specific encoding or format for representing resources. The encoding Requirements Classes defined for this version of API-Coverages are: 
 
 * *HTML*
-* *GeoJSON*
-* *RFD*
-* *NetCDF*
-* *GeoTIFF*
-* *JPEG-2000*
+* *JSON*
 
-The _HTML_ and _GeoJSON_ Requirements Classes specify commonly used encodings for spatial data on the web. Use of these encodings is recommended for resources which describe the coverage resources. 
+The _HTML_ and _JSON_ Requirements Classes specify commonly used encodings for spatial data on the web. Use of these encodings is recommended for resources which describe the coverage resources. 
 
 Many requirements in this standard include wording similar to the following:
 
   "encoded using a schema equivalent to the JSON fragment at"
 
 "Equivalent to" shall be interpreted to mean a schema which has the same information content as the JSON fragment.   
-
-NOTE: We may want to re-work the requirements so that they point to an appropriate requirements in the encoding Requirements Class.
-
-NOTE: Question, Can I use a format which is not on the list of recognized Conformance Classes?
 
 === API Description
 

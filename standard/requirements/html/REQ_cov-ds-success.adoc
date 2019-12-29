@@ -1,0 +1,9 @@
+[[req_html_cov-ds-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/html/cov-ds-success*
+^|**Restricts** |/req/core/cov-ds-success
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The response SHALL be a vaild HTML document
+^|C |The response SHALL include content equivalent to that defined in JSON schema link:https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_domainset.json[coverage_domainset.json].
+|===
