@@ -2,7 +2,7 @@
 
 This extension allows sending a WCPS request to a server for server-side filtering, processing, and fusion, generally: analytics on a coverage server.
 
-To this end, the Processing Extension adds query parameters to the server offering. The query parameter is operating on collection level as any number of coverages can be combined:
+To this end, the Processing Extension adds query parameters to the server offering:
 
     Q={wcps-query}
 
@@ -13,6 +13,12 @@ The output is a (possibly empty) list of coverages or scalars, depending on the 
 Example:
 
     http://acme.com/oapi/collections?Q=for $c in (ERA5-cube) return max( $c.temperature )
+
+Note that the query parameter is operating on collection level as any number of coverages can be combined.
+
+Example:
+
+    http://acme.com/oapi/collections?Q=for $c in (ERA5-cube), $d in (DEM) return encode( $c.temperature > 20 and $d > 100, "image/png" )
 
 Error conditions:
 
