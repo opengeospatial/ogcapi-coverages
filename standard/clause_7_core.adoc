@@ -5,91 +5,30 @@
 
 include::requirements/requirements_class_core.adoc[]
 
-The OGC API family of standards is organized by resource type. OGC API - Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time, such as spatio-temporal sensor, image, simulation, and statistics data.
+The `Core` Requirements Class defines the requirements for locating, understanding, and accessing coverage resources. The `Core` Requirements Class is presented in five sections:
 
-If you are unfamiliar with the term 'coverage', the explanations on the http://myogc.org/go/coveragesDWG[Coverages DWG Wiki] provide more detail and links to educational material. Additionally, https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)] in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
+. <<api-platform-section,API Platform>>: a set of common capabilities
+. <<collection-access-section,Collection Access>>: operations for accessing collections of `Coverages`
+. <<coverage-access-section,Coverage Access>>: operations for accessing `Coverage` resources
+. <<parameters-section,Parameters>>: parameters for use in the API-Coverage operations.
+. <<general-section,General>>: general principles for use with this standard.
 
-This https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] specification establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs. A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
-
-[#abstract-coverage-figure,reftext='{figure-caption} {counter:fig-num}']
-.Abstract Coverage
-image::figures/Abstract_Coverage.png[]
-
-This `Core` Requirements Class defines the requirements for locating, understanding, sub-setting, and accessing coverage resources. However, it does not specify any formats for the returned resources. The formats available to implementors of this standard are specified in additional Requirements Classes.
-
-[[dependencies]]
+[[core-dependencies-section]]
 === Dependencies
 
 The OGC API-Coverages standard is an extension of the OGC API-Common standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.
 
 include::requirements/core/REQ_api-common.adoc[]
 
-<<mapping-to-common>> Identifies the API-Common Requirements Classes which are applicable to each section of this Standard. Instructions on when and how to apply these Requirements Classes are provided in each section.
-
-[#mapping-to-common,reftext='{table-caption} {counter:table-num}']
-.Mapping API-Coverages Sections to API-Common Requirements Classes
-[width="90%",cols="2,6"]
-|====
-^|*API-Coverage Section* ^|*API-Common Requirements Class*
-|<<landing-page,API Landing Page>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/core
-|<<api-definition,API Definition>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/core
-|<<conformance-classes,Declaration of Conformance Classes>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/core
-|<<collections,Collections>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/collections
-|<<collections,OpenAPI 3.0>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/oas30
-|<<collections,GeoJSON>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/geojson
-|<<collections,HTML>>| http://www.opengis.net/spec/ogcapi_common/1.0/req/html
-|====
-
-[[path-summary]]
-=== Path Summary
-
-Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
-
-* Service Offering: The service endpoint (subsequently referred to as Base URI or {root})
-* Access Paths: Unique paths to Resources
-* Query: Parameters to adjust the representation of a Resource or Resources like encoding format or subsetting
-
-Alternately, most resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.
-
-<<coverage-paths>> summarizes the access paths and relation types defined in this standard.
-
-[#coverage-paths,reftext='{table-caption} {counter:table-num}']
-.Coverage API Paths
-[width="90%",cols="2,^1,4",options="header"]
-|===
-^|**Path Template** ^|**Relation** ^|**Resource**
-3+^|**Common**
-|<<landing-page,{root}/>> |none |Landing page
-|<<api-definition,{root}/api>> |`service-desc` +
-or +
-`service-doc` |API Description (optional)
-|<<conformance-classes,{root}/conformance>> |`conformance` |Conformance Classes
-|<<collections,{root}/collections>> |`data` |Metadata describing the spatial collections (coverages) available from this API.
-|<<collectionInfo,{root}/collections/{coverageId}>> | |Metadata describing the coverge which has the unique identifier `{coverageId}`
-3+^|**Coverages**
-|<<coverage-clause,{root}/collections/{coverageId}/coverage>> |`items` |A general description of the coverage identified by {coverageId} including the coverage's envelope.
-|<<coverage-description-clause,{root}/collections/{coverageId}/coverage/description>> |tbd |returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
-|<<coverage-domainset-clause,{root}/collections/{coverageId}/coverage/domainset>> |tbd |returns the coverage's domain set definition
-|<<coverage-rangetype-clause,{root}/collections/{coverageId}/coverage/rangetype>> |tbd |returns the coverage's range type information (i.e., a description of the data semantics)
-|<<coverage-metadata-clause,{root}/collections/{coverageId}/coverage/metadata>> |tbd |returns the coverage's metadata (may be empty)
-|<<coverage-rangeset-clause,{root}/collections/{coverageId}/coverage/rangeset>> |tbd |returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
-|<<coverage-all-clause,{root}/collections/{coverageId}/coverage/all>> |tbd |returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
-|===
-
-Where:
-
-* {root} = Base URI for the API server
-* {coverageId} = an identifier for a specific coverage (collection)
-
-[[api-platform]]
+[[api-platform-section]]
 === Platform
 
-API-Common defines a set of common capabilities which are applicable to any OGC Web API. Those capabilities provide the platform upon which resource-specific APIS can be built. This section describes those capabilities and any modifications needed to better support Coverage resources.
+API-Common defines a set of common capabilities which are applicable to any OGC Web API. Those capabilities provide the platform upon which resource-specific APIs can be built. This section describes those capabilities and any modifications needed to better support Coverage resources.
 
 [[landing-page]]
 ==== API landing page
 
-The landing page provides links to start exploring the resources offered by an API. Its most important component is a list of links. OGC API-Common already requires some common links. Those links are sufficient for this standard.
+The landing page provides links to start exploration of the resources offered by an API. Its most important component is a list of links. OGC API-Common already requires some common links. Those links are sufficient for this standard.
 
 .Dependencies
 [width="90%"]
@@ -107,9 +46,7 @@ Support for `GET` on the `{root}/` path is required by API-Common.
 
 ===== Response
 
-A successful response to the `Landing Page` operation is defined in API-Common. The schenma for this resource is provided in <<landingPage-schema>>.
-
-include::requirements/core/REQ_root-success.adoc[]
+A successful response to the `Landing Page` operation is defined in API-Common. The schema for this resource is provided in <<landingPage-schema>>.
 
 [#landingPage-schema,reftext='Landing Page Response Schema']
 .Landing Page Response Schema
@@ -205,9 +142,8 @@ include::examples/JSON/conformance_example.json[]
 
 The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
 
-=== Coverage Access Paths
-
-In this clause, API-Common is extended to support `Coverage` resources. 
+[[collection-access-section]]
+=== Collection Access
 
 API-Common starts with the assumption that spatial resources are orgainzed into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.
 
@@ -304,9 +240,12 @@ include::examples/JSON/collection_info_example.json[]
 
 The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
 
+[[coverage-access-section]]
 === Coverage Access
 
-This section is about coverage access, which is driven by the coverage structure. That structure contains four principle components:
+In this clause, API-Common is extended to support `Coverage` resources.
+
+A `Coverage` is a collection of measured values. The structure of that collection is defined by the <<CIS_1_1,CIS standard>>. CIS contains four principle components:
 
 * A `DomainSet` component describing the coverage’s domain (the set of “direct positions”, i.e., the locations for which values are stored in the coverage) 
 * A `RangeType` component which describes the coverage's `RangeSet` data structure (in the case of images usually called the “pixel data type”). 
@@ -471,7 +410,7 @@ The requirements for handeling unsuccesful requests are provided in <<http-respo
 [[coverage-rangeset-clause]]
 ==== Coverage Range Set
 
-The `Coverage Range Set` operation returns the coverage’s range set, i.e., the actual values in the coverage’s Native Format (see format encoding for ways to retrieve inspecific formats)
+The `Coverage Range Set` operation returns the coverage’s range set, i.e., the actual values in the coverage’s Native Format (see <<media-types-section,Media Types>> for ways to retrieve inspecific formats)
 
 ===== Operation
 

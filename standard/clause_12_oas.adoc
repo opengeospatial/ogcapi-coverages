@@ -3,12 +3,10 @@
 
 include::requirements/requirements_class_oas30.adoc[]
 
-The following requirements apply to an OGC API-Coverage implementation supports OpenAPI 3.0 for its' API Definition Document format.
-
-Add the OpenAPI 3.0 Requirements Class to the set of API-Coverage Requirements Classes.
+The OpenAPI 3.0 Requirements Class is applicable to API-Coverages as well. So an implementation of API-Coverages which supports OpenAPI 3.0 as an API Description format must also comply with the API-Common oas30 Conformance Class.
 
 include::requirements/oas30/REQ_oas-common.adoc[]
 
-Advertise conformance with this Requirements Class.
+Implementations must also advertise conformance with this Requirements Class.
 
 include::requirements/oas30/REQ_oas-conformance.adoc[]
