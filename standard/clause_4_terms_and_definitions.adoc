@@ -3,26 +3,26 @@ This document uses the terms defined in Clause 5 of [OGC 17-072] and in ISO/IEC 
 
 For the purposes of this document, the following additional terms and definitions apply.
 
-=== *Coverage*
-feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6 
+=== Coverage
+feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6
 
-=== *Regular grid*
+=== Regular grid
 grid whose grid lines have a constant distance along each grid axis
 
-=== *Irregular grid*
+=== Irregular grid
 Grid whose grid lines have individual distances along each grid axis
 
-=== *Displaced grid*
+=== Displaced grid
 grid whose direct positions are topologically aligned to a grid, but whose geometric positions can vary arbitrarily
 
-=== *Mesh*
+=== Mesh
 coverage consisting of a collection of curves, surfaces, or solids, respectively
 
-=== *Partition [of a coverage]*
+=== Partition [of a coverage]
 separately stored coverage acting, by being referenced in the coverage on hand, as one of its components
 
-=== *Sensor model*
+=== Sensor model
 mathematical model for estimating geolocations from recorded sensor data such as digital imagery
 
-=== *Transformation grid*
+=== Transformation grid
 grid whose direct positions are given by some transformation algorithm not further specified in this standard

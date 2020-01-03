@@ -1,15 +1,20 @@
 == Scope
 This OGC API Coverages (https://github.com/opengeospatial/ogc_api_coverages[https://github.com/opengeospatial/ogc_api_coverages]) specification establishes how to access coverages as defined by the Coverage Implementation  Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]) through a Web API such as those described by the OpenAPI specification (https://www.openapis.org/[https://www.openapis.org/]).
 
-The functionality provided by API-Coverages resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard]. It is expected that Coverage APIs and WCS services will be able to interoperate, allowing developers to pick the solution best suited for their requirements. 
+=== Service Scope
+The functionality provided by API-Coverages resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard]. It is expected that Coverage APIs and WCS services will be able to interoperate, allowing developers to pick the solution best suited for their requirements.
 
-=== Current scope:
 The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors. Additional capabilities will be added based on community demand.
 
 As a result, this API-Coverages standard does not provide a full duplication of the WCS capabilities. The restrictions are:
 
-*   Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SolidCoverages. Reason is that gridded coverages receive most attention today.
-*   Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
 *   Only coverage extraction functionality is considered, not general processing (as is provided with Web Coverage Service (WCS) extensions such as the Processing Extension). Exceptions from this rule are subsetting including band subsetting, scaling, and CRS conversion and data format encoding, given their practical relevance.
 *   Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the path component. Further, subsetting may reference any axis and leave out any other, which makes positional parameters unsuitable. Nevertheless subsetting in the path component particularly limited to fixed subsets might be considered in a future version.
+
+=== Content Scope
+The API-Coverages standard provides access to content which complies with the Coverage Implementation Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]). However, there are limitations:
+
+* Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SolidCoverages. Reason is that gridded coverages receive most attention today.
+* Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
+* Coverage Partitioning is not supported. The `Coverage-Partitioning` Requirements Class will be added in a future version.
 

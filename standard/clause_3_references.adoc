@@ -5,9 +5,11 @@ The following normative documents contain provisions that, through reference in 
 * [[rfc2818]]  Rescorla, E.: IETF RFC 2818, *HTTP Over TLS*, http://tools.ietf.org/rfc/rfc2818.txt[RFC 2818]
 * [[rfc3339]] Klyne, G., Newman, C.: IETF RFC 3339, *Date and Time on the Internet: Timestamps*, http://tools.ietf.org/rfc/rfc3339.txt[RFC 3339]
 * [[rfc3986]] Berners-Lee, T., Fielding, R., Masinter, L.: IETF RFC 3986, *Uniform Resource Identifier (URI): Generic Syntax*, https://tools.ietf.org/html/rfc3986[RFC 3986]
+* [[rfc3987]] Duerst, M., Suignard, M.: IETF RFC 3987, *Internationalized Resource Identifiers (IRIs)*, https://tools.ietf.org/html/rfc3987[RFC 3987]
+* [[rfc6570]] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., Orchard, D.: IETF RFC 6570, *URI Template*, https://tools.ietf.org/html/rfc6570[RFC 6570]
 * [[GeoJSON]] IETF RFC 7946: *The GeoJSON Format*, https://tools.ietf.org/rfc/rfc7946.txt[eoJSON]
 * [[rfc8288]] Nottingham, M.: IETF RFC 8288, *Web Linking*, http://tools.ietf.org/rfc/rfc8288.txt[RFC 8288]
-* [[J2K]] International Telecommunication Union, *ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system*, June, 2019, https://www.itu.int/rec/T-REC-T.800-201906-I/en 
+* [[J2K]] International Telecommunication Union, *ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system*, June, 2019, https://www.itu.int/rec/T-REC-T.800-201906-I/en
 * [[OAPI_Common]] OGC 19-072: *OGC API (OAPI) Common Specification*, (Draft) https://github.com/opengeospatial/oapi_common[API Common]
 * [[CIS_1_1]] OGC 09-146: *OGC Coverage Implementation Schema (CIS)*, version 1.1, https://portal.opengeospatial.org/files/?artifact_id=72392&version=2[CIS]
 * [[GeoTIFF]] OGC 19-008: *OGC GeoTIFF Standard*, Version 1.1, http://docs.opengeospatial.org/is/19-008r4/19-008r4.html
