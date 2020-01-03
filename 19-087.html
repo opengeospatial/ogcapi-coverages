@@ -500,7 +500,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Copyright notice</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright &#169; 2019 Open Geospatial Consortium</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright &#169; 2019, 2020 Open Geospatial Consortium</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a></p></td>
@@ -529,13 +529,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type:   OGC&#174; Implementation Specification</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type: OGC&#174; Implementation Specification</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Draft</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage: Draft</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: 	English</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: English</p></td>
 </tr>
 </tbody>
 </table>
@@ -567,7 +567,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_scope">1. Scope</a>
 <ul class="sectlevel2">
-<li><a href="#_service_scope">1.1. Service Scope:</a></li>
+<li><a href="#_service_scope">1.1. Service Scope</a></li>
 <li><a href="#_content_scope">1.2. Content Scope</a></li>
 </ul>
 </li>
@@ -575,14 +575,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_references">3. References</a></li>
 <li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
 <ul class="sectlevel2">
-<li><a href="#_coverage">4.1. <strong>Coverage</strong></a></li>
-<li><a href="#_regular_grid">4.2. <strong>Regular grid</strong></a></li>
-<li><a href="#_irregular_grid">4.3. <strong>Irregular grid</strong></a></li>
-<li><a href="#_displaced_grid">4.4. <strong>Displaced grid</strong></a></li>
-<li><a href="#_mesh">4.5. <strong>Mesh</strong></a></li>
-<li><a href="#_partition_of_a_coverage">4.6. <strong>Partition [of a coverage]</strong></a></li>
-<li><a href="#_sensor_model">4.7. <strong>Sensor model</strong></a></li>
-<li><a href="#_transformation_grid">4.8. <strong>Transformation grid</strong></a></li>
+<li><a href="#_coverage">4.1. Coverage</a></li>
+<li><a href="#_regular_grid">4.2. Regular grid</a></li>
+<li><a href="#_irregular_grid">4.3. Irregular grid</a></li>
+<li><a href="#_displaced_grid">4.4. Displaced grid</a></li>
+<li><a href="#_mesh">4.5. Mesh</a></li>
+<li><a href="#_partition_of_a_coverage">4.6. Partition [of a coverage]</a></li>
+<li><a href="#_sensor_model">4.7. Sensor model</a></li>
+<li><a href="#_transformation_grid">4.8. Transformation grid</a></li>
 </ul>
 </li>
 <li><a href="#_conventions">5. Conventions</a>
@@ -598,7 +598,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#general-overview">6.1. General</a></li>
 <li><a href="#coverage-implementation-schema-overview">6.2. Coverage Implementation Schema</a></li>
-<li><a href="#web-coverage-service-overview">6.3. WCS Service Model</a></li>
+<li><a href="#api-behavior-model-overview">6.3. API Behavior Model</a></li>
 <li><a href="#dependencies-overview">6.4. Dependencies</a></li>
 </ul>
 </li>
@@ -786,7 +786,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <p>This OGC API Coverages (<a href="https://github.com/opengeospatial/ogc_api_coverages">https://github.com/opengeospatial/ogc_api_coverages</a>) specification establishes how to access coverages as defined by the Coverage Implementation  Schema (CIS) 1.1 (<a href="http://docs.opengeospatial.org/is/09-146r6/09-146r6.html">http://docs.opengeospatial.org/is/09-146r6/09-146r6.html</a>) through a Web API such as those described by the OpenAPI specification (<a href="https://www.openapis.org/">https://www.openapis.org/</a>).</p>
 </div>
 <div class="sect2">
-<h3 id="_service_scope"><a class="anchor" href="#_service_scope"></a>1.1. Service Scope:</h3>
+<h3 id="_service_scope"><a class="anchor" href="#_service_scope"></a>1.1. Service Scope</h3>
 <div class="paragraph">
 <p>The functionality provided by API-Coverages resembles that of the <a href="http://docs.opengeospatial.org/is/17-089r1/17-089r1.html">OGC Web Coverage Service (WCS) 2.1 Interface Standard</a>. It is expected that Coverage APIs and WCS services will be able to interoperate, allowing developers to pick the solution best suited for their requirements.</p>
 </div>
@@ -900,6 +900,12 @@ Attention is drawn to the possibility that some of the elements of this document
 <p><a id="rfc3986"></a> Berners-Lee, T., Fielding, R., Masinter, L.: IETF RFC 3986, <strong>Uniform Resource Identifier (URI): Generic Syntax</strong>, <a href="https://tools.ietf.org/html/rfc3986">RFC 3986</a></p>
 </li>
 <li>
+<p><a id="rfc3987"></a> Duerst, M., Suignard, M.: IETF RFC 3987, <strong>Internationalized Resource Identifiers (IRIs)</strong>, <a href="https://tools.ietf.org/html/rfc3987">RFC 3987</a></p>
+</li>
+<li>
+<p><a id="rfc6570"></a> Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., Orchard, D.: IETF RFC 6570, <strong>URI Template</strong>, <a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a></p>
+</li>
+<li>
 <p><a id="GeoJSON"></a> IETF RFC 7946: <strong>The GeoJSON Format</strong>, <a href="https://tools.ietf.org/rfc/rfc7946.txt">eoJSON</a></p>
 </li>
 <li>
@@ -1008,55 +1014,55 @@ Attention is drawn to the possibility that some of the elements of this document
 <h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and Definitions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document uses the terms defined in Clause 5 of [OGC 17-072] and in ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
+<p>This document uses the terms defined in Sub-clause 5.3 of <a href="https://portal.opengeospatial.org/files/?artifact_id=38867">OGC Web Services Common</a> (OGC 06-121r9), which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
 </div>
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
 <div class="sect2">
-<h3 id="_coverage"><a class="anchor" href="#_coverage"></a>4.1. <strong>Coverage</strong></h3>
+<h3 id="_coverage"><a class="anchor" href="#_coverage"></a>4.1. Coverage</h3>
 <div class="paragraph">
 <p>feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_regular_grid"><a class="anchor" href="#_regular_grid"></a>4.2. <strong>Regular grid</strong></h3>
+<h3 id="_regular_grid"><a class="anchor" href="#_regular_grid"></a>4.2. Regular grid</h3>
 <div class="paragraph">
 <p>grid whose grid lines have a constant distance along each grid axis</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_irregular_grid"><a class="anchor" href="#_irregular_grid"></a>4.3. <strong>Irregular grid</strong></h3>
+<h3 id="_irregular_grid"><a class="anchor" href="#_irregular_grid"></a>4.3. Irregular grid</h3>
 <div class="paragraph">
 <p>Grid whose grid lines have individual distances along each grid axis</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_displaced_grid"><a class="anchor" href="#_displaced_grid"></a>4.4. <strong>Displaced grid</strong></h3>
+<h3 id="_displaced_grid"><a class="anchor" href="#_displaced_grid"></a>4.4. Displaced grid</h3>
 <div class="paragraph">
 <p>grid whose direct positions are topologically aligned to a grid, but whose geometric positions can vary arbitrarily</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_mesh"><a class="anchor" href="#_mesh"></a>4.5. <strong>Mesh</strong></h3>
+<h3 id="_mesh"><a class="anchor" href="#_mesh"></a>4.5. Mesh</h3>
 <div class="paragraph">
 <p>coverage consisting of a collection of curves, surfaces, or solids, respectively</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_partition_of_a_coverage"><a class="anchor" href="#_partition_of_a_coverage"></a>4.6. <strong>Partition [of a coverage]</strong></h3>
+<h3 id="_partition_of_a_coverage"><a class="anchor" href="#_partition_of_a_coverage"></a>4.6. Partition [of a coverage]</h3>
 <div class="paragraph">
 <p>separately stored coverage acting, by being referenced in the coverage on hand, as one of its components</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sensor_model"><a class="anchor" href="#_sensor_model"></a>4.7. <strong>Sensor model</strong></h3>
+<h3 id="_sensor_model"><a class="anchor" href="#_sensor_model"></a>4.7. Sensor model</h3>
 <div class="paragraph">
 <p>mathematical model for estimating geolocations from recorded sensor data such as digital imagery</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_transformation_grid"><a class="anchor" href="#_transformation_grid"></a>4.8. <strong>Transformation grid</strong></h3>
+<h3 id="_transformation_grid"><a class="anchor" href="#_transformation_grid"></a>4.8. Transformation grid</h3>
 <div class="paragraph">
 <p>grid whose direct positions are given by some transformation algorithm not further specified in this standard</p>
 </div>
@@ -1118,7 +1124,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="sect2">
 <h3 id="_namespace_prefix_conventions"><a class="anchor" href="#_namespace_prefix_conventions"></a>5.5. Namespace Prefix Conventions</h3>
 <div class="paragraph">
-<p>UML diagrams and XML code fragments adhere to the namespace conventions shown in Table 2. The namespace prefixes used in this document are not normative and are merely chosen for convenience. The namespaces to which the prefixes correspond are normative, however.</p>
+<p>UML diagrams and XML code fragments adhere to the namespace conventions shown in <a href="#namespace-mapping-conventions">Table 1</a>. The namespace prefixes used in this document are not normative and are merely chosen for convenience. The namespaces to which the prefixes correspond are normative, however.</p>
 </div>
 <div class="paragraph">
 <p>Whenever a data item from a CIS-external namespace is referenced this constitutes a normative dependency on the data structure imported together with all requirements defined in the namespace referenced.</p>
@@ -1195,7 +1201,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <p>Provide access to <code>Coverages</code> conformant to the <a href="#coverage-implementation-schema-overview">OGC CIS standard</a>.</p>
 </li>
 <li>
-<p>Provide functionality comprable to that of the <a href="#web-coverage-service-overview">OGC WCS standard</a>.</p>
+<p>Provide functionality comparable to that of the <a href="#web-coverage-service-overview">OGC WCS standard</a>.</p>
 </li>
 </ol>
 </div>
@@ -1262,45 +1268,45 @@ or<br>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Metadata describing the spatial collections (coverages) available from this API.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collectionInfo">{root}/collections/{coverageId}</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collectionInfo">{root}/collections/{coverageid}</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Metadata describing the coverge which has the unique identifier <code>{coverageId}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Metadata describing the coverge which has the unique identifier <code>{coverageid}</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" colspan="3" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Coverages</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-clause">{root}/collections/{coverageId}/coverage</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-clause">{root}/collections/{coverageid}/coverage</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>items</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A general description of the coverage identified by {coverageId} including the coverage&#8217;s envelope.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A general description of the coverage identified by {coverageid} including the coverage&#8217;s envelope.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-description-clause">{root}/collections/{coverageId}/coverage/description</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-description-clause">{root}/collections/{coverageid}/coverage/description</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-domainset-clause">{root}/collections/{coverageId}/coverage/domainset</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-domainset-clause">{root}/collections/{coverageid}/coverage/domainset</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s domain set definition</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangetype-clause">{root}/collections/{coverageId}/coverage/rangetype</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangetype-clause">{root}/collections/{coverageid}/coverage/rangetype</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s range type information (i.e., a description of the data semantics)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-metadata-clause">{root}/collections/{coverageId}/coverage/metadata</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-metadata-clause">{root}/collections/{coverageid}/coverage/metadata</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s metadata (may be empty)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangeset-clause">{root}/collections/{coverageId}/coverage/rangeset</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangeset-clause">{root}/collections/{coverageid}/coverage/rangeset</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s range set, i.e., the actual values in the coverage&#8217;s Native Format (see format encoding for ways to retrieve in specific formats)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-all-clause">{root}/collections/{coverageId}/coverage/all</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-all-clause">{root}/collections/{coverageid}/coverage/all</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns all of the above namely the coverage&#8217;s domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response</p></td>
 </tr>
@@ -1315,7 +1321,7 @@ or<br>
 <p>{root} = Base URI for the API server</p>
 </li>
 <li>
-<p>{coverageId} = an identifier for a specific coverage (collection)</p>
+<p>{coverageid} = an identifier for a specific coverage (collection)</p>
 </li>
 </ul>
 </div>
@@ -1339,7 +1345,10 @@ or<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="web-coverage-service-overview"><a class="anchor" href="#web-coverage-service-overview"></a>6.3. WCS Service Model</h3>
+<h3 id="api-behavior-model-overview"><a class="anchor" href="#api-behavior-model-overview"></a>6.3. API Behavior Model</h3>
+<div class="paragraph">
+<p>The Coverages API is designed to be compatible but not conformant with the OGC Web Coverage Service. This allows API-Coverage and WCS implementations to co-exist in a single processing environment.</p>
+</div>
 <div class="paragraph">
 <p><a href="https://www.opengeospatial.org/standards/wcs">OGC Web Coverage Service standard version 2</a> has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally. This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage&#8217;s Native CRS).</p>
 </div>
@@ -1576,7 +1585,7 @@ properties:
 <div class="sect4">
 <h5 id="_error_situations"><a class="anchor" href="#_error_situations"></a>7.3.1.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -1624,7 +1633,7 @@ properties:
 <div class="sect4">
 <h5 id="_error_situations_2"><a class="anchor" href="#_error_situations_2"></a>7.3.2.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -1739,7 +1748,7 @@ properties:
 <div class="sect4">
 <h5 id="_error_situations_3"><a class="anchor" href="#_error_situations_3"></a>7.3.3.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -1747,13 +1756,13 @@ properties:
 <div class="sect2">
 <h3 id="collection-access-section"><a class="anchor" href="#collection-access-section"></a>7.4. Collection Access</h3>
 <div class="paragraph">
-<p>API-Common starts with the assumption that spatial resources are orgainzed into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.</p>
+<p>API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.</p>
 </div>
 <div class="paragraph">
 <p>API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.</p>
 </div>
 <div class="paragraph">
-<p>This standard extends the API-Common <code>Collections</code> conformance class to support collections of coverages, then extends that class to support <code>Coverage</code> unique capabilties.</p>
+<p>This standard extends the API-Common <code>Collections</code> conformance class to support collections of coverages, then extends that class to support <code>Coverage</code> unique capabilities.</p>
 </div>
 <div class="sect3">
 <h4 id="collections"><a class="anchor" href="#collections"></a>7.4.1. Collections</h4>
@@ -1831,14 +1840,14 @@ properties:
 <div class="sect4">
 <h5 id="_error_situations_4"><a class="anchor" href="#_error_situations_4"></a>7.4.1.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="collectionInfo"><a class="anchor" href="#collectionInfo"></a>7.4.2. Collection Information</h4>
 <div class="paragraph">
-<p>Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abreviated copy of this information is returned for each Coverage in the /Collections response.</p>
+<p>Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the <code>/collections</code> response.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <caption class="title">Table 8. Dependencies</caption>
@@ -1854,26 +1863,26 @@ properties:
 <div class="sect4">
 <h5 id="_operation_5"><a class="anchor" href="#_operation_5"></a>7.4.2.1. Operation</h5>
 <div class="paragraph">
-<p>This operation is defined in the <code>Collections</code> conformance class of API-Common. No modifications are required to support <code>Coverage</code> resources. However, on a coverages API the the collections are also coverages. So in this standard the term <code>coverageId</code> is used instead of <code>collectionId</code>. The two terms are equivalent.</p>
+<p>This operation is defined in the <code>Collections</code> conformance class of API-Common. No modifications are required to support <code>Coverage</code> resources. However, on a coverages API the the collections are also coverages. So in this standard the term <code>coverageid</code> is used instead of <code>collectionid</code>. The two terms are equivalent.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Issue a <code>GET</code> request on the <code>{root}/collections/{coverageId}</code> path</p>
+<p>Issue a <code>GET</code> request on the <code>{root}/collections/{coverageid}</code> path</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The {coverageId} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageId} is provided in the /collections response.</p>
+<p>The {coverageid} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageid} is provided in the /collections response.</p>
 </div>
 <div class="paragraph">
-<p>Support for both the <code>/collections/{coverageId}</code> path is required by API-Common.</p>
+<p>Support for both the <code>/collections/{coverageid}</code> path is required by API-Common.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_response_5"><a class="anchor" href="#_response_5"></a>7.4.2.2. Response</h5>
 <div class="paragraph">
-<p>A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageId} parameter.</p>
+<p>A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageid} parameter.</p>
 </div>
 <div id="collectionInfo-schema" class="listingblock">
 <div class="title">Collection Information Response Schema</div>
@@ -1938,7 +1947,7 @@ properties:
 <div class="sect4">
 <h5 id="_error_situations_5"><a class="anchor" href="#_error_situations_5"></a>7.4.2.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -1981,7 +1990,7 @@ properties:
 </ul>
 </div>
 <div class="paragraph">
-<p>The paths discussed in this section are all branches off of the <code>/collections/{coverageId}</code> root.</p>
+<p>The paths discussed in this section are all branches off of the <code>/collections/{coverageid}</code> root.</p>
 </div>
 <div class="sect3">
 <h4 id="coverage-clause"><a class="anchor" href="#coverage-clause"></a>7.5.1. Coverage Offering</h4>
@@ -2008,12 +2017,12 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2096,7 +2105,7 @@ coverageOffering:
 <div class="sect4">
 <h5 id="_error_situations_6"><a class="anchor" href="#_error_situations_6"></a>7.5.1.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -2125,12 +2134,12 @@ coverageOffering:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage/description</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/description</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2217,7 +2226,7 @@ coverageDescription:
 <div class="sect4">
 <h5 id="_error_situations_7"><a class="anchor" href="#_error_situations_7"></a>7.5.2.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -2246,12 +2255,12 @@ coverageDescription:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage/domainset</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/domainset</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2632,7 +2641,7 @@ domainSet:
 <div class="sect4">
 <h5 id="_error_situations_8"><a class="anchor" href="#_error_situations_8"></a>7.5.3.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -2661,12 +2670,12 @@ domainSet:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage/rangetype</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/rangetype</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -2842,7 +2851,7 @@ rangeType:
 <div class="sect4">
 <h5 id="_error_situations_9"><a class="anchor" href="#_error_situations_9"></a>7.5.4.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -2871,12 +2880,12 @@ rangeType:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage/rangeset</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/rangeset</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3001,7 +3010,7 @@ rangeSet:
 <div class="sect4">
 <h5 id="_error_situations_10"><a class="anchor" href="#_error_situations_10"></a>7.5.5.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -3030,12 +3039,12 @@ rangeSet:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage/metadata</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/metadata</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3116,7 +3125,7 @@ metadata:
 <div class="sect4">
 <h5 id="_error_situations_11"><a class="anchor" href="#_error_situations_11"></a>7.5.6.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -3145,12 +3154,12 @@ metadata:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageId}/coverage/all</code>.</p>
+<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/all</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>coverageId</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionId</code> parameter defined in API-Common.</p>
+<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
 </li>
 </ul>
 </div></div></td>
@@ -3251,7 +3260,7 @@ properties:
 <div class="sect4">
 <h5 id="_error_situations_12"><a class="anchor" href="#_error_situations_12"></a>7.5.7.3. Error situations</h5>
 <div class="paragraph">
-<p>The requirements for handeling unsuccesful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handeled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
@@ -3284,7 +3293,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A Coverage API SHALL support the Bounding Box (bbox) parameter for <code>/coverages</code> and <code>/coverages/{coverageId}</code> requests.</p>
+<p>A Coverage API SHALL support the Bounding Box (bbox) parameter for <code>/collections</code> and <code>/collections/{coverageid}</code> requests.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3322,7 +3331,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A Coverage API SHALL support the Date-Time (datetime) parameter for <code>/coverages</code> and <code>/coverages/{coverageId}</code> requests.</p>
+<p>A Coverage API SHALL support the Date-Time (datetime) parameter for <code>/collections</code> and <code>/collections/{coverageid}</code> requests.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3360,7 +3369,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A Coverage API SHALL support the Limit (limit) parameter for <code>/coverages</code> and <code>/coverages/{coverageId}</code> requests.</p>
+<p>A Coverage API SHALL support the Limit (limit) parameter for <code>/collections</code> and <code>/collections/{coverageid}</code> requests.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3634,7 +3643,7 @@ properties:
 <p>This API-Coverages standard is built around the <a href="#CIS_1_1">OGC Coverage Implementation Schema (CIS)</a>. CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space. These "Engineering" coordinate reference systems cannot be represented using WGS-84. Therefore, an alternative to GeoJSON is needed.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="#CIS_JSON_Schema">OGC JSON Schema for CIS</a> standard addresses that need by defining a JSON schema for the CIS standard. This format should be used for all JSON encodings from the <code>{root}/collections/{coverageId}/coverage/*</code> paths.</p>
+<p>The <a href="#CIS_JSON_Schema">OGC JSON Schema for CIS</a> standard addresses that need by defining a JSON schema for the CIS standard. This format should be used for all JSON encodings from the <code>{root}/collections/{coverageid}/coverage/*</code> paths.</p>
 </div>
 </div>
 </div>
@@ -3880,19 +3889,19 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7dcollectionid%7d/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)</a>&#8201;&#8212;&#8201;returns a coverage cutout between (40,10) and (50,20), in the coverage&#8217;s Native Format</p>
+<p><a href="http://acme.com/oapi/collections/%7dcoverageid%7d/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)</a>&#8201;&#8212;&#8201;returns a coverage cutout between (40,10) and (50,20), in the coverage&#8217;s Native Format</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collection/%7bcollectionid%7d/coverage/rangeset?SUBSET=time(2019-03-27)">http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given, with all data available in the other dimensions (in case the coverage is Lat/Long/time the result will be a 2D image with its full Lat/Lon extent)</p>
+<p><a href="http://acme.com/oapi/collection/%7bcoverageid%7d/coverage/rangeset?SUBSET=time(2019-03-27)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?SUBSET=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given, with all data available in the other dimensions (in case the coverage is Lat/Long/time the result will be a 2D image with its full Lat/Lon extent)</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=Lat((40,50)&amp;SUBSET=Long(10,20)</a>&#8201;&#8212;&#8201;returns a cutout from the coverage identified with extent between corner coordinates (40,10) and (50,20) (note: replace the _ in the URL by a comma character - an adoc issue)</p>
+<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage?SUBSET=Lat((40,50)&amp;SUBSET=Long(10,20)</a>&#8201;&#8212;&#8201;returns a cutout from the coverage identified with extent between corner coordinates (40,10) and (50,20) (note: replace the _ in the URL by a comma character - an adoc issue)</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)</a> &#8201;&#8212;&#8201;returns the range set of a coverage cutout between (40,10) and (50,20), in the coverage’s Native Format; no domain set, range type, and metadata will be returned (note: replace the _ in the URL by a comma character - an adoc issue)</p>
+<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)</a> &#8201;&#8212;&#8201;returns the range set of a coverage cutout between (40,10) and (50,20), in the coverage’s Native Format; no domain set, range type, and metadata will be returned (note: replace the _ in the URL by a comma character - an adoc issue)</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7Bcollectionid%7D/coverage?SUBSET=time(%222019-03-27%22)">http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)</p>
+<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage?SUBSET=time(%222019-03-27%22)">http://acme.com/oapi/collections/{coverageid}/coverage?SUBSET=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)</p>
 </li>
 </ul>
 </div>
@@ -3972,7 +3981,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <p><code>{root}/collections</code>: Collections</p>
 </li>
 <li>
-<p><code>{root}/collections/{coverageId}</code>: Collection Information</p>
+<p><code>{root}/collections/{coverageid}</code>: Collection Information</p>
 </li>
 </ul>
 </div>
@@ -4036,7 +4045,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_offering"><a class="anchor" href="#_coverage_offering"></a>10.2. Coverage Offering</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-clause">Coverage Offering</a> response for the
-<code>{root}/collections/{coverageId}/coverage</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage</code> operation.</p>
 </div>
 <table id="req_html_cov-offer-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4081,7 +4090,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_description"><a class="anchor" href="#_coverage_description"></a>10.3. Coverage Description</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-description-clause">Coverage Description</a> response for the
-<code>{root}/collections/{coverageId}/coverage/description</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/description</code> operation.</p>
 </div>
 <table id="req_html_cov-desc-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4126,7 +4135,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_domain_set"><a class="anchor" href="#_coverage_domain_set"></a>10.4. Coverage Domain Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-domainset-clause">Coverage Domain Set</a> response for the
-<code>{root}/collections/{coverageId}/coverage/domainset</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/domainset</code> operation.</p>
 </div>
 <table id="req_html_cov-ds-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4171,7 +4180,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_range_type"><a class="anchor" href="#_coverage_range_type"></a>10.5. Coverage Range Type</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangetype-clause">Coverage Range Type</a> response for the
-<code>{root}/collections/{coverageId}/coverage/rangetype</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/rangetype</code> operation.</p>
 </div>
 <table id="req_html_cov-rt-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4216,7 +4225,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_range_set"><a class="anchor" href="#_coverage_range_set"></a>10.6. Coverage Range Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangeset-clause">Coverage Range Set</a> response for the
-<code>{root}/collections/{coverageId}/coverage/rangeset</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/rangeset</code> operation.</p>
 </div>
 <table id="req_html_cov-rs-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4261,7 +4270,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_metadata"><a class="anchor" href="#_coverage_metadata"></a>10.7. Coverage Metadata</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-metadata-clause">Coverage Metadata</a> response for the
-<code>{root}/collections/{coverageId}/coverage/metadata</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/metadata</code> operation.</p>
 </div>
 <table id="req_html_cov-md-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4306,7 +4315,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_all"><a class="anchor" href="#_coverage_all"></a>10.8. Coverage All</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-all-clause">Coverage All</a> response for the
-<code>{root}/collections/{coverageId}/coverage/all</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/all</code> operation.</p>
 </div>
 <table id="req_html_cov-all-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4423,7 +4432,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <p><code>{root}/collections</code>: Collections</p>
 </li>
 <li>
-<p><code>{root}/collections/{coverageId}</code>: Collection Information</p>
+<p><code>{root}/collections/{coverageid}</code>: Collection Information</p>
 </li>
 </ul>
 </div>
@@ -4487,7 +4496,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_offering_2"><a class="anchor" href="#_coverage_offering_2"></a>11.2. Coverage Offering</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-clause">Coverage Offering</a> response for the
-<code>{root}/collections/{coverageId}/coverage</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage</code> operation.</p>
 </div>
 <table id="req_json_cov-offer-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4526,7 +4535,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_description_2"><a class="anchor" href="#_coverage_description_2"></a>11.3. Coverage Description</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-description-clause">Coverage Description</a> response for the
-<code>{root}/collections/{coverageId}/coverage/description</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/description</code> operation.</p>
 </div>
 <table id="req_json_cov-desc-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4565,7 +4574,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_domain_set_2"><a class="anchor" href="#_coverage_domain_set_2"></a>11.4. Coverage Domain Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-domainset-clause">Coverage Domain Set</a> response for the
-<code>{root}/collections/{coverageId}/coverage/domainset</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/domainset</code> operation.</p>
 </div>
 <table id="req_json_cov-ds-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4604,7 +4613,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_range_type_2"><a class="anchor" href="#_coverage_range_type_2"></a>11.5. Coverage Range Type</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangetype-clause">Coverage Range Type</a> response for the
-<code>{root}/collections/{coverageId}/coverage/rangetype</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/rangetype</code> operation.</p>
 </div>
 <table id="req_json_cov-rt-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4643,7 +4652,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_range_set_2"><a class="anchor" href="#_coverage_range_set_2"></a>11.6. Coverage Range Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangeset-clause">Coverage Range Set</a> response for the
-<code>{root}/collections/{coverageId}/coverage/rangeset</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/rangeset</code> operation.</p>
 </div>
 <table id="req_json_cov-rs-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4682,7 +4691,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_metadata_2"><a class="anchor" href="#_coverage_metadata_2"></a>11.7. Coverage Metadata</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-metadata-clause">Coverage Metadata</a> response for the
-<code>{root}/collections/{coverageId}/coverage/metadata</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/metadata</code> operation.</p>
 </div>
 <table id="req_json_cov-md-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4721,7 +4730,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <h3 id="_coverage_all_2"><a class="anchor" href="#_coverage_all_2"></a>11.8. Coverage All</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-all-clause">Coverage All</a> response for the
-<code>{root}/collections/{coverageId}/coverage/all</code> operation.</p>
+<code>{root}/collections/{coverageid}/coverage/all</code> operation.</p>
 </div>
 <table id="req_json_cov-all-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4950,7 +4959,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-12-30 19:38:32 UTC
+Last updated 2020-01-03 13:54:42 UTC
 </div>
 </div>
 </body>

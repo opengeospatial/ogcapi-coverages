@@ -60,8 +60,10 @@ image::figures/Abstract_Coverage.png[]
 
 If you are unfamiliar with the term 'coverage', the explanations on the http://myogc.org/go/coveragesDWG[Coverages DWG Wiki] provide more detail and links to educational material. Additionally, https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)] in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
 
-[[web-coverage-service-overview]]
-=== WCS Service Model
+[[api-behavior-model-overview]]
+=== API Behavior Model
+
+The Coverages API is designed to be compatible but not conformant with the OGC Web Coverage Service. This allows API-Coverage and WCS implementations to co-exist in a single processing environment.
 
 https://www.opengeospatial.org/standards/wcs[OGC Web Coverage Service standard version 2] has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally. This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage's Native CRS).
 
