@@ -7,7 +7,7 @@
 The OGC API family of standards enable access to resources using the HTTP protocol and its' associated operations (GET, PUT, POST, etc.). OGC API-Common defines a set of features which are applicable to all OGC APIs. Other OGC standards extend API-Common with features specific to a resource type. This OGC API-Coverages standard defines an API with two goals:
 
 . Provide access to `Coverages` conformant to the <<coverage-implementation-schema-overview,OGC CIS standard>>.
-. Provide functionality comprable to that of the <<web-coverage-service-overview,OGC WCS standard>>.
+. Provide functionality comparable to that of the <<web-coverage-service-overview,OGC WCS standard>>.
 
 Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
 
