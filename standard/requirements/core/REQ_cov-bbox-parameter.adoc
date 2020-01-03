@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/cov-bbox-parameter*
-^|A |A Coverage API SHALL support the Bounding Box (bbox) parameter for `/coverages` and `/coverages/{coverageId}` requests.
+^|A |A Coverage API SHALL support the Bounding Box (bbox) parameter for `/collections` and `/collections/{coverageid}` requests.
 ^|B |Requests which include the Bounding Box parameter SHALL comply with API-Common requirement `/req/core/rc-bbox-definition`.
 ^|C |Responses to Bounding Box requests SHALL comply with API-Common requirement `/req/core/rc-bbox-response`.
 |===

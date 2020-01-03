@@ -66,7 +66,7 @@ include::examples/JSON/landingPage_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[api-definition]]
 ==== API definition
@@ -94,7 +94,7 @@ A successful response to the API Definition request is a resource which document
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[conformance-classes]]
 ==== Declaration of conformance classes
@@ -140,16 +140,16 @@ include::examples/JSON/conformance_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[collection-access-section]]
 === Collection Access
 
-API-Common starts with the assumption that spatial resources are orgainzed into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.
+API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.
 
-API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection. 
+API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
 
-This standard extends the API-Common `Collections` conformance class to support collections of coverages, then extends that class to support `Coverage` unique capabilties.
+This standard extends the API-Common `Collections` conformance class to support collections of coverages, then extends that class to support `Coverage` unique capabilities.
 
 [[collections]]
 ==== Collections
@@ -173,7 +173,7 @@ Support for both the `{root}/collections` path and the `data` link is required b
 
 ===== Response
 
-A successful response to the `Collections Operation` is a document which includes summary metadata for each collection accessible though the API. 
+A successful response to the `Collections Operation` is a document which includes summary metadata for each collection accessible though the API.
 
 [#collections-schema,reftext='Collections Response Schema']
 .Collections Response Schema
@@ -193,12 +193,12 @@ include::examples/JSON/collections_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[collectionInfo]]
 ==== Collection Information
 
-Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abreviated copy of this information is returned for each Coverage in the /Collections response.   
+Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the `/collections` response.
 
 .Dependencies
 [width="90%"]
@@ -208,17 +208,17 @@ Collection Information is the set of metadata which describes a single collectio
 
 ===== Operation
 
-This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `coverageId` is used instead of `collectionId`. The two terms are equivalent. 
+This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `coverageid` is used instead of `collectionid`. The two terms are equivalent.
 
-. Issue a `GET` request on the `{root}/collections/{coverageId}` path
- 
-The {coverageId} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageId} is provided in the /collections response. 
+. Issue a `GET` request on the `{root}/collections/{coverageid}` path
 
-Support for both the `/collections/{coverageId}` path is required by API-Common.
+The {coverageid} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageid} is provided in the /collections response.
+
+Support for both the `/collections/{coverageid}` path is required by API-Common.
 
 ===== Response
 
-A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageId} parameter. 
+A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageid} parameter.
 
 [#collectionInfo-schema,reftext='Collection Information Response Schema']
 .Collection Information Response Schema
@@ -238,7 +238,7 @@ include::examples/JSON/collection_info_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-access-section]]
 === Coverage Access
@@ -247,17 +247,17 @@ In this clause, API-Common is extended to support `Coverage` resources.
 
 A `Coverage` is a collection of measured values. The structure of that collection is defined by the <<CIS_1_1,CIS standard>>. CIS contains four principle components:
 
-* A `DomainSet` component describing the coverage’s domain (the set of “direct positions”, i.e., the locations for which values are stored in the coverage) 
-* A `RangeType` component which describes the coverage's `RangeSet` data structure (in the case of images usually called the “pixel data type”). 
-* A `RangeSet` component containing the stored values (often referred to as “pixels”, “voxels”) of the coverage. 
+* A `DomainSet` component describing the coverage’s domain (the set of “direct positions”, i.e., the locations for which values are stored in the coverage)
+* A `RangeType` component which describes the coverage's `RangeSet` data structure (in the case of images usually called the “pixel data type”).
+* A `RangeSet` component containing the stored values (often referred to as “pixels”, “voxels”) of the coverage.
 * A `Metadata` component which represents an extensible slot for metadata. The intended use is to hold any kind of application-specific metadata structures.
 
 Each component is directly accessible through the API using standard paths. In addition, collections of elements can be accessed through the following paths:
 
-* `/description`: Returns `DomainSet`, `RangeType`, and `Metadata` 
+* `/description`: Returns `DomainSet`, `RangeType`, and `Metadata`
 * `/all`: Returns `DomainSet`, `RangeType`, `RangeSet`, and `Metadata`
 
-The paths discussed in this section are all branches off of the `/collections/{coverageId}` root.
+The paths discussed in this section are all branches off of the `/collections/{coverageid}` root.
 
 [[coverage-clause]]
 ==== Coverage Offering
@@ -266,7 +266,7 @@ The `Coverage Offering` operation returns a general coverage offering descriptio
 
 ===== Operation
 
-The `Coverage Offering` operation is defined by the following requirement. 
+The `Coverage Offering` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-offer-op.adoc[]
 
@@ -294,7 +294,7 @@ include::examples/JSON/coverage_offering_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-description-clause]]
 ==== Coverage Description
@@ -303,7 +303,7 @@ The `Coverage Description` operation returns the whole coverage description cons
 
 ===== Operation
 
-The `Coverage Description` operation is defined by the following requirement. 
+The `Coverage Description` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-desc-op.adoc[]
 
@@ -331,7 +331,7 @@ include::examples/JSON/coverage_description_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-domainset-clause]]
 ==== Coverage Domain Set
@@ -340,7 +340,7 @@ The `Coverage Domain Set` operation returns the coverage’s domain set definiti
 
 ===== Operation
 
-The `Coverage Domain Set` operation is defined by the following requirement. 
+The `Coverage Domain Set` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-ds-op.adoc[]
 
@@ -368,7 +368,7 @@ include::examples/JSON/coverage_domainset_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-rangetype-clause]]
 ==== Coverage Range Type
@@ -377,7 +377,7 @@ The `Coverage Range Type` operation returns the coverage’s range type informat
 
 ===== Operation
 
-The `Coverage Range Type` operation is defined by the following requirement. 
+The `Coverage Range Type` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-rt-op.adoc[]
 
@@ -405,7 +405,7 @@ include::examples/JSON/coverage_rangetype_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-rangeset-clause]]
 ==== Coverage Range Set
@@ -414,7 +414,7 @@ The `Coverage Range Set` operation returns the coverage’s range set, i.e., the
 
 ===== Operation
 
-The `Coverage Range Set` operation is defined by the following requirement. 
+The `Coverage Range Set` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-rs-op.adoc[]
 
@@ -442,7 +442,7 @@ include::examples/JSON/coverage_rangeset_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-metadata-clause]]
 ==== Coverage Metadata
@@ -451,7 +451,7 @@ The `Coverage Metadata` operation returns the coverage’s metadata (may be empt
 
 ===== Operation
 
-The `Coverage Metadata` operation is defined by the following requirement. 
+The `Coverage Metadata` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-md-op.adoc[]
 
@@ -479,7 +479,7 @@ include::examples/JSON/coverage_metadata_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[coverage-all-clause]]
 ==== Coverage All
@@ -488,7 +488,7 @@ The `Coverage All` operation returns all of the above namely the coverage’s do
 
 ===== Operation
 
-The `Coverage All` operation is defined by the following requirement. 
+The `Coverage All` operation is defined by the following requirement.
 
 include::requirements/core/REQ_cov-all-op.adoc[]
 
@@ -516,7 +516,7 @@ include::examples/JSON/coverage_all_example.json[]
 
 ===== Error situations
 
-The requirements for handeling unsuccesful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handeled is provided in <<http-status-codes>>.
+The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
 [[parameters-section]]
 === Parameters
@@ -526,25 +526,25 @@ All of the permissions and recommendations in API-Common regarding the these par
 
 ==== Parameter bbox
 
-The Bounding Box (bbox) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.  
+The Bounding Box (bbox) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.
 
 include::requirements/core/REQ_cov-bbox-parameter.adoc[]
 
 ==== Parameter datetime
 
-The Date-Time (datetime) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.  
+The Date-Time (datetime) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.
 
 include::requirements/core/REQ_cov-datetime-parameter.adoc[]
 
 ==== Parameter Limit
 
-The Limit (limit) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.  
+The Limit (limit) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.
 
 include::requirements/core/REQ_cov-limit-parameter.adoc[]
 
 ==== Combinations of Filter Parameters
 
-Any combination of `bbox`, `datetime` and 
+Any combination of `bbox`, `datetime` and
 parameters for filtering on coverage properties is allowed. Note that the requirements on these parameters imply that only coverages matching all the predicates are in the result set; i.e., the logical operator between the predicates is 'AND.'
 
 ==== Paged Response

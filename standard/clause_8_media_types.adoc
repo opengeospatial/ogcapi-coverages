@@ -8,7 +8,7 @@ This standard does not mandate any particular encoding or format. However, it do
 
 Neither of these encodings are mandatory. An implementor of this standard may choose to implement neither of them, selecting different encodings instead.
 
-In addition to the Requirements Classes, there are additional coverage formats which implementors should be aware of. These formats apply to encodings of pixel data. Since this data is typically binary, it is largely opaque to the API. 
+In addition to the Requirements Classes, there are additional coverage formats which implementors should be aware of. These formats apply to encodings of pixel data. Since this data is typically binary, it is largely opaque to the API.
 
 === HTML Encoding
 Support for HTML is recommended. HTML is the core language of the World Wide Web. An API that supports HTML will support browsing the spatial resources with a web browser and will also enable search engines to crawl and index those resources.
@@ -21,12 +21,12 @@ JSON structures documented in this standard are defined using JSON Schema. These
 ==== GeoJSON
 "GeoJSON is a geospatial data interchange format based on JavaScript Object Notation (JSON). It defines several types of JSON objects and the manner in which they are combined to represent data about geographic features, their properties, and their spatial extents. GeoJSON uses a geographic coordinate reference system, World Geodetic System 1984, and units of decimal degrees." <<GeoJSON,IETF RFC 7946>>
 
-GeoJSON provides a simple way of represening OGC Featues in JSON. Due to its simplicity, however, it is not suitable for all feature data. It is best used for content which has a spatial extent that can be used with the World Geodetic System 1984 Coordinate Reference System.  
+GeoJSON provides a simple way of represening OGC Featues in JSON. Due to its simplicity, however, it is not suitable for all feature data. It is best used for content which has a spatial extent that can be used with the World Geodetic System 1984 Coordinate Reference System.
 
 ==== CIS JSON
 This API-Coverages standard is built around the <<CIS_1_1,OGC Coverage Implementation Schema (CIS)>>. CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space. These "Engineering" coordinate reference systems cannot be represented using WGS-84. Therefore, an alternative to GeoJSON is needed.
 
-The <<CIS_JSON_Schema,OGC JSON Schema for CIS>> standard addresses that need by defining a JSON schema for the CIS standard. This format should be used for all JSON encodings from the `{root}/collections/{coverageId}/coverage/*` paths.
+The <<CIS_JSON_Schema,OGC JSON Schema for CIS>> standard addresses that need by defining a JSON schema for the CIS standard. This format should be used for all JSON encodings from the `{root}/collections/{coverageid}/coverage/*` paths.
 
 === Binary
 A coverage does not need to be delivered in JSON or HTML in its entirety. Multipart encoding is also defined in OGC CIS. This allows the result to have a "canonical" header while components can be factored out and represented in some (more efficient) binary format. Any suitable container format (such as zip, miltipart/mime, SAFE, etc.) can "bundle" these components into one coverage file ready for shipping.
@@ -38,7 +38,7 @@ Commonly used formats for binary encoding are:
 * NetCDF
 
 === Media Types
-A description of the MIME-types is mandatory for any OGC standard which involves data encodings. The list of suitable MIME-types for the API-Coverages standard in provided in <<api-coverage-mime-types>>. 
+A description of the MIME-types is mandatory for any OGC standard which involves data encodings. The list of suitable MIME-types for the API-Coverages standard in provided in <<api-coverage-mime-types>>.
 
 Coverages can be encoded in any suitable data format, including formats as GML, JSON, GeoTIFF, and NetCDF. Further, coverages can be represented by a single document (stream or file) or by a hierarchically organized set of documents, each of which can be encoded individually – for example, the domain set, range type, and metadata may be encoded in easily parseable GML, JSON, or RDF while the range set is encoded in some compact binary format like NetCDF or JPEG2000. Such partitioning allows for coverages tiled in space, time, or mixed, thereby enabling mosaics, time-interleaved coverages, and efficiently subsettable datacubes.
 
@@ -61,6 +61,6 @@ NOTE: Consider adding a table showing valid MIME-types for each CIS component.
 [[media-type-defaults]]
 === Default Encodings
 
-The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common. However, content negotiation is not required by the HTTP standard. So default encodings must be established. 
+The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common. However, content negotiation is not required by the HTTP standard. So default encodings must be established.
 
 include::requirements/core/REQ_cov-media-type-default.adoc[]

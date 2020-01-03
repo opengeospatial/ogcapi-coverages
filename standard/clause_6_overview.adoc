@@ -31,26 +31,26 @@ or +
 `service-doc` |API Description (optional)
 |<<conformance-classes,{root}/conformance>> |`conformance` |Conformance Classes
 |<<collections,{root}/collections>> |`data` |Metadata describing the spatial collections (coverages) available from this API.
-|<<collectionInfo,{root}/collections/{coverageId}>> | |Metadata describing the coverge which has the unique identifier `{coverageId}`
+|<<collectionInfo,{root}/collections/{coverageid}>> | |Metadata describing the coverge which has the unique identifier `{coverageid}`
 3+^|**Coverages**
-|<<coverage-clause,{root}/collections/{coverageId}/coverage>> |`items` |A general description of the coverage identified by {coverageId} including the coverage's envelope.
-|<<coverage-description-clause,{root}/collections/{coverageId}/coverage/description>> |none |returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
-|<<coverage-domainset-clause,{root}/collections/{coverageId}/coverage/domainset>> |none |returns the coverage's domain set definition
-|<<coverage-rangetype-clause,{root}/collections/{coverageId}/coverage/rangetype>> |none |returns the coverage's range type information (i.e., a description of the data semantics)
-|<<coverage-metadata-clause,{root}/collections/{coverageId}/coverage/metadata>> |none |returns the coverage's metadata (may be empty)
-|<<coverage-rangeset-clause,{root}/collections/{coverageId}/coverage/rangeset>> |none |returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
-|<<coverage-all-clause,{root}/collections/{coverageId}/coverage/all>> |none |returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
+|<<coverage-clause,{root}/collections/{coverageid}/coverage>> |`items` |A general description of the coverage identified by {coverageid} including the coverage's envelope.
+|<<coverage-description-clause,{root}/collections/{coverageid}/coverage/description>> |none |returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
+|<<coverage-domainset-clause,{root}/collections/{coverageid}/coverage/domainset>> |none |returns the coverage's domain set definition
+|<<coverage-rangetype-clause,{root}/collections/{coverageid}/coverage/rangetype>> |none |returns the coverage's range type information (i.e., a description of the data semantics)
+|<<coverage-metadata-clause,{root}/collections/{coverageid}/coverage/metadata>> |none |returns the coverage's metadata (may be empty)
+|<<coverage-rangeset-clause,{root}/collections/{coverageid}/coverage/rangeset>> |none |returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
+|<<coverage-all-clause,{root}/collections/{coverageid}/coverage/all>> |none |returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
 |===
 
 Where:
 
 * {root} = Base URI for the API server
-* {coverageId} = an identifier for a specific coverage (collection)
+* {coverageid} = an identifier for a specific coverage (collection)
 
 [[coverage-implementation-schema-overview]]
 === Coverage Implementation Schema
 
-OGC API-Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time such as; spatio-temporal sensor, image, simulation, and statistical data. 
+OGC API-Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time such as; spatio-temporal sensor, image, simulation, and statistical data.
 
 This https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] standard establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs. A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
 
