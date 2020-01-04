@@ -2,6 +2,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subset/subset-success*
-^|A |The `subset` parameter SHALL only apply to resources which include a RangeSet. 
-^|B |Only that portion of a RangeSet that falls within the bounds of the subset expression SHALL be returned.
+^|A |The `subset` parameter SHALL only apply to resources offered as coverages. 
+^|B |Only that part of the coverage addressed SHALL be returned that falls within the bounds of the subset expression. The DomainSet shall be adjusted accordingly to the new boundaries (in case of trimming) and the reduced dimension (in case of slicing).
 |===
