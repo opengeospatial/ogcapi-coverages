@@ -95,7 +95,7 @@
         "parameters" : [ {
           "name" : "limit",
           "in" : "query",
-          "description" : "The optional limit parameter limits the number of items that are\npresented in the response document.\n\nOnly items are counted that are on the first level of the collection in\nthe response document. Nested objects contained within the explicitly\nrequested items shall not be counted.\n\n* Minimum = 1\n* Maximum = 10000\n* Default = 10\n",
+          "description" : "The optional limit parameter limits the number of collections that are\npresented in the response document.\n\nOnly items are counted that are on the first level of the collection in\nthe response document. Nested objects contained within the explicitly\nrequested items shall not be counted.\n\n* Minimum = 1\n* Maximum = 10000\n* Default = 10\n",
           "required" : false,
           "style" : "form",
           "explode" : false,
@@ -165,13 +165,13 @@
         }
       }
     },
-    "/collections/{collectionId}" : {
+    "/collections/{coverageid}" : {
       "get" : {
         "tags" : [ "Capabilities" ],
-        "summary" : "describe the {collectionId} collection",
-        "operationId" : "describeCollection",
+        "summary" : "Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage.",
+        "operationId" : "describeCoverage",
         "parameters" : [ {
-          "name" : "collectionId",
+          "name" : "coverageid",
           "in" : "path",
           "description" : "Identifier (name) of a specific collection",
           "required" : true,
@@ -183,7 +183,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Metadata about the {collectionId} collection shared by this API.",
+            "description" : "Metadata about the {coverageid} collection shared by this API.",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -215,14 +215,14 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage" : {
+    "/collections/{coverageid}/coverage" : {
       "get" : {
         "tags" : [ "Coverage" ],
-        "summary" : "description of the coverage offering identified by {collectionId} including envelope",
-        "description" : "Coverage offering identified by {collectionId}.\nUse content negotiation to request HTML or GeoJSON.",
+        "summary" : "description of the coverage offering identified by {coverageid} including envelope",
+        "description" : "Coverage offering identified by {coverageid}.\nUse content negotiation to request HTML or GeoJSON.",
         "operationId" : "getCoverageOffering",
         "parameters" : [ {
-          "name" : "collectionId",
+          "name" : "coverageid",
           "in" : "path",
           "description" : "Identifier (name) of a specific collection",
           "required" : true,
@@ -266,13 +266,13 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/description" : {
+    "/collections/{coverageid}/coverage/description" : {
       "get" : {
         "tags" : [ "Coverage" ],
         "summary" : "returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)",
         "operationId" : "getCoverageDescription",
         "parameters" : [ {
-          "name" : "collectionId",
+          "name" : "coverageid",
           "in" : "path",
           "description" : "Identifier (name) of a specific collection",
           "required" : true,
@@ -326,13 +326,13 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/domainset" : {
+    "/collections/{coverageid}/coverage/domainset" : {
       "get" : {
         "tags" : [ "Coverage" ],
         "summary" : "retrieve a coverages domainset; use content negotiation to request HTML or GeoJSON",
         "operationId" : "getCoverageDomainSet",
         "parameters" : [ {
-          "name" : "collectionId",
+          "name" : "coverageid",
           "in" : "path",
           "description" : "Identifier (name) of a specific collection",
           "required" : true,
@@ -386,13 +386,13 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/rangetype" : {
+    "/collections/{coverageid}/coverage/rangetype" : {
       "get" : {
         "tags" : [ "Coverage" ],
         "summary" : "retrieve a coverage's rangetype; use content negotiation to request HTML or GeoJSON",
         "operationId" : "getCoverageRangeType",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/collectionId"
+          "$ref" : "#/components/parameters/coverageid"
         } ],
         "responses" : {
           "200" : {
@@ -428,13 +428,13 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/metadata" : {
+    "/collections/{coverageid}/coverage/metadata" : {
       "get" : {
         "tags" : [ "Coverage" ],
         "summary" : "retrieve a coverage's metadata; use content negotiation to request HTML or GeoJSON",
         "operationId" : "getCoverageMetadata",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/collectionId"
+          "$ref" : "#/components/parameters/coverageid"
         } ],
         "responses" : {
           "200" : {
@@ -470,13 +470,13 @@
         }
       }
     },
-    "/collections/{collectionId}/coverages/rangeset" : {
+    "/collections/{coverageid}/coverage/rangeset" : {
       "get" : {
         "tags" : [ "Coverage" ],
         "summary" : "retrieve a coverage's rangeset; use content negotiation to request HTML or GeoJSON",
         "operationId" : "getCoverageRangeSet",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/collectionId"
+          "$ref" : "#/components/parameters/coverageid"
         }, {
           "$ref" : "#/components/parameters/subset"
         } ],
@@ -519,13 +519,13 @@
         }
       }
     },
-    "/collections/{collectionId}/coverages/all" : {
+    "/collections/{coverageid}/coverage/all" : {
       "get" : {
         "tags" : [ "Coverage" ],
         "summary" : "retrieve a coverages rangeset; use content negotiation to request HTML or GeoJSON",
         "operationId" : "getCoverageAll",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/collectionId"
+          "$ref" : "#/components/parameters/coverageid"
         }, {
           "$ref" : "#/components/parameters/subset"
         }, {
@@ -608,8 +608,17 @@
         "required" : [ "links" ],
         "type" : "object",
         "properties" : {
+          "title" : {
+            "type" : "string",
+            "description" : "The title of the API"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "A textual description of the API"
+          },
           "links" : {
             "type" : "array",
+            "description" : "Links to the resources exposed through this API.",
             "example" : [ {
               "href" : "http://data.example.org/",
               "rel" : "self",
@@ -617,7 +626,7 @@
               "title" : "this document"
             }, {
               "href" : "http://data.example.org/api",
-              "rel" : "service",
+              "rel" : "service-desc",
               "type" : "application/openapi+json;version=3.0",
               "title" : "the API definition"
             }, {
@@ -641,7 +650,7 @@
         "properties" : {
           "conformsTo" : {
             "type" : "array",
-            "example" : [ "http://www.opengis.net/spec/ogcapi-common/1.0/conf/core", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/collections", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/oas3", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/html", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/geojson", "http://www.opengis.net/spec/ogcapi-coverages/1.0/conf/core" ],
+            "example" : [ "http://www.opengis.net/spec/ogcapi-common/1.0/conf/core", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/collections", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/oas3", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/html", "http://www.opengis.net/spec/ogcapi-common/1.0/conf/geojson", "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core" ],
             "items" : {
               "type" : "string"
             }
@@ -653,11 +662,12 @@
         "type" : "object",
         "properties" : {
           "href" : {
-            "type" : "string"
+            "type" : "string",
+            "example" : "http://data.example.com/buildings/123"
           },
           "rel" : {
             "type" : "string",
-            "example" : "prev"
+            "example" : "alternate"
           },
           "type" : {
             "type" : "string",
@@ -666,6 +676,10 @@
           "hreflang" : {
             "type" : "string",
             "example" : "en"
+          },
+          "title" : {
+            "type" : "string",
+            "example" : "Trierer Strasse 70, 53115 Bonn"
           }
         }
       },
@@ -725,9 +739,9 @@
           "links" : {
             "type" : "array",
             "example" : [ {
-              "href" : "http://data.example.org/collections/buildings/items",
-              "rel" : "item",
-              "type" : "application/geo+json",
+              "href" : "http://data.example.org/collections/buildings/coverage",
+              "rel" : "coverage",
+              "type" : "application/json",
               "title" : "Buildings"
             }, {
               "href" : "http://example.org/concepts/building.html",
@@ -810,7 +824,7 @@
       "limit" : {
         "name" : "limit",
         "in" : "query",
-        "description" : "The optional limit parameter limits the number of items that are\npresented in the response document.\n\nOnly items are counted that are on the first level of the collection in\nthe response document. Nested objects contained within the explicitly\nrequested items shall not be counted.\n\n* Minimum = 1\n* Maximum = 10000\n* Default = 10\n",
+        "description" : "The optional limit parameter limits the number of collections that are\npresented in the response document.\n\nOnly items are counted that are on the first level of the collection in\nthe response document. Nested objects contained within the explicitly\nrequested items shall not be counted.\n\n* Minimum = 1\n* Maximum = 10000\n* Default = 10\n",
         "required" : false,
         "style" : "form",
         "explode" : false,
@@ -848,8 +862,8 @@
           "type" : "string"
         }
       },
-      "collectionId" : {
-        "name" : "collectionId",
+      "coverageid" : {
+        "name" : "coverageid",
         "in" : "path",
         "description" : "Identifier (name) of a specific collection",
         "required" : true,
