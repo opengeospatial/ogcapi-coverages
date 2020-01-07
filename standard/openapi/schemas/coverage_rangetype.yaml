@@ -17,7 +17,7 @@ rangeType:
         type: array
         items:
           title: quantity
-          description: quantiy
+          description: quantity
           type: object
           required:
           - type

@@ -2,9 +2,33 @@ $schema: http://json-schema.org/draft-07/schema#
 coverageOffering:
   title: Coverage Offering
   description: Description of the Coverage Offering
+  required:
+    - links
+    - name
+    - envelope
+    - rangetype
+    - servicemetadata
   type: object
   properties:
-    propertyName:
-      description: The propertyName description
+    name:
       type: string
-
+      description: identifier of the collection used, for example, in URIs
+      example: dem
+    title:
+      type: string
+      description: human readable title of the collection
+      example: Digital Elevation Model
+    description:
+      type: string
+      description: a description of the data in the collection
+      example: Digital Elevation Model
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/link'
+    envelope:
+      $ref: '#/components/schemas/envelope'
+    rangetype:
+      $ref: '#/components/schemas/rangetype'
+    servicemetadata:
+      $ref: '#/components/schemas/serviceMetadata'

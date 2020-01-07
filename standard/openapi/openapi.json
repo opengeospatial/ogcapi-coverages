@@ -332,66 +332,6 @@
         }
       }
     },
-    "/collections/{coverageid}/coverage/description" : {
-      "get" : {
-        "tags" : [ "Coverage" ],
-        "summary" : "returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)",
-        "operationId" : "getCoverageDescription",
-        "parameters" : [ {
-          "name" : "coverageid",
-          "in" : "path",
-          "description" : "Identifier (name) of a specific collection",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "subset",
-          "in" : "query",
-          "description" : "get a subset of the coverage by slicing or trimming among one axis",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "A coverage description.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/coverageDescription"
-                }
-              },
-              "text/html" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              }
-            }
-          },
-          "default" : {
-            "description" : "An error occured.",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/exception"
-                }
-              },
-              "text/html" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/collections/{coverageid}/coverage/domainset" : {
       "get" : {
         "tags" : [ "Coverage" ],
@@ -508,7 +448,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/coverageMetadata"
+                  "$ref" : "http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/metadata"
                 }
               },
               "text/html" : {
@@ -558,6 +498,50 @@
               "application/*" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/rangeSetImage"
+                }
+              },
+              "text/html" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "An error occured.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/exception"
+                }
+              },
+              "text/html" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collections/{coverageid}/coverage/description" : {
+      "get" : {
+        "tags" : [ "Coverage" ],
+        "summary" : "returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)",
+        "operationId" : "getCoverageDescription",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/coverageid"
+        }, {
+          "$ref" : "#/components/parameters/subset"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A coverage description.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/coverageDescription"
                 }
               },
               "text/html" : {
@@ -753,6 +737,40 @@
         "required" : [ "collections", "links" ],
         "type" : "object",
         "properties" : {
+          "collections" : {
+            "type" : "array",
+            "example" : {
+              "name" : "dem",
+              "title" : "Digital Elevation Model",
+              "description" : "Digital Elevation Model",
+              "links" : [ {
+                "href" : "http://data.example.org/collections/dem?f=json",
+                "rel" : "self",
+                "type" : "application/json",
+                "title" : "Digital Elevation Model"
+              }, {
+                "href" : "http://data.example.org/collections/dem?f=html",
+                "rel" : "alternate",
+                "type" : "application/json",
+                "title" : "Digital Elevation Model"
+              }, {
+                "href" : "http://data.example.org/collections/dem/coverage",
+                "rel" : "coverage",
+                "type" : "application/json",
+                "title" : "Digital Elevation Model"
+              } ],
+              "extent" : {
+                "crs" : "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+                "spatial" : [ -180, -90, 180, 90 ],
+                "trs" : "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian",
+                "temporal" : [ "2020-01-06T14:00:00Z", "2020-02-07T22:00:00Z" ]
+              },
+              "crs" : [ "http://www.opengis.net/def/crs/OGC/1.3/CRS84" ]
+            },
+            "items" : {
+              "$ref" : "#/components/schemas/collectionInfo"
+            }
+          },
           "links" : {
             "type" : "array",
             "example" : [ {
@@ -765,20 +783,9 @@
               "rel" : "alternate",
               "type" : "text/html",
               "title" : "this document as HTML"
-            }, {
-              "href" : "http://schemas.example.org/1.0/foobar.json",
-              "rel" : "describedBy",
-              "type" : "application/xml",
-              "title" : "XML schema for Acme Corporation data"
             } ],
             "items" : {
               "$ref" : "#/components/schemas/link"
-            }
-          },
-          "collections" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/collectionInfo"
             }
           }
         }
@@ -805,6 +812,16 @@
           "links" : {
             "type" : "array",
             "example" : [ {
+              "href" : "http://data.example.org/collections/dem?f=json",
+              "rel" : "self",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            }, {
+              "href" : "http://data.example.org/collections/dem?f=html",
+              "rel" : "alternate",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            }, {
               "href" : "http://data.example.org/collections/dem/coverage",
               "rel" : "coverage",
               "type" : "application/json",
@@ -836,13 +853,8 @@
               "title" : "Digital Elevation Model"
             }, {
               "href" : "http://data.example.org/collections/dem/coverage/all",
-              "rel" : "coverage",
+              "rel" : "data",
               "type" : "application/json",
-              "title" : "Digital Elevation Model"
-            }, {
-              "href" : "http://example.org/concepts/dem.html",
-              "rel" : "describedBy",
-              "type" : "text/html",
               "title" : "Digital Elevation Model"
             } ],
             "items" : {
@@ -902,7 +914,8 @@
         }
       },
       "coverageOffering" : {
-        "required" : [ "envelope", "links", "name", "rangetype", "servicemetadata" ],
+        "title" : "Coverage Offering",
+        "required" : [ "envelope", "links", "name", "rangeType", "serviceMetadata" ],
         "type" : "object",
         "properties" : {
           "name" : {
@@ -923,8 +936,13 @@
           "links" : {
             "type" : "array",
             "example" : [ {
-              "href" : "http://data.example.org/collections/dem/coverage",
-              "rel" : "coverage",
+              "href" : "http://data.example.org/collections/dem/coverage?f=json",
+              "rel" : "self",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            }, {
+              "href" : "http://data.example.org/collections/dem/coverage?f=html",
+              "rel" : "alternate",
               "type" : "application/json",
               "title" : "Digital Elevation Model"
             }, {
@@ -954,13 +972,8 @@
               "title" : "Digital Elevation Model"
             }, {
               "href" : "http://data.example.org/collections/dem/coverage/all",
-              "rel" : "coverage",
+              "rel" : "data",
               "type" : "application/json",
-              "title" : "Digital Elevation Model"
-            }, {
-              "href" : "http://example.org/concepts/dem.html",
-              "rel" : "describedBy",
-              "type" : "text/html",
               "title" : "Digital Elevation Model"
             } ],
             "items" : {
@@ -968,251 +981,61 @@
             }
           },
           "envelope" : {
-            "$ref" : "#/components/schemas/envelope"
+            "example" : {
+              "id" : "dem_envelope",
+              "srsName" : "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+              "axisLabels" : [ "Lat", "Long" ],
+              "axis" : [ {
+                "type" : "AxisExtentType",
+                "id" : "dem_envelope_lat",
+                "axisLabel" : "Lat",
+                "lowerBound" : -90,
+                "upperBound" : 90,
+                "uomLabel" : "deg"
+              }, {
+                "type" : "AxisExtentType",
+                "id" : "dem_envelope_long",
+                "axisLabel" : "Long",
+                "lowerBound" : -180,
+                "upperBound" : 180,
+                "uomLabel" : "deg"
+              } ]
+            },
+            "allOf" : [ {
+              "$ref" : "http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/envelope"
+            } ]
           },
-          "rangetype" : {
-            "$ref" : "#/components/schemas/rangetype"
-          },
-          "servicemetadata" : {
-            "$ref" : "#/components/schemas/serviceMetadata"
-          }
-        }
-      },
-      "envelope" : {
-        "title" : "envelope",
-        "required" : [ "axis", "axisLabels", "srsName", "type" ],
-        "type" : "object",
-        "properties" : {
-          "type" : {
-            "type" : "string",
-            "enum" : [ "EnvelopeByAxisType" ]
-          },
-          "id" : {
-            "type" : "string"
-          },
-          "srsName" : {
-            "type" : "string",
-            "format" : "uri"
-          },
-          "axisLabels" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "axis" : {
-            "type" : "array",
-            "items" : {
-              "required" : [ "lowerBound", "type", "uomLabel", "upperBound" ],
-              "type" : "object",
-              "properties" : {
-                "type" : {
-                  "type" : "string",
-                  "enum" : [ "AxisExtentType" ]
+          "rangeType" : {
+            "example" : {
+              "type" : "DataRecordType",
+              "field" : {
+                "type" : "QuantityType",
+                "id" : "dem_field",
+                "name" : "dem field",
+                "definition" : "unsignedInt",
+                "uom" : {
+                  "type" : "UnitReference",
+                  "code" : "m"
                 },
-                "id" : {
-                  "type" : "string"
-                },
-                "axisLabel" : {
-                  "type" : "string"
-                },
-                "lowerBound" : {
-                  "nullable" : true,
-                  "oneOf" : [ {
-                    "type" : "number"
-                  }, {
-                    "type" : "string"
-                  }, {
-                    "type" : "boolean"
-                  } ]
-                },
-                "upperBound" : {
-                  "nullable" : true,
-                  "oneOf" : [ {
-                    "type" : "number"
-                  }, {
-                    "type" : "string"
-                  }, {
-                    "type" : "boolean"
-                  } ]
-                },
-                "uomLabel" : {
-                  "type" : "string"
+                "constraint" : {
+                  "type" : "AllowedValues",
+                  "interval" : [ 0, 10000 ]
                 }
               },
-              "additionalProperties" : false
-            }
-          }
-        },
-        "description" : "The envelope around a coverage is defined by the lower and upper bound of each axis, respectively. The purpose of the axisLabels attribute, which lists the axis labels of all axisExtent elements in proper sequence, is to enforce axis sequence also in XML systems which do not preserve document order.",
-        "example" : {
-          "type" : "EnvelopeByAxisType",
-          "id" : "dem_envelope",
-          "srsName" : "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
-          "axisLabels" : [ "Lat", "Long" ],
-          "axis" : [ {
-            "type" : "AxisExtentType",
-            "id" : "dem_envelope_lat",
-            "axisLabel" : "Lat",
-            "lowerBound" : -80,
-            "upperBound" : -70,
-            "uomLabel" : "deg"
-          }, {
-            "type" : "AxisExtentType",
-            "id" : "dem_envelope_long",
-            "axisLabel" : "Long",
-            "lowerBound" : 0,
-            "upperBound" : 10,
-            "uomLabel" : "deg"
-          } ]
-        }
-      },
-      "rangetype" : {
-        "title" : "rangeType",
-        "type" : "object",
-        "description" : "The rangeType element describes the structure and semantics of a coverage's range values, including (optionally) restrictions on the interpolation allowed on such values.",
-        "example" : {
-          "type" : "DataRecordType",
-          "field" : {
-            "type" : "QuantityType",
-            "id" : "dem_field",
-            "name" : "dem field",
-            "definition" : "unsignedInt",
-            "uom" : {
-              "type" : "UnitReference",
-              "code" : "m"
-            },
-            "constraint" : {
-              "type" : "AllowedValues",
-              "interval" : [ 0, 10000 ]
-            }
-          },
-          "interpolationRestriction" : {
-            "type" : "InterpolationRestrictionType",
-            "allowedInterpolation" : [ "linear" ]
-          }
-        },
-        "oneOf" : [ {
-          "required" : [ "field", "type" ],
-          "properties" : {
-            "type" : {
-              "type" : "string",
-              "enum" : [ "DataRecordType" ]
-            },
-            "field" : {
-              "type" : "array",
-              "items" : {
-                "title" : "quantity",
-                "required" : [ "type" ],
-                "type" : "object",
-                "properties" : {
-                  "type" : {
-                    "type" : "string",
-                    "enum" : [ "QuantityType" ]
-                  },
-                  "id" : {
-                    "type" : "string",
-                    "format" : "uri"
-                  },
-                  "name" : {
-                    "type" : "string"
-                  },
-                  "definition" : {
-                    "type" : "string",
-                    "format" : "uri"
-                  },
-                  "uom" : {
-                    "title" : "units of measure",
-                    "required" : [ "code", "type" ],
-                    "type" : "object",
-                    "properties" : {
-                      "type" : {
-                        "type" : "string",
-                        "enum" : [ "UnitReference" ]
-                      },
-                      "id" : {
-                        "type" : "string",
-                        "format" : "uri"
-                      },
-                      "code" : {
-                        "type" : "string"
-                      }
-                    },
-                    "description" : "units of measure"
-                  },
-                  "constraint" : {
-                    "title" : "Constraint",
-                    "required" : [ "type" ],
-                    "type" : "object",
-                    "properties" : {
-                      "type" : {
-                        "type" : "string",
-                        "enum" : [ "AllowedValues" ]
-                      },
-                      "id" : {
-                        "type" : "string",
-                        "format" : "uri"
-                      },
-                      "interval" : {
-                        "type" : "array",
-                        "items" : {
-                          "oneOf" : [ {
-                            "type" : "number"
-                          }, {
-                            "type" : "string"
-                          }, {
-                            "type" : "boolean"
-                          } ]
-                        }
-                      }
-                    },
-                    "description" : "Constraint"
-                  }
-                },
-                "description" : "quantiy"
+              "interpolationRestriction" : {
+                "type" : "InterpolationRestrictionType",
+                "allowedInterpolation" : [ "linear" ]
               }
             },
-            "interpolationRestriction" : {
-              "title" : "interpolationRestriction",
-              "required" : [ "type" ],
-              "type" : "object",
-              "properties" : {
-                "type" : {
-                  "type" : "string",
-                  "enum" : [ "InterpolationRestrictionType" ]
-                },
-                "id" : {
-                  "type" : "string",
-                  "format" : "uri"
-                },
-                "allowedInterpolation" : {
-                  "type" : "array",
-                  "items" : {
-                    "type" : "string",
-                    "format" : "uri"
-                  }
-                }
-              },
-              "description" : "Interpolation restriction"
-            }
+            "allOf" : [ {
+              "$ref" : "http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/rangeType"
+            } ]
+          },
+          "serviceMetadata" : {
+            "$ref" : "#/components/schemas/serviceMetadata"
           }
-        }, {
-          "required" : [ "fileReference", "type" ],
-          "properties" : {
-            "type" : {
-              "type" : "string",
-              "enum" : [ "RangeTypeRefType" ]
-            },
-            "id" : {
-              "type" : "string",
-              "format" : "uri"
-            },
-            "fileReference" : {
-              "type" : "string",
-              "format" : "uri"
-            }
-          }
-        } ]
+        },
+        "description" : "Description of the Coverage Offering"
       },
       "serviceMetadata" : {
         "title" : "serviceMetadata",
@@ -1228,7 +1051,7 @@
           "coverageSubtypeParent" : {
             "$ref" : "#/components/schemas/coverageSubtypeParent"
           },
-          "limits" : {
+          "constraints" : {
             "type" : "string"
           }
         },
@@ -1252,14 +1075,63 @@
         }
       },
       "coverageDescription" : {
-        "type" : "string",
-        "description" : "TODO",
-        "example" : "TODO"
-      },
-      "coverageMetadata" : {
-        "type" : "string",
-        "description" : "TODO",
-        "example" : "TODO"
+        "title" : "Coverage Description",
+        "required" : [ "domainSet", "links", "metadata", "name", "rangeType" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "identifier of the collection used, for example, in URIs",
+            "example" : "dem"
+          },
+          "title" : {
+            "type" : "string",
+            "description" : "human readable title of the collection",
+            "example" : "Digital Elevation Model"
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "a description of the data in the collection",
+            "example" : "Digital Elevation Model"
+          },
+          "links" : {
+            "type" : "array",
+            "example" : [ {
+              "href" : "http://data.example.org/collections/dem/coverage/description?f=json",
+              "rel" : "self",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            }, {
+              "href" : "http://data.example.org/collections/dem/coverage/description?f=html",
+              "rel" : "alternate",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            }, {
+              "href" : "http://data.example.org/collections/dem/coverage/rangeset",
+              "rel" : "rangeset",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            }, {
+              "href" : "http://data.example.org/collections/dem/coverage/all",
+              "rel" : "data",
+              "type" : "application/json",
+              "title" : "Digital Elevation Model"
+            } ],
+            "items" : {
+              "$ref" : "#/components/schemas/link"
+            }
+          },
+          "domainSet" : {
+            "$ref" : "http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/domainSet"
+          },
+          "rangeType" : {
+            "$ref" : "http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/rangeType"
+          },
+          "etadata" : {
+            "$ref" : "http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/metadata"
+          }
+        },
+        "description" : "Description of the Coverage including domainSet, rangeType, and metadata"
       },
       "coverageMultipart" : {
         "type" : "string",
