@@ -1,9 +1,9 @@
-openapi: 3.0.1
+openapi: 3.0.2
 info:
   title: A sample API conforming to the OGC API - Coverages standard
   description: 'This is a sample OpenAPI definition that conforms to the OGC API -
-    Coverages Service specification (conformance classes: "Core", "GeoJSON", "HTML"
-    and "OpenAPI 3.0").'
+    Coverages Service specification (conformance classes: "Core", "Subset", "JSON",
+    "HTML" and "OpenAPI 3.0").'
   contact:
     name: Acme Corporation
     url: http://example.org/
@@ -34,6 +34,20 @@ paths:
       description: The landing page provides links to the API definition, the Conformance
         statements and the metadata about the coverage data in this dataset.
       operationId: getLandingPage
+      parameters:
+      - name: f
+        in: query
+        description: |
+          The optional f parameter indicates the output format which the server shall provide as part of the response document. It has preference over the HTTP Accept header. The default format is JSON.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          default: json
+          enum:
+          - json
+          - html
       responses:
         "200":
           description: links to the API capabilities
@@ -44,14 +58,45 @@ paths:
             text/html:
               schema:
                 type: string
+  /api:
+    get:
+      tags:
+      - Capabilities
+      summary: API definition
+      description: most likely returning the document at hand
+      responses:
+        "200":
+          description: most likely returning the document at hand
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api'
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
   /conformance:
     get:
       tags:
       - Capabilities
-      summary: information about standards that this API conforms to
-      description: list all requirements classes specified in a standard (e.g., )
-        that the server conforms to
-      operationId: getRequirementsClasses
+      summary: API conformance definition
+      description: list of all conformance classes that the server conforms to
+      parameters:
+      - name: f
+        in: query
+        description: |
+          The optional f parameter indicates the output format which the server shall provide as part of the response document. It has preference over the HTTP Accept header. The default format is JSON.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          default: json
+          enum:
+          - json
+          - html
       responses:
         "200":
           description: the URIs of all requirements classes supported by the server
@@ -122,6 +167,19 @@ paths:
         explode: false
         schema:
           type: string
+      - name: f
+        in: query
+        description: |
+          The optional f parameter indicates the output format which the server shall provide as part of the response document. It has preference over the HTTP Accept header. The default format is JSON.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          default: json
+          enum:
+          - json
+          - html
       responses:
         "200":
           description: Metdata about the collections shared by this API.
@@ -483,11 +541,11 @@ components:
         conformsTo:
           type: array
           example:
-          - http://www.opengis.net/spec/ogcapi-common/1.0/conf/core
-          - http://www.opengis.net/spec/ogcapi-common/1.0/conf/collections
-          - http://www.opengis.net/spec/ogcapi-common/1.0/conf/oas3
-          - http://www.opengis.net/spec/ogcapi-common/1.0/conf/html
-          - http://www.opengis.net/spec/ogcapi-common/1.0/conf/geojson
+          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
+          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/collections
+          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3
+          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html
+          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/geojson
           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
           items:
             type: string
@@ -498,19 +556,19 @@ components:
       properties:
         href:
           type: string
-          example: http://data.example.com/buildings/123
+          example: http://data.example.com/collections/dem/coverage
         rel:
           type: string
           example: alternate
         type:
           type: string
-          example: application/geo+json
+          example: application/json
         hreflang:
           type: string
           example: en
         title:
           type: string
-          example: Trierer Strasse 70, 53115 Bonn
+          example: Digital Elevation Model
     content:
       required:
       - collections
@@ -520,15 +578,15 @@ components:
         links:
           type: array
           example:
-          - href: http://data.example.org/collections.json
+          - href: http://data.example.org/collections?f=json
             rel: self
             type: application/json
             title: this document
-          - href: http://data.example.org/collections.html
+          - href: http://data.example.org/collections?f=html
             rel: alternate
             type: text/html
             title: this document as HTML
-          - href: http://schemas.example.org/1.0/foobar.xsd
+          - href: http://schemas.example.org/1.0/foobar.json
             rel: describedBy
             type: application/xml
             title: XML schema for Acme Corporation data
@@ -547,26 +605,50 @@ components:
         name:
           type: string
           description: identifier of the collection used, for example, in URIs
-          example: buildings
+          example: dem
         title:
           type: string
           description: human readable title of the collection
-          example: Buildings
+          example: Digital Elevation Model
         description:
           type: string
           description: a description of the data in the collection
-          example: Buildings in the city of Bonn.
+          example: Digital Elevation Model
         links:
           type: array
           example:
-          - href: http://data.example.org/collections/buildings/coverage
+          - href: http://data.example.org/collections/dem/coverage
             rel: coverage
             type: application/json
-            title: Buildings
-          - href: http://example.org/concepts/building.html
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/domainset
+            rel: domainset
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/rangetype
+            rel: rangetype
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/metadata
+            rel: metadata
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/rangeset
+            rel: rangeset
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/description
+            rel: description
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/all
+            rel: coverage
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://example.org/concepts/dem.html
             rel: describedBy
             type: text/html
-            title: Coverage for buildings
+            title: Digital Elevation Model
           items:
             $ref: '#/components/schemas/link'
         extent:
@@ -578,6 +660,8 @@ components:
             coordinate reference system is the coordinate reference system that is
             used by default. This is always "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
             i.e. WGS84 longitude/latitude.
+          example:
+          - http://www.opengis.net/def/crs/OGC/1.3/CRS84
           items:
             type: string
           default:
@@ -622,21 +706,327 @@ components:
           type: array
           description: Begin and end times of the temporal extent.
           example:
-          - 2011-11-11T12:22:11.000Z
-          - 2012-11-24T12:32:43.000Z
+          - 2020-01-06T14:00:00Z
+          - 2020-02-07T22:00:00Z
           items:
             type: string
             format: dateTime
     coverageOffering:
-      type: string
+      required:
+      - envelope
+      - links
+      - name
+      - rangetype
+      - servicemetadata
+      type: object
+      properties:
+        name:
+          type: string
+          description: identifier of the collection used, for example, in URIs
+          example: dem
+        title:
+          type: string
+          description: human readable title of the collection
+          example: Digital Elevation Model
+        description:
+          type: string
+          description: a description of the data in the collection
+          example: Digital Elevation Model
+        links:
+          type: array
+          example:
+          - href: http://data.example.org/collections/dem/coverage
+            rel: coverage
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/domainset
+            rel: domainset
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/rangetype
+            rel: rangetype
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/metadata
+            rel: metadata
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/rangeset
+            rel: rangeset
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/description
+            rel: description
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://data.example.org/collections/dem/coverage/all
+            rel: coverage
+            type: application/json
+            title: Digital Elevation Model
+          - href: http://example.org/concepts/dem.html
+            rel: describedBy
+            type: text/html
+            title: Digital Elevation Model
+          items:
+            $ref: '#/components/schemas/link'
+        envelope:
+          $ref: '#/components/schemas/envelope'
+        rangetype:
+          $ref: '#/components/schemas/rangetype'
+        servicemetadata:
+          $ref: '#/components/schemas/serviceMetadata'
+    envelope:
+      title: envelope
+      required:
+      - axis
+      - axisLabels
+      - srsName
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - EnvelopeByAxisType
+        id:
+          type: string
+        srsName:
+          type: string
+          format: uri
+        axisLabels:
+          type: array
+          items:
+            type: string
+        axis:
+          type: array
+          items:
+            required:
+            - lowerBound
+            - type
+            - uomLabel
+            - upperBound
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - AxisExtentType
+              id:
+                type: string
+              axisLabel:
+                type: string
+              lowerBound:
+                nullable: true
+                oneOf:
+                - type: number
+                - type: string
+                - type: boolean
+              upperBound:
+                nullable: true
+                oneOf:
+                - type: number
+                - type: string
+                - type: boolean
+              uomLabel:
+                type: string
+            additionalProperties: false
+      description: The envelope around a coverage is defined by the lower and upper
+        bound of each axis, respectively. The purpose of the axisLabels attribute,
+        which lists the axis labels of all axisExtent elements in proper sequence,
+        is to enforce axis sequence also in XML systems which do not preserve document
+        order.
+      example:
+        type: EnvelopeByAxisType
+        id: dem_envelope
+        srsName: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+        axisLabels:
+        - Lat
+        - Long
+        axis:
+        - type: AxisExtentType
+          id: dem_envelope_lat
+          axisLabel: Lat
+          lowerBound: -80
+          upperBound: -70
+          uomLabel: deg
+        - type: AxisExtentType
+          id: dem_envelope_long
+          axisLabel: Long
+          lowerBound: 0
+          upperBound: 10
+          uomLabel: deg
+    rangetype:
+      title: rangeType
+      type: object
+      description: The rangeType element describes the structure and semantics of
+        a coverage's range values, including (optionally) restrictions on the interpolation
+        allowed on such values.
+      example:
+        type: DataRecordType
+        field:
+          type: QuantityType
+          id: dem_field
+          name: dem field
+          definition: unsignedInt
+          uom:
+            type: UnitReference
+            code: m
+          constraint:
+            type: AllowedValues
+            interval:
+            - 0
+            - 10000
+        interpolationRestriction:
+          type: InterpolationRestrictionType
+          allowedInterpolation:
+          - linear
+      oneOf:
+      - required:
+        - field
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - DataRecordType
+          field:
+            type: array
+            items:
+              title: quantity
+              required:
+              - type
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - QuantityType
+                id:
+                  type: string
+                  format: uri
+                name:
+                  type: string
+                definition:
+                  type: string
+                  format: uri
+                uom:
+                  title: units of measure
+                  required:
+                  - code
+                  - type
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - UnitReference
+                    id:
+                      type: string
+                      format: uri
+                    code:
+                      type: string
+                  description: units of measure
+                constraint:
+                  title: Constraint
+                  required:
+                  - type
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                      - AllowedValues
+                    id:
+                      type: string
+                      format: uri
+                    interval:
+                      type: array
+                      items:
+                        oneOf:
+                        - type: number
+                        - type: string
+                        - type: boolean
+                  description: Constraint
+              description: quantiy
+          interpolationRestriction:
+            title: interpolationRestriction
+            required:
+            - type
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - InterpolationRestrictionType
+              id:
+                type: string
+                format: uri
+              allowedInterpolation:
+                type: array
+                items:
+                  type: string
+                  format: uri
+            description: Interpolation restriction
+      - required:
+        - fileReference
+        - type
+        properties:
+          type:
+            type: string
+            enum:
+            - RangeTypeRefType
+          id:
+            type: string
+            format: uri
+          fileReference:
+            type: string
+            format: uri
+    serviceMetadata:
+      title: serviceMetadata
+      required:
+      - coverageSubtype
+      - nativeFormat
+      type: object
+      properties:
+        nativeFormat:
+          type: string
+        coverageSubtype:
+          type: string
+        coverageSubtypeParent:
+          $ref: '#/components/schemas/coverageSubtypeParent'
+        limits:
+          type: string
+      description: Coverage specific service metadata like native format, coverate
+        type, etc.
+      example:
+        nativeFormat: image/tiff
+        coverageSubtype: RectifiedGridCoverage
+    coverageSubtypeParent:
+      title: coverageSubtypeParent
+      required:
+      - coverageSubtype
+      type: object
+      properties:
+        coverageSubtype:
+          type: string
+        coverageSubtypeParent:
+          $ref: '#/components/schemas/coverageSubtypeParent'
     coverageDescription:
       type: string
+      description: TODO
+      example: TODO
     coverageMetadata:
       type: string
+      description: TODO
+      example: TODO
     coverageMultipart:
       type: string
+      description: TODO
+      example: TODO
     rangeSetImage:
       type: string
+      description: TODO
+      example: TODO
   parameters:
     limit:
       name: limit
@@ -691,6 +1081,20 @@ components:
       explode: false
       schema:
         type: string
+    f:
+      name: f
+      in: query
+      description: |
+        The optional f parameter indicates the output format which the server shall provide as part of the response document. It has preference over the HTTP Accept header. The default format is JSON.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        default: json
+        enum:
+        - json
+        - html
     coverageid:
       name: coverageid
       in: path
