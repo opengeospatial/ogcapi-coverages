@@ -4,7 +4,7 @@ This extension allows sending a WCPS request to a server for server-side filteri
 
 To this end, the Processing Extension adds query parameters to the server offering:
 
-    Q={wcps-query}
+    q={wcps-query}
 
 where {wcps-query} is a syntactically and semantically correct WCPS query.
 
@@ -12,14 +12,95 @@ The output is a (possibly empty) list of coverages or scalars, depending on the 
 
 Example:
 
-    http://acme.com/oapi/collections?Q=for $c in (ERA5-cube) return max( $c.temperature )
+    http://acme.com/oapi/collections?q=for $c in (ERA5-cube) return max( $c.temperature )
 
 Note that the query parameter is operating on collection level as any number of coverages can be combined.
 
 Example:
 
-    http://acme.com/oapi/collections?Q=for $c in (ERA5-cube), $d in (DEM) return encode( $c.temperature > 20 and $d > 100, "image/png" )
+    http://acme.com/oapi/collections?q=for $c in (ERA5-cube), $d in (DEM) return encode( $c.temperature > 20 and $d > 100, "image/png" )
 
 Error conditions:
 
 *    The query must be syntactically and semantically correct.
+
+== OAPI Definition (draft)
+The following is a working OAPI file for the demonstration service available at http://54.93.148.198:8080/rasdaman. It executes the WCPS query `for $c in (S2_NDVI_84) return encode($c[Lat(51.9:52.1), Long(-4.1:-3.9), ansi("2018-11-14")], "jpeg" )` on the server and returns an image result:
+....
+{ 
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WCPS",
+    "description": "This is a sample WCPS server.",
+    "contact": {
+      "email": "baumann@rasdaman.com"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about WCPS",
+    "url": "http://doc.rasdaman.org/05_geo-services-guide.html#wcps"
+  },
+  "servers": [
+    {
+      "url": "http://54.93.148.198:8080/rasdaman/"
+    }
+  ],
+  "paths": {
+    "/collections": {
+      "get": {
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "WCPS query to be executed by the server",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "for $c in (S2_NDVI_84) return encode($c[Lat(51.9:52.1), Long(-4.1:-3.9), ansi(\"2018-11-14\")], \"jpeg\")"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "image/jpeg": {
+                "example": null
+              },
+              "application/json": {
+                "example": null
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": 42
+                }
+              },
+              "application/xml": {
+                "example": null
+              },
+              "application/netcdf": {
+                "example": null
+              },
+              "image/tiff": {
+                "example": null
+              },
+              "image/png": {
+                "example": null
+              },
+              "image/jpeg2000": {
+                "example": null
+              } 
+            } 
+          },  
+          "400": {
+            "description": "Invalid query",
+            "content": {}
+          }     
+        }     
+      }
+    }
+  }
+}
+....
