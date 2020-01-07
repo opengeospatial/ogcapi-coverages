@@ -25,7 +25,7 @@ Error conditions:
 *    The query must be syntactically and semantically correct.
 
 == OAPI Definition (draft)
-The following is a working OAPI file for the demonstration service available at http://54.93.148.198:8080/rasdaman. It executes the WCPS query `for $c in (S2_NDVI_84) return encode($c[Lat(51.9:52.1), Long(-4.1:-3.9), ansi("2018-11-14")], "jpeg" )` on the server and returns an image result. This can be tested by pasting the contents of the text box below into the ink:http://editor.swagger.io/[swagger editor].
+The following is a working OAPI file for the demonstration service available at http://54.93.148.198:8080/rasdaman. It executes the WCPS query `for $c in (S2_NDVI_84) return encode($c[Lat(51.9:52.1), Long(-4.1:-3.9), ansi("2018-11-14")], "jpeg" )` on the server and returns an image result. This can be tested by pasting the contents of the text box below into the link:http://editor.swagger.io/[swagger editor].
 ....
 { 
   "openapi": "3.0.1",
