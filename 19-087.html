@@ -1568,15 +1568,31 @@ properties:
 <div class="title">Landing Page Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
+  "title": "string",
+  "description": "string",
   "links": [
-    { "href": "http://data.example.org/",
-      "rel": "self", "type": "application/json", "title": "this document" },
-    { "href": "http://data.example.org/api",
-      "rel": "service-desc", "type": "application/openapi+json;version=3.0", "title": "the API definition" },
-    { "href": "http://data.example.org/conformance",
-      "rel": "conformance", "type": "application/json", "title": "OGC conformance classes implemented by this API" },
-    { "href": "http://data.example.org/collections",
-      "rel": "data", "type": "application/json", "title": "Metadata about the resource collections" }
+    {
+      "href": "http://data.example.org/",
+      "rel": "self",
+      "type": "application/json",
+      "title": "this document"
+    },
+    {
+      "href": "http://data.example.org/api",
+      "rel": "service-desc",
+      "type": "application/openapi+json;version=3.0",
+      "title": "the API definition"
+    },
+    {
+      "href": "http://data.example.org/conformance",
+      "rel": "conformance",
+      "type": "application/json",
+      "title": "OGC conformance classes implemented by this API"
+    },
+    {
+      "href": "http://data.example.org/collections",
+      "title": "Metadata about the resource collections"
+    }
   ]
 }</code></pre>
 </div>
@@ -2080,11 +2096,36 @@ properties:
 coverageOffering:
   title: Coverage Offering
   description: Description of the Coverage Offering
+  required:
+    - links
+    - name
+    - envelope
+    - rangetype
+    - servicemetadata
   type: object
   properties:
-    propertyName:
-      description: The propertyName description
-      type: string</code></pre>
+    name:
+      type: string
+      description: identifier of the collection used, for example, in URIs
+      example: dem
+    title:
+      type: string
+      description: human readable title of the collection
+      example: Digital Elevation Model
+    description:
+      type: string
+      description: a description of the data in the collection
+      example: Digital Elevation Model
+    links:
+      type: array
+      items:
+        $ref: '#/components/schemas/link'
+    envelope:
+      $ref: '#/components/schemas/envelope'
+    rangetype:
+      $ref: '#/components/schemas/rangetype'
+    servicemetadata:
+      $ref: '#/components/schemas/serviceMetadata'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2748,7 +2789,7 @@ rangeType:
         type: array
         items:
           title: quantity
-          description: quantiy
+          description: quantity
           type: object
           required:
           - type
@@ -3873,13 +3914,13 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The <code>subset</code> parameter SHALL only apply to resources which include a RangeSet.</p>
+<p>The <code>subset</code> parameter SHALL only apply to resources offered as coverages.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Only that portion of a RangeSet that falls within the bounds of the subset expression SHALL be returned.</p>
+<p>Only that part of the coverage addressed SHALL be returned that falls within the bounds of the subset expression. The DomainSet shall be adjusted accordingly to the new boundaries (in case of trimming) and the reduced dimension (in case of slicing).</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4959,7 +5000,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-03 13:54:42 UTC
+Last updated 2020-01-29 15:35:07 UTC
 </div>
 </div>
 </body>
