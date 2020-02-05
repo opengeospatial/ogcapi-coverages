@@ -17,7 +17,7 @@ The Requirements Classes for OGC API-Coverages are:
 
 The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of API-Coverages.
 
-The _Subset_ Requirements Class provides capabilities to select a sub-set of a `Coverage` using a "bounding box" which is suitable for any coordinate reference system.
+The _Subset_ Requirements Class provides capabilities to select a sub-set of a `Coverage` using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
 The _HTML_ and _JSON_ Requirements Classes address support for encodings commonly used with APIs.
 
