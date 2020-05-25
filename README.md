@@ -19,7 +19,8 @@ Additionally, [Coverages: describing properties that vary with location (and tim
 in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
 
 Please note that this Readme holds an informative introduction, the
-authoritative specification is contained in the folder `standard`.
+authoritative specification is contained in the folder `standard`. There is also
+a [nightly build](http://docs.opengeospatial.org/DRAFTS/19-087.html).
 
 ## Overview
 
