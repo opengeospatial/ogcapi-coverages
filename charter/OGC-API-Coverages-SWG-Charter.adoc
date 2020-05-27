@@ -1,5 +1,5 @@
 :authors: Stephan Meissl (EOX)
-:authors_email: a@a.com, b@b.com
+:authors_email: TBA
 :date: YYYY-MM-DD
 :title: OGC API - Coverages
 :swgname: OGC API - Coverages
