@@ -139,7 +139,12 @@ The targeted start date is in {target_start_date} once charter is approved. Form
 
 ==== Additional SWG Tasks
 
-To be completed as SWG takes on new tasks.
+Additional extensions will include:
+
+* OGC API - Coverages - Part n: Processing
+* OGC API - Coverages - Part n: CRS
+
+The part numbers will be determined later in 2020.
 
 === IPR Policy for this SWG
 
