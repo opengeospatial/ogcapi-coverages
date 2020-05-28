@@ -1,4 +1,4 @@
-:authors: Stephan Meissl (EOX)
+:authors: Stephan Meissl, Chuck Heazel
 :authors_email: TBA
 :date: YYYY-MM-DD
 :title: OGC API - Coverages
@@ -194,7 +194,7 @@ The following people support this proposal and are committed to the Charter and 
 |Stephan Meissl | EOX
 |Jerome Jacovella St Louis | Ecere
 |Tom Kralidis | Meteorological Service of Canada
-|FirstName1 LastName1 | OrganizationName1
+|Chuck Heazel | Heazel Tech
 |===
 
 
