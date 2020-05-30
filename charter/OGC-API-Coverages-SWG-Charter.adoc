@@ -57,7 +57,9 @@ The formal proposed name of the new multi-part standard is "{swgname}". The shor
 
 === Business Value Proposition
 
-TBA
+The Space Foundation documents in its https://promo.spacefoundation.org/tsr/quarterly-reports/TheSpaceReport19Q1.pdf[2019 first quarter Space Report] that of the 465 spacecraft deployed in 2018, 38% were deployed for Earth Observation or Remote Sensing missions, a majority of those spacecraft were deployed for commercial purposes. In a separate report http://www.euroconsult-ec.com/earthobservation[report] by a consulting firm specialising in space markets, the market for data and services derived from Earth observation (EO) satellites was forecasted to reach $8.5 billion by 2026.
+
+Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how communities can improve their management of natural resources. Other applications include for example competitor analysis in business and geospatial intelligence in defense and security. With the corpi of coverage data growing daily, there is an enduring need to look for ways to leverage recent advances in technology that can improve the ability of users to access coverages. OGC API - Coverages leverages some of those technological advances, in particular Web APIs.
 
 === Scope of Work
 
