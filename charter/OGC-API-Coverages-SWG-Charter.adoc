@@ -57,20 +57,19 @@ The formal proposed name of the new multi-part standard is "{swgname}". The shor
 
 === Business Value Proposition
 
-The Space Foundation documents in its https://promo.spacefoundation.org/tsr/quarterly-reports/TheSpaceReport19Q1.pdf[2019 first quarter Space Report] that of the 465 spacecraft deployed in 2018, 38% were deployed for Earth Observation or Remote Sensing missions, a majority of those spacecraft were deployed for commercial purposes. In a separate report http://www.euroconsult-ec.com/earthobservation[report] by a consulting firm specialising in space markets, the market for data and services derived from Earth observation (EO) satellites was forecasted to reach $8.5 billion by 2026.
+The quarterly Space Foundation https://promo.spacefoundation.org/tsr/quarterly-reports/TheSpaceReport19Q1.pdf[2019 first quarter Space Report] states that 38 percent of the 465 spacecraft deployed in 2018 were deployed for Earth Observation or Remote Sensing missions. A majority of those spacecraft were deployed for commercial purposes. In a separate report by a consulting firm specializing in space markets http://www.euroconsult-ec.com/earthobservation[report], the market for data and services derived from Earth observation (EO) satellites was forecasted to reach $8.5 billion by 2026.
 
-Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how communities can improve their management of natural resources. Other applications include for example competitor analysis in business and geospatial intelligence in defense and security. With the corpi of coverage data growing daily, there is an enduring need to look for ways to leverage recent advances in technology that can improve the ability of users to access coverages. OGC API - Coverages leverages some of those technological advances, in particular Web APIs.
+Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how communities can improve their management of natural resources. Other applications include, for example, competitor analysis in business and geospatial intelligence in defense and security. With the volume of coverage data growing daily, there is an significant need to find ways to leverage recent advances in technology that can improve the ability of users to discover and access coverages. The goal of the OGC API - Coverages standards work is to leverage some of those technological advances, in particular Web APIs.
 
 === Scope of Work
 
 OpenAPI frameworks have helped make describing and sharing API definitions more suitable for interoperability standardization. The concept of a {shortname} was demonstrated in various OGC Innovation Program initiatives.
 
-The {swgname} SWG will build on those preliminary efforts to more fully develop and document a {shortname} candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the
-Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
+The {swgname} SWG will build on those preliminary efforts to more fully develop and document a {shortname} candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
 
-The {swgname} SWG will develop a {shortname} candidate standard which is informed by emerging OGC API best practices and prior API standards examples (e.g., OGC API - Features) to define core API functions of GET, PUT, PATCH, POST, DELETE applied to {resources} as resources. The {shortname} will also document metadata requirements for {resources} to enhance discovery and exchange of {resources}.
+The {swgname} SWG will develop a {shortname} candidate standard which is informed by emerging OGC API best practices and prior API standards examples (e.g., OGC API - Features) to define core API functions for GET, PUT, PATCH, POST, and DELETE applied to {resources} as resources. The {shortname} will also document metadata requirements for {resources} to enhance discovery and exchange of {resources}.
 
-* Architecture: The {swgname} standard will specify an implementation specification aligned with prior work in OGC for {resources} and Web APIs. The proposed standard will define API building blocks for {resources} in Web API. {swgname} will be consistent with HTTP and HTTPS.
+* Architecture: The {swgname} standard will align with prior OGC work for {resources} and Web APIs. The proposed standard will define API building blocks for {resources} in Web API. The {swgname} will be consistent with HTTP and HTTPS.
 
 *	Encodings: The first version of the {shortname} will support JSON and HTML as encodings for descriptions of {resource} resources in the API. No encoding will be mandatory and other encodings may be used as well. The HTTP focus is designed to support the use of multiple formats and defines rules about how servers can return the encoding that the client can best handle (“content negotiation”).
 
@@ -85,14 +84,14 @@ Extensions may be proposed and addressed in revisions to this charter. The prima
 
 Before finalizing parts of the future versions of the "{swgname}", completion of goals should be verified:
 
-*	Working implementations of all capabilities must be available and tested; and
+*	Working implementations of all capabilities must be available and tested.
 *	Implementation feedback must be taken into account.
 
-A consequence of this verification is that the period between the availability of what is considered a mature draft and the finalization of the candidate standard may be longer than in the past, depending on the availability of evidence about the suitability of the candidate standard based on implementations. Developers should be encouraged as early as possible to implement the draft API specification and provide feedback. An aspect of this is public access to drafts from the beginning. To this end, the SWG intends to use a public GitHub repository in the development of this standard as this is the environment many developers are familiar with and use on a daily basis.
+A consequence of this verification is that the period between the availability of what is considered a mature draft and the finalization of the candidate standard may be longer than in the past. The timing is dependent on the availability of evidence about the suitability of the candidate standard based on implementations. Developers should be encouraged as early as possible to implement the draft API specification and provide feedback. An aspect of this is public access to drafts from the beginning. To this end, the SWG intends to use a public GitHub repository in the development of this standard as this is the environment many developers are familiar with and use on a daily basis.
 
 ==== Statement of relationship of planned work to the current OGC standards baseline
 
-This proposed standard is intended to be a major component of the OGC API framework. The proposed standard will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API – Features) and other ongoing API efforts (e.g. OGC API - Common development in OWS Common SWG) to better align with current and emerging IT practices.  The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
+This proposed standard is intended to be a major component of the OGC API framework. The proposed standard will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API – Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices.  The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
 
 ==== What is Out of Scope?
 
@@ -104,9 +103,9 @@ The basic resource described in {swgname} are {resources}. The {shortname} descr
 
 ==== Specific Contribution of Existing Work as a Starting Point
 
-The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognises the prior work done by the {base_swg}. Upon approval of this Charter, responsibility for {swgname} shall be transferred to the proposed {swgname} SWG.
+The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognizes the prior work done by the {base_swg}. Upon approval of this Charter, responsibility for {swgname} will be transferred to the proposed {swgname} SWG.
 
-The work shall also be informed by the following specifications and by recommendations found in:
+The work will also be informed by the following specifications and by recommendations found in:
 
 *	OGC/W3C Spatial Data Working Group on the Web Best Practices (https://www.w3.org/TR/sdw-bp/);
 *	OGC Geospatial API White Paper [OGC 16-019r4];
@@ -131,8 +130,8 @@ The SWG can be inactivated once the final multipart standard has been developed 
 
 The following deliverables will result from the work of this SWG:
 
-*	A final version of the "{swgname} - Part 1: Core" document for submission to the TC;
-*	Identification of at least three prototype implementations of the core based on the standard — although more would be preferred; and
+*	A final version of the "{swgname} - Part 1: Core" document for submission to the TC.
+*	Identification of at least three prototype implementations of the core based on the standard — although more would be preferred.
 *	Zero or more additional parts as time and community interest permits.
 
 Part 1 will cover basic capabilities to GET, PUT, PATCH, POST, and DELETE {resources} and define {resource} metadata. Capabilities for richer {resource} interfaces or extension for unique geospatial resource considerations will be specified in additional parts.
