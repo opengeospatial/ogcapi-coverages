@@ -197,6 +197,7 @@ The following people support this proposal and are committed to the Charter and 
 |Jerome Jacovella St Louis | Ecere
 |Tom Kralidis | Meteorological Service of Canada
 |Chuck Heazel | Heazel Tech
+|Chris Little | UK Met Office
 |===
 
 
