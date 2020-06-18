@@ -49,6 +49,7 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 The purpose of this Standards Working Group is to:
 
+•	Develop and maintain the WCS standards suite.
 •	Develop and maintain an {swgname} core standard.
 •	Develop and maintain extensions of the {swgname} standard as identified in section 4 (Scope).
 
@@ -88,6 +89,8 @@ Before finalizing parts of the future versions of the "{swgname}", completion of
 *	Implementation feedback must be taken into account.
 
 A consequence of this verification is that the period between the availability of what is considered a mature draft and the finalization of the candidate standard may be longer than in the past. The timing is dependent on the availability of evidence about the suitability of the candidate standard based on implementations. Developers should be encouraged as early as possible to implement the draft API specification and provide feedback. An aspect of this is public access to drafts from the beginning. To this end, the SWG intends to use a public GitHub repository in the development of this standard as this is the environment many developers are familiar with and use on a daily basis.
+
+In addition, this SWG continues work on the WCS.SWG Core and Extensions, including both maintenance and new specification development.
 
 ==== Statement of relationship of planned work to the current OGC standards baseline
 
