@@ -51,6 +51,11 @@ Please feel free to forward this announcement to any other appropriate lists. Th
 
 The purpose of this Standards Working Group is to:
 
+* Develop and maintain the Coverage data model suite, including Coverage encodings.
+* Develop and maintain the Coverage service model standards, including WCS and OAPI-Coverages, with their core and extension specifications.
+
+Alternate list:
+
 * Develop and maintain the OGC Web Coverage Service standards suite.
 * Develop and maintain additions and extensions to the WCS standards suite.
 * Develop and maintain the OGC API-Coverages standards suite
@@ -62,9 +67,21 @@ The purpose of this Standards Working Group is to:
 
 The quarterly Space Foundation https://promo.spacefoundation.org/tsr/quarterly-reports/TheSpaceReport19Q1.pdf[2019 first quarter Space Report] states that 38 percent of the 465 spacecraft deployed in 2018 were deployed for Earth Observation or Remote Sensing missions. A majority of those spacecraft were deployed for commercial purposes. In a separate report by a consulting firm specializing in space markets http://www.euroconsult-ec.com/earthobservation[report], the market for data and services derived from Earth observation (EO) satellites was forecasted to reach $8.5 billion by 2026.
 
-Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how communities can improve their management of natural resources. Other applications include, for example, competitor analysis in business and geospatial intelligence in defense and security. With the volume of coverage data growing daily, there is an significant need to find ways to leverage recent advances in technology that can improve the ability of users to discover and access coverages. The goal of the OGC API - Coverages standards work is to leverage some of those technological advances, in particular Web APIs.
+Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how communities can improve their management of natural resources. Other applications include, for example, competitor analysis in business and geospatial intelligence in defense and security. 
+
+In the European INSPIRE legal framework for a common Spatial Data Infrastructure coverages play a central role. In 9 of the 13 themes data appear modeled as coverages, such as Elevation, Land cover, Orthoimagery, Soil, Energy resources, Species distribution, Natural risk zones, and Geology. 
+
+With the volume of coverage data growing daily, there is an significant need to find ways to leverage recent advances in technology that can improve the ability of users to discover and access coverages. The goal of the OGC API - Coverages standards work is to leverage some of those technological advances, in particular Web APIs.
 
 === Scope of Work
+
+* Coverages, as defined in Abstract Topic 6 and Coverage Implementation Schema (CIS), have proven valuable as a unified, comprehensive representation of spatio-temporal grids, point clouds, and meshes. In particular, coverages serve to model "datacubes".
+* Web Coverage Service (WCS) with its easy to implement and use core and the manifold extensions has proven a powerful way to access, process, filter, analyse, and combine coverage data, being used on multi-Petabyte satellite image and atmospheric data, among others.
+* OAPI-Coverages is a service model base on OpenAPI frameworks. These have helped make describing and sharing API definitions more suitable for interoperability standardization. The concept of a {shortname} was demonstrated in various OGC Innovation Program initiatives.
+
+Regarding OAPI-Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document a {shortname} candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
+
+Alernate:
 
 The Web Coverage Service (WCS) is a suite of Web Service standards which have been successfull in delivering interopeable coverage resources to the Geospatial community. WCS has proven value and its's maintenance and extension will be continued under this SWG.
 
@@ -104,11 +121,11 @@ In addition, this SWG continues work on the WCS.SWG Core and Extensions, includi
 
 ==== Statement of relationship of planned work to the current OGC standards baseline
 
-This proposed standard is intended to be a major component of the OGC API framework. The proposed standard will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API – Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices.  The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
+The proposed API-Coverages standard is intended to be a major component of the OGC API framework. It will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API – Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices.  The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
 
 ==== What is Out of Scope?
 
-Standards are important for interoperability. At the same time, it is important that standards only state requirements that are important for a significantly large group of users. Proposals for new parts of {swgname} or change requests to existing parts must identify the user group that will benefit from the proposal and for each proposed conformance class; otherwise the proposal will be considered out-of-scope.
+Proposals for new parts of {swgname} or change requests to existing parts must identify the user group that will benefit from the proposal and for each proposed conformance class; otherwise the proposal will be considered out-of-scope.
 
 OGC-API - Coverages is envisioned to be a modular, multi-part standard. Extensions and profiles not identified as in scope in the previous section will require a revision to the SWG charter prior to commencement of work. If a community has a need to develop a profile, the profile should be specified and governed by that community.
 
@@ -116,7 +133,7 @@ The basic resource described in {swgname} are {resources}. The {shortname} descr
 
 ==== Specific Contribution of Existing Work as a Starting Point
 
-The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognizes the prior work done by the {base_swg}. Upon approval of this Charter, responsibility for {swgname} will be transferred to the proposed {swgname} SWG.
+The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognizes the prior work done by the {base_swg}. Upon approval of this Charter, responsibility for {swgname} will be continued by the proposed renamed {swgname} SWG.
 
 The work will also be informed by the following specifications and by recommendations found in:
 
@@ -135,7 +152,7 @@ Each of these documents recommends an emphasis on resource-oriented APIs in futu
 
 ==== When can SWG be inactivated?
 
-The SWG can be inactivated once the final multipart standard has been developed and change requests become minimal or not applicable for consideration. The SWG can be re-activated at any time.
+The SWG is a standing one, maintaining the suite through corrigenda, feature extensions, new features, etc. as requested by the membership. Any newly adopted coverage standard will be added to the portfolio of standards maintained.
 
 === Description of Deliverables
 
@@ -188,7 +205,7 @@ The {swgname} will explore and specify how API-Coverages shall support the follo
 
 === Domain Working Group Endorsement
 
-The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG charter. A statement of endorsement is anticipated at the  {dwg_review_meeting}.
+The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG charter. A statement of endorsement will be requested at the  {dwg_review_meeting}.
 
 === Other Informative Remarks about this SWG
 
@@ -222,8 +239,7 @@ The work of this SWG will be carried out primarily on GitHub and via email, conf
 [loweralpha, start=4]
 .	Supporters of the Proposal (Charter Members)
 
-The following people support this proposal and are committed to the Charter and projected meeting schedule. These members are known as SWG Founding or Charter members. The charter members agree to the SoW and IPR terms as defined in this charter. The charter members have voting rights beginning the day the SWG is officially formed. Charter Members are shown on the public SWG page.
-
+The following people support this proposal and are committed to the Charter and projected meeting schedule. These members are known as SWG Founding or Charter members. The charter members agree to the SoW and IPR terms as defined in this charter. The charter members have voting rights beginning the day the SWG is officially renamed. Charter Members are shown on the public SWG page.
 
 [cols=",",width="75%",options="header",align="center"]
 |===
@@ -233,6 +249,7 @@ The following people support this proposal and are committed to the Charter and 
 |Tom Kralidis | Meteorological Service of Canada
 |Chuck Heazel | Heazel Tech
 |Chris Little | UK Met Office
+|Peter Baumann | Jacobs University, rasdaman GmbH
 |===
 
 
