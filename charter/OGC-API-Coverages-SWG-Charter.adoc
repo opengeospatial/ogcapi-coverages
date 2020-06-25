@@ -76,9 +76,9 @@ With the volume of coverage data growing daily, there is an significant need to 
 
 Regarding OAPI-Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document a {shortname} candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
 
-Extensions may be proposed and addressed in revisions to this charter. 
+Additional tasks for the SWG may be proposed and addressed in revisions to this charter. The process to be used is described in OGC 05-020r27 Technical Committee Policies and Procedures. The SWG may begin work on the new task once TC approval has been received, the charter updated, and the charter has been posted.  
 
-NOTE: The following is from the TC P&P (05-020r27). Update text to align.
+NOTE: The following is from the TC P&P (05-020r27). The preceeding paragraph has been updated to reflect these requirements.  This can be deleted once there is concurrence on that text.
 
    "Any new work from a SWG after the primary deliverable must be approved by the TC as a new Task prior to start of that work. The new work can result in an update, extension, or profile of a standard.
    
