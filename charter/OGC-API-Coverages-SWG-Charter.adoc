@@ -29,7 +29,7 @@
 
 To: OGC members & interested parties
 
-The  is being rechartered Web Coverage Service (WCS) Standards Working Group (SWG). 
+Recharting the Web Coverage Service (WCS) Standards Working Group (SWG). 
 
 The OGC members listed below have proposed that the Web Coverage Service SWG be rechartered as the "{swgname} SWG". The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures. The SWG name, statement of purpose, scope, list of deliverables, audience, and language specified in the proposal will constitute the SWG’s official charter. Technical discussions may occur no sooner than the SWG’s first meeting.
 
