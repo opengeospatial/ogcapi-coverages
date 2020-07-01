@@ -14,7 +14,7 @@
 :target_end_date: December 2020
 :dwg_review: Coverages DWG
 :dwg_review_meeting: June 2020 Virtual OGC Members' meeting
-:conveners: FirstName LastName
+:conveners: Stephan Meissl, Chuck Heazel
 
 == {swgname}
 
