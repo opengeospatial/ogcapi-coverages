@@ -105,7 +105,7 @@ Proposals for new parts of {swgname} or change requests to existing parts must i
 
 OGC-API - Coverages is envisioned to be a modular, multi-part standard. Extensions and profiles not identified as in scope in the previous section will require a revision to the SWG charter prior to commencement of work. If a community has a need to develop a profile, the profile should be specified and governed by that community.
 
-The basic resource described in {swgname} are {resources}. The {shortname} describes the interface and exchange of {resources}. The construction of the main components of {resources} is addressed in {information_model_base} and multiple OGC and other {resource} encoding standards.
+The basic resource described in {swgname} are {resources}. The {shortname} describes the interface and exchange of {resources}. The definition of {resources} is given by the {information_model_base} standard and its encoding standards.
 
 ==== Specific Contribution of Existing Work as a Starting Point
 
