@@ -95,16 +95,18 @@ The basic resource described in {swgname} are {resources}. The {shortname} descr
 
 ==== Specific Contribution of Existing Work as a Starting Point
 
-The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognizes the prior work done by the {base_swg}. Upon approval of this Charter, responsibilities for OGC API - Coverages will be continued by the proposed renamed {swgname} SWG.
+The starting points for the initial deliverables are:
+
+* OGC API - Coverages GitHub repository ({githubrepo})
+* CoverageJSON GitHub repository (https://github.com/opengeospatial/CoverageJSON)
 
 The work will also be informed by the following specifications and by recommendations found in:
 
+* OGC API - Common
 * OGC/W3C Spatial Data Working Group on the Web Best Practices (https://www.w3.org/TR/sdw-bp/);
 * OGC Geospatial API White Paper [OGC 16-019r4];
 * OGC API - Features - Part 1: Core standard, [OGC 17-069r3]; and
 * {information_model_base}, [OGC {information_model_base_docnum}].
-
-Each of these documents recommends an emphasis on resource-oriented APIs in future OGC standards development including use of tools such as OpenAPI.
 
 ==== Is this a persistent SWG?
 
@@ -117,7 +119,7 @@ The {swgname} SWG is a standing one, maintaining the suite through corrigenda, f
 
 === Description of Deliverables
 
-==== Initial Deliverables
+==== Ongoing Tasks
 
 The following set of deliverables will be provided by this SWG:
 
@@ -129,7 +131,15 @@ Part 1 will cover basic capabilities to GET, PUT, PATCH, POST, and DELETE {resou
 
 Work on this deliverable has been proceeding under the WCS SWG. This work will transition to the {swgname} SWG once the charter is approved. Formal approval of the core OGC API - Coverages is envisaged to take place nearer {target_end_date}.
 
+The {swgname} SWG is developing Coverage encodings for:
+
+* CoverageJSON
+
 ==== Additional SWG Tasks
+
+The {swgname} SWG provides CIS and WCS maintenance:
+
+* Corrigenda and new functionality as proposed via Change Requests
 
 The {swgname} SWG work program also include development of extensions to the OGC API - Coverages Core Standards mirroring the WCS capabilities:
 
@@ -143,21 +153,20 @@ The {swgname} SWG work program also include development of extensions to the OGC
 
 The part numbers will be determined later including combining extensions in one part as conformance classes.
 
-The {swgname} SWG will develop Coverage encodings for:
-
-* CoverageJSON
-
 The {swgname} SWG will explore and specify how the OGC API - Coverages can support the following coverage format standards:
 
 * GeoTIFF
 * JPEG 2000
 * JPEG
 * HDF5
+* PNG
 * NetCDF
 * GMLJP2
 * JPIP
 * GRIB2
 * Any other coverage relevant encoding
+
+The {swgname} SWG will deliver updated standards in response to Change Requests.
 
 Additional tasks for the SWG may be proposed and addressed in revisions to this charter. The process to be used is described in OGC 05-020r27 Technical Committee Policies and Procedures. The SWG may begin work on the new task once TC approval has been received, the charter updated, and the charter has been posted.
 
