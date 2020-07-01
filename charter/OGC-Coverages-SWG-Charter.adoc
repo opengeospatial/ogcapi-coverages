@@ -103,7 +103,7 @@ The proposed API-Coverages standard is intended to be a major component of the O
 
 Proposals for new parts of {swgname} or change requests to existing parts must identify the user group that will benefit from the proposal and for each proposed conformance class; otherwise the proposal will be considered out-of-scope.
 
-{swgname} is envisioned to be a modular, multi-part standard. Extensions and profiles not identified as in scope in the previous section will require a revision to the SWG charter prior to commencement of work. If a community has a need to develop a profile, the profile should be specified and governed by that community.
+OGC-API - Coverages is envisioned to be a modular, multi-part standard. Extensions and profiles not identified as in scope in the previous section will require a revision to the SWG charter prior to commencement of work. If a community has a need to develop a profile, the profile should be specified and governed by that community.
 
 The basic resource described in {swgname} are {resources}. The {shortname} describes the interface and exchange of {resources}. The construction of the main components of {resources} is addressed in {information_model_base} and multiple OGC and other {resource} encoding standards.
 
@@ -142,11 +142,13 @@ The following set of deliverables will be provided by this SWG:
 
 Part 1 will cover basic capabilities to GET, PUT, PATCH, POST, and DELETE {resources} and define {resource} metadata. Capabilities for richer {resource} interfaces or extension for unique geospatial resource considerations will be specified in additional parts.
 
-The targeted start date is in {target_start_date} once charter is approved. Formal approval of the core {shortname} is envisaged to take place nearer {target_end_date}.
+Work on this deliverable has been proceeding under the WCS SWG. This work will transition to the {swgname} once the charter is approved. Formal approval of the core {shortname} is envisaged to take place nearer {target_end_date}.
 
 ==== Additional SWG Tasks
 
-Additional extensions will include:
+The {swgname} work program will also include development of extensions to the API-Coverages Core Standards including:
+
+NOTE: populate this list of extensions
 
 * OGC API - Coverages - Part n: Subsetting
 * OGC API - Coverages - Part n: Processing
@@ -172,10 +174,10 @@ The {swgname} will explore and specify how API-Coverages shall support the follo
 
 === Anticipated Participants
 
-* Geospatial resource providers.
+* {resource} resource providers.
 * Developers implementing services.
 * Producers of {resource} data.
-* Users of geospatial resources.
+* Users of {resource} resources.
 
 === Domain Working Group Endorsement
 
@@ -188,10 +190,19 @@ The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG c
 
 The following standards work may be applicable to the work of the proposed SWG:
 
-* 17-069, OGC API - Features
-* {information_model_base_docnum}, {information_model_base}
+* 19-072 OGC API - Common Part 1: Core
+* ISO 19123-1:(working draft) Coverage Fundamentals
+* ISO 19123-2:2018 Coverage implementation schema
+* OGC Web Coverage Service
+* OGC Web Coverage Processing Service
+* EO-GeoJSON
+* GML in JPEG2000
+* GeoTIFF
+* HDF5
+* LAS
+* NetCDF
 
-Additionally, the proposed SWG will monitor other OGC API work ongoing in various Standards and Innovation Program activities.
+Additionally, the proposed SWG will monitor other related work ongoing in various Standards and Innovation Program activities.
 
 [loweralpha, start=2]
 . Projected On-going Meeting Schedule
