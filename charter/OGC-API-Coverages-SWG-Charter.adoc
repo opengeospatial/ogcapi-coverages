@@ -223,6 +223,7 @@ The following people support this proposal and are committed to the Charter and 
 |Chuck Heazel | Heazel Tech
 |Chris Little | UK Met Office
 |Peter Baumann | Jacobs University, rasdaman GmbH
+|James Passmore | United Kingdom Research Institute (UKRI)
 |===
 
 
