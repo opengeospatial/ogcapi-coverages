@@ -13,7 +13,7 @@
 :target_start_date: July 2020
 :target_end_date: December 2020
 :dwg_review: Coverages DWG
-:dwg_review_meeting: June 2020 Virtual OGC Members' meeting
+:dwg_review_meeting: September 2020 OGC Members' meeting
 :conveners: Stephan Meissl, Chuck Heazel
 
 == {swgname}
@@ -51,8 +51,8 @@ The purpose of this Standards Working Group is to:
 
 * Develop and maintain the OGC Web Coverage Service standards suite.
 * Develop and maintain additions and extensions to the WCS standards suite.
-* Develop and maintain the OGC API-Coverages standards suite
-* Develop and maintain additions and extensions to the OGC API-Coverages standards suite.
+* Develop and maintain the OGC API - Coverages standards suite
+* Develop and maintain additions and extensions to the OGC API - Coverages standards suite.
 * Develop and maintain standards for metadata exposed through Web Coverage Services or APIs.
 * Develop and maintain the Coverage data model suite, including Coverage encodings.
 
@@ -70,9 +70,9 @@ With the volume of coverage data growing daily, there is an significant need to 
 
 * Coverages, as defined in Abstract Topic 6 and Coverage Implementation Schema (CIS), have proven valuable as a unified, comprehensive representation of spatio-temporal grids, point clouds, and meshes. In particular, coverages serve to model "datacubes".
 * Web Coverage Service (WCS) with its easy to implement and use core and the manifold extensions has proven a powerful way to access, process, filter, analyse, and combine coverage data, being used on multi-Petabyte satellite image and atmospheric data, among others.
-* OAPI-Coverages is a service model base on OpenAPI frameworks. These have helped make describing and sharing API definitions more suitable for interoperability standardization. The concept of a {shortname} was demonstrated in various OGC Innovation Program initiatives.
+* OGC API - Coverages is a service model base on OpenAPI frameworks. These have helped make describing and sharing API definitions more suitable for interoperability standardization. The concept of a OGC API - Coverages was demonstrated in various OGC Innovation Program initiatives.
 
-Regarding OAPI-Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document a {shortname} candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
+Regarding OGC API - Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document an OGC API - Coverages candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
 
 Additional tasks for the SWG may be proposed and addressed in revisions to this charter. The process to be used is described in OGC 05-020r27 Technical Committee Policies and Procedures. The SWG may begin work on the new task once TC approval has been received, the charter updated, and the charter has been posted.
 
@@ -97,26 +97,26 @@ A consequence of this verification is that the period between the availability o
 
 ==== Statement of relationship of planned work to the current OGC standards baseline
 
-The proposed API-Coverages standard is intended to be a major component of the OGC API framework. It will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API – Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices.  The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
+The proposed OGC API - Coverages standard is intended to be a major component of the OGC API framework. It will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API - Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices. The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
 
 ==== What is Out of Scope?
 
 Proposals for new parts of {swgname} or change requests to existing parts must identify the user group that will benefit from the proposal and for each proposed conformance class; otherwise the proposal will be considered out-of-scope.
 
-OGC-API - Coverages is envisioned to be a modular, multi-part standard. Extensions and profiles not identified as in scope in the previous section will require a revision to the SWG charter prior to commencement of work. If a community has a need to develop a profile, the profile should be specified and governed by that community.
+OGC API - Coverages is envisioned to be a modular, multi-part standard. Extensions and profiles not identified as in scope in the previous section will require a revision to the SWG charter prior to commencement of work. If a community has a need to develop a profile, the profile should be specified and governed by that community.
 
-The basic resource described in {swgname} are {resources}. The {shortname} describes the interface and exchange of {resources}. The construction of the main components of {resources} is addressed in {information_model_base} and multiple OGC and other {resource} encoding standards.
+The basic resource described in {swgname} are {resources}. The {shortname} describes the interface and exchange of {resources}. The definition of {resources} is given by the {information_model_base} standard and its encoding standards.
 
 ==== Specific Contribution of Existing Work as a Starting Point
 
-The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognizes the prior work done by the {base_swg}. Upon approval of this Charter, responsibilities for OAPI-coverages will be continued by the proposed renamed {swgname} SWG.
+The starting point for the work will be the draft document that is currently on the proposed SWG's repository ({githubrepo}). This charter recognizes the prior work done by the {base_swg}. Upon approval of this Charter, responsibilities for OGC API - Coverages will be continued by the proposed renamed {swgname} SWG.
 
 The work will also be informed by the following specifications and by recommendations found in:
 
 * OGC/W3C Spatial Data Working Group on the Web Best Practices (https://www.w3.org/TR/sdw-bp/);
 * OGC Geospatial API White Paper [OGC 16-019r4];
 * OGC API - Features - Part 1: Core standard, [OGC 17-069r3]; and
-* {information_model_base},	[OGC {information_model_base_docnum}].
+* {information_model_base}, [OGC {information_model_base_docnum}].
 
 Each of these documents recommends an emphasis on resource-oriented APIs in future OGC standards development including use of tools such as OpenAPI.
 
@@ -136,17 +136,17 @@ The {swgname} SWG is a standing one, maintaining the suite through corrigenda, f
 
 The following set of deliverables will be provided by this SWG:
 
-* A final version of the "OGC API-Coverages - Part 1: Core" document for submission to the TC.
-* Identification of at least three prototype implementations of the core based on the standard — although more would be preferred.
+* A final version of the "OGC API - Coverages - Part 1: Core" document for submission to the TC.
+* Identification of at least three prototype implementations of the core based on the standard - although more would be preferred.
 * Zero or more additional parts as time and community interest permits.
 
 Part 1 will cover basic capabilities to GET, PUT, PATCH, POST, and DELETE {resources} and define {resource} metadata. Capabilities for richer {resource} interfaces or extension for unique geospatial resource considerations will be specified in additional parts.
 
-Work on this deliverable has been proceeding under the WCS SWG. This work will transition to the {swgname} once the charter is approved. Formal approval of the core {shortname} is envisaged to take place nearer {target_end_date}.
+Work on this deliverable has been proceeding under the WCS SWG. This work will transition to the {swgname} SWG once the charter is approved. Formal approval of the core OGC API - Coverages is envisaged to take place nearer {target_end_date}.
 
 ==== Additional SWG Tasks
 
-The {swgname} work program will also include development of extensions to the API-Coverages Core Standards including:
+The {swgname} SWG work program will also include development of extensions to the OGC API - Coverages Core Standards including:
 
 NOTE: populate this list of extensions
 
@@ -160,7 +160,7 @@ The {swgname} SWG will develop Coverage encodings for:
 
 * CoverageJSON
 
-The {swgname} will explore and specify how API-Coverages shall support the following coverage format standards:
+The {swgname} SWG will explore and specify how the OGC API - Coverages shall support the following coverage format standards:
 
 * GeoTIFF
 * JPEG 2000
@@ -181,7 +181,7 @@ The {swgname} will explore and specify how API-Coverages shall support the follo
 
 === Domain Working Group Endorsement
 
-The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG charter. A statement of endorsement will be requested at the  {dwg_review_meeting}.
+The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG charter. A statement of endorsement will be requested at the {dwg_review_meeting}.
 
 === Other Informative Remarks about this SWG
 
@@ -190,7 +190,7 @@ The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG c
 
 The following standards work may be applicable to the work of the proposed SWG:
 
-* 19-072 OGC API - Common Part 1: Core
+* 19-072 OGC API - Common - Part 1: Core
 * ISO 19123-1:(working draft) Coverage Fundamentals
 * ISO 19123-2:2018 Coverage implementation schema
 * OGC Web Coverage Service
@@ -207,7 +207,7 @@ Additionally, the proposed SWG will monitor other related work ongoing in variou
 [loweralpha, start=2]
 . Projected On-going Meeting Schedule
 
-The work of this SWG will be carried out primarily on GitHub and via email, conference calls, with potential face-to-face meetings at OGC TC meetings as agreed to by the SWG members. The teleconference calls will be scheduled as needed and posted to the OGC portal. Voting on {shortname} content will be limited to SWG members only.
+The work of this SWG will be carried out primarily on GitHub and via email, conference calls, with potential face-to-face meetings at OGC TC meetings as agreed to by the SWG members. The teleconference calls will be scheduled as needed and posted to the OGC portal. Voting on {shortname} SWG content will be limited to SWG members only.
 
 [loweralpha, start=3]
 . Supporters of the Proposal (Charter Members)
