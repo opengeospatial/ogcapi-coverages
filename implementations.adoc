@@ -9,7 +9,7 @@
 |Implementation | Type | Contact
 
 | TBA
-| OGC API - Maps
+| OGC API - Coverages
 | TBA
 
 | TBA
