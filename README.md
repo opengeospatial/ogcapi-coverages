@@ -88,6 +88,15 @@ coverage's Native Format.
 
 TODO: Link to published standard, OpenAPI definition, implementations, etc.
 
+Those who want to just see the endpoints and responses can explore generic
+OpenAPI definitions in this folder (please paste one of them in the Swagger Editor):
+
+* [ogc_api_coverages/standard/openapi](https://github.com/opengeospatial/ogc_api_coverages/tree/master/standard/openapi)
+
+Implementations of the draft standard are listed at the link below:
+
+[Implementations of the draft specification / demo services](https://github.com/opengeospatial/ogc_api_coverages/blob/master/implementations.adoc)
+
 ## Communication
 
 TODO: links to mailing lists, issues, etc.
