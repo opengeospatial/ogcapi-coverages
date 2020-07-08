@@ -14,7 +14,6 @@ As a result, this API-Coverages standard does not provide a full duplication of 
 === Content Scope
 The API-Coverages standard provides access to content which complies with the Coverage Implementation Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]). However, there are limitations:
 
-* Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SolidCoverages. Reason is that gridded coverages receive most attention today.
+* Only gridded or multi-point coverages are addressed, not Curve/Surface/SolidCoverages. The reason is that these are common use cases that receive the most attention today. Gridded coverages or 'point-cloud' multi-point coverages are the primary data types considered but other kinds of datasets are not excluded.
 * Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
 * Coverage Partitioning is not supported. The `Coverage-Partitioning` Requirements Class will be added in a future version.
-
