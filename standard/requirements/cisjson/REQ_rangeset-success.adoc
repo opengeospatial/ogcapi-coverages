@@ -1,0 +1,8 @@
+[[req_cisjson_rangeset-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/cisjson/rangeset-success*
+^|**Restricts** |/req/core/rangeset-success
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The response SHALL be a CIS JSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangeset.json[coverage_rangeset.json].
+|===

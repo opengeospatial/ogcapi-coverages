@@ -22,7 +22,8 @@
     },
     {
       "href": "http://data.example.org/collections",
-      "title": "Metadata about the resource collections"
+      "title": "The list of available collections",
+      "rel": "data"
     }
   ]
 }

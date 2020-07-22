@@ -1,0 +1,6 @@
+[[rec_geodata_coverage_png]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/png*
+^|A |If the resource can be represented for the intended use in (raw data values) PNG, implementations SHOULD consider to support PNG as an encoding.
+|===

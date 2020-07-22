@@ -1,0 +1,6 @@
+[[rec_geodata_coverage_cisrdf]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/cisrdf*
+^|A |If the resource can be represented for the intended use in CIS RDF, implementations SHOULD consider to support CIS RDF as an encoding.
+|===

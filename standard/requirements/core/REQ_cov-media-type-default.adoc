@@ -1,9 +1,0 @@
-[[req_core_cov-mediatype-default]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/cov-mediatype-default*
-^|A |The default media type for Range Set data SHALL be GeoTIFF.
-^|B |IF the `JSON` Conformance Class is advertised, then the default media type for content other than a Range Set SHALL be JSON or GeoJSON.
-^|C |IF the `JSON` Conformance Class is not advertised, then the default media type for content other than a Range Set SHALL be HTML. 
-^|D |The default media type for responses to `all` requests SHALL be multi-part using the appropriate media type for each component resource.
-|===
