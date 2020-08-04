@@ -1,9 +1,0 @@
-[[req_json_cov-desc-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/json/cov-desc-success*
-^|**Restricts** |/req/core/cov-desc-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The response SHALL be a JSON or GeoJSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_description.json[coverage_description.json].
-|===
-

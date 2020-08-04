@@ -3,7 +3,7 @@
 
 This standard does not mandate any particular encoding or format. However, it does provide extensions for encodings which are commonly used in OGC APIs. These extensions include:
 
-* <<requirements-class-json-clause,JSON>>
+* <<requirements-class-cisjson-clause,CIS JSON>>
 * <<requirements-class-html-clause,HTML>>
 
 Neither of these encodings are mandatory. An implementor of this standard may choose to implement neither of them, selecting different encodings instead.
@@ -13,54 +13,66 @@ In addition to the Requirements Classes, there are additional coverage formats w
 === HTML Encoding
 Support for HTML is recommended. HTML is the core language of the World Wide Web. An API that supports HTML will support browsing the spatial resources with a web browser and will also enable search engines to crawl and index those resources.
 
-=== JSON Encoding
-Support for JSON is recommended. JSON is a commonly used format that is simple to understand and well supported by tools and software libraries.
+=== CIS JSON Encoding
+Support for CIS JSON is recommended. JSON is a commonly used format that is simple to understand and well supported by tools and software libraries.
 
 JSON structures documented in this standard are defined using JSON Schema. These schema are available in JSON and YAML formats from http://schemas.opengis.net/tbd[http://schemas.opengis.net/tbd]
 
-==== GeoJSON
-"GeoJSON is a geospatial data interchange format based on JavaScript Object Notation (JSON). It defines several types of JSON objects and the manner in which they are combined to represent data about geographic features, their properties, and their spatial extents. GeoJSON uses a geographic coordinate reference system, World Geodetic System 1984, and units of decimal degrees." <<GeoJSON,IETF RFC 7946>>
+When coverage resources (the coverage as a whole, range set, domain set, range type, meta data) advertise the `application/json` media type, it refers to the CIS JSON encoding.
 
-GeoJSON provides a simple way of represening OGC Featues in JSON. Due to its simplicity, however, it is not suitable for all feature data. It is best used for content which has a spatial extent that can be used with the World Geodetic System 1984 Coordinate Reference System.
+This API-Coverages standard is built around the <<CIS_1_1,OGC Coverage Implementation Schema (CIS)>>.
+CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space.
+These "Engineering" coordinate reference systems cannot be represented using WGS-84.
 
-==== CIS JSON
-This API-Coverages standard is built around the <<CIS_1_1,OGC Coverage Implementation Schema (CIS)>>. CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space. These "Engineering" coordinate reference systems cannot be represented using WGS-84. Therefore, an alternative to GeoJSON is needed.
+The <<CIS_JSON_Schema,OGC JSON Schema for CIS>> standard addresses that need by defining a JSON schema for the CIS standard.
+This format should be used when the `application/json` media type is specified to encode all of the `{datasetAPI}/collections/{coverageid}/coverage*` resources.
+A CIS JSON representation of the range type and domain set for the coverage is also required to be either embedded in properties or linked from the /collections/{collectionId} resource.
 
-The <<CIS_JSON_Schema,OGC JSON Schema for CIS>> standard addresses that need by defining a JSON schema for the CIS standard. This format should be used for all JSON encodings from the `{root}/collections/{coverageid}/coverage/*` paths.
+Other encodings such as CoverageJSON must use an alternate media type.
 
 === Binary
-A coverage does not need to be delivered in JSON or HTML in its entirety. Multipart encoding is also defined in OGC CIS. This allows the result to have a "canonical" header while components can be factored out and represented in some (more efficient) binary format. Any suitable container format (such as zip, miltipart/mime, SAFE, etc.) can "bundle" these components into one coverage file ready for shipping.
+A coverage can also be distributed in binary form, for which a number of formats are commonly used:
 
-Commonly used formats for binary encoding are:
+* CIS RDF
+* NetCDF
 * GeoTIFF
+* PNG
 * JPEG
 * JPEG-2000
-* NetCDF
+
+OGC CIS also defines multipart encoding of the different components of a coverage.
+This allows the result to have a "canonical" header while components can be factored out and represented in some (more efficient) binary format.
+Any suitable container format (such as zip, multipart/mime, SAFE, etc.) can "bundle" these components into one coverage file ready for shipping.
+
+With OGC API - Coverages, given that the description of the coverage is easily available at the /collections/{collectionId} resource, with the
+range type and domain set either embedded or linked from that resource, an implementation may prefer to keep single-part binary formats encoding
+all components to the best it can, as they might be more directly interoperable.
 
 === Media Types
-A description of the MIME-types is mandatory for any OGC standard which involves data encodings. The list of suitable MIME-types for the API-Coverages standard in provided in <<api-coverage-mime-types>>.
+A description of the media types is mandatory for any OGC standard which involves data encodings. The list of suitable media types for the API-Coverages standard in provided in <<api-coverage-media-types>>.
 
-Coverages can be encoded in any suitable data format, including formats as GML, JSON, GeoTIFF, and NetCDF. Further, coverages can be represented by a single document (stream or file) or by a hierarchically organized set of documents, each of which can be encoded individually – for example, the domain set, range type, and metadata may be encoded in easily parseable GML, JSON, or RDF while the range set is encoded in some compact binary format like NetCDF or JPEG2000. Such partitioning allows for coverages tiled in space, time, or mixed, thereby enabling mosaics, time-interleaved coverages, and efficiently subsettable datacubes.
+Coverages can be encoded in any suitable data format, including formats as GML, CIS JSON, GeoTIFF, and NetCDF. Further, coverages can be represented by a single document (stream or file) or by a hierarchically organized set of documents, each of which can be encoded individually – for example, the domain set, range type, and metadata may be encoded in easily parseable GML, CIS JSON, or RDF while the range set is encoded in some compact binary format like NetCDF or JPEG2000. Such partitioning allows for coverages tiled in space, time, or mixed, thereby enabling mosaics, time-interleaved coverages, and efficiently subsettable datacubes.
 
-[#api-coverage-mime-types,reftext='{table-caption} {counter:table-num}']
-.API-Coverages MIME Types
+[#api-coverage-media-types,reftext='{table-caption} {counter:table-num}']
+.API-Coverages media Types
 [width="90%",cols="2,4"]
 |====
-^|*Encoding* ^|*MIME Type*
+^|*Encoding* ^|*media type*
 |HTML |text/html
-|JSON |application/json
-|GeoJSON |application/geo+json
+|JSON / CIS JSON|application/json
+|CIS RDF| TODO:
+|CoverageJSON| TODO:
 |GeoTIFF |image/tiff; application=geotiff
+|PNG |image/png
 |JPEG |image/jpeg
 |JPEG-2000|image/jp2
 |NetCDF |application/x-netcdf
 |====
 
-NOTE: Consider adding a table showing valid MIME-types for each CIS component.
+NOTE: Consider adding a table showing valid media types for each CIS component.
 
 [[media-type-defaults]]
 === Default Encodings
 
-The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common. However, content negotiation is not required by the HTTP standard. So default encodings must be established.
-
-include::requirements/core/REQ_cov-media-type-default.adoc[]
+The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common.
+If not using content negotiation, the encoding must follow the media type described in the link to the resource from the collection.

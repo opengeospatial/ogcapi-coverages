@@ -1,9 +1,0 @@
-[[req_core_cov-ds-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/cov-ds-success*
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL provide the `Domain Set` definition of the coverage as defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_domainset.json[coverage_domainset.json].
-^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
-^|D |If no format is negotiated, then the response SHALL be encoded using the default format as described in <<media-types-section,Media Types>>.
-|===

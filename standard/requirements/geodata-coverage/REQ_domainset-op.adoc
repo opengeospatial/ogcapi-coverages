@@ -1,0 +1,8 @@
+[[req_geodata_coverage_domainset-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/domainset-op*
+^|A |If the API does not include a "DomainSet" property within the coverage (collection) resource, it The API SHALL support the HTTP GET operation at the path `/collections/{coverageid}/coverage/domainset`.
+
+* `coverageid` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
+|===
