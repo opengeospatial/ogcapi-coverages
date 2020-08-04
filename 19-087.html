@@ -462,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date: &lt;yyyy-mm-dd&gt;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date: 2019-12-31</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date: 2020-08-03</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0" class="bare">http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0</a></p></td>
@@ -471,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document: 19-087</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.0.5</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.0.6</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation Specification</p></td>
@@ -602,10 +602,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#dependencies-overview">6.4. Dependencies</a></li>
 </ul>
 </li>
-<li><a href="#_requirements_class_core">7. Requirements Class "Core"</a>
+<li><a href="#_requirements_class_geodata_coverage">7. Requirements Class "GeoData-Coverage"</a>
 <ul class="sectlevel2">
-<li><a href="#core-overview">7.1. Overview</a></li>
-<li><a href="#core-dependencies-section">7.2. Dependencies</a></li>
+<li><a href="#geodata-coverage-overview">7.1. Overview</a></li>
+<li><a href="#geodata-coverage-dependencies-section">7.2. Dependencies</a></li>
 <li><a href="#api-platform-section">7.3. Platform</a>
 <ul class="sectlevel3">
 <li><a href="#landing-page">7.3.1. API landing page</a></li>
@@ -621,22 +621,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#coverage-access-section">7.5. Coverage Access</a>
 <ul class="sectlevel3">
-<li><a href="#coverage-clause">7.5.1. Coverage Offering</a></li>
-<li><a href="#coverage-description-clause">7.5.2. Coverage Description</a></li>
-<li><a href="#coverage-domainset-clause">7.5.3. Coverage Domain Set</a></li>
-<li><a href="#coverage-rangetype-clause">7.5.4. Coverage Range Type</a></li>
-<li><a href="#coverage-rangeset-clause">7.5.5. Coverage Range Set</a></li>
-<li><a href="#coverage-metadata-clause">7.5.6. Coverage Metadata</a></li>
-<li><a href="#coverage-all-clause">7.5.7. Coverage All</a></li>
+<li><a href="#coverage-clause">7.5.1. Coverage</a></li>
 </ul>
 </li>
 <li><a href="#parameters-section">7.6. Parameters</a>
 <ul class="sectlevel3">
-<li><a href="#_parameter_bbox">7.6.1. Parameter bbox</a></li>
-<li><a href="#_parameter_datetime">7.6.2. Parameter datetime</a></li>
-<li><a href="#_parameter_limit">7.6.3. Parameter Limit</a></li>
-<li><a href="#_combinations_of_filter_parameters">7.6.4. Combinations of Filter Parameters</a></li>
-<li><a href="#_paged_response">7.6.5. Paged Response</a></li>
+<li><a href="#coverage-domainset-clause">7.6.1. Coverage Domain Set</a></li>
+<li><a href="#coverage-rangetype-clause">7.6.2. Coverage Range Type</a></li>
+<li><a href="#coverage-rangeset-clause">7.6.3. Coverage Range Set</a></li>
+<li><a href="#coverage-metadata-clause">7.6.4. Coverage Metadata</a></li>
+<li><a href="#_parameter_bbox">7.6.5. Parameter bbox</a></li>
+<li><a href="#_parameter_datetime">7.6.6. Parameter datetime</a></li>
+<li><a href="#_parameter_limit">7.6.7. Parameter Limit</a></li>
+<li><a href="#_combinations_of_filter_parameters">7.6.8. Combinations of Filter Parameters</a></li>
+<li><a href="#_paged_response">7.6.9. Paged Response</a></li>
 </ul>
 </li>
 <li><a href="#general-section">7.7. General</a>
@@ -650,18 +648,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#media-types-section">8. Media Types</a>
 <ul class="sectlevel2">
 <li><a href="#_html_encoding">8.1. HTML Encoding</a></li>
-<li><a href="#_json_encoding">8.2. JSON Encoding</a>
-<ul class="sectlevel3">
-<li><a href="#_geojson">8.2.1. GeoJSON</a></li>
-<li><a href="#_cis_json">8.2.2. CIS JSON</a></li>
-</ul>
-</li>
+<li><a href="#_cis_json_encoding">8.2. CIS JSON Encoding</a></li>
 <li><a href="#_binary">8.3. Binary</a></li>
 <li><a href="#_media_types">8.4. Media Types</a></li>
 <li><a href="#media-type-defaults">8.5. Default Encodings</a></li>
 </ul>
 </li>
-<li><a href="#_requirements_class_subset">9. Requirements Class Subset</a>
+<li><a href="#_requirements_class_coverage_subset">9. Requirements Class Coverage Subset</a>
 <ul class="sectlevel2">
 <li><a href="#_subsetting_examples">9.1. Subsetting Examples</a></li>
 </ul>
@@ -669,25 +662,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#requirements-class-html-clause">10. Requirements Class HTML</a>
 <ul class="sectlevel2">
 <li><a href="#_common">10.1. Common</a></li>
-<li><a href="#_coverage_offering">10.2. Coverage Offering</a></li>
-<li><a href="#_coverage_description">10.3. Coverage Description</a></li>
-<li><a href="#_coverage_domain_set">10.4. Coverage Domain Set</a></li>
-<li><a href="#_coverage_range_type">10.5. Coverage Range Type</a></li>
-<li><a href="#_coverage_range_set">10.6. Coverage Range Set</a></li>
-<li><a href="#_coverage_metadata">10.7. Coverage Metadata</a></li>
-<li><a href="#_coverage_all">10.8. Coverage All</a></li>
+<li><a href="#_coverage_2">10.2. Coverage</a></li>
+<li><a href="#_coverage_domain_set">10.3. Coverage Domain Set</a></li>
+<li><a href="#_coverage_range_type">10.4. Coverage Range Type</a></li>
+<li><a href="#_coverage_range_set">10.5. Coverage Range Set</a></li>
+<li><a href="#_coverage_metadata">10.6. Coverage Metadata</a></li>
 </ul>
 </li>
-<li><a href="#requirements-class-json-clause">11. Requirements Class JSON</a>
+<li><a href="#requirements-class-cisjson-clause">11. Requirements Class CIS JSON</a>
 <ul class="sectlevel2">
 <li><a href="#_common_2">11.1. Common</a></li>
-<li><a href="#_coverage_offering_2">11.2. Coverage Offering</a></li>
-<li><a href="#_coverage_description_2">11.3. Coverage Description</a></li>
-<li><a href="#_coverage_domain_set_2">11.4. Coverage Domain Set</a></li>
-<li><a href="#_coverage_range_type_2">11.5. Coverage Range Type</a></li>
-<li><a href="#_coverage_range_set_2">11.6. Coverage Range Set</a></li>
-<li><a href="#_coverage_metadata_2">11.7. Coverage Metadata</a></li>
-<li><a href="#_coverage_all_2">11.8. Coverage All</a></li>
+<li><a href="#_coverage_3">11.2. Coverage</a></li>
+<li><a href="#_coverage_domain_set_2">11.3. Coverage Domain Set</a></li>
+<li><a href="#_coverage_range_type_2">11.4. Coverage Range Type</a></li>
+<li><a href="#_coverage_range_set_2">11.5. Coverage Range Set</a></li>
+<li><a href="#_coverage_metadata_2">11.6. Coverage Metadata</a></li>
 </ul>
 </li>
 <li><a href="#requirements-class-openapi_3_0-clause">12. Requirements class "OpenAPI 3.0"</a></li>
@@ -815,7 +804,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="ulist">
 <ul>
 <li>
-<p>Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SolidCoverages. Reason is that gridded coverages receive most attention today.</p>
+<p>Only gridded or multi-point coverages are addressed, not Curve/Surface/SolidCoverages. The reason is that these are common use cases that receive the most attention today. Gridded coverages or 'point-cloud' multi-point coverages are the primary data types considered but other kinds of datasets are not excluded.</p>
 </li>
 <li>
 <p>Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.</p>
@@ -869,7 +858,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <p>The <em>Core</em> Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of API-Coverages.</p>
 </div>
 <div class="paragraph">
-<p>The <em>Subset</em> Requirements Class provides capabilities to select a sub-set of a <code>Coverage</code> using a "bounding box" which is suitable for any coordinate reference system.</p>
+<p>The <em>Subset</em> Requirements Class provides capabilities to select a sub-set of a <code>Coverage</code> using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.</p>
 </div>
 <div class="paragraph">
 <p>The <em>HTML</em> and <em>JSON</em> Requirements Classes address support for encodings commonly used with APIs.</p>
@@ -1198,7 +1187,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Provide access to <code>Coverages</code> conformant to the <a href="#coverage-implementation-schema-overview">OGC CIS standard</a>.</p>
+<p>Provide access to <strong><em>Coverages</em></strong> conformant to the <a href="#coverage-implementation-schema-overview">OGC CIS standard</a>.</p>
 </li>
 <li>
 <p>Provide functionality comparable to that of the <a href="#web-coverage-service-overview">OGC WCS standard</a>.</p>
@@ -1211,7 +1200,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="ulist">
 <ul>
 <li>
-<p>Service Offering: The service endpoint (subsequently referred to as Base URI or {root})</p>
+<p>Dataset distribution API: The endpoint corresponding to a dataset distribution, where the landing page resource as defined in OGC API - Common - Part 1: Core is available (subsequently referred to as Base URI or <code>{datasetAPI}</code>)</p>
 </li>
 <li>
 <p>Access Paths: Unique paths to Resources</p>
@@ -1246,69 +1235,69 @@ Attention is drawn to the possibility that some of the elements of this document
 <td class="tableblock halign-center valign-top" colspan="3" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Common</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#landing-page">{root}/</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Landing page</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#landing-page">{datasetAPI}/</a></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:common:dataset</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Landing page for this dataset distribution</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{root}/api</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>service-desc</code><br>
-or<br>
-<code>service-doc</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API Description (optional)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{datasetAPI}/api</a>
+(not a fixed path)</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>service-desc</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API description (e.g. OpenAPI)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#conformance-classes">{root}/conformance</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{datasetAPI}/api</a>
+(not a fixed path)</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>service-doc</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API documentation (optional, e.g. HTML)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#conformance-classes">{datasetAPI}/conformance</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>conformance</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Conformance Classes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collections">{root}/collections</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collections">{datasetAPI}/collections</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>data</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Metadata describing the spatial collections (coverages) available from this API.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The list off all collections available, some or all of which may be accessible using this Coverage API. Each of these collection objects take the same form as that of the collection resource object described immediately below.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collectionInfo">{root}/collections/{coverageid}</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Metadata describing the coverge which has the unique identifier <code>{coverageid}</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collectionInfo">{datasetAPI}/collections/{coverageId}</a></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:common:collection</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">resource corresponding to the collection with the unique identifier <code>{coverageId}</code>, which may be accessible as a coverage.
+The resource will describe key elements such as an <code>id</code>, <code>title</code>, <code>description</code>, available <code>crs</code> and <code>extent</code> (the coverage envelope) as well as
+links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set.
+It is comparable to a WCS <strong><em>DescribeCoverage</em></strong> response, with the exception that the range type and domain set may have to be retrieved separately by following a link
+to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" colspan="3" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Coverages</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-clause">{root}/collections/{coverageid}/coverage</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>items</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A general description of the coverage identified by {coverageid} including the coverage&#8217;s envelope.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-clause">{datasetAPI}/collections/{coverageId}/coverage</a><br>
+(not a fixed path)</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:coverage:coverage</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS <strong><em>GetCoverage</em></strong> response.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-description-clause">{root}/collections/{coverageid}/coverage/description</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangeset-clause">{datasetAPI}/collections/{coverageId}/coverage/rangeset</a></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:coverage:rangeset</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">if supported by the service and by the selected representation, returns only the coverage&#8217;s range set, i.e., the actual values in the selected representation without any accompanying description or extra information.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-domainset-clause">{root}/collections/{coverageid}/coverage/domainset</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s domain set definition</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangetype-clause">{datasetAPI}/collections/{coverageId}/coverage/rangetype</a></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:coverage:rangetype</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">if available separately from the collection resource, returns the coverage&#8217;s range type information, i.e., a description of the data semantics (their components and data type).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangetype-clause">{root}/collections/{coverageid}/coverage/rangetype</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s range type information (i.e., a description of the data semantics)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-domainset-clause">{datasetAPI}/collections/{coverageId}/coverage/domainset</a></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:coverage:domainset</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">if available separately from the collection resource, returns the coverage&#8217;s domain set definition (the detailed n-dimensional space covered by the data).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-metadata-clause">{root}/collections/{coverageid}/coverage/metadata</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s metadata (may be empty)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-rangeset-clause">{root}/collections/{coverageid}/coverage/rangeset</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage&#8217;s range set, i.e., the actual values in the coverage&#8217;s Native Format (see format encoding for ways to retrieve in specific formats)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-all-clause">{root}/collections/{coverageid}/coverage/all</a></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns all of the above namely the coverage&#8217;s domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-metadata-clause">{datasetAPI}/collections/{coverageId}/coverage/metadata</a></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:coverage:metadata</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">if available, returns the associated coverage metadata as defined by the CIS model, which may be e.g. domain specific metadata.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1318,10 +1307,10 @@ or<br>
 <div class="ulist">
 <ul>
 <li>
-<p>{root} = Base URI for the API server</p>
+<p>{datasetAPI} = URI of the landing page for the API distributing the dataset</p>
 </li>
 <li>
-<p>{coverageid} = an identifier for a specific coverage (collection)</p>
+<p>{coverageId} = an identifier for a specific coverage (collection)</p>
 </li>
 </ul>
 </div>
@@ -1391,7 +1380,7 @@ or<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collection-access-section">Collections</a></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#requirements-class-openapi_3_0-clause">OpenAPI 3.0</a></p></td>
@@ -1399,7 +1388,7 @@ or<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#requirements-class-json-clause">JSON</a></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/geojson" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/geojson</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#requirements-class-html-clause">HTML</a></p></td>
@@ -1411,10 +1400,10 @@ or<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements_class_core"><a class="anchor" href="#_requirements_class_core"></a>7. Requirements Class "Core"</h2>
+<h2 id="_requirements_class_geodata_coverage"><a class="anchor" href="#_requirements_class_geodata_coverage"></a>7. Requirements Class "GeoData-Coverage"</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="core-overview"><a class="anchor" href="#core-overview"></a>7.1. Overview</h3>
+<h3 id="geodata-coverage-overview"><a class="anchor" href="#geodata-coverage-overview"></a>7.1. Overview</h3>
 <table id="rc_core" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1425,7 +1414,7 @@ or<br>
 <td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core</a></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/geodata-coverage" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/geodata-coverage</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
@@ -1437,12 +1426,12 @@ or<br>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections</a></p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The <code>Core</code> Requirements Class defines the requirements for locating, understanding, and accessing coverage resources. The <code>Core</code> Requirements Class is presented in five sections:</p>
+<p>The <code>GeoData-Coverage</code> Requirements Class defines the requirements for locating, understanding, and accessing a geospatial data resource as a coverage. The <code>GeoData-Coverage</code> Requirements Class is presented in five sections:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1465,9 +1454,9 @@ or<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="core-dependencies-section"><a class="anchor" href="#core-dependencies-section"></a>7.2. Dependencies</h3>
+<h3 id="geodata-coverage-dependencies-section"><a class="anchor" href="#geodata-coverage-dependencies-section"></a>7.2. Dependencies</h3>
 <div class="paragraph">
-<p>The OGC API-Coverages standard is an extension of the OGC API-Common standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.</p>
+<p>The OGC API-Coverages standard is an extension of the OGC API - Common - Part 1: Core and Part 2: Geospatial Data standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.</p>
 </div>
 <table id="req_core_api-common" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1493,7 +1482,7 @@ or<br>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1528,12 +1517,12 @@ or<br>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Issue a <code>GET</code> request on the <code>{root}/</code> path</p>
+<p>Issue a <code>GET</code> request on the <code>{datasetAPI}/</code> path</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Support for <code>GET</code> on the <code>{root}/</code> path is required by API-Common.</p>
+<p>Support for <code>GET</code> on the <code>{datasetAPI}/</code> path is required by API-Common.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1591,7 +1580,8 @@ properties:
     },
     {
       "href": "http://data.example.org/collections",
-      "title": "Metadata about the resource collections"
+      "title": "The list of available collections",
+      "rel": "data"
     }
   ]
 }</code></pre>
@@ -1629,7 +1619,7 @@ properties:
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Issue a <code>GET</code> request on the <code>{root}/api</code> path</p>
+<p>Issue a <code>GET</code> request on the <code>{datasetAPI}/api</code> path</p>
 </li>
 <li>
 <p>Follow the <code>service-desc</code> or <code>service-doc</code> link on the landing page</p>
@@ -1677,7 +1667,7 @@ properties:
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Issue a <code>GET</code> request on the <code>{root}/conformance</code> path</p>
+<p>Issue a <code>GET</code> request on the <code>{datasetAPI}/conformance</code> path</p>
 </li>
 <li>
 <p>Follow the <code>conformance</code> link on the landing page</p>
@@ -1693,7 +1683,7 @@ properties:
 <div class="paragraph">
 <p>A successful response to the Conformance operation is a list of URLs. Each URL identifies an OGC Conformance Class for which this API claims conformance. The schema for this resource is defined in API-Common and provided for reference in <a href="#conformance-schema">Conformance Response Schema</a>.</p>
 </div>
-<table id="req_core_conformance" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage_conformance" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -1702,7 +1692,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 2</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/conformance</strong></p>
+<p><strong>/req/geodata-coverage/conformance</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1717,13 +1707,13 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/collections" class="bare">http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/collections</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections" class="bare">http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1751,11 +1741,19 @@ properties:
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "conformsTo": [
     "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core",
-    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/collections",
-    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3",
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json",
     "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html",
-    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/geojson",
-    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core"
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3",
+    "http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisrdf",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-subset",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-bbox",
+    "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-datetime"
   ]
 }</code></pre>
 </div>
@@ -1804,7 +1802,7 @@ properties:
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Issue a <code>GET</code> request on <code>{root}/collections</code> path</p>
+<p>Issue a <code>GET</code> request on <code>{datasetAPI}/collections</code> path</p>
 </li>
 <li>
 <p>Follow the <code>data</code> link on the landing page</p>
@@ -1812,7 +1810,7 @@ properties:
 </ol>
 </div>
 <div class="paragraph">
-<p>Support for both the <code>{root}/collections</code> path and the <code>data</code> link is required by API-Common.</p>
+<p>Support for both the <code>{datasetAPI}/collections</code> path and the <code>data</code> link is required by API-Common.</p>
 </div>
 </div>
 <div class="sect4">
@@ -1884,7 +1882,7 @@ properties:
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Issue a <code>GET</code> request on the <code>{root}/collections/{coverageid}</code> path</p>
+<p>Issue a <code>GET</code> request on the <code>{datasetAPI}/collections/{coverageid}</code> path</p>
 </li>
 </ol>
 </div>
@@ -1949,13 +1947,29 @@ properties:
 <p>The following JSON fragment is an example of a response to an OGC API-Coverages Collection Information operation.</p>
 </div>
 <div id="collection-info-example" class="listingblock">
-<div class="title">Collection Information Example</div>
+<div class="title">Collection description resource  Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  "TBD": [
-    "filler1",
-    "filler2"
-  ]
+    "id": "buildings",
+    "title": "Buildings",
+    "description": "Buildings in the city of Bonn.",
+    "extent": {
+        "spatial": [ 7.01, 50.63, 7.22, 50.78 ],
+        "temporal": [ "2010-02-15T12:34:56Z", "2018-03-18T12:11:00Z" ]
+      },
+    "itemType": "coverage",
+    "CRS": [
+        "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+        "http://www.opengis.net/def/crs/EPSG/0/4326"
+    ],
+    "links": [
+      { "href": "http://data.example.org/collections/buildings/items",
+        "rel": "items", "type": "application/geo+json",
+        "title": "Buildings" },
+      { "href": "http://example.org/concepts/building.html",
+        "rel": "describedBy", "type": "text/html",
+        "title": "Feature catalogue for buildings" }
+    ]
 }</code></pre>
 </div>
 </div>
@@ -1993,32 +2007,38 @@ properties:
 </ul>
 </div>
 <div class="paragraph">
-<p>Each component is directly accessible through the API using standard paths. In addition, collections of elements can be accessed through the following paths:</p>
+<p>The coverage containing all of those components is accessible at</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>/description</code>: Returns <code>DomainSet</code>, <code>RangeType</code>, and <code>Metadata</code></p>
-</li>
-<li>
-<p><code>/all</code>: Returns <code>DomainSet</code>, <code>RangeType</code>, <code>RangeSet</code>, and <code>Metadata</code></p>
+<p><code>/coverage</code>: Returns <code>DomainSet</code>, <code>RangeType</code>, <code>RangeSet</code>, and <code>Metadata</code></p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The <code>DomainSet</code> and <code>RangeType</code> are either defined as properties of the <code>/collections/{coverageid}</code> resource, or linked using specific relation types to their own resource.</p>
+</div>
+<div class="paragraph">
+<p>The <code>RangeSet</code> may be available as its own resource as well, if supported by the selected representation (format).</p>
+</div>
+<div class="paragraph">
+<p>If <code>Metadata</code> is available, it will also be be available as its own resource.</p>
 </div>
 <div class="paragraph">
 <p>The paths discussed in this section are all branches off of the <code>/collections/{coverageid}</code> root.</p>
 </div>
 <div class="sect3">
-<h4 id="coverage-clause"><a class="anchor" href="#coverage-clause"></a>7.5.1. Coverage Offering</h4>
+<h4 id="coverage-clause"><a class="anchor" href="#coverage-clause"></a>7.5.1. Coverage</h4>
 <div class="paragraph">
-<p>The <code>Coverage Offering</code> operation returns a general coverage offering description consisting of envelope, rangetype, and service metadata such as the coverage&#8217;s native format</p>
+<p>The <code>Coverage</code> operation returns all the components of the coverage (rangeset, domain set, range type, meatadata). It is comparable to a WCS GetCoverage operation.</p>
 </div>
 <div class="sect4">
 <h5 id="_operation_6"><a class="anchor" href="#_operation_6"></a>7.5.1.1. Operation</h5>
 <div class="paragraph">
-<p>The <code>Coverage Offering</code> operation is defined by the following requirement.</p>
+<p>The <code>Coverage</code> operation is defined by the following requirement.</p>
 </div>
-<table id="req_core_cov-offer-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -2027,7 +2047,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 3</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-offer-op</strong></p>
+<p><strong>/req/geodata-coverage/coverage-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2049,9 +2069,9 @@ properties:
 <div class="sect4">
 <h5 id="_response_6"><a class="anchor" href="#_response_6"></a>7.5.1.2. Response</h5>
 <div class="paragraph">
-<p>A successful response to the <code>Coverage Offering</code> operation shall meet the following requirement.</p>
+<p>A successful response to the <code>Coverage</code> operation shall meet the following requirement.</p>
 </div>
-<table id="req_core_cov-offer-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -2060,7 +2080,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 4</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-offer-success</strong></p>
+<p><strong>/req/geodata-coverage/coverage-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2072,67 +2092,91 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL provide a general description of the coverage, including the coverage&#8217;s envelope, as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_offering.json">coverage_offering.json</a>.</p>
+<p>The content of that response SHALL include the <code>rangeset</code> of the coverage equivalent to that defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage.json">coverage.json</a>.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.</p>
+<p>The content of that response SHALL also include the <code>domainset</code> and <code>rangetype</code> as well, to the extent that the negotiated format can describe it.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format as described in <a href="#media-types-section">Media Types</a>.</p>
+<p>The content of that response MAY also include the <code>metadata</code> for that coverage. The server SHOULD return that metadata if it is available and the negotiated format can describe it.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">E</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-<div id="coverage-schema" class="listingblock">
-<div class="title">Coverage Offering Response Schema</div>
+<div id="coverage--schema" class="listingblock">
+<div class="title">Coverage Response Schema</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">$schema: http://json-schema.org/draft-07/schema#
-coverageOffering:
-  title: Coverage Offering
-  description: Description of the Coverage Offering
-  required:
-    - links
-    - name
-    - envelope
-    - rangetype
-    - servicemetadata
-  type: object
+title: Coverage object
+description: 'Component of OGC Coverage Implementation Schema 1.1. Last updated: 2016-may-18.
+  Copyright (c) 2016 Open Geospatial Consortium, Inc. All Rights Reserved. To obtain
+  additional rights of use, visit http://www.opengeospatial.org/legal/.'
+type: object
+oneOf:
+- required:
+  - type
+  - domainSet
+  - rangeSet
+  - rangeType
   properties:
-    name:
+    id:
       type: string
-      description: identifier of the collection used, for example, in URIs
-      example: dem
-    title:
-      type: string
-      description: human readable title of the collection
-      example: Digital Elevation Model
-    description:
-      type: string
-      description: a description of the data in the collection
-      example: Digital Elevation Model
-    links:
-      type: array
-      items:
-        $ref: '#/components/schemas/link'
+    type:
+      enum:
+      - CoverageByDomainAndRangeType
     envelope:
-      $ref: '#/components/schemas/envelope'
-    rangetype:
-      $ref: '#/components/schemas/rangetype'
-    servicemetadata:
-      $ref: '#/components/schemas/serviceMetadata'</code></pre>
+      "$ref": coverage_envelope.json#/envelope
+    domainSet:
+      "$ref": coverage_domainset.json#/domainSet
+    rangeSet:
+      "$ref": coverage_rangeset.json#/rangeSet
+    rangeType:
+      "$ref": coverage_rangetype.json#/rangeType
+    metadata:
+      "$ref": coverage_metadata.json#/metadata
+- required:
+  - type
+  - partitionSet
+  - rangeType
+  properties:
+    id:
+      type: string
+    type:
+      enum:
+      - CoverageByPartitioningType
+    envelope:
+      "$ref": coverage_envelope.json#/envelope
+    partitionSet:
+      "$ref": coverage_partitionset.json#/partitionSet
+    rangeType:
+      "$ref": coverage_rangetype.json#/rangeType
+    metadata:
+      "$ref": coverage_metadata.json#/metadata</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The following JSON fragment is an example of a response to a Coverage Offering request.</p>
+<p>The following JSON fragment is an example of a response to a Coverage request.</p>
 </div>
-<div id="coverage-offering-example" class="listingblock">
-<div class="title">Coverage Offering Example</div>
+<div id="coverage-all-example" class="listingblock">
+<div class="title">Coverage Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "TBD": [
@@ -2150,17 +2194,26 @@ coverageOffering:
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="coverage-description-clause"><a class="anchor" href="#coverage-description-clause"></a>7.5.2. Coverage Description</h4>
+</div>
+<div class="sect2">
+<h3 id="parameters-section"><a class="anchor" href="#parameters-section"></a>7.6. Parameters</h3>
 <div class="paragraph">
-<p>The <code>Coverage Description</code> operation returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)</p>
+<p>The API-Coverages standard inherits basic query and subsetting parameters from API-Common. This section provides a short description of each parameter and identifies the relevant requirements.</p>
+</div>
+<div class="paragraph">
+<p>All of the permissions and recommendations in API-Common regarding the these parameters also apply to API-Coverages implementations.</p>
+</div>
+<div class="sect3">
+<h4 id="coverage-domainset-clause"><a class="anchor" href="#coverage-domainset-clause"></a>7.6.1. Coverage Domain Set</h4>
+<div class="paragraph">
+<p>The <code>Coverage Domain Set</code> operation returns the coverage’s domain set definition</p>
 </div>
 <div class="sect4">
-<h5 id="_operation_7"><a class="anchor" href="#_operation_7"></a>7.5.2.1. Operation</h5>
+<h5 id="_operation_7"><a class="anchor" href="#_operation_7"></a>7.6.1.1. Operation</h5>
 <div class="paragraph">
-<p>The <code>Coverage Description</code> operation is defined by the following requirement.</p>
+<p>The <code>Coverage Domain Set</code> operation is defined by the following requirement.</p>
 </div>
-<table id="req_core_cov-desc-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage_domainset-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -2169,13 +2222,13 @@ coverageOffering:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 5</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-desc-op</strong></p>
+<p><strong>/req/geodata-coverage/domainset-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/description</code>.</p>
+<p>If the API does not include a "DomainSet" property within the coverage (collection) resource, it The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/domainset</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2189,11 +2242,11 @@ coverageOffering:
 </table>
 </div>
 <div class="sect4">
-<h5 id="_response_7"><a class="anchor" href="#_response_7"></a>7.5.2.2. Response</h5>
+<h5 id="_response_7"><a class="anchor" href="#_response_7"></a>7.6.1.2. Response</h5>
 <div class="paragraph">
-<p>A successful response to the <code>Coverage Description</code> operation shall meet the following requirement.</p>
+<p>A successful response to the <code>Coverage Domain Set</code> operation shall meet the following requirement.</p>
 </div>
-<table id="req_core_cov-desc-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage_domainset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -2202,7 +2255,7 @@ coverageOffering:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 6</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-desc-success</strong></p>
+<p><strong>/req/geodata-coverage/domainset-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2214,7 +2267,7 @@ coverageOffering:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL provide a description of the coverage as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_description.json">coverage_description.json</a>.</p>
+<p>The content of that response SHALL provide the <code>Domain Set</code> definition of the coverage equivalent to that defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_domainset.json">coverage_domainset.json</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2226,128 +2279,7 @@ coverageOffering:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format as described in <a href="#media-types-section">Media Types</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div id="coverage-description-schema" class="listingblock">
-<div class="title">Coverage Description Response Schema</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">$schema: http://json-schema.org/draft-07/schema#
-coverageDescription:
-  title: Coverage Description
-  description: The whole coverage description including domain set, range type and
-    metadata. It does not include the range set.
-  type: object
-  properties:
-    domainSet:
-      "$ref": coverage_domainset.json#/domainSet
-    rangeType:
-      "$ref": coverage_rangetype.json#/rangeType
-    metadata:
-      "$ref": coverage_metadata.json#/metadata</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The following JSON fragment is an example of a response to a Coverage Description request.</p>
-</div>
-<div id="coverage-description-example" class="listingblock">
-<div class="title">Coverage Description Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "TBD": [
-    "filler1",
-    "filler2"
-  ]
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_error_situations_7"><a class="anchor" href="#_error_situations_7"></a>7.5.2.3. Error situations</h5>
-<div class="paragraph">
-<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="coverage-domainset-clause"><a class="anchor" href="#coverage-domainset-clause"></a>7.5.3. Coverage Domain Set</h4>
-<div class="paragraph">
-<p>The <code>Coverage Domain Set</code> operation returns the coverage’s domain set definition</p>
-</div>
-<div class="sect4">
-<h5 id="_operation_8"><a class="anchor" href="#_operation_8"></a>7.5.3.1. Operation</h5>
-<div class="paragraph">
-<p>The <code>Coverage Domain Set</code> operation is defined by the following requirement.</p>
-</div>
-<table id="req_core_cov-ds-op" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-ds-op</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/domainset</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_response_8"><a class="anchor" href="#_response_8"></a>7.5.3.2. Response</h5>
-<div class="paragraph">
-<p>A successful response to the <code>Coverage Domain Set</code> operation shall meet the following requirement.</p>
-</div>
-<table id="req_core_cov-ds-success" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-ds-success</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A successful execution of the operation SHALL be reported as a response with a HTTP status code <code>200</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL provide the <code>Domain Set</code> definition of the coverage as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_domainset.json">coverage_domainset.json</a>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format as described in <a href="#media-types-section">Media Types</a>.</p>
+<p>If no format is negotiated, then the response SHALL be encoded using CIS JSON, which SHALL also be the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2680,38 +2612,38 @@ domainSet:
 </div>
 </div>
 <div class="sect4">
-<h5 id="_error_situations_8"><a class="anchor" href="#_error_situations_8"></a>7.5.3.3. Error situations</h5>
+<h5 id="_error_situations_7"><a class="anchor" href="#_error_situations_7"></a>7.6.1.3. Error situations</h5>
 <div class="paragraph">
 <p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="coverage-rangetype-clause"><a class="anchor" href="#coverage-rangetype-clause"></a>7.5.4. Coverage Range Type</h4>
+<h4 id="coverage-rangetype-clause"><a class="anchor" href="#coverage-rangetype-clause"></a>7.6.2. Coverage Range Type</h4>
 <div class="paragraph">
 <p>The <code>Coverage Range Type</code> operation returns the coverage’s range type information (i.e., a description of the data semantics)</p>
 </div>
 <div class="sect4">
-<h5 id="_operation_9"><a class="anchor" href="#_operation_9"></a>7.5.4.1. Operation</h5>
+<h5 id="_operation_8"><a class="anchor" href="#_operation_8"></a>7.6.2.1. Operation</h5>
 <div class="paragraph">
 <p>The <code>Coverage Range Type</code> operation is defined by the following requirement.</p>
 </div>
-<table id="req_core_cov-rt-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-rangetype-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 7</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-rt-op</strong></p>
+<p><strong>/req/geodata-coverage/rangetype-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/rangetype</code>.</p>
+<p>If the API does not include a "RangeType" property within the coverage (collection) resource, it SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/rangetype</code>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2725,20 +2657,20 @@ domainSet:
 </table>
 </div>
 <div class="sect4">
-<h5 id="_response_9"><a class="anchor" href="#_response_9"></a>7.5.4.2. Response</h5>
+<h5 id="_response_8"><a class="anchor" href="#_response_8"></a>7.6.2.2. Response</h5>
 <div class="paragraph">
 <p>A successful response to the <code>Coverage Range Type</code> operation shall meet the following requirement.</p>
 </div>
-<table id="req_core_cov-rt-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata-coverage_rangetype-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 8</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-rt-success</strong></p>
+<p><strong>/req/geodata-coverage/rangetype-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2750,7 +2682,7 @@ domainSet:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL describe the <code>Range Type</code> of the coverage as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangetype.json">coverage_rangetype.json</a>.</p>
+<p>The content of that response SHALL describe the <code>Range Type</code> of the coverage equivalent to that defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangetype.json">coverage_rangetype.json</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2762,7 +2694,7 @@ domainSet:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format as described in <a href="#media-types-section">Media Types</a>.</p>
+<p>If no format is negotiated, then the response SHALL be encoded using CIS JSON, which SHALL also be the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -2890,38 +2822,44 @@ rangeType:
 </div>
 </div>
 <div class="sect4">
-<h5 id="_error_situations_9"><a class="anchor" href="#_error_situations_9"></a>7.5.4.3. Error situations</h5>
+<h5 id="_error_situations_8"><a class="anchor" href="#_error_situations_8"></a>7.6.2.3. Error situations</h5>
 <div class="paragraph">
 <p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="coverage-rangeset-clause"><a class="anchor" href="#coverage-rangeset-clause"></a>7.5.5. Coverage Range Set</h4>
+<h4 id="coverage-rangeset-clause"><a class="anchor" href="#coverage-rangeset-clause"></a>7.6.3. Coverage Range Set</h4>
 <div class="paragraph">
 <p>The <code>Coverage Range Set</code> operation returns the coverage’s range set, i.e., the actual values in the coverage’s Native Format (see <a href="#media-types-section">Media Types</a> for ways to retrieve inspecific formats)</p>
 </div>
 <div class="sect4">
-<h5 id="_operation_10"><a class="anchor" href="#_operation_10"></a>7.5.5.1. Operation</h5>
+<h5 id="_operation_9"><a class="anchor" href="#_operation_9"></a>7.6.3.1. Operation</h5>
 <div class="paragraph">
 <p>The <code>Coverage Range Set</code> operation is defined by the following requirement.</p>
 </div>
-<table id="req_core_cov-rs-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-rangeset-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 9</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-rs-op</strong></p>
+<p><strong>/req/geodata_coverage/rangeset-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/rangeset</code>.</p>
+<p>The API MAY support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/rangeset</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The API SHOULD support it for selected formats which can describe the raw data values without any additional information.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2935,20 +2873,20 @@ rangeType:
 </table>
 </div>
 <div class="sect4">
-<h5 id="_response_10"><a class="anchor" href="#_response_10"></a>7.5.5.2. Response</h5>
+<h5 id="_response_9"><a class="anchor" href="#_response_9"></a>7.6.3.2. Response</h5>
 <div class="paragraph">
 <p>A successful response to the <code>Coverage Range Set</code> operation shall meet the following requirement.</p>
 </div>
-<table id="req_core_cov-rs-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-rangeset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 10</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-rs-success</strong></p>
+<p><strong>/req/geodata_coverage/rangeset-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -2960,7 +2898,7 @@ rangeType:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL contain the <code>Range Set</code> of the coverage as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangeset.json">coverage_rangeset.json</a>.</p>
+<p>The content of that response SHALL contain the <code>Range Set</code> of the coverage equivalent to that defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangeset.json">coverage_rangeset.json</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2972,7 +2910,7 @@ rangeType:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format as described in <a href="#media-types-section">Media Types</a>.</p>
+<p>If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3049,38 +2987,44 @@ rangeSet:
 </div>
 </div>
 <div class="sect4">
-<h5 id="_error_situations_10"><a class="anchor" href="#_error_situations_10"></a>7.5.5.3. Error situations</h5>
+<h5 id="_error_situations_9"><a class="anchor" href="#_error_situations_9"></a>7.6.3.3. Error situations</h5>
 <div class="paragraph">
 <p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="coverage-metadata-clause"><a class="anchor" href="#coverage-metadata-clause"></a>7.5.6. Coverage Metadata</h4>
+<h4 id="coverage-metadata-clause"><a class="anchor" href="#coverage-metadata-clause"></a>7.6.4. Coverage Metadata</h4>
 <div class="paragraph">
 <p>The <code>Coverage Metadata</code> operation returns the coverage’s metadata (may be empty)</p>
 </div>
 <div class="sect4">
-<h5 id="_operation_11"><a class="anchor" href="#_operation_11"></a>7.5.6.1. Operation</h5>
+<h5 id="_operation_10"><a class="anchor" href="#_operation_10"></a>7.6.4.1. Operation</h5>
 <div class="paragraph">
 <p>The <code>Coverage Metadata</code> operation is defined by the following requirement.</p>
 </div>
-<table id="req_core_cov-md-op" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-metadata-op" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 11</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-md-op</strong></p>
+<p><strong>/req/geodata-coverage/metadata-op</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/metadata</code>.</p>
+<p>The API MAY support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/metadata</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The API SHOULD support it, if available, for selected formats which can describe it.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3094,20 +3038,20 @@ rangeSet:
 </table>
 </div>
 <div class="sect4">
-<h5 id="_response_11"><a class="anchor" href="#_response_11"></a>7.5.6.2. Response</h5>
+<h5 id="_response_10"><a class="anchor" href="#_response_10"></a>7.6.4.2. Response</h5>
 <div class="paragraph">
 <p>A successful response to the <code>Coverage Metadata</code> operation shall meet the following requirement.</p>
 </div>
-<table id="req_core_cov-md-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_coverage-metadata-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 12</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-md-success</strong></p>
+<p><strong>/req/geodata-coverage/metadata-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -3119,7 +3063,7 @@ rangeSet:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL contain metadata which describes the coverage as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_metadata.json">coverage_metadata.json</a>.</p>
+<p>The content of that response SHALL contain metadata which describes the coverage equivalent to that defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_metadata.json">coverage_metadata.json</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3131,7 +3075,7 @@ rangeSet:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format as described in <a href="#media-types-section">Media Types</a>.</p>
+<p>If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3164,177 +3108,44 @@ metadata:
 </div>
 </div>
 <div class="sect4">
-<h5 id="_error_situations_11"><a class="anchor" href="#_error_situations_11"></a>7.5.6.3. Error situations</h5>
+<h5 id="_error_situations_10"><a class="anchor" href="#_error_situations_10"></a>7.6.4.3. Error situations</h5>
 <div class="paragraph">
 <p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>TODO</strong>: Move <code>geodata-filteredList</code> conformance class into its own clause, which may end up only in OGC API - Common - Part 2: Geospatial data has Coverage doesn&#8217;t add anything.</p>
+</div>
+<div class="paragraph">
+<p><strong>TODO</strong>: Create new clauses for conformance classes for <code>coverage-bbox</code> and <code>coverage-dateTime</code> (or potentially make this a single one), which are additional ways to sub-select the actual coverage data being returned that a service may opt to suport.</p>
+</div>
+<div class="paragraph">
+<p><strong>TODO</strong>: Limit and Paged response may apply to both listing collections (<code>geodata-filteredList</code>) and the coverage itself.
+Is it a requirement to support Limit for either of these? Is it separate conformance classes?
+It would be difficult for static servers, and paging makes less sense for coverages than it does for many small features.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="coverage-all-clause"><a class="anchor" href="#coverage-all-clause"></a>7.5.7. Coverage All</h4>
-<div class="paragraph">
-<p>The <code>Coverage All</code> operation returns all of the above namely the coverage’s domainset, rangetype, meatadata, and rangeset comparable to a GetCoverage response</p>
-</div>
-<div class="sect4">
-<h5 id="_operation_12"><a class="anchor" href="#_operation_12"></a>7.5.7.1. Operation</h5>
-<div class="paragraph">
-<p>The <code>Coverage All</code> operation is defined by the following requirement.</p>
-</div>
-<table id="req_core_cov-all-op" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-all-op</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The API SHALL support the HTTP GET operation at the path <code>/collections/{coverageid}/coverage/all</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>coverageid</code> is the local identifier for a <code>Coverage</code>. It serves the same role and is subject to the same requirements as the <code>collectionid</code> parameter defined in API-Common.</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_response_12"><a class="anchor" href="#_response_12"></a>7.5.7.2. Response</h5>
-<div class="paragraph">
-<p>A successful response to the <code>Coverage All</code> operation shall meet the following requirement.</p>
-</div>
-<table id="req_core_cov-all-success" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-all-success</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A successful execution of the operation SHALL be reported as a response with a HTTP status code <code>200</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The content of that response SHALL include the <code>domainset</code>, <code>rangetype</code>, <code>metadata</code>, and <code>rangeset</code> of the coverage as defined in the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage.json">coverage.json</a>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>If no format is negotiated, then the response SHALL be encoded using the default format(s) as described in <a href="#media-types-section">Media Types</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div id="coverage--schema" class="listingblock">
-<div class="title">Coverage Response Schema</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">$schema: http://json-schema.org/draft-04/schema#
-title: Coverage object
-description: 'Component of OGC Coverage Implementation Schema 1.1. Last updated: 2016-may-18.
-  Copyright (c) 2016 Open Geospatial Consortium, Inc. All Rights Reserved. To obtain
-  additional rights of use, visit http://www.opengeospatial.org/legal/.'
-type: object
-required:
-- type
-- domainSet
-- rangeSet
-- rangeType
-properties:
-  id:
-    type: string
-  type:
-    enum:
-    - CoverageByDomainAndRangeType
-  envelope:
-    "$ref": coverage_envelope.json#/envelope
-  domainSet:
-    "$ref": coverage_domainset.json#/domainSet
-  rangeSet:
-    "$ref": coverage_rangeset.json#/rangeSet
-  rangeType:
-    "$ref": coverage_rangetype.json#/rangeType
-  metadata:
-    "$ref": coverage_metadata.json#/metadata</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The following JSON fragment is an example of a response to a Coverage All request.</p>
-</div>
-<div id="coverage-all-example" class="listingblock">
-<div class="title">Coverage All Example</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "TBD": [
-    "filler1",
-    "filler2"
-  ]
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_error_situations_12"><a class="anchor" href="#_error_situations_12"></a>7.5.7.3. Error situations</h5>
-<div class="paragraph">
-<p>The requirements for handling unsuccessful requests are provided in <a href="#http-response">HTTP Response</a>. General guidance on HTTP status codes and how they should be handled is provided in <a href="#http-status-codes">HTTP status codes</a>.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="parameters-section"><a class="anchor" href="#parameters-section"></a>7.6. Parameters</h3>
-<div class="paragraph">
-<p>The API-Coverages standard inherits basic query and subsetting parameters from API-Common. This section provides a short description of each parameter and identifies the relevant requirements.</p>
-</div>
-<div class="paragraph">
-<p>All of the permissions and recommendations in API-Common regarding the these parameters also apply to API-Coverages implementations.</p>
-</div>
-<div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.6.1. Parameter bbox</h4>
+<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.6.5. Parameter bbox</h4>
 <div class="paragraph">
 <p>The Bounding Box (bbox) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.</p>
 </div>
-<table id="req_core_cov-bbox-parameter" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_filteredList-bbox-parameter" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 13</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-bbox-parameter</strong></p>
+<p><strong>/req/geodata-filteredList/bbox-parameter</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A Coverage API SHALL support the Bounding Box (bbox) parameter for <code>/collections</code> and <code>/collections/{coverageid}</code> requests.</p>
+<p>An API implementing Common - Part 2: Geospatial data MAY support the Bounding Box (bbox) parameter for <code>/collections</code> requests.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3346,71 +3157,71 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Responses to Bounding Box requests SHALL comply with API-Common requirement <code>/req/core/rc-bbox-response</code>.</p>
+<p>Responses SHALL be appropriately filtered, returning only collections whose spatial extent intersects with the specified bounding box parameter.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_parameter_datetime"><a class="anchor" href="#_parameter_datetime"></a>7.6.2. Parameter datetime</h4>
+<h4 id="_parameter_datetime"><a class="anchor" href="#_parameter_datetime"></a>7.6.6. Parameter datetime</h4>
 <div class="paragraph">
 <p>The Date-Time (datetime) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.</p>
 </div>
-<table id="req_core_cov-datetime-parameter" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_filteredList-datetime-parameter" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 14</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-datetime-parameter</strong></p>
+<p><strong>/req/geodata-filteredList/datetime-parameter</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A Coverage API SHALL support the Date-Time (datetime) parameter for <code>/collections</code> and <code>/collections/{coverageid}</code> requests.</p>
+<p>An API implementing Common - Part 2: Geospatial data MAY support the Date-Time (datetime) parameter for <code>/collections</code> requests.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Requests which include the Date-Time parameter SHALL comply with API-Common requirement <code>/req/core/rc-time-definition</code>.</p>
+<p>Requests which include the Date-Time parameter SHALL comply with API-Common requirement <code>/req/geodata-filteredList/rc-time-definition</code>.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Responses to Date-Time requests SHALL comply with API-Common requirement <code>/req/core/rc-time-response</code>.</p>
+<p>Responses SHALL be appropriately filtered, returning only collections whose temporal extent intersects with the specified date time parameter.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_parameter_limit"><a class="anchor" href="#_parameter_limit"></a>7.6.3. Parameter Limit</h4>
+<h4 id="_parameter_limit"><a class="anchor" href="#_parameter_limit"></a>7.6.7. Parameter Limit</h4>
 <div class="paragraph">
 <p>The Limit (limit) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.</p>
 </div>
-<table id="req_core_cov-limit-parameter" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata_filteredList-limit-parameter" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 15</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-limit-parameter</strong></p>
+<p><strong>/req/geodata-filteredList/limit-parameter</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A Coverage API SHALL support the Limit (limit) parameter for <code>/collections</code> and <code>/collections/{coverageid}</code> requests.</p>
+<p>A Coverage API SHALL support the Limit (limit) parameter for <code>/collections</code> requests.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -3442,33 +3253,37 @@ properties:
 </table>
 </div>
 <div class="sect3">
-<h4 id="_combinations_of_filter_parameters"><a class="anchor" href="#_combinations_of_filter_parameters"></a>7.6.4. Combinations of Filter Parameters</h4>
+<h4 id="_combinations_of_filter_parameters"><a class="anchor" href="#_combinations_of_filter_parameters"></a>7.6.8. Combinations of Filter Parameters</h4>
 <div class="paragraph">
 <p>Any combination of <code>bbox</code>, <code>datetime</code> and
 parameters for filtering on coverage properties is allowed. Note that the requirements on these parameters imply that only coverages matching all the predicates are in the result set; i.e., the logical operator between the predicates is 'AND.'</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_paged_response"><a class="anchor" href="#_paged_response"></a>7.6.5. Paged Response</h4>
+<h4 id="_paged_response"><a class="anchor" href="#_paged_response"></a>7.6.9. Paged Response</h4>
 <div class="paragraph">
 <p>One consequence of the Limit parameter is that the full result set is not delivered to the user. However, users frequently want to know how big the result set it and how to access the rest of it. The following requirement add information to the response to address that need.</p>
 </div>
-<table id="req_core_cov-paged-response" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_geodata-coverage-paged-response" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 16</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-paged-response</strong></p>
+<p><strong>/req/geodata-coverage/paged-response</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p>Responses to a filtered operation that only return a portion of the full selected resource set SHALL comply with API-Common requirements:</p>
+</div>
+<div class="paragraph">
+<p>TODO: These Features resources pertained to individual feaures being returned, and are not currently defined in Common.
+Their paging mechanism likely does not apply well to coverages as well.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3511,7 +3326,7 @@ parameters for filtering on coverage properties is allowed. Note that the requir
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 17</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/core/http-response</strong></p>
 </div></div></td>
@@ -3609,7 +3424,7 @@ properties:
 <div class="paragraph">
 <p>The API Description Document describes the HTTP status codes generated by that API. This should not be an exhaustive list of all possible status codes. It is not reasonable to expect an API designer to control the use of HTTP status codes which are not generated by their software. Therefore, it is recommended that the API Description Document limit itself to describing HTTP status codes relevant to the proper operation of the API application logic. Client implementations should be prepared to receive HTTP status codes in addition to those described in the API Description Document.</p>
 </div>
-<table id="per_core_additional-status-codes" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="per_geospatial_data_additional-status-codes" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
@@ -3618,7 +3433,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Permission 1</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/per/core/additional-status-codes</strong></p>
+<p><strong>/per/geospatial-data/additional-status-codes</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -3642,7 +3457,7 @@ properties:
 <div class="ulist">
 <ul>
 <li>
-<p><a href="#requirements-class-json-clause">JSON</a></p>
+<p><a href="#requirements-class-cisjson-clause">CIS JSON</a></p>
 </li>
 <li>
 <p><a href="#requirements-class-html-clause">HTML</a></p>
@@ -3662,55 +3477,78 @@ properties:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_json_encoding"><a class="anchor" href="#_json_encoding"></a>8.2. JSON Encoding</h3>
+<h3 id="_cis_json_encoding"><a class="anchor" href="#_cis_json_encoding"></a>8.2. CIS JSON Encoding</h3>
 <div class="paragraph">
-<p>Support for JSON is recommended. JSON is a commonly used format that is simple to understand and well supported by tools and software libraries.</p>
+<p>Support for CIS JSON is recommended. JSON is a commonly used format that is simple to understand and well supported by tools and software libraries.</p>
 </div>
 <div class="paragraph">
 <p>JSON structures documented in this standard are defined using JSON Schema. These schema are available in JSON and YAML formats from <a href="http://schemas.opengis.net/tbd">http://schemas.opengis.net/tbd</a></p>
 </div>
-<div class="sect3">
-<h4 id="_geojson"><a class="anchor" href="#_geojson"></a>8.2.1. GeoJSON</h4>
 <div class="paragraph">
-<p>"GeoJSON is a geospatial data interchange format based on JavaScript Object Notation (JSON). It defines several types of JSON objects and the manner in which they are combined to represent data about geographic features, their properties, and their spatial extents. GeoJSON uses a geographic coordinate reference system, World Geodetic System 1984, and units of decimal degrees." <a href="#GeoJSON">IETF RFC 7946</a></p>
+<p>When coverage resources (the coverage as a whole, range set, domain set, range type, meta data) advertise the <code>application/json</code> media type, it refers to the CIS JSON encoding.</p>
 </div>
 <div class="paragraph">
-<p>GeoJSON provides a simple way of represening OGC Featues in JSON. Due to its simplicity, however, it is not suitable for all feature data. It is best used for content which has a spatial extent that can be used with the World Geodetic System 1984 Coordinate Reference System.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cis_json"><a class="anchor" href="#_cis_json"></a>8.2.2. CIS JSON</h4>
-<div class="paragraph">
-<p>This API-Coverages standard is built around the <a href="#CIS_1_1">OGC Coverage Implementation Schema (CIS)</a>. CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space. These "Engineering" coordinate reference systems cannot be represented using WGS-84. Therefore, an alternative to GeoJSON is needed.</p>
+<p>This API-Coverages standard is built around the <a href="#CIS_1_1">OGC Coverage Implementation Schema (CIS)</a>.
+CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space.
+These "Engineering" coordinate reference systems cannot be represented using WGS-84.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="#CIS_JSON_Schema">OGC JSON Schema for CIS</a> standard addresses that need by defining a JSON schema for the CIS standard. This format should be used for all JSON encodings from the <code>{root}/collections/{coverageid}/coverage/*</code> paths.</p>
+<p>The <a href="#CIS_JSON_Schema">OGC JSON Schema for CIS</a> standard addresses that need by defining a JSON schema for the CIS standard.
+This format should be used when the <code>application/json</code> media type is specified to encode all of the <code>{datasetAPI}/collections/{coverageid}/coverage*</code> resources.
+A CIS JSON representation of the range type and domain set for the coverage is also required to be either embedded in properties or linked from the /collections/{collectionId} resource.</p>
 </div>
+<div class="paragraph">
+<p>Other encodings such as CoverageJSON must use an alternate media type.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_binary"><a class="anchor" href="#_binary"></a>8.3. Binary</h3>
 <div class="paragraph">
-<p>A coverage does not need to be delivered in JSON or HTML in its entirety. Multipart encoding is also defined in OGC CIS. This allows the result to have a "canonical" header while components can be factored out and represented in some (more efficient) binary format. Any suitable container format (such as zip, miltipart/mime, SAFE, etc.) can "bundle" these components into one coverage file ready for shipping.</p>
+<p>A coverage can also be distributed in binary form, for which a number of formats are commonly used:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CIS RDF</p>
+</li>
+<li>
+<p>NetCDF</p>
+</li>
+<li>
+<p>GeoTIFF</p>
+</li>
+<li>
+<p>PNG</p>
+</li>
+<li>
+<p>JPEG</p>
+</li>
+<li>
+<p>JPEG-2000</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Commonly used formats for binary encoding are:
-* GeoTIFF
-* JPEG
-* JPEG-2000
-* NetCDF</p>
+<p>OGC CIS also defines multipart encoding of the different components of a coverage.
+This allows the result to have a "canonical" header while components can be factored out and represented in some (more efficient) binary format.
+Any suitable container format (such as zip, multipart/mime, SAFE, etc.) can "bundle" these components into one coverage file ready for shipping.</p>
+</div>
+<div class="paragraph">
+<p>With OGC API - Coverages, given that the description of the coverage is easily available at the /collections/{collectionId} resource, with the
+range type and domain set either embedded or linked from that resource, an implementation may prefer to keep single-part binary formats encoding
+all components to the best it can, as they might be more directly interoperable.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_media_types"><a class="anchor" href="#_media_types"></a>8.4. Media Types</h3>
 <div class="paragraph">
-<p>A description of the MIME-types is mandatory for any OGC standard which involves data encodings. The list of suitable MIME-types for the API-Coverages standard in provided in <a href="#api-coverage-mime-types">Table 5</a>.</p>
+<p>A description of the media types is mandatory for any OGC standard which involves data encodings. The list of suitable media types for the API-Coverages standard in provided in <a href="#api-coverage-media-types">Table 5</a>.</p>
 </div>
 <div class="paragraph">
-<p>Coverages can be encoded in any suitable data format, including formats as GML, JSON, GeoTIFF, and NetCDF. Further, coverages can be represented by a single document (stream or file) or by a hierarchically organized set of documents, each of which can be encoded individually – for example, the domain set, range type, and metadata may be encoded in easily parseable GML, JSON, or RDF while the range set is encoded in some compact binary format like NetCDF or JPEG2000. Such partitioning allows for coverages tiled in space, time, or mixed, thereby enabling mosaics, time-interleaved coverages, and efficiently subsettable datacubes.</p>
+<p>Coverages can be encoded in any suitable data format, including formats as GML, CIS JSON, GeoTIFF, and NetCDF. Further, coverages can be represented by a single document (stream or file) or by a hierarchically organized set of documents, each of which can be encoded individually – for example, the domain set, range type, and metadata may be encoded in easily parseable GML, CIS JSON, or RDF while the range set is encoded in some compact binary format like NetCDF or JPEG2000. Such partitioning allows for coverages tiled in space, time, or mixed, thereby enabling mosaics, time-interleaved coverages, and efficiently subsettable datacubes.</p>
 </div>
-<table id="api-coverage-mime-types" class="tableblock frame-all grid-all" style="width: 90%;">
-<caption class="title">Table 10. API-Coverages MIME Types</caption>
+<table id="api-coverage-media-types" class="tableblock frame-all grid-all" style="width: 90%;">
+<caption class="title">Table 10. API-Coverages media Types</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 66.6667%;">
@@ -3718,23 +3556,31 @@ properties:
 <tbody>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Encoding</strong></p></td>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>MIME Type</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>media type</strong></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">HTML</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">text/html</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JSON / CIS JSON</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">application/json</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GeoJSON</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">application/geo+json</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">CIS RDF</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TODO:</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">CoverageJSON</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TODO:</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GeoTIFF</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">image/tiff; application=geotiff</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PNG</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">image/png</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">JPEG</p></td>
@@ -3757,7 +3603,7 @@ properties:
 <div class="title">Note</div>
 </td>
 <td class="content">
-Consider adding a table showing valid MIME-types for each CIS component.
+Consider adding a table showing valid media types for each CIS component.
 </td>
 </tr>
 </table>
@@ -3766,55 +3612,15 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="sect2">
 <h3 id="media-type-defaults"><a class="anchor" href="#media-type-defaults"></a>8.5. Default Encodings</h3>
 <div class="paragraph">
-<p>The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common. However, content negotiation is not required by the HTTP standard. So default encodings must be established.</p>
+<p>The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common.
+If not using content negotiation, the encoding must follow the media type described in the link to the resource from the collection.</p>
 </div>
-<table id="req_core_cov-mediatype-default" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/core/cov-mediatype-default</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The default media type for Range Set data SHALL be GeoTIFF.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>IF the <code>JSON</code> Conformance Class is advertised, then the default media type for content other than a Range Set SHALL be JSON or GeoJSON.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>IF the <code>JSON</code> Conformance Class is not advertised, then the default media type for content other than a Range Set SHALL be HTML.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">D</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The default media type for responses to <code>all</code> requests SHALL be multi-part using the appropriate media type for each component resource.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements_class_subset"><a class="anchor" href="#_requirements_class_subset"></a>9. Requirements Class Subset</h2>
+<h2 id="_requirements_class_coverage_subset"><a class="anchor" href="#_requirements_class_coverage_subset"></a>9. Requirements Class Coverage Subset</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The <code>core</code> Requirements Class provides parameters for filtering the results of an API-Coverages request.</p>
-</div>
 <div class="paragraph">
 <p>The Subset Requirements Class defines parameters for filtering n-dimensional Range Sets. Subsetting parameters may be mixed with other parameters, in no particular order, in the query part of a URL.</p>
 </div>
@@ -3828,7 +3634,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subset" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subset</a></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-subset" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-subset</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
@@ -3836,7 +3642,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_coverage-1/1.0/req/core" class="bare">http://www.opengis.net/spec/ogcapi_coverage-1/1.0/req/core</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_coverage-1/1.0/req/geodata-coverage" class="bare">http://www.opengis.net/spec/ogcapi_coverage-1/1.0/req/geodata-coverage</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
@@ -3847,16 +3653,16 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="paragraph">
 <p>The subset parameter is defined in the following Requirement:</p>
 </div>
-<table id="req_subset-definition" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_coverage_subset-definition" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 18</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/subset/definition</strong></p>
+<p><strong>/req/coverage-subset/definition</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -3899,16 +3705,16 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="paragraph">
 <p>The results of using a subset parameter are defined by the following Requirement:</p>
 </div>
-<table id="req_subset_subset-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_coverage_subset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 19</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/subset/subset-success</strong></p>
+<p><strong>/req/coverage-subset/success</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -3920,7 +3726,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>Only that part of the coverage addressed SHALL be returned that falls within the bounds of the subset expression. The DomainSet shall be adjusted accordingly to the new boundaries (in case of trimming) and the reduced dimension (in case of slicing).</p>
+<p>Only that part of the coverage addressed SHALL be returned that falls within the bounds of the subset expression whereby a "*" (asterisk) in the position of a lower or upper limit along an axis denotes the coverage&#8217;s minimum or maximum extent along this axis, respectively. The DomainSet shall be adjusted accordingly to the new boundaries (in case of trimming) and the reduced dimension (in case of slicing).</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3930,19 +3736,19 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7dcoverageid%7d/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)</a>&#8201;&#8212;&#8201;returns a coverage cutout between (40,10) and (50,20), in the coverage&#8217;s Native Format</p>
+<p><a href="http://acme.com/oapi/collections/%7dcoverageid%7d/coverage/rangeset?subset=Lat(40,50)&amp;subset=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?subset=Lat(40,50)&amp;subset=Long(10,20)</a>&#8201;&#8212;&#8201;returns a coverage cutout between (40,10) and (50,20), in the coverage&#8217;s Native Format</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collection/%7bcoverageid%7d/coverage/rangeset?SUBSET=time(2019-03-27)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?SUBSET=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given, with all data available in the other dimensions (in case the coverage is Lat/Long/time the result will be a 2D image with its full Lat/Lon extent)</p>
+<p><a href="http://acme.com/oapi/collection/%7bcoverageid%7d/coverage/rangeset?subset=time(2019-03-27)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?subset=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given, with all data available in the other dimensions (in case the coverage is Lat/Long/time the result will be a 2D image with its full Lat/Lon extent)</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage?SUBSET=Lat((40,50)&amp;SUBSET=Long(10,20)</a>&#8201;&#8212;&#8201;returns a cutout from the coverage identified with extent between corner coordinates (40,10) and (50,20) (note: replace the _ in the URL by a comma character - an adoc issue)</p>
+<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage?subset=Lat(40,50)&amp;subset=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage?subset=Lat((40,50)&amp;subset=Long(10,20)</a>&#8201;&#8212;&#8201;returns a cutout from the coverage identified with extent between corner coordinates (40,10) and (50,20) (note: replace the _ in the URL by a comma character - an adoc issue)</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?SUBSET=Lat(40,50)&amp;SUBSET=Long(10,20)</a> &#8201;&#8212;&#8201;returns the range set of a coverage cutout between (40,10) and (50,20), in the coverage’s Native Format; no domain set, range type, and metadata will be returned (note: replace the _ in the URL by a comma character - an adoc issue)</p>
+<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage/rangeset?subset=Lat(40,50)&amp;subset=Long(10,20)">http://acme.com/oapi/collections/{coverageid}/coverage/rangeset?subset=Lat(40,50)&amp;SUBSET=Long(10,20)</a> &#8201;&#8212;&#8201;returns the range set of a coverage cutout between (40,10) and (50,20), in the coverage’s Native Format; no domain set, range type, and metadata will be returned (note: replace the _ in the URL by a comma character - an adoc issue)</p>
 </li>
 <li>
-<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage?SUBSET=time(%222019-03-27%22)">http://acme.com/oapi/collections/{coverageid}/coverage?SUBSET=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)</p>
+<p><a href="http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage?subset=time(%222019-03-27%22)">http://acme.com/oapi/collections/{coverageid}/coverage?subset=time("2019-03-27")</a>&#8201;&#8212;&#8201;returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)</p>
 </li>
 </ul>
 </div>
@@ -3966,7 +3772,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </ol>
 </div>
 <div class="paragraph">
-<p>The HTML Requirements Class restricts requirements defined in the <code>Core</code> Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the <code>Core</code> requirements which lay within each scope.</p>
+<p>The HTML Requirements Class restricts requirements defined in the <code>GeoData-Coverage</code> Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the <code>GeoData-Coverage</code> requirements which lay within each scope.</p>
 </div>
 <table id="rc_html" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4010,19 +3816,19 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="ulist">
 <ul>
 <li>
-<p><code>{root}/</code>: Landing Page</p>
+<p><code>{datasetAPI}/</code>: Dataset API Landing Page</p>
 </li>
 <li>
-<p><code>{root}/api</code>: API Description</p>
+<p><code>{datasetAPI}/api</code>: API Description</p>
 </li>
 <li>
-<p><code>{root}/conformance</code>: Conformance Classes</p>
+<p><code>{datasetAPI}/conformance</code>: Conformance Classes</p>
 </li>
 <li>
-<p><code>{root}/collections</code>: Collections</p>
+<p><code>{datasetAPI}/collections</code>: Collections</p>
 </li>
 <li>
-<p><code>{root}/collections/{coverageid}</code>: Collection Information</p>
+<p><code>{datasetAPI}/collections/{coverageid}</code>: Collection Information</p>
 </li>
 </ul>
 </div>
@@ -4033,7 +3839,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 20</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/html/api-common</strong></p>
 </div></div></td>
@@ -4065,7 +3871,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 21</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/html/conformance</strong></p>
 </div></div></td>
@@ -4083,27 +3889,27 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_offering"><a class="anchor" href="#_coverage_offering"></a>10.2. Coverage Offering</h3>
+<h3 id="_coverage_2"><a class="anchor" href="#_coverage_2"></a>10.2. Coverage</h3>
 <div class="paragraph">
-<p>This section covers the <a href="#coverage-clause">Coverage Offering</a> response for the
-<code>{root}/collections/{coverageid}/coverage</code> operation.</p>
+<p>This section covers the <a href="#coverage-clause">Coverage</a> response for the
+<code>{datasetAPI}/collections/{coverageid}/coverage</code> operation.</p>
 </div>
-<table id="req_html_cov-offer-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_html_coverage-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 22</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-offer-success</strong></p>
+<p><strong>/req/html/coverage-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-offer-success</p>
+<p>/req/core/coverage-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4115,85 +3921,40 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
+<p>The response SHALL be a valid HTML document</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_offering.json">coverage_offering.json</a>.</p>
+<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage.json">coverage.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_description"><a class="anchor" href="#_coverage_description"></a>10.3. Coverage Description</h3>
-<div class="paragraph">
-<p>This section covers the <a href="#coverage-description-clause">Coverage Description</a> response for the
-<code>{root}/collections/{coverageid}/coverage/description</code> operation.</p>
-</div>
-<table id="req_html_cov-desc-success" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-desc-success</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-desc-success</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A successful execution of the operation SHALL be reported as a response with a HTTP status code <code>200</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_description.json">coverage_description.json</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_coverage_domain_set"><a class="anchor" href="#_coverage_domain_set"></a>10.4. Coverage Domain Set</h3>
+<h3 id="_coverage_domain_set"><a class="anchor" href="#_coverage_domain_set"></a>10.3. Coverage Domain Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-domainset-clause">Coverage Domain Set</a> response for the
-<code>{root}/collections/{coverageid}/coverage/domainset</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/domainset</code> operation.</p>
 </div>
-<table id="req_html_cov-ds-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_html_domainset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 23</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-ds-success</strong></p>
+<p><strong>/req/html/domainset-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-ds-success</p>
+<p>/req/core/domainset-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4205,40 +3966,40 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
+<p>The response SHALL be a valid HTML document</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_domainset.json">coverage_domainset.json</a>.</p>
+<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_domainset.json">coverage_domainset.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_range_type"><a class="anchor" href="#_coverage_range_type"></a>10.5. Coverage Range Type</h3>
+<h3 id="_coverage_range_type"><a class="anchor" href="#_coverage_range_type"></a>10.4. Coverage Range Type</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangetype-clause">Coverage Range Type</a> response for the
-<code>{root}/collections/{coverageid}/coverage/rangetype</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/rangetype</code> operation.</p>
 </div>
-<table id="req_html_cov-rt-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_html_rangetype-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 24</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-rt-success</strong></p>
+<p><strong>/req/html/rangetype-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-rt-success</p>
+<p>/req/core/rangetype-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4250,40 +4011,40 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
+<p>The response SHALL be a valid HTML document</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangetype.json">coverage_rangetype.json</a>.</p>
+<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangetype.json">coverage_rangetype.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_range_set"><a class="anchor" href="#_coverage_range_set"></a>10.6. Coverage Range Set</h3>
+<h3 id="_coverage_range_set"><a class="anchor" href="#_coverage_range_set"></a>10.5. Coverage Range Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangeset-clause">Coverage Range Set</a> response for the
-<code>{root}/collections/{coverageid}/coverage/rangeset</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/rangeset</code> operation.</p>
 </div>
-<table id="req_html_cov-rs-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_html_rangeset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 25</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-rs-success</strong></p>
+<p><strong>/req/html/rangeset-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-rs-success</p>
+<p>/req/core/rangeset-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4295,40 +4056,40 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
+<p>The response SHALL be a valid HTML document</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangeset.json">coverage_rangeset.json</a>.</p>
+<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangeset.json">coverage_rangeset.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_metadata"><a class="anchor" href="#_coverage_metadata"></a>10.7. Coverage Metadata</h3>
+<h3 id="_coverage_metadata"><a class="anchor" href="#_coverage_metadata"></a>10.6. Coverage Metadata</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-metadata-clause">Coverage Metadata</a> response for the
-<code>{root}/collections/{coverageid}/coverage/metadata</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/metadata</code> operation.</p>
 </div>
-<table id="req_html_cov-md-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_html_metadata-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 26</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-md-success</strong></p>
+<p><strong>/req/html/metadata-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-md-success</p>
+<p>/req/core/metadata-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4340,58 +4101,13 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
+<p>The response SHALL be a valid HTML document</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_metadata.json">coverage_metadata.json</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_coverage_all"><a class="anchor" href="#_coverage_all"></a>10.8. Coverage All</h3>
-<div class="paragraph">
-<p>This section covers the <a href="#coverage-all-clause">Coverage All</a> response for the
-<code>{root}/collections/{coverageid}/coverage/all</code> operation.</p>
-</div>
-<table id="req_html_cov-all-success" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/html/cov-all-success</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-all-success</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A successful execution of the operation SHALL be reported as a response with a HTTP status code <code>200</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a vaild HTML document</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage.json">coverage.json</a>.</p>
+<p>The response SHALL include content equivalent to that defined in JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_metadata.json">coverage_metadata.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4400,7 +4116,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </div>
 </div>
 <div class="sect1">
-<h2 id="requirements-class-json-clause"><a class="anchor" href="#requirements-class-json-clause"></a>11. Requirements Class JSON</h2>
+<h2 id="requirements-class-cisjson-clause"><a class="anchor" href="#requirements-class-cisjson-clause"></a>11. Requirements Class CIS JSON</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following requirements apply to an OGC API-Coverage implementation when the following conditions apply:</p>
@@ -4408,15 +4124,15 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The API advertises conformance to the JSON Conformance Class</p>
+<p>The API advertises conformance to the CIS JSON Conformance Class</p>
 </li>
 <li>
-<p>The client negotiates a JSON or GeoJSON format</p>
+<p>The client negotiates a JSON or CIS JSON format</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The JSON Requirements Class restricts requirements defined in the <code>Core</code> Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the <code>Core</code> requirements which lay within each scope.</p>
+<p>The CIS JSON Requirements Class restricts requirements defined in the <code>GeoData-Coverage</code> Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the <code>GeoData-Coverage</code> requirements which lay within each scope.</p>
 </div>
 <table id="rc_json" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4428,7 +4144,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirements Class</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_coverages-1/1.0/req/json" class="bare">http://www.opengis.net/spec/ogcapi_coverages-1/1.0/req/json</a></p></td>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_coverages-1/1.0/req/cisjson" class="bare">http://www.opengis.net/spec/ogcapi_coverages-1/1.0/req/cisjson</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
@@ -4440,16 +4156,12 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/geojson">API-Common GeoJSON</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#rfc7946">GeoJSON</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json">API-Common JSON</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Pre-conditions</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1) The API advertises conformance to the JSON Conformance Class<br>
-2) The client negotiates use of the JSON or GeoJSON encoding.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1) The API advertises conformance to the CIS JSON Conformance Class<br>
+2) The client negotiates use of the JSON or CIS JSON encoding.</p></td>
 </tr>
 </tbody>
 </table>
@@ -4461,32 +4173,32 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="ulist">
 <ul>
 <li>
-<p><code>{root}/</code>: Landing Page</p>
+<p><code>{datasetAPI}/</code>: Dataset API Landing Page</p>
 </li>
 <li>
-<p><code>{root}/api</code>: API Description</p>
+<p><code>{datasetAPI}/api</code>: API Description</p>
 </li>
 <li>
-<p><code>{root}/conformance</code>: Conformance Classes</p>
+<p><code>{datasetAPI}/conformance</code>: Conformance Classes</p>
 </li>
 <li>
-<p><code>{root}/collections</code>: Collections</p>
+<p><code>{datasetAPI}/collections</code>: Collections</p>
 </li>
 <li>
-<p><code>{root}/collections/{coverageid}</code>: Collection Information</p>
+<p><code>{datasetAPI}/collections/{coverageid}</code>: Collection Information</p>
 </li>
 </ul>
 </div>
-<table id="req_json_api-common" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_api-common" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 27</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/api-common</strong></p>
+<p><strong>/req/cisjson/api-common</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -4501,7 +4213,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/geojson" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/geojson</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4509,16 +4221,16 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <div class="paragraph">
 <p>It is also necessary to advertise conformance with this Requirements Class.</p>
 </div>
-<table id="req_json_conformance" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_conformance" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 28</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/conformance</strong></p>
+<p><strong>/req/cisjson/conformance</strong></p>
 </div></div></td>
 </tr>
 <tr>
@@ -4527,34 +4239,34 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/json" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/json</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson" class="bare">http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson</a></p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_offering_2"><a class="anchor" href="#_coverage_offering_2"></a>11.2. Coverage Offering</h3>
+<h3 id="_coverage_3"><a class="anchor" href="#_coverage_3"></a>11.2. Coverage</h3>
 <div class="paragraph">
-<p>This section covers the <a href="#coverage-clause">Coverage Offering</a> response for the
-<code>{root}/collections/{coverageid}/coverage</code> operation.</p>
+<p>This section covers the <a href="#coverage-clause">Coverage</a> response for the
+<code>{datasetAPI}/collections/{coverageid}/coverage</code> operation.</p>
 </div>
-<table id="req_json_cov-offer-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_coverage-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 36</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 29</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-offer-success</strong></p>
+<p><strong>/req/cisjson/coverage-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-offer-success</p>
+<p>/req/core/coverage-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4566,73 +4278,34 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_offering.json">coverage_offering.json</a>.</p>
+<p>The response SHALL be a CIS JSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage.json">coverage.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_description_2"><a class="anchor" href="#_coverage_description_2"></a>11.3. Coverage Description</h3>
-<div class="paragraph">
-<p>This section covers the <a href="#coverage-description-clause">Coverage Description</a> response for the
-<code>{root}/collections/{coverageid}/coverage/description</code> operation.</p>
-</div>
-<table id="req_json_cov-desc-success" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 37</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-desc-success</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-desc-success</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A successful execution of the operation SHALL be reported as a response with a HTTP status code <code>200</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/CIS/coverage_description.json">coverage_description.json</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_coverage_domain_set_2"><a class="anchor" href="#_coverage_domain_set_2"></a>11.4. Coverage Domain Set</h3>
+<h3 id="_coverage_domain_set_2"><a class="anchor" href="#_coverage_domain_set_2"></a>11.3. Coverage Domain Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-domainset-clause">Coverage Domain Set</a> response for the
-<code>{root}/collections/{coverageid}/coverage/domainset</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/domainset</code> operation.</p>
 </div>
-<table id="req_json_cov-ds-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_domainset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 38</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 30</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-ds-success</strong></p>
+<p><strong>/req/cisjson/domainset-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-ds-success</p>
+<p>/req/core/domainset-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4644,34 +4317,34 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_domainset.json">coverage_domainset.json</a>.</p>
+<p>The response SHALL be a CIS JSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_domainset.json">coverage_domainset.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_range_type_2"><a class="anchor" href="#_coverage_range_type_2"></a>11.5. Coverage Range Type</h3>
+<h3 id="_coverage_range_type_2"><a class="anchor" href="#_coverage_range_type_2"></a>11.4. Coverage Range Type</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangetype-clause">Coverage Range Type</a> response for the
-<code>{root}/collections/{coverageid}/coverage/rangetype</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/rangetype</code> operation.</p>
 </div>
-<table id="req_json_cov-rt-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_rangetype-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 39</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 31</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-rt-success</strong></p>
+<p><strong>/req/cisjson/rangetype-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-rt-success</p>
+<p>/req/core/rangetype-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4683,34 +4356,34 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangetype.json">coverage_rangetype.json</a>.</p>
+<p>The response SHALL be a CIS JSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangetype.json">coverage_rangetype.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_range_set_2"><a class="anchor" href="#_coverage_range_set_2"></a>11.6. Coverage Range Set</h3>
+<h3 id="_coverage_range_set_2"><a class="anchor" href="#_coverage_range_set_2"></a>11.5. Coverage Range Set</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-rangeset-clause">Coverage Range Set</a> response for the
-<code>{root}/collections/{coverageid}/coverage/rangeset</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/rangeset</code> operation.</p>
 </div>
-<table id="req_json_cov-rs-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_rangeset-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 40</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 32</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-rs-success</strong></p>
+<p><strong>/req/cisjson/rangeset-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-rs-success</p>
+<p>/req/core/rangeset-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4722,34 +4395,34 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangeset.json">coverage_rangeset.json</a>.</p>
+<p>The response SHALL be a CIS JSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_rangeset.json">coverage_rangeset.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_coverage_metadata_2"><a class="anchor" href="#_coverage_metadata_2"></a>11.7. Coverage Metadata</h3>
+<h3 id="_coverage_metadata_2"><a class="anchor" href="#_coverage_metadata_2"></a>11.6. Coverage Metadata</h3>
 <div class="paragraph">
 <p>This section covers the <a href="#coverage-metadata-clause">Coverage Metadata</a> response for the
-<code>{root}/collections/{coverageid}/coverage/metadata</code> operation.</p>
+<code>{datasetAPI}/collections/{coverageid}/coverage/metadata</code> operation.</p>
 </div>
-<table id="req_json_cov-md-success" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="req_cisjson_metadata-success" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 41</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 33</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-md-success</strong></p>
+<p><strong>/req/cisjson/metadata-success</strong></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-md-success</p>
+<p>/req/core/metadata-success</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4761,46 +4434,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_metadata.json">coverage_metadata.json</a>.</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_coverage_all_2"><a class="anchor" href="#_coverage_all_2"></a>11.8. Coverage All</h3>
-<div class="paragraph">
-<p>This section covers the <a href="#coverage-all-clause">Coverage All</a> response for the
-<code>{root}/collections/{coverageid}/coverage/all</code> operation.</p>
-</div>
-<table id="req_json_cov-all-success" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 42</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><strong>/req/json/cov-all-success</strong></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Restricts</strong></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>/req/core/cov-all-success</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>A successful execution of the operation SHALL be reported as a response with a HTTP status code <code>200</code>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p>The response SHALL be a JSON or GeoJSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage.json">coverage.json</a>.</p>
+<p>The response SHALL be a JSON document which validates against the JSON schema <a href="https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_metadata.json">coverage_metadata.json</a>.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4851,7 +4485,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 43</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 34</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>/req/oas30/oas-common</strong></p></td>
 </tr>
 <tr>
@@ -4874,7 +4508,7 @@ Consider adding a table showing valid MIME-types for each CIS component.
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 44</strong></p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Requirement 35</strong></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
 <p><strong>/req/oas30/conformance</strong></p>
 </div></div></td>
@@ -5000,7 +4634,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-01-29 15:35:07 UTC
+Last updated 2020-08-04 21:34:40 +0100
 </div>
 </div>
 </body>
