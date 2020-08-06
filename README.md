@@ -3,8 +3,8 @@
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
 standard for accessing geospatial data resources on the web as a coverage, "OGC API - Coverages".
 
-OGC API standards define modular API building blocks to spatially enable Web
-APIs in a consistent way. [OpenAPI](http://openapis.org) is used to define the
+[OGC API standards](https://ogcapi.ogc.org) define modular API building blocks to spatially enable Web APIs
+in a consistent way. [OpenAPI](http://openapis.org) is used to define the
 reusable API building blocks with responses available in different representations,
 such as JSON and HTML, as well as more domain specific formats (e.g. CIS RDF, netCDF, GeoTIFF).
 
