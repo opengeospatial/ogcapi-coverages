@@ -374,3 +374,6 @@ The Coverages API Standards Working Group (SWG) is the group at OGC responsible 
 * [Coverages API Standards Working Group Charter](charter/OGC-Coverages-SWG-Charter.adoc)
 * [Open issues](https://github.com/opengeospatial/ogc_api_coverages/issues)
 * [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/LICENSE)
+
+
+Pull Requests from contributors are welcomed. However, please note that by sending a Pull Request or Commit to this GitHub repository, you are agreeing to the terms in the Observer Agreement https://portal.ogc.org/files/?artifact_id=92169
