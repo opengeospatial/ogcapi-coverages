@@ -44,3 +44,4 @@ Whenever a data item from a CIS-external namespace is referenced this constitute
 |SWE Common |swe |http://www.opengis.net/swe/2.0 |SWE Common 2.0
 |SML |sml |http://www.opengis.net/sensorml/2.0 |SensorML 2.0
 |====
+

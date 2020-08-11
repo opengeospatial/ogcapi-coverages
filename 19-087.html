@@ -462,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date: &lt;yyyy-mm-dd&gt;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date: 2020-08-03</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date: 2020-08-10</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0" class="bare">http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0</a></p></td>
@@ -630,9 +630,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#coverage-rangetype-clause">7.6.2. Coverage Range Type</a></li>
 <li><a href="#coverage-rangeset-clause">7.6.3. Coverage Range Set</a></li>
 <li><a href="#coverage-metadata-clause">7.6.4. Coverage Metadata</a></li>
-<li><a href="#_parameter_bbox">7.6.5. Parameter bbox</a></li>
-<li><a href="#_parameter_datetime">7.6.6. Parameter datetime</a></li>
-<li><a href="#_parameter_limit">7.6.7. Parameter Limit</a></li>
+<li><a href="#bbox-section">7.6.5. Parameter bbox</a></li>
+<li><a href="#datetime--section">7.6.6. Parameter datetime</a></li>
+<li><a href="#limit-section">7.6.7. Parameter Limit</a></li>
 <li><a href="#_combinations_of_filter_parameters">7.6.8. Combinations of Filter Parameters</a></li>
 <li><a href="#_paged_response">7.6.9. Paged Response</a></li>
 </ul>
@@ -691,7 +691,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_revision_history">Annex B: Revision History</a></li>
-<li><a href="#Bibliography">Annex C: Bibliography</a></li>
+<li><a href="#Glossary">Annex C: Glossary</a></li>
+<li><a href="#Bibliography">Annex D: Bibliography</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -895,16 +896,13 @@ Attention is drawn to the possibility that some of the elements of this document
 <p><a id="rfc6570"></a> Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., Orchard, D.: IETF RFC 6570, <strong>URI Template</strong>, <a href="https://tools.ietf.org/html/rfc6570">RFC 6570</a></p>
 </li>
 <li>
-<p><a id="GeoJSON"></a> IETF RFC 7946: <strong>The GeoJSON Format</strong>, <a href="https://tools.ietf.org/rfc/rfc7946.txt">eoJSON</a></p>
-</li>
-<li>
 <p><a id="rfc8288"></a> Nottingham, M.: IETF RFC 8288, <strong>Web Linking</strong>, <a href="http://tools.ietf.org/rfc/rfc8288.txt">RFC 8288</a></p>
 </li>
 <li>
-<p><a id="J2K"></a> International Telecommunication Union, <strong>ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system</strong>, June, 2019, <a href="https://www.itu.int/rec/T-REC-T.800-201906-I/en" class="bare">https://www.itu.int/rec/T-REC-T.800-201906-I/en</a></p>
+<p><a id="OAPI_Common-Core"></a> OGC 19-072: <strong>OGC API - Common - Part 1: Core</strong>, (Draft) <a href="https://github.com/opengeospatial/oapi_common/blob/Master/19-072.pdf">https://github.com/opengeospatial/oapi_common/blob/Master/19-072.pdf</a></p>
 </li>
 <li>
-<p><a id="OAPI_Common"></a> OGC 19-072: <strong>OGC API (OAPI) Common Specification</strong>, (Draft) <a href="https://github.com/opengeospatial/oapi_common">API Common</a></p>
+<p><a id="OAPI_Common-Geodata"></a> OGC 20-024: <strong>OGC API - Common - Part 2: Geospatial Data</strong>, (Draft) <a href="https://github.com/opengeospatial/oapi_common/blob/Master/20-024.pdf">https://github.com/opengeospatial/oapi_common/blob/Master/20-024.pdf</a></p>
 </li>
 <li>
 <p><a id="CIS_1_1"></a> OGC 09-146: <strong>OGC Coverage Implementation Schema (CIS)</strong>, version 1.1, <a href="https://portal.opengeospatial.org/files/?artifact_id=72392&amp;version=2">CIS</a></p>
@@ -931,69 +929,37 @@ Attention is drawn to the possibility that some of the elements of this document
 <p><a id="HTML5"></a> W3C: <strong>HTML5</strong>, W3C Recommendation, <a href="http://www.w3.org/TR/html5/">HTML5</a></p>
 </li>
 <li>
-<p><a id="RDF"></a> W3C, <strong>RDF 1.1 Semantics</strong>, February 2014, <a href="https://www.w3.org/TR/rdf11-mt/" class="bare">https://www.w3.org/TR/rdf11-mt/</a></p>
+<p>OGC: OGC 07-011, <strong>Abstract Specification Topic 6: The Coverage Type and its Subtypes</strong>, version 7.0 (identical to ISO 19123:2005), 2007</p>
 </li>
 <li>
-<p>OGC: OGC 07-011, Abstract Specification Topic 6: The Coverage Type and its Subtypes, version 7.0 (identical to ISO 19123:2005), 2007</p>
+<p>OGC: OGC 08-094, <strong>OGC® SWE Common Data Model Encoding Standard</strong>, version 2, 2011</p>
 </li>
 <li>
-<p>OGC: OGC 07-036, Geography Markup Language (GML) Encoding Standard, version 3.2.1, 2007</p>
+<p>OGC: OGC 12-000, <strong>OGC® SensorML: Model and XML Encoding Standard</strong>, version 2, 2014</p>
 </li>
 <li>
-<p>OGC: OGC 10-129r1, OGC® Geography Markup Language (GML) – Extended schemas and encoding rules (GML 3.3), version 3.3, 2012</p>
+<p>OGC: OGC 09-146r2, <strong>GML 3.2.1 Application Schema – Coverages</strong>, version 1.0.1, 2012</p>
 </li>
 <li>
-<p>OGC: OGC 08-094, OGC® SWE Common Data Model Encoding Standard, version 2, 2011</p>
+<p>OGC: OGC 16-083, <strong>Coverage Implementation Schema – ReferenceableGridCoverage Extension</strong>, version 1, 2017</p>
 </li>
 <li>
-<p>OGC: OGC 12-000, OGC® SensorML: Model and XML Encoding Standard, version 2, 2014</p>
+<p>OGC: OGC 09-110r4, <strong>Web Coverage Service (WCS) Core Interface Standard</strong>, version 2, 2012</p>
 </li>
 <li>
-<p>OGC: OGC 09-146r2, GML 3.2.1 Application Schema – Coverages, version 1.0.1, 2012</p>
+<p>OGC: OGC 13-102r2, <strong>Name type specification – Time and index coordinate reference system definitions</strong> (OGC Policy Document), version 1, 2014</p>
 </li>
 <li>
-<p>OGC: OGC 16-083, Coverage Implementation Schema – ReferenceableGridCoverage Extension, version 1, 2017</p>
+<p>IETF: RFC 7159, <strong>The JavaScript Object Notation (JSON) Data Interchange Format</strong>, <a href="https://www.ietf.org/rfc/rfc7159.txt">https://www.ietf.org/rfc/rfc7159.txt</a>, 2014</p>
 </li>
 <li>
-<p>OGC: OGC 09-110r4, Web Coverage Service (WCS) Core Interface Standard, version 2, 2012</p>
+<p>W3C: W3C JSON-LD 1.0, <strong>A JSON-based Serialization for Linked Data</strong>. <a href="http://www.w3.org/TR/json-ld/">http://www.w3.org/TR/json-ld/</a>, 2014</p>
 </li>
 <li>
-<p>OGC: OGC 13-102r2, Name type specification – Time and index coordinate reference system definitions (OGC Policy Document), version 1, 2014</p>
+<p>W3C: W3C JSON-LD 1.0 <strong>Processing Algorithms and API</strong>. <a href="http://www.w3.org/TR/json-ld-api">http://www.w3.org/TR/json-ld-api</a>, 2014</p>
 </li>
 <li>
-<p>OGC: OGC 14-121, Web Information Service (WIS), version 1 (unpublished)</p>
-</li>
-<li>
-<p>W3C: W3C Recommendation, XML Path Language (XPath), version 2, 2007</p>
-</li>
-<li>
-<p>W3C: W3C Recommendation, XML Linking Language (XLink), version 1, 2001</p>
-</li>
-<li>
-<p>W3C: W3C Working Draft, The app: URI scheme, 2013</p>
-</li>
-<li>
-<p>ISO/IEC: ISO/IEC 19757-3:2006 Information technology – Document Schema Definition Languages (DSDL) – Part 3: Rule-based validation – Schematron, 2006</p>
-</li>
-<li>
-<p>IETF: RFC 2183, 1997</p>
-</li>
-<li>
-<p>IETF: RFC 2387, 1998</p>
-</li>
-<li>
-<p>IETF: RFC 2392, 1998
-[18] IETF: RFC 3986, 2005
-[19] IETF: RFC 7159, The JavaScript Object Notation (JSON) Data Interchange Format  <a href="https://www.ietf.org/rfc/rfc7159.txt" class="bare">https://www.ietf.org/rfc/rfc7159.txt</a>, 2014</p>
-</li>
-<li>
-<p>W3C: W3C JSON-LD 1.0, A JSON-based Serialization for Linked Data. <a href="http://www.w3.org/TR/json-ld/" class="bare">http://www.w3.org/TR/json-ld/</a>, 2014</p>
-</li>
-<li>
-<p>W3C: W3C JSON-LD 1.0 Processing Algorithms and API. <a href="http://www.w3.org/TR/json-ld-api" class="bare">http://www.w3.org/TR/json-ld-api</a>, 2014</p>
-</li>
-<li>
-<p>W3C: W3C RDF 1.1 Concepts and Abstract Syntax. <a href="https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/" class="bare">https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/</a>, 2014</p>
+<p>W3C: W3C RDF 1.1 <strong>Concepts and Abstract Syntax.</strong> <a href="https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/">https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/</a>, 2014</p>
 </li>
 </ul>
 </div>
@@ -1003,7 +969,7 @@ Attention is drawn to the possibility that some of the elements of this document
 <h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and Definitions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document uses the terms defined in Sub-clause 5.3 of <a href="https://portal.opengeospatial.org/files/?artifact_id=38867">OGC Web Services Common</a> (OGC 06-121r9), which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
+<p>This document uses the terms defined in Sub-clause 5 of <a href="https://github.com/opengeospatial/oapi_common/blob/master/19-072.pdf">OGC API - Common - Part 1: Core</a> (OGC 19-072), which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
 </div>
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
@@ -1211,13 +1177,16 @@ Attention is drawn to the possibility that some of the elements of this document
 </ul>
 </div>
 <div class="paragraph">
-<p>Some resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.</p>
+<p>Access Paths are used to build resource identifiers. It is recommended, but not required, that these paths</p>
+</div>
+<div class="paragraph">
+<p>Most resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.</p>
 </div>
 <div class="paragraph">
 <p><a href="#coverage-paths">Table 2</a> summarizes the access paths and relation types defined in this standard.</p>
 </div>
 <table id="coverage-paths" class="tableblock frame-all grid-all" style="width: 90%;">
-<caption class="title">Table 2. Coverage API Paths</caption>
+<caption class="title">Table 2. Coverage API Resources</caption>
 <colgroup>
 <col style="width: 28.5714%;">
 <col style="width: 14.2857%;">
@@ -1225,29 +1194,24 @@ Attention is drawn to the possibility that some of the elements of this document
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><strong>Path Template</strong></th>
-<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><strong>Relation</strong></th>
-<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><strong>Resource</strong></th>
+<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;">Resource URI</th>
+<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;">Relation Type</th>
+<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;">Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="tableblock halign-center valign-top" colspan="3" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Common</strong></p></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#landing-page">{datasetAPI}/</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:common:dataset</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Landing page for this dataset distribution</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{datasetAPI}/api</a>
-(not a fixed path)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{datasetAPI}/api</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>service-desc</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API description (e.g. OpenAPI)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{datasetAPI}/api</a>
-(not a fixed path)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#api-definition">{datasetAPI}/api</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>service-doc</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">API documentation (optional, e.g. HTML)</p></td>
 </tr>
@@ -1264,18 +1228,13 @@ Attention is drawn to the possibility that some of the elements of this document
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collectionInfo">{datasetAPI}/collections/{coverageId}</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:common:collection</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">resource corresponding to the collection with the unique identifier <code>{coverageId}</code>, which may be accessible as a coverage.
-The resource will describe key elements such as an <code>id</code>, <code>title</code>, <code>description</code>, available <code>crs</code> and <code>extent</code> (the coverage envelope) as well as
-links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set.
-It is comparable to a WCS <strong><em>DescribeCoverage</em></strong> response, with the exception that the range type and domain set may have to be retrieved separately by following a link
-to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">resource corresponding to the collection with the unique identifier <code>{coverageId}</code>, which may be accessible as a coverage. The resource will describe key elements such as an <code>id</code>, <code>title</code>, <code>description</code>, available <code>crs</code> and <code>extent</code> (the coverage envelope) as well as links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set. It is comparable to a WCS <strong><em>DescribeCoverage</em></strong> response, with the exception that the range type and domain set may have to be retrieved separately by following a link to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" colspan="3" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Coverages</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-clause">{datasetAPI}/collections/{coverageId}/coverage</a><br>
-(not a fixed path)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#coverage-clause">{datasetAPI}/collections/{coverageId}/coverage</a></p></td>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>ogc:coverage:coverage</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS <strong><em>GetCoverage</em></strong> response.</p></td>
 </tr>
@@ -1379,7 +1338,7 @@ to accommodate the case where they may be considerably large, and the domain set
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collection-access-section">Collections</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#collection-access-section">Collection Access</a></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections</a></p></td>
 </tr>
 <tr>
@@ -1456,7 +1415,7 @@ to accommodate the case where they may be considerably large, and the domain set
 <div class="sect2">
 <h3 id="geodata-coverage-dependencies-section"><a class="anchor" href="#geodata-coverage-dependencies-section"></a>7.2. Dependencies</h3>
 <div class="paragraph">
-<p>The OGC API-Coverages standard is an extension of the OGC API - Common - Part 1: Core and Part 2: Geospatial Data standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.</p>
+<p>The OGC API-Coverages standard is an extension of the OGC API - Common - Part 1: Core and Part 2: Geospatial Data Standards. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.</p>
 </div>
 <table id="req_core_api-common" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1476,13 +1435,13 @@ to accommodate the case where they may be considerably large, and the domain set
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core" class="bare">http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core" class="bare">http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections" class="bare">http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1496,7 +1455,26 @@ to accommodate the case where they may be considerably large, and the domain set
 <div class="sect3">
 <h4 id="landing-page"><a class="anchor" href="#landing-page"></a>7.3.1. API landing page</h4>
 <div class="paragraph">
-<p>The landing page provides links to start exploration of the resources offered by an API. Its most important component is a list of links. OGC API-Common already requires some common links. Those links are sufficient for this standard.</p>
+<p>The purpose of the landing page is to provide clients with a starting point for using the API. It provides the basic information needed to understand the purpose, structure, and capabilities of the API. The landing page also serves as the starting point for navigation. Any resource exposed through an API can be accessed using a path or link starting from the landing page.</p>
+</div>
+<div class="paragraph">
+<p>The resources exposed by API-Common Core include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A description of the API,</p>
+</li>
+<li>
+<p>A declaration of conformance classes,</p>
+</li>
+<li>
+<p>A list of coverages available.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Those resources are sufficient for this standard.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <caption class="title">Table 4. Dependencies</caption>
@@ -1707,7 +1685,7 @@ properties:
 <tr>
 <td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">B</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections" class="bare">http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections</a></p>
+<p><a href="http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata" class="bare">http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata</a></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1744,7 +1722,7 @@ properties:
     "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json",
     "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html",
     "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3",
-    "http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections",
+    "http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata",
     "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage",
     "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson",
     "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisrdf",
@@ -1781,7 +1759,7 @@ properties:
 <div class="sect3">
 <h4 id="collections"><a class="anchor" href="#collections"></a>7.4.1. Collections</h4>
 <div class="paragraph">
-<p>The <code>Collections</code> operation returns a set of metadata which describes the collections available from this API. Each collection on a Coverages API will be a coverage.</p>
+<p>The <code>Collections</code> operation returns a set of metadata which describes the collections available from this API. Each collection on a Coverages API will be a coverage. The coverages returned in the response can be limited using the <a href="#bbox-section">Bounding Box</a>, <a href="#datatime-section">Date-Time</a>, and <a href="#limit-section">Limit</a> parameters.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <caption class="title">Table 7. Dependencies</caption>
@@ -1816,8 +1794,41 @@ properties:
 <div class="sect4">
 <h5 id="_response_4"><a class="anchor" href="#_response_4"></a>7.4.1.2. Response</h5>
 <div class="paragraph">
-<p>A successful response to the <code>Collections Operation</code> is a document which includes summary metadata for each collection accessible though the API.</p>
+<p>A successful response to the <code>Collections Operation</code> is a document which includes <span class="underline">summary</span> metadata for each collection accessible though the API. To keep the size of this response manageable, the summary metadata should be limited to just those elements which are essential for clients and those which are needed to support the filtering parameters.</p>
 </div>
+<table id="rec_geodata_coverage_coverageinfo" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Recommendation 1</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p><strong>/rec/geodata-coverage/coverageinfo</strong></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="paragraph">
+<p>The coverage metadata provided through the /collections resource SHOULD be limited to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>TBD</p>
+</li>
+<li>
+<p>TBD</p>
+</li>
+<li>
+<p>TBD</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <div id="collections-schema" class="listingblock">
 <div class="title">Collections Response Schema</div>
 <div class="content">
@@ -1879,24 +1890,43 @@ properties:
 <div class="paragraph">
 <p>This operation is defined in the <code>Collections</code> conformance class of API-Common. No modifications are required to support <code>Coverage</code> resources. However, on a coverages API the the collections are also coverages. So in this standard the term <code>coverageid</code> is used instead of <code>collectionid</code>. The two terms are equivalent.</p>
 </div>
+<div class="paragraph">
+<p>The <code>Collections</code> conformance class describes two ways of performing this operation:</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Issue a <code>GET</code> request on the <code>{datasetAPI}/collections/{coverageid}</code> path</p>
 </li>
+<li>
+<p>Follow the <code>ogc:common:collection</code> link on the ?????</p>
+</li>
 </ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+What is the origin of the "ogc:common:collection" link?
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The {coverageid} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageid} is provided in the /collections response.</p>
 </div>
 <div class="paragraph">
-<p>Support for both the <code>/collections/{coverageid}</code> path is required by API-Common.</p>
+<p>Support for the <code>/collections/{coverageid}</code> path is recommended by API-Common.
+Support for the ogc:common:collection link is required.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_response_5"><a class="anchor" href="#_response_5"></a>7.4.2.2. Response</h5>
 <div class="paragraph">
-<p>A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageid} parameter.</p>
+<p>A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageid} parameter. This metadata is an extension to the set defined by API-Common. The additional elements are specific to Coverage resources.</p>
 </div>
 <div id="collectionInfo-schema" class="listingblock">
 <div class="title">Collection Information Response Schema</div>
@@ -1905,6 +1935,9 @@ properties:
 required:
   - id
   - links
+  - extent
+  - domainSet
+  - rangeType
 properties:
   id:
     type: string
@@ -1931,6 +1964,10 @@ properties:
     description: indicator about the type of the items in the collection (the default value is 'unknown').
     type: string
     default: unknown
+  domainSet:
+    $ref: coverage_domainset.json#/domainSet
+  rangeType:
+    $ref: coverage_rangetype.json#/rangeType
   crs:
     description: the list of coordinate reference systems supported by the API; the first item is the default coordinate reference system
     type: array
@@ -1947,12 +1984,12 @@ properties:
 <p>The following JSON fragment is an example of a response to an OGC API-Coverages Collection Information operation.</p>
 </div>
 <div id="collection-info-example" class="listingblock">
-<div class="title">Collection description resource  Example</div>
+<div class="title">Collection Information Resource Example</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-    "id": "buildings",
-    "title": "Buildings",
-    "description": "Buildings in the city of Bonn.",
+    "id": "CIS123456789",
+    "title": "Bonn Germany",
+    "description": "Image over the city of Bonn.",
     "extent": {
         "spatial": [ 7.01, 50.63, 7.22, 50.78 ],
         "temporal": [ "2010-02-15T12:34:56Z", "2018-03-18T12:11:00Z" ]
@@ -1962,14 +1999,13 @@ properties:
         "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
         "http://www.opengis.net/def/crs/EPSG/0/4326"
     ],
+    "domainSet": {"$href": "http://data.example.org/collections/CIS123456789/coverages/domainSet"},
+    "rangeType": {"$href": "http://data.example.org/collections/CIS123456789/coverages/rangeType"},
     "links": [
-      { "href": "http://data.example.org/collections/buildings/items",
-        "rel": "items", "type": "application/geo+json",
-        "title": "Buildings" },
-      { "href": "http://example.org/concepts/building.html",
-        "rel": "describedBy", "type": "text/html",
-        "title": "Feature catalogue for buildings" }
-    ]
+      { "href": "http://data.example.org/collections/CIS123456789/coverages",
+        "rel": "items", "type": "application/json",
+        "title": "CIS Image" }
+     ]
 }</code></pre>
 </div>
 </div>
@@ -2007,12 +2043,15 @@ properties:
 </ul>
 </div>
 <div class="paragraph">
-<p>The coverage containing all of those components is accessible at</p>
+<p>A coverage containing the <code>DomainSet</code>, <code>RangeType</code>, <code>RangeSet</code>, and <code>Metadata</code>  components is accessible at</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>/coverage</code>: Returns <code>DomainSet</code>, <code>RangeType</code>, <code>RangeSet</code>, and <code>Metadata</code></p>
+<p>The relative path <code>/coverage</code></p>
+</li>
+<li>
+<p>The link relation <code>ogc:coverage:coverage</code></p>
 </li>
 </ul>
 </div>
@@ -2031,7 +2070,7 @@ properties:
 <div class="sect3">
 <h4 id="coverage-clause"><a class="anchor" href="#coverage-clause"></a>7.5.1. Coverage</h4>
 <div class="paragraph">
-<p>The <code>Coverage</code> operation returns all the components of the coverage (rangeset, domain set, range type, meatadata). It is comparable to a WCS GetCoverage operation.</p>
+<p>The <code>Coverage</code> operation returns all the components of the coverage (rangeset, domain set, range type, metadata). It is comparable to a WCS GetCoverage operation.</p>
 </div>
 <div class="sect4">
 <h5 id="_operation_6"><a class="anchor" href="#_operation_6"></a>7.5.1.1. Operation</h5>
@@ -3126,7 +3165,7 @@ It would be difficult for static servers, and paging makes less sense for covera
 </div>
 </div>
 <div class="sect3">
-<h4 id="_parameter_bbox"><a class="anchor" href="#_parameter_bbox"></a>7.6.5. Parameter bbox</h4>
+<h4 id="bbox-section"><a class="anchor" href="#bbox-section"></a>7.6.5. Parameter bbox</h4>
 <div class="paragraph">
 <p>The Bounding Box (bbox) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.</p>
 </div>
@@ -3164,7 +3203,7 @@ It would be difficult for static servers, and paging makes less sense for covera
 </table>
 </div>
 <div class="sect3">
-<h4 id="_parameter_datetime"><a class="anchor" href="#_parameter_datetime"></a>7.6.6. Parameter datetime</h4>
+<h4 id="datetime--section"><a class="anchor" href="#datetime--section"></a>7.6.6. Parameter datetime</h4>
 <div class="paragraph">
 <p>The Date-Time (datetime) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.</p>
 </div>
@@ -3202,7 +3241,7 @@ It would be difficult for static servers, and paging makes less sense for covera
 </table>
 </div>
 <div class="sect3">
-<h4 id="_parameter_limit"><a class="anchor" href="#_parameter_limit"></a>7.6.7. Parameter Limit</h4>
+<h4 id="limit-section"><a class="anchor" href="#limit-section"></a>7.6.7. Parameter Limit</h4>
 <div class="paragraph">
 <p>The Limit (limit) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.</p>
 </div>
@@ -3646,7 +3685,7 @@ If not using content negotiation, the encoding must follow the media type descri
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#CIS_1.1">OGC Coverage Implementation Schema (CIS)</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="#CIS_1_1">OGC Coverage Implementation Schema (CIS)</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -3672,19 +3711,19 @@ If not using content negotiation, the encoding must follow the media type descri
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-BNF" data-lang="BNF"> SubsetSpec:        subset=axisName(intervalOrPoint)
- axisName:          {NCName}
- intervalOrPoint:   interval | point
- interval:          low : high
- low:               point | *
- high:              point | *
- point:             {number} | "{text}"
+<pre class="highlight"><code class="language-BNF" data-lang="BNF">  SubsetSpec:        subset=axisName(intervalOrPoint)
+  axisName:          {NCName}
+  intervalOrPoint:   interval | point
+  interval:          low : high
+  low:               point | *
+  high:              point | *
+  point:             {number} | "{text}"
 
- Where:
-    " = double quote = ASCII code 0x42,
-    {NCName} is an XML-style identifier not containing ":" (colon) characters,
-    {number} is an integer or floating-point number, and
-    {text} is some general ASCII text (such as a time and date notation in ISO 8601).</code></pre>
+  Where:
+     \" = double quote = ASCII code 0x42,
+     {NCName} is an XML-style identifier not containing ":" (colon) characters,
+     {number} is an integer or floating-point number, and
+     {text} is some general ASCII text (such as a time and date notation in ISO 8601).</code></pre>
 </div>
 </div></div></td>
 </tr>
@@ -4610,21 +4649,148 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 </div>
 <div class="sect1">
-<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex C: Bibliography</h2>
+<h2 id="Glossary"><a class="anchor" href="#Glossary"></a>Annex C: Glossary</h2>
+<div class="sectionbody">
+<div id="ctm-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Conformance Test Module</strong><br>
+set of related tests, all within a single conformance test class (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>NOTE:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">When no ambiguity is possible, the word <code>test</code> may be omitted. i.e. <a href="#ctm-definition">conformance test module</a> is the same as <a href="#ctm-definition">conformance module</a>. Conformance modules may be nested in a hierarchical way.<br>
+This term and those associated to it are included here for consistency with ISO 19105.</p></td>
+</tr>
+</tbody>
+</table>
+<div id="ctc-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Conformance Test Class; Conformance Test Level</strong><br>
+set of <a href="#ctm-definition">conformance test modules</a> that must be applied to receive a single <strong>certificate of conformance</strong>. (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>NOTE:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">When no ambiguity is possible, the word <code>test</code> may be left out, so <a href="#ctc-definition">conformance test class</a> may be called a <a href="#ctc-definition">conformance class</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<div id="ets-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Executable Test Suite (ETS)</strong><br>
+A set of code (e.g. Java and CTL) that provides runtime tests for the assertions defined by the ATS. Test data required to do the tests are part of the ETS <a href="https://portal.opengeospatial.org/files/?artifact_id=55234">(OGC 08-134)</a></p>
+</li>
+</ul>
+</div>
+<div id="recomendation-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Recommendation</strong><br>
+expression in the content of a document conveying that among several possibilities one is recommended as particularly suitable, without mentioning or excluding others, or that a certain course of action is preferred but not necessarily required, or that (in the negative form) a certain possibility or course of action is deprecated but not prohibited (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>NOTE:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">"Although using normative language, a <a href="#recomendation-definition">recommendation</a> is not a <a href="#requirement-definition">requirement</a>. The usual form replaces the <code>shall</code> (imperative or command) of a <a href="#requirement-definition">requirement</a> with a <code>should</code> (suggestive or conditional)." (ISO Directives Part 2)</p></td>
+</tr>
+</tbody>
+</table>
+<div id="requirement-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Requirement</strong><br>
+expression in the content of a document conveying criteria to be fulfilled if compliance with the document is to be claimed and from which no deviation is permitted (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<div id="requirements-class-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Requirements Class</strong><br>
+aggregate of all requirement modules that must all be satisfied to satisfy a conformance test class (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<div id="requirements-module-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Requirements Module</strong><br>
+aggregate of <a href="#requirement-definition">requirements</a> and <a href="#recomendation-defintion">recommendations</a> of a specification against a single <a href="#standardization-target-definition">standardization target</a> type (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<div id="standardization-target-definition" class="ulist">
+<ul>
+<li>
+<p><strong>Standardization Target</strong><br>
+entity to which some requirements of a standard apply (<a href="#ogc08-131r3">OGC 08-131r3</a>)</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 90.9091%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>NOTE:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The standardization target is the entity which may receive a certificate of conformance for a requirements class.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><a id="SDWBP"></a> W3C/OGC: Spatial Data on the Web Best Practices, W3C Working Group Note 28 September 2017, <a href="https://www.w3.org/TR/sdw-bp/" class="bare">https://www.w3.org/TR/sdw-bp/</a></p>
+<p><a id="SDWBP"></a> W3C/OGC: <strong>Spatial Data on the Web Best Practices</strong>, W3C Working Group Note 28 September 2017, <a href="https://www.w3.org/TR/sdw-bp/" class="bare">https://www.w3.org/TR/sdw-bp/</a></p>
 </li>
 <li>
-<p><a id="DWBP"></a> W3C: Data on the Web Best Practices, W3C Recommendation 31 January 2017, <a href="https://www.w3.org/TR/dwbp/" class="bare">https://www.w3.org/TR/dwbp/</a></p>
+<p><a id="DWBP"></a> W3C: <strong>Data on the Web Best Practices</strong>, W3C Recommendation 31 January 2017, <a href="https://www.w3.org/TR/dwbp/" class="bare">https://www.w3.org/TR/dwbp/</a></p>
 </li>
 <li>
-<p><a id="DCAT"></a> W3C: Data Catalog Vocabulary, W3C Recommendation 16 January 2014, <a href="https://www.w3.org/TR/vocab-dcat/" class="bare">https://www.w3.org/TR/vocab-dcat/</a></p>
+<p><a id="DCAT"></a> W3C: <strong>Data Catalog Vocabulary</strong>, W3C Recommendation 16 January 2014, <a href="https://www.w3.org/TR/vocab-dcat/" class="bare">https://www.w3.org/TR/vocab-dcat/</a></p>
 </li>
 <li>
-<p><a id="link-relations"></a> IANA: Link Relation Types, <a href="https://www.iana.org/assignments/link-relations/link-relations.xml" class="bare">https://www.iana.org/assignments/link-relations/link-relations.xml</a></p>
+<p><a id="link-relations"></a> IANA: <strong>Link Relation Types</strong>, <a href="https://www.iana.org/assignments/link-relations/link-relations.xml" class="bare">https://www.iana.org/assignments/link-relations/link-relations.xml</a></p>
+</li>
+<li>
+<p><a id="J2K"></a> International Telecommunication Union, <strong>ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system</strong>, June, 2019, <a href="https://www.itu.int/rec/T-REC-T.800-201906-I/en" class="bare">https://www.itu.int/rec/T-REC-T.800-201906-I/en</a></p>
+</li>
+<li>
+<p><a id="RDF"></a> W3C, <strong>RDF 1.1 Semantics</strong>, February 2014, <a href="https://www.w3.org/TR/rdf11-mt/" class="bare">https://www.w3.org/TR/rdf11-mt/</a></p>
+</li>
+<li>
+<p>OGC: OGC 13-102r2, <strong>Name type specification – Time and index coordinate reference system definitions</strong> (OGC Policy Document), version 1, 2014</p>
 </li>
 </ul>
 </div>
@@ -4634,7 +4800,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-04 21:34:40 +0100
+Last updated 2020-08-11 01:42:21 +0100
 </div>
 </div>
 </body>

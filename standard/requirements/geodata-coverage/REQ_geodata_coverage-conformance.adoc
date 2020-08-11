@@ -4,6 +4,6 @@
 ^|*Requirement {counter:req-id}* |*/req/geodata-coverage/conformance*
 2+|The list of Conformance Classes advertised by the API SHALL include:
 ^|A |http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
-^|B |http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
+^|B |http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata
 ^|C |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
 |===

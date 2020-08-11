@@ -6,19 +6,19 @@
 
 [source,BNF]
 ----
- SubsetSpec:        subset=axisName(intervalOrPoint)
- axisName:          {NCName}
- intervalOrPoint:   interval \| point
- interval:          low : high
- low:               point \| *
- high:              point \| *
- point:             {number} \| "{text}"
+  SubsetSpec:        subset=axisName(intervalOrPoint)
+  axisName:          {NCName}
+  intervalOrPoint:   interval \| point
+  interval:          low : high
+  low:               point \| *
+  high:              point \| *
+  point:             {number} \| "{text}" 
 
- Where:
-    " = double quote = ASCII code 0x42,
-    {NCName} is an XML-style identifier not containing ":" (colon) characters,
-    {number} is an integer or floating-point number, and
-    {text} is some general ASCII text (such as a time and date notation in ISO 8601).
+  Where:
+     \" = double quote = ASCII code 0x42,
+     {NCName} is an XML-style identifier not containing ":" (colon) characters,
+     {number} is an integer or floating-point number, and
+     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
 ^|B |The axis name SHALL be the same as one of the `axisLabels` defined in the DomainSet or else return a 400 status code.
 ^|C |The intervalOrPoint values SHALL fall within the range of valid values defined by the DomainSet for the identified axis or else return a 400 status code

@@ -15,31 +15,25 @@ Resources exposed through an OGC API may be accessed through a Universal Resourc
 * Access Paths: Unique paths to Resources
 * Query: Parameters to adjust the representation of a Resource or Resources like encoding format or subsetting
 
-Some resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.
+Access Paths are used to build resource identifiers. It is recommended, but not required, that these paths 
+
+Most resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.
 
 <<coverage-paths>> summarizes the access paths and relation types defined in this standard.
 
 [#coverage-paths,reftext='{table-caption} {counter:table-num}']
-.Coverage API Paths
+.Coverage API Resources
 [width="90%",cols="2,^1,4",options="header"]
 |===
-^|**Path Template** ^|**Relation** ^|**Resource**
-3+^|**Common**
+^|Resource URI ^|Relation Type ^|Description
 |<<landing-page,{datasetAPI}/>> |`ogc:common:dataset` |Landing page for this dataset distribution
-|<<api-definition,{datasetAPI}/api>>
-(not a fixed path) |`service-desc` | API description (e.g. OpenAPI)
-|<<api-definition,{datasetAPI}/api>>
-(not a fixed path) |`service-doc` | API documentation (optional, e.g. HTML)
+|<<api-definition,{datasetAPI}/api>> |`service-desc` | API description (e.g. OpenAPI)
+|<<api-definition,{datasetAPI}/api>> |`service-doc` | API documentation (optional, e.g. HTML)
 |<<conformance-classes,{datasetAPI}/conformance>> |`conformance` |Conformance Classes
 |<<collections,{datasetAPI}/collections>> |`data` |The list off all collections available, some or all of which may be accessible using this Coverage API. Each of these collection objects take the same form as that of the collection resource object described immediately below.
-|<<collectionInfo,{datasetAPI}/collections/{coverageId}>> | `ogc:common:collection` |resource corresponding to the collection with the unique identifier `{coverageId}`, which may be accessible as a coverage.
-The resource will describe key elements such as an `id`, `title`, `description`, available `crs` and `extent` (the coverage envelope) as well as
-links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set.
-It is comparable to a WCS *_DescribeCoverage_* response, with the exception that the range type and domain set may have to be retrieved separately by following a link
-to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.
+|<<collectionInfo,{datasetAPI}/collections/{coverageId}>> |`ogc:common:collection` |resource corresponding to the collection with the unique identifier `{coverageId}`, which may be accessible as a coverage. The resource will describe key elements such as an `id`, `title`, `description`, available `crs` and `extent` (the coverage envelope) as well as links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set. It is comparable to a WCS *_DescribeCoverage_* response, with the exception that the range type and domain set may have to be retrieved separately by following a link to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.
 3+^|**Coverages**
-|<<coverage-clause,{datasetAPI}/collections/{coverageId}/coverage>> +
-(not a fixed path) |`ogc:coverage:coverage` |returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS *_GetCoverage_* response.
+|<<coverage-clause,{datasetAPI}/collections/{coverageId}/coverage>> |`ogc:coverage:coverage` |returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS *_GetCoverage_* response.
 |<<coverage-rangeset-clause,{datasetAPI}/collections/{coverageId}/coverage/rangeset>> |`ogc:coverage:rangeset` |if supported by the service and by the selected representation, returns only the coverage's range set, i.e., the actual values in the selected representation without any accompanying description or extra information.
 |<<coverage-rangetype-clause,{datasetAPI}/collections/{coverageId}/coverage/rangetype>> |`ogc:coverage:rangetype` |if available separately from the collection resource, returns the coverage's range type information, i.e., a description of the data semantics (their components and data type).
 |<<coverage-domainset-clause,{datasetAPI}/collections/{coverageId}/coverage/domainset>> |`ogc:coverage:domainset` |if available separately from the collection resource, returns the coverage's domain set definition (the detailed n-dimensional space covered by the data).
@@ -88,9 +82,8 @@ The OGC API-Coverages standard is an extension of the OGC API-Common standard. T
 |<<landing-page,API Landing Page>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
 |<<api-definition,API Definition>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
 |<<conformance-classes,Declaration of Conformance Classes>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
-|<<collection-access-section,Collections>>| http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections
+|<<collection-access-section,Collection Access>>| http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections
 |<<requirements-class-openapi_3_0-clause,OpenAPI 3.0>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/oas30
 |<<requirements-class-json-clause,JSON>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json
 |<<requirements-class-html-clause,HTML>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/html
 |====
-

@@ -3,7 +3,10 @@
 [[Bibliography]]
 = Bibliography
 
-* [[SDWBP]] W3C/OGC: Spatial Data on the Web Best Practices, W3C Working Group Note 28 September 2017, https://www.w3.org/TR/sdw-bp/
-* [[DWBP]] W3C: Data on the Web Best Practices, W3C Recommendation 31 January 2017, https://www.w3.org/TR/dwbp/
-* [[DCAT]] W3C: Data Catalog Vocabulary, W3C Recommendation 16 January 2014, https://www.w3.org/TR/vocab-dcat/
-* [[link-relations]] IANA: Link Relation Types, https://www.iana.org/assignments/link-relations/link-relations.xml
+* [[SDWBP]] W3C/OGC: *Spatial Data on the Web Best Practices*, W3C Working Group Note 28 September 2017, https://www.w3.org/TR/sdw-bp/
+* [[DWBP]] W3C: *Data on the Web Best Practices*, W3C Recommendation 31 January 2017, https://www.w3.org/TR/dwbp/
+* [[DCAT]] W3C: *Data Catalog Vocabulary*, W3C Recommendation 16 January 2014, https://www.w3.org/TR/vocab-dcat/
+* [[link-relations]] IANA: *Link Relation Types*, https://www.iana.org/assignments/link-relations/link-relations.xml
+* [[J2K]] International Telecommunication Union, *ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system*, June, 2019, https://www.itu.int/rec/T-REC-T.800-201906-I/en
+* [[RDF]] W3C, *RDF 1.1 Semantics*, February 2014, https://www.w3.org/TR/rdf11-mt/
+* OGC: OGC 13-102r2, *Name type specification – Time and index coordinate reference system definitions* (OGC Policy Document), version 1, 2014
