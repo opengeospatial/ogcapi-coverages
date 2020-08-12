@@ -6,7 +6,7 @@ type: object
 properties:
   spatial:
     description: |-
-      The spatial extent of the features in the collection.
+      The spatial extent of the collection aka coverage.
     type: object
     properties:
       bbox:

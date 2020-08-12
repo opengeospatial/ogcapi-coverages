@@ -32,7 +32,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
-        "200":
+        '200':
           description: links to the API capabilities
           content:
             application/json:
@@ -50,7 +50,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
-        "200":
+        '200':
           description: most likely returning the document at hand
           content:
             application/json:
@@ -71,7 +71,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
-        "200":
+        '200':
           description: The URIs of all conformance classes supported by the server
           content:
             application/json:
@@ -110,7 +110,7 @@ paths:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/datetime'
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
-        "200":
+        '200':
           description: Metdata about the collections shared by this API.
           content:
             application/json:
@@ -137,7 +137,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
-        "200":
+        '200':
           description: Metadata about the {coverageid} collection shared by this
             API.
           content:
@@ -168,7 +168,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
-        "200":
+        '200':
           description: Information about the coverage collection.
           content:
             application/json:
@@ -197,7 +197,7 @@ paths:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
         - $ref: '#/components/parameters/subset'
       responses:
-        "200":
+        '200':
           description: A coverages domainset.
           content:
             application/json:
@@ -227,7 +227,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
-        "200":
+        '200':
           description: A coverage's rangetype.
           content:
             application/geo+json:
@@ -255,7 +255,7 @@ paths:
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
-        "200":
+        '200':
           description: A coverage's metadata.
           content:
             application/json:
@@ -284,7 +284,7 @@ paths:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
         - $ref: '#/components/parameters/subset'
       responses:
-        "200":
+        '200':
           description: A coverage's range set.
           content:
             image/*:
@@ -315,7 +315,7 @@ paths:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
         - $ref: '#/components/parameters/subset'
       responses:
-        "200":
+        '200':
           description: A coverage description.
           content:
             application/json:
@@ -352,7 +352,7 @@ paths:
         - $ref: '#/components/parameters/outputCrs'
         - $ref: '#/components/parameters/interpolation'
       responses:
-        "200":
+        '200':
           description: A full coverage.
           content:
             application/multipart+related:
@@ -406,16 +406,18 @@ components:
                 type: application/json
                 title: Digital Elevation Model
             extent:
-              crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
               spatial:
-                - -180
-                - -90
-                - 180
-                - 90
-              trs: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
+                bbox:
+                  - -180
+                  - -90
+                  - 180
+                  - 90
+                crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
               temporal:
-                - "2020-01-06T14:00:00Z"
-                - "2020-02-07T22:00:00Z"
+                interval:
+                  - '2020-01-06T14:00:00Z'
+                  - '2020-02-07T22:00:00Z'
+                trs: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
             crs:
               - http://www.opengis.net/def/crs/OGC/1.3/CRS84
         links:
@@ -491,13 +493,13 @@ components:
           items:
             $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
         extent:
-          $ref: '#/components/schemas/extent'
+          $ref: 'schemas/ogcapi-common-2_1.0/extent.yaml'
         crs:
           type: array
           description: The coordinate reference systems in which geometries may be
             retrieved. Coordinate reference systems are identified by a URI. The first
             coordinate reference system is the coordinate reference system that is
-            used by default. This is always "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+            used by default. This is always 'http://www.opengis.net/def/crs/OGC/1.3/CRS84',
             i.e. WGS84 longitude/latitude.
           items:
             type: string
@@ -572,13 +574,13 @@ components:
           items:
             $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
         extent:
-          $ref: '#/components/schemas/extent'
+          $ref: 'schemas/ogcapi-common-2_1.0/extent.yaml'
         crs:
           type: array
           description: The coordinate reference systems in which geometries may be
             retrieved. Coordinate reference systems are identified by a URI. The first
             coordinate reference system is the coordinate reference system that is
-            used by default. This is always "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+            used by default. This is always 'http://www.opengis.net/def/crs/OGC/1.3/CRS84',
             i.e. WGS84 longitude/latitude.
           items:
             type: string
@@ -610,51 +612,6 @@ components:
               type: InterpolationRestrictionType
               allowedInterpolation:
                 - linear
-    extent:
-      type: object
-      properties:
-        crs:
-          type: string
-          description: Coordinate reference system of the coordinates in the spatial
-            extent (property `spatial`). In the Core, only WGS84 longitude/latitude
-            is supported. Extensions may support additional coordinate reference systems.
-          default: http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          enum:
-            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-        spatial:
-          maxItems: 6
-          minItems: 4
-          type: array
-          description: West, north, east, south edges of the spatial extent. The minimum
-            and maximum values apply to the coordinate reference system WGS84 longitude/latitude
-            that is supported in the Core. If, for example, a projected coordinate
-            reference system is used, the minimum and maximum values need to be adjusted.
-          example:
-            - -180
-            - -90
-            - 180
-            - 90
-          items:
-            type: number
-        trs:
-          type: string
-          description: Temporal reference system of the coordinates in the temporal
-            extent (property `temporal`). In the Core, only the Gregorian calendar
-            is supported. Extensions may support additional temporal reference systems.
-          default: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
-          enum:
-          - http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
-        temporal:
-          maxItems: 2
-          minItems: 2
-          type: array
-          description: Begin and end times of the temporal extent.
-          example:
-            - "2020-01-06T14:00:00Z"
-            - "2020-02-07T22:00:00Z"
-          items:
-            type: string
-            format: dateTime
     coverageOffering:
       title: Coverage Offering
       description: Description of the Coverage Offering
