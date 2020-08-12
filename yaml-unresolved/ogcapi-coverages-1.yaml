@@ -115,7 +115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/content'
+                $ref: 'schemas/ogcapi-common-2_1.0/collections.yaml'
             text/html:
               schema:
                 type: string
@@ -378,61 +378,6 @@ paths:
                 type: string
 components:
   schemas:
-    content:
-      required:
-      - collections
-      - links
-      type: object
-      properties:
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/collectionInfoAbr'
-          example:
-            id: dem
-            title: Digital Elevation Model
-            description: Digital Elevation Model
-            links:
-              - href: http://data.example.org/collections/dem?f=json
-                rel: self
-                type: application/json
-                title: Digital Elevation Model
-              - href: http://data.example.org/collections/dem?f=html
-                rel: alternate
-                type: text/html
-                title: Digital Elevation Model
-              - href: http://data.example.org/collections/dem/coverage
-                rel: coverage
-                type: application/json
-                title: Digital Elevation Model
-            extent:
-              spatial:
-                bbox:
-                  - -180
-                  - -90
-                  - 180
-                  - 90
-                crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
-              temporal:
-                interval:
-                  - '2020-01-06T14:00:00Z'
-                  - '2020-02-07T22:00:00Z'
-                trs: http://www.opengis.net/def/uom/ISO-8601/0/Gregorian
-            crs:
-              - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-        links:
-          type: array
-          example:
-          - href: http://data.example.org/collections?f=json
-            rel: self
-            type: application/json
-            title: this document
-          - href: http://data.example.org/collections?f=html
-            rel: alternate
-            type: text/html
-            title: this document as HTML
-          items:
-            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
     collectionInfoAbr:
       required:
       - id
