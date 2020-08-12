@@ -10,7 +10,7 @@ allOf:
         allOf:
           - $ref: '../cis_1.1/domainSet.yaml'
         example:
-          $href: 'http://data.example.org/collections/dem/coverage/domainSet'
+          $ref: 'http://data.example.org/collections/dem/coverage/domainSet'
       rangeType:
         allOf:
           - $ref: '../cis_1.1/rangeType.yaml'
