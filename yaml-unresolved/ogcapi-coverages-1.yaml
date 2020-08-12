@@ -70,11 +70,25 @@ paths:
         - $ref: '#/components/parameters/f'
       responses:
         "200":
-          description: the URIs of all requirements classes supported by the server
+          description: The URIs of all conformance classes supported by the server
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/conf-classes'
+                allOf:
+                - $ref: 'schemas/ogcapi-common-1_1.0/confClasses.yaml'
+                example:
+                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
+                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json
+                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html
+                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3
+                - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata
+                - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
+                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
+                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
+                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
+                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
+                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-subset
+                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
         default:
           description: An error occured.
           content:
@@ -185,7 +199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis-1.1/domainSet.yaml'
+                $ref: 'schemas/cis_1.1/domainSet.yaml'
               example:
                 $ref:
             text/html:
@@ -215,7 +229,7 @@ paths:
           content:
             application/geo+json:
               schema:
-                $ref: 'schemas/cis-1.1/rangeType.yaml'
+                $ref: 'schemas/cis_1.1/rangeType.yaml'
             text/html:
               schema:
                 type: string
@@ -243,7 +257,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis-1.1/metadata.yaml'
+                $ref: 'schemas/cis_1.1/metadata.yaml'
             text/html:
               schema:
                 type: string
@@ -401,28 +415,6 @@ components:
             title: Metadata about the resource collections
           items:
             $ref: '#/components/schemas/link'
-    conf-classes:
-      required:
-      - conformsTo
-      type: object
-      properties:
-        conformsTo:
-          type: array
-          example:
-          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
-          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json
-          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html
-          - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3
-          - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata
-          - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
-          - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
-          - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
-          - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
-          - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
-          - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-subset
-          - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
-          items:
-            type: string
     link:
       type: object
       required:
@@ -483,27 +475,6 @@ components:
                 - "2020-02-07T22:00:00Z"
             crs:
               - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-            domainSet:
-              - TODO
-            rangeType:
-              type: DataRecordType
-              field:
-                type: QuantityType
-                id: dem_field
-                name: dem field
-                definition: unsignedInt
-                uom:
-                  type: UnitReference
-                  code: m
-                constraint:
-                  type: AllowedValues
-                  interval:
-                    - 0
-                    - 10000
-              interpolationRestriction:
-                type: InterpolationRestrictionType
-                allowedInterpolation:
-                  - linear
         links:
           type: array
           example:
@@ -592,9 +563,9 @@ components:
           example:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
         domainSet:
-          $ref: 'schemas/cis-1.1/domainSet.yaml'
+          $ref: 'schemas/cis_1.1/domainSet.yaml'
         rangeType:
-          $ref: 'schemas/cis-1.1/rangeType.yaml'
+          $ref: 'schemas/cis_1.1/rangeType.yaml'
     collectionInfo:
       required:
       - id
@@ -673,9 +644,29 @@ components:
           example:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
         domainSet:
-          $ref: 'schemas/cis-1.1/domainSet.yaml'
+          $ref: 'schemas/cis_1.1/domainSet.yaml'
         rangeType:
-          $ref: 'schemas/cis-1.1/rangeType.yaml'
+          allOf:
+          - $ref: 'schemas/cis_1.1/rangeType.yaml'
+          example:
+            type: DataRecordType
+            field:
+              type: QuantityType
+              id: dem_field
+              name: dem field
+              definition: unsignedInt
+              uom:
+                type: UnitReference
+                code: m
+              constraint:
+                type: AllowedValues
+                interval:
+                  - 0
+                  - 10000
+            interpolationRestriction:
+              type: InterpolationRestrictionType
+              allowedInterpolation:
+                - linear
     extent:
       type: object
       properties:
@@ -783,7 +774,7 @@ components:
             $ref: '#/components/schemas/link'
         envelope:
           allOf:
-            - $ref: 'schemas/cis-1.1/envelope.yaml'
+            - $ref: 'schemas/cis_1.1/envelope.yaml'
           example:
             id: dem_envelope
             srsName: http://www.opengis.net/def/crs/OGC/1.3/CRS84
@@ -805,7 +796,7 @@ components:
                 uomLabel: deg
         rangeType:
           allOf:
-            - $ref: 'schemas/cis-1.1/rangeType.yaml'
+            - $ref: 'schemas/cis_1.1/rangeType.yaml'
           example:
             type: DataRecordType
             field:
@@ -901,11 +892,11 @@ components:
           items:
             $ref: '#/components/schemas/link'
         domainSet:
-          $ref: 'schemas/cis-1.1/domainSet.yaml'
+          $ref: 'schemas/cis_1.1/domainSet.yaml'
         rangeType:
-          $ref: 'schemas/cis-1.1/rangeType.yaml'
+          $ref: 'schemas/cis_1.1/rangeType.yaml'
         etadata:
-          $ref: 'schemas/cis-1.1/metadata.yaml'
+          $ref: 'schemas/cis_1.1/metadata.yaml'
     coverageMultipart:
       type: string
       description: TODO
