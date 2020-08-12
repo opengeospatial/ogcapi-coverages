@@ -1,0 +1,7 @@
+[[using-api-common-section]]
+=== Using API-Common
+
+Provides a description of how API-Common Parts 1 and 2 should be used in a Coverage API. Key issues:
+
+1) Collections vs. Coverages
+2) Use of bbox and datetime - what is their purpose, what elements are they applied against, what are their limitations.

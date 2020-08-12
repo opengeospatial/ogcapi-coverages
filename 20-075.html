@@ -467,10 +467,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/EG/ogcapi-coverages/1.0" class="bare">http://www.opengis.net/doc/EG/ogcapi-coverages/1.0</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    20-071</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    20-075</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: n.n</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.1</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Engineering Guidance</p></td>
@@ -586,7 +586,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_identifiers">4.1. Identifiers</a></li>
 </ul>
 </li>
-<li><a href="#api-users-guide-section">5. Users Guide</a></li>
+<li><a href="#api-users-guide-section">5. Users Guide</a>
+<ul class="sectlevel2">
+<li><a href="#api-users-guide-section-1">5.1. Get Data From Point</a>
+<ul class="sectlevel3">
+<li><a href="#_discussion">5.1.1. Discussion</a></li>
+<li><a href="#_return_type">5.1.2. Return Type</a></li>
+</ul>
+</li>
+<li><a href="#using-api-common-section">5.2. Using API-Common</a></li>
+<li><a href="#using-metadata-section">5.3. Using Metadata</a></li>
+<li><a href="#selecting-pixels-section">5.4. Selecting Pixels</a></li>
+<li><a href="#range-types-section">5.5. Range Types</a></li>
+<li><a href="#slicing-and-subsetting-section">5.6. Slicing and Subsetting</a></li>
+</ul>
+</li>
 <li><a href="#_revision_history">Annex A: Revision History</a></li>
 <li><a href="#Glossary">Annex B: Glossary</a></li>
 <li><a href="#Bibliography">Annex C: Bibliography</a></li>
@@ -849,7 +863,395 @@ Attention is drawn to the possibility that some of the elements of this document
 <div class="paragraph">
 <p>Everything up the now has been information about this document and how to use it. Topics related to the implementation of Coverages APIs are included in this section.</p>
 </div>
+<div class="sect2">
+<h3 id="api-users-guide-section-1"><a class="anchor" href="#api-users-guide-section-1"></a>5.1. Get Data From Point</h3>
+<div class="sect3">
+<h4 id="_discussion"><a class="anchor" href="#_discussion"></a>5.1.1. Discussion</h4>
+<div class="paragraph">
+<p>Users might want to query a coverage for getting a data value from a
+single point. Typical use case is to check the height at given location
+from DEM but probably queries with more dimensions "temperature at
+location x,y,z at time …" make sense as well.</p>
+</div>
+<div class="paragraph">
+<p>WCS 2.0 defines two possibilities for getting a coverage from a single point.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Use subsets with lower limit = upper limit (trim to a point)</p>
+<div class="literalblock">
+<div class="content">
+<pre>``&amp;SUBSET=Lat(20,20)&amp;SUBSET=Long(30,30)``</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Use subsets with slice points (slice to a point)</p>
+<div class="literalblock">
+<div class="content">
+<pre>``&amp;SUBSET=Lat(20)&amp;SUBSET=Long(30)``</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The difference between the trimming and slicing is that trimming does
+ not alter the dimensionality but slicing removes dimensions. If the
+coverage is 2D raster DEM in case 1) the result can be 1 by 1 pixel
+sized GeoTIFF. In case 2) the result must use format like GML because
+rasters have always 2 dimensions but the result must have zero.</p>
+</div>
+<div class="paragraph">
+<p>Behavior in existing WCS 2.0 implementations vary. GeoServer sends
+1x1 sized GeoTIFF with slice type of query but trim to point yields an
+error "Empty intersection after subsetting"</p>
+</div>
+<div class="paragraph">
+<p><a href="https://osgeo-org.atlassian.net/browse/GEOS-9553">https://osgeo-org.atlassian.net/browse/GEOS-9553</a>.
+ MapServer sends 1x1 sized GeoTIFF with trim to point query but it does
+not accept slicing query. Because MapServer is limited to send coverages
+ only as rasters it cannot use for example GML for 0-dimensional
+coverages.</p>
+</div>
+<div class="paragraph">
+<p>To my knowledge it is much more common to use WMS GetFeatureInfo for
+pixel value queries than WCS. However, GetFeatureInfo does  not suit
+well for other than 8 bit rasters, and if raster is styled for
+visualisation, some servers send the pixel value of the native data but
+others the pixel value after styling is applied. Thus GFI is a poor
+workaround and users deserve better.</p>
+</div>
+<div class="paragraph">
+<p>I would like to see a recommendation about how to support point
+queries in OACov. From the client application side I believe that
+slicing together with some very simple format for rangeset would be
+convenient.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately point queries are not as trivial as they may feel. In
+the next image query by point 1 that hits a data point should not give
+any troubles. Point 2 is also easy and those who think that coverages
+are pixels can select the intersected pixel, and folks who prefer points
+ can take the nearest point. The result is the same.</p>
+</div>
+<div class="paragraph">
+<p>Queries by points 3 and 4 are not as easy. Should the result be an
+average of 2 or 4 nearest points, respectively (requires interpolation),
+ or simply the value of some nearest neigbor? Which nearest? How to
+guarantee that different servers give uniform results? There are also
+coverages which are certainly not continuos and only query by point 1 is
+ reasonable.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/image_1.png" alt="point_query">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_return_type"><a class="anchor" href="#_return_type"></a>5.1.2. Return Type</h4>
+<div class="paragraph">
+<p>0D support (slice to point) could return single value range set, which in <code>application/json</code> media-type could be either a number for a single band e.g.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>403.51</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or an object for multiple bands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{ "red" : 0.434, "green" : 0.123, "blue" : 0.53 }</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Trim to point could return 1x1 image.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-api-common-section"><a class="anchor" href="#using-api-common-section"></a>5.2. Using API-Common</h3>
+<div class="paragraph">
+<p>Provides a description of how API-Common Parts 1 and 2 should be used in a Coverage API. Key issues:</p>
+</div>
+<div class="paragraph">
+<p>1) Collections vs. Coverages
+2) Use of bbox and datetime - what is their purpose, what elements are they applied against, what are their limitations.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="using-metadata-section"><a class="anchor" href="#using-metadata-section"></a>5.3. Using Metadata</h3>
+<div class="paragraph">
+<p>API-Common provides sets of common metadata along with JSON schema for that metadata. Resource-specific APIs are expected to extend that metadata with information specific to their resource type.</p>
+</div>
+<div class="paragraph">
+<p>In the case of coverages, we should distinquish between discovery metadata and exploitation metadata. Coverage metadata is that metadata used to identify and select a coverage. Exploitation metadata is metadata required to use the coverage. Note that there is some overlap between these categories. The API implementor should have the freedom to draw the line based on how they expect their API to be used.</p>
+</div>
+<div class="paragraph">
+<p>Foot Stomp - metadata has to come from somewhere. If it is not in the coverage, then it cannot be populated in the API.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-pixels-section"><a class="anchor" href="#selecting-pixels-section"></a>5.4. Selecting Pixels</h3>
+<div class="paragraph">
+<p>Imagine to have some raster data with pixel size 10 by 10 units and bbox starting at 0,0. Let&#8217;s put the anchor point at the centre of the pixel. Now user requests a subset as</p>
+</div>
+<div class="paragraph">
+<p><code>&amp;SUBSET=E(572,612)&amp;SUBSET=N(477,518)</code></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/image_2.png" alt="subset_1">
+</div>
+</div>
+<div class="paragraph">
+<p>Which pixels should be selected?</p>
+</div>
+<div class="paragraph">
+<p>A) All pixels that intersect with the subset</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/image_2_A.png" alt="subset_2">
+</div>
+</div>
+<div class="paragraph">
+<p>B) Only pixels which all totally contained by the subset</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/image_2_B.png" alt="subset_3">
+</div>
+</div>
+<div class="paragraph">
+<p>C) Only pixels whose anchor points are within the subset</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/image_2_C.png" alt="subset_4">
+</div>
+</div>
+<div class="paragraph">
+<p>With plain GetCoverage no resampling nor scaling should happen and if I understand right, in all three cases the envelope of the result is different from the envelope of the subsetting request. Also, if user sends a new request with subset envelope that is adjacent to the previous one, interpretation A would give duplicate pixels, interpretation B) would lead to rows of missing pixels, and only alternative C) would give a resultset that is adjacent to the first resultset.</p>
+</div>
+<div class="paragraph">
+<p>These sections in the WCS 2.0 Core deal somehow with the case but I feel that they do not answer my question.</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>The WCS Core standard defines</p>
+</div>
+<div class="paragraph">
+<p>the domain subsetting operation which delivers all data from a coverage inside a specified</p>
+</div>
+<div class="paragraph">
+<p>request envelope (“bounding box”), relative to the coverage’s envelope – more precisely, the</p>
+</div>
+<div class="paragraph">
+<p>intersection of the request envelope with the coverage envelope.</p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Requirement 32 /req/core/getCoverage-request-trim-within-extent:</p>
+</div>
+<div class="paragraph">
+<p>Let the extent of the coverage’s gml:Envelope along the dimension specified in the trim</p>
+</div>
+<div class="paragraph">
+<p>request range from L to H. Then, for the trim bounds trimLow and trimHigh the following</p>
+</div>
+<div class="paragraph">
+<p>shall hold: L &#8656; trimLow &#8656; trimHigh &#8656; H.</p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Let further</p>
+</div>
+<div class="paragraph">
+<p>c be the OfferedCoverage of the server addressed;</p>
+</div>
+<div class="paragraph">
+<p>low = tLow if specified in the request, otherwise low is set to the coverage’s lower</p>
+</div>
+<div class="paragraph">
+<p>bound in dimension dname;</p>
+</div>
+<div class="paragraph">
+<p>high = tHigh if specified in the request, otherwise high is set to the coverage’s upper</p>
+</div>
+<div class="paragraph">
+<p>bound in dimension dname;</p>
+</div>
+<div class="paragraph">
+<p>B be an envelope equal to the domain of c, except that in dimension dname the extent</p>
+</div>
+<div class="paragraph">
+<p>is given by the closed interval [low,high];</p>
+</div>
+<div class="paragraph">
+<p>Then, the following requirement holds:</p>
+</div>
+</blockquote>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>Requirement 38 /req/core/getCoverage-response-trimming:</p>
+</div>
+<div class="paragraph">
+<p>The response to a successful GetCoverage request on coverage identifier id of admissible</p>
+</div>
+<div class="paragraph">
+<p>type containing no slicing and exactly one trimming operation with dimension name dname,</p>
+</div>
+<div class="paragraph">
+<p>lower bound parameter evaluating to low, and upper bound parameter evaluating to high</p>
+</div>
+<div class="paragraph">
+<p>shall be a coverage identical to c, but containing all points of c with location inside B, and</p>
+</div>
+<div class="paragraph">
+<p>no other points.</p>
+</div>
+<div class="paragraph">
+<p>NOTE This requirement does not specify the actual extent of the coverage
+ returned. Possible options include: the minimal bounding box of the
+coverage returned, or the request bounding box. Servers are strongly
+encouraged to deliver the minimal bounding box.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>I believe the correct answer is C.  At least that&#8217;s the way CubeWerx has implemented it.  The way I see it, coverages typically deal with points, not pixels.  When a coverage is returned in a pixel-based representation such as GeoTIFF, it represents each sample point by a pixel, where the sample point is at the centre of each pixel.  If a sample point intersects the requested subset, it should be returned in the GeoTIFF response as a pixel; otherwise it shouldn&#8217;t.</p>
+</div>
+<div class="paragraph">
+<p>CubeWerx&#8217;s implementation of the various OGC web services distinguishes between what we call a "cell-based" extent (used, for example, by WMS) and a "grid-based" extent (used, for example, by WCS). A grid-based extent is always one pixel smaller in each dimension (0.5 pixels per side) than its corresponding cell-based extent.</p>
+</div>
+<div class="paragraph">
+<p>So if there&#8217;s a sample point at each integral unit and a coverage subset of E(572,612) N(477,518) is requested, the resulting GeoTIFF will contain 41x42 pixels (representing 41x42 sample points).  Its grid-based extent is exactly what was requested (572,477 to 612,518) but its cell-based extent (that is, corner to corner) is 571.5,476.5 to 612.5,518.5.  It you wanted to make a map request of this coverage subset, that&#8217;d be the extent you&#8217;d specify.</p>
+</div>
+<div class="paragraph">
+<p>If a coverage subset of E(571.9,612.1) N(476.9,518.1) is requested, you&#8217;d get exactly the same response.</p>
+</div>
+<div class="paragraph">
+<p>However, if a coverage subset of E(572.1,611.9) N(477.1,517.9) is requested, you&#8217;d get a response that&#8217;s only 39x40 pixels in size, representing the subset E(573,611) N(478,517).  It would have a grid-based extent of 573,478 to 611,517 and a cell-based extent of 572.5,478.5 to 610.5,517.5.</p>
+</div>
+<div class="paragraph">
+<p>Reference This existing OGC document may have material you can reuse:  <a href="http://docs.opengeospatial.org/is/10-140r2/10-140r2.html">http://docs.opengeospatial.org/is/10-140r2/10-140r2.html</a> &lt;<a href="http://docs.opengeospatial.org/is/10-140r2/10-140r2.html">http://docs.opengeospatial.org/is/10-140r2/10-140r2.html</a>&gt;</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="range-types-section"><a class="anchor" href="#range-types-section"></a>5.5. Range Types</h3>
+<div class="paragraph">
+<p>In our implementation, we currently support coverages encoded in
+16-bit PNG, with the 16-bit range mapped linearly to the range of values
+ for the coverage, similar to how it is done in the <a href="http://docs.opengeospatial.org/is/17-066r1/17-066r1.html">GeoPackage tile gridded coverage extension</a>.</p>
+</div>
+<div class="paragraph">
+<p>Two main points:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>How could it be possible to desribe in the <code>&#8230;&#8203;/{collectionId}</code> resource the range of the values that occur in the coverage? e.g. -11000..9000, or 1 to 27?</p>
+<div class="literalblock">
+<div class="content">
+<pre>    As far as I understand the RangeType does not specify this, it only says a 32-bit float or an unsigned 8 bit integer is used.
+*   How could a linear mapping be established from encoded values to
+units like meters, to use a format like PNG and maximize precision while
+ minimizing storage size?</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>GeoServer WCS 2 example:</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">&lt;swe:Quantity&gt;
+&lt;swe:description&gt;RED_BAND&lt;/swe:description&gt;
+&lt;swe:nilValues&gt;
+&lt;swe:NilValues&gt;
+&lt;swe:nilValue reason="http://www.opengis.net/def/nil/OGC/0/unknown"&gt;0.0&lt;/swe:nilValue&gt;
+&lt;/swe:NilValues&gt;
+&lt;/swe:nilValues&gt;
+&lt;swe:uom code="W.m-2.Sr-1"/&gt;
+&lt;swe:constraint&gt;
+&lt;swe:AllowedValues&gt;
+&lt;swe:interval&gt;100.0 150.0&lt;/swe:interval&gt;
+&lt;/swe:AllowedValues&gt;
+&lt;/swe:constraint&gt;
+&lt;/swe:Quantity&gt;
+&lt;/swe:field&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is an example using ISO 19115-2. I believe the Range Type in CIS is similar.  The coverage is a SAR collection. Each pixel is an imaginary number (real and imaginary components) represented as 2s compliment integers. "Count" is the SWE Common equivalent of integer. There is a lot of additional information you can add, but this was sufficient for my immediate needs.</p>
+</div>
+<div class="paragraph">
+<p>I&#8217;m sure there is a range type you cannot represent using SWE Common, but I haven&#8217;t found one yet.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java"> &lt;gco:Record&gt;  &lt;DataRecord xmlns="http://www.opengis.net/swe/2.0"&gt;
+        &lt;field name="RE16I"&gt;
+            &lt;Count axisID="Real"&gt;
+                &lt;description&gt;Each component is stored in a 16-bit signed integer in 2’s complement format.&lt;/description&gt;
+                &lt;constraint&gt;
+                    &lt;AllowedValues&gt;  0 65535 &lt;/AllowedValues&gt;
+                &lt;/constraint&gt;
+            &lt;/Count&gt;
+        &lt;/field&gt;
+        &lt;field name="IM16I"&gt;
+            &lt;Count axisID="Imaginary"&gt;
+                &lt;description&gt;Each component is stored in a 16-bit signed integer in 2’s complement format.&lt;/description&gt;
+                &lt;constraint&gt;
+                    &lt;AllowedValues&gt; 0 65535 &lt;/AllowedValues&gt;
+                &lt;/constraint&gt;
+            &lt;/Count&gt;
+        &lt;/field&gt;
+    &lt;/DataRecord&gt;
+ &lt;/gco:Record&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="slicing-and-subsetting-section"><a class="anchor" href="#slicing-and-subsetting-section"></a>5.6. Slicing and Subsetting</h3>
+<div class="paragraph">
+<p>First we need to define two concepts:</p>
+</div>
+<div class="paragraph">
+<p>subsetting - this appears to be the case where you select a subset of the range set that is at full resolution. To perform a selection you identify the range of values along each axis that should be included in the result.</p>
+</div>
+<div class="paragraph">
+<p>thinning - appears to be the case where you reduce the resolution of the range set. This is done by removing elements from the range set and performing any smoothing or interpolation functions needed to maintain the integrity of the data.</p>
+</div>
+<div class="paragraph">
+<p>Once we have agreed on these definitions, we can talk about the implications of these techniques for both regular and irregular grids.</p>
+</div>
+<div class="paragraph">
+<p>Also consider edge cases:
+1) non-terrestrial data
+2) swath or curtain data (collection across a vertical column)
+3) RF data - phase, frequency, doppler, etc.</p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1035,7 +1437,7 @@ entity to which some requirements of a standard apply (<a href="#ogc08-131r3">OG
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-12 13:42:46 +0100
+Last updated 2020-08-12 15:38:48 +0100
 </div>
 </div>
 </body>

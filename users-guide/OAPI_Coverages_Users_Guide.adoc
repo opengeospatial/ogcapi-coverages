@@ -8,7 +8,6 @@
 :toclevels: 3
 :numbered:
 :sectanchors:
-:source-highlighter: pygments
 
 <<<
 [cols = ">",frame = "none",grid = "none"]
@@ -19,8 +18,8 @@
 |Approval Date:   <yyyy-mm-dd>
 |Publication Date:   <2020-08-12>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/EG/ogcapi-coverages/1.0
-|Internal reference number of this OGC(R) document:    20-071
-|Version: n.n
+|Internal reference number of this OGC(R) document:    20-075
+|Version: 0.1
 |Category: OGC(R) Engineering Guidance
 |Editor:   Charles Heazel
 |===

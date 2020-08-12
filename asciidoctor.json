@@ -8,5 +8,15 @@
                 "a":[
                         "data-uri"
                 ]
+        },
+        "2": {
+                "OGC_doc_number": "20-075",
+                "urn":"http://www.opengis.net/doc/eg/ogcapi-coverages/1.0",
+                "title":"OGC API - Coverages Users Guide",
+                "path":"users-guide/OAPI_Coverages-Users_Guide.adoc",
+                "options": ["--trace"],
+                "a":[
+                        "data-uri"
+                ]
         }
 }

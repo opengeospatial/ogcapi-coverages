@@ -2,3 +2,15 @@
 == Users Guide
 
 Everything up the now has been information about this document and how to use it. Topics related to the implementation of Coverages APIs are included in this section.
+
+include::./clause_5_get_data_from_point.adoc[]
+
+include::./clause_5_using_api-common.adoc[]
+
+include::./clause_5_using_metadata.adoc[]
+
+include::./clause_5_selecting_pixels.adoc[]
+
+include::./clause_5_range-types.adoc[]
+
+include::./clause_5_slicing-and-subsetting.adoc[]
