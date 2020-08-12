@@ -90,6 +90,8 @@ coverageid:
   in: path
   description: Local identifier of a collection aka coverage
   required: true
+  style: simple
+  explode: false
   schema:
     type: string
 datetime:
