@@ -1,0 +1,28 @@
+== Terms and Definitions
+This document uses the terms defined in Sub-clause 5 of https://github.com/opengeospatial/oapi_common/blob/master/19-072.pdf[OGC API - Common - Part 1: Core] (OGC 19-072), which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+=== Coverage
+feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6
+
+=== Regular grid
+grid whose grid lines have a constant distance along each grid axis
+
+=== Irregular grid
+Grid whose grid lines have individual distances along each grid axis
+
+=== Displaced grid
+grid whose direct positions are topologically aligned to a grid, but whose geometric positions can vary arbitrarily
+
+=== Mesh
+coverage consisting of a collection of curves, surfaces, or solids, respectively
+
+=== Partition [of a coverage]
+separately stored coverage acting, by being referenced in the coverage on hand, as one of its components
+
+=== Sensor model
+mathematical model for estimating geolocations from recorded sensor data such as digital imagery
+
+=== Transformation grid
+grid whose direct positions are given by some transformation algorithm not further specified in this standard
