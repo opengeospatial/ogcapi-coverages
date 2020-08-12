@@ -83,7 +83,7 @@ A consequence of this verification is that the period between the availability o
 
 ==== Statement of relationship of planned work to the current OGC standards baseline
 
-The proposed OGC API - Coverages standard is intended to be a major component of the OGC API framework. It will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API - Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices. The {shortname} complements the {information_model_base} and provides a means for sharing {resources} developed under OGC and other {resource} encodings.
+The proposed OGC API - Coverages standard is intended to be a major component of the OGC API framework. It will take advantage of Web API patterns identified in OGC API standards (e.g., OGC API - Features) and other ongoing API efforts (e.g. OGC API - Common development in the OWS Common SWG) to better align with current and emerging IT practices. The work of the {shortname} will complement the previously developed {information_model_base} and provide a means for sharing {resources} developed under OGC and other {resource} encodings.
 
 ==== What is Out of Scope?
 
