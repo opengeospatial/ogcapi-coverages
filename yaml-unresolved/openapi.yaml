@@ -1,11 +1,11 @@
 openapi: 3.0.2
 info:
-  title: A sample API conforming to the OGC API - Coverages standard
+  title: 'A sample API conforming to the OGC API - Coverages - Part 1: Core standard'
   description: 'This is a sample OpenAPI definition that conforms to the OGC API - Coverages - Part 1: Core Service specification (conformance classes: "Core", "Subset", "JSON", "HTML" and "OpenAPI 3.0").'
   contact:
-    name: Acme Corporation
-    url: http://example.org/
-    email: info@example.org
+    name: EOX IT Services GmbH
+    url: https://eox.at
+    email: office@eox.at
   license:
     name: CC-BY 4.0 license
     url: https://creativecommons.org/licenses/by/4.0/
@@ -17,8 +17,7 @@ servers:
     description: Production server
 tags:
   - name: Capabilities
-    description: Essential characteristics of this API including information about the
-      data.
+    description: Essential characteristics of this API including information about the data.
   - name: Coverage
     description: Access to data (coverage).
 paths:
@@ -216,7 +215,7 @@ paths:
           content:
             application/geo+json:
               schema:
-                $ref: '#/components/schemas/rangeType'
+                $ref: 'schemas/cis-1.1/rangeType.yaml'
             text/html:
               schema:
                 type: string
@@ -244,7 +243,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/metadata'
+                $ref: 'schemas/cis-1.1/metadata.yaml'
             text/html:
               schema:
                 type: string
@@ -595,7 +594,7 @@ components:
         domainSet:
           $ref: 'schemas/cis-1.1/domainSet.yaml'
         rangeType:
-          $ref: '#/components/schemas/rangeType'
+          $ref: 'schemas/cis-1.1/rangeType.yaml'
     collectionInfo:
       required:
       - id
@@ -676,7 +675,7 @@ components:
         domainSet:
           $ref: 'schemas/cis-1.1/domainSet.yaml'
         rangeType:
-          $ref: '#/components/schemas/rangeType'
+          $ref: 'schemas/cis-1.1/rangeType.yaml'
     extent:
       type: object
       properties:
@@ -722,111 +721,6 @@ components:
           items:
             type: string
             format: dateTime
-    rangeType:
-      title: rangeType
-      description: The rangeType element describes the structure and semantics of a
-        coverage's range values, including (optionally) restrictions on the interpolation
-        allowed on such values.
-      type: object
-      oneOf:
-      - required:
-        - type
-        - field
-        properties:
-          type:
-            enum:
-            - DataRecordType
-          field:
-            type: array
-            items:
-              title: quantity
-              description: quantiy
-              type: object
-              required:
-              - type
-              properties:
-                type:
-                  enum:
-                  - QuantityType
-                id:
-                  type: string
-                  format: uri
-                name:
-                  type: string
-                definition:
-                  type: string
-                  format: uri
-                uom:
-                  title: units of measure
-                  description: units of measure
-                  type: object
-                  required:
-                  - type
-                  - code
-                  properties:
-                    type:
-                      enum:
-                      - UnitReference
-                    id:
-                      type: string
-                      format: uri
-                    code:
-                      type: string
-                constraint:
-                  title: Constraint
-                  description: Constraint
-                  type: object
-                  required:
-                  - type
-                  properties:
-                    type:
-                      enum:
-                      - AllowedValues
-                    id:
-                      type: string
-                      format: uri
-                    interval:
-                      type: array
-                      items:
-                        type: string
-
-          interpolationRestriction:
-            title: interpolationRestriction
-            description: Interpolation restriction
-            type: object
-            required:
-            - type
-            properties:
-              type:
-                enum:
-                - InterpolationRestrictionType
-              id:
-                type: string
-                format: uri
-              allowedInterpolation:
-                type: array
-                items:
-                  type: string
-                  format: uri
-      - required:
-        - type
-        - fileReference
-        properties:
-          type:
-            enum:
-            - RangeTypeRefType
-          id:
-            type: string
-            format: uri
-          fileReference:
-            type: string
-            format: uri
-    metadata:
-      title: Metadata
-      description: The metadata element is a container of any (not further specified)
-        information which should be transported along with the coverage on hand, such
-        as domain-specific metadata.
-      type: object
     coverageOffering:
       title: Coverage Offering
       description: Description of the Coverage Offering
@@ -889,7 +783,7 @@ components:
             $ref: '#/components/schemas/link'
         envelope:
           allOf:
-            - $ref: http://schemas.opengis.net/cis/1.1/json/coverage-schema.json#/definitions/envelope
+            - $ref: 'schemas/cis-1.1/envelope.yaml'
           example:
             id: dem_envelope
             srsName: http://www.opengis.net/def/crs/OGC/1.3/CRS84
@@ -911,7 +805,7 @@ components:
                 uomLabel: deg
         rangeType:
           allOf:
-            - $ref: '#/components/schemas/rangeType'
+            - $ref: 'schemas/cis-1.1/rangeType.yaml'
           example:
             type: DataRecordType
             field:
@@ -1009,9 +903,9 @@ components:
         domainSet:
           $ref: 'schemas/cis-1.1/domainSet.yaml'
         rangeType:
-          $ref: '#/components/schemas/rangeType'
+          $ref: 'schemas/cis-1.1/rangeType.yaml'
         etadata:
-          $ref: '#/components/schemas/metadata'
+          $ref: 'schemas/cis-1.1/metadata.yaml'
     coverageMultipart:
       type: string
       description: TODO
