@@ -105,9 +105,9 @@ paths:
       summary: describe the collections in the dataset
       operationId: describeCollections
       parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/bbox'
-        - $ref: '#/components/parameters/time'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/limit'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/bbox'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/datetime'
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
         "200":
@@ -135,7 +135,7 @@ paths:
       summary: Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage.
       operationId: describeCoverage
       parameters:
-      - $ref: '#/components/parameters/coverageid'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
         "200":
           description: Metadata about the {coverageid} collection shared by this
@@ -159,14 +159,14 @@ paths:
   /collections/{coverageid}/coverage:
     get:
       tags:
-      - Coverage
+        - Coverage
       summary: description of the coverage offering identified by {coverageid} including envelope
       description: |-
         Coverage offering identified by {coverageid}.
         Use content negotiation to request HTML or GeoJSON.
       operationId: getCoverageOffering
       parameters:
-      - $ref: '#/components/parameters/coverageid'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
         "200":
           description: Information about the coverage collection.
@@ -189,13 +189,13 @@ paths:
   /collections/{coverageid}/coverage/domainset:
     get:
       tags:
-      - Coverage
+        - Coverage
       summary: retrieve a coverages domainset; use content negotiation to request
         HTML or GeoJSON
       operationId: getCoverageDomainSet
       parameters:
-      - $ref: '#/components/parameters/coverageid'
-      - $ref: '#/components/parameters/subset'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/subset'
       responses:
         "200":
           description: A coverages domainset.
@@ -220,12 +220,12 @@ paths:
   /collections/{coverageid}/coverage/rangetype:
     get:
       tags:
-      - Coverage
+        - Coverage
       summary: retrieve a coverage's rangetype; use content negotiation to request
         HTML or GeoJSON
       operationId: getCoverageRangeType
       parameters:
-      - $ref: '#/components/parameters/coverageid'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
         "200":
           description: A coverage's rangetype.
@@ -253,7 +253,7 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageMetadata
       parameters:
-      - $ref: '#/components/parameters/coverageid'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
       responses:
         "200":
           description: A coverage's metadata.
@@ -281,8 +281,8 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageRangeSet
       parameters:
-      - $ref: '#/components/parameters/coverageid'
-      - $ref: '#/components/parameters/subset'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/subset'
       responses:
         "200":
           description: A coverage's range set.
@@ -312,8 +312,8 @@ paths:
       summary: returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
       operationId: getCoverageDescription
       parameters:
-      - $ref: '#/components/parameters/coverageid'
-      - $ref: '#/components/parameters/subset'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/subset'
       responses:
         "200":
           description: A coverage description.
@@ -341,16 +341,16 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageAll
       parameters:
-      - $ref: '#/components/parameters/coverageid'
-      - $ref: '#/components/parameters/subset'
-      - $ref: '#/components/parameters/rangeSubset'
-      - $ref: '#/components/parameters/scaleFactor'
-      - $ref: '#/components/parameters/scaleAxis'
-      - $ref: '#/components/parameters/scaleSize'
-      - $ref: '#/components/parameters/scaleExtent'
-      - $ref: '#/components/parameters/subsettingCrs'
-      - $ref: '#/components/parameters/outputCrs'
-      - $ref: '#/components/parameters/interpolation'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/subset'
+        - $ref: '#/components/parameters/rangeSubset'
+        - $ref: '#/components/parameters/scaleFactor'
+        - $ref: '#/components/parameters/scaleAxis'
+        - $ref: '#/components/parameters/scaleSize'
+        - $ref: '#/components/parameters/scaleExtent'
+        - $ref: '#/components/parameters/subsettingCrs'
+        - $ref: '#/components/parameters/outputCrs'
+        - $ref: '#/components/parameters/interpolation'
       responses:
         "200":
           description: A full coverage.
@@ -849,68 +849,6 @@ components:
       description: TODO
       example: TODO
   parameters:
-    limit:
-      name: limit
-      in: query
-      description: |
-        The optional limit parameter limits the number of collections that are
-        presented in the response document.
-
-        Only items are counted that are on the first level of the collection in
-        the response document. Nested objects contained within the explicitly
-        requested items shall not be counted.
-
-        * Minimum = 1
-        * Maximum = 10000
-        * Default = 10
-      required: false
-      style: form
-      explode: false
-      schema:
-        maximum: 10000
-        minimum: 1
-        type: integer
-        default: 10
-    bbox:
-      name: bbox
-      in: query
-      description: |
-        Only collections that have a geometry that intersects the bounding box are selected. The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth):
-        * Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Lower left corner, coordinate axis 3 (optional) * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2 * Upper right corner, coordinate axis 3 (optional)
-        The coordinate reference system of the values is WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter `bbox-crs`.
-        For WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).
-        If a collection has multiple spatial geometry properties, it is the decision of the server whether only a single spatial geometry property is used to determine the extent or all relevant geometries.
-      required: false
-      style: form
-      explode: false
-      schema:
-        maxItems: 6
-        minItems: 4
-        type: array
-        items:
-          type: number
-    time:
-      name: time
-      in: query
-      description: |-
-        Either a date-time or a period string that adheres to RFC 3339. Examples:
-        * A date-time: "2018-02-12T23:20:50Z" * A period: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z" or "2018-02-12T00:00:00Z/P1M6DT12H31M12S"
-        Only collections that have a temporal property that intersects the value of `time` are selected.
-        If a collection has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.
-      required: false
-      style: form
-      explode: false
-      schema:
-        type: string
-    coverageid:
-      name: coverageid
-      in: path
-      description: Identifier (name) of a specific collection
-      required: true
-      style: simple
-      explode: false
-      schema:
-        type: string
     subset:
       name: subset
       in: query
