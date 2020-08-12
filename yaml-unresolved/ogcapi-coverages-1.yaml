@@ -44,7 +44,7 @@ paths:
   /api:
     get:
       tags:
-      - Capabilities
+        - Capabilities
       summary: API definition
       description: most likely returning the document at hand
       responses:
@@ -63,7 +63,7 @@ paths:
   /conformance:
     get:
       tags:
-      - Capabilities
+        - Capabilities
       summary: API conformance definition
       description: list of all conformance classes that the server conforms to
       parameters:
@@ -77,18 +77,19 @@ paths:
                 allOf:
                 - $ref: 'schemas/ogcapi-common-1_1.0/confClasses.yaml'
                 example:
-                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
-                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json
-                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html
-                - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3
-                - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata
-                - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
-                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
-                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
-                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
-                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
-                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-subset
-                - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
+                  conformsTo:
+                    - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
+                    - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json
+                    - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html
+                    - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3
+                    - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata
+                    - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
+                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
+                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
+                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
+                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
+                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-subset
+                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
         default:
           description: An error occured.
           content:
@@ -98,14 +99,14 @@ paths:
   /collections:
     get:
       tags:
-      - Capabilities
+        - Capabilities
       summary: describe the collections in the dataset
       operationId: describeCollections
       parameters:
-      - $ref: '#/components/parameters/limit'
-      - $ref: '#/components/parameters/bbox'
-      - $ref: '#/components/parameters/time'
-      - $ref: '#/components/parameters/f'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/bbox'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/f'
       responses:
         "200":
           description: Metdata about the collections shared by this API.
@@ -414,27 +415,7 @@ components:
           - href: http://data.example.org/collections
             title: Metadata about the resource collections
           items:
-            $ref: '#/components/schemas/link'
-    link:
-      type: object
-      required:
-      - href
-      properties:
-        href:
-          type: string
-          example: http://data.example.com/collections/dem/coverage
-        rel:
-          type: string
-          example: alternate
-        type:
-          type: string
-          example: application/json
-        hreflang:
-          type: string
-          example: en
-        title:
-          type: string
-          example: Digital Elevation Model
+            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
     content:
       required:
       - collections
@@ -487,7 +468,7 @@ components:
             type: text/html
             title: this document as HTML
           items:
-            $ref: '#/components/schemas/link'
+            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
     collectionInfoAbr:
       required:
       - id
@@ -546,7 +527,7 @@ components:
               type: application/json
               title: Digital Elevation Model
           items:
-            $ref: '#/components/schemas/link'
+            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
         extent:
           $ref: '#/components/schemas/extent'
         crs:
@@ -627,7 +608,7 @@ components:
               type: application/json
               title: Digital Elevation Model
           items:
-            $ref: '#/components/schemas/link'
+            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
         extent:
           $ref: '#/components/schemas/extent'
         crs:
@@ -771,7 +752,7 @@ components:
             type: application/json
             title: Digital Elevation Model
           items:
-            $ref: '#/components/schemas/link'
+            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
         envelope:
           allOf:
             - $ref: 'schemas/cis_1.1/envelope.yaml'
@@ -890,7 +871,7 @@ components:
             type: application/json
             title: Digital Elevation Model
           items:
-            $ref: '#/components/schemas/link'
+            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
         domainSet:
           $ref: 'schemas/cis_1.1/domainSet.yaml'
         rangeType:
