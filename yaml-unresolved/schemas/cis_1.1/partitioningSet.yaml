@@ -22,7 +22,7 @@ properties:
               enum:
                 - PartitionRefType
             envelope:
-              $ref: '#/definitions/envelope'
+              $ref: 'envelope.yaml'
             coverageRef:
               type: string
               format: uri
@@ -36,7 +36,7 @@ properties:
               enum:
                 - PartitionType
             envelope:
-              $ref: '#/definitions/envelope'
+              $ref: 'envelope.yaml'
             coverage:
               $ref: '#'
   positionValuePair:
