@@ -1,0 +1,10 @@
+allOf:
+  - $ref: '../ogcapi-common-2_1.0/collectionInfo.yaml'
+  - type: object
+    properties:
+      rootCause:
+        type: string
+        domainSet:
+          $ref: '../cis_1.1/domainSet.yaml'
+        rangeType:
+          $ref: '../cis_1.1/rangeType.yaml'

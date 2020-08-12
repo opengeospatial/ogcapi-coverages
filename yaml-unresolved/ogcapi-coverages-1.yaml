@@ -115,7 +115,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-2_1.0/collections.yaml'
+                $ref: 'schemas/ogcapi-coverages-1_1.0/collections.yaml'
             text/html:
               schema:
                 type: string
@@ -378,84 +378,6 @@ paths:
                 type: string
 components:
   schemas:
-    collectionInfoAbr:
-      required:
-      - id
-      - links
-      type: object
-      properties:
-        id:
-          type: string
-          description: identifier of the collection used, for example, in URIs
-          example: dem
-        title:
-          type: string
-          description: human readable title of the collection
-          example: Digital Elevation Model
-        description:
-          type: string
-          description: a description of the data in the collection
-          example: Digital Elevation Model
-        links:
-          type: array
-          example:
-            - href: http://data.example.org/collections/dem?f=json
-              rel: self
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem?f=html
-              rel: alternate
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage
-              rel: coverage
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage/domainset
-              rel: domainset
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage/rangetype
-              rel: rangetype
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage/metadata
-              rel: metadata
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage/rangeset
-              rel: rangeset
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage/description
-              rel: description
-              type: application/json
-              title: Digital Elevation Model
-            - href: http://data.example.org/collections/dem/coverage/all
-              rel: data
-              type: application/json
-              title: Digital Elevation Model
-          items:
-            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
-        extent:
-          $ref: 'schemas/ogcapi-common-2_1.0/extent.yaml'
-        crs:
-          type: array
-          description: The coordinate reference systems in which geometries may be
-            retrieved. Coordinate reference systems are identified by a URI. The first
-            coordinate reference system is the coordinate reference system that is
-            used by default. This is always 'http://www.opengis.net/def/crs/OGC/1.3/CRS84',
-            i.e. WGS84 longitude/latitude.
-          items:
-            type: string
-          default:
-            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-          example:
-            - http://www.opengis.net/def/crs/OGC/1.3/CRS84
-        domainSet:
-          $ref: 'schemas/cis_1.1/domainSet.yaml'
-        rangeType:
-          $ref: 'schemas/cis_1.1/rangeType.yaml'
     collectionInfo:
       required:
       - id

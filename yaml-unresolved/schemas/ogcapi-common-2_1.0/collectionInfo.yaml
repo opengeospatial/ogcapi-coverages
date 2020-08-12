@@ -5,12 +5,15 @@ required:
 properties:
   id:
     type: string
+    description: identifier of the collection used, for example, in URIs
     example: address
   title:
     type: string
+    description: human readable title of the collection
     example: address
   description:
     type: string
+    description: a description of the data in the collection
     example: An address.
   links:
     type: array
