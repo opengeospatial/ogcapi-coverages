@@ -85,15 +85,6 @@ bbox:
       type: number
   style: form
   explode: false
-coverageid:
-  name: coverageid
-  in: path
-  description: Local identifier of a collection aka coverage
-  required: true
-  style: simple
-  explode: false
-  schema:
-    type: string
 datetime:
   name: datetime
   in: query

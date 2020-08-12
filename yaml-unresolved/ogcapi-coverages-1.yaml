@@ -135,7 +135,7 @@ paths:
       summary: Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage.
       operationId: describeCoverage
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
       responses:
         '200':
           description: Metadata about the {coverageid} collection shared by this
@@ -166,7 +166,7 @@ paths:
         Use content negotiation to request HTML or GeoJSON.
       operationId: getCoverageOffering
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
       responses:
         '200':
           description: Information about the coverage collection.
@@ -194,7 +194,7 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageDomainSet
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
         - $ref: '#/components/parameters/subset'
       responses:
         '200':
@@ -225,7 +225,7 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageRangeType
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
       responses:
         '200':
           description: A coverage's rangetype.
@@ -253,7 +253,7 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageMetadata
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
       responses:
         '200':
           description: A coverage's metadata.
@@ -281,7 +281,7 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageRangeSet
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
         - $ref: '#/components/parameters/subset'
       responses:
         '200':
@@ -312,7 +312,7 @@ paths:
       summary: returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
       operationId: getCoverageDescription
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
         - $ref: '#/components/parameters/subset'
       responses:
         '200':
@@ -341,7 +341,7 @@ paths:
         HTML or GeoJSON
       operationId: getCoverageAll
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/coverageid'
+        - $ref: '#/components/parameters/coverageid'
         - $ref: '#/components/parameters/subset'
         - $ref: '#/components/parameters/rangeSubset'
         - $ref: '#/components/parameters/scaleFactor'
@@ -806,6 +806,15 @@ components:
       description: TODO
       example: TODO
   parameters:
+    coverageid:
+      name: coverageid
+      in: path
+      description: Identifier (name) of a specific collection aka coverage
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
     subset:
       name: subset
       in: query
