@@ -49,7 +49,8 @@ properties:
   itemType:
     description: indicator about the type of the items in the collection if the collection has an accessible /collections/{collectionId}/items endpoint
     type: string
-    default: null
+    default: unknown
+    example:
   crs:
     description: the list of coordinate reference systems supported by the API; the first item is the default coordinate reference system
     type: array

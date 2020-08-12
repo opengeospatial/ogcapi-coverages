@@ -13,9 +13,11 @@ properties:
   numberMatched:
     type: integer
     minimum: 0
+    example: 1
   numberReturned:
     type: integer
     minimum: 0
+    example: 1
   collections:
     type: array
     items:
