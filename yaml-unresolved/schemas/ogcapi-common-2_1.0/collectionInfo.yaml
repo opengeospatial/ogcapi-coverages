@@ -6,17 +6,42 @@ properties:
   id:
     type: string
     description: identifier of the collection used, for example, in URIs
-    example: address
+    example: dem
   title:
     type: string
     description: human readable title of the collection
-    example: address
+    example: Digital Elevation Model
   description:
     type: string
     description: a description of the data in the collection
-    example: An address.
+    example: A Digital Elevation Model.
   links:
     type: array
+    example:
+      - href: http://data.example.org/collections/dem?f=json
+        rel: self
+        type: application/json
+        title: Digital Elevation Model
+      - href: http://data.example.org/collections/dem?f=html
+        rel: alternate
+        type: application/json
+        title: Digital Elevation Model
+      - href: http://data.example.org/collections/dem/coverage
+        rel: coverage
+        type: application/json
+        title: Digital Elevation Model
+      - href: http://data.example.org/collections/dem/coverage/domainset
+        rel: domainset
+        type: application/json
+        title: Digital Elevation Model
+      - href: http://data.example.org/collections/dem/coverage/rangetype
+        rel: rangetype
+        type: application/json
+        title: Digital Elevation Model
+      - href: http://data.example.org/collections/dem/coverage/metadata
+        rel: metadata
+        type: application/json
+        title: Digital Elevation Model
     items:
       $ref: '../ogcapi-common-1_1.0/link.yaml'
   extent:

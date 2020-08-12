@@ -7,7 +7,10 @@ allOf:
       - rangeType
     properties:
       domainSet:
-        $ref: '../cis_1.1/domainSet.yaml'
+        allOf:
+          - $ref: '../cis_1.1/domainSet.yaml'
+        example:
+          $href: 'http://data.example.org/collections/dem/coverage/domainSet'
       rangeType:
         allOf:
           - $ref: '../cis_1.1/rangeType.yaml'
