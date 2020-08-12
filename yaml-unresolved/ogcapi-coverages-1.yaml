@@ -30,7 +30,7 @@ paths:
         statements and the metadata about the coverage data in this dataset.
       operationId: getLandingPage
       parameters:
-        - $ref: '#/components/parameters/f'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
         "200":
           description: links to the API capabilities
@@ -47,6 +47,8 @@ paths:
         - Capabilities
       summary: API definition
       description: most likely returning the document at hand
+      parameters:
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
         "200":
           description: most likely returning the document at hand
@@ -67,7 +69,7 @@ paths:
       summary: API conformance definition
       description: list of all conformance classes that the server conforms to
       parameters:
-        - $ref: '#/components/parameters/f'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
         "200":
           description: The URIs of all conformance classes supported by the server
@@ -106,7 +108,7 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/bbox'
         - $ref: '#/components/parameters/time'
-        - $ref: '#/components/parameters/f'
+        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
         "200":
           description: Metdata about the collections shared by this API.
@@ -899,20 +901,6 @@ components:
       style: form
       explode: false
       schema:
-        type: string
-    f:
-      name: f
-      in: query
-      description: |
-        The optional f parameter indicates the output format which the server shall provide as part of the response document. It has preference over the HTTP Accept header. The default format is JSON.
-      required: false
-      style: form
-      explode: false
-      schema:
-        default: json
-        enum:
-          - json
-          - html
         type: string
     coverageid:
       name: coverageid
