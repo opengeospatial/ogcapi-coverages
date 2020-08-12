@@ -10,7 +10,41 @@ allOf:
         allOf:
           - $ref: '../cis_1.1/domainSet.yaml'
         example:
-          '$ref: http://data.example.org/collections/dem/coverage/domainSet'
+          type: DomainSetType
+          generalGrid:
+            type: GeneralGridCoverageType
+            srsName: 'http://www.opengis.net/def/crs/EPSG/0/4326'
+            axisLabels:
+              - Lat
+              - Long
+            axis:
+              - type: RegularAxisType
+                axisLabel: Lat
+                lowerBound: -90
+                upperBound: 90
+                uomLabel: deg
+                resolution: 1
+              - type: RegularAxisType
+                axisLabel: Long
+                lowerBound: -180
+                upperBound: 180
+                uomLabel: deg
+                resolution: 1
+            gridLimits:
+              type: GridLimitsType
+              srsName: 'http://www.opengis.net/def/crs/OGC/0/Index2D'
+              axisLabels:
+                - i
+                - j
+              axis:
+                - type: IndexAxisType
+                  axisLabel: i
+                  lowerBound: 0
+                  upperBound: 180
+                - type: IndexAxisType
+                  axisLabel: j
+                  lowerBound: 0
+                  upperBound: 360
       rangeType:
         allOf:
           - $ref: '../cis_1.1/rangeType.yaml'
