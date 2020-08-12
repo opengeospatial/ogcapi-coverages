@@ -28,7 +28,7 @@ properties:
         title: Digital Elevation Model
       - href: http://data.example.org/collections/dem/coverage
         rel: coverage
-        type: application/json
+        type: image/tiff; application=geotiff
         title: Digital Elevation Model
       - href: http://data.example.org/collections/dem/coverage/domainset
         rel: domainset

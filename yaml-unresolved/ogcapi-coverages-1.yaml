@@ -132,7 +132,7 @@ paths:
     get:
       tags:
       - Capabilities
-      summary: Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage.
+      summary: Collection Information is the set of metadata which describes a single collection, or in the the case of OGCAPI-Coverages, a single Coverage.
       operationId: describeCoverage
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -160,20 +160,20 @@ paths:
     get:
       tags:
         - Coverage
-      summary: description of the coverage offering identified by {coverageid} including envelope
+      summary: The coverage identified by {coverageid}
       description: |-
-        Coverage offering identified by {coverageid}.
-        Use content negotiation to request HTML or GeoJSON.
-      operationId: getCoverageOffering
+        Coverage identified by {coverageid}.
+        Use content negotiation to request required format.
+      operationId: getCoverage
       parameters:
         - $ref: '#/components/parameters/coverageid'
       responses:
         '200':
-          description: Information about the coverage collection.
+          description: The coverage.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/coverageOffering'
+                $ref: 'schemas/cis_1.1/coverage-schema.yaml'
             text/html:
               schema:
                 type: string
