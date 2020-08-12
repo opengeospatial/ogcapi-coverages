@@ -167,6 +167,15 @@ paths:
       operationId: getCoverage
       parameters:
         - $ref: '#/components/parameters/coverageid'
+        - $ref: '#/components/parameters/subset'
+        - $ref: '#/components/parameters/rangeSubset'
+        - $ref: '#/components/parameters/scaleFactor'
+        - $ref: '#/components/parameters/scaleAxis'
+        - $ref: '#/components/parameters/scaleSize'
+        - $ref: '#/components/parameters/scaleExtent'
+        - $ref: '#/components/parameters/subsettingCrs'
+        - $ref: '#/components/parameters/outputCrs'
+        - $ref: '#/components/parameters/interpolation'
       responses:
         '200':
           description: The coverage.
@@ -305,77 +314,77 @@ paths:
             text/html:
               schema:
                 type: string
-  /collections/{coverageid}/coverage/description:
-    get:
-      tags:
-      - Coverage
-      summary: returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
-      operationId: getCoverageDescription
-      parameters:
-        - $ref: '#/components/parameters/coverageid'
-        - $ref: '#/components/parameters/subset'
-      responses:
-        '200':
-          description: A coverage description.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/coverageDescription'
-            text/html:
-              schema:
-                type: string
-        default:
-          description: An error occured.
-          content:
-            application/json:
-              schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
-            text/html:
-              schema:
-                type: string
-  /collections/{coverageid}/coverage/all:
-    get:
-      tags:
-      - Coverage
-      summary: retrieve a coverages rangeset; use content negotiation to request
-        HTML or GeoJSON
-      operationId: getCoverageAll
-      parameters:
-        - $ref: '#/components/parameters/coverageid'
-        - $ref: '#/components/parameters/subset'
-        - $ref: '#/components/parameters/rangeSubset'
-        - $ref: '#/components/parameters/scaleFactor'
-        - $ref: '#/components/parameters/scaleAxis'
-        - $ref: '#/components/parameters/scaleSize'
-        - $ref: '#/components/parameters/scaleExtent'
-        - $ref: '#/components/parameters/subsettingCrs'
-        - $ref: '#/components/parameters/outputCrs'
-        - $ref: '#/components/parameters/interpolation'
-      responses:
-        '200':
-          description: A full coverage.
-          content:
-            application/multipart+related:
-              schema:
-                $ref: '#/components/schemas/coverageMultipart'
-            image/*:
-              schema:
-                $ref: '#/components/schemas/rangeSetImage'
-            application/*:
-              schema:
-                $ref: '#/components/schemas/rangeSetImage'
-            text/html:
-              schema:
-                type: string
-        default:
-          description: An error occured.
-          content:
-            application/json:
-              schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
-            text/html:
-              schema:
-                type: string
+  # /collections/{coverageid}/coverage/description:
+  #   get:
+  #     tags:
+  #     - Coverage
+  #     summary: returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
+  #     operationId: getCoverageDescription
+  #     parameters:
+  #       - $ref: '#/components/parameters/coverageid'
+  #       - $ref: '#/components/parameters/subset'
+  #     responses:
+  #       '200':
+  #         description: A coverage description.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: '#/components/schemas/coverageDescription'
+  #           text/html:
+  #             schema:
+  #               type: string
+  #       default:
+  #         description: An error occured.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+  #           text/html:
+  #             schema:
+  #               type: string
+  # /collections/{coverageid}/coverage/all:
+  #   get:
+  #     tags:
+  #     - Coverage
+  #     summary: retrieve a coverages rangeset; use content negotiation to request
+  #       HTML or GeoJSON
+  #     operationId: getCoverageAll
+  #     parameters:
+  #       - $ref: '#/components/parameters/coverageid'
+  #       - $ref: '#/components/parameters/subset'
+  #       - $ref: '#/components/parameters/rangeSubset'
+  #       - $ref: '#/components/parameters/scaleFactor'
+  #       - $ref: '#/components/parameters/scaleAxis'
+  #       - $ref: '#/components/parameters/scaleSize'
+  #       - $ref: '#/components/parameters/scaleExtent'
+  #       - $ref: '#/components/parameters/subsettingCrs'
+  #       - $ref: '#/components/parameters/outputCrs'
+  #       - $ref: '#/components/parameters/interpolation'
+  #     responses:
+  #       '200':
+  #         description: A full coverage.
+  #         content:
+  #           application/multipart+related:
+  #             schema:
+  #               $ref: '#/components/schemas/coverageMultipart'
+  #           image/*:
+  #             schema:
+  #               $ref: '#/components/schemas/rangeSetImage'
+  #           application/*:
+  #             schema:
+  #               $ref: '#/components/schemas/rangeSetImage'
+  #           text/html:
+  #             schema:
+  #               type: string
+  #       default:
+  #         description: An error occured.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+  #           text/html:
+  #             schema:
+  #               type: string
 components:
   schemas:
     coverageOffering:
