@@ -186,9 +186,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/domainSet'
+                $ref: 'schemas/cis-1.1/domainSet.yaml'
               example:
-                $ref: 
+                $ref:
             text/html:
               schema:
                 type: string
@@ -482,7 +482,7 @@ components:
               temporal:
                 - "2020-01-06T14:00:00Z"
                 - "2020-02-07T22:00:00Z"
-            crs: 
+            crs:
               - http://www.opengis.net/def/crs/OGC/1.3/CRS84
             domainSet:
               - TODO
@@ -593,7 +593,7 @@ components:
           example:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
         domainSet:
-          $ref: '#/components/schemas/domainSet'
+          $ref: 'schemas/cis-1.1/domainSet.yaml'
         rangeType:
           $ref: '#/components/schemas/rangeType'
     collectionInfo:
@@ -674,7 +674,7 @@ components:
           example:
             - http://www.opengis.net/def/crs/OGC/1.3/CRS84
         domainSet:
-          $ref: '#/components/schemas/domainSet'
+          $ref: 'schemas/cis-1.1/domainSet.yaml'
         rangeType:
           $ref: '#/components/schemas/rangeType'
     extent:
@@ -722,268 +722,6 @@ components:
           items:
             type: string
             format: dateTime
-    domainSet:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-          - DomainSetType
-        generalGrid:
-          type: object
-          required:
-          - type
-          additionalProperties: false
-          properties:
-            type:
-              enum:
-              - GeneralGridCoverageType
-            id:
-              type: string
-            srsName:
-              type: string
-              format: uri
-            axisLabels:
-              type: array
-              items:
-                type: string
-            axis:
-              type: array
-              items:
-                type: object
-                oneOf:
-                - title: Index Axis
-                  description: An Index Axis is an axis with only integer positions
-                    allowed.
-                  required:
-                  - type
-                  - axisLabel
-                  - lowerBound
-                  - upperBound
-                  additionalProperties: false
-                  properties:
-                    type:
-                      enum:
-                      - IndexAxisType
-                    id:
-                      type: string
-                    axisLabel:
-                      type: string
-                    lowerBound:
-                      type: number
-                    upperBound:
-                      type: number
-                - title: Regular Axis
-                  description: A Regular Axis is an axis where all direct coordinates
-                    are at a common distance from its immediate neighbors.
-                  required:
-                  - type
-                  - axisLabel
-                  - lowerBound
-                  - upperBound
-                  - resolution
-                  - uomLabel
-                  additionalProperties: false
-                  properties:
-                    type:
-                      enum:
-                      - RegularAxisType
-                    id:
-                      type: string
-                    axisLabel:
-                      type: string
-                    lowerBound:
-                      type: number
-                    upperBound:
-                      type: number
-                    uomLabel:
-                      type: string
-                    resolution:
-                      type: number
-                - title: Irregular Axis
-                  description: An irregular axis enumerates all possible direct position
-                    coordinates.
-                  required:
-                  - type
-                  - axisLabel
-                  - uomLabel
-                  - coordinate
-                  additionalProperties: false
-                  properties:
-                    type:
-                      enum:
-                      - IrregularAxisType
-                    id:
-                      type: string
-                    axisLabel:
-                      type: string
-                    uomLabel:
-                      type: string
-                    coordinate:
-                      type: array
-                      items:
-                        type: string
-            displacement:
-              title: Displacement
-              description: A Displacement is a warped axis nest where points on the
-                grid all have their individual direct position coordinates. The sequenceRule
-                element describes linearization order.
-              type: object
-              oneOf:
-              - required:
-                - type
-                - axisLabels
-                - uomLabels
-                - coordinates
-                properties:
-                  type:
-                    enum:
-                    - DisplacementAxisNestType
-                  id:
-                    type: string
-                  axisLabel:
-                    type: string
-                  srsName:
-                    type: string
-                    format: uri
-                  axisLabels:
-                    type: array
-                    items:
-                      type: string
-                  uomLabels:
-                    type: array
-                    items:
-                      type: string
-                  coordinates:
-                    type: array
-                    items:
-                      type: array
-                      items:
-                        type: string
-              - required:
-                - type
-                - axisLabels
-                - uomLabels
-                - coordinatesRef
-                properties:
-                  type:
-                    enum:
-                    - DisplacementAxisNestTypeRef
-                  id:
-                    type: string
-                  axisLabel:
-                    type: string
-                  srsName:
-                    type: string
-                    format: uri
-                  axisLabels:
-                    type: array
-                    items:
-                      type: string
-                  uomLabels:
-                    type: array
-                    items:
-                      type: string
-                  coordinatesRef:
-                    type: string
-                    format: uri
-            model:
-              title: Sensor model
-              description: A Transformation By Sensor Model is a transformation definition
-                which is given by a SensorML 2.0 transformation specification.
-              type: object
-              required:
-              - type
-              - sensorModelRef
-              properties:
-                type:
-                  enum:
-                  - TransformationBySensorModelType
-                id:
-                  type: string
-                axisLabels:
-                  type: array
-                  items:
-                    type: string
-                uomLabels:
-                  type: array
-                  items:
-                    type: string
-                sensorModelRef:
-                  type: string
-                  format: uri
-                sensorInstanceRef:
-                  type: string
-                  format: uri
-            gridLimits:
-              title: Grid limits
-              description: This is the boundary of the array underlying the grid,
-                given by its diagonal corner points in integer _60_3D. The grid limits
-                can be omitted in case all axes are of type index axis, because then
-                it repeats the grid information in a redundant way. The purpose of
-                the axisLabels attribute, which lists the axis labels of all axisExtent
-                elements in proper sequence, is to enforce axis sequence also in XML
-                systems which do not preserve document order.
-              type: object
-              required:
-              - type
-              properties:
-                indexAxis:
-                  title: Index Axis
-                  description: An Index Axis is an axis with only integer positions
-                    allowed.
-                  type: object
-                  required:
-                  - type
-                  - lowerBound
-                  - upperBound
-                  additionalProperties: false
-                  properties:
-                    type:
-                      enum:
-                      - IndexAxisType
-                    id:
-                      type: string
-                    axisLabel:
-                      type: string
-                    lowerBound:
-                      type: number
-                    upperBound:
-                      type: number
-                srsName:
-                  type: string
-                  format: uri
-                axisLabels:
-                  type: array
-                  items:
-                    type: string
-        directMultiPoint:
-          oneOf:
-          - required:
-            - type
-            - coordinates
-            properties:
-              type:
-                enum:
-                - DirectMultiPointType
-              coordinates:
-                type: array
-                items:
-                  type: array
-                  items:
-                    type: string
-          - required:
-            - type
-            - coordinatesRef
-          properties:
-            type:
-              enum:
-              - DirectMultiPointTypeRef
-            coordinatesRef:
-              type: string
-              format: uri
     rangeType:
       title: rangeType
       description: The rangeType element describes the structure and semantics of a
@@ -1269,7 +1007,7 @@ components:
           items:
             $ref: '#/components/schemas/link'
         domainSet:
-          $ref: '#/components/schemas/domainSet'
+          $ref: 'schemas/cis-1.1/domainSet.yaml'
         rangeType:
           $ref: '#/components/schemas/rangeType'
         etadata:
