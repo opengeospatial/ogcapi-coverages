@@ -59,7 +59,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
   /conformance:
     get:
       tags:
@@ -75,7 +75,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                - $ref: 'schemas/ogcapi-common-1_1.0/confClasses.yaml'
+                  - $ref: 'schemas/ogcapi-common-1_1.0/confClasses.yaml'
                 example:
                   conformsTo:
                     - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
@@ -95,7 +95,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
   /collections:
     get:
       tags:
@@ -122,7 +122,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -150,7 +150,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -180,7 +180,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -211,7 +211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -239,7 +239,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -267,7 +267,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -299,7 +299,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -327,7 +327,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -370,50 +370,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/exception'
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
             text/html:
               schema:
                 type: string
 components:
   schemas:
-    exception:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          type: string
-        description:
-          type: string
     root:
       required:
-      - links
+        - links
       type: object
       properties:
         title:
           description: The title of the API
           type: string
+          example: 'Example of OGCAPI - Coverages - Part 1: Core'
         description:
           description: A textual description of the API
           type: string
+          example: 'Example of OGCAPI - Coverages - Part 1: Core'
         links:
           description: Links to the resources exposed through this API.
           type: array
           example:
-          - href: http://data.example.org/
-            rel: self
-            type: application/json
-            title: this document
-          - href: http://data.example.org/api
-            rel: service-desc
-            type: application/openapi+json;version=3.0
-            title: the API definition
-          - href: http://data.example.org/conformance
-            rel: conformance
-            type: application/json
-            title: OGC conformance classes implemented by this API
-          - href: http://data.example.org/collections
-            title: Metadata about the resource collections
+            - href: http://data.example.org/
+              rel: self
+              type: application/json
+              title: this document
+            - href: http://data.example.org/api
+              rel: service-desc
+              type: application/openapi+json;version=3.0
+              title: the API definition
+            - href: http://data.example.org/conformance
+              rel: conformance
+              type: application/json
+              title: OGC conformance classes implemented by this API
+            - href: http://data.example.org/collections
+              title: Metadata about the resource collections
           items:
             $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
     content:
