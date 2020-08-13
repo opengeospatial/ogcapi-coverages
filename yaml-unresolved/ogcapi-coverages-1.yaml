@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: 'A sample API conforming to the OGC API - Coverages - Part 1: Core standard'
-  description: 'This is a sample OpenAPI definition that conforms to the OGC API - Coverages - Part 1: Core Service specification (conformance classes: "Core", "Subset", "JSON", "HTML" and "OpenAPI 3.0").'
+  description: 'This is a sample OpenAPI definition that conforms to the OGC API - Coverages - Part 1: Core Service specification (conformance classes: "GeoData-Coverage", "Coverage Subset", "CIS JSON", "HTML" and "OpenAPI 3.0").'
   contact:
     name: EOX IT Services GmbH
     url: https://eox.at
@@ -86,7 +86,6 @@ paths:
                     - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas3
                     - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/geodata
                     - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
-                    - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
                     - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
                     - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
                     - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
