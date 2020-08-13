@@ -2,10 +2,35 @@ allOf:
   - $ref: '../ogcapi-common-2_1.0/collectionInfo.yaml'
   - type: object
     required:
-      - extent
+      oneOf:
+        - extent
+        - envelope
       - domainSet
       - rangeType
+      - serviceMetadata
     properties:
+      envelope:
+        allOf:
+          - $ref: 'schemas/cis_1.1/envelope.yaml'
+        example:
+          id: dem_envelope
+          srsName: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+          axisLabels:
+            - Lat
+            - Long
+          axis:
+            - type: AxisExtentType
+              id: dem_envelope_lat
+              axisLabel: Lat
+              lowerBound: -90
+              upperBound: 90
+              uomLabel: deg
+            - type: AxisExtentType
+              id: dem_envelope_long
+              axisLabel: Long
+              lowerBound: -180
+              upperBound: 180
+              uomLabel: deg
       domainSet:
         allOf:
           - $ref: '../cis_1.1/domainSet.yaml'
@@ -67,3 +92,22 @@ allOf:
             type: InterpolationRestrictionType
             allowedInterpolation:
               - linear
+      serviceMetadata:
+        title: serviceMetadata
+        description: Coverage specific service metadata like native format, coverate type, etc.
+        type: object
+        required:
+          - nativeFormat
+          - coverageSubtype
+        properties:
+          nativeFormat:
+            type: string
+          coverageSubtype:
+            type: string
+          coverageSubtypeParent:
+            $ref: 'coverageSubtypeParent.yaml'
+          constraints: #TODO
+            type: string
+        example:
+          nativeFormat: image/tiff
+          coverageSubtype: RectifiedGridCoverage

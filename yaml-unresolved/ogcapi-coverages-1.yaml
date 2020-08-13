@@ -160,7 +160,7 @@ paths:
     get:
       tags:
         - Coverage
-      summary: The coverage identified by {coverageid}
+      summary: Retrieve the coverage identified by {coverageid}
       description: |-
         Coverage identified by {coverageid}.
         Use content negotiation to request required format.
@@ -178,11 +178,20 @@ paths:
         - $ref: '#/components/parameters/interpolation'
       responses:
         '200':
-          description: The coverage.
+          description: A full coverage.
           content:
             application/json:
               schema:
                 $ref: 'schemas/cis_1.1/coverage-schema.yaml'
+            application/multipart+related:
+              schema:
+                $ref: '#/components/schemas/coverageMultipart'
+            image/*:
+              schema:
+                $ref: '#/components/schemas/coverageImage'
+            application/*:
+              schema:
+                $ref: '#/components/schemas/coverageImage'
             text/html:
               schema:
                 type: string
@@ -199,8 +208,7 @@ paths:
     get:
       tags:
         - Coverage
-      summary: retrieve a coverages domainset; use content negotiation to request
-        HTML or GeoJSON
+      summary: Retrieve a coverage's domainset; use content negotiation to request HTML or JSON
       operationId: getCoverageDomainSet
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -230,8 +238,7 @@ paths:
     get:
       tags:
         - Coverage
-      summary: retrieve a coverage's rangetype; use content negotiation to request
-        HTML or GeoJSON
+      summary: Retrieve a coverage's rangetype; use content negotiation to request HTML or JSON
       operationId: getCoverageRangeType
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -239,9 +246,43 @@ paths:
         '200':
           description: A coverage's rangetype.
           content:
-            application/geo+json:
+            application/json:
               schema:
                 $ref: 'schemas/cis_1.1/rangeType.yaml'
+            text/html:
+              schema:
+                type: string
+        default:
+          description: An error occured.
+          content:
+            application/json:
+              schema:
+                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+            text/html:
+              schema:
+                type: string
+  /collections/{coverageid}/coverage/rangeset:
+    get:
+      tags:
+      - Coverage
+      summary: Retrieve a coverage's rangeset; use content negotiation to request HTML or JSON
+      operationId: getCoverageRangeSet
+      parameters:
+        - $ref: '#/components/parameters/coverageid'
+        - $ref: '#/components/parameters/subset'
+      responses:
+        '200':
+          description: A coverage's range set.
+          content:
+            application/json:
+              schema:
+                $ref: 'schemas/cis_1.1/rangeSet.yaml'
+            image/*:
+              schema:
+                $ref: '#/components/schemas/rangeSetImage'
+            application/*:
+              schema:
+                $ref: '#/components/schemas/rangeSetImage'
             text/html:
               schema:
                 type: string
@@ -282,297 +323,13 @@ paths:
             text/html:
               schema:
                 type: string
-  /collections/{coverageid}/coverage/rangeset:
-    get:
-      tags:
-      - Coverage
-      summary: retrieve a coverage's rangeset; use content negotiation to request
-        HTML or GeoJSON
-      operationId: getCoverageRangeSet
-      parameters:
-        - $ref: '#/components/parameters/coverageid'
-        - $ref: '#/components/parameters/subset'
-      responses:
-        '200':
-          description: A coverage's range set.
-          content:
-            image/*:
-              schema:
-                $ref: '#/components/schemas/rangeSetImage'
-            application/*:
-              schema:
-                $ref: '#/components/schemas/rangeSetImage'
-            text/html:
-              schema:
-                type: string
-        default:
-          description: An error occured.
-          content:
-            application/json:
-              schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
-            text/html:
-              schema:
-                type: string
-  # /collections/{coverageid}/coverage/description:
-  #   get:
-  #     tags:
-  #     - Coverage
-  #     summary: returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
-  #     operationId: getCoverageDescription
-  #     parameters:
-  #       - $ref: '#/components/parameters/coverageid'
-  #       - $ref: '#/components/parameters/subset'
-  #     responses:
-  #       '200':
-  #         description: A coverage description.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/coverageDescription'
-  #           text/html:
-  #             schema:
-  #               type: string
-  #       default:
-  #         description: An error occured.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
-  #           text/html:
-  #             schema:
-  #               type: string
-  # /collections/{coverageid}/coverage/all:
-  #   get:
-  #     tags:
-  #     - Coverage
-  #     summary: retrieve a coverages rangeset; use content negotiation to request
-  #       HTML or GeoJSON
-  #     operationId: getCoverageAll
-  #     parameters:
-  #       - $ref: '#/components/parameters/coverageid'
-  #       - $ref: '#/components/parameters/subset'
-  #       - $ref: '#/components/parameters/rangeSubset'
-  #       - $ref: '#/components/parameters/scaleFactor'
-  #       - $ref: '#/components/parameters/scaleAxis'
-  #       - $ref: '#/components/parameters/scaleSize'
-  #       - $ref: '#/components/parameters/scaleExtent'
-  #       - $ref: '#/components/parameters/subsettingCrs'
-  #       - $ref: '#/components/parameters/outputCrs'
-  #       - $ref: '#/components/parameters/interpolation'
-  #     responses:
-  #       '200':
-  #         description: A full coverage.
-  #         content:
-  #           application/multipart+related:
-  #             schema:
-  #               $ref: '#/components/schemas/coverageMultipart'
-  #           image/*:
-  #             schema:
-  #               $ref: '#/components/schemas/rangeSetImage'
-  #           application/*:
-  #             schema:
-  #               $ref: '#/components/schemas/rangeSetImage'
-  #           text/html:
-  #             schema:
-  #               type: string
-  #       default:
-  #         description: An error occured.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
-  #           text/html:
-  #             schema:
-  #               type: string
 components:
   schemas:
-    coverageOffering:
-      title: Coverage Offering
-      description: Description of the Coverage Offering
-      required:
-        - links
-        - name
-        - envelope
-        - rangeType
-        - serviceMetadata
-      type: object
-      properties:
-        name:
-          type: string
-          description: identifier of the collection used, for example, in URIs
-          example: dem
-        title:
-          type: string
-          description: human readable title of the collection
-          example: Digital Elevation Model
-        description:
-          type: string
-          description: a description of the data in the collection
-          example: Digital Elevation Model
-        links:
-          type: array
-          example:
-          - href: http://data.example.org/collections/dem/coverage?f=json
-            rel: self
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage?f=html
-            rel: alternate
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/domainset
-            rel: domainset
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/rangetype
-            rel: rangetype
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/metadata
-            rel: metadata
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/rangeset
-            rel: rangeset
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/description
-            rel: description
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/all
-            rel: data
-            type: application/json
-            title: Digital Elevation Model
-          items:
-            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
-        envelope:
-          allOf:
-            - $ref: 'schemas/cis_1.1/envelope.yaml'
-          example:
-            id: dem_envelope
-            srsName: http://www.opengis.net/def/crs/OGC/1.3/CRS84
-            axisLabels:
-              - Lat
-              - Long
-            axis:
-              - type: AxisExtentType
-                id: dem_envelope_lat
-                axisLabel: Lat
-                lowerBound: -90
-                upperBound: 90
-                uomLabel: deg
-              - type: AxisExtentType
-                id: dem_envelope_long
-                axisLabel: Long
-                lowerBound: -180
-                upperBound: 180
-                uomLabel: deg
-        rangeType:
-          allOf:
-            - $ref: 'schemas/cis_1.1/rangeType.yaml'
-          example:
-            type: DataRecordType
-            field:
-              type: QuantityType
-              id: dem_field
-              name: dem field
-              definition: unsignedInt
-              uom:
-                type: UnitReference
-                code: m
-              constraint:
-                type: AllowedValues
-                interval:
-                  - 0
-                  - 10000
-            interpolationRestriction:
-              type: InterpolationRestrictionType
-              allowedInterpolation:
-                - linear
-        serviceMetadata:
-          $ref: '#/components/schemas/serviceMetadata'
-    serviceMetadata:
-      title: serviceMetadata
-      description: Coverage specific service metadata like native format, coverate type, etc.
-      type: object
-      required:
-        - nativeFormat
-        - coverageSubtype
-      properties:
-        nativeFormat:
-          type: string
-        coverageSubtype:
-          type: string
-        coverageSubtypeParent:
-          $ref: '#/components/schemas/coverageSubtypeParent'
-        constraints: #TODO
-          type: string
-      example:
-        nativeFormat: image/tiff
-        coverageSubtype: RectifiedGridCoverage
-    coverageSubtypeParent:
-      title: coverageSubtypeParent
-      type: object
-      required:
-        - coverageSubtype
-      properties:
-        coverageSubtype:
-          type: string
-        coverageSubtypeParent:
-          $ref: '#/components/schemas/coverageSubtypeParent'
-    coverageDescription:
-      title: Coverage Description
-      description: Description of the Coverage including domainSet, rangeType, and metadata
-      required:
-        - links
-        - name
-        - domainSet
-        - rangeType
-        - metadata
-      type: object
-      properties:
-        name:
-          type: string
-          description: identifier of the collection used, for example, in URIs
-          example: dem
-        title:
-          type: string
-          description: human readable title of the collection
-          example: Digital Elevation Model
-        description:
-          type: string
-          description: a description of the data in the collection
-          example: Digital Elevation Model
-        links:
-          type: array
-          example:
-          - href: http://data.example.org/collections/dem/coverage/description?f=json
-            rel: self
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/description?f=html
-            rel: alternate
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/rangeset
-            rel: rangeset
-            type: application/json
-            title: Digital Elevation Model
-          - href: http://data.example.org/collections/dem/coverage/all
-            rel: data
-            type: application/json
-            title: Digital Elevation Model
-          items:
-            $ref: 'schemas/ogcapi-common-1_1.0/link.yaml'
-        domainSet:
-          $ref: 'schemas/cis_1.1/domainSet.yaml'
-        rangeType:
-          $ref: 'schemas/cis_1.1/rangeType.yaml'
-        etadata:
-          $ref: 'schemas/cis_1.1/metadata.yaml'
     coverageMultipart:
+      type: string
+      description: TODO
+      example: TODO
+    coverageImage:
       type: string
       description: TODO
       example: TODO

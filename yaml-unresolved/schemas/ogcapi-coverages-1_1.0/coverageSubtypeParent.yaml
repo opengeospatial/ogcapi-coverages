@@ -1,0 +1,10 @@
+title: coverageSubtypeParent
+type: object
+required:
+  - coverageSubtype
+properties:
+  coverageSubtype:
+    type: string
+  coverageSubtypeParent:
+    $ref: 'coverageSubtypeParent.yaml'
+
