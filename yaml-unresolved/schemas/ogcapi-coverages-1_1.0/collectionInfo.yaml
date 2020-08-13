@@ -2,9 +2,7 @@ allOf:
   - $ref: '../ogcapi-common-2_1.0/collectionInfo.yaml'
   - type: object
     required:
-      oneOf:
-        - extent
-        - envelope
+      - envelope
       - domainSet
       - rangeType
       - serviceMetadata
