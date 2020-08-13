@@ -9,7 +9,7 @@ allOf:
     properties:
       envelope:
         allOf:
-          - $ref: 'schemas/cis_1.1/envelope.yaml'
+          - $ref: '../cis_1.1/envelope.yaml'
         example:
           id: dem_envelope
           srsName: http://www.opengis.net/def/crs/OGC/1.3/CRS84
