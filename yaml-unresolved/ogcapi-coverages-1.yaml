@@ -11,9 +11,9 @@ info:
     url: https://creativecommons.org/licenses/by/4.0/
   version: 2.0.0
 servers:
-  - url: https://dev.example.org/
+  - url: https://dev.example.org
     description: Development server
-  - url: https://data.example.org/
+  - url: https://data.example.org
     description: Production server
 tags:
   - name: Capabilities
@@ -24,7 +24,7 @@ paths:
   /:
     get:
       tags:
-      - Capabilities
+        - Capabilities
       summary: landing page of this API
       description: The landing page provides links to the API definition, the Conformance
         statements and the metadata about the coverage data in this dataset.
@@ -47,6 +47,7 @@ paths:
         - Capabilities
       summary: API definition
       description: most likely returning the document at hand
+      operationId: getApiDefinition
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
@@ -68,6 +69,7 @@ paths:
         - Capabilities
       summary: API conformance definition
       description: list of all conformance classes that the server conforms to
+      operationId: getCapabilities
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
       responses:
@@ -102,6 +104,7 @@ paths:
       tags:
         - Capabilities
       summary: describe the collections in the dataset
+      description: list of all collections available from the server
       operationId: describeCollections
       parameters:
         - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/limit'
@@ -132,6 +135,7 @@ paths:
       tags:
       - Capabilities
       summary: Collection Information is the set of metadata which describes a single collection, or in the the case of OGCAPI-Coverages, a single Coverage.
+      description: description of the collection identified with coverageid
       operationId: describeCoverage
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -208,6 +212,7 @@ paths:
       tags:
         - Coverage
       summary: Retrieve a coverage's domainset; use content negotiation to request HTML or JSON
+      description: a coverage's domainset
       operationId: getCoverageDomainSet
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -219,8 +224,6 @@ paths:
             application/json:
               schema:
                 $ref: 'schemas/cis_1.1/domainSet.yaml'
-              example:
-                $ref:
             text/html:
               schema:
                 type: string
@@ -238,6 +241,7 @@ paths:
       tags:
         - Coverage
       summary: Retrieve a coverage's rangetype; use content negotiation to request HTML or JSON
+      description: a coverage's rangetype
       operationId: getCoverageRangeType
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -265,6 +269,7 @@ paths:
       tags:
       - Coverage
       summary: Retrieve a coverage's rangeset; use content negotiation to request HTML or JSON
+      description: a coverage's rangeset
       operationId: getCoverageRangeSet
       parameters:
         - $ref: '#/components/parameters/coverageid'
@@ -300,6 +305,7 @@ paths:
       - Coverage
       summary: retrieve a coverage's metadata; use content negotiation to request
         HTML or GeoJSON
+      description: a coverage's metadata
       operationId: getCoverageMetadata
       parameters:
         - $ref: '#/components/parameters/coverageid'
