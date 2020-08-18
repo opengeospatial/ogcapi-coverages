@@ -8,9 +8,9 @@
 |===
 |Implementation | Type | Contact
 
-| TBA
+| pygeoapi[https://pygeoapi.io]
 | OGC API - Coverages
-| TBA
+| Tom Kralidis[https://github.com/tomkralidis]
 
 | TBA
 | TBA
@@ -26,7 +26,7 @@
 |===
 |Implementation | Type | Contact
 
-| TBA
-| TBA
-| TBA
+| OWSLib[https://geopython.github.io/OWSLib
+| Python client
+| Tom Kralidis[https://github.com/tomkralidis]
 |===
