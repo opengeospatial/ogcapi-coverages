@@ -1,4 +1,4 @@
-$schema: 'http://json-schema.org/draft-04/schema#'
+#$schema: 'http://json-schema.org/draft-04/schema#'
 title: Coverage object
 description: 'Component of OGC Coverage Implementation Schema 1.1. Last updated: 2016-may-18. Copyright (c) 2016 Open Geospatial Consortium, Inc. All Rights Reserved. To obtain additional rights of use, visit http://www.opengeospatial.org/legal/.'
 type: object
@@ -14,16 +14,16 @@ oneOf:
       type:
         enum:
           - CoverageByDomainAndRangeType
-      envelope:
-        $ref: 'envelope.yaml'
-      domainSet:
-        $ref: 'domainSet.yaml'
-      rangeSet:
-        $ref: 'rangeSet.yaml'
-      rangeType:
-        $ref: 'rangeType.yaml'
-      metadata:
-        $ref: 'metadata.yaml'
+      # envelope:
+      #   $ref: 'envelope.yaml'
+      # domainSet:
+      #   $ref: 'domainSet.yaml'
+      # rangeSet:
+      #   $ref: 'rangeSet.yaml'
+      # rangeType:
+      #   $ref: 'rangeType.yaml'
+      # metadata:
+      #   $ref: 'metadata.yaml'
   - required:
       - type
       - partitionSet
@@ -34,11 +34,11 @@ oneOf:
       type:
         enum:
           - CoverageByPartitioningType
-      envelope:
-        $ref: 'envelope.yaml'
-      partitionSet:
-        $ref: 'partitioningSet.yaml'
-      rangeType:
-        $ref: 'rangeType.yaml'
-      metadata:
-        $ref: 'metadata.yaml'
+      # envelope:
+      #   $ref: 'envelope.yaml'
+      # partitionSet:
+      #   $ref: 'partitioningSet.yaml'
+      # rangeType:
+      #   $ref: 'rangeType.yaml'
+      # metadata:
+      #   $ref: 'metadata.yaml'
