@@ -2,10 +2,6 @@ allOf:
   - $ref: '../ogcapi-common-2_1.0/collectionInfo.yaml'
   - type: object
     required:
-      - envelope
-      - domainSet
-      - rangeType
-      - serviceMetadata
     properties:
       envelope:
         allOf:
@@ -90,22 +86,3 @@ allOf:
             type: InterpolationRestrictionType
             allowedInterpolation:
               - linear
-      serviceMetadata:
-        title: serviceMetadata
-        description: Coverage specific service metadata like native format, coverate type, etc.
-        type: object
-        required:
-          - nativeFormat
-          - coverageSubtype
-        properties:
-          nativeFormat:
-            type: string
-          coverageSubtype:
-            type: string
-          coverageSubtypeParent:
-            $ref: 'coverageSubtypeParent.yaml'
-          constraints: #TODO
-            type: string
-        example:
-          nativeFormat: image/tiff
-          coverageSubtype: RectifiedGridCoverage
