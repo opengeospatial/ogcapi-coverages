@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
   title: 'A sample API conforming to the OGC API - Coverages - Part 1: Core standard'
   description: 'This is a sample OpenAPI definition that conforms to the OGC API - Coverages - Part 1: Core Service specification (conformance classes: "GeoData-Coverage", "Coverage Subset", "CIS JSON", "HTML" and "OpenAPI 3.0").'
