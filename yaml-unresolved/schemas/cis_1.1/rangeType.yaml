@@ -61,10 +61,7 @@ oneOf:
                 interval:
                   type: array
                   items:
-                    type:
-                      - number
-                      - string
-                      - boolean
+                    type: string
       interpolationRestriction:
         title: interpolationRestriction
         description: Interpolation restriction

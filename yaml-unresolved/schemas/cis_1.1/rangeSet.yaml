@@ -24,11 +24,7 @@ oneOf:
           values:
             type: array
             items:
-              type:
-                - number
-                - string
-                - 'null'
-                - boolean
+              type: string
   - required:
       - type
       - fileReference
