@@ -187,7 +187,7 @@ by the selected representation. A specific representation is selected either via
 
 Allows to retrieve only a subset of the coverage, with well-defined ranges for named axes.
 
-Example: `?subset=Lat(40,50)&subset=Long(10,20)`
+Example: `?subset=Lat(40:50),Long(10:20)`
 
 Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set defines axes named `Lat` and `Long`.
 
@@ -329,7 +329,7 @@ Example CIS JSON domain set encoding:
 
 Allows to retrieve only a subset of the domain set, with well-defined ranges for named axes.
 
-Example: `?subset=Lat(40,50)&subset=Long(10,20)`
+Example: `?subset=Lat(40:50),Long(10:20)`
 
 Retrieve the domain set of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set defines axes named `Lat` and `Long`.
 
