@@ -2,7 +2,10 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/geodata-coverage/rangetype-op*
-^|A |If the API does not include a "RangeType" property within the coverage (collection) resource, it SHALL support the HTTP GET operation at the path `/collections/{coverageid}/coverage/rangetype`.
+^|A |The API SHALL include a link with the relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype` within the links of the
+coverage (collection) resource, to a resource supporting the HTTP GET operation and returning a CIS JSON representation including a `RangeType` property.
+This link can either be a link to a separate resource (e.g., recommended path `/collections/{coverageid}/coverage/rangetype`) or a link to the coverage
+resource itself pointing to the property with `#` e.g., `#RangeType`.
 
 * `coverageid` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
 |===

@@ -273,7 +273,13 @@ A coverage containing the `DomainSet`, `RangeType`, `RangeSet`, and `Metadata`  
 * The relative path `/coverage`
 * The link relation `ogc:coverage:coverage`
 
-The `DomainSet` and `RangeType` are either defined as properties of the `/collections/{coverageid}` resource, or linked using specific relation types to their own resource.
+The `DomainSet` and `RangeType` are accessible from resources linked by links within the `/collections/{coverageid}` resource,
+using the relation types `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset` and
+`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`, respectively.
+Those links may either point to separate resource, in which case the recommended paths are `/collections/{coverageid}/coverage/domainset` and
+`/collections/{coverageid}/coverage/rangetype`, or point to the coverage description resource itself the domain set and/or range type are
+embedded. In the latter case those links will point specifically to properties using `#`, e.g.,
+`#domainset` and `#rangetype`.
 
 The `RangeSet` may be available as its own resource as well, if supported by the selected representation (format).
 
