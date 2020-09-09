@@ -39,7 +39,7 @@ It integrates with the OGC API family of standards through [OGC API - Common](ht
 
 Resource path: `{datasetAPI}/`
 
-Relation type: `ogc:common:dataset`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/dataset`
 
 HTTP methods: `GET`
 
@@ -107,7 +107,7 @@ Lists the collections intersecting with the New Zealand economic zone (any time,
 
 Resource path: `{datasetAPI}/collections/{collectionId}`
 
-Relation type: `ogc:common:collection`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
 
 HTTP methods: `GET`
 
@@ -135,7 +135,7 @@ Resource path: `{datasetAPI}/collections/{coverageId}`
 
 NOTE: `{collectionId}` is replaced here by `{coverageId}` as extensions specific to coverages are described
 
-Relation type: `ogc:common:collection`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
 
 HTTP methods: `GET`
 
@@ -147,10 +147,15 @@ but the OGC API - Coverages Part 1: Core standard further extends it with the fo
 - a `RangeType` describing the data values semantics (their components and data type),
 - a `DomainSet` describing the domain set (the detailed n-dimensional space covered by the data).
 
-In a JSON representation of this resource, both `RangeType` and `DomainSet` properties are encoded as [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
+In a JSON representation of this resource, both `RangeType` and `DomainSet` properties are at least available encoded as [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
 
-Both of these properties are required for conforming to coverage access for that collection,
-unless they are defined as separate resources and linked using the associated relation type within the `links` property.
+Both of these properties are required for conforming to coverage access for that collection, unless they are available as separate resources.
+
+Whether they are embedded or a separate resources, links using their respective relation type (`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype` or
+`http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`) must be present within the `links` property.
+If the properties are embedded, the links will be relative and point directly to the property using `#` e.g.,
+`#DomainSet` and `#RangeType`.
+
 A good reason to define them as separate resources would be if they are complex and consist of a sizable amount of data.
 
 See the [range type](#rangeTypeExample) and [domain set](#domainSetExample) resources below for examples encoding them as CIS JSON.
@@ -164,7 +169,7 @@ Resource path: `{datasetAPI}/collections/{coverageId}/coverage`
 
 NOTE: though this path should exist, a client should not rely on it as additional representations for this resource may reside elsewhere, e.g. /coverage.tiff or /coverage?f=tiff
 
-Relation type: `ogc:coverage:coverage`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage`
 
 HTTP methods: `GET`
 
@@ -199,9 +204,9 @@ Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 d
 
 Resource path: `{datasetAPI}/collections/{coverageId}/coverage/rangeset`
 
-NOTE: this path is not fixed and not required
+NOTE: this path is not fixed and not required (follow the link)
 
-Relation type: `ogc:coverage:rangeset`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangeset`
 
 HTTP methods: `GET`
 
@@ -234,9 +239,9 @@ Example CIS JSON rangeSet encoding:
 
 Resource path: `{datasetAPI}/collections/{coverageId}/coverage/rangetype`
 
-NOTE: this path is not fixed and may not exist
+NOTE: this path is not fixed and may not exist (follow the link)
 
-Relation type: `ogc:coverage:rangetype`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`
 
 HTTP methods: `GET`
 
@@ -247,6 +252,7 @@ Alternative JSON encodings such as CoverageJSON must be differentiated by using 
 
 If provided, returns only the range type of the coverage, i.e. the data values semantics (their components and data type).
 A CIS JSON encoding of this resource is required, but may be embedded within the Coverage description resource as the value of the `RangeType` property.
+In that case, a link will still exist pointing to `#RangeType`
 A reason to make it a separate resource is if the range type is very complex and consists of a sizable amount of data.
 
 <a name="rangeTypeExample"></a>
@@ -272,9 +278,9 @@ Example CIS JSON range type encoding:
 
 Resource path: `{datasetAPI}/collections/{coverageId}/coverage/domainset`
 
-NOTE: this path is not fixed and may not exist
+NOTE: this path is not fixed and may not exist (follow the link)
 
-Relation type: `ogc:coverage:domainset`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`
 
 HTTP methods: `GET`
 
@@ -285,6 +291,7 @@ Alternative JSON encodings such as CoverageJSON must be differentiated by using 
 
 If provided, returns only the domain set of the coverage (the detailed n-dimensional space covered by the data).
 A CIS JSON encoding of this resource is required, but may be embedded within the Coverage description resource as the value of the `DomainSet` property.
+In that case, a link will still exist pointing to `#DomainSet`
 A reason to make it a separate resource is if the domain set is very complex and consists of a sizable amount of data,
 and optionally if the API supports subsetting the domain set itself.
 
@@ -332,7 +339,7 @@ Resource path: `{datasetAPI}/collections/{coverageId}/coverage/metadata`
 
 NOTE: this path is not fixed and may not exist
 
-Relation type: `ogc:coverage:metadata`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-metadata`
 
 HTTP methods: `GET`
 
