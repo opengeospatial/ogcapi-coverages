@@ -94,7 +94,7 @@ Additionally, a `links` property can be included (e.g. linking back to the datas
 
 ##### Query parameters (optional conformance classes)
 
-**`BBOX`**
+**`bbox`**
 
 A bounding box, expressed in WGS84 (westLong,southLat,eastLong,northLat) or WGS84h (westLong,southLat,minHeight,eastLong,northLat,maxHeight) CRS,
 by which to filter out all collections whose spatial extent does not intersect with the bounding box.
@@ -183,15 +183,37 @@ by the selected representation. A specific representation is selected either via
 
 ##### Query parameters (optional conformance classes)
 
-**`SUBSET`**
+**`subset`**
 
 Allows to retrieve only a subset of the coverage, with well-defined ranges for named axes.
 
-Example: `?subset=Lat(40:50),Long(10:20)`
+The axis names are determined by the CRS, as defined in the <gml:axisAbbrev> tags.
+For EPSG:4326 and CRS84, this should always be `Lat` and `Lon` (case sensitive).
+These should also correspond to the domain set definition, and additional axes beyond temporal and spatial
+should correspond to their names in the collection description extent definition.
 
-Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set defines axes named `Lat` and `Long`.
+Example: `?subset=Lat(40:50),Lon(10:20)`
 
-**`BBOX`** (OGC API - Common - Part 2: Geospatial Data)
+Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set and CRS define axes named `Lat` and `Lon`.
+
+**`scaleSize`, `scaleFactor` and `scaleAxes` **
+
+Allows to specify scaling factors to apply to the resolution of the coverage, e.g. to retrieve an overview of the coverage, using one of those three query parameters.
+
+Example: `?scaleSize=Lon(800),Lat(400)`
+
+Specify that 800 values along the longitude axis, and 400 values along the latitude axis are desired in the output.
+
+Example: `?scaleFactor=2`
+
+Specify that the resolution of the data should be half that of the original data.
+
+Example: `?scaleAxes=Lon(2)`
+
+Specify that the resolution of the data along the longitude axis should be half that of the original data, while the resolution along the other axes
+remains unchanged.
+
+**`bbox`** (OGC API - Common - Part 2: Geospatial Data)
 
 A bounding box, expressed in WGS84 (westLong,southLat,eastLong,northLat) or WGS84h (westLong,southLat,minHeight,eastLong,northLat,maxHeight) CRS, allowing to retrieve
 only a subset of the coverage, with this Common bounding box sub-setting mechanism.
@@ -325,13 +347,13 @@ Example CIS JSON domain set encoding:
 
 ##### Query parameters (optional conformance classes)
 
-**`SUBSET`**
+**`subset`**
 
 Allows to retrieve only a subset of the domain set, with well-defined ranges for named axes.
 
-Example: `?subset=Lat(40:50),Long(10:20)`
+Example: `?subset=Lat(40:50),Lon(10:20)`
 
-Retrieve the domain set of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set defines axes named `Lat` and `Long`.
+Retrieve the domain set of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set and CRS define axes named `Lat` and `Lon`.
 
 #### Coverage metadata (optional)
 

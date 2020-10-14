@@ -1,0 +1,31 @@
+[[req_coverage_scaling-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/definition*
+^|A |The operation SHALL support a parameter `scaleSize` with the following characteristics (using an Backus Naur Form (BNF) fragment):
+
+[source,BNF]
+----
+  ScalingSpec:       scaleSize=axisName({number})[,axisName({nuber})]*
+  axisName:          {NCName}
+
+  Where:
+     {NCName} is an XML-style identifier not containing ":" (colon) characters,
+     {number} is an integer or floating-point number, and
+
+----
+^|B |The operation SHALL support `scaleFactor` numeric parameter.
+^|C |The operation SHALL support a parameter `scaleAxes` with the following characteristics (using an Backus Naur Form (BNF) fragment):
+
+[source,BNF]
+----
+  ScalingSpec:       scaleAxes=axisName({number})[,axisName({nuber})]*
+  axisName:          {NCName}
+
+  Where:
+     {NCName} is an XML-style identifier not containing ":" (colon) characters,
+     {number} is an integer or floating-point number, and
+
+^|D |The axis name SHALL be the same as one of the `axisLabels` defined in the DomainSet, and shall match the abbreviations defined by the CRS
+(as defined bythe <gml:axisAbbrev> tags).  or else return a 400 status code.
+|===
