@@ -1,0 +1,63 @@
+[[range-types-section]]
+=== Range Types
+
+In our implementation, we currently support coverages encoded in 
+16-bit PNG, with the 16-bit range mapped linearly to the range of values
+ for the coverage, similar to how it is done in the http://docs.opengeospatial.org/is/17-066r1/17-066r1.html[GeoPackage tile gridded coverage extension].
+
+Two main points:
+
+*   How could it be possible to desribe in the ``.../{collectionId}`` resource the range of the values that occur in the coverage? e.g. -11000..9000, or 1 to 27?
+
+    As far as I understand the RangeType does not specify this, it only says a 32-bit float or an unsigned 8 bit integer is used.
+*   How could a linear mapping be established from encoded values to
+units like meters, to use a format like PNG and maximize precision while
+ minimizing storage size?
+ 
+ GeoServer WCS 2 example:
+
+[source,java]
+----
+<swe:Quantity>
+<swe:description>RED_BAND</swe:description>
+<swe:nilValues>
+<swe:NilValues>
+<swe:nilValue reason="http://www.opengis.net/def/nil/OGC/0/unknown">0.0</swe:nilValue>
+</swe:NilValues>
+</swe:nilValues>
+<swe:uom code="W.m-2.Sr-1"/>
+<swe:constraint>
+<swe:AllowedValues>
+<swe:interval>100.0 150.0</swe:interval>
+</swe:AllowedValues>
+</swe:constraint>
+</swe:Quantity>
+</swe:field>
+----
+
+Here is an example using ISO 19115-2. I believe the Range Type in CIS is similar.  The coverage is a SAR collection. Each pixel is an imaginary number (real and imaginary components) represented as 2s compliment integers. "Count" is the SWE Common equivalent of integer. There is a lot of additional information you can add, but this was sufficient for my immediate needs.
+
+I'm sure there is a range type you cannot represent using SWE Common, but I haven't found one yet.
+
+[source,java]
+----
+ <gco:Record>  <DataRecord xmlns="http://www.opengis.net/swe/2.0">
+        <field name="RE16I">  
+            <Count axisID="Real"> 
+                <description>Each component is stored in a 16-bit signed integer in 2’s complement format.</description>
+                <constraint>
+                    <AllowedValues>  0 65535 </AllowedValues>
+                </constraint> 
+            </Count> 
+        </field> 
+        <field name="IM16I"> 
+            <Count axisID="Imaginary"> 
+                <description>Each component is stored in a 16-bit signed integer in 2’s complement format.</description> 
+                <constraint> 
+                    <AllowedValues> 0 65535 </AllowedValues> 
+                </constraint>       
+            </Count> 
+        </field> 
+    </DataRecord>
+ </gco:Record>
+----

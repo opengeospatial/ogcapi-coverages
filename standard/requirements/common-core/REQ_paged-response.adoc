@@ -1,0 +1,16 @@
+[[req_common_core-paged-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/common-core/paged-response*
+^|A |Responses to a filtered operation that only return a portion of the full selected resource set SHALL comply with API-Common requirements:
+
+TODO: These Features resources pertained to individual features being returned, and are not currently defined in Common.
+Define this generically for all resources, including e.g. for paging list of collections?
+
+* `/req/core/rc-response`
+* `/req/core/fc-links`
+* `/req/core/fc-rel-type`
+* `/req/core/fc-timestamp`
+* `/req/core/fc-numberMatched`
+* `/req/core/fc-numberReturned`
+|===

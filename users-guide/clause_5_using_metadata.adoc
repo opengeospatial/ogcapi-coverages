@@ -1,0 +1,8 @@
+[[using-metadata-section]]
+=== Using Metadata
+
+API-Common provides sets of common metadata along with JSON schema for that metadata. Resource-specific APIs are expected to extend that metadata with information specific to their resource type. 
+
+In the case of coverages, we should distinquish between discovery metadata and exploitation metadata. Coverage metadata is that metadata used to identify and select a coverage. Exploitation metadata is metadata required to use the coverage. Note that there is some overlap between these categories. The API implementor should have the freedom to draw the line based on how they expect their API to be used.
+
+Foot Stomp - metadata has to come from somewhere. If it is not in the coverage, then it cannot be populated in the API.

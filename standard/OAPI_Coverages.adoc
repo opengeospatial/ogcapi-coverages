@@ -24,10 +24,10 @@
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
 |Approval Date: <yyyy-mm-dd>
-|Publication Date: 2019-12-26
+|Publication Date: 2020-08-10
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0
 |Internal reference number of this OGC(R) document: 19-087
-|Version: 0.0.5
+|Version: 0.0.6
 |Category: OGC(R) Implementation Specification
 |Editor: Charles Heazel
 |===
@@ -40,7 +40,7 @@
 [cols = "^", frame = "none", grid = "none"]
 |===
 |*Copyright notice*
-|Copyright (C) 2019 Open Geospatial Consortium
+|Copyright (C) 2019, 2020 Open Geospatial Consortium
 |To obtain additional rights of use, visit http://www.opengeospatial.org/legal/
 |===
 
@@ -55,9 +55,9 @@ Recipients of this document are invited to submit, with their comments, notifica
 
 [width = "50%", grid = "none"]
 |===
-|Document type:   OGC(R) Implementation Specification
-|Document stage:   	Draft
-|Document language: 	English
+|Document type: OGC(R) Implementation Specification
+|Document stage: Draft
+|Document language: English
 |===
 
 <<<
@@ -94,11 +94,11 @@ include::clause_5_conventions.adoc[]
 
 include::clause_6_overview.adoc[]
 
-include::clause_7_core.adoc[]
+include::clause_7_geodata_coverage.adoc[]
 
-include::clause_8_subset.adoc[]
+include::clause_8_media_types.adoc[]
 
-include::clause_9_media_types.adoc[]
+include::clause_9_coverage_subset_and_scaling.adoc[]
 
 include::clause_10_HTML.adoc[]
 
@@ -109,6 +109,8 @@ include::clause_12_oas.adoc[]
 include::annex_ats.adoc[]
 
 include::annex_history.adoc[]
+
+include::annex_glossary.adoc[]
 
 include::annex_bibliography.adoc[]
 

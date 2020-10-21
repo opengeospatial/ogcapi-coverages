@@ -1,0 +1,32 @@
+== Implementations
+
+=== Services
+
+[#table_implementation,reftext='{table-caption} {counter:table-num}']
+.Service implementations
+[cols=",,",width="75%",options="header",align="center"]
+|===
+|Implementation | Type | Contact
+
+| https://pygeoapi.io[pygeoapi]
+| OGC API - Coverages
+| https://github.com/tomkralidis[Tom Kralidis]
+
+| TBA
+| TBA
+| TBA
+|===
+
+
+=== Clients
+
+[#table_implementation,reftext='{table-caption} {counter:table-num}']
+.Client implementations
+[cols=",,",width="75%",options="header",align="center"]
+|===
+|Implementation | Type | Contact
+
+| https://geopython.github.io/OWSLib[OWSLib]
+| Python client
+| https://github.com/tomkralidis[Tom Kralidis]
+|===

@@ -1,0 +1,9 @@
+[[req_geodata_coverage_domainset-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/domainset-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL provide the `Domain Set` definition of the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_domainset.json[coverage_domainset.json].
+^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+^|D |If no format is negotiated, then the response SHALL be encoded using CIS JSON, which SHALL also be the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+|===

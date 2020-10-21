@@ -1,7 +1,0 @@
-[[req_core_cov-rs-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/cov-rs-success*
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL contain the `Range Set` of the coverage as defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/oapi_coverages/master/standard/openapi/schemas/coverage_rangeset.json[coverage_rangeset.json].
-|===

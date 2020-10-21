@@ -1,0 +1,15 @@
+[[slicing-and-subsetting-section]]
+=== Slicing and Subsetting
+
+First we need to define two concepts:
+
+subsetting - this appears to be the case where you select a subset of the range set that is at full resolution. To perform a selection you identify the range of values along each axis that should be included in the result.
+
+thinning - appears to be the case where you reduce the resolution of the range set. This is done by removing elements from the range set and performing any smoothing or interpolation functions needed to maintain the integrity of the data.
+
+Once we have agreed on these definitions, we can talk about the implications of these techniques for both regular and irregular grids.
+
+Also consider edge cases:
+1) non-terrestrial data
+2) swath or curtain data (collection across a vertical column)
+3) RF data - phase, frequency, doppler, etc.

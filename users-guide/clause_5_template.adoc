@@ -1,0 +1,4 @@
+[[api-users-guide-section]]
+== Users Guide
+
+Everything up the now has been information about this document and how to use it. Topics related to the implementation of Coverages APIs are included in this section.

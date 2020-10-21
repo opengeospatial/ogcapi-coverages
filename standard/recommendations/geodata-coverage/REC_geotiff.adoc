@@ -1,0 +1,6 @@
+[[rec_geodata_coverage_geotiff]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/geotiff*
+^|A |If the resource can be represented for the intended use in GeoTIFF, implementations SHOULD consider to support GeoTIFF as an encoding.
+|===

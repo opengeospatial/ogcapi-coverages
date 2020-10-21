@@ -1,11 +1,12 @@
 # OGC API - Coverages
 
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
-standard for querying geospatial information on the web, "OGC API - Coverages".
+standard for accessing geospatial data resources on the web as a coverage, "OGC API - Coverages".
 
-OGC API standards define modular API building blocks to spatially enable Web
-APIs in a consistent way. [OpenAPI](http://openapis.org) is used to define the
-reusable API building blocks with responses in JSON and HTML.
+[OGC API standards](https://ogcapi.ogc.org) define modular API building blocks to spatially enable Web APIs
+in a consistent way. [OpenAPI](http://openapis.org) is used to define the
+reusable API building blocks with responses available in different representations,
+such as JSON and HTML, as well as more domain specific formats (e.g. CIS RDF, netCDF, GeoTIFF).
 
 The OGC API family of standards is organized by resource type. OGC API -
 Coverages specifies the fundamental API building blocks for interacting with
@@ -18,175 +19,390 @@ the [Coverages DWG Wiki](http://myogc.org/go/coveragesDWG) provide more detail a
 Additionally, [Coverages: describing properties that vary with location (and time)](https://www.w3.org/TR/sdw-bp/#coverages)
 in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
 
+Please note that this Readme holds an informative introduction, the
+authoritative specification is contained in the folder `standard`. There is also
+a [nightly build](http://docs.opengeospatial.org/DRAFTS/19-087.html).
+
 ## Overview
 
-### General
+This [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) specification establishes how to access coverages as defined by the [Coverage Implementation Schema (CIS) 1.1](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html) .
 
-This [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) specification establishes how to access coverages as defined by the [Coverage Implementation Schema (CIS) 1.1](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html) through [OpenAPI](https://www.openapis.org/).
+It integrates with the OGC API family of standards through [OGC API - Common](https://github.com/opengeospatial/oapi_common) by:
+- being accessible from an API landing page for a particular dataset,
+- enabling the API to be described and documented using [OpenAPI](https://www.openapis.org/),
+- defining conformance classes specific to coverages,
+- providing access to an OGC API *collection* of geospatial data (as defined in OGC API - Common - Part 2: Geospatial Data), as a coverage.
 
-Current scope:
+### Common resources
 
-* Only gridded coverages are addressed, not MultiPoint/Curve/Surface/SolidCoverages. Reason is that gridded coverages receive most attention today.
-* Only CIS 1.1 GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
-* Only coverage extraction functionality is considered, not general processing (as is provided with Web Coverage Service (WCS) extensions such as the Processing Extension). Exceptions from this rule are subsetting including band subsetting, scaling, and CRS conversion and data format encoding, given their practical relevance.
-* Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the path component. Further, subsetting may reference any axis and leave out any other, which makes positional parameters unsuitable. Nevertheless subsetting in the path component particularly limited to fixed subsets might be considered in a future version. The principles of the `/tiles` path defined in OGC API - Maps & Tiles might be a good fit and shall be explored.
+#### Landing page (Common Part 1: Core)
 
-As such, the functionality provided below resembles [OGC Web Coverage Service (WCS) 2.1 Interface Standard - Core](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
+Resource path: `{datasetAPI}/`
 
-### Background Information: WCS Service Model
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/dataset`
 
-OGC WCS 2 has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally.
-This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage's Native CRS).
+HTTP methods: `GET`
 
-![WCS 2 internal storage model](http://external.opengeospatial.org/twiki_public/pub/CoveragesDWG/CoveragesBigPicture/WCS-internal-organization.png)
+Recommended encodings: HTML, JSON
 
-Discussion has shown that the OpenAPI functionality also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental model" of the server store organization on hand to explain the various functionalities introduced below.
+A landing page for the dataset being distributed.
+The landing page at minimum should feature links to:
+- the description of the API,
+- the declaration of conformance classes,
+- the list of coverages available.
 
-## Principles
+#### Conformance declaration (Common Part 1: Core)
 
-[OpenAPI](https://www.openapis.org/) establishes URL-based access patterns, as defined by [RFC 3986 "Uniform Resource Identifier (URI): Generic Syntax"](https://tools.ietf.org/html/rfc3986), [RFC 3987 "Internationalized Resource Identifiers (IRIs)"](https://tools.ietf.org/html/rfc3987), and [RFC 6570 "URI Template"](https://tools.ietf.org/html/rfc6570) following a syntax like
-        http://www.acme.com/path/to/resource/{id}{?query,parameters}
-whereby
+Resource path: `{datasetAPI}/conformance`
 
-* `/path/to/resource/{id}` defines the local path to the resource to be retrieved on the node identified by the head part, http://www.acme.com.
-* the `{?query,parameters}` represent key/value pairs with further parameters passed to the request.
+Relation type: `conformance`
 
-As a general rule,
+HTTP methods: `GET`
 
-* accessing a coverage component is done in the path section,
-* subsetting is done in the query parameter section
-* format encoding is controlled via HTTP headers
+Recommended encodings: HTML, JSON
 
-As the coverage model normatively is given by the corresponding XML schema (JSON and RDF are built in sync with XML) specification of the [OpenAPI](https://www.openapis.org/) access paths follows this schema. Note, though, that OWS Common, while normatively
-referenced in CIS, is not followed by [OpenAPI](https://www.openapis.org/), so here deviations will occur.
+The declaration of conformance classes supported by that API.
 
-For path expressions abbreviations (i.e., aliases) may be defined for convenience.
+#### API description / documentation (Common Part 1: Core)
 
-## [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) Requests
+Resource path: `{datasetAPI}/api` NOTE: the path is not fixed, this resource may reside elsewhere
 
-This clause defines the basics of accessing OGC coverages via OpenAPI.
+Relation type: `service-desc`, `service-doc`
 
-### General
+HTTP methods: `GET`
 
-Requirement:
-A service offering [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) access shall be accessible via an URL as service endpoint (subsequently referred to as Base URL).
+Recommended encodings: JSON (OpenAPI), HTML
 
-Example:
-        http://acme.com/oapi
+A description, and optionally documentation for the API.
+To conform to the OpenAPI conformance class of OGC API - Common, an OpenAPI representation of the API description must be available.
 
-Requirement:
-Coverage access paths, as defined in the next clause, are concatenated to the Base URL via a "/" character, followed (optionally) by a query part.
+#### List of available collections (Common Part 2: Geospatial Data)
 
-Example:
-        http://acme.com/oapi/collections/{collectionid}/coverage/rangeset
+Resource path: `{datasetAPI}/collections`
 
-A request may be denied for server-specific reasons, such as quota.
+Relation type: `data`
 
-### Coverage Access Paths
+HTTP methods: `GET`
 
-In this clause, the path component of [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) access is established.
+Recommended encodings: JSON, HTML
 
-Access paths follow the XML Schema of [CIS](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html) in their structure.
+Lists all collections of data available for this dataset API, some of which may support being accessed as a coverage.
+A `collections` property is defined as a list of individual collection resources,
+where each element describes basic information about that specific collection.
+The content for each collection is also available individually at `{datasetAPI}/collections/{collectionId}`, and described in the next section.
+Additionally, a `links` property can be included (e.g. linking back to the dataset landing page).
 
-To access coverage service constituents, such as formats supported, OGC 14-121 Web Query Service provides guidance, see https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf .
+##### Query parameters (optional conformance classes)
 
-### Coverage Query Parameters
+**`bbox`**
 
-In this clause, the query component of [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) access is established.
+A bounding box, expressed in WGS84 (westLong,southLat,eastLong,northLat) or WGS84h (westLong,southLat,minHeight,eastLong,northLat,maxHeight) CRS,
+by which to filter out all collections whose spatial extent does not intersect with the bounding box.
 
-Subsetting parameters may be mixed in a query part, in no particular order.
+Example: `?bbox=160.6,-55.95,-170,-25.89`
 
-#### Coverage Subsetting
+Lists the collections intersecting with the New Zealand economic zone (any time, any elevation, etc.).
 
-Without any subsetting parameter the whole coverage extent is the target resource addressed. If a subsetting operation is provided then the coverage subset indicated is the target resource addressed.
+#### Collection description resource (Common Part 2: Geospatial Data)
 
-Coverage subsetting is indicated through the SUBSET parameter name. The value following the "=" symbol is built as follows:
+Resource path: `{datasetAPI}/collections/{collectionId}`
 
-    SubsetSpec:            SUBSET = axisName ( intervalOrPoint )
-    axisName:              {NCName}
-    intervalOrPoint:       interval | point
-    interval:              low ,  high
-    low:                   point | *
-    high:                  point | *
-    point:                 {number} | " {text} "    //" = double quote = ASCII code 0x42
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
 
-where {NCName} is an XML-style identifier not containing ":" (colon) characters, {number} is an integer or floating-point number, and {text} is some general ASCII text (such as a time and date notation in ISO 8601). A coverage access request may have any number of SUBSET parameters, however for each axis of the coverage at most one SUBSET parameter may be provided.
+HTTP methods: `GET`
 
-In case of an interval a trim operation is specified, with lower and upper bound. In case of a point a slicing operation is specified. For the detailed semantics of subsetting, trimming, and slicing see [OGC WCS](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
+Recommended encodings: JSON, HTML
 
-### Coverage Encoding
+Each collection resource describes basic information about the geospatial data collection, including:
+- an identifier (`id`),
+- a human readable `title`,
+- a more detailed `description`,
+- an `extent`, which can include a spatial extent expressed in WGS84, as well as a temporal extent. For a coverage this represents its envelope, and may cover additional dimensions.
+- a list of `crs` in which the data is available,
+- an (optional) `storageCRS`, representing the native CRS of the data (as defined in OGC API - Common - Part 3: CRS),
+- `links` to resources specific to the collection, such as for retrieving it as a coverage, as tiles or as a map.
+See the description of coverage resources below for the relation types to use to link to those resources.
 
-If no format encoding is specified in the request then a representation of the coverage shall be returned in its Native Format.
+TODO: Additional properties should be defined in OGC API - Common - Part 2: Geospatial Data:
+- A way to determine the native representation (e.g. for link to the coverage data), either as a property of a link, or a property of a collection.
+- The available resolution of the data
 
-In general, file formats are not always capable of representing all coverage information. This is one reason why applications may prefer receiving a coverage in some different format.
+### Coverage resources (Coverages: Part 1: Core)
 
-Note:
+#### Coverage description resource
 
-* The notion of Native Format refers to the range set only. Returning a coverage in this format may mean that some coverage constituents cannot be represented appropriately, and consequently will be missing from the coverage result.
+Resource path: `{datasetAPI}/collections/{coverageId}`
 
-An application may request a particular format encoding through one of the following two options:
+NOTE: `{collectionId}` is replaced here by `{coverageId}` as extensions specific to coverages are described
 
-* By indicating the format's MIME type identifier in the Accept and Accept-Encoding HTTP header of the request. The syntax for format encoding HTTP headers is defined in [RFC 7231 "Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content"](https://tools.ietf.org/html/rfc7231).
-* By appending a query parameter `f=m` where `m` is the format's MIME type identifier.
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
 
-If both options are present simultaneously in the request then the `f` parameter shall have preference.
+HTTP methods: `GET`
 
-If the format chosen is not capable of representing the coverage data requested this shall lead to a request error.
+Recommended encodings: JSON, HTML
 
-Note:
+If a collection is accessible as a coverage, this resource inherits all the properties defined by Common: Part 2,
+but the OGC API - Coverages Part 1: Core standard further extends it with the following properties:
 
-* Extensions may provide further options, such as full content negotiation as per the HTTP standard.
+- a `RangeType` describing the data values semantics (their components and data type),
+- a `DomainSet` describing the domain set (the detailed n-dimensional space covered by the data).
 
-For the detailed semantics of format encoding see [OGC WCS](http://docs.opengeospatial.org/is/17-089r1/17-089r1.html).
+In a JSON representation of this resource, both `RangeType` and `DomainSet` properties are at least available encoded as [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
 
-## Examples
+Both of these properties are required for conforming to coverage access for that collection, unless they are available as separate resources.
 
-This section contains examples for coverage access, subsetting, and encoding. It assumes a service endpoint of http://acme.com/oapi/ .
+Whether they are embedded or a separate resources, links using their respective relation type (`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype` or
+`http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`) must be present within the `links` property.
+If the properties are embedded, the links will be relative and point directly to the property using `#` e.g.,
+`#DomainSet` and `#RangeType`.
 
-### Service Metadata
+A good reason to define them as separate resources would be if they are complex and consist of a sizable amount of data.
 
-The first part is about service metadata. Currently this is wild speculation as it will mainly be defined through [OGC API - Common](https://github.com/opengeospatial/oapi_common).
+See the [range type](#rangeTypeExample) and [domain set](#domainSetExample) resources below for examples encoding them as CIS JSON.
 
-* http://acme.com/oapi/servicedescription/formatssupported  -- returns a list of formats in which coverage representations can be requested
+In addition, as described above the `extent` property must be a full description of the coverage's envelope according to the CIS model, including any extra dimensions
+which do not map to either the `spatial` or `temporal` properties described by Common - Part 2.
 
-### Coverage Finding
+#### The coverage (including all of its components)
 
-* http://acme.com/oapi/collections  -- returns a list of all collection identifiers
-* http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collection identifiers intersecting with the New Zealand economic zone (any time, any elevation, etc.); the CRS in which the bbox parameters are expressed is WGS84, defined in OGC API - Common and likely in a future OGC API - Catalog
-* http://acme.com/oapi/collections/{collectionid}  -- returns the description of a specific collection including links to available sub-paths like /coverage, /tiles, or /map
-* http://acme.com/oapi/collections/{collectionid}/coverage  -- returns a general description of the coverage represented by collectionid containing the coverage's envelope (the full domainset might be huge and thus is omitted here), rangetype, and service metadata like the coverage's native format
+Resource path: `{datasetAPI}/collections/{coverageId}/coverage`
 
-Notes:
+NOTE: though this path should exist, a client should not rely on it as additional representations for this resource may reside elsewhere, e.g. /coverage.tiff or /coverage?f=tiff
 
-* all list results include links (cf. OGC API - Common)
-* "coverage" is a specialization of "items"; further names could be defined in future (RectifiedGridCoverage, features, ...)
-* "description of collection" to be clarified (defined in OGC API - Common?)
-* bbox is OGC API - Common syntax
-  * in OGC API - Coverages Core, no subsetting on vertical and time coordinates
-  * horizontal coordinates: all filtering is evaluated in WGS84 (may require bounding box translation before intersecting)
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage`
 
-### Coverage Access
+HTTP methods: `GET`
 
-The second part is about coverage access, which (as described earlier) is driven by the coverage structure and, hence, given:
+Recommended encodings: CIS JSON, HTML, CIS RDF, CoverageJSON, netCDF, GeoTIFF, PNG
 
-* http://acme.com/oapi/collections/{collectionid}/coverage/description -- returns the whole coverage description consisting of domainset, rangetype, and metadata (but not the rangeset)
-* http://acme.com/oapi/collections/{collectionid}/coverage/domainset  -- returns the coverage's domain set definition
-* http://acme.com/oapi/collections/{collectionid}/coverage/rangetype  -- returns the coverage's range type information (i.e., a description of the data semantics)
-* http://acme.com/oapi/collections/{collectionid}/coverage/metadata  -- returns the coverage's metadata (may be empty)
-* http://acme.com/oapi/collections/{collectionid}/coverage/rangeset  -- returns the coverage's range set, i.e., the actual values in the coverage's Native Format (see format encoding for ways to retrieve in specific formats)
-* http://acme.com/oapi/collections/{collectionid}/coverage/all  -- returns all of the above namely the coverage's domainset, rangetype, metadata, and rangeset comparable to a GetCoverage response
+NOTE: The media type `application/json` is reserved for [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
+Alternative JSON encodings such as CoverageJSON must be differentiated by using an alternative media type.
 
-### Coverage Subsetting
+Returns the coverage, including all components as defined by the CIS model (domain set, range type, range set and metadata), to the extent that they are supported
+by the selected representation. A specific representation is selected either via HTTP headers Accept-content, or separate link URLs with different media types.
 
-The third part is about query parameters:
+##### Query parameters (optional conformance classes)
 
-* http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), as multipart coverage
-* http://acme.com/oapi/collections/{collectionid}/coverage/rangeset?SUBSET=Lat(40,50)&SUBSET=Long(10,20)  -- returns a coverage cutout between (40,10) and (50,20), in the coverage's Native Format
-* http://acme.com/oapi/collections/{collectionid}/coverage?SUBSET=time("2019-03-27")  -- returns a coverage slice at the timestamp given (in case the coverage is Lat/Long/time the result will be a 2D image)
+**`subset`**
 
-## Open Issues
+Allows to retrieve only a subset of the coverage, with well-defined ranges for named axes.
 
-* Establish service parameter access, based on [OGC API - Common](https://github.com/opengeospatial/oapi_common)
-* What is the output format of items typically returned as XML or JSON, such as DomainSet and RangeType? Should maybe FORMAT be applicable here as well? If so, should it be listed as a possible output format (which might be confusing)?
-* [OGC 14-121 Web Query Service](https://github.com/opengeospatial/ogc_api_coverages/blob/master/CIS%2BWCS-standards/14-121_Web-Query-Service_2016-06-19.pdf) provides a definition of path syntax, but adds more functionality (such as selection predicates), all based on the XPath standard. Such extra functionality might come handy.
-* Add `bbox` and `time` as defined in OGC API - Common as subsetting option.
+The axis names are determined by the CRS, as defined in the <gml:axisAbbrev> tags.
+For EPSG:4326 and CRS84, this should always be `Lat` and `Lon` (case sensitive).
+These should also correspond to the domain set definition, and additional axes beyond temporal and spatial
+should correspond to their names in the collection description extent definition.
+
+Example: `?subset=Lat(40:50),Lon(10:20)`
+
+Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set and CRS define axes named `Lat` and `Lon`.
+
+**`scaleSize`, `scaleFactor` and `scaleAxes` **
+
+Allows to specify scaling factors to apply to the resolution of the coverage, e.g. to retrieve an overview of the coverage, using one of those three query parameters.
+
+Example: `?scaleSize=Lon(800),Lat(400)`
+
+Specify that 800 values along the longitude axis, and 400 values along the latitude axis are desired in the output.
+
+Example: `?scaleFactor=2`
+
+Specify that the resolution of the data should be half that of the original data.
+
+Example: `?scaleAxes=Lon(2)`
+
+Specify that the resolution of the data along the longitude axis should be half that of the original data, while the resolution along the other axes
+remains unchanged.
+
+**`bbox`** (OGC API - Common - Part 2: Geospatial Data)
+
+A bounding box, expressed in WGS84 (westLong,southLat,eastLong,northLat) or WGS84h (westLong,southLat,minHeight,eastLong,northLat,maxHeight) CRS, allowing to retrieve
+only a subset of the coverage, with this Common bounding box sub-setting mechanism.
+
+Example: `?bbox=10,40,20,50`
+
+Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, regardless of how the domain set is defined.
+
+#### Range set (optional)
+
+Resource path: `{datasetAPI}/collections/{coverageId}/coverage/rangeset`
+
+NOTE: this path is not fixed and not required (follow the link)
+
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangeset`
+
+HTTP methods: `GET`
+
+Recommended encodings: CIS JSON, CIS RDF, CoverageJSON, PNG
+
+NOTE: The media type `application/json` is reserved for [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
+Alternative JSON encodings such as CoverageJSON must be differentiated by using an alternative media type.
+
+If provided, returns only the range set of the coverage (i.e. the data values), for representations that support describing the values by themselves
+without any accompanying description or extra information.
+
+TODO: How could one optionally describe the actual range of the values that one can possibly encounter within the coverage, assuming this is known and not the full extent of the data type?
+
+TODO: How could one map the full range of a type with a linear transformation to such an arbitrary range, given that the raw values themselves could not directly map to a defined unit?
+(e.g. as is done in the [GeoPackage tile gridded coverage extension](http://docs.opengeospatial.org/is/17-066r1/17-066r1.html); use cases: populating a GeoPackage from a Coverages API, or serving coverage data from a GeoPackage)
+
+Example CIS JSON rangeSet encoding:
+
+```json
+{
+   "type" : "RangeSetType",
+   "dataBlock" : {
+      "type" : "VDataBlockType",
+      "values" : [1,2,3,4,5,6,7,8,9]
+   }
+}
+```
+
+#### Range type (optional as a separate resource)
+
+Resource path: `{datasetAPI}/collections/{coverageId}/coverage/rangetype`
+
+NOTE: this path is not fixed and may not exist (follow the link)
+
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`
+
+HTTP methods: `GET`
+
+Recommended encodings: CIS JSON (required), CIS RDF
+
+NOTE: The media type `application/json` is reserved for [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
+Alternative JSON encodings such as CoverageJSON must be differentiated by using an alternative media type.
+
+If provided, returns only the range type of the coverage, i.e. the data values semantics (their components and data type).
+A CIS JSON encoding of this resource is required, but may be embedded within the Coverage description resource as the value of the `RangeType` property.
+In that case, a link will still exist pointing to `#RangeType`
+A reason to make it a separate resource is if the range type is very complex and consists of a sizable amount of data.
+
+<a name="rangeTypeExample"></a>
+Example CIS JSON range type encoding:
+
+```json
+{
+   "type" : "DataRecordType",
+   "field" : [
+      {
+         "type" : "QuantityType",
+         "definition" : "ogcType:unsignedInt",
+         "uom" : {
+            "type" : "UnitReference",
+            "code" : "10^0"
+         }
+     }
+  ]
+}
+```
+
+#### Domain set (optional as a separate resource)
+
+Resource path: `{datasetAPI}/collections/{coverageId}/coverage/domainset`
+
+NOTE: this path is not fixed and may not exist (follow the link)
+
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`
+
+HTTP methods: `GET`
+
+Recommended encodings: CIS JSON (required), CIS RDF
+
+NOTE: The media type `application/json` is reserved for [CIS JSON](https://docs.opengeospatial.org/is/09-146r6/09-146r6.html#46).
+Alternative JSON encodings such as CoverageJSON must be differentiated by using an alternative media type.
+
+If provided, returns only the domain set of the coverage (the detailed n-dimensional space covered by the data).
+A CIS JSON encoding of this resource is required, but may be embedded within the Coverage description resource as the value of the `DomainSet` property.
+In that case, a link will still exist pointing to `#DomainSet`
+A reason to make it a separate resource is if the domain set is very complex and consists of a sizable amount of data,
+and optionally if the API supports subsetting the domain set itself.
+
+<a name="domainSetExample"></a>
+Example CIS JSON domain set encoding:
+
+```json
+{
+   "type" : "DomainSetType",
+   "generalGrid" : {
+      "type": "GeneralGridCoverageType",
+      "srsName" : "http://www.opengis.net/def/crs/OGC/0/Index2D",
+      "axisLabels": [ "i", "j" ],
+      "axis": [
+         {
+            "type": "IndexAxisType",
+            "axisLabel": "i",
+            "lowerBound": 0,
+            "upperBound": 2
+         },
+         {
+            "type": "IndexAxisType",
+            "axisLabel": "j",
+            "lowerBound": 0,
+            "upperBound": 2
+         }
+      ]
+   }
+}
+```
+
+##### Query parameters (optional conformance classes)
+
+**`subset`**
+
+Allows to retrieve only a subset of the domain set, with well-defined ranges for named axes.
+
+Example: `?subset=Lat(40:50),Lon(10:20)`
+
+Retrieve the domain set of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set and CRS define axes named `Lat` and `Lon`.
+
+#### Coverage metadata (optional)
+
+Resource path: `{datasetAPI}/collections/{coverageId}/coverage/metadata`
+
+NOTE: this path is not fixed and may not exist
+
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/coverage-metadata`
+
+HTTP methods: `GET`
+
+If provided, returns the coverage metadata associated with the coverage.
+Note that this is *not* general metadata associated with the data, but rather coverage metadata which forms part of the coverage as defined by the CIS standard,
+and may be domain specific.
+
+## Using the standard
+
+TODO: Link to published standard, OpenAPI definition, implementations, etc.
+
+Those who want to just see the endpoints and responses can explore generic
+OpenAPI definitions in this folder (please paste one of them in the Swagger Editor):
+
+* [ogc_api_coverages/standard/openapi](https://github.com/opengeospatial/ogc_api_coverages/tree/master/standard/openapi)
+
+Implementations of the draft standard are listed at the link below:
+
+[Implementations of the draft specification / demo services](https://github.com/opengeospatial/ogc_api_coverages/blob/master/implementations.adoc)
+
+## Communication
+
+Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wcs.swg) or [![chat at https://gitter.im/opengeospatial/ogcapi-coverages](https://badges.gitter.im/opengeospatial/ogcapi-coverages.svg)](https://gitter.im/opengeospatial/ogcapi-coverages?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+Most of the work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogc_api_coverages/issues),
+so browse there to get a good idea of what is happening, as well as past decisions.
+
+## Additional parts of OGC API - Coverages
+
+* [Part 2: CRS](extensions/crs.adoc)
+* [Part 3: Processing](extensions/processing.adoc)
+
+## Contributing
+
+The contributor understands that any contributions, if accepted by the OGC Membership, shall be incorporated into OGC API standards documents and that all copyright and intellectual property shall be vested to the OGC.
+
+The Coverages API Standards Working Group (SWG) is the group at OGC responsible for the stewardship of the standard, but is working to do as much work in public as possible.
+
+* [Coverages API Standards Working Group Charter](charter/OGC-Coverages-SWG-Charter.adoc)
+* [Open issues](https://github.com/opengeospatial/ogc_api_coverages/issues)
+* [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/LICENSE)
+
+
+Pull Requests from contributors are welcomed. However, please note that by sending a Pull Request or Commit to this GitHub repository, you are agreeing to the terms in the Observer Agreement https://portal.ogc.org/files/?artifact_id=92169
