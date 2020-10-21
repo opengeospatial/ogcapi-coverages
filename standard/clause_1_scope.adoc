@@ -6,14 +6,19 @@ The functionality provided by API-Coverages resembles that of the http://docs.op
 
 The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors. Additional capabilities will be added based on community demand.
 
-As a result, this API-Coverages standard does not provide a full duplication of the WCS capabilities. The restrictions are:
+As a result, this API-Coverages Part 1 - Core standard does not provide a full duplication of the WCS capabilities. The functionality covered in Part 1 is:
 
-*   Only coverage extraction functionality is considered, not general processing (as is provided with Web Coverage Service (WCS) extensions such as the Processing Extension). Exceptions from this rule are subsetting including band subsetting, scaling, and CRS conversion and data format encoding, given their practical relevance.
-*   Subsetting is considered in the query component only for now. As typically all dimensions in a coverage are of same importance subsetting might not fit perfectly in the hierarchical nature of the path component. Further, subsetting may reference any axis and leave out any other, which makes positional parameters unsuitable. Nevertheless subsetting in the path component particularly limited to fixed subsets might be considered in a future version.
+* Coverage extraction functionality
+* Subsetting by domain set
+* Subsetting of domain set
+* Subsetting by range type (bands)
+* Scaling
+* Content type negotiation.
 
 === Content Scope
-The API-Coverages standard provides access to content which complies with the Coverage Implementation Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]). However, there are limitations:
+The API-Coverages standard provides access to content which complies with the Coverage Implementation Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]).
 
-* Only gridded or multi-point coverages are addressed, not Curve/Surface/SolidCoverages. The reason is that these are common use cases that receive the most attention today. Gridded coverages or 'point-cloud' multi-point coverages are the primary data types considered but other kinds of datasets are not excluded.
-* Only GeneralGridCoverage is addressed, other coverage types will follow later. Reason is to have a first version early which shows and allows to evaluate the principles.
-* Coverage Partitioning is not supported. The `Coverage-Partitioning` Requirements Class will be added in a future version.
+The functionality covered in Part 1 is:
+
+* Gridded or multi-point coverages
+* GeneralGridCoverage
