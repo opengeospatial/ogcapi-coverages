@@ -10,11 +10,11 @@
     "properties": {
         "links": {
             "type": "array",
-            "items": {"$href": "link.json"}
+            "items": {"$ref": "link.json"}
         },
         "collections": {
             "type": "array",
-            "items": {"$href": "collectionInfo.json"}
+            "items": {"$ref": "collectionInfo.json"}
         }
     }
 }
