@@ -25,7 +25,7 @@ include::requirements/requirements_class_coverage_scaling.adoc[]
 
 The scaling parameters are defined in the following Requirement:
 
-include::requirements/coverage-subset/REQ_cov-scaling-definition.adoc[]
+include::requirements/coverage-scaling/REQ_cov-scaling-definition.adoc[]
 
 The results of using a scaling parameter are defined by the following Requirement:
 

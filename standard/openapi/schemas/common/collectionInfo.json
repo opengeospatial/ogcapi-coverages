@@ -13,9 +13,9 @@
         "description": {"type": "string"},
         "links": {
             "type": "array",
-            "items": {"$href": "link.json"}
+            "items": {"$ref": "link.json"}
         },
-        "extent": {"$href": "extent.json"},
+        "extent": {"$ref": "extent.json"},
         "itemType": {
             "type": "string",
             "default": "unknown"

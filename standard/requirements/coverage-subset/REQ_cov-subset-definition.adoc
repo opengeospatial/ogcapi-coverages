@@ -2,12 +2,12 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-subset/definition*
-^|A |The operation SHALL support a parameter `subset` with the following characteristics (using an Backus Naur Form (BNF) fragment):
+^|A |The operation SHALL support a parameter `subset` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
-[source,BNF]
+[source,EBNF]
 ----
-  SubsetSpec:        subset=axisName(intervalOrPoint)
-  axisName:          {NCName}
+  SubsetSpec:        "subset"=axisName(intervalOrPoint)
+  axisName:          {text}
   intervalOrPoint:   interval \| point
   interval:          low : high
   low:               point \| *
@@ -16,7 +16,6 @@
 
   Where:
      \" = double quote = ASCII code 0x42,
-     {NCName} is an XML-style identifier not containing ":" (colon) characters,
      {number} is an integer or floating-point number, and
      {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
