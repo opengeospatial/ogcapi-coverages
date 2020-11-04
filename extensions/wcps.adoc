@@ -1,8 +1,8 @@
-== OAPI - Coverages Processing Extension
+== OAPI - Coverages WCPS Extension
 
 This extension allows sending a WCPS request to a server for server-side filtering, processing, and fusion, generally: analytics on a coverage server.
 
-To this end, the Processing Extension adds `/wcps` as a query branch to the paths available:
+To this end, the WCPS Extension adds `/wcps` as a query branch to the paths available:
     {api-endpoint}/wcps
 
 This path expects a query parameter of the shape
