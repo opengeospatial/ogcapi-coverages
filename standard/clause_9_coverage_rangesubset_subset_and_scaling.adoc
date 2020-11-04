@@ -34,3 +34,22 @@ include::requirements/coverage-scaling/REQ_cov-scaling-success.adoc[]
 === Scaling Examples
 
 include::examples/examples_scaling.adoc[]
+
+== Requirements Class Coverage Range Subset
+
+The Range Subset Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
+Range subsetting parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
+
+include::requirements/requirements_class_coverage_rangesubset.adoc[]
+
+The rangeSubset parameter is defined in the following Requirement:
+
+include::requirements/coverage-rangesubset/REQ_cov-rangesubset-definition.adoc[]
+
+The results of using a rangeSubset parameter are defined by the following Requirement:
+
+include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
+
+=== Range Subsetting Examples
+
+include::examples/examples_rangesubsetting.adoc[]
