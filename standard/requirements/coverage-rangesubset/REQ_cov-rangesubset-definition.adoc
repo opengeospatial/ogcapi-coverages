@@ -7,7 +7,7 @@
 [source,EBNF]
 ----
   RangeSubsetSpec:   "rangeSubset"=band[,bandName]*
-  band:              {bandName}|{bandIndex}
+  band:              {bandName}|{bandIndex}|"*"
   bandName:          {text}
   bandIndex:         {number}
 
