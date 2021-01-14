@@ -164,7 +164,7 @@
                 "description": "CMIP5 sample",
                 "responses": {
                     "200": {
-                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/openapi.yaml#/components/schemas/coverageOffering"
+                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/openapi.yaml#/components/schemas/coverageOffering"
                     },
                     "400": {
                         "$ref": "http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/responses/InvalidParameter"
@@ -187,12 +187,12 @@
                 "description": "CMIP5 sample",
                 "parameters": [
                     {
-                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/openapi.yaml#components/parameters/rangeSubset"
+                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/openapi.yaml#components/parameters/rangeSubset"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_metadata.yaml#metadata/properties"
+                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_metadata.yaml#metadata/properties"
                     },
                     "400": {
                         "$ref": "http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/responses/InvalidParameter"
@@ -215,7 +215,7 @@
                 "description": "CMIP5 sample",
                 "responses": {
                     "200": {
-                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage_metadata.yaml#metadata/properties"
+                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_metadata.yaml#metadata/properties"
                     },
                     "400": {
                         "$ref": "http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/ogcapi-features-1.yaml#/components/responses/InvalidParameter"

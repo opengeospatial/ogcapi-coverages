@@ -3,7 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-success*
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL include the `rangeset` of the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/standard/openapi/schemas/coverage.json[coverage.json].
+^|B |The content of that response SHALL include the `rangeset` of the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage.json[coverage.json].
 ^|C |The content of that response SHALL also include the `domainset` and `rangetype` as well, to the extent that the negotiated format can describe it.
 ^|D |The content of that response MAY also include the `metadata` for that coverage. The server SHOULD return that metadata if it is available and the negotiated format can describe it.
 ^|E |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.

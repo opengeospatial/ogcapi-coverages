@@ -50,7 +50,7 @@ Where:
 
 OGC API-Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time such as; spatio-temporal sensor, image, simulation, and statistical data.
 
-This https://github.com/opengeospatial/ogc_api_coverages[OGC API - Coverages] standard establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs. A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
+This https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] standard establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs. A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
 
 [#abstract-coverage-figure,reftext='{figure-caption} {counter:fig-num}']
 .Abstract Coverage
