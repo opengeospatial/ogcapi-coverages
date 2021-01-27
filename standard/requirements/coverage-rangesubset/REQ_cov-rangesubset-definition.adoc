@@ -2,11 +2,11 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-rangesubset/definition*
-^|A |The operation SHALL support a parameter `rangeSubset` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|A |The operation SHALL support a parameter `range-subset` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
 [source,EBNF]
 ----
-  RangeSubsetSpec:   "rangeSubset"=band[,bandName]*
+  RangeSubsetSpec:   "range-subset"=band[,bandName]*
   band:              {bandName}|{bandIndex}|"*"
   bandName:          {text}
   bandIndex:         {number}
