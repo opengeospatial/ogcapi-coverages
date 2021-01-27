@@ -579,19 +579,17 @@
         }, {
           "$ref" : "#/components/parameters/subset"
         }, {
-          "$ref" : "#/components/parameters/rangeSubset"
+          "$ref" : "#/components/parameters/range-subset"
         }, {
-          "$ref" : "#/components/parameters/scaleFactor"
+          "$ref" : "#/components/parameters/scale-factor"
         }, {
-          "$ref" : "#/components/parameters/scaleAxis"
+          "$ref" : "#/components/parameters/scale-axes"
         }, {
-          "$ref" : "#/components/parameters/scaleSize"
+          "$ref" : "#/components/parameters/scale-size"
         }, {
-          "$ref" : "#/components/parameters/scaleExtent"
+          "$ref" : "#/components/parameters/subset-crs"
         }, {
-          "$ref" : "#/components/parameters/subsettingCrs"
-        }, {
-          "$ref" : "#/components/parameters/outputCrs"
+          "$ref" : "#/components/parameters/crs"
         }, {
           "$ref" : "#/components/parameters/interpolation"
         } ],
@@ -1213,7 +1211,7 @@
       "subset" : {
         "name" : "subset",
         "in" : "query",
-        "description" : "get a subset of the coverage by slicing or trimming among one axis",
+        "description" : "get a subset of the coverage by slicing or trimming along one or more axis",
         "required" : false,
         "style" : "form",
         "explode" : true,
@@ -1221,10 +1219,10 @@
           "type" : "string"
         }
       },
-      "rangeSubset" : {
-        "name" : "rangeSubset",
+      "range-subset" : {
+        "name" : "range-subset",
         "in" : "query",
-        "description" : "subset the resulting coverage by choosing and/or rearrange particular fields",
+        "description" : "subset the resulting coverage by choosing and/or re-arranging particular fields (bands)",
         "required" : false,
         "style" : "form",
         "explode" : true,
@@ -1232,10 +1230,10 @@
           "type" : "string"
         }
       },
-      "scaleFactor" : {
-        "name" : "scaleFactor",
+      "scale-factor" : {
+        "name" : "scale-factor",
         "in" : "query",
-        "description" : "scale the resulting coverage either among all axes by a given factor",
+        "description" : "scale the resulting coverage along all axis by a given factor.",
         "required" : false,
         "style" : "form",
         "explode" : true,
@@ -1243,10 +1241,10 @@
           "type" : "string"
         }
       },
-      "scaleAxis" : {
-        "name" : "scaleAxis",
+      "scale-axes" : {
+        "name" : "scale-axes",
         "in" : "query",
-        "description" : "scale the resulting coverage either among one axis by a given factor",
+        "description" : "scale the resulting coverage along one or more axis by a given factor.",
         "required" : false,
         "style" : "form",
         "explode" : true,
@@ -1254,10 +1252,10 @@
           "type" : "string"
         }
       },
-      "scaleSize" : {
-        "name" : "scaleSize",
+      "scale-size" : {
+        "name" : "scale-size",
         "in" : "query",
-        "description" : "scale the resulting coverage either among one axis to a given size",
+        "description" : "scale the resulting coverage along one or more axis to a given size in data cells/pixels",
         "required" : false,
         "style" : "form",
         "explode" : true,
@@ -1265,19 +1263,8 @@
           "type" : "string"
         }
       },
-      "scaleExtent" : {
-        "name" : "scaleExtent",
-        "in" : "query",
-        "description" : "scale the resulting coverage either among one axis to a given extent",
-        "required" : false,
-        "style" : "form",
-        "explode" : true,
-        "schema" : {
-          "type" : "string"
-        }
-      },
-      "subsettingCrs" : {
-        "name" : "subsettingcrs",
+      "subset-crs" : {
+        "name" : "subset-crs",
         "in" : "query",
         "description" : "specify the projection in which the subsets are expressed",
         "required" : false,
@@ -1287,8 +1274,8 @@
           "type" : "string"
         }
       },
-      "outputCrs" : {
-        "name" : "outputcrs",
+      "crs" : {
+        "name" : "crs",
         "in" : "query",
         "description" : "reproject the output coverage to the given",
         "required" : false,

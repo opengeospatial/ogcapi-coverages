@@ -196,31 +196,31 @@ Example: `?subset=Lat(40:50),Lon(10:20)`
 
 Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 degrees East, for a coverage whose domain set and CRS define axes named `Lat` and `Lon`.
 
-**`rangeSubset`**
+**`range-subset`**
 
 Allows to retrieve only a subset of the bands available.
 
 The band names are listed as in the `id` member of the RangeType DataRecord fields.
 
-Example: `?rangeSubset=B02,B03,B04`
+Example: `?range-subset=B02,B03,B04`
 
 Retrieve only bands with IDs B02, B03 and B04.
 A 0-based index can also be used instead, based on the position of the band in the field array of the RangeType DataRecord.
 A `*` before or after a list of bands indicate all previous or subsequent bands, respectively.
 
-**`scaleSize`**, **`scaleFactor`** and **`scaleAxes`**
+**`scale-size`**, **`scale-factor`** and **`scale-axes`**
 
 Allows to specify scaling factors to apply to the resolution of the coverage, e.g. to retrieve an overview of the coverage, using one of those three query parameters.
 
-Example: `?scaleSize=Lon(800),Lat(400)`
+Example: `?scale-size=Lon(800),Lat(400)`
 
 Specify that 800 values along the longitude axis, and 400 values along the latitude axis are desired in the output.
 
-Example: `?scaleFactor=2`
+Example: `?scale-factor=2`
 
 Specify that the resolution of the data should be half that of the original data.
 
-Example: `?scaleAxes=Lon(2)`
+Example: `?scale-axes=Lon(2)`
 
 Specify that the resolution of the data along the longitude axis should be half that of the original data, while the resolution along the other axes
 remains unchanged.

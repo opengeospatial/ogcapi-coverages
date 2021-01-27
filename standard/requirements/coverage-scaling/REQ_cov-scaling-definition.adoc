@@ -2,23 +2,23 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-scaling/definition*
-^|A |The operation SHALL support a parameter `scaleSize` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|A |The operation SHALL support a parameter `scale-size` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
 [source,EBNF]
 ----
-  ScalingSpec:       "scaleSize"=axisName({number})[,axisName({number})]*
+  ScalingSpec:       "scale-size"=axisName({number})[,axisName({number})]*
   axisName:          {text}
 
   Where:
      {number} is an integer or floating-point number, and
 
 ----
-^|B |The operation SHALL support `scaleFactor` numeric parameter.
-^|C |The operation SHALL support a parameter `scaleAxes` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|B |The operation SHALL support `scale-factor` numeric parameter.
+^|C |The operation SHALL support a parameter `scale-axes` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
 [source,EBNF]
 ----
-  ScalingSpec:       "scaleAxes"=axisName({number})[,axisName({number})]*
+  ScalingSpec:       "scale-axes"=axisName({number})[,axisName({number})]*
   axisName:          {NCName}
 
   Where:
