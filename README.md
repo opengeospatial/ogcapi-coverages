@@ -25,7 +25,7 @@ a [nightly build](http://docs.opengeospatial.org/DRAFTS/19-087.html).
 
 ## Overview
 
-This [OGC API - Coverages](https://github.com/opengeospatial/ogc_api_coverages) specification establishes how to access coverages as defined by the [Coverage Implementation Schema (CIS) 1.1](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html) .
+This [OGC API - Coverages](https://github.com/opengeospatial/ogcapi-coverages) specification establishes how to access coverages as defined by the [Coverage Implementation Schema (CIS) 1.1](http://docs.opengeospatial.org/is/09-146r6/09-146r6.html) .
 
 It integrates with the OGC API family of standards through [OGC API - Common](https://github.com/opengeospatial/oapi_common) by:
 - being accessible from an API landing page for a particular dataset,
@@ -388,17 +388,17 @@ TODO: Link to published standard, OpenAPI definition, implementations, etc.
 Those who want to just see the endpoints and responses can explore generic
 OpenAPI definitions in this folder (please paste one of them in the Swagger Editor):
 
-* [ogc_api_coverages/standard/openapi](https://github.com/opengeospatial/ogc_api_coverages/tree/master/standard/openapi)
+* [ogcapi-coverages/standard/openapi](https://github.com/opengeospatial/ogcapi-coverages/tree/master/standard/openapi)
 
 Implementations of the draft standard are listed at the link below:
 
-[Implementations of the draft specification / demo services](https://github.com/opengeospatial/ogc_api_coverages/blob/master/implementations.adoc)
+[Implementations of the draft specification / demo services](https://github.com/opengeospatial/ogcapi-coverages/blob/master/implementations.adoc)
 
 ## Communication
 
 Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wcs.swg) or [![chat at https://gitter.im/opengeospatial/ogcapi-coverages](https://badges.gitter.im/opengeospatial/ogcapi-coverages.svg)](https://gitter.im/opengeospatial/ogcapi-coverages?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Most of the work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogc_api_coverages/issues),
+Most of the work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogcapi-coverages/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
 
 ## Additional parts of OGC API - Coverages
@@ -413,8 +413,8 @@ The contributor understands that any contributions, if accepted by the OGC Membe
 The Coverages API Standards Working Group (SWG) is the group at OGC responsible for the stewardship of the standard, but is working to do as much work in public as possible.
 
 * [Coverages API Standards Working Group Charter](charter/OGC-Coverages-SWG-Charter.adoc)
-* [Open issues](https://github.com/opengeospatial/ogc_api_coverages/issues)
-* [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogc_api_coverages/master/LICENSE)
+* [Open issues](https://github.com/opengeospatial/ogcapi-coverages/issues)
+* [Copy of License Language](https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/LICENSE)
 
 
 Pull Requests from contributors are welcomed. However, please note that by sending a Pull Request or Commit to this GitHub repository, you are agreeing to the terms in the Observer Agreement https://portal.ogc.org/files/?artifact_id=92169

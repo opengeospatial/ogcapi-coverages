@@ -8,7 +8,7 @@
 :resource: coverage
 :information_model_base: Coverage Implementation Schema (CIS)
 :information_model_base_docnum: 09-146r8
-:githubrepo: https://github.com/opengeospatial/ogc_api_coverages
+:githubrepo: https://github.com/opengeospatial/ogcapi-coverages
 :base_swg: Web Coverage Service (WCS) SWG
 :target_start_date: July 2020
 :target_end_date: December 2020
