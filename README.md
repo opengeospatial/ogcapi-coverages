@@ -396,7 +396,7 @@ Implementations of the draft standard are listed at the link below:
 
 ## Communication
 
-Join the [mailing list](https://lists.opengeospatial.org/mailman/listinfo/wcs.swg) or [![chat at https://gitter.im/opengeospatial/ogcapi-coverages](https://badges.gitter.im/opengeospatial/ogcapi-coverages.svg)](https://gitter.im/opengeospatial/ogcapi-coverages?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Join the [mailing list](https://lists.ogc.org/mailman/listinfo/coverages.swg) or [![chat at https://gitter.im/opengeospatial/ogcapi-coverages](https://badges.gitter.im/opengeospatial/ogcapi-coverages.svg)](https://gitter.im/opengeospatial/ogcapi-coverages?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Most of the work on the specification takes place in [GitHub issues](https://github.com/opengeospatial/ogcapi-coverages/issues),
 so browse there to get a good idea of what is happening, as well as past decisions.
