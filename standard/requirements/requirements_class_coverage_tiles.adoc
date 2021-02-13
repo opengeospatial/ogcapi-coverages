@@ -1,0 +1,12 @@
+[[rc_coverage_tiles]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-tiles
+|Target type |Web API
+|Dependency |http://www.opengis.net/spec/ogcapi_coverage-1/1.0/req/geodata-coverage
+|Dependency |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tileset
+|Dependency |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tilesets-list
+|Dependency |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets
+|Dependency |<<CIS_1_1,OGC Coverage Implementation Schema (CIS)>>
+|===
