@@ -1,0 +1,19 @@
+[[req_coverage_tiles-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-tiles/success*
+^|A |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles specifications
+^|B |The response to a request for an individual tile SHALL return a subset of the coverage trimmed on the axes defined by the 2D Tile Matrix Set
+to cover the exact geospatial extent of the tile.
+^|C |The response to a request for an individual tile SHALL be scaled down to a number of cells corresponding to the tile's pixel size,
+   plus one if the coverage cells do not fully span the distance between them.
+
+As an example, a request for tile .../coverage/tiles/WorldCRS84Quad/1/0/0 of a point coverage is equivalent to:
+
+   .../coverage?subset=Lat(0:90),Lon(-180:-90)&scaleSize=257,257
+
+and return a tile containing 257 x 257 cells, while for an area coverage it is equivalent to:
+
+   .../coverage?subset=Lat(0:90),Lon(-180:-90)&scaleSize=256,256
+
+and return a tile containing 256 x 256 cells.

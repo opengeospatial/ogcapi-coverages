@@ -54,6 +54,27 @@ include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
 
 include::examples/examples_rangesubsetting.adoc[]
 
+== Requirements Class Coverage Tiles
+
+The Tiles Requirements Class defines how to combine the OGC API - Tiles building blocks with the Coverages API to request coverage tiles.
+Coverages parameters such as for subsetting additional dimensions not covered by the Tiles 2D Tile Matrix Set (such as time or elevation),
+or for range subsetting, can be used together with the path for requesting individual tiles.
+
+include::requirements/requirements_class_coverage_tiles.adoc[]
+
+The capability to request tiles is defined in the following Requirement:
+
+include::requirements/coverage-tiles/REQ_cov-tiles-definition.adoc[]
+
+The results of requesting coverage tiles are defined by the following Requirement:
+
+include::requirements/coverage-tiles/REQ_cov-tiles-success.adoc[]
+
+=== Coverage Tiles Examples
+
+include::examples/examples_tiles.adoc[]
+
+
 == Requirements Class DomainSet Subset
 
 The DomainSet Subset Requirements Class defines the use of parameters for sub-setting the domainset of the coverage.

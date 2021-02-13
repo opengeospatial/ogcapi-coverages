@@ -1,0 +1,9 @@
+[[req_coverage_tiles-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-tiles/definition*
+^|A |The coverage SHALL have an associated list of at least one coverage tilesets accessible at .../{collectionId}/coverage/tiles, conforming to OGC API - Tiles - Part 1: Core
+^|B |The coverage's collection description document at .../{collectionId} SHALL include a link with relation type http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
+^|C |This list of coverage tilesets shall include link to the full descriptions of these tilesets accessible at .../{collectionId}/coverage/tiles/{tileMatrixSetId}
+^|D |The tiles making up the tilesets SHALL be accessible from .../{collectionId}/coverage/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}
+|===
