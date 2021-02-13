@@ -9,13 +9,14 @@ to cover the exact geospatial extent of the tile.
    plus one if the coverage cells do not fully span the distance between them.
 |===
 
-As an example, considering that the WorldCRS84Quad Tile Matrix Set has tile pixel sizes defined as 256 x 256,
-a request for tile .../coverage/tiles/WorldCRS84Quad/1/0/0 of a point coverage is equivalent to:
+As an example, considering that the _WorldCRS84Quad_ Tile Matrix Set has tile pixel sizes defined as 256 x 256,
+a request for tile +
+`.../coverage/tiles/WorldCRS84Quad/1/0/0` of a point coverage is equivalent to:
 
-   .../coverage?subset=Lat(0:90),Lon(-180:-90)&scaleSize=257,257
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scaleSize=257,257`
 
-and returns a tile containing 257 x 257 cells, while for an area coverage it is equivalent to:
+and returns a tile containing one or more slices of 257 x 257 cells, while for an area coverage it is equivalent to:
 
-   .../coverage?subset=Lat(0:90),Lon(-180:-90)&scaleSize=256,256
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scaleSize=256,256`
 
-and returns a tile containing 256 x 256 cells.
+and returns a tile containing one or more slices of 256 x 256 cells.
