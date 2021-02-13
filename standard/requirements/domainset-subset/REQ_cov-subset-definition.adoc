@@ -21,4 +21,6 @@
 ----
 ^|B |The axis name SHALL be the same as one of the axes defined in the coverage's envelope as part of its collection description document, or else the server SHALL return a 400 status code.
 ^|C |If the intervalOrPoint values fall entirely outside the range of the DomainSet for the identified axis, a 204 status code SHALL be returned
+^|D |For a CRS where an axis can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
+be supported to indicate an extent crossing that wrapping point.
 |===
