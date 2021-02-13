@@ -53,3 +53,21 @@ include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
 === Range Subsetting Examples
 
 include::examples/examples_rangesubsetting.adoc[]
+
+== Requirements Class DomainSet Subset
+
+The DomainSet Subset Requirements Class defines the use of parameters for sub-setting the domainset of the coverage.
+
+include::requirements/requirements_class_domainset_subset.adoc[]
+
+The subset parameter is defined in the following Requirement:
+
+include::requirements/domainset-subset/REQ_cov-subset-definition.adoc[]
+
+The results of using a subset parameter are defined by the following Requirement:
+
+include::requirements/domainset-subset/REQ_cov-subset-success.adoc[]
+
+=== DomainSet Subsetting Examples
+
+include::examples/examples_domainset_subsetting.adoc[]
