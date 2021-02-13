@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-bbox/definition*
-^|A |The API SHALL support a BBOX (Bounding Box) parameter parameter for `{coverageId}/coverage` requests.
+^|A |The API SHALL support a BBOX (Bounding Box) parameter parameter for `{collectionId}/coverage` requests.
 ^|B |Requests which include the Bounding Box parameter SHALL comply with API-Common requirement `/req/core/rc-bbox-definition`.
 ^|C |Responses SHALL be appropriately sub-set, returning only data within the spatial extent of the specified bounding box parameter.
 |===

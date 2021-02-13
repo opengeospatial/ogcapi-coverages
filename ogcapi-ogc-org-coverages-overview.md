@@ -124,9 +124,7 @@ TODO: Additional properties should be defined in OGC API - Common - Part 2: Geos
 
 #### Coverage description resource
 
-Resource path: `{datasetAPI}/collections/{coverageId}`
-
-NOTE: `{collectionId}` is replaced here by `{coverageId}` as extensions specific to coverages are described
+Resource path: `{datasetAPI}/collections/{collectionId}`
 
 Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
 
@@ -158,7 +156,7 @@ which do not map to either the `spatial` or `temporal` properties described by C
 
 #### The coverage (including all of its components)
 
-Resource path: `{datasetAPI}/collections/{coverageId}/coverage`
+Resource path: `{datasetAPI}/collections/{collectionId}/coverage`
 
 NOTE: though this path should exist, a client should not rely on it as additional representations for this resource may reside elsewhere, e.g. /coverage.tiff or /coverage?f=tiff
 
@@ -229,7 +227,7 @@ Retrieve the subset of the coverage between 40 and 50 degrees North, 10 and 20 d
 
 #### Range set (optional)
 
-Resource path: `{datasetAPI}/collections/{coverageId}/coverage/rangeset`
+Resource path: `{datasetAPI}/collections/{collectionId}/coverage/rangeset`
 
 NOTE: this path is not fixed and not required (follow the link)
 
@@ -264,7 +262,7 @@ Example CIS JSON rangeSet encoding:
 
 #### Range type (optional as a separate resource)
 
-Resource path: `{datasetAPI}/collections/{coverageId}/coverage/rangetype`
+Resource path: `{datasetAPI}/collections/{collectionId}/coverage/rangetype`
 
 NOTE: this path is not fixed and may not exist (follow the link)
 
@@ -303,7 +301,7 @@ Example CIS JSON range type encoding:
 
 #### Domain set (optional as a separate resource)
 
-Resource path: `{datasetAPI}/collections/{coverageId}/coverage/domainset`
+Resource path: `{datasetAPI}/collections/{collectionId}/coverage/domainset`
 
 NOTE: this path is not fixed and may not exist (follow the link)
 
@@ -362,7 +360,7 @@ Retrieve the domain set of the coverage between 40 and 50 degrees North, 10 and 
 
 #### Coverage metadata (optional)
 
-Resource path: `{datasetAPI}/collections/{coverageId}/coverage/metadata`
+Resource path: `{datasetAPI}/collections/{collectionId}/coverage/metadata`
 
 NOTE: this path is not fixed and may not exist
 
