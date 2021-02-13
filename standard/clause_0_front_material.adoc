@@ -32,4 +32,5 @@ All questions regarding this submission should be directed to the editor or the 
 |Charles Heazel |HeazelTech
 |Stephan Meissl <stephan.meissl@eox.at> |https://eox.at[EOX IT Services GmbH]
 |Tom Kralidis <tom.kralidis@canada.ca> | Meteorological Service of Canada
+|Jerome St-Louis <jerome@ecere.com> | https://ecere.ca[Ecere Corporation]
 |===
