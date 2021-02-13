@@ -8,6 +8,10 @@ The subset parameter is defined in the following Requirement:
 
 include::requirements/coverage-subset/REQ_cov-subset-definition.adoc[]
 
+The following permission is granted to facilitate slicing data sparsely populated across a dimension, such as Earth Observation imagery:
+
+include::recommendations/coverage-subset/PER_slice-sparse-dimensions.adoc[]
+
 The results of using a subset parameter are defined by the following Requirement:
 
 include::requirements/coverage-subset/REQ_cov-subset-success.adoc[]
