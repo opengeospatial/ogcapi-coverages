@@ -146,8 +146,8 @@ Both of these properties are required for conforming to coverage access for that
 
 Whether they are embedded or a separate resources, links using their respective relation type (`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype` or
 `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`) must be present within the `links` property.
-If the properties are embedded, the links will be relative and point directly to the property using `#` e.g.,
-`#DomainSet` and `#RangeType`.
+If the properties are embedded, the links will be relative and point directly to the property using https://tools.ietf.org/html/rfc6901[RFC 6901 (JSON Pointer)] e.g.,
+`#/DomainSet` and `#/RangeType`.
 
 A good reason to define them as separate resources would be if they are complex and consist of a sizable amount of data.
 
@@ -279,7 +279,7 @@ Alternative JSON encodings such as CoverageJSON must be differentiated by using 
 
 If provided, returns only the range type of the coverage, i.e. the data values semantics (their components and data type).
 A CIS JSON encoding of this resource is required, but may be embedded within the Coverage description resource as the value of the `RangeType` property.
-In that case, a link will still exist pointing to `#RangeType`
+In that case, a link will still exist pointing to `#/RangeType`
 A reason to make it a separate resource is if the range type is very complex and consists of a sizable amount of data.
 
 <a name="rangeTypeExample"></a>
@@ -318,7 +318,7 @@ Alternative JSON encodings such as CoverageJSON must be differentiated by using 
 
 If provided, returns only the domain set of the coverage (the detailed n-dimensional space covered by the data).
 A CIS JSON encoding of this resource is required, but may be embedded within the Coverage description resource as the value of the `DomainSet` property.
-In that case, a link will still exist pointing to `#DomainSet`
+In that case, a link will still exist pointing to `#/DomainSet`
 A reason to make it a separate resource is if the domain set is very complex and consists of a sizable amount of data,
 and optionally if the API supports subsetting the domain set itself.
 

@@ -153,8 +153,8 @@ Both of these properties are required for conforming to coverage access for that
 
 Whether they are embedded or a separate resources, links using their respective relation type (`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype` or
 `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`) must be present within the `links` property.
-If the properties are embedded, the links will be relative and point directly to the property using `#` e.g.,
-`#DomainSet` and `#RangeType`.
+If the properties are embedded, the links will be relative and point directly to the property using https://tools.ietf.org/html/rfc6901[RFC 6901 (JSON Pointer)] e.g.,
+`#/DomainSet` and `#/RangeType`.
 
 A good reason to define them as separate resources would be if they are complex and consist of a sizable amount of data.
 
