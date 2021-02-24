@@ -98,7 +98,7 @@ include::clause_7_geodata_coverage.adoc[]
 
 include::clause_8_media_types.adoc[]
 
-include::clause_9_coverage_subset_and_scaling.adoc[]
+include::clause_9_coverage_rangesubset_subset_and_scaling.adoc[]
 
 include::clause_10_HTML.adoc[]
 
