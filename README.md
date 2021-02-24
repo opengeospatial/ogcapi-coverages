@@ -1,5 +1,9 @@
 # OGC API - Coverages
 
+Latest draft specifications: [HTML](https://docs.opengeospatial.org/DRAFTS/19-087.html) [PDF](https://docs.opengeospatial.org/DRAFTS/19-087.pdf)
+
+Latest draft User's Guide: [HTML](https://docs.opengeospatial.org/DRAFTS/20-075.html) [PDF](https://docs.opengeospatial.org/DRAFTS/20-075.pdf)
+
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
 standard for accessing geospatial data resources on the web as a coverage, "OGC API - Coverages".
 
