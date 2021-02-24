@@ -3,7 +3,7 @@
                 "OGC_doc_number": "19-087",
                 "urn":"http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0",
                 "title":"OGC API - Coverages - Part 1: Core",
-                "path":"standard/OAPI_Coverages.adoc",
+                "path":"standard/19-087.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri"
@@ -13,7 +13,7 @@
                 "OGC_doc_number": "20-075",
                 "urn":"http://www.opengis.net/doc/eg/ogcapi-coverages/1.0",
                 "title":"OGC API - Coverages Users Guide",
-                "path":"users-guide/OAPI_Coverages_Users_Guide.adoc",
+                "path":"users-guide/20-075.adoc",
                 "options": ["--trace"],
                 "a":[
                         "data-uri"
