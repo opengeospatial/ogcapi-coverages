@@ -23,6 +23,7 @@
 
   Where:
      {number} is an integer or floating-point number, and
+----
 
 ^|D |The axis name SHALL be the same as one of the `axisLabels` defined in the DomainSet, and shall match the abbreviations defined by the CRS
 (as defined bythe <gml:axisAbbrev> tags).  or else return a 400 status code.
