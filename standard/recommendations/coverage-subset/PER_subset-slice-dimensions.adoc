@@ -2,7 +2,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/coverage-subset/slice-sparse-dimension*
-^|A |The empty portions of a slice operation on an axis (e.g. time), combined with a trimming operations on other axes (e.g. latitude and longitude)
+^|A |The empty portions in a coverage resulting from a slice operation on an axis (e.g. time), combined with a trimming operations on other axes (e.g. latitude and longitude)
  which would either be empty or not cover the full extent of the trim operation MAY be filled with data values from the same trim operation
  combined with a slicing operation on a different value of the slicing axis which would return non-empty values.
  For example, the closest or last previous time for which data is available for a certain geospatial extent may be returned.
