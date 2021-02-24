@@ -5,7 +5,8 @@
 2+|The list of Conformance Classes advertised by the API SHALL include:
 ^|A |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
 ^|B |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-tiles
-^|C |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tileset
-^|D |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tilesets-list
-^|E |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets
+^|C |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/core
+^|D |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tileset
+^|E |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tilesets-list
+^|F |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets
 |===
