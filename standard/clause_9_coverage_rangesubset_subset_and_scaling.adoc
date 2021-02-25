@@ -46,11 +46,11 @@ Range subsetting parameters may be mixed with other parameters, in no particular
 
 include::requirements/requirements_class_coverage_rangesubset.adoc[]
 
-The rangeSubset parameter is defined in the following Requirement:
+The range-subset parameter is defined in the following Requirement:
 
 include::requirements/coverage-rangesubset/REQ_cov-rangesubset-definition.adoc[]
 
-The results of using a rangeSubset parameter are defined by the following Requirement:
+The results of using a range-subset parameter are defined by the following Requirement:
 
 include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
 

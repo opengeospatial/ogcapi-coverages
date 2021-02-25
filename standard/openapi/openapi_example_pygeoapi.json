@@ -187,7 +187,7 @@
                 "description": "CMIP5 sample",
                 "parameters": [
                     {
-                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/openapi.yaml#components/parameters/rangeSubset"
+                        "$ref": "https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/openapi.yaml#components/parameters/range-subset"
                     }
                 ],
                 "responses": {

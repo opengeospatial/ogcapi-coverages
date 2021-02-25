@@ -1,4 +1,4 @@
-== OAPI - Coverage  CRS Extension
+== OGC API - Coverage - Part 2: Coordinate Reference Systems
 
 This extension allows modification of a request so that it considers Coordinate Reference Systems (CRSs) provided by the client. Without this extension, all coverage delivery is in the coverage's Native CRS.
 
@@ -7,13 +7,13 @@ To this end, the CRS Extension adds query parameters to the coverage access requ
 === Delivery of coverage in a CRS different from Native CRS
 A query parameter
 
-    outputcrs={crs}
+    crs={crs}
 
-will transform the result coverage into the CRS indicated by {crs}. 
+will transform the result coverage into the CRS indicated by {crs}.
 
 Example:
 
-    http://acme.com/oapi/collections/{collectionid}/coverage/all?outputcrs=http://www.opengis.net/def/crs/EPSG/0/4326
+    http://acme.com/oapi/collections/{collectionid}/coverage?crs=http://www.opengis.net/def/crs/EPSG/0/4326
 
 Error conditions:
 
@@ -23,7 +23,7 @@ Error conditions:
 === Subsetting Coordinates in a CRS different from Native CRS
 A query parameter
 
-    subsettingcrs={crs}
+    subset-crs={crs}
 
 will interpret the bounding box to be provided in {crs} and transform it into the coverage's Native CRS before applying the subsetting. Note that an axis-parallel bounding box in general may transform into a non-axis-parallel, non-rectangular polygon.
 

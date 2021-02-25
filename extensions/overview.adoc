@@ -12,8 +12,8 @@ In addition to the OAPI - Coverages Core, which every implementation claiming co
 ^|*Extension* ^|*Purpose*
 | Processing | process WCPS analytics queries in the server
 | Transaction | insert, delete, or update a coverage on a server
-| Range Subsetting | extract range components ("bands", "variables") from a coverage
-| Scaling | change resolution of a gridd coverage
-| CRS | change the projection of a coverage 
-| Interpolation | apply a particular interpolation method when interpolation occurs during request processing 
+| Range Subsetting _(now in Core)_ | extract range components ("bands", "variables") from a coverage
+| Scaling _(now in Core)_ | change resolution of a gridd coverage
+| CRS | change the projection of a coverage
+| Interpolation | apply a particular interpolation method when interpolation occurs during request processing
 |====
