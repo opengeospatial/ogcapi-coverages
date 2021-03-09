@@ -27,6 +27,20 @@ Error conditions:
 
 *    The query must be syntactically and semantically correct wrt. the service addressed (cf. WCPS specification).
 
+
+A WCPS query can have an arbitrary number of parameters passed as part of the request, but outside the query. Such parameters are numbered starting from 1. Inside the query parameters are embedded by referencing them through their resp. number together with a "$" prefix. Before evaluation of the WCPS query in the server all parameters are expanded textually in the query, substituting the "$i" variables with the value provided in the request.
+
+Examples:
+
+    {api-endpoint}/wcps?q=for $c in (ERA5-cube) return max( $c.$1 ) & 1=temperature
+    {api-endpoint}/wcps?q=for $c in (Sentinel-2) return ($c.red-$c.nir)/($c.red+$c.nir) > $1 ) & 1=0.6
+
+WCPS requests may use GET as well as POST requests. 
+
+Note:
+
+    In practice, POST requests are preferred when such a parameter is a large string, such as the encoding of a complete coverage provided as input parameter. 
+
 == OAPI Definition (draft)
 
 NOTE: this section is not up to date, it needs to be adjusted to the above specification.
