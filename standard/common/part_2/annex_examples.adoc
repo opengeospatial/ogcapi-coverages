@@ -1,0 +1,13 @@
+[[collections-metadata-examples]]
+=== Collections Metadata Example
+
+include::examples/collections_metadata_JSON.adoc[]
+
+[[collection-description-examples]]
+=== Collection Description Examples
+
+==== Building Collection
+
+include::examples/collection_description_JSON.adoc[]
+
+

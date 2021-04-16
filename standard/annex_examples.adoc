@@ -1,0 +1,10 @@
+[appendix]
+:appendix-caption: Annex
+== Examples (Informative)
+
+include::common/part_1/annex_examples.adoc[]
+
+include::common/part_2/annex_examples.adoc[]
+
+
+

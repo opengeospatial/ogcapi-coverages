@@ -1,0 +1,8 @@
+[[req_general_query-param-unknown]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/general/query-param-unknown*
+^|A |IF a request URI includes a query parameter that is not specified in the API definition, +
+{nbsp}{nbsp}{nbsp}{nbsp}THEN +
+The server SHALL return a response with the status code `400`.
+|===

@@ -1,0 +1,31 @@
+{
+"$schema": "http://json-schema.org/draft-07/schema#",
+"title": "Landing Page Schema",
+"description": "JSON schema for the OGC API - Common landing page",
+"type": "object",
+"required": [
+    "links"
+    ],
+"properties": {
+    "title": {
+        "title": "The title of the API.",
+        "description": "While a title is not required, implementors are strongly advised to include one.",
+        "type": "string"
+        },
+    "description": {
+        "description": "A textual description of the API",
+        "type": "string"
+        },
+    "attribution" : {
+        "type" : "string",
+        "title" : "attribution for the API",
+        "description" : "The `attribution` should be short and intended for presentation to a user, for example, in a corner of a map. Parts of the text can be links to other resources if additional information is needed. The string can include HTML markup."
+        },
+    "links": {
+        "description": "Links to the resources exposed through this API.",
+        "type": "array",
+        "items": {"$href": "link.json"}
+        }
+    },
+    "additionalProperties": true
+}

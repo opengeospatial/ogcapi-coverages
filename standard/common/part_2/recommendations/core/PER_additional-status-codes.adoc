@@ -1,0 +1,6 @@
+[[per_platform_additional-status-codes]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/platform/additional-status-codes*
+^|A |Servers MAY support other capabilities of the HTTP protocol and, therefore, MAY return status codes in addition to those listed in <<status-codes>>.
+|===

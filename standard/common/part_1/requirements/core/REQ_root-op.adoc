@@ -1,0 +1,7 @@
+[[req_platform_root-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/platform/root-op*
+^|A |The server SHALL support the HTTP GET operation on the URI `{root}/`.
+^|B |The response to the HTTP GET request issued in `A` SHALL satisfy requirement <<req_platform_root-success,/req/platform/root-success>>.
+|===

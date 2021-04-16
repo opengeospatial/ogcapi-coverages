@@ -1,0 +1,12 @@
+[[service-metadata]]
+.Service Metadata
+=================
+This is an example of how to extend the OpenAPI `info` object to include identifying metadata about both the service and the service provider. 
+
+[source,JSON]
+----
+
+include::../openapi/examples/serviceMetadataExample.json[]
+
+----
+=================
