@@ -8,19 +8,19 @@ oneOf:
     properties:
       type:
         enum:
-          - DataRecordType
+          - DataRecord
       field:
         type: array
         items:
           title: quantity
-          description: quantiy
+          description: quantity
           type: object
           required:
             - type
           properties:
             type:
               enum:
-                - QuantityType
+                - Quantity
             id:
               type: string
               format: uri
@@ -71,7 +71,7 @@ oneOf:
         properties:
           type:
             enum:
-              - InterpolationRestrictionType
+              - InterpolationRestriction
           id:
             type: string
             format: uri
@@ -86,7 +86,7 @@ oneOf:
     properties:
       type:
         enum:
-          - RangeTypeRefType
+          - RangeTypeRef
       id:
         type: string
         format: uri

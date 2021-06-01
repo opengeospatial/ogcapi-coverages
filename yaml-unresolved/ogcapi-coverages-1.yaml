@@ -112,11 +112,11 @@ paths:
         - $ref: 'parameters/common-core/parameters.yaml#/f'
       responses:
         '200':
-          description: Metdata about the collections shared by this API.
+          description: Metadata about the collections shared by this API.
           content:
             application/json:
               schema:
-                $ref: 'schemas/coverages-core/collections.yaml'
+                $ref: 'schemas/coverages-core/coverages.yaml'
             text/html:
               schema:
                 type: string
@@ -145,7 +145,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/coverages-core/collectionInfo.yaml'
+                $ref: 'schemas/coverages-core/coverageInfo.yaml'
             text/html:
               schema:
                 type: string

@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../common-collections/collectionInfo.yaml'
+  - $ref: '../common-geodata/collectionInfo.yaml'
   - description: |-
       The extent (envelope) of the coverage. In Common, only spatial and temporal
       extents are specified. Coverages extends this by regrouping additional coverage dimensions under the "additional" property.

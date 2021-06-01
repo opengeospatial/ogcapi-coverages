@@ -9,7 +9,7 @@ required:
 properties:
   type:
     enum:
-      - EnvelopeByAxisType
+      - EnvelopeByAxis
   id:
     type: string
   srsName:
@@ -32,7 +32,7 @@ properties:
       properties:
         type:
           enum:
-            - AxisExtentType
+            - AxisExtent
         id:
           type: string
         axisLabel:

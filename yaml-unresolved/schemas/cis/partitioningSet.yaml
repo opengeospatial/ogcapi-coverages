@@ -6,7 +6,7 @@ required:
 properties:
   type:
     enum:
-      - PartitionSetType
+      - PartitionSet
   partition:
     type: array
     items:
@@ -20,7 +20,7 @@ properties:
               type: string
             type:
               enum:
-                - PartitionRefType
+                - PartitionRef
             envelope:
               $ref: 'envelope.yaml'
             coverageRef:
@@ -34,7 +34,7 @@ properties:
               type: string
             type:
               enum:
-                - PartitionType
+                - Partition
             envelope:
               $ref: 'envelope.yaml'
             coverage:
@@ -52,7 +52,7 @@ properties:
           type: string
         type:
           enum:
-            - PVPType
+            - PVP
         coordinate:
           type: array
           items:

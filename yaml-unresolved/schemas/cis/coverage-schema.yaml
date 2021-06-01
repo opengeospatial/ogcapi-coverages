@@ -13,7 +13,7 @@ oneOf:
         type: string
       type:
         enum:
-          - CoverageByDomainAndRangeType
+          - CoverageByDomainAndRange
       # envelope:
       #   $ref: 'envelope.yaml'
       # domainSet:
@@ -33,7 +33,7 @@ oneOf:
         type: string
       type:
         enum:
-          - CoverageByPartitioningType
+          - CoverageByPartitioning
       # envelope:
       #   $ref: 'envelope.yaml'
       # partitionSet:

@@ -8,7 +8,7 @@ oneOf:
     properties:
       type:
         enum:
-          - RangeSetType
+          - RangeSet
       dataBlock:
         title: dataBlock
         description: Data block objects
@@ -19,8 +19,8 @@ oneOf:
         properties:
           type:
             enum:
-              - VDataBlockType
-              - CVDataBlockType
+              - VDataBlock
+              - CVDataBlock
           values:
             type: array
             items:
@@ -31,7 +31,7 @@ oneOf:
     properties:
       type:
         enum:
-          - RangeSetRefType
+          - RangeSetRef
       fileReference:
         type: array
         items:
