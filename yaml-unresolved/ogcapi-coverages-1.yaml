@@ -30,14 +30,14 @@ paths:
         statements and the metadata about the coverage data in this dataset.
       operationId: getLandingPage
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
+        - $ref: 'parameters/common-core/parameters.yaml#/f'
       responses:
         '200':
           description: links to the API capabilities
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/landingPage.yaml'
+                $ref: 'schemas/common-core/landingPage.yaml'
             text/html:
               schema:
                 type: string
@@ -49,7 +49,7 @@ paths:
       description: most likely returning the document at hand
       operationId: getApiDefinition
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
+        - $ref: 'parameters/common-core/parameters.yaml#/f'
       responses:
         '200':
           description: most likely returning the document at hand
@@ -62,7 +62,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
   /conformance:
     get:
       tags:
@@ -71,7 +71,7 @@ paths:
       description: list of all conformance classes that the server conforms to
       operationId: getCapabilities
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
+        - $ref: 'parameters/common-core/parameters.yaml#/f'
       responses:
         '200':
           description: The URIs of all conformance classes supported by the server
@@ -79,7 +79,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: 'schemas/ogcapi-common-1_1.0/confClasses.yaml'
+                  - $ref: 'schemas/common-core/confClasses.yaml'
                 example:
                   conformsTo:
                     - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
@@ -97,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
   /collections:
     get:
       tags:
@@ -106,17 +106,17 @@ paths:
       description: list of all collections available from the server
       operationId: describeCollections
       parameters:
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/limit'
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/bbox'
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/datetime'
-        - $ref: 'schemas/ogcapi-common-1_1.0/parameters.yaml#/f'
+        - $ref: 'parameters/common-core/parameters.yaml#/limit'
+        - $ref: 'parameters/common-core/parameters.yaml#/bbox'
+        - $ref: 'parameters/common-core/parameters.yaml#/datetime'
+        - $ref: 'parameters/common-core/parameters.yaml#/f'
       responses:
         '200':
           description: Metdata about the collections shared by this API.
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-coverages-1_1.0/collections.yaml'
+                $ref: 'schemas/coverages-core/collections.yaml'
             text/html:
               schema:
                 type: string
@@ -125,7 +125,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -145,7 +145,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-coverages-1_1.0/collectionInfo.yaml'
+                $ref: 'schemas/coverages-core/collectionInfo.yaml'
             text/html:
               schema:
                 type: string
@@ -154,7 +154,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -184,7 +184,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis_1.1/coverage-schema.yaml'
+                $ref: 'schemas/cis/coverage-schema.yaml'
             application/multipart+related:
               schema:
                 $ref: '#/components/schemas/coverageMultipart'
@@ -202,7 +202,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -222,7 +222,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis_1.1/domainSet.yaml'
+                $ref: 'schemas/cis/domainSet.yaml'
             text/html:
               schema:
                 type: string
@@ -231,7 +231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -250,7 +250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis_1.1/rangeType.yaml'
+                $ref: 'schemas/cis/rangeType.yaml'
             text/html:
               schema:
                 type: string
@@ -259,7 +259,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -279,7 +279,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis_1.1/rangeSet.yaml'
+                $ref: 'schemas/cis/rangeSet.yaml'
             image/*:
               schema:
                 $ref: '#/components/schemas/rangeSetImage'
@@ -294,7 +294,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string
@@ -314,7 +314,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/cis_1.1/metadata.yaml'
+                $ref: 'schemas/cis/metadata.yaml'
             text/html:
               schema:
                 type: string
@@ -323,7 +323,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'schemas/ogcapi-common-1_1.0/exception.yaml'
+                $ref: 'schemas/common-core/exception.yaml'
             text/html:
               schema:
                 type: string

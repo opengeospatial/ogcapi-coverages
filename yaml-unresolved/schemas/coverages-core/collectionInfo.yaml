@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../ogcapi-common-2_1.0/collectionInfo.yaml'
+  - $ref: '../common-collections/collectionInfo.yaml'
   - type: object
     required:
       - extent
@@ -8,7 +8,7 @@ allOf:
         $ref: 'extent.yaml'
       domainSet:
         allOf:
-          - $ref: '../cis_1.1/domainSet.yaml'
+          - $ref: '../cis/domainSet.yaml'
         example:
           type: DomainSetType
           generalGrid:
@@ -47,7 +47,7 @@ allOf:
                   upperBound: 360
       rangeType:
         allOf:
-          - $ref: '../cis_1.1/rangeType.yaml'
+          - $ref: '../cis/rangeType.yaml'
         example:
           type: DataRecordType
           field:

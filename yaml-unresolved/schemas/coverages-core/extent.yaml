@@ -1,5 +1,5 @@
 allOf:
-  - $ref: '../ogcapi-common-2_1.0/collectionInfo.yaml'
+  - $ref: '../common-collections/collectionInfo.yaml'
   - description: |-
       The extent (envelope) of the coverage. In Common, only spatial and temporal
       extents are specified. Coverages extends this by regrouping additional coverage dimensions under the "additional" property.
