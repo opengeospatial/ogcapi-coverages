@@ -1,0 +1,17 @@
+name: scale-axes
+in: query
+description: |-
+  Returns a coverage re-scaled so as to contain `{number}` times less sample
+  values along its latitude axis, and all original values along all its other
+  dimensions
+  ```
+  ScalingSpec:       "scale-axes"=axisName({number})[,axisName({number})]*
+  axisName:          {NCName}
+
+  Where:
+     {number} is an integer or floating-point number, and {axisName} is the
+     same as one of the axisLabels defined in the DomainSet
+  ```
+required: false
+schema:
+  type: string
