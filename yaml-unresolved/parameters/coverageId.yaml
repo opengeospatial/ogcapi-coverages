@@ -1,0 +1,9 @@
+name: coverageId
+in: path
+description: |-
+  `coverageId` is the local identifier for a Coverage. It serves the same role
+  and is subject to the same requirements as the collectionid parameter defined
+  in API-Common.
+required: true
+schema:
+  type: string
