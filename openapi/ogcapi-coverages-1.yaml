@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  title: 'A sample API conforming to the OGC API - Coverages - Part 1: Core standard'
+  description: 'This is a sample OpenAPI definition that conforms to the OGC API - Coverages - Part 1: Core Service specification (conformance classes: "GeoData-Coverage", "Coverage Subset", "CIS JSON", "HTML" and "OpenAPI 3.0").'
+  contact:
+    name: Open Geospatial Consortium
+    url: https://ogc.org
+    email: info@ogc.org
+  license:
+    name: CC-BY 4.0 license
+    url: https://creativecommons.org/licenses/by/4.0/
+  version: 2.0.0
+servers:
+  - url: https://dev.example.org
+    description: Development server
+  - url: https://data.example.org
+    description: Production server
+tags:
+  - name: Capabilities
+    description: Essential characteristics of this API including information about the data.
+  - name: Coverage
+    description: Access to data (coverage).
+paths:
+  /:
+    get:
+      tags:
+        - Capabilities
+      summary: landing page of this API
+      description: The landing page provides links to the API definition, the Conformance
+        statements and the metadata about the coverage data in this dataset.
+      operationId: getLandingPage
+      parameters:
+        - $ref: 'parameters/non-normative/f.yaml'
+      responses:
+        '200':
+          - $ref: 'responses/common-core/rLandingPage.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /api:
+    get:
+      tags:
+        - Capabilities
+      summary: API definition
+      description: most likely returning the document at hand
+      operationId: getApiDefinition
+      parameters:
+        - $ref: 'parameters/non-normative/f.yaml'
+      responses:
+        '200':
+          - $ref: 'responses/common-core/rAPI.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /conformance:
+    get:
+      tags:
+        - Capabilities
+      summary: API conformance definition
+      description: list of all conformance classes that the server conforms to
+      operationId: getCapabilities
+      parameters:
+        - $ref: 'parameters/non-normative/f.yaml'
+      responses:
+        '200':
+          - $ref: 'responses/common-core/rConformance.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections:
+    get:
+      tags:
+        - Capabilities
+      summary: describe the collections in the dataset
+      description: list of all collections available from the server
+      operationId: describeCollections
+      parameters:
+        - $ref: 'parameters/common-core/limit.yaml'
+        - $ref: 'parameters/common-core/bbox.yaml'
+        - $ref: 'parameters/common-core/datetime.yaml'
+        - $ref: 'parameters/non-normative/f.yaml'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rCollections.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections/{collectionId}:
+    get:
+      tags:
+      - Capabilities
+      summary: Collection Information is the set of metadata which describes a single collection, or in the the case of OGCAPI-Coverages, a single Coverage.
+      description: description of the collection identified with collectionId
+      operationId: describeCoverage
+      parameters:
+        - $ref: 'parameters/coverages-core/collectionId.yaml'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rCollection.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections/{collectionId}/coverage:
+    get:
+      tags:
+        - Coverage
+      summary: Retrieve the coverage identified by {collectionId}
+      description: |-
+        Coverage identified by {collectionId}.
+        Use content negotiation to request required format.
+      operationId: getCoverage
+      parameters:
+        - $ref: 'parameters/coverages-core/collectionId'
+        - $ref: 'parameters/coverages-core/subset'
+        - $ref: 'parameters/coverages-core/range-subset'
+        - $ref: 'parameters/coverages-core/scale-factor'
+        - $ref: 'parameters/coverages-core/scale-axes'
+        - $ref: 'parameters/coverages-core/scale-size'
+        - $ref: 'parameters/coverages-core/subset-crs'
+        - $ref: 'parameters/coverages-core/crs'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rCoverage.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections/{collectionId}/coverage/domainset:
+    get:
+      tags:
+        - Coverage
+      summary: Retrieve a coverage's domainset; use content negotiation to request HTML or JSON
+      description: a coverage's domainset
+      operationId: getCoverageDomainSet
+      parameters:
+        - $ref: 'parameters/coverages-core/coverageId'
+        - $ref: 'parameters/coverages-core/subset'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rDomainSet.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections/{collectionId}/coverage/rangetype:
+    get:
+      tags:
+        - Coverage
+      summary: Retrieve a coverage's rangetype; use content negotiation to request HTML or JSON
+      description: a coverage's rangetype
+      operationId: getCoverageRangeType
+      parameters:
+        - $ref: 'parameters/coverages-core/collectionId'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rRangeType.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections/{collectionId}/coverage/rangeset:
+    get:
+      tags:
+      - Coverage
+      summary: Retrieve a coverage's rangeset; use content negotiation to request HTML or JSON
+      description: a coverage's rangeset
+      operationId: getCoverageRangeSet
+      parameters:
+        - $ref: 'parameters/coverages-core/collectionId'
+        - $ref: 'parameters/coverages-core/subset'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rRangeSet.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
+  /collections/{collectionId}/coverage/metadata:
+    get:
+      tags:
+      - Coverage
+      summary: retrieve a coverage's metadata; use content negotiation to request
+        HTML or GeoJSON
+      description: a coverage's metadata
+      operationId: getCoverageMetadata
+      parameters:
+        - $ref: 'parameters/coverages-core/collectionId'
+      responses:
+        '200':
+          - $ref: 'responses/coverages-core/rMetaData.yaml'
+        default:
+          - $ref: 'responses/common-core/rException.yaml'
