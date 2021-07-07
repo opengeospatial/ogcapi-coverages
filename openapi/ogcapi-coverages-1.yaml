@@ -33,9 +33,9 @@ paths:
         - $ref: 'parameters/non-normative/f.yaml'
       responses:
         '200':
-          - $ref: 'responses/common-core/rLandingPage.yaml'
+          $ref: 'responses/common-core/rLandingPage.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /api:
     get:
       tags:
@@ -47,9 +47,9 @@ paths:
         - $ref: 'parameters/non-normative/f.yaml'
       responses:
         '200':
-          - $ref: 'responses/common-core/rAPI.yaml'
+          $ref: 'responses/common-core/rAPI.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /conformance:
     get:
       tags:
@@ -61,9 +61,9 @@ paths:
         - $ref: 'parameters/non-normative/f.yaml'
       responses:
         '200':
-          - $ref: 'responses/common-core/rConformance.yaml'
+          $ref: 'responses/common-core/rConformance.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections:
     get:
       tags:
@@ -78,9 +78,9 @@ paths:
         - $ref: 'parameters/non-normative/f.yaml'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rCollections.yaml'
+          $ref: 'responses/coverages-core/rCollections.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections/{collectionId}:
     get:
       tags:
@@ -92,9 +92,9 @@ paths:
         - $ref: 'parameters/coverages-core/collectionId.yaml'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rCollection.yaml'
+          $ref: 'responses/coverages-core/rCollection.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections/{collectionId}/coverage:
     get:
       tags:
@@ -115,9 +115,9 @@ paths:
         - $ref: 'parameters/coverages-core/crs'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rCoverage.yaml'
+          $ref: 'responses/coverages-core/rCoverage.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections/{collectionId}/coverage/domainset:
     get:
       tags:
@@ -130,9 +130,9 @@ paths:
         - $ref: 'parameters/coverages-core/subset'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rDomainSet.yaml'
+          $ref: 'responses/coverages-core/rDomainSet.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections/{collectionId}/coverage/rangetype:
     get:
       tags:
@@ -144,9 +144,9 @@ paths:
         - $ref: 'parameters/coverages-core/collectionId'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rRangeType.yaml'
+          $ref: 'responses/coverages-core/rRangeType.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections/{collectionId}/coverage/rangeset:
     get:
       tags:
@@ -159,9 +159,9 @@ paths:
         - $ref: 'parameters/coverages-core/subset'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rRangeSet.yaml'
+          $ref: 'responses/coverages-core/rRangeSet.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
   /collections/{collectionId}/coverage/metadata:
     get:
       tags:
@@ -174,6 +174,6 @@ paths:
         - $ref: 'parameters/coverages-core/collectionId'
       responses:
         '200':
-          - $ref: 'responses/coverages-core/rMetaData.yaml'
+          $ref: 'responses/coverages-core/rMetaData.yaml'
         default:
-          - $ref: 'responses/common-core/rException.yaml'
+          $ref: 'responses/common-core/rException.yaml'
