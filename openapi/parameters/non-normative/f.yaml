@@ -1,16 +1,15 @@
-f:
-  description: >-
-    The optional f parameter indicates the output format which the server
-    shall provide as part of the response document. It has preference over
-    the HTTP Accept header. The default format is JSON.
-  explode: false
-  in: query
-  name: f
-  required: false
-  schema:
-    default: json
-    enum:
-      - json
-      - html
-    type: string
-  style: form
+name: f
+description: >-
+  The optional f parameter indicates the output format which the server
+  shall provide as part of the response document. It has preference over
+  the HTTP Accept header. The default format is JSON.
+explode: false
+in: query
+required: false
+schema:
+  default: json
+  enum:
+    - json
+    - html
+  type: string
+style: form

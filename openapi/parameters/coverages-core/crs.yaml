@@ -1,9 +1,8 @@
-crs:
-   name: crs
-   in: query
-   description: reproject the output coverage to the given crs
-   required: false
-   style: form
-   explode: true
-   schema:
-     type: string
+name: crs
+in: query
+description: reproject the output coverage to the given crs
+required: false
+style: form
+explode: true
+schema:
+  type: string

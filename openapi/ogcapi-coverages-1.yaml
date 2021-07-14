@@ -105,14 +105,14 @@ paths:
         Use content negotiation to request required format.
       operationId: getCoverage
       parameters:
-        - $ref: 'parameters/coverages-core/collectionId'
-        - $ref: 'parameters/coverages-core/subset'
-        - $ref: 'parameters/coverages-core/range-subset'
-        - $ref: 'parameters/coverages-core/scale-factor'
-        - $ref: 'parameters/coverages-core/scale-axes'
-        - $ref: 'parameters/coverages-core/scale-size'
-        - $ref: 'parameters/coverages-core/subset-crs'
-        - $ref: 'parameters/coverages-core/crs'
+        - $ref: 'parameters/coverages-core/collectionId.yaml'
+        - $ref: 'parameters/coverages-core/subset.yaml'
+        - $ref: 'parameters/coverages-core/range-subset.yaml'
+        - $ref: 'parameters/coverages-core/scale-factor.yaml'
+        - $ref: 'parameters/coverages-core/scale-axes.yaml'
+        - $ref: 'parameters/coverages-core/scale-size.yaml'
+        - $ref: 'parameters/coverages-core/subset-crs.yaml'
+        - $ref: 'parameters/coverages-core/crs.yaml'
       responses:
         '200':
           $ref: 'responses/coverages-core/rCoverage.yaml'
@@ -126,8 +126,8 @@ paths:
       description: a coverage's domainset
       operationId: getCoverageDomainSet
       parameters:
-        - $ref: 'parameters/coverages-core/coverageId'
-        - $ref: 'parameters/coverages-core/subset'
+        - $ref: 'parameters/coverages-core/collectionId.yaml'
+        - $ref: 'parameters/coverages-core/subset.yaml'
       responses:
         '200':
           $ref: 'responses/coverages-core/rDomainSet.yaml'
@@ -141,7 +141,7 @@ paths:
       description: a coverage's rangetype
       operationId: getCoverageRangeType
       parameters:
-        - $ref: 'parameters/coverages-core/collectionId'
+        - $ref: 'parameters/coverages-core/collectionId.yaml'
       responses:
         '200':
           $ref: 'responses/coverages-core/rRangeType.yaml'
@@ -155,8 +155,8 @@ paths:
       description: a coverage's rangeset
       operationId: getCoverageRangeSet
       parameters:
-        - $ref: 'parameters/coverages-core/collectionId'
-        - $ref: 'parameters/coverages-core/subset'
+        - $ref: 'parameters/coverages-core/collectionId.yaml'
+        - $ref: 'parameters/coverages-core/subset.yaml'
       responses:
         '200':
           $ref: 'responses/coverages-core/rRangeSet.yaml'
@@ -171,7 +171,7 @@ paths:
       description: a coverage's metadata
       operationId: getCoverageMetadata
       parameters:
-        - $ref: 'parameters/coverages-core/collectionId'
+        - $ref: 'parameters/coverages-core/collectionId.yaml'
       responses:
         '200':
           $ref: 'responses/coverages-core/rMetaData.yaml'
