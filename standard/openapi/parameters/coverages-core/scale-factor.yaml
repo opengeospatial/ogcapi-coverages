@@ -1,0 +1,8 @@
+name: scale-factor
+in: query
+description: |-
+  For each axis, the returned coverage SHALL contain the number of original
+  sampled values, divided by the scale-factor.
+required: false
+schema:
+  type: number

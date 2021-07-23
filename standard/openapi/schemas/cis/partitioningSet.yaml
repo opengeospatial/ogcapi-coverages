@@ -1,0 +1,70 @@
+title: Partitioning Set
+description: 'A partition describes how a coverage (*sub-coverage*) referenced is located within referencing coverage (*super-coverage*). The sub-coverage can be represented by referencing a coverage id or a URL pointing to a coverage.  Such sub-coverages referenced may be grouped into the super-coverage document, or reside remote, or mixed. As an additional alternative, single range values can be indicated verbatimg, together with their direct position. All values must share an identical structure and conform to the rangeType definition.'
+type: object
+required:
+  - type
+properties:
+  type:
+    enum:
+      - PartitionSet
+  partition:
+    type: array
+    items:
+      type: object
+      oneOf:
+        - required:
+            - type
+            - coverageRef
+          properties:
+            id:
+              type: string
+            type:
+              enum:
+                - PartitionRef
+            envelope:
+              $ref: 'envelope.yaml'
+            coverageRef:
+              type: string
+              format: uri
+        - required:
+            - type
+            - coverage
+          properties:
+            id:
+              type: string
+            type:
+              enum:
+                - Partition
+            envelope:
+              $ref: 'envelope.yaml'
+            coverage:
+              $ref: '#'
+  positionValuePair:
+    type: array
+    items:
+      type: object
+      required:
+        - type
+        - coordinate
+        - value
+      properties:
+        id:
+          type: string
+        type:
+          enum:
+            - PVP
+        coordinate:
+          type: array
+          items:
+            type:
+              - number
+              - string
+              - boolean
+        value:
+          type: array
+          items:
+            type:
+              - number
+              - string
+              - 'null'
+              - boolean

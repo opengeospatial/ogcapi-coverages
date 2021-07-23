@@ -1,0 +1,8 @@
+description: Metadata about the {collectionId} collection shared by this API.
+content:
+   application/json:
+     schema:
+       $ref: '../../schemas/coverages-core/coverageInfo.yaml'
+   text/html:
+     schema:
+       type: string

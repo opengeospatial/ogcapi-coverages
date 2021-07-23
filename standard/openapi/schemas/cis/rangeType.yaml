@@ -1,0 +1,95 @@
+title: rangeType
+description: 'The rangeType element describes the structure and semantics of a coverage''s range values, including (optionally) restrictions on the interpolation allowed on such values.'
+type: object
+oneOf:
+  - required:
+      - type
+      - field
+    properties:
+      type:
+        enum:
+          - DataRecord
+      field:
+        type: array
+        items:
+          title: quantity
+          description: quantity
+          type: object
+          required:
+            - type
+          properties:
+            type:
+              enum:
+                - Quantity
+            id:
+              type: string
+              format: uri
+            name:
+              type: string
+            definition:
+              type: string
+              format: uri
+            uom:
+              title: units of measure
+              description: units of measure
+              type: object
+              required:
+                - type
+                - code
+              properties:
+                type:
+                  enum:
+                    - UnitReference
+                id:
+                  type: string
+                  format: uri
+                code:
+                  type: string
+            constraint:
+              title: Constraint
+              description: Constraint
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  enum:
+                    - AllowedValues
+                id:
+                  type: string
+                  format: uri
+                interval:
+                  type: array
+                  items:
+                    type: string
+      interpolationRestriction:
+        title: interpolationRestriction
+        description: Interpolation restriction
+        type: object
+        required:
+          - type
+        properties:
+          type:
+            enum:
+              - InterpolationRestriction
+          id:
+            type: string
+            format: uri
+          allowedInterpolation:
+            type: array
+            items:
+              type: string
+              format: uri
+  - required:
+      - type
+      - fileReference
+    properties:
+      type:
+        enum:
+          - RangeTypeRef
+      id:
+        type: string
+        format: uri
+      fileReference:
+        type: string
+        format: uri

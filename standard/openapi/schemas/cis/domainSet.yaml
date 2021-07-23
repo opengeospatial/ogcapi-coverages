@@ -1,0 +1,276 @@
+type: object
+title: domainSet
+description: 'The domainSet describes the *direct positions* of the coverage, i.e., the locations for which values are available.'
+oneOf:
+  - required:
+      - type
+      - generalGrid
+    properties:
+      type:
+        enum:
+          - DomainSet
+      generalGrid:
+        title: General Grid
+        description: 'A general n-D grid is defined through a sequence of axes, each of which can be of a particular axis type.'
+        type: object
+        required:
+          - type
+        additionalProperties: false
+        properties:
+          type:
+            enum:
+              - GeneralGridCoverage
+          id:
+            type: string
+          srsName:
+            type: string
+            format: uri
+          axisLabels:
+            type: array
+            items:
+              type: string
+          axis:
+            type: array
+            items:
+              type: object
+              oneOf:
+                - title: Index Axis
+                  description: An Index Axis is an axis with only integer positions allowed.
+                  required:
+                    - type
+                    - axisLabel
+                    - lowerBound
+                    - upperBound
+                  additionalProperties: false
+                  properties:
+                    type:
+                      enum:
+                        - IndexAxis
+                    id:
+                      type: string
+                    axisLabel:
+                      type: string
+                    lowerBound:
+                      type: number
+                    upperBound:
+                      type: number
+                - title: Regular Axis
+                  description: A Regular Axis is an axis where all direct coordinates are at a common distance from its immediate neighbors.
+                  required:
+                    - type
+                    - axisLabel
+                    - lowerBound
+                    - upperBound
+                    - resolution
+                    - uomLabel
+                  additionalProperties: false
+                  properties:
+                    type:
+                      enum:
+                        - RegularAxis
+                    id:
+                      type: string
+                    axisLabel:
+                      type: string
+                    lowerBound:
+                      type: string
+                    upperBound:
+                      type: string
+                    uomLabel:
+                      type: string
+                    resolution:
+                      type: number
+                - title: Irregular Axis
+                  description: An irregular axis enumerates all possible direct position coordinates.
+                  required:
+                    - type
+                    - axisLabel
+                    - uomLabel
+                    - coordinate
+                  additionalProperties: false
+                  properties:
+                    type:
+                      enum:
+                        - IrregularAxis
+                    id:
+                      type: string
+                    axisLabel:
+                      type: string
+                    uomLabel:
+                      type: string
+                    coordinate:
+                      type: array
+                      items:
+                        type: string
+          displacement:
+            title: Displacement
+            description: A Displacement is a warped axis nest where points on the grid all have their individual direct position coordinates. The sequenceRule element describes linearization order.
+            type: object
+            oneOf:
+              - required:
+                  - type
+                  - axisLabels
+                  - uomLabels
+                  - coordinates
+                properties:
+                  type:
+                    enum:
+                      - DisplacementAxisNest
+                  id:
+                    type: string
+                  axisLabel:
+                    type: string
+                  srsName:
+                    type: string
+                    format: uri
+                  axisLabels:
+                    type: array
+                    items:
+                      type: string
+                  uomLabels:
+                    type: array
+                    items:
+                      type: string
+                  coordinates:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string
+              - required:
+                  - type
+                  - axisLabels
+                  - uomLabels
+                  - coordinatesRef
+                properties:
+                  type:
+                    enum:
+                      - DisplacementAxisNestRef
+                  id:
+                    type: string
+                  axisLabel:
+                    type: string
+                  srsName:
+                    type: string
+                    format: uri
+                  axisLabels:
+                    type: array
+                    items:
+                      type: string
+                  uomLabels:
+                    type: array
+                    items:
+                      type: string
+                  coordinatesRef:
+                    type: string
+                    format: uri
+          model:
+            title: Sensor model
+            description: A Transformation By Sensor Model is a transformation definition which is given by a SensorML 2.0 transformation specification.
+            type: object
+            required:
+              - type
+              - sensorModelRef
+            properties:
+              type:
+                enum:
+                  - TransformationBySensorModel
+              id:
+                type: string
+              axisLabels:
+                type: array
+                items:
+                  type: string
+              uomLabels:
+                type: array
+                items:
+                  type: string
+              sensorModelRef:
+                type: string
+                format: uri
+              sensorInstanceRef:
+                type: string
+                format: uri
+          gridLimits:
+            title: Grid limits
+            description: 'This is the boundary of the array underlying the grid, given by its diagonal corner points in integer _60_3D. The grid limits can be omitted in case all axes are of type index axis, because then it repeats the grid information in a redundant way. The purpose of the axisLabels attribute, which lists the axis labels of all axisExtent elements in proper sequence, is to enforce axis sequence also in XML systems which do not preserve document order.'
+            type: object
+            required:
+              - type
+            properties:
+              type:
+                enum:
+                  - GridLimits
+              indexAxis:
+                title: Index Axis
+                description: An Index Axis is an axis with only integer positions allowed.
+                type: object
+                required:
+                  - type
+                  - lowerBound
+                  - upperBound
+                additionalProperties: false
+                properties:
+                  type:
+                    enum:
+                      - IndexAxis
+                  id:
+                    type: string
+                  axisLabel:
+                    type: string
+                  lowerBound:
+                    type: number
+                  upperBound:
+                    type: number
+              srsName:
+                type: string
+                format: uri
+              axisLabels:
+                type: array
+                items:
+                  type: string
+  - required:
+      - type
+      - directMultiPoint
+    properties:
+      type:
+        enum:
+          - DomainSet
+      directMultiPoint:
+        oneOf:
+          - required:
+              - type
+              - coordinates
+            properties:
+              type:
+                enum:
+                  - DirectMultiPoint
+              coordinates:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: string
+          - required:
+              - type
+              - coordinatesRef
+            properties:
+              type:
+                enum:
+                  - DirectMultiPointRef
+              coordinatesRef:
+                type: string
+                format: uri
+  - required:
+      - type
+      - fileReference
+    properties:
+      type:
+        enum:
+          - DomainSetRef
+      id:
+        type: string
+        format: uri
+      fileReference:
+        type: string
+        format: uri

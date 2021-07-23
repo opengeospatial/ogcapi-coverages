@@ -1,0 +1,16 @@
+description: A full coverage.
+content:
+   application/json:
+     schema:
+       $ref: '../../schemas/cis/coverage-schema.yaml'
+   image/tiff; application=geotiff:
+     schema:
+       type: string
+       format: binary
+   multipart/related:
+     schema:
+       type: string
+       format: binary
+   text/html:
+     schema:
+       type: string

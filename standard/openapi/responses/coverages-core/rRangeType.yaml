@@ -1,0 +1,8 @@
+description: A coverage's rangetype.
+content:
+  application/json:
+    schema:
+      $ref: '../../schemas/cis/rangeType.yaml'
+  text/html:
+    schema:
+      type: string
