@@ -41,7 +41,7 @@ Those resources are sufficient for this standard.
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
+|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
 |====
 
 ===== Operation
@@ -84,7 +84,7 @@ Every API is required to provide a definition document that describes the capabi
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
+|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
 |====
 
 ===== Operation
@@ -112,7 +112,7 @@ To support "generic" clients that want to access multiple OGC API standards and 
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
+|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
 |====
 
 ===== Operation
@@ -167,7 +167,7 @@ The `Collections` operation returns a set of metadata which describes the collec
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections
+|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/collections
 |====
 
 ===== Operation
@@ -213,7 +213,7 @@ Collection Information is the set of metadata which describes a single collectio
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi_common-1/1.0/req/collections
+|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/collections
 |====
 
 ===== Operation

@@ -79,11 +79,11 @@ The OGC API-Coverages standard is an extension of the OGC API-Common standard. T
 [width="90%",cols="2,6"]
 |====
 ^|*API-Coverage Section* ^|*API-Common Requirements Class*
-|<<landing-page,API Landing Page>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
-|<<api-definition,API Definition>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
-|<<conformance-classes,Declaration of Conformance Classes>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/core
-|<<collection-access-section,Collection Access>>| http://www.opengis.net/spec/ogcapi_common-2/1.0/req/collections
-|<<requirements-class-openapi_3_0-clause,OpenAPI 3.0>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/oas30
-|<<requirements-class-json-clause,JSON>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/json
-|<<requirements-class-html-clause,HTML>>| http://www.opengis.net/spec/ogcapi_common-1/1.0/req/html
+|<<landing-page,API Landing Page>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
+|<<api-definition,API Definition>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
+|<<conformance-classes,Declaration of Conformance Classes>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
+|<<collection-access-section,Collection Access>>| http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
+|<<requirements-class-openapi_3_0-clause,OpenAPI 3.0>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/oas30
+|<<requirements-class-json-clause,JSON>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/json
+|<<requirements-class-html-clause,HTML>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/html
 |====
