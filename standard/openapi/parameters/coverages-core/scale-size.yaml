@@ -1,0 +1,17 @@
+name: scale-size
+in: query
+description: |-
+  When `scale-size` is used, the returned coverage SHALL contain exactly the
+  specified number of sample values along each axis which is specified, and
+  the original number of sample values for unspecified axes.
+  ```
+  ScalingSpec:       "scale-size"=axisName({number})[,axisName({number})]*
+  axisName:          {text}
+
+  Where:
+     {number} is an integer or floating-point number and {axisName}
+     is the same as one of the axisLabels defined in the DomainSet
+  ```
+required: false
+schema:
+  type: string

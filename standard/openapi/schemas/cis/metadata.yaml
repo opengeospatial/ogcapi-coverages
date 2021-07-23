@@ -1,0 +1,3 @@
+title: Metadata
+description: 'The metadata element is a container of any (not further specified) information which should be transported along with the coverage on hand, such as domain-specific metadata.'
+type: object

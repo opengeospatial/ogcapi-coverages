@@ -1,0 +1,8 @@
+description: A coverage's metadata.
+content:
+   application/json:
+     schema:
+       $ref: '../../schemas/cis/metadata.yaml'
+   text/html:
+     schema:
+       type: string
