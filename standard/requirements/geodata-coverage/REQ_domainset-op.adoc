@@ -4,8 +4,8 @@
 ^|*Requirement {counter:req-id}* |*/req/geodata-coverage/domainset-op*
 ^|A |The API SHALL include a link with the relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset` within the links of the
 coverage (collection) resource, to a resource supporting the HTTP GET operation and returning a CIS JSON representation including a `DomainSet` property.
-This link can either be a link to a separate resource (e.g., recommended path `/collections/{coverageid}/coverage/domainset`) or a link to the coverage
+This link can either be a link to a separate resource (e.g., recommended path `/collections/{collectionId}/coverage/domainset`) or a link to the coverage
 resource itself pointing to the property using https://tools.ietf.org/html/rfc6901[RFC 6901 (JSON Pointer)] e.g., `#/DomainSet`.
 
-* `coverageid` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
+* `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
 |===

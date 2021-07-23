@@ -25,7 +25,7 @@ CIS content often includes multi-dimensional coordinates and coordinate referenc
 These "Engineering" coordinate reference systems cannot be represented using WGS-84.
 
 The <<CIS_JSON_Schema,OGC JSON Schema for CIS>> standard addresses that need by defining a JSON schema for the CIS standard.
-This format should be used when the `application/json` media type is specified to encode all of the `{datasetAPI}/collections/{coverageid}/coverage*` resources.
+This format should be used when the `application/json` media type is specified to encode all of the `{datasetAPI}/collections/{collectionId}/coverage*` resources.
 A CIS JSON representation of the range type and domain set for the coverage is also required to be either embedded in properties or linked from the /collections/{collectionId} resource.
 
 Other encodings such as CoverageJSON must use an alternate media type.

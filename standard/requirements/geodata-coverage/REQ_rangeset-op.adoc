@@ -2,8 +2,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/geodata_coverage/rangeset-op*
-^|A |The API MAY support the HTTP GET operation at the path `/collections/{coverageid}/coverage/rangeset`.
+^|A |The API MAY support the HTTP GET operation at the path `/collections/{collectionId}/coverage/rangeset`.
 ^|B |The API SHOULD support it for selected formats which can describe the raw data values without any additional information.
 
-* `coverageid` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
+* `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
 |===
