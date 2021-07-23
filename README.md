@@ -59,7 +59,7 @@ The landing page at minimum should feature links to:
 
 Resource path: `{datasetAPI}/conformance`
 
-Relation type: `conformance`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/conformance`
 
 HTTP methods: `GET`
 
@@ -84,7 +84,7 @@ To conform to the OpenAPI conformance class of OGC API - Common, an OpenAPI repr
 
 Resource path: `{datasetAPI}/collections`
 
-Relation type: `data`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/data`
 
 HTTP methods: `GET`
 
@@ -111,7 +111,7 @@ Lists the collections intersecting with the New Zealand economic zone (any time,
 
 Resource path: `{datasetAPI}/collections/{collectionId}`
 
-Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/geodata`
 
 HTTP methods: `GET`
 
@@ -137,7 +137,7 @@ TODO: Additional properties should be defined in OGC API - Common - Part 2: Geos
 
 Resource path: `{datasetAPI}/collections/{collectionId}`
 
-Relation type: `http://www.opengis.net/def/rel/ogc/1.0/collection`
+Relation type: `http://www.opengis.net/def/rel/ogc/1.0/geodata`
 
 HTTP methods: `GET`
 
