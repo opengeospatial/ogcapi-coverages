@@ -18,7 +18,7 @@ This section covers the requirements inherited from the API-Common standard. Its
 * `{datasetAPI}/api`: API Description
 * `{datasetAPI}/conformance`: Conformance Classes
 * `{datasetAPI}/collections`: Collections
-* `{datasetAPI}/collections/{coverageid}`: Collection Information
+* `{datasetAPI}/collections/{collectionId}`: Collection Information
 
 include::requirements/html/REQ_api-common.adoc[]
 
@@ -29,35 +29,35 @@ include::requirements/html/REQ_html-conformance.adoc[]
 === Coverage
 
 This section covers the <<coverage-clause,Coverage>> response for the
-`{datasetAPI}/collections/{coverageid}/coverage` operation.
+`{datasetAPI}/collections/{collectionId}/coverage` operation.
 
 include::requirements/html/REQ_coverage-success.adoc[]
 
 === Coverage Domain Set
 
 This section covers the <<coverage-domainset-clause,Coverage Domain Set>> response for the
-`{datasetAPI}/collections/{coverageid}/coverage/domainset` operation.
+`{datasetAPI}/collections/{collectionId}/coverage/domainset` operation.
 
 include::requirements/html/REQ_domainset-success.adoc[]
 
 === Coverage Range Type
 
 This section covers the <<coverage-rangetype-clause,Coverage Range Type>> response for the
-`{datasetAPI}/collections/{coverageid}/coverage/rangetype` operation.
+`{datasetAPI}/collections/{collectionId}/coverage/rangetype` operation.
 
 include::requirements/html/REQ_rangetype-success.adoc[]
 
 === Coverage Range Set
 
 This section covers the <<coverage-rangeset-clause,Coverage Range Set>> response for the
-`{datasetAPI}/collections/{coverageid}/coverage/rangeset` operation.
+`{datasetAPI}/collections/{collectionId}/coverage/rangeset` operation.
 
 include::requirements/html/REQ_rangeset-success.adoc[]
 
 === Coverage Metadata
 
 This section covers the <<coverage-metadata-clause,Coverage Metadata>> response for the
-`{datasetAPI}/collections/{coverageid}/coverage/metadata` operation.
+`{datasetAPI}/collections/{collectionId}/coverage/metadata` operation.
 
 include::requirements/html/REQ_metadata-success.adoc[]
 

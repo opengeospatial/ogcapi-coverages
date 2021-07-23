@@ -218,23 +218,23 @@ Collection Information is the set of metadata which describes a single collectio
 
 ===== Operation
 
-This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `coverageid` is used instead of `collectionid`. The two terms are equivalent.
+This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `collectionId` is used instead of `collectionid`. The two terms are equivalent.
 
 The `Collections` conformance class describes two ways of performing this operation:
 
-. Issue a `GET` request on the `{datasetAPI}/collections/{coverageid}` path
+. Issue a `GET` request on the `{datasetAPI}/collections/{collectionId}` path
 . Follow the `ogc:common:collection` link on the ?????
 
 NOTE: What is the origin of the "ogc:common:collection" link?
 
-The {coverageid} parameter is the unique identifier for a single coverage on the API. The list of valid values for {coverageid} is provided in the /collections response.
+The {collectionId} parameter is the unique identifier for a single coverage on the API. The list of valid values for {collectionId} is provided in the /collections response.
 
-Support for the `/collections/{coverageid}` path is recommended by API-Common.
+Support for the `/collections/{collectionId}` path is recommended by API-Common.
 Support for the ogc:common:collection link is required.
 
 ===== Response
 
-A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {coverageid} parameter. This metadata is an extension to the set defined by API-Common. The additional elements are specific to Coverage resources.
+A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {collectionId} parameter. This metadata is an extension to the set defined by API-Common. The additional elements are specific to Coverage resources.
 
 [#collectionInfo-schema,reftext='Collection Information Response Schema']
 .Collection Information Response Schema
@@ -273,11 +273,11 @@ A coverage containing the `DomainSet`, `RangeType`, `RangeSet`, and `Metadata`  
 * The relative path `/coverage`
 * The link relation `ogc:coverage:coverage`
 
-The `DomainSet` and `RangeType` are accessible from resources linked by links within the `/collections/{coverageid}` resource,
+The `DomainSet` and `RangeType` are accessible from resources linked by links within the `/collections/{collectionId}` resource,
 using the relation types `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset` and
 `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`, respectively.
-Those links may either point to separate resource, in which case the recommended paths are `/collections/{coverageid}/coverage/domainset` and
-`/collections/{coverageid}/coverage/rangetype`, or point to the coverage description resource itself the domain set and/or range type are
+Those links may either point to separate resource, in which case the recommended paths are `/collections/{collectionId}/coverage/domainset` and
+`/collections/{collectionId}/coverage/rangetype`, or point to the coverage description resource itself the domain set and/or range type are
 embedded. In the latter case those links will point specifically to properties using `#`, e.g.,
 `#domainset` and `#rangetype`.
 
@@ -285,7 +285,7 @@ The `RangeSet` may be available as its own resource as well, if supported by the
 
 If `Metadata` is available, it will also be be available as its own resource.
 
-The paths discussed in this section are all branches off of the `/collections/{coverageid}` root.
+The paths discussed in this section are all branches off of the `/collections/{collectionId}` root.
 
 [[coverage-clause]]
 ==== Coverage

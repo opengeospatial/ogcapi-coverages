@@ -14,10 +14,10 @@ The first part is about service metadata. Currently this is wild speculation as 
 *   http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89[http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89]
   -- returns a list of all collection identifiers intersecting with the
 New Zealand economic zone (any time, any elevation, etc.); the CRS inwhich the bbox parameters are expressed is WGS84, defined in OGC API -Common and likely in a future OGC API - Catalog
-*   http://acme.com/oapi/collections/%7Bcoverageid%7D[http://acme.com/oapi/collections/{coverageid}]  -- returns the description of a specific collection including links to available sub-paths like /coverage, /tiles, or /map
-*   http://acme.com/oapi/collections/%7Bcoverageid%7D/coverage[http://acme.com/oapi/collections/{coverageid}/coverage]
+*   http://acme.com/oapi/collections/%7BcollectionId%7D[http://acme.com/oapi/collections/{collectionId}]  -- returns the description of a specific collection including links to available sub-paths like /coverage, /tiles, or /map
+*   http://acme.com/oapi/collections/%7BcollectionId%7D/coverage[http://acme.com/oapi/collections/{collectionId}/coverage]
   -- returns a general description of the coverage represented by
-`coverageid` containing the coverage's envelope (the full domainset might be huge and thus is omitted here), rangetype, and service metadata
+`collectionId` containing the coverage's envelope (the full domainset might be huge and thus is omitted here), rangetype, and service metadata
  like the coverage's native format
 
 Notes:
