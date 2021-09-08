@@ -59,9 +59,9 @@ Coverages can be encoded in any suitable data format, including formats as GML, 
 |====
 ^|*Encoding* ^|*media type*
 |HTML |text/html
-|JSON / CIS JSON|application/json
-|CIS RDF| TODO:
-|CoverageJSON| TODO:
+|JSON / CIS JSON|application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
+|CIS RDF| application/ld+json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
+|CoverageJSON| application/prs.coverage+json
 |GeoTIFF |image/tiff; application=geotiff
 |PNG |image/png
 |JPEG |image/jpeg
