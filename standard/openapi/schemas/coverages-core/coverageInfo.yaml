@@ -6,6 +6,12 @@ allOf:
     properties:
       extent:
         $ref: 'envelope.yaml'
+      orderedAxes:
+        type: array
+        minItems: 1
+        items:
+           type: string
+           description: axis labels of all dimensions listed in CRS order. Spatial dimensions should be listed separately here.
       domainSet:
         allOf:
           - $ref: '../cis/domainSet.yaml'

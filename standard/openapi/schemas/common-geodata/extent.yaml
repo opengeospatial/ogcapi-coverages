@@ -51,10 +51,12 @@ properties:
       interval:
         description: |-
           One or more time intervals that describe the temporal extent of the dataset.
-          The value `null` is supported and indicates an open time intervall.
-          In the Core only a single time interval is supported. Extensions may support
-          multiple intervals. If multiple intervals are provided, the union of the
-          intervals describes the temporal extent.
+
+          The value `null` is supported and indicates an unbounded or half-bounded interval.
+          The first time interval describes the overall temporal extent of the data.
+          All subsequent time intervals describe more precise time intervals, e.g., to identify clusters of data.
+          Clients only interested in the overall extent will only need
+          to access the first item (a pair of lower and upper bound values).
         type: array
         minItems: 1
         items:
