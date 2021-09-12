@@ -15,7 +15,7 @@ Resources exposed through an OGC API may be accessed through a Universal Resourc
 * Access Paths: Unique paths to Resources
 * Query: Parameters to adjust the representation of a Resource or Resources like encoding format or subsetting
 
-Access Paths are used to build resource identifiers. It is recommended, but not required, that these paths
+Access Paths are used to build resource identifiers. It is recommended, but not required, that these paths are used.
 
 Most resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.
 
