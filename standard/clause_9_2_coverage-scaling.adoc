@@ -1,0 +1,19 @@
+[[rc-coverage-scaling-section]]
+== Requirements Class Coverage Scaling
+
+The Scaling Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
+Scaling parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
+
+include::requirements/requirements_class_coverage_scaling.adoc[]
+
+The scaling parameters are defined in the following Requirement:
+
+include::requirements/coverage-scaling/REQ_cov-scaling-definition.adoc[]
+
+The results of using a scaling parameter are defined by the following Requirement:
+
+include::requirements/coverage-scaling/REQ_cov-scaling-success.adoc[]
+
+=== Scaling Examples
+
+include::examples/examples_scaling.adoc[]

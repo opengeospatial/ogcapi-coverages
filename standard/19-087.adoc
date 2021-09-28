@@ -24,7 +24,7 @@
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
 |Approval Date: <yyyy-mm-dd>
-|Publication Date: 2021-03-09
+|Publication Date: 2021-09-21
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0
 |Internal reference number of this OGC(R) document: 19-087
 |Version: 0.0.6
@@ -98,7 +98,15 @@ include::clause_7_geodata_coverage.adoc[]
 
 include::clause_8_media_types.adoc[]
 
-include::clause_9_coverage_rangesubset_subset_and_scaling.adoc[]
+include::clause_9_1_coverage-subset.adoc[]
+
+include::clause_9_2_coverage-scaling.adoc[]
+
+include::clause_9_3_range-subset.adoc[]
+
+include::clause_9_4_coverage-tiles.adoc[]
+
+include::clause_9_5_domainset-subset.adoc[]
 
 include::clause_10_HTML.adoc[]
 
