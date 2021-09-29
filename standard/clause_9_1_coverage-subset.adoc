@@ -5,17 +5,13 @@ The Subset Requirements Class defines parameters for sub-setting n-dimensional R
 
 include::requirements/requirements_class_coverage_subset.adoc[]
 
-The subset parameter is defined in the following Requirement:
+The subset parameter is defined in the following Requirement Module:
 
-include::requirements/coverage-subset/REQ_cov-subset-definition.adoc[]
+include::../api_modules/subset/requirements_module_subset.adoc[]
 
-The following permission is granted to facilitate slicing data sparsely populated across a dimension, such as Earth Observation imagery:
+The `Coverage Subset` Requirements Class defines the application of the `subset` parameter against a Coverage resource using the HTTP GET operation. The effect is to generate a subset of the coverage and all of its' parts. That subset is then returned to the client in the HTTP response.
 
-include::recommendations/coverage-subset/PER_subset-slice-sparse-dimensions.adoc[]
-
-The results of using a subset parameter are defined by the following Requirement:
-
-include::requirements/coverage-subset/REQ_cov-subset-success.adoc[]
+NOTE: Path = /collections/{collection_id}/coverage
 
 === Subsetting Examples
 

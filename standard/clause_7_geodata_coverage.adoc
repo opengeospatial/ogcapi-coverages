@@ -6,13 +6,10 @@
 
 include::requirements/requirements_class_geodata_coverage.adoc[]
 
-The `GeoData-Coverage` Requirements Class defines the requirements for locating, understanding, and accessing a geospatial data resource as a coverage. The `GeoData-Coverage` Requirements Class is presented in five sections:
+The `GeoData-Coverage` Requirements Class defines the requirements for locating, understanding, and accessing a geospatial data resource as a coverage. The `GeoData-Coverage` Requirements Class is presented in two sections:
 
-. <<api-platform-section,API Platform>>: a set of common capabilities
 . <<collection-access-section,Collection Access>>: operations for accessing collections of `Coverages`
 . <<coverage-access-section,Coverage Access>>: operations for accessing `Coverage` resources
-. <<parameters-section,Parameters>>: parameters for use in the API-Coverage operations.
-. <<general-section,General>>: general principles for use with this standard.
 
 [[geodata-coverage-dependencies-section]]
 === Dependencies
@@ -30,6 +27,8 @@ include::recommendations/geodata-coverage/REC_dependency-simple-query.adoc[]
 [[collection-access-section]]
 === Collection Access
 
+NOTE: Further strip down this section to only that info which is specific to coverages.
+
 API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.
 
 API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
@@ -44,7 +43,8 @@ The `Collections` operation returns a set of metadata which describes the collec
 .Dependencies
 [width="90%"]
 |====
-|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/collections
+|http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
+|http://www.opengis.net/spec/ogcapi-common-2/1.0/req/simple-query
 |====
 
 ===== Operation
@@ -201,13 +201,6 @@ include::examples/JSON/coverage_example.json[]
 
 The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
-[[parameters-section]]
-=== Parameters
-The API-Coverages standard inherits basic query and subsetting parameters from API-Common. This section provides a short description of each parameter and identifies the relevant requirements.
-
-All of the permissions and recommendations in API-Common regarding the these parameters also apply to API-Coverages implementations.
-
-
 [[coverage-domainset-clause]]
 ==== Coverage Domain Set
 
@@ -356,43 +349,4 @@ include::examples/JSON/coverage_metadata_example.json[]
 
 The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
 
-*TODO*: Move `geodata-filteredList` conformance class into its own clause, which may end up only in OGC API - Common - Part 2: Geospatial data has Coverage doesn't add anything.
-
-*TODO*: Create new clauses for conformance classes for `coverage-bbox` and `coverage-dateTime` (or potentially make this a single one), which are additional ways to sub-select the actual coverage data being returned that a service may opt to suport.
-
-*TODO*: Limit and Paged response may apply to both listing collections (`geodata-filteredList`) and the coverage itself.
-Is it a requirement to support Limit for either of these? Is it separate conformance classes?
-It would be difficult for static servers, and paging makes less sense for coverages than it does for many small features.
-
-[[bbox-section]]
-==== Parameter bbox
-
-The Bounding Box (bbox) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.
-
-include::requirements/geodata-filteredList/REQ_bbox-parameter.adoc[]
-
-[[datetime--section]]
-==== Parameter datetime
-
-The Date-Time (datetime) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.
-
-include::requirements/geodata-filteredList/REQ_datetime-parameter.adoc[]
-
-[[limit-section]]
-==== Parameter Limit
-
-The Limit (limit) parameter is defined in API-Common. The following requirement governs use of that parameter in a Coverage API.
-
-include::requirements/geodata-filteredList/REQ_limit-parameter.adoc[]
-
-==== Combinations of Filter Parameters
-
-Any combination of `bbox`, `datetime` and
-parameters for filtering on coverage properties is allowed. Note that the requirements on these parameters imply that only coverages matching all the predicates are in the result set; i.e., the logical operator between the predicates is 'AND.'
-
-==== Paged Response
-
-One consequence of the Limit parameter is that the full result set is not delivered to the user. However, users frequently want to know how big the result set it and how to access the rest of it. The following requirement add information to the response to address that need.
-
-include::requirements/geodata-coverage/REQ_paged-response.adoc[]
-
+NOTE: Sections on parameters have been removed since they only apply to the resouces defined in API-Common.
