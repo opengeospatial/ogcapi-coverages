@@ -1,0 +1,32 @@
+[[rc-range-subset-section]]
+== Requirements Class Range Subset
+
+The Range Subset Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
+
+NOTE: The following is an alternative definition for this requiremenents class.
+
+The subset parameter is defined in the following Requirement Module:
+
+include::../api_modules/subset/requirements_module_subset.adoc[]
+
+The `Range Subset` Requirements Class defines the application of the `subset` parameter against the RangeSet component of a Coverage resource using the HTTP GET operation. The effect is to generate a subset of the range set of the coverage. That subset is then returned to the client in the HTTP response.
+
+NOTE: Path = /collections/{collection_id}/coverage/rangeset
+
+NOTE: End insert
+
+Range subsetting parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
+
+include::requirements/requirements_class_coverage_rangesubset.adoc[]
+
+The range-subset parameter is defined in the following Requirement:
+
+include::requirements/coverage-rangesubset/REQ_cov-rangesubset-definition.adoc[]
+
+The results of using a range-subset parameter are defined by the following Requirement:
+
+include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
+
+=== Range Subsetting Examples
+
+include::examples/examples_rangesubsetting.adoc[]

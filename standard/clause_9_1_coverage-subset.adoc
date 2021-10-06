@@ -1,0 +1,18 @@
+[[rc-coverage-subset-section]]
+== Requirements Class Coverage Subset
+
+The Subset Requirements Class defines parameters for sub-setting n-dimensional Range Sets. Subsetting parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
+
+include::requirements/requirements_class_coverage_subset.adoc[]
+
+The subset parameter is defined in the following Requirement Module:
+
+include::../api_modules/subset/requirements_module_subset.adoc[]
+
+The `Coverage Subset` Requirements Class defines the application of the `subset` parameter against a Coverage resource using the HTTP GET operation. The effect is to generate a subset of the coverage and all of its' parts. That subset is then returned to the client in the HTTP response.
+
+NOTE: Path = /collections/{collection_id}/coverage
+
+=== Subsetting Examples
+
+include::examples/examples_subsetting.adoc[]
