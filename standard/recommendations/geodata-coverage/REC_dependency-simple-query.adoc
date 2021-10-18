@@ -2,5 +2,5 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/rec-dependency-simple-query* 
-^|A |An implementation of the `geodata-coverage` Requirements Class SHOULD demonstrate conformance with the `Simple Query` Conformance Class defined in OGC API - Common Part 2.
+^|A |An implementation of the `geodata-coverage` Requirements Class SHOULD demonstrate conformance with the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/simple-query Conformance Class defined in OGC API - Common Part 2.
 |===

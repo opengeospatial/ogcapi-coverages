@@ -1,4 +1,3 @@
-[[req_collections_rc-subset-definition]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/collections/rc-subset-definition*

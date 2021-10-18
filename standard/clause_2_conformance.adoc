@@ -9,19 +9,27 @@ This standard identifies five Conformance Classes. Each Conformance Class has an
 
 The Requirements Classes for OGC API-Coverages are:
 
-* *GeoDataCoverage*
-* *Subset*
-* *Scaling*
-* *RangeSubset*
-* *Tiles*
-* *DomainSetSubset*
-* *HTML*
-* *JSON*
-* *OpenAPI 3.0*
+* <<rc-geodata-coverage-section,*GeoDataCoverage*>>
+* <<rc-coverage-subset-section,*Subset*>>
+* <<rc-coverage-scaling-section,*Scaling*>>
+* <<rc-range-subset-section,*RangeSubset*>>
+* <<rc-coverage-tiles-section,*Tiles*>>
+* <<rc-domainset-subset-section,*DomainSetSubset*>>
+* <<requirements-class-html-clause,*HTML*>>
+* <<requirements-class-cisjson-clause,*JSON*>>
+* <<requirements-class-openapi_3_0-clause,*OpenAPI 3.0*>>
 
 The _GeoDataCoverage_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of API-Coverages.
 
 The _Subset_ Requirements Class provides capabilities to select a sub-set of a `Coverage` using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
+
+The _Scaling_ Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original. 
+
+The _Range Subset_ Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
+
+The _Tiles_ Requirements Class defines how to combine the OGC API - Tiles building blocks with the Coverages API to request coverage tiles. 
+
+The _Domain Subset_ Requirements Class defines the use of parameters for sub-setting the domainset of the coverage. 
 
 The _HTML_ and _JSON_ Requirements Classes address support for encodings commonly used with APIs.
 

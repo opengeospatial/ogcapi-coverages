@@ -1,4 +1,3 @@
-[[req_collection_rc-subset-response]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/collection/subset-response*

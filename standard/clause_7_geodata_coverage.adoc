@@ -18,120 +18,42 @@ The OGC API-Coverages standard is an extension of the OGC API - Common - Part 1:
 
 include::recommendations/geodata-coverage/REC_dependency-core.adoc[]
 
+A Web API should provide a common look and feel to its clients. Part of that is consistency in the use of protocols and the construction of request URIs. The `core` Conformance Class provides that guidance for OGC Web APIs.  
+
 include::recommendations/geodata-coverage/REC_dependency-landing-page.adoc[]
+
+The landing page resource provides a common starting point for clients to explore an API. Consistency in the structure of a landing page further advances the goal of a common look and feel for OGC Web API. Any implementation which is not intended for hosting on an existing API should implement the `landing page` Conformance Class. 
 
 include::requirements/geodata-coverage/REQ_dependency-collections.adoc[]
 
+The OGC Collections API uses the `/collections` and `/collection` resources defined in API-Common Part 2. Therefore, conformance with the Conformance Class which defines these resources is required.
+
 include::recommendations/geodata-coverage/REC_dependency-simple-query.adoc[]
+
+A query to the `/collections` resource will return a `/collection` resource for every collection hosted through that API. That could be a very large body of data. The `simple query` Conformance Class defines parameters which a client can use to limit which collections to include in the response.
 
 [[collection-access-section]]
 === Collection Access
-
-NOTE: Further strip down this section to only that info which is specific to coverages.
 
 API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Conformance Class defines how to organize and provide access to a collection of collections.
 
 API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
 
-This standard extends the API-Common `Collections` conformance class to support collections of coverages, then extends that class to support `Coverage` unique capabilities.
+This standard describes use of the API-Common `Collections` conformance class to support collections of coverages.
 
 [[collections]]
 ==== Collections
 
-The `Collections` operation returns a set of metadata which describes the collections available from this API. Each collection on a Coverages API will be a coverage. The coverages returned in the response can be limited using the <<bbox-section,Bounding Box>>, <<datatime-section,Date-Time>>, and <<limit-section,Limit>> parameters. 
+The `Collections` operation returns a set of metadata which describes the collections available from this API. Each collection on a Coverages API will be a coverage.
 
-.Dependencies
-[width="90%"]
-|====
-|http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
-|http://www.opengis.net/spec/ogcapi-common-2/1.0/req/simple-query
-|====
+The `Collections` operation is defined by the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections Conformance Class.
 
-===== Operation
-
-This operation is defined in the `Collections` conformance class of API-Common. No modifications are needed to support `Coverage` resources. The `Collections` conformance class describes two ways of performing this operation:
-
-. Issue a `GET` request on `{datasetAPI}/collections` path
-. Follow the `data` link on the landing page
-
-Support for both the `{datasetAPI}/collections` path and the `data` link is required by API-Common.
-
-===== Response
-
-A successful response to the `Collections Operation` is a document which includes [underline]#summary# metadata for each collection accessible though the API. To keep the size of this response manageable, the summary metadata should be limited to just those elements which are essential for clients and those which are needed to support the filtering parameters. 
-
-include::recommendations/geodata-coverage/REC_coverageinfo.adoc[]
-
-[#collections-schema,reftext='Collections Response Schema']
-.Collections Response Schema
-[source,yaml]
-----
-include::openapi/schemas/common-geodata/collections.yaml[]
-----
-
-The following JSON fragment is an example of a response to an OGC API-Coverages Collections operation.
-
-[#conllections-example,reftext=`Collections Example`]
-.Collections Example
-[source,json]
-----
-include::examples/JSON/collections_example.json[]
-----
-
-===== Error situations
-
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
+Optional query parameters for use with the `Collections` operation are defined by the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/simple-query Conformance Class.
 
 [[collectionInfo]]
 ==== Collection Information
 
-Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the `/collections` response.
-
-.Dependencies
-[width="90%"]
-|====
-|http://www.opengis.net/spec/ogcapi-common-1/1.0/req/collections
-|====
-
-===== Operation
-
-This operation is defined in the `Collections` conformance class of API-Common. No modifications are required to support `Coverage` resources. However, on a coverages API the the collections are also coverages. So in this standard the term `collectionId` is used instead of `collectionid`. The two terms are equivalent.
-
-The `Collections` conformance class describes two ways of performing this operation:
-
-. Issue a `GET` request on the `{datasetAPI}/collections/{collectionId}` path
-. Follow the `ogc:common:collection` link on the ?????
-
-NOTE: What is the origin of the "ogc:common:collection" link?
-
-The {collectionId} parameter is the unique identifier for a single coverage on the API. The list of valid values for {collectionId} is provided in the /collections response.
-
-Support for the `/collections/{collectionId}` path is recommended by API-Common.
-Support for the ogc:common:collection link is required.
-
-===== Response
-
-A successful response to the Collection Operation is a set of metadata which describes the collection identified by the {collectionId} parameter. This metadata is an extension to the set defined by API-Common. The additional elements are specific to Coverage resources.
-
-[#collectionInfo-schema,reftext='Collection Information Response Schema']
-.Collection Information Response Schema
-[source,yaml]
-----
-include::openapi/schemas/coverages-core/coverageInfo.yaml[]
-----
-
-The following JSON fragment is an example of a response to an OGC API-Coverages Collection Information operation.
-
-[#collection-info-example,reftext=`Collection Information Example`]
-.Collection Information Resource Example
-[source,json]
-----
-include::examples/JSON/collection_info_example.json[]
-----
-
-===== Error situations
-
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
+Collection Information is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the `/collections` response. No modifications to the resources or operations defined in the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections Conformance Class are required to support coverages.
 
 [[coverage-access-section]]
 === Coverage Access
