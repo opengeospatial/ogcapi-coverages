@@ -1,0 +1,8 @@
+[[req_coverage_subset-subset-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-subset/subset-response*
+2+|The requirements governing a subset parameter.
+^|A |TBD
+^|B |TBD
+|===

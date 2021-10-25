@@ -1,0 +1,8 @@
+[[req_domainset_subset-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/domainset-subset/response*
+2+|The requirements governing generation of the domainset to be returned to the user.
+^|A |TBD
+^|B |TBD
+|===

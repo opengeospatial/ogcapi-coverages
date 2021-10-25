@@ -1,4 +1,3 @@
-[[rm_subset]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Module*
@@ -12,7 +11,7 @@ The `subset` parameter is defined as follows:
 
 include::requirements/REQ_subset-definition.adoc[]
 
-While the processing of the `subset` parameter is specific to the resource and operation for which it is applied, there is a general set of requirements which all implementations must address.
+While the processing of the `subset` parameter is specific to the resource and operation for which it is applied, there are requirements which all implementations must address.
 
 include::requirements/REQ_subset-response.adoc[]
 

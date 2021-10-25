@@ -1,0 +1,8 @@
+[[req_coverage_subset-datetime-response]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-subset/datetime-response*
+2+|The requirements governing a datetime parameter.
+^|A |TBD
+^|B |TBD
+|===
