@@ -1,8 +1,0 @@
-[[req_coverage_datetime-parameter]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/coverage-dateTime/datetime-parameter*
-^|A |A Coverage API implementing MAY support the Date-Time (datetime) parameter for `{collectionId}/coverage` and/or `{collectionId}/coverage/domainset` requests.
-^|B |Requests which include the Date-Time parameter SHALL comply with API-Common requirement `/req/geodata-filteredList/rc-time-definition`.
-^|C |Responses to Date-Time requests SHALL comply with API-Common requirement `/req/core/rc-time-response`.
-|===

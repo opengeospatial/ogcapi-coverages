@@ -1,15 +1,25 @@
 [[rc-geodata-coverage-section]]
 == Requirements Class "GeoData-Coverage"
 
-[[geodata-coverage-overview]]
-=== Overview
-
 include::requirements/requirements_class_geodata_coverage.adoc[]
 
-The `GeoData-Coverage` Requirements Class defines the requirements for locating, understanding, and accessing a geospatial data resource as a coverage. The `GeoData-Coverage` Requirements Class is presented in two sections:
+API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Requirements Class defines how to organize and provide access to a collection of collections.
 
-. <<collection-access-section,Collection Access>>: operations for accessing collections of `Coverages`
-. <<coverage-access-section,Coverage Access>>: operations for accessing `Coverage` resources
+API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
+
+The `GeoData-Coverage` Requirements Class extends API-Common to define the requirements for locating, understanding, and accessing a collection which is a coverage. 
+
+Three resources and their operations are defined in this Requirements Class. They are summarized in <<collection-resources>>.
+
+[#collection-resources,reftext='{table-caption} {counter:table-num}']
+.Collection Resources
+[width="90%",cols="10,10,5,20",options="header"]
+|===
+^|Resource ^|URI ^|HTTP Method ^|Description
+|<<collections-metadata-section,Collections>> |/collections ^|GET |Information which describes the set of available Collections 
+|<<collection-description-section,Collection>> |/collections/{collectionId} ^|GET |Information about a specific collection of geospatial data with links to distribution
+|<<coverage-access-section,Coverages>> |/collections/{collectionId}/coverage ^|GET |A coverage conformant with the <<CIS_1_1,CIS>> Standard
+|===
 
 [[geodata-coverage-dependencies-section]]
 === Dependencies
@@ -32,62 +42,81 @@ include::recommendations/geodata-coverage/REC_dependency-simple-query.adoc[]
 
 A query to the `/collections` resource will return a `/collection` resource for every collection hosted through that API. That could be a very large body of data. The `simple query` Conformance Class defines parameters which a client can use to limit which collections to include in the response.
 
-[[collection-access-section]]
-=== Collection Access
-
-API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Requirements Class defines how to organize and provide access to a collection of collections.
-
-API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
-
-This standard describes use of the API-Common `Collections` requirements class to support collections of coverages.
-
-[[collections]]
-==== Collections
-
-The `Collections` operation returns a set of metadata which includes descriptions for each of the collections available from this API. All of the collections described on a Coverages API will be be <<CIS_1_1,CIS>> coverages. 
-
-The `Collections` operation is defined by the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections Requirements Class. The requirements applicable to the `Collections` operation are listed in <<collections-requirements-table>>. 
+The `Collections` and `Simple Query` Requirements Classes have a direct bearing on the `GeoData Coverage` Requirements Class. The applicable requirements from Common Part 2 are identified in <<collections-requirements-table>>. 
 
 [#collections-requirements-table,reftext='{table-caption} {counter:table-num}']
 .Collections Requirements 
 [width="90%",cols="2,6a",options="header"]
 |====
 ^|**Section** ^|**Requirements** 
+2+^|From Collections Requirements Class
 ^|Operation |/req/collections/rc-md-op
 ^|Response |/req/collections/rc-md-success
-^|Content |/req/collections/rc-md-links, +
-/req/collections/rc-timeStamp, +
+^|Content |/req/collections/rc-md-links +
+/req/collections/rc-timeStamp +
 /req/collections/rc-md-items
+2+^|From Simple Query Requirements Class
+^|Parameter bbox |/req/collections/rc-bbox-definition +
+/req/collections/rc-bbox-response
+^|Parameter datetime |/req/collections/rc-datetime-definition +
+/req/collections/rc-datetime-response
+^|Parameter limit |/req/collections/rc-limit-definition +
+/req/collections/rc-limit-response
+^|Target Resource Filtering |/req/collections/rc-bbox-collection-response +
+/req/collections/rc-datetime-collection-response +
+/req/collections/rc-limit-collection-response +
+/req/collections/rc-numberMatched +
+/req/collections/rc-numberReturned
 |====
 
-(Note: Requirement identifiers are relative to http://www.opengis.net/spec/ogcapi-common-2/1.0/)
+[[collections-metadata-section]]
+=== Collections
 
-Optional query parameters for use with the `Collections` operation are defined by the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/simple-query Requirements Class.
+The `Collections` operation returns a set of metadata which includes descriptions for each of the collections available from this API. All of the collections described on a Coverages API will be be <<CIS_1_1,CIS>> coverages. 
 
-[[collectionInfo]]
-==== Collection Resource
+The `Collections` operation is defined in the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections Requirements Class. 
+
+Optional query parameters for use with the `Collections` operation are defined in the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/simple-query Requirements Class.
+
+The applicable requirements from Common Part 2 are identified in <<collections-requirements-table>>. 
+
+==== Operation
+
+The `GeoData-Coverage` Requirements Class does not modify the `Collections` operation as defined in API-Common. 
+
+==== Response
+
+The `GeoData-Coverage` Requirements Class does not modify the `Collections` response as defined in API-Common except for the extension of the `Collection Resource` as described in <<collection-resource-definition-section,Collection Resource Definition>>. 
+
+==== Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+[[collection-description-section]]
+=== Resource Collection
+
+Each resource collection (Coverage) is described by a set of metadata. That metadata can be accessed directly using the ``/collections/{collectionId}`` path and as an entry in the ``collections`` property of the ``/Collections`` resource.
+
+==== Operation
+
+The `GeoData-Coverage` Requirements Class does not modify the `/collections/{collectionId}` operation as defined in API-Common. 
+
+==== Response
+
+The `GeoData-Coverage` Requirements Class does not modify the `/collections/{collectionId}` response as defined in API-Common except for the extension of the `Collection Resource` as described in <<collection-resource-definition-section,Collection Resource Definition>>. 
+
+==== Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+If the parameter collectionId does not exist on the server, the status code of the response will be 404.
+
+[[collection-resource-definition-section]]
+=== Collection Resource Definition
 
 The Collection Resource is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the `/collections` response. 
 
-The resources definitions and operations required to access a Collection Resource are defined in the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections Requirements Class of API Comon Part 2. The requirements applicable to the `/Collections/{collectionId}` operation are listed in <<collection-requirements-table>>. 
-
-[#collection-requirements-table,reftext='{table-caption} {counter:table-num}']
-.Collection Resource Requirements 
-[width="90%",cols="2,6a",options="header"]
-|====
-^|**Section** ^|**Requirements** 
-^|Operation |/req/collections/src-md-op
-^|Response |/req/collections/src-md-success
-^|Content |/req/collections/collection-definition, +
-/req/collections/rc-md-items-links, +
-/req/collections/rc-md-extent
-|====
-
-(Note: Requirement identifiers are relative to http://www.opengis.net/spec/ogcapi-common-2/1.0/)
-
-Due to the multi-dimensional nature of coverages, this `GeoData Coverage` Requirements Class extends the Collection Resource defined in API Common by replacing the `Extent` module with the `Extent-UAD` module. The `Extent-UAD` module defines an optional extension of the `Extent` module. It has been designed so that a Collection with a Extend-UAD will still comply with API-Common Part 2. Likewise, a Collection which is conformant with API-Common Part 2 will also be conformant with API-Coverages.
-
-include::../api_modules/extent-uad/requirements/REQ_extent-uad-definition.adoc[]
+Due to the multi-dimensional nature of coverages, it is desireable for an API to describe the extent of a coverage along those additional dimensions. The `GeoData Coverage` Requirements Class addresses this need through an extension of the Collection Resource which supports additional dimensions. This is accomplished by replacing the `Extent` module with the `Extent-UAD` module. The `Extent-UAD` module adds an element to the `Extent` module which identifies the content-specific axis as well as the intersecting intervals along those axis.  This extension has been designed so that a Collection with a Extend-UAD will still comply with API-Common Part 2. Likewise, a Collection which is conformant with API-Common Part 2 will also be conformant with API-Coverages.
 
 include::requirements/geodata-coverage/REQ_coverage-collection-definition.adoc[]
 
@@ -96,9 +125,9 @@ include::../api_modules/extent-uad/requirements_module_extent-uad.adoc[]
 [[coverage-access-section]]
 === Coverage Access
 
-OGC API Common only supports access to collection metadata. OGC API - Coverages defines the operations and schemas specific to Coverages.
+OGC API Common provides access to metadata about collections. The `GeoData-Coverages` Requirements Class extends that foundation to provide access to the individual Coverages.
 
-A `Coverage` is a collection of measured values. The structure of that collection is defined by the <<CIS_1_1,CIS standard>>. CIS contains four principle components:
+A `Coverage` is a collection of measured values. The structure of that collection is defined by the <<CIS_1_1,CIS standard>>. A CIS Coverage contains four principle components:
 
 * A `DomainSet` component describing the coverage’s domain (the set of “direct positions”, i.e., the locations for which values are stored in the coverage)
 * A `RangeType` component which describes the coverage's `RangeSet` data structure (in the case of images usually called the “pixel data type”).
@@ -121,8 +150,6 @@ embedded. In the latter case those links will point specifically to properties u
 The `RangeSet` may be available as its own resource as well, if supported by the selected representation (format).
 
 If `Metadata` is available, it will also be be available as its own resource.
-
-The paths discussed in this section are all branches off of the `/collections/{collectionId}` root.
 
 [[coverage-clause]]
 ==== Coverage
@@ -159,7 +186,9 @@ include::examples/JSON/coverage_example.json[]
 
 ===== Error situations
 
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
+include::requirements/geodata-coverage/REQ_coverage-failure.adoc[]
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-domainset-clause]]
 ==== Coverage Domain Set
@@ -196,7 +225,7 @@ include::examples/JSON/coverage_domainset_example.json[]
 
 ===== Error situations
 
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-rangetype-clause]]
 ==== Coverage Range Type
@@ -233,7 +262,7 @@ include::examples/JSON/coverage_rangetype_example.json[]
 
 ===== Error situations
 
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-rangeset-clause]]
 ==== Coverage Range Set
@@ -270,7 +299,7 @@ include::examples/JSON/coverage_rangeset_example.json[]
 
 ===== Error situations
 
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-metadata-clause]]
 ==== Coverage Metadata
@@ -307,6 +336,4 @@ include::examples/JSON/coverage_metadata_example.json[]
 
 ===== Error situations
 
-The requirements for handling unsuccessful requests are provided in <<http-response>>. General guidance on HTTP status codes and how they should be handled is provided in <<http-status-codes>>.
-
-NOTE: Sections on parameters have been removed since they only apply to the resouces defined in API-Common.
+See <<http-status-codes,HTTP Status Codes>> for general guidance.

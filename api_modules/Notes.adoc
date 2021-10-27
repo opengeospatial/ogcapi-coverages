@@ -1,0 +1,6 @@
+Notes:
+
+. Do not include anchors in API-Modules. Since a module can be included in a standard more than once, the anchor is no longer unique.
+. An API Module which contains an identifier can only be used once in a Requirements Class. The identifer of the Requirements Class, combined with the relative URI identifier in the module, produces the unique identifier for that entity.
+. Question - should Requirements Modules identify themself in the Standard? Is there value in exposing them to the user, or are they just a convinience for the developers of the standard and test suites?
+

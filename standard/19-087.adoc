@@ -24,7 +24,7 @@
 |[big]*Open Geospatial Consortium*
 |Submission Date: <yyyy-mm-dd>
 |Approval Date: <yyyy-mm-dd>
-|Publication Date: 2021-10-25
+|Publication Date: 2021-10-27
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0
 |Internal reference number of this OGC(R) document: 19-087
 |Version: 0.0.6

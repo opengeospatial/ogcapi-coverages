@@ -1,6 +1,0 @@
-[[req_coverage_bbox-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/coverage-bbox/success*
-^|A |Only that part of the coverage addressed falling within the bounds of the bounding box SHALL be returned.
-|===

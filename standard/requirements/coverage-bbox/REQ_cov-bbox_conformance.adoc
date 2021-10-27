@@ -1,8 +1,0 @@
-[[req_coverage_bbox]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subset/conformance*
-2+|The list of Conformance Classes advertised by the API SHALL include:
-^|A |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
-^|B |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-bbox
-|===
