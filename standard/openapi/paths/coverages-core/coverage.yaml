@@ -1,0 +1,23 @@
+# Coverage
+get:
+  tags:
+    - Coverage
+  summary: Retrieve the coverage identified by {collectionId}
+  description: |-
+    Coverage identified by {collectionId}.
+    Use content negotiation to request required format.
+  operationId: getCoverage
+  parameters:
+    - $ref: '../../parameters/coverages-core/collectionId.yaml'
+    - $ref: '../../parameters/coverages-core/subset.yaml'
+    - $ref: '../../parameters/coverages-core/range-subset.yaml'
+    - $ref: '../../parameters/coverages-core/scale-factor.yaml'
+    - $ref: '../../parameters/coverages-core/scale-axes.yaml'
+    - $ref: '../../parameters/coverages-core/scale-size.yaml'
+    - $ref: '../../parameters/coverages-core/subset-crs.yaml'
+    - $ref: '../../parameters/coverages-core/crs.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/coverages-core/rCoverage.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'
