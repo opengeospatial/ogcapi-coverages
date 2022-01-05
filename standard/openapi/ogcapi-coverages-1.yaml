@@ -29,9 +29,9 @@ paths:
   /api:
     $ref: 'paths/common-core/api.yaml'
   /collections:
-    $ref: 'paths/coverages-core/collections.yaml'
+    $ref: 'paths/common-geodata/collections.yaml'
   /collections/{collectionId}:
-    $ref: 'paths/coverages-core/collection.yaml'
+    $ref: 'paths/common-geodata/collection.yaml'
   /collections/{collectionId}/coverage:
     $ref: 'paths/coverages-core/coverage.yaml'
   /collections/{collectionId}/coverage/domainset:
