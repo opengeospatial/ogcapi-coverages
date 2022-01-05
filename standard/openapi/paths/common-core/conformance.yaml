@@ -1,0 +1,14 @@
+# Conformance
+get:
+  tags:
+    - Capabilities
+  summary: API conformance definition
+  description: list of all conformance classes that the server conforms to
+  operationId: getCapabilities
+  parameters:
+    - $ref: '../../parameters/non-normative/f.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/common-core/rConformance.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'
