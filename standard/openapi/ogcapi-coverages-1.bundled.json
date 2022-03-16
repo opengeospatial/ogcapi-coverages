@@ -124,7 +124,7 @@
         }
       }
     },
-    "/api/coverages-collections": {
+    "/api/coverage-collections": {
       "get": {
         "tags": [
           "API"
