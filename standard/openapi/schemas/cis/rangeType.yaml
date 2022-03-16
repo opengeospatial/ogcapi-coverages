@@ -12,8 +12,8 @@ oneOf:
       field:
         type: array
         items:
-          title: quantity
-          description: quantity
+          title: DataRecord field
+          description: e.g. Quantity or Count
           type: object
           required:
             - type
@@ -21,6 +21,7 @@ oneOf:
             type:
               enum:
                 - Quantity
+                - Count
             id:
               type: string
               format: uri

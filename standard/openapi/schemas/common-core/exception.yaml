@@ -4,13 +4,13 @@ type: object
 required:
 - type
 properties:
-  type: 
+  type:
     type: string
-  title: 
+  title:
     type: string
   status:
     type: integer
-  detail: 
+  detail:
     type: string
-  instance: 
+  instance:
     type: string

@@ -1,0 +1,16 @@
+# Metadata
+get:
+  tags:
+  - Coverage
+  summary: retrieve a coverage's metadata; use content negotiation to request
+    HTML or GeoJSON
+  description: a coverage's metadata
+  operationId: getCoverageMetadata
+  parameters:
+    - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
+    - $ref: '../../parameters/unspecified/f-metadata.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/coverages-core/rMetadata.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'

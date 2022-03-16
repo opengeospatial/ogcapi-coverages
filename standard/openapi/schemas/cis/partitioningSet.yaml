@@ -38,7 +38,8 @@ properties:
             envelope:
               $ref: 'envelope.yaml'
             coverage:
-              $ref: '#'
+              # $ref: 'coverage-schema.yaml' # recursion issues...
+              type: object
   positionValuePair:
     type: array
     items:
@@ -56,15 +57,15 @@ properties:
         coordinate:
           type: array
           items:
-            type:
-              - number
-              - string
-              - boolean
+            oneOf:
+              - type: number
+              - type: string
+              - type: boolean
         value:
           type: array
           items:
-            type:
-              - number
-              - string
-              - 'null'
-              - boolean
+            oneOf:
+              - type: number
+              - type: string
+                nullable: true
+              - type: boolean

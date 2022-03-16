@@ -38,16 +38,16 @@ properties:
         axisLabel:
           type: string
         lowerBound:
-          type:
-            - number
-            - string
-            - 'null'
-            - boolean
+          oneOf:
+            - type: number
+            - type: string
+              nullable: true
+            - type: boolean
         upperBound:
-          type:
-            - number
-            - string
-            - 'null'
-            - boolean
+          oneOf:
+            - type: number
+            - type: string
+              nullable: true
+            - type: boolean
         uomLabel:
           type: string

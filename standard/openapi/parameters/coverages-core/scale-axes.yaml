@@ -2,8 +2,8 @@ name: scale-axes
 in: query
 description: |-
   Returns a coverage re-scaled so as to contain `{number}` times less sample
-  values along its latitude axis, and all original values along all its other
-  dimensions
+  values along the corresponding axisName axis, and all original values along
+  the dimensions of unspecified axes
   ```
   ScalingSpec:       "scale-axes"=axisName({number})[,axisName({number})]*
   axisName:          {NCName}
