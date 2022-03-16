@@ -1,7 +1,7 @@
 name: scale-size
 in: query
 description: |-
-  When `scale-size` is used, the returned coverage SHALL contain exactly the
+  When `scale-size` is used, the returned coverage will contain exactly the
   specified number of sample values along each axis which is specified, and
   the original number of sample values for unspecified axes.
   ```

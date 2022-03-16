@@ -4,7 +4,7 @@ Latest draft specifications: [HTML](https://docs.opengeospatial.org/DRAFTS/19-08
 
 Latest draft User's Guide: [HTML](https://docs.opengeospatial.org/DRAFTS/20-075.html) [PDF](https://docs.opengeospatial.org/DRAFTS/20-075.pdf)
 
-See the latest [OpenAPI definition](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/ogcapi-coverages-1.yaml) with SwaggerUI.
+See the latest [OpenAPI definition](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/ogcapi-coverages-1.bundled.json) with SwaggerUI.
 
 This GitHub repository contains [OGC](http://opengeospatial.org)'s
 standard for accessing geospatial data resources on the web as a coverage, "OGC API - Coverages".

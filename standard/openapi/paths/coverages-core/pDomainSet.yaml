@@ -1,0 +1,16 @@
+# DomainSet
+get:
+  tags:
+    - Coverage
+  summary: Retrieve a coverage's domainset; use content negotiation to request HTML or JSON
+  description: a coverage's domainset
+  operationId: getCoverageDomainSet
+  parameters:
+    - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
+    - $ref: '../../parameters/common-geodata/subset.yaml'
+    - $ref: '../../parameters/unspecified/f-domainset.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/coverages-core/rDomainSet.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'

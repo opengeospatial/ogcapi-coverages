@@ -1,0 +1,18 @@
+name: f
+description: >-
+  The optional f parameter indicates the output format which the server
+  shall provide as part of the response document. It has preference over
+  the HTTP Accept header.
+explode: false
+in: query
+required: false
+schema:
+  type: string
+  enum:
+    - png
+    - geotiff
+    - netcdf
+    - json
+    - covjson
+    - html
+style: form
