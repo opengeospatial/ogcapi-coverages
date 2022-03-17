@@ -2610,7 +2610,7 @@
         }
       },
       "2DPoint": {
-        "description": "A 2DPoint in the CRS indicated elsewere",
+        "description": "A 2D Point in the CRS indicated elsewhere",
         "type": "array",
         "minItems": 2,
         "maxItems": 2,
@@ -2835,7 +2835,7 @@
       "properties": {
         "name": "properties",
         "in": "query",
-        "description": "Select specific data record fields (measured/observed properties) to be returned.\n\n```\nRangeSubsetSpec:   \"properties\"=field[,fieldName]*\nfield:              {fieldName}|{fieldIndex}|\"*\"\nfieldName:          {text}\nfieldIndex:         {number}\n\nWhere:\n   {number} is an integer number, and\n   {text} is some general ASCII text.\n```\n\nThe field name must one of the id defined in the RangeType DataRecord fields.\nThe field index must be an integer between 0 and the number of fields - 1 defined in the RangeType DataRecord fields.\nAn asterisk indicates to also include subsequent fields.",
+        "description": "Select specific data record fields (measured/observed properties) to be returned.\n\n```\nRangeSubsetSpec:   \"properties\"=field[,fieldName]*\nfield:              {fieldName}|{fieldIndex}|\"*\"\nfieldName:          {text}\nfieldIndex:         {number}\n\nWhere:\n   {number} is an integer number, and\n   {text} is some general ASCII text.\n```\n\nThe field name must be one of the id defined in the RangeType DataRecord fields.\nThe field index must be an integer between 0 and the number of fields - 1 defined in the RangeType DataRecord fields.\nAn asterisk indicates to also include subsequent fields.",
         "required": false,
         "schema": {
           "type": "string"
@@ -3513,4 +3513,3 @@
     }
   }
 }
-
