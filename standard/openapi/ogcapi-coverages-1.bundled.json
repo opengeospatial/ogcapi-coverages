@@ -278,15 +278,7 @@
             "$ref": "#/components/parameters/subset-crs"
           },
           {
-            "name": "bbox-crs",
-            "in": "query",
-            "description": "crs for the specified bbox",
-            "required": false,
-            "style": "form",
-            "explode": true,
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/bbox-crs"
           },
           {
             "$ref": "#/components/parameters/crs"
@@ -354,7 +346,7 @@
             "$ref": "#/components/parameters/crs"
           },
           {
-            "$ref": "#/paths/~1collections~1%7BcollectionId%7D~1coverage/get/parameters/9"
+            "$ref": "#/components/parameters/bbox-crs"
           },
           {
             "$ref": "#/components/parameters/subset-crs"
@@ -457,7 +449,7 @@
             "$ref": "#/components/parameters/scale-size"
           },
           {
-            "$ref": "#/paths/~1collections~1%7BcollectionId%7D~1coverage/get/parameters/9"
+            "$ref": "#/components/parameters/bbox-crs"
           },
           {
             "$ref": "#/components/parameters/subset-crs"
@@ -2833,6 +2825,17 @@
         "name": "subset-crs",
         "in": "query",
         "description": "crs for the specified subset",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "bbox-crs": {
+        "name": "bbox-crs",
+        "in": "query",
+        "description": "crs for the specified bbox",
         "required": false,
         "style": "form",
         "explode": true,
