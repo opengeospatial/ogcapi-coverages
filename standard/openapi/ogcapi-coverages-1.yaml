@@ -150,6 +150,8 @@ components:
          $ref: 'parameters/common-crs/crs.yaml'
       subset-crs:
          $ref: 'parameters/common-crs/subset-crs.yaml'
+      bbox-crs:
+         $ref: 'parameters/common-crs/bbox-crs.yaml'
 
       # Coverages - Core (unspecified)
       scale-factor:
