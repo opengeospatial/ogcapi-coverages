@@ -9,9 +9,10 @@ get:
     - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
     - $ref: '../../parameters/common-geodata/subset.yaml'
     - $ref: '../../parameters/common-geodata/bbox.yaml'
-    - $ref: '../../parameters/common-geodata/crs.yaml'
-    - $ref: '../../parameters/common-geodata/bbox-crs.yaml'
-    - $ref: '../../parameters/common-geodata/subset-crs.yaml'
+    - $ref: '../../parameters/common-geodata/datetime.yaml'
+    - $ref: '../../parameters/common-crs/crs.yaml'
+    - $ref: '../../parameters/common-crs/bbox-crs.yaml'
+    - $ref: '../../parameters/common-crs/subset-crs.yaml'
     - $ref: '../../parameters/unspecified/f-domainset.yaml'
   responses:
     '200':
