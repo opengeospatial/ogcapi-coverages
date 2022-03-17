@@ -260,6 +260,9 @@
             "$ref": "#/components/parameters/bbox"
           },
           {
+            "$ref": "#/components/parameters/datetime"
+          },
+          {
             "$ref": "#/components/parameters/properties"
           },
           {
@@ -273,6 +276,17 @@
           },
           {
             "$ref": "#/components/parameters/subset-crs"
+          },
+          {
+            "name": "bbox-crs",
+            "in": "query",
+            "description": "crs for the specified bbox",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "$ref": "#/components/parameters/crs"
@@ -329,6 +343,21 @@
           },
           {
             "$ref": "#/components/parameters/subset"
+          },
+          {
+            "$ref": "#/components/parameters/bbox"
+          },
+          {
+            "$ref": "#/components/parameters/datetime"
+          },
+          {
+            "$ref": "#/components/parameters/crs"
+          },
+          {
+            "$ref": "#/paths/~1collections~1%7BcollectionId%7D~1coverage/get/parameters/9"
+          },
+          {
+            "$ref": "#/components/parameters/subset-crs"
           },
           {
             "$ref": "#/components/parameters/f-domainset"
@@ -413,6 +442,9 @@
             "$ref": "#/components/parameters/bbox"
           },
           {
+            "$ref": "#/components/parameters/datetime"
+          },
+          {
             "$ref": "#/components/parameters/properties"
           },
           {
@@ -423,6 +455,9 @@
           },
           {
             "$ref": "#/components/parameters/scale-size"
+          },
+          {
+            "$ref": "#/paths/~1collections~1%7BcollectionId%7D~1coverage/get/parameters/9"
           },
           {
             "$ref": "#/components/parameters/subset-crs"
