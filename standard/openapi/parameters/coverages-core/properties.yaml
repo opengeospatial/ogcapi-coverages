@@ -14,7 +14,7 @@ description: |-
      {text} is some general ASCII text.
   ```
 
-  The field name must one of the id defined in the RangeType DataRecord fields.
+  The field name must be one of the id defined in the RangeType DataRecord fields.
   The field index must be an integer between 0 and the number of fields - 1 defined in the RangeType DataRecord fields.
   An asterisk indicates to also include subsequent fields.
 
