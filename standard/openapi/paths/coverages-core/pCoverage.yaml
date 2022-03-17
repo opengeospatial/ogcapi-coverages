@@ -16,6 +16,7 @@ get:
     - $ref: '../../parameters/coverages-core/scale-axes.yaml'
     - $ref: '../../parameters/coverages-core/scale-size.yaml'
     - $ref: '../../parameters/common-crs/subset-crs.yaml'
+    - $ref: '../../parameters/common-crs/bbox-crs.yaml'
     - $ref: '../../parameters/common-crs/crs.yaml'
     - $ref: '../../parameters/unspecified/f-coverage.yaml'
   responses:
