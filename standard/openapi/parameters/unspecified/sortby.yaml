@@ -1,15 +1,14 @@
-sortby:
-  description: >-
-    The optional sortby parameter indicates the sort property and order on
-    which the server shall present results in the response document using
-    the convention `sortby=PROPERTY:X`, where `PROPERTY` is the sort
-    property and `X` is the sort order (`A` is ascending, `D` is
-    descending). Sorting by multiple properties is supported by providing a
-    comma-separated list.
-  explode: false
-  in: query
-  name: sortby
-  required: false
-  schema:
-    type: string
-  style: form
+description: >-
+  The optional sortby parameter indicates the sort property and order on
+  which the server shall present results in the response document using
+  the convention `sortby=PROPERTY:X`, where `PROPERTY` is the sort
+  property and `X` is the sort order (`A` is ascending, `D` is
+  descending). Sorting by multiple properties is supported by providing a
+  comma-separated list.
+explode: false
+in: query
+name: sortby
+required: false
+schema:
+  type: string
+style: form
