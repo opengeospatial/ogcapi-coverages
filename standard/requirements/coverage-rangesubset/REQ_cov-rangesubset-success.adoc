@@ -2,8 +2,9 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-rangesubset/success*
-^|A |The `range-subset` parameter SHALL be applied to the coverage (and rangeset, if available as a separate resource).
-^|B |Only the bands of the coverage addressed SHALL be returned that correspond to one of the bands selected by the range subset expression
-whereby a `*` (asterisk) at the begining or at the end of the comma-separated list denotes all other bands before or after the listed bands, respectively.
-The RangeType shall be adjusted accordingly to the new selected bands.
+^|A |The `properties` parameter SHALL be applied to the coverage (and rangeset, if available as a separate resource).
+^|B |Only the fields of the coverage addressed SHALL be returned that correspond to one of the fields selected by the range subset expression
+whereby a `*` (asterisk) at the begining or at the end of the comma-separated list denotes all other fields before or after the listed fields, respectively.
+^|C |The RangeType describing the fields of the coverage being returned SHALL be adjusted accordingly to the new selected fields.
+^|D |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the list of selected fields.
 |===
