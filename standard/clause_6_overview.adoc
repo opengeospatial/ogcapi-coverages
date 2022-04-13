@@ -23,21 +23,21 @@ Most resources are also accessible through links on previously accessed resource
 
 [#coverage-paths,reftext='{table-caption} {counter:table-num}']
 .Coverage API Resources
-[width="90%",cols="2,^1,4",options="header"]
+[width="90%",cols="2,4",options="header"]
 |===
-^|Resource URI ^|Relation Type ^|Description
-|<<landing-page,{datasetAPI}/>> |`http://www.opengis.net/def/rel/ogc/1.0/dataset` |Landing page for this dataset distribution
-|<<api-definition,{datasetAPI}/api>> |`service-desc` | API description (e.g. OpenAPI)
-|<<api-definition,{datasetAPI}/api>> |`service-doc` | API documentation (optional, e.g. HTML)
-|<<conformance-classes,{datasetAPI}/conformance>> |`http://www.opengis.net/def/rel/ogc/1.0/conformance` |Conformance Classes
-|<<collections,{datasetAPI}/collections>> |`http://www.opengis.net/def/rel/ogc/1.0/data` |The list off all collections available, some or all of which may be accessible using this Coverage API. Each of these collection objects take the same form as that of the collection resource object described immediately below.
-|<<collectionInfo,{datasetAPI}/collections/{collectionId}>> |`http://www.opengis.net/def/rel/ogc/1.0/geodata` |resource corresponding to the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource will describe key elements such as an `id`, `title`, `description`, available `crs` and `extent` (the coverage envelope) as well as links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set. It is comparable to a WCS *_DescribeCoverage_* response, with the exception that the range type and domain set may have to be retrieved separately by following a link to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.
-3+^|**Coverages**
-|<<coverage-clause,{datasetAPI}/collections/{collectionId}/coverage>> |`http://www.opengis.net/def/rel/ogc/1.0/coverage` |returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS *_GetCoverage_* response.
-|<<coverage-rangeset-clause,{datasetAPI}/collections/{collectionId}/coverage/rangeset>> |`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangeset` |if supported by the service and by the selected representation, returns only the coverage's range set, i.e., the actual values in the selected representation without any accompanying description or extra information.
-|<<coverage-rangetype-clause,{datasetAPI}/collections/{collectionId}/coverage/rangetype>> |`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype` |if available separately from the collection resource, returns the coverage's range type information, i.e., a description of the data semantics (their components and data type).
-|<<coverage-domainset-clause,{datasetAPI}/collections/{collectionId}/coverage/domainset>> |`http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset` |if available separately from the collection resource, returns the coverage's domain set definition (the detailed n-dimensional space covered by the data).
-|<<coverage-metadata-clause,{datasetAPI}/collections/{collectionId}/coverage/metadata>> |`http://www.opengis.net/def/rel/ogc/1.0/coverage-metadata` |if available, returns the associated coverage metadata as defined by the CIS model, which may be e.g. domain specific metadata.
+^|Resource URI ^|Description
+|<<landing-page,{datasetAPI}/>> |Landing page for this dataset distribution
+|<<api-definition,{datasetAPI}/api>> | API description (e.g. OpenAPI)
+|<<api-definition,{datasetAPI}/api>> |API documentation (optional, e.g. HTML)
+|<<conformance-classes,{datasetAPI}/conformance>> |Conformance Classes
+|<<collections,{datasetAPI}/collections>> |The list off all collections available, some or all of which may be accessible using this Coverage API. Each of these collection objects take the same form as that of the collection resource object described immediately below.
+|<<collectionInfo,{datasetAPI}/collections/{collectionId}>> |resource corresponding to the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource will describe key elements such as an `id`, `title`, `description`, available `crs` and `extent` (the coverage envelope) as well as links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set. It is comparable to a WCS *_DescribeCoverage_* response, with the exception that the range type and domain set may have to be retrieved separately by following a link to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.
+2+^|**Coverages**
+|<<coverage-clause,{datasetAPI}/collections/{collectionId}/coverage>> |returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS *_GetCoverage_* response.
+|<<coverage-rangeset-clause,{datasetAPI}/collections/{collectionId}/coverage/rangeset>> |if supported by the service and by the selected representation, returns only the coverage's range set, i.e., the actual values in the selected representation without any accompanying description or extra information.
+|<<coverage-rangetype-clause,{datasetAPI}/collections/{collectionId}/coverage/rangetype>> |if available separately from the collection resource, returns the coverage's range type information, i.e., a description of the data semantics (their components and data type).
+|<<coverage-domainset-clause,{datasetAPI}/collections/{collectionId}/coverage/domainset>> |if available separately from the collection resource, returns the coverage's domain set definition (the detailed n-dimensional space covered by the data).
+|<<coverage-metadata-clause,{datasetAPI}/collections/{collectionId}/coverage/metadata>> |if available, returns the associated coverage metadata as defined by the CIS model, which may be e.g. domain specific metadata.
 |===
 
 Where:
