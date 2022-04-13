@@ -1,24 +1,31 @@
 == Scope
-This OGC API Coverages (https://github.com/opengeospatial/ogcapi-coverages[https://github.com/opengeospatial/ogcapi-coverages]) specification establishes how to access coverages as defined by the Coverage Implementation  Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]) through a Web API such as those described by the OpenAPI specification (https://www.openapis.org/[https://www.openapis.org/]).
+This https://docs.opengeospatial.org/DRAFTS/19-087.html[_OGC API - Coverages_] draft specification establishes how to access
+coverages as defined by the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6] / https://www.iso.org/standard/40121.html[ISO 19123]
+_Schema for coverage geometry and functions_ through a Web API such as those described by the https://www.openapis.org/[OpenAPI specification].
 
-=== Service Scope
-The functionality provided by API-Coverages resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard]. It is expected that Coverage APIs and WCS services will be able to interoperate, allowing developers to pick the solution best suited for their requirements.
+=== API Scope
+The functionality provided by _OGC API - Coverages_ resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard].
+It is expected that _OGC API - Coverages_ and WCS implementations will be able to interoperate, allowing developers to pick the solution best suited for their requirements, and also to implement one as a facade on top of the other.
 
 The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors. Additional capabilities will be added based on community demand.
 
-As a result, this API-Coverages Part 1 - Core standard does not provide a full duplication of the WCS capabilities. The functionality covered in Part 1 is:
-
-* Coverage extraction functionality
-* Subsetting by domain set
-* Subsetting of domain set
-* Subsetting by range type (bands)
-* Scaling
-* Content type negotiation.
-
-=== Content Scope
-The API-Coverages standard provides access to content which complies with the Coverage Implementation Schema (CIS) 1.1 (http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[http://docs.opengeospatial.org/is/09-146r6/09-146r6.html]).
-
 The functionality covered in Part 1 is:
 
-* Gridded or multi-point coverages
-* GeneralGridCoverage
+* Retrieval of a coverage and its individual components (domain set, range type, range set, metadata), with support for content type negotiation,
+* Subsetting of the coverage or range set (trimming or slicing along one or more dimensions/axes of its domain),
+* Subsetting of the domain set (for use cases where the domainset itself is large),
+* Range subsetting (retrieving only certain fields of the range),
+* Scaling (retrieving a downsampled or upsampled coverage or range set),
+* Retrieving part of a coverage as tiles (in combination with http://docs.ogc.org/DRAFTS/20-057.html[_OGC API - Tiles_], each tile corresponding to a specific subset trimmed along two spatial dimensions, and the response downsampled for lower resolution tile matrices).
+
+=== Content Scope
+The _OGC API - Coverages_ specification provides access to content which complies with https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
+This includes, but is not limited to, support for gridded (regular and irregular) and multi-point coverages (e.g., point clouds).
+
+The content of the coverage can be encoded using any suitable logical model and physical encodings, such as those defined by e.g.:
+
+- http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1],
+- https://www.ogc.org/standards/netcdf[netCDF],
+- https://covjson.org/[CoverageJSON],
+- https://www.ogc.org/standards/geotiff[GeoTIFF] -- including https://www.cogeo.org/[Cloud Optimized GeoTIFF (COG)],
+- https://www.asprs.org/divisions-committees/lidar-division/laser-las-file-format-exchange-activities[LAS]/LAZ -- including https://copc.io/[Cloud Optimized Point Cloud (COPC)].

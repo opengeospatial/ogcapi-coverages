@@ -6,7 +6,7 @@
 
 The OGC API family of standards enable access to resources using the HTTP protocol and its' associated operations (GET, PUT, POST, etc.). OGC API-Common defines a set of features which are applicable to all OGC APIs. Other OGC standards extend API-Common with features specific to a resource type. This OGC API-Coverages standard defines an API with two goals:
 
-. Provide access to *_Coverages_* conformant to the <<coverage-implementation-schema-overview,OGC CIS standard>>.
+. Provide access to *_Coverages_* conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 . Provide functionality comparable to that of the <<web-coverage-service-overview,OGC WCS standard>>.
 
 Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
@@ -48,9 +48,12 @@ Where:
 [[coverage-implementation-schema-overview]]
 === Coverage Implementation Schema
 
-OGC API-Coverages specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time such as; spatio-temporal sensor, image, simulation, and statistical data.
+_OGC API - Coverages_ specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time such as: spatio-temporal sensor, image, simulation, and statistical data.
 
-This https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] standard establishes how to access coverages as defined by the http://docs.opengeospatial.org/is/09-146r6/09-146r6.html[Coverage Implementation Schema (CIS) 1.1] through Web APIs. A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
+The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage of its components according to this https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] Web API standard.
+A CIS JSON representation is required at least for the domain set and the range type, which can both either be embedded within the collection resource, or provided as separate resources.
+
+A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
 
 [#abstract-coverage-figure,reftext='{figure-caption} {counter:fig-num}']
 .Abstract Coverage
@@ -74,7 +77,7 @@ Discussion has shown that the API model also assumes underlying service and obje
 
 NOTE: remove or update
 
-The OGC API-Coverages standard is an extension of the OGC API-Common standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common. <<mapping-to-common>> Identifies the API-Common Requirements Classes which are applicable to each section of this Standard. Instructions on when and how to apply these Requirements Classes are provided in each section.
+The _OGC API - Coverages_ standard is an extension of the OGC API-Common standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common. <<mapping-to-common>> Identifies the API-Common Requirements Classes which are applicable to each section of this Standard. Instructions on when and how to apply these Requirements Classes are provided in each section.
 
 [#mapping-to-common,reftext='{table-caption} {counter:table-num}']
 .Mapping API-Coverages Sections to API-Common Requirements Classes
