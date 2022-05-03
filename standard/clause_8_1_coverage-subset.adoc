@@ -26,17 +26,17 @@ include::./recommendations/coverage-subset/REC_subset-parameter-documentation.ad
 [[bbox-parameter-subset-requirements]]
 ==== Parameter bbox
 
-include::../../oapi_common/api_modules/bbox/requirements_module_bbox.adoc[]
+include::https://github.com/opengeospatial/ogcapi-common/tree/master/api_modules/bbox/requirements_module_bbox.adoc[]
 
 [[datetime-parameter-subset-requirements]]
 ==== Parameter datetime
 
-include::../../oapi_common/api_modules/datetime/requirements_module_datetime.adoc[]
+include::https://github.com/opengeospatial/ogcapi-common/tree/master/api_modules/datetime/requirements_module_datetime.adoc[]
 
 [[subset-parameter-subset-requirements]]
 ==== Parameter subset
 
-include::../api_modules/subset/requirements_module_subset.adoc[]
+include::https://github.com/opengeospatial/ogcapi-common/tree/master/api_modules/subset/requirements_module_subset.adoc[]
 
 [[subset-target-resource-requirements]]
 === Target resource Requirements

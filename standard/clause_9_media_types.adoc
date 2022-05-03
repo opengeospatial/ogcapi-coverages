@@ -16,7 +16,7 @@ Support for HTML is recommended. HTML is the core language of the World Wide Web
 === CIS JSON Encoding
 Support for CIS JSON is recommended. JSON is a commonly used format that is simple to understand and well supported by tools and software libraries.
 
-JSON structures documented in this standard are defined using JSON Schema. These schema are available in JSON and YAML formats from http://schemas.opengis.net/tbd[http://schemas.opengis.net/tbd]
+JSON structures documented in this standard are defined using JSON Schema. These schema are available in JSON and YAML formats from http://beta.schemas.opengis.net/ogcapi/coverages/part1/0.1/openapi/schemas[http://beta.schemas.opengis.net/ogcapi/coverages/part1/0.1/openapi/schemas]
 
 When coverage resources (the coverage as a whole, range set, domain set, range type, meta data) advertise the `application/json` media type, it refers to the CIS JSON encoding.
 
@@ -59,8 +59,8 @@ Coverages can be encoded in any suitable data format, including formats as GML, 
 |====
 ^|*Encoding* ^|*media type*
 |HTML |text/html
-|JSON / CIS JSON|application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
-|CIS RDF| application/ld+json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
+|JSON / CIS JSON|application/json (NOTE: This value may be updated in the event that OGC APIs adopt a mechanism for negotiation by profile or a more specific media type has been registered)
+|CIS RDF| application/ld+json (NOTE: This value may be updated in the event that OGC APIs adopt a mechanism for negotiation by profile or a more specific media type has been registered)
 |CoverageJSON| application/prs.coverage+json
 |GeoTIFF |image/tiff; application=geotiff
 |PNG |image/png

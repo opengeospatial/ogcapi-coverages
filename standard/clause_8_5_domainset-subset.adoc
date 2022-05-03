@@ -30,19 +30,19 @@ include::./recommendations/domainset-subset/REC_subset-parameter-documentation.a
 ==== Parameter bbox
 
 [[re_domainset_subset-bbox]]
-include::../../oapi_common/api_modules/bbox/requirements_module_bbox.adoc[]
+include::https://github.com/opengeospatial/ogcapi-common/tree/master/api_modules/bbox/requirements_module_bbox.adoc[]
 
 [[datetime-parameter-domainset-subset-requirements]]
 ==== Parameter datetime
 
 [[re_domainset_subset-datetime]]
-include::../../oapi_common/api_modules/datetime/requirements_module_datetime.adoc[]
+include::https://github.com/opengeospatial/ogcapi-common/tree/master/api_modules/datetime/requirements_module_datetime.adoc[]
 
 [[subset-parameter-domainset-subset-requirements]]
 ==== Parameter subset
 
 [[re_domainset_subset-select]]
-include::../api_modules/subset/requirements_module_subset.adoc[]
+include::https://github.com/opengeospatial/ogcapi-common/tree/master/api_modules/subset/requirements_module_subset.adoc[]
 
 [[domainset-subset-target-resource-requirements]]
 === Target resource Requirements
