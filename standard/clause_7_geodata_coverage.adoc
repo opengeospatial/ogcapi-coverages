@@ -124,6 +124,10 @@ This schema includes a schema element which contains links to relevant resources
 
 include::requirements/geodata-coverage/REQ_coverage-collection-links.adoc[]
 
+This schema also includes an `extent` element. That element is further restricted as follows:
+
+include::requirements/geodata-coverage/REQ_coverage-collection-extent-restrictions.adoc[]
+
 Due to the multi-dimensional nature of coverages, it is desireable for an API to describe the extent of a coverage along those additional dimensions. The `GeoData Coverage` Requirements Class addresses this need through an extension of the Collection Resource which supports additional dimensions. This is accomplished by replacing the `Extent` module with the `Extent-UAD` module. The `Extent-UAD` module adds an element to the `Extent` module which identifies the content-specific axis as well as the intersecting intervals along those axis.  This extension has been designed so that a Collection with a Extend-UAD will still comply with API-Common Part 2. Likewise, a Collection which is conformant with API-Common Part 2 will also be conformant with API-Coverages.
 
 include::../api_modules/extent-uad/requirements_module_extent-uad.adoc[]
