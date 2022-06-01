@@ -1,0 +1,9 @@
+[[req_coverage_collection-links]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage/collection-links* 
+2+|The `links` element of a `Collection` resource SHALL include links to the following resources:
+^|A |`/coverage` using relation type http://www.opengis.net/def/rel/ogc/1.0/coverage:
+^|B |`/coverage/domainset` using relation type  http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset
+^|C |`/coverage/rangetype` using relation type http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype
+|===

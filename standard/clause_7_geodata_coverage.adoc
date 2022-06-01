@@ -116,9 +116,15 @@ If the parameter collectionId does not exist on the server, the status code of t
 
 The Collection Resource is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the `/collections` response. 
 
-Due to the multi-dimensional nature of coverages, it is desireable for an API to describe the extent of a coverage along those additional dimensions. The `GeoData Coverage` Requirements Class addresses this need through an extension of the Collection Resource which supports additional dimensions. This is accomplished by replacing the `Extent` module with the `Extent-UAD` module. The `Extent-UAD` module adds an element to the `Extent` module which identifies the content-specific axis as well as the intersecting intervals along those axis.  This extension has been designed so that a Collection with a Extend-UAD will still comply with API-Common Part 2. Likewise, a Collection which is conformant with API-Common Part 2 will also be conformant with API-Coverages.
+The Collection Resource is defined in the OGC API-Common Part 2 Standard. Therefore, the definition of a Collection Resource for a Coverage must conform to the common schema.
 
 include::requirements/geodata-coverage/REQ_coverage-collection-definition.adoc[]
+
+This schema includes a schema element which contains links to relevant resources. There are additional mandatory links when the Collection is a Coverage.  
+
+include::requirements/geodata-coverage/REQ_coverage-collection-links.adoc[]
+
+Due to the multi-dimensional nature of coverages, it is desireable for an API to describe the extent of a coverage along those additional dimensions. The `GeoData Coverage` Requirements Class addresses this need through an extension of the Collection Resource which supports additional dimensions. This is accomplished by replacing the `Extent` module with the `Extent-UAD` module. The `Extent-UAD` module adds an element to the `Extent` module which identifies the content-specific axis as well as the intersecting intervals along those axis.  This extension has been designed so that a Collection with a Extend-UAD will still comply with API-Common Part 2. Likewise, a Collection which is conformant with API-Common Part 2 will also be conformant with API-Coverages.
 
 include::../api_modules/extent-uad/requirements_module_extent-uad.adoc[]
 
