@@ -3,5 +3,5 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-op*
 ^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage`.
-
+^|B |The API SHALL support the HTTP GET operation on all links to a `Coverage` that have the relation type http://www.opengis.net/def/rel/ogc/1.0/coverage[http://www.opengis.net/def/rel/ogc/1.0/coverage].
 |===
