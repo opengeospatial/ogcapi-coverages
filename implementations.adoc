@@ -12,6 +12,18 @@
 | OGC API - Coverages
 | https://github.com/tomkralidis[Tom Kralidis]
 
+| https://maps.ecere.com/ogcapi/[GNOSIS Map Server]
+| OGC API - Coverages
+| https://github.com/jerstlouis[Jerome St-Louis]
+
+| https://test.cubewerx.com/cubewerx/cubeserv/demo/ogcapi[CubeSERV]
+| OGC API - Coverages
+| https://github.com/pomakis[Keith Pomakis]
+
+| https://rasdaman.org/[rasdaman]
+| OGC API - Coverages
+| https://github.com/pebau[Peter Baumann]
+
 | TBA
 | TBA
 | TBA
@@ -29,4 +41,16 @@
 | https://geopython.github.io/OWSLib[OWSLib]
 | Python client
 | https://github.com/tomkralidis[Tom Kralidis]
+
+| https://gdal.org/[GDAL]  (https://gdal.org/drivers/raster/ogcapi.html[OGC API driver])
+| OGC API - Coverages client
+| https://github.com/rouault[Even Rouault]
+
+| https://ecere.ca/gnosis[GNOSIS SDK / GNOSIS Cartographer]
+| OGC API - Coverages client
+| https://github.com/jerstlouis[Jerome St-Louis]
+
+| TBA
+| TBA
+| TBA
 |===
