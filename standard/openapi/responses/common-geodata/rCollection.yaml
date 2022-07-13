@@ -1,0 +1,50 @@
+description: |-
+  Information about a particular collection of (mostly geospatial) data available from this API. The collection is accessible via one or more OGC API set of specifications, for which a link to relevant accessible resources, e.g. /collections/{collectionId}/(items, coverage, map, tiles...) is contained in the response, with the corresponding relation type, as well as key information about the collection. This information includes:
+  * a local identifier for the collection that is unique for the dataset;
+  * a list of coordinate reference systems (CRS) in which data may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);
+  * an optional title and description for the collection;
+  * an optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
+  * for collections accessible via the Features or Records API, an optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').
+content:
+   application/json:
+     schema:
+      $ref: '../../schemas/coverages-core/coverageInfo.yaml'
+     example:
+        id: elevation
+        title: Elevation
+        description: Elevation in the city of Bonn.
+        extent:
+          spatial:
+            bbox:
+              - - 7.01
+                - 50.63
+                - 7.22
+                - 50.78
+        links:
+          - href: http://data.example.org/collections/elevation/coverage/domainset
+            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset
+            type: application/json
+            title: Elevation
+          - href: http://data.example.org/collections/elevation/coverage/rangetype
+            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype
+            type: application/json
+            title: Elevation
+          - href: http://data.example.org/collections/elevation/coverage
+            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
+            type: application/json
+            title: Elevation
+          - href: http://data.example.org/collections/buildings/coverage.html
+            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
+            type: text/html
+            title: Elevation
+          - href: https://creativecommons.org/publicdomain/zero/1.0/
+            rel: license
+            type: text/html
+            title: CC0-1.0
+          - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
+            rel: license
+            type: application/rdf+xml
+            title: CC0-1.0
+   text/html:
+     schema:
+       type: string
