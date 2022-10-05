@@ -1,7 +1,9 @@
 [[req_coverage_collections_extent_restrictions]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage/collections/extent-restrictions* 
-2+|For the `extent` element of the Collection Resource: 
-^|A |The coordinates in the `bbox` schema element SHALL be interpreted as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) OR WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]) 
+^|*Requirement {counter:req-id}* |*/req/coverage/collections/extent-restrictions*
+2+|For the `extent` element of the Collection Resource:
+^|A |For data referenced in relation to planet Earth, the coordinates in the `bbox` schema element SHALL be provided either as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]).
 |===
+
+NOTE: Ideally, a property would be included in CRS descriptions to facilitate validating this requirement.
