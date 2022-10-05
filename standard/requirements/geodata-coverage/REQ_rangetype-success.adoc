@@ -3,7 +3,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/geodata-coverage/rangetype-success*
 ^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The content of that response SHALL describe the `Range Type` of the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_rangetype.json[coverage_rangetype.json].
+^|B |The content of that response SHALL describe the `Range Type` of the coverage equivalent to that defined in the JSON schema for CIS Range Type link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_rangetype.json[coverage_rangetype.json].
 ^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
-^|D |If no format is negotiated, then the response SHALL be encoded using CIS JSON, which SHALL also be the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+^|D |If no format is negotiated, then the response SHALL be encoded using CIS JSON.
 |===
