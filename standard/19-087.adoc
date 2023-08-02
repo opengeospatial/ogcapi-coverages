@@ -104,7 +104,7 @@ include::clause_8_3_range-subset.adoc[]
 
 include::clause_8_4_coverage-tiles.adoc[]
 
-include::clause_8_5_domainset-subset.adoc[]
+// include::clause_8_5_domainset-subset.adoc[]
 
 include::clause_9_media_types.adoc[]
 

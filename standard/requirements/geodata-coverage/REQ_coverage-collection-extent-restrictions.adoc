@@ -6,4 +6,4 @@
 ^|A |For data referenced in relation to planet Earth, the coordinates in the `bbox` schema element SHALL be provided either as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]).
 |===
 
-NOTE: Ideally, a property would be included in CRS descriptions to facilitate validating this requirement.
+NOTE: Ideally, a property would be included in CRS descriptions to facilitate validating this requirement by indicating for which planetary body it is applicable.
