@@ -7,8 +7,6 @@ The `Coverage Subset` Requirements Class defines the application of query parame
 
 Implementors of this Requirements Class must also implement the <<rc-geodata-coverage-section,`GeoData Coverage`>> Requirements Class.
 
-include::./requirements/coverage-subset/REQ_dependency-geodata-coverage.adoc[]
-
 === Parameter Requirements
 
 The OGC API - Common - Part 2: Geospatial Data Standard identifies query parameters that have been standardized for use in OGC API standards. This Requirements Class defines how three of those parameters are used to create subsets of a hosted CIS Coverage.

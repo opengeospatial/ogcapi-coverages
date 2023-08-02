@@ -1,8 +1,0 @@
-[[req_coverage_subset-bbox-response]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/coverage-subset/bbox-response*
-2+|The requirements governing a bbox parameter.
-^|A |TBD
-^|B |TBD
-|===
