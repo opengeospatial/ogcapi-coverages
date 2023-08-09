@@ -1,6 +1,0 @@
-[[rec-coverage-subset-parameter-documentation]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:Rec-id}* |*/rec/coverage-subset/parameter-documentation*
-^|A |Implementers of the `coverage-subset` Requirements Class should document their supported parameters in the API definition as describe in file:///C:/Workspace/GitHub/oapi_common/collections/20-024.html#apicore[API-Core].
-|===

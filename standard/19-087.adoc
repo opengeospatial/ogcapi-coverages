@@ -94,25 +94,23 @@ include::clause_5_conventions.adoc[]
 
 include::clause_6_overview.adoc[]
 
-include::clause_7_geodata_coverage.adoc[]
+include::clause_7_core.adoc[]
 
-include::clause_8_1_coverage-subset.adoc[]
+include::clause_8_subsetting.adoc[]
 
-include::clause_8_2_coverage-scaling.adoc[]
+// include::removed_clause_domainset-subset.adoc[]
 
-include::clause_8_3_range-subset.adoc[]
+include::clause_9_scaling.adoc[]
 
-include::clause_8_4_coverage-tiles.adoc[]
+include::clause_10_field_selection.adoc[]
 
-// include::clause_8_5_domainset-subset.adoc[]
+include::clause_11_CRS.adoc[]
 
-include::clause_9_media_types.adoc[]
+include::clause_12_coverage_tiles.adoc[]
 
-include::clause_10_HTML.adoc[]
+include::clause_13_encodings.adoc[]
 
-include::clause_11_JSON.adoc[]
-
-include::clause_12_oas.adoc[]
+include::clause_14_oas.adoc[]
 
 include::annex_ats.adoc[]
 
@@ -120,14 +118,14 @@ include::annex_examples.adoc[]
 
 include::annex_history.adoc[]
 
-include::annex_glossary.adoc[]
+// include::annex_glossary.adoc[]
 
 include::annex_bibliography.adoc[]
 
-include::annex_bnf.adoc[]
+// include::annex_bnf.adoc[]
 
-include::annex_http_status.adoc[]
+// include::annex_http_status.adoc[]
 
-include::annex_api_guidelines.adoc[]
+// include::annex_api_guidelines.adoc[]
 
 <<<

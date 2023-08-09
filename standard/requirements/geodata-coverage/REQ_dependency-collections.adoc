@@ -1,6 +1,0 @@
-[[req_dependency-collections]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-coverage/dependency-collections*
-2+|The API implementation SHALL demonstrate conformance with the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections Conformance Class of the OGC API-Common Part 2, version 1.0 Standard.
-|===

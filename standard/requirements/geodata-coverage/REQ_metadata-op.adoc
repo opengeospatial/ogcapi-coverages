@@ -1,9 +1,0 @@
-[[req_geodata_coverage-metadata-op]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-coverage/metadata-op*
-^|A |The API MAY support the HTTP GET operation at the path `/collections/{collectionId}/coverage/metadata`.
-^|B |The API SHOULD support it, if available, for selected formats which can describe it.
-
-* `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
-|===

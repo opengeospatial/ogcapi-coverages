@@ -16,4 +16,4 @@ include::requirements/coverage-scaling/REQ_cov-scaling-success.adoc[]
 
 === Scaling Examples
 
-include::examples/examples_scaling.adoc[]
+See also <<scaling-examples, examples of caling requests>> in an annex.

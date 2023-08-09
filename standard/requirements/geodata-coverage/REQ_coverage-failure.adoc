@@ -1,6 +1,0 @@
-[[req_geodata_coverage-failure]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-failure*
-^|A |If the coverage identified by the {collectionId} parameter does not exist on the server, the status code of the response SHALL be 404.
-|===

@@ -1,6 +1,0 @@
-[[req_geodata_coverage-op]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-op*
-^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage` to retrieve the coverage.
-|===
