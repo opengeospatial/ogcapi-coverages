@@ -17,4 +17,4 @@ include::requirements/coverage-tiles/REQ_cov-tiles-success.adoc[]
 
 === Coverage Tiles Examples
 
-include::examples/examples_coverage_tiles.adoc[]
+See also <<coverage-tiles-examples, examples of coverage tile requests>> in an annex.

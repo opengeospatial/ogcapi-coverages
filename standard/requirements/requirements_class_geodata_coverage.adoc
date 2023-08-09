@@ -1,4 +1,4 @@
-[[rc_core]]
+[[rc-core-table]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
@@ -7,3 +7,543 @@
 |Dependency |http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
 |Dependency |http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
 |===
+
+==== Requirements
+
+[#collections-requirements-table,reftext='{table-caption} {counter:table-num}']
+.Collections Requirements
+[width="90%",cols="2,6a",options="header"]
+|====
+^|**Section** ^|**Requirements**
+2+^|From Collections Requirements Class
+^|Operation |/req/collections/rc-md-op
+^|Response |/req/collections/rc-md-success
+^|Content |/req/collections/rc-md-links +
+/req/collections/rc-timeStamp +
+/req/collections/rc-md-items
+2+^|From Simple Query Requirements Class
+^|Parameter bbox |/req/collections/rc-bbox-definition +
+/req/collections/rc-bbox-response
+^|Parameter datetime |/req/collections/rc-datetime-definition +
+/req/collections/rc-datetime-response
+^|Parameter limit |/req/collections/rc-limit-definition +
+/req/collections/rc-limit-response
+^|Target Resource Filtering |/req/collections/rc-bbox-collection-response +
+/req/collections/rc-datetime-collection-response +
+/req/collections/rc-limit-collection-response +
+/req/collections/rc-numberMatched +
+/req/collections/rc-numberReturned
+|====
+
+[[geodata-coverage-dependencies-section]]
+===== Dependencies
+
+The OGC API-Coverages standard is an extension of the OGC API - Common - Part 1: Core and Part 2: Geospatial Data Standards. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common.
+
+[[rec_dependency-core]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/rec-dependency-core*
+^|A |An implementation of the `geodata-coverage` Requirements Class SHOULD demonstrate conformance with the http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core Conformance Class defined in OGC API - Common Part 1.
+|===
+
+A Web API should provide a common look and feel to its clients. Part of that is consistency in the use of protocols and the construction of request URIs. The `core` Requirements Class provides that guidance for OGC Web APIs.
+
+[[rec_dependency-landing-page]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/rec-dependency-landing-page*
+^|A |An implementation of the `geodata-coverage` Requirements Class SHOULD demonstrate conformance with the http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/landing-page Conformance Class defined in OGC API - Common Part 1.
+|===
+
+The landing page resource provides a common starting point for clients to explore an API. Consistency in the structure of a landing page further advances the goal of a common look and feel for OGC Web API. Any implementation which is not intended for hosting on an existing API should implement the `landing page` Requirements Class.
+
+[[req_dependency-collections]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/dependency-collections*
+2+|The API implementation SHALL demonstrate conformance with the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections Conformance Class of the OGC API-Common Part 2, version 1.0 Standard.
+|===
+
+The OGC Collections API uses the `/collections` and `/collection` resources defined in API-Common Part 2. Therefore, conformance with the Requirements Class which defines these resources is required.
+
+[[rec_dependency-simple-query]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geodata-coverage/rec-dependency-simple-query*
+^|A |An implementation of the `geodata-coverage` Requirements Class SHOULD demonstrate conformance with the http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/simple-query Conformance Class defined in OGC API - Common Part 2.
+|===
+
+A query to the `/collections` resource will return a `/collection` resource for every collection hosted through that API. That could be a very large body of data. The `simple query` Conformance Class defines parameters which a client can use to limit which collections to include in the response.
+
+The `Collections` and `Simple Query` Requirements Classes have a direct bearing on the `GeoData Coverage` Requirements Class. The applicable requirements from Common Part 2 are identified in <<collections-requirements-table>>.
+
+
+[[collections-metadata-section]]
+===== Collections
+
+The `Collections` operation returns a set of metadata which includes descriptions for each of the collections available from this API. All of the collections described on a Coverages API will be be <<CIS_1_1,CIS>> coverages.
+
+The `Collections` operation is defined in the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections Requirements Class.
+
+Optional query parameters for use with the `Collections` operation are defined in the http://www.opengis.net/spec/ogcapi-common-2/1.0/req/simple-query Requirements Class.
+
+The applicable requirements from Common Part 2 are identified in <<collections-requirements-table>>.
+
+====== Operation
+
+The `GeoData-Coverage` Requirements Class does not modify the `Collections` operation as defined in API-Common.
+
+====== Response
+
+The `GeoData-Coverage` Requirements Class does not modify the `Collections` response as defined in API-Common except for the extension of the `Collection Resource` as described in <<collection-resource-definition-section,Collection Resource Definition>>.
+
+====== Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+[[collection-description-section]]
+===== Resource Collection
+
+Each resource collection (Coverage) is described by a set of metadata. That metadata can be accessed directly using the ``/collections/{collectionId}`` path and as an entry in the ``collections`` property of the ``/Collections`` resource.
+
+====== Operation
+
+The `GeoData-Coverage` Requirements Class does not modify the `/collections/{collectionId}` operation as defined in API-Common.
+
+====== Response
+
+The `GeoData-Coverage` Requirements Class does not modify the `/collections/{collectionId}` response as defined in API-Common except for the extension of the `Collection Resource` as described in <<collection-resource-definition-section,Collection Resource Definition>>.
+
+====== Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+If the parameter collectionId does not exist on the server, the status code of the response will be 404.
+
+[[collection-resource-definition-section]]
+===== Collection Resource Definition
+
+The Collection Resource is the set of metadata which describes a single collection, or in the the case of API-Coverages, a single Coverage. An abbreviated copy of this information is returned for each Coverage in the `/collections` response.
+
+The Collection Resource is defined in the OGC API-Common Part 2 Standard. Therefore, the definition of a Collection Resource for a Coverage must conform to the common schema.
+
+[[req_coverage_collection-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage/collection-definition*
+^|A |The content of a `Collection` resource SHALL be based upon the JSON schema link:https://github.com/opengeospatial/ogcapi-coverages/tree/master/standard/openapi/schemas/coverages-core/collectionInfo.yaml[collectionInfo.yaml].
+|===
+
+This schema includes a schema element which contains links to relevant resources. There are additional mandatory links when the Collection is a Coverage.
+
+[[req_coverage_collection-links]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage/collection-links*
+2+|The `links` element of a `Collection` resource SHALL include links to the following resources:
+^|A |the coverage as a whole (always available at `/collections/{collectionId}/coverage`) using relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage`,
+^|B |the coverage domainset (commonly at `/collections/{collectionId}/coverage/domainset`, but possibly a JSON pointer) using relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset,
+^|C |the coverage rangetype (commonly at `/collections/{collectionId}/coverage/rangetype`, but possibly a JSON pointer) using relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype,
+^|D |if available separately, the coverage rangeset (always at `/collections/{collectionId}/coverage/rangeset`) using relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangeset, and
+^|E |if available, the coverage metadata (always at `/collections/{collectionId}/coverage/metadata`) using relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-metadata.
+^|F |if an explicit media type (`type` property) is specified in the links for the domain set or range type, at least one of those links SHALL have the media type associated with CIS JSON (currently `application/json`).
+|===
+
+NOTE: JSON pointers are defined by https://tools.ietf.org/html/rfc6901[RFC 6901 (JSON Pointer)].
+NOTE: The links for domain set and range type resources can either be links to separate resources, or JSON Pointers, which could possibly link to the
+coverage (collection) description resource itself, pointing to the property using  e.g., `#/RangeType` or `#/DomainSet`.
+
+This schema also includes an `extent` element. That element is further restricted as follows:
+
+[[req_coverage_collections_extent_restrictions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage/collections/extent-restrictions*
+2+|For the `extent` element of the Collection Resource:
+^|A |For data referenced in relation to planet Earth, the coordinates in the `bbox` schema element SHALL be provided either as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]).
+|===
+
+NOTE: Ideally, a property would be included in CRS descriptions to facilitate validating this requirement by indicating for which planetary body it is applicable.
+
+Due to the multi-dimensional nature of coverages, it is desireable for an API to describe the extent of a coverage along those additional dimensions. The `GeoData Coverage` Requirements Class addresses this need through an extension of the Collection Resource which supports additional dimensions. This is accomplished by replacing the `Extent` module with the `Extent-UAD` module. The `Extent-UAD` module adds an element to the `Extent` module which identifies the content-specific axis as well as the intersecting intervals along those axis.  This extension has been designed so that a Collection with a Extend-UAD will still comply with API-Common Part 2. Likewise, a Collection which is conformant with API-Common Part 2 will also be conformant with API-Coverages.
+
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Module*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/rm/extent-uad
+|Target type |Web API Resource
+|Dependencies |<<rm_extent,Extent>> Requirements Module
+|===
+
+The `Extent with Uniform Additional Dimensions` (Extent-uad) resource extends the <<rm_extent,Extent>> element to support domain-specific geometries.
+
+The `Extent-uad` resource is defined as follows:
+
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/common/extent-uad-definition*
+^|A |The content of an `Extent with Uniform Additional Dimensions` (Extent-uad) resource SHALL be based upon the OpenAPI segment  link:https://github.com/opengeospatial/ogcapi-coverages/tree/master/api_modules/extent-uad/schemas/extent-uad.json[extent-uad.oas].
+|===
+
+`Extent-uad` allows definition of additional axis through the use of the Coordinate Reference System (`crs`, `trs` or `vrs`) property and one of more Intervals properties.
+
+The Coordinate Reference System (`crs`, `trs` or `vrs`) property defines the number and range of the additional axis. This property can be populated with either an identifier or a http://docs.opengeospatial.org/is/18-010r7/18-010r7.html[Well Known Text] definition of the reference system.
+
+Identifers SHALL follow a the convention of http://www.opengis.net/def/crs/{authority}/{version}/{code} where:
+
+* the token {authority} is a placeholder for a code the designates to authority responsible for the definion of this CRS. Typical values include “EPSG” and “OGC”.
+* The token{version} is a placeholder for the specific version of the coordinate reference system definion or 0 for the latest version or if the version is unknown.
+* The token {code} is a placeholder for the authority’s code for the CRS.
+
+[[vrs_example]]
+.Vertical CRS (vrs) Example
+[source, TEXT]
+----
+ VERTCS["WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PARAMETER["Vertical_Shift",0.0],PARAMETER["Direction",1.0],UNIT["Meter",1.0]],AXIS["Up",UP]
+----
+
+The Intervals properties describe where the resource intersects the additional axis.
+
+Since the `Extent-uad` resource extends the `Extent` element, all operations applied against the `Extent` resource will have identical behavior when applied against `Extend-uad`.
+
+[[uniform-uad-schema]]
+.Uniform-uad Property
+[source, YAML]
+----
+title: Extent with Uniform Additional Dimensions Schema
+allOf:
+  - $ref: 'http://beta.schemas.opengis.net/ogcapi/common/part2/0.1/collections/openapi/schemas/extent.yaml'
+  - type: object
+    additionalProperties:
+       type: object
+       properties:
+         allOf:
+            - interval:
+              description: |-
+              type: array
+              minItems: 1
+              items:
+                type: array
+                minItems: 2
+                maxItems: 2
+                items:
+                  - type: string
+                  - type: number
+                  - type: null
+                example:
+                  - '2011-11-11T12:22:11Z'
+                  - 32.5
+                  - null
+            - oneOf:
+              - crs:
+                  type: string
+                  description: generic coordinate reference system suitable for any type of dimensions
+              - trs:
+                  type: string
+                  description: temporal coordinate reference system (e.g. as defined by Features for 'temporal')
+              - vrs:
+                  type: string
+                  description: vertical coordinate reference system (e.g. as defined in EDR for 'vertical')
+----
+
+
+[[coverage-access-section]]
+===== Coverage Access
+
+OGC API Common provides access to metadata about collections. The `GeoData-Coverages` Requirements Class extends that foundation to provide access to the individual Coverages.
+
+A `Coverage` is a collection of measured values. The structure of that collection is defined by the <<CIS_1_1,CIS standard>>. A CIS Coverage contains four principle components:
+
+* A `DomainSet` component describing the coverage’s domain (the set of “direct positions”, i.e., the locations for which values are stored in the coverage)
+* A `RangeType` component which describes the coverage's `RangeSet` data structure (in the case of images usually called the “pixel data type”).
+* A `RangeSet` component containing the stored values (often referred to as “pixels”, “voxels”) of the coverage.
+* A `Metadata` component which represents an extensible slot for metadata. The intended use is to hold any kind of application-specific metadata structures.
+
+A coverage containing the `DomainSet`, `RangeType`, `RangeSet`, and `Metadata`  components is accessible at
+
+* The relative path `/coverage`
+* The link relation `ogc:coverage:coverage`
+
+The `DomainSet` and `RangeType` are accessible from resources referenced through links within the `/collections/{collectionId}` resource,
+using the relation types `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset` and
+`http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`, respectively.
+Those links may either point to separate resource, in which case the recommended paths are `/collections/{collectionId}/coverage/domainset` and
+`/collections/{collectionId}/coverage/rangetype`, or point to the coverage description resource itself the domain set and/or range type are
+embedded. In the latter case those links will point specifically to properties using `#`, e.g.,
+`#domainset` and `#rangetype`.
+
+The `RangeSet` may be available as its own resource as well, if supported by the selected representation (format).
+
+If `Metadata` is available, it will also be be available as its own resource.
+
+[[coverage-clause]]
+====== Coverage
+
+The `Coverage` operation returns all the components of the coverage (rangeset, domain set, range type, metadata). It is comparable to a WCS GetCoverage operation.
+
+======= Operation
+
+The `Coverage` operation is defined by the following requirement.
+
+[[req_geodata_coverage-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-op*
+^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage` to retrieve the coverage.
+|===
+
+======= Response
+
+A successful response to the `Coverage` operation shall meet the following requirement.
+
+[[req_geodata_coverage-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL include the `rangeset` of the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage.json[coverage.json].
+^|C |The content of that response SHALL also include the `domainset` and `rangetype` as well, to the extent that the negotiated format can describe it.
+^|D |The content of that response MAY also include the `metadata` for that coverage. The server SHOULD return that metadata if it is available and the negotiated format can describe it.
+^|E |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+^|F |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+|===
+
+////
+[#coverage--schema,reftext='Coverage Response Schema']
+.Coverage Response Schema
+[source,yaml]
+----
+include::../openapi/schemas/cis/coverage-schema.yaml[]
+----
+
+The following JSON fragment is an example of a response to a Coverage request.
+
+[#coverage-all-example,reftext=`Coverage Example`]
+.Coverage Example
+[source,json]
+----
+include::../examples/JSON/coverage_example.json[]
+----
+////
+
+======= Error situations
+
+[[req_geodata_coverage-failure]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/coverage-failure*
+^|A |If the coverage identified by the {collectionId} parameter does not exist on the server, the status code of the response SHALL be 404.
+|===
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+[[coverage-domainset-clause]]
+====== Coverage Domain Set
+
+The `Coverage Domain Set` operation returns the coverage’s domain set.
+
+======= Operation
+
+The `Coverage Domain Set` operation is defined by the following requirement.
+
+[[req_geodata_coverage_domainset-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/domainset-op*
+^|A |The API SHALL support an HTTP GET operation for the resource linked to by the domain set link included in the coverage (collection) description resource (link relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`).
+|===
+
+======= Response
+
+A successful response to the `Coverage Domain Set` operation shall meet the following requirement.
+
+[[req_geodata_coverage_domainset-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/domainset-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL provide the `Domain Set` definition of the coverage equivalent to that defined in the JSON schema for the CIS Domain Set  link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_domainset.json[coverage_domainset.json].
+^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+^|D |If no format is negotiated, then the response SHALL be encoded using CIS JSON.
+|===
+
+[#coverage-domainset-schema,reftext='Coverage Domain Set Response Schema']
+.Coverage Domain Set Response Schema
+[source,yaml]
+----
+include::../openapi/schemas/cis/domainSet.yaml[]
+----
+
+The following JSON fragment is an example of a response to a Coverage DomainSet request.
+
+[#coverage-domainset-example,reftext=`Coverage DomainSet Example`]
+.Coverage DomainSet Example
+[source,json]
+----
+include::../examples/JSON/coverage_domainset_example.json[]
+----
+
+======= Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+[[coverage-rangetype-clause]]
+====== Coverage Range Type
+
+The `Coverage Range Type` operation returns the coverage’s range type information (i.e., a description of the data semantics)
+
+======= Operation
+
+The `Coverage Range Type` operation is defined by the following requirement.
+
+[[req_geodata_coverage-rangetype-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/rangetype-op*
+^|A |The API SHALL support an HTTP GET operation for the resource linked to by the range type link included in the coverage (collection) description resource (link relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`).
+|===
+
+======= Response
+
+A successful response to the `Coverage Range Type` operation shall meet the following requirement.
+
+[[req_geodata-coverage_rangetype-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/rangetype-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL describe the `Range Type` of the coverage equivalent to that defined in the JSON schema for CIS Range Type link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_rangetype.json[coverage_rangetype.json].
+^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+^|D |If no format is negotiated, then the response SHALL be encoded using CIS JSON.
+|===
+
+[#coverage-rangetype-schema,reftext='Coverage Range Type Response Schema']
+.Coverage Range Type Response Schema
+[source,yaml]
+----
+include::../openapi/schemas/cis/rangeType.yaml[]
+----
+
+The following JSON fragment is an example of a response to a Coverage RangeType request.
+
+[#coverage-rangetype-example,reftext=`Coverage RangeType Example`]
+.Coverage RangeType Example
+[source,json]
+----
+include::../examples/JSON/coverage_rangetype_example.json[]
+----
+
+======= Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+[[coverage-rangeset-clause]]
+====== Coverage Range Set
+
+The `Coverage Range Set` operation returns the coverage’s range set, i.e., the actual values in the coverage’s Native Format (see <<media-types-section,Media Types>> for ways to retrieve inspecific formats)
+
+======= Operation
+
+The `Coverage Range Set` operation is defined by the following requirement.
+
+[[req_geodata_coverage-rangeset-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata_coverage/rangeset-op*
+^|A |The API MAY support the HTTP GET operation at the path `/collections/{collectionId}/coverage/rangeset`.
+^|B |The API SHOULD support it for selected formats which can describe the raw data values without any additional information.
+
+* `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
+|===
+
+======= Response
+
+A successful response to the `Coverage Range Set` operation shall meet the following requirement.
+
+[[req_geodata_coverage-rangeset-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata_coverage/rangeset-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL contain the `Range Set` of the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_rangeset.json[coverage_rangeset.json].
+^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+^|D |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+|===
+
+////
+[#coverage-rangeset-schema,reftext='Coverage Range Set Response Schema']
+.Coverage Range Set Response Schema
+[source,yaml]
+----
+include::../openapi/schemas/cis/rangeSet.yaml[]
+----
+
+The following JSON fragment is an example of a response to a Coverage RangeSet request.
+
+[#coverage-rangeset-example,reftext=`Coverage RangeSet Example`]
+.Coverage RangeSet Example
+[source,json]
+----
+include::../examples/JSON/coverage_rangeset_example.json[]
+----
+////
+
+======= Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.
+
+[[coverage-metadata-clause]]
+====== Coverage Metadata
+
+The `Coverage Metadata` operation returns the coverage’s metadata (may be empty)
+
+======= Operation
+
+The `Coverage Metadata` operation is defined by the following requirement.
+
+[[req_geodata_coverage-metadata-op]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/metadata-op*
+^|A |The API MAY support the HTTP GET operation at the path `/collections/{collectionId}/coverage/metadata`.
+^|B |The API SHOULD support it, if available, for selected formats which can describe it.
+
+* `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
+|===
+
+======= Response
+
+A successful response to the `Coverage Metadata` operation shall meet the following requirement.
+
+[[req_geodata_coverage-metadata-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/geodata-coverage/metadata-success*
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The content of that response SHALL contain metadata which describes the coverage equivalent to that defined in the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_metadata.json[coverage_metadata.json].
+^|C |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+^|D |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+|===
+
+////
+[#coverage-metadata-schema,reftext='Coverage Metadata Response Schema']
+.Coverage Metadata Response Schema
+[source,yaml]
+----
+include::../openapi/schemas/cis/metadata.yaml[]
+----
+
+The following JSON fragment is an example of a response to a Coverage Metadata request.
+
+[#coverage-metadata-example,reftext=`Coverage Metadata Example`]
+.Coverage Metadata Example
+[source,json]
+----
+include::../examples/JSON/coverage_metadata_example.json[]
+----
+////
+
+======= Error situations
+
+See <<http-status-codes,HTTP Status Codes>> for general guidance.

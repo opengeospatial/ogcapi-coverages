@@ -21,6 +21,6 @@ The results of using a range-subset parameter are defined by the following Requi
 
 include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
 
-=== Range Subsetting Examples
+=== Field Selection Examples
 
-include::examples/examples_rangesubsetting.adoc[]
+See also <<field-selection--examples, examples of field selection requests>> in an annex.

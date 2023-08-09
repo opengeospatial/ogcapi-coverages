@@ -1,6 +1,0 @@
-[[req_geodata_coverage-rangetype-op]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-coverage/rangetype-op*
-^|A |The API SHALL support an HTTP GET operation for the resource linked to by the range type link included in the coverage (collection) description resource (link relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`).
-|===

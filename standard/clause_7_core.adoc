@@ -1,0 +1,25 @@
+[[rc-core]]
+== Requirements Class "Core"
+
+=== Overview
+
+API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Requirements Class defines how to organize and provide access to a collection of collections.
+
+API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
+
+The `GeoData-Coverage` Requirements Class extends API-Common to define the requirements for locating, understanding, and accessing a collection which is a coverage.
+
+Three resources and their operations are defined in this Requirements Class. They are summarized in <<collection-resources>>.
+
+include::requirements/requirements_class_geodata_coverage.adoc[]
+
+[#collection-resources,reftext='{table-caption} {counter:table-num}']
+.Collection Resources
+[width="90%",cols="10,10,5,20",options="header"]
+|===
+^|Resource ^|URI ^|HTTP Method ^|Description
+|<<collections-metadata-section,Collections>> |/collections ^|GET |Information which describes the set of available Collections
+|<<collection-description-section,Collection>> |/collections/{collectionId} ^|GET |Information about a specific collection of geospatial data with links to distribution
+|<<coverage-access-section,Coverages>> |/collections/{collectionId}/coverage ^|GET |A coverage conformant with the <<CIS_1_1,CIS>> Standard
+|===
+
