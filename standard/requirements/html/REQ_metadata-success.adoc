@@ -1,9 +1,0 @@
-[[req_html_metadata-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/html/metadata-success*
-^|**Restricts** |/req/core/metadata-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The response SHALL be a valid HTML document
-^|C |The response SHALL include content equivalent to that defined in JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_metadata.json[coverage_metadata.json].
-|===

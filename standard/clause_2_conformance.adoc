@@ -1,38 +1,55 @@
 == Conformance
-Conformance with this standard shall be checked using the tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to claim conformance, are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
+Conformance with this standard shall be checked using the tests specified in Annex A (normative) of this document.
+The framework, concepts, and methodology for testing, and the criteria to claim conformance, are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.
 
 The one Standardization Target for this standard is Web APIs.
 
-OGC API-Common provides a common foundation for OGC API standards. Therefore, this standard should be viewed as an extension to API-Common. 
+_OGC API - Common_ provides a common foundation for OGC API standards. Therefore, this standard should be viewed as an extension to _OGC API - Common_.
 
-This standard identifies five Conformance Classes. Each Conformance Class has an associated Requirements Class. The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
+This standard identifies eighteen Conformance Classes. Each Conformance Class has an associated Requirements Class.
+The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
 
-The Requirements Classes for OGC API-Coverages are:
+The Requirements Classes for _OGC API - Coverages_ are:
 
-* <<rc-geodata-coverage-section,*GeoDataCoverage*>>
-* <<rc-coverage-subset-section,*Subset*>>
-* <<rc-coverage-scaling-section,*Scaling*>>
-* <<rc-range-subset-section,*RangeSubset*>>
-* <<rc-coverage-tiles-section,*Tiles*>>
-* <<rc-domainset-subset-section,*DomainSetSubset*>>
-* <<requirements-class-html-clause,*HTML*>>
-* <<requirements-class-cisjson-clause,*JSON*>>
-* <<requirements-class-openapi_3_0-clause,*OpenAPI 3.0*>>
+=== Requirements classes defining resources
 
-The _GeoDataCoverage_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of API-Coverages.
+* <<rc-core,*Core*>>
+* <<rc-coverage-tiles,*Coverage Tiles*>>
+
+The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
+
+The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the Coverages API to request coverage tiles.
+
+=== Requirements classes defining query parameters
+
+* <<rc-subsetting,*Subsetting*>>
+* <<rc-scaling,*Scaling*>>
+* <<rc-fieldselection,*Field Selection*>>
+* <<rc-crs,*Coordinate Reference System*>>
 
 The _Subset_ Requirements Class provides capabilities to select a sub-set of a `Coverage` using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
-The _Scaling_ Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original. 
+The _Scaling_ Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
 
-The _Range Subset_ Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
+The _Field Selection_ (Range Subsetting) Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
 
-The _Tiles_ Requirements Class defines how to combine the OGC API - Tiles building blocks with the Coverages API to request coverage tiles. 
+The _Coordinate Reference System_ Requirements Class defines the ability to request coverage data in an alternate output coordinate reference system.
 
-The _Domain Subset_ Requirements Class defines the use of parameters for sub-setting the domainset of the coverage. 
+=== Requirements classes defining resource representations
 
-The _HTML_ and _JSON_ Requirements Classes address support for encodings commonly used with APIs.
+* <<rc-encoding-html,HTML>>
+* <<rc-encoding-geotiff,GeoTIFF>>
+* <<rc-encoding-netcdf,netCDF>>
+* <<rc-encoding-cisjson,CIS JSON>>
+* <<rc-encoding-coveragejson,CoverageJSON>>
+* <<rc-encoding-las,LAS>>
+* <<rc-encoding-laszip,LASZip>>
+* <<rc-encoding-png,PNG>>
+* <<rc-encoding-jpegxl,JPEG XL>>
+* <<rc-encoding-jpeg2000,JPEG 2000>>
+* <<rc-encoding-zarr,(Geo)Zarr>>
+* <<rc-oas30,*OpenAPI 3.0*>>
 
-The _OpenAPI 3.0_ Requirements Class addresses the use of the OpenAPI 3.0 standard to document and communicate the API Definition.
+The Encoding Requirements Classes address support for formats commonly used for encoding coverage data.
 
-
+The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition to those defined in _OGC API - Common - Part 1: Core_ to facilitate identifying coverage resources from an OpenAPI 3.0 API Definition.

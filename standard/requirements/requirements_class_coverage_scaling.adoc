@@ -5,5 +5,54 @@
 2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-scaling
 |Target type |Web API
 |Dependency |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/geodata-coverage
-|Dependency |<<CIS_1_1,OGC Coverage Implementation Schema (CIS)>>
+|===
+
+=== Requirements
+
+==== `scale-factor`, `scale-size` and `scale-axes` parameters
+
+The scaling parameters are defined in the following Requirement:
+
+[[req_coverage_scaling-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/definition*
+^|A |The operation SHALL support a parameter `scale-size` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+
+[source,EBNF]
+----
+  ScalingSpec:       "scale-size"=axisName({number})[,axisName({number})]*
+  axisName:          {text}
+
+  Where:
+     {number} is an integer or floating-point number, and
+
+----
+^|B |The operation SHALL support `scale-factor` numeric parameter.
+^|C |The operation SHALL support a parameter `scale-axes` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+
+[source,EBNF]
+----
+  ScalingSpec:       "scale-axes"=axisName({number})[,axisName({number})]*
+  axisName:          {NCName}
+
+  Where:
+     {number} is an integer or floating-point number, and
+----
+
+^|D |The axis name SHALL be the same as one of the `axisLabels` defined in the DomainSet, and shall match the abbreviations defined by the CRS
+(as defined bythe <gml:axisAbbrev> tags).  or else return a 400 status code.
+|===
+
+The results of using a scaling parameter are defined by the following Requirement:
+
+[[req_coverage_scaling-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/success*
+^|A |The `scale-size=AxisName(count)`, `scale-factor=factor` and `scale-axes=AxisName(factor)` parameters SHALL be supported for the coverage and range set resources.
+^|B |When `scale-size` is used, the returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified, and the original number of sample values for unspecified axes.
+^|C |When `scale-factor` is used, for each axis, the returned coverage SHALL contain the number of original sampled values, divided by _factor_.
+^|D |When `scale-axes` is used, for each axis specified, the returned coverage SHALL contain the number of original sampled values, divided by the _factor_ specified for that axis, and the original number of sample values for unspecified axes.
+^|E |When `scale-size` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===

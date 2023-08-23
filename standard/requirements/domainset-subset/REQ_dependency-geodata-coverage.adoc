@@ -1,5 +1,0 @@
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/collection-subset/rc-dependency-geodata-coverage* 
-^|A |An implementation of the `Coverage Subset` Requirements Class SHALL demonstrate conformance with the `GeoData Coverage` Conformance Class.
-|===

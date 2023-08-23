@@ -1,7 +1,9 @@
-[[rc-range-subset-section]]
-== Requirements Class Range Subset
+[[rc-fieldselection]]
+== Requirements Class Field Selection
 
-The Range Subset Requirements Class defines the `properties` parameter for selecting a subset of the DataRecord fields (defined in the Range Type, e.g. individual imagery bands)
+=== Overview
+
+The Field Selection Requirements Class defines the `properties` parameter for selecting a subset of the DataRecord fields (defined in the Range Type, e.g. individual imagery bands)
 to retrieve from Range Sets, either of a Coverage resource, or a separate RangeSet resource of the coverage, using the HTTP GET operation.
 The effect is to generate a subset of the range set of the coverage. The order of the fields as listed in the value of the parameter also determines the order
 in which those fields will be ordered in the response, if the negotiated format has such a concept of field order.
@@ -11,16 +13,8 @@ This query parameter affects both the `/collections/{collection_id}/coverage` an
 
 Range subsetting parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
 
-include::requirements/requirements_class_coverage_rangesubset.adoc[]
-
-The `properties` parameter is defined in the following Requirement:
-
-include::requirements/coverage-rangesubset/REQ_cov-rangesubset-definition.adoc[]
-
-The results of using a range-subset parameter are defined by the following Requirement:
-
-include::requirements/coverage-rangesubset/REQ_cov-rangesubset-success.adoc[]
-
 === Field Selection Examples
 
 See also <<field-selection--examples, examples of field selection requests>> in an annex.
+
+include::requirements/requirements_class_coverage_rangesubset.adoc[]

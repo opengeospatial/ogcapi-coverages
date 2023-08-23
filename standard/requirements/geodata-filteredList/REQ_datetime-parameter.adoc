@@ -1,8 +1,0 @@
-[[req_geodata_filteredList-datetime-parameter]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-filteredList/datetime-parameter*
-^|A |An API implementing Common - Part 2: Geospatial data MAY support the Date-Time (datetime) parameter for `/collections` requests.
-^|B |Requests which include the Date-Time parameter SHALL comply with API-Common requirement `/req/geodata-filteredList/rc-time-definition`.
-^|C |Responses SHALL be appropriately filtered, returning only collections whose temporal extent intersects with the specified date time parameter.
-|===

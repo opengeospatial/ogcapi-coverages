@@ -1,12 +1,11 @@
-[[requirements-class-openapi_3_0-clause]]
+[[rc-oas30]]
 == Requirements class "OpenAPI 3.0"
 
+=== Overview
+
+The OpenAPI 3.0 Requirements Class is applicable to OGC API - Coverages as well.
+So an implementation of _OGC API - Coverages_ which supports OpenAPI 3.0 as an API Description format must also comply with the _OGC API - Common_ oas30 Conformance Class.
+
+In addition, this optional requirements class defines the `.getCoverage` operationId suffix to be used in order to facilitate the identification of coverage resources available from an API.
+
 include::requirements/requirements_class_oas30.adoc[]
-
-The OpenAPI 3.0 Requirements Class is applicable to API-Coverages as well. So an implementation of API-Coverages which supports OpenAPI 3.0 as an API Description format must also comply with the API-Common oas30 Conformance Class.
-
-include::requirements/oas30/REQ_oas-common.adoc[]
-
-Implementations must also advertise conformance with this Requirements Class.
-
-include::requirements/oas30/REQ_oas-conformance.adoc[]

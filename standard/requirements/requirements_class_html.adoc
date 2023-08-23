@@ -9,3 +9,30 @@
 |Dependency |<<HTML5,HTML5>>
 |Dependency |<<schema.org,Schema.org>>
 |===
+
+==== Requirements
+
+[[requirements-class-html-clause]]
+The following requirements apply to an _OGC API - Coverages_ implementation when the following conditions apply:
+
+. The API advertises conformance to the HTML Conformance Class
+. The client negotiates an HTML format
+
+The HTML Requirements Class restricts requirements defined in the `Core` Requirements Class by imposing encoding-specific requirements.
+At this time, these additional requirements only apply to the HTTP response payloads.
+The sections below identify the scope of each new requirement and the `Core` requirements which lay within each scope.
+
+===== Coverage
+
+This section covers the <<coverage-clause,Coverage>> response for the
+`{datasetAPI}/collections/{collectionId}/coverage` operation.
+
+[[req_html_coverage-success]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/html/coverage-success*
+^|**Restricts** |/req/core/coverage-success
+^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|B |The response SHALL be a valid HTML document
+^|C |The response SHALL include content equivalent to that defined in JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage.json[coverage.json].
+|===

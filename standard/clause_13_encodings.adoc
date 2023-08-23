@@ -1,207 +1,195 @@
-[[media-types-section]]
-== Media Types
+[[encodings-section]]
+== Requirements Classes for Encodings
 
-This standard does not mandate any particular encoding or format. However, it does provide extensions for encodings which are commonly used in OGC APIs. These extensions include:
+This standard does not mandate any particular encoding or format in which to return the `../coverage` resource.
+Coverages can be encoded in any suitable data format.
+However, it does define requirements class for encodings which are expected to be commonly supported in implementations of this standard.
+These requirements classes include:
 
-* <<requirements-class-cisjson-clause,CIS JSON>>
-* <<requirements-class-html-clause,HTML>>
+* <<rc-encoding-html,HTML>>
+* <<rc-encoding-geotiff,GeoTIFF>>
+* <<rc-encoding-netcdf,netCDF>>
+* <<rc-encoding-cisjson,CIS JSON>>
+* <<rc-encoding-coveragejson,CoverageJSON>>
+* <<rc-encoding-las,LAS>>
+* <<rc-encoding-laszip,LASZip>>
+* <<rc-encoding-png,PNG>>
+* <<rc-encoding-jpegxl,JPEG XL>>
+* <<rc-encoding-jpeg2000,JPEG 2000>>
+* <<rc-encoding-zarr,(Geo)Zarr>>
 
-Neither of these encodings are mandatory. An implementor of this standard may choose to implement neither of them, selecting different encodings instead.
+None of these encodings is mandatory. An implementor of this standard may choose to implement none of them, selecting different encodings instead.
 
-In addition to the Requirements Classes, there are additional coverage formats which implementors should be aware of. These formats apply to encodings of pixel data. Since this data is typically binary, it is largely opaque to the API.
-
-=== HTML Encoding
-Support for HTML is recommended. HTML is the core language of the World Wide Web. An API that supports HTML will support browsing the spatial resources with a web browser and will also enable search engines to crawl and index those resources.
-
-=== CIS JSON Encoding
-Support for CIS JSON is recommended. JSON is a commonly used format that is simple to understand and well supported by tools and software libraries.
-
-JSON structures documented in this standard are defined using JSON Schema. These schema are available in JSON and YAML formats from http://schemas.opengis.net/tbd[http://schemas.opengis.net/tbd]
-
-When coverage resources (the coverage as a whole, range set, domain set, range type, meta data) advertise the `application/json` media type, it refers to the CIS JSON encoding.
-
-This API-Coverages standard is built around the <<CIS_1_1,OGC Coverage Implementation Schema (CIS)>>.
-CIS content often includes multi-dimensional coordinates and coordinate reference systems in sensor and analytic space.
-These "Engineering" coordinate reference systems cannot be represented using WGS-84.
-
-The <<CIS_JSON_Schema,OGC JSON Schema for CIS>> standard addresses that need by defining a JSON schema for the CIS standard.
-This format should be used when the `application/json` media type is specified to encode all of the `{datasetAPI}/collections/{collectionId}/coverage*` resources.
-A CIS JSON representation of the range type and domain set for the coverage is also required to be either embedded in properties or linked from the /collections/{collectionId} resource.
-
-Other encodings such as CoverageJSON must use an alternate media type.
-
-=== Binary
-A coverage can also be distributed in binary form, for which a number of formats are commonly used:
-
-* CIS RDF
-* NetCDF
-* GeoTIFF
-* PNG
-* JPEG
-* JPEG-2000
-
-OGC CIS also defines multipart encoding of the different components of a coverage.
-This allows the result to have a "canonical" header while components can be factored out and represented in some (more efficient) binary format.
-Any suitable container format (such as zip, multipart/mime, SAFE, etc.) can "bundle" these components into one coverage file ready for shipping.
-
-With OGC API - Coverages, given that the description of the coverage is easily available at the /collections/{collectionId} resource, with the
-range type and domain set either embedded or linked from that resource, an implementation may prefer to keep single-part binary formats encoding
-all components to the best it can, as they might be more directly interoperable.
-
-=== Media Types
-A description of the media types is mandatory for any OGC standard which involves data encodings. The list of suitable media types for the API-Coverages standard in provided in <<api-coverage-media-types>>.
-
-Coverages can be encoded in any suitable data format, including formats as GML, CIS JSON, GeoTIFF, and NetCDF. Further, coverages can be represented by a single document (stream or file) or by a hierarchically organized set of documents, each of which can be encoded individually – for example, the domain set, range type, and metadata may be encoded in easily parseable GML, CIS JSON, or RDF while the range set is encoded in some compact binary format like NetCDF or JPEG2000. Such partitioning allows for coverages tiled in space, time, or mixed, thereby enabling mosaics, time-interleaved coverages, and efficiently subsettable datacubes.
-
-[#api-coverage-media-types,reftext='{table-caption} {counter:table-num}']
-.API-Coverages media Types
-[width="90%",cols="2,4"]
-|====
-^|*Encoding* ^|*media type*
-|HTML |text/html
-|JSON / CIS JSON|application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
-|CIS RDF| application/ld+json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
-|CoverageJSON| application/prs.coverage+json
-|GeoTIFF |image/tiff; application=geotiff
-|PNG |image/png
-|JPEG |image/jpeg
-|JPEG-2000|image/jp2
-|NetCDF |application/x-netcdf
-|====
-
-NOTE: Consider adding a table showing valid media types for each CIS component.
-
-[[media-type-defaults]]
-=== Default Encodings
-
-The media type used to encode a response to a request shall be determined through the HTTP content negotiation protocol as specified in API-Common.
+The media type used to encode a response to a request shall be determined based on HTTP content negotiation, as specified in _OGC API - Common_.
 If not using content negotiation, the encoding must follow the media type described in the link to the resource from the collection.
 
+For most efficient usage, a coverage should be available in binary form, for which a number of encodings requirements classes are defined below.
 
-[[requirements-class-cisjson-clause]]
-== Requirements Class CIS JSON
+=== Media Types
 
-The following requirements apply to an OGC API-Coverage implementation when the following conditions apply:
+A table of the media types corresponding to each encoding requirements class defined in this standard follows.
 
-. The API advertises conformance to the CIS JSON Conformance Class
-. The client negotiates a JSON or CIS JSON format
+[#api-coverage-media-types,reftext='{table-caption} {counter:table-num}']
+.Media Types for each encoding requirements class
+[width="90%",cols="2,4"]
+|====
+^|*Encoding*            ^|*media type*
+|HTML                    |text/html
+|GeoTIFF                 |image/tiff; application=geotiff
+|netCDF                  |application/x-netcdf
+|CIS JSON                |application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
+|CoverageJSON            |application/prs.coverage+json
+|LAS                     |vnd.las
+|LASZip                  |vnd.laszip
+|PNG                     |image/png
+|JPEG XL                 |image/jxl
+|JPEG-2000               |image/jp2
+|(Geo)Zarr               |application/x-zarr (TODO: Register this media type?)
+|====
 
-The CIS JSON Requirements Class restricts requirements defined in the `GeoData-Coverage` Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the `GeoData-Coverage` requirements which lay within each scope.
+[[rc-encoding-html]]
+=== Requirements Class HTML Encoding
 
-include::requirements/requirements_class_cisjson.adoc[]
+==== Overview
 
-=== Common
+The HTML requirements class defines at a high level the ability to retrieve an HTML response for the coverage resource intended primarily for users accessing the API from a Web browser.
 
-This section covers the requirements inherited from the API-Common standard. Its scope includes responses for the following operations:
+The exact content of the HTML response is not prescribed, leaving the flexibility for implementations to choose a preferred approach, such as embedding a static or interactive view of a coverage.
 
-* `{datasetAPI}/`: Dataset API Landing Page
-* `{datasetAPI}/api`: API Description
-* `{datasetAPI}/conformance`: Conformance Classes
-* `{datasetAPI}/collections`: Collections
-* `{datasetAPI}/collections/{collectionId}`: Collection Information
-
-include::requirements/cisjson/REQ_api-common.adoc[]
-
-It is also necessary to advertise conformance with this Requirements Class.
-
-include::requirements/cisjson/REQ_cisjson-conformance.adoc[]
-
-=== Coverage
-
-This section covers the <<coverage-clause,Coverage>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage` operation.
-
-include::requirements/cisjson/REQ_coverage-success.adoc[]
-
-=== Coverage Domain Set
-
-This section covers the <<coverage-domainset-clause,Coverage Domain Set>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/domainset` operation.
-
-include::requirements/cisjson/REQ_domainset-success.adoc[]
-
-=== Coverage Range Type
-
-This section covers the <<coverage-rangetype-clause,Coverage Range Type>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/rangetype` operation.
-
-include::requirements/cisjson/REQ_rangetype-success.adoc[]
-
-=== Coverage Range Set
-
-This section covers the <<coverage-rangeset-clause,Coverage Range Set>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/rangeset` operation.
-
-include::requirements/cisjson/REQ_rangeset-success.adoc[]
-
-=== Coverage Metadata
-
-This section covers the <<coverage-metadata-clause,Coverage Metadata>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/metadata` operation.
-
-include::requirements/cisjson/REQ_metadata-success.adoc[]
-
-
-[[requirements-class-html-clause]]
-== Requirements Class HTML
-
-The following requirements apply to an OGC API-Coverage implementation when the following conditions apply:
-
-. The API advertises conformance to the HTML Conformance Class
-. The client negotiates an HTML format
-
-The HTML Requirements Class restricts requirements defined in the `GeoData-Coverage` Requirements Class by imposing encoding-specific requirements. At this time, these additional requirements only apply to the HTTP response payloads. The sections below identify the scope of each new requirement and the `GeoData-Coverage` requirements which lay within each scope.
+HTML is the core language of the World Wide Web. An API that supports HTML will support browsing the spatial resources with a web browser and will also enable search engines to crawl and index those resources.
 
 include::requirements/requirements_class_html.adoc[]
 
-=== Common
+[[rc-encoding-geotiff]]
+=== Requirements Class GeoTIFF
 
-This section covers the requirements inherited from the API-Common standard. Its scope includes responses for the following operations:
+==== Overview
 
-* `{datasetAPI}/`: Dataset API Landing Page
-* `{datasetAPI}/api`: API Description
-* `{datasetAPI}/conformance`: Conformance Classes
-* `{datasetAPI}/collections`: Collections
-* `{datasetAPI}/collections/{collectionId}`: Collection Information
+The GeoTIFF requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/is/19-008r4/19-008r4.html[OGC GeoTIFF standard].
 
-include::requirements/html/REQ_api-common.adoc[]
+// TODO: include::requirements/requirements_class_geotiff.adoc[]
 
-It is also necessary to advertise conformance with this Requirements Class.
+=== Requirements Class netCDF
 
-include::requirements/html/REQ_html-conformance.adoc[]
+==== Overview
 
-=== Coverage
+The netCDF requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/?artifact_id=43732[OGC netCDF standard].
 
-This section covers the <<coverage-clause,Coverage>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage` operation.
+// TODO: include::requirements/requirements_class_netcdf.adoc[]
 
-include::requirements/html/REQ_coverage-success.adoc[]
+[[rc-encoding-cisjson]]
+=== Requirements Class CIS JSON
 
-=== Coverage Domain Set
+==== Overview
 
-This section covers the <<coverage-domainset-clause,Coverage Domain Set>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/domainset` operation.
+The CIS JSON requirements class defines support for encoding a coverage response according to the http://www.opengis.net/doc/IS/cis/1.1.1[OGC Coverage Implementation Schema (CIS) 1.1].
 
-include::requirements/html/REQ_domainset-success.adoc[]
+The CIS JSON structures are defined using JSON Schema at https://schemas.opengis.net/cis/1.1/json/coverage-schema.json.
+A draft corrigendum is available at https://github.com/opengeospatial/coverage-implementation-schema/blob/main/standard/schemas/1.1/json/coverage-schema.json, with updated examples
+available at https://github.com/opengeospatial/coverage-implementation-schema/tree/main/standard/schemas/1.1/json/examples .
 
-=== Coverage Range Type
+The media type `application/json` is reserved for use with CIS JSON until a dedicated media type is registered.
 
-This section covers the <<coverage-rangetype-clause,Coverage Range Type>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/rangetype` operation.
+The CIS Standard defines four aspects of a coverage which are described in separate properties: the domain set, the range type, the rangeset, and the domain-specific metadata.
+By default, all of these aspects should be returned as part of a coverage response, with the domain-specific metadata being optional if none is available.
 
-include::requirements/html/REQ_rangetype-success.adoc[]
+This CIS JSON requirements class defines a permission for implementations to support a `profile` query parameter which can be used by a client to retrieve only some of these aspects of the coverage e.g.,
+`profile=domainset,rangetype`. Information equivalent to the CIS _DomainSet_ is already included in the collection description resource `extent` property,
+whereas information equivalent to the CIS _RangeType_ is included in the schema resource associated with the collection resource.
+This profiling capability also allows clients to retrieve a subset of the domainset when using `profile=domainset` together with
+one or more subsetting parameters (`subset`, `bbox` or `datetime`).
 
-=== Coverage Range Set
+The CIS standard defines a number of alternative way in which a coverage encoding can be structured.
+In order to maximize interoperability, this requirements class specifies that the response will be a _CoverageByDomainAndRange_ consisting of either a DomainSet described by a
+_GeneralGridCoverage_ (for coverages consisting of one or more dimensions of regular and/or irregular grids) or a _DirectMultiPoint_ coverage (for point clouds), excluding
+a _CoverageByPartitioning_ defined by a PartitionSet, unless a prior arrangement (not specified by this Standard) is established with the client.
 
-This section covers the <<coverage-rangeset-clause,Coverage Range Set>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/rangeset` operation.
+Similarly, this requirement class also specifies that the CIS JSON response will be self-contained (not linking to data available in separate resources),
+unless a prior arrangement (not specified by this Standard) is established with the client.
 
-include::requirements/html/REQ_rangeset-success.adoc[]
+Since the description of the coverage domain and range is easily available at the `/collections/{collectionId}` and `/collections/{collectionId}/schema` resources,
+implementations and clients are likely to prefer keeping to single-part encodings, and would select a binary encoding such as those defined in the other encoding requirements classes for efficient access.
 
-=== Coverage Metadata
+This requirements class also clarifies how to describe the _DomainSet_ of coverages based on whether the _RangeSet_ values correspond to cells whose geometry are a single point or an area,
+ensuring that the extent interval in the collection resource always fully cover the spatial extent described by the coverage and that this extent description is consistent with other
+OGC API Standards, such as OGC API - Maps (where map pixels always represent an area), which may be made available for the same collection resource.
 
-This section covers the <<coverage-metadata-clause,Coverage Metadata>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/metadata` operation.
+include::requirements/requirements_class_cisjson.adoc[]
 
-include::requirements/html/REQ_metadata-success.adoc[]
+[[rc-encoding-coveragejson]]
+=== Requirements Class CoverageJSON
 
+==== Overview
+
+The CoverageJSON requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/cs/21-069r2/21-069r2.html[OGC CoverageJSON Community Standard].
+
+// TODO: include::requirements/requirements_class_coveragejson.adoc[]
+
+[[rc-encoding-las]]
+=== Requirements Class LAS
+
+==== Overview
+
+The LAS requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/?artifact_id=74523[OGC LAS Community Standard].
+
+This requirements class is particularly well suited for distributing point cloud coverages.
+
+// TODO: include::requirements/requirements_class_las.adoc[]
+
+[[rc-encoding-laszip]]
+=== Requirements Class LASZip
+
+==== Overview
+
+The LASZip requirements class defines support for encoding a coverage response according to the
+https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASZip] compression extension of the https://portal.ogc.org/files/?artifact_id=74523[OGC LAS Community Standard].
+
+This requirements class is particularly well suited for distributing point cloud coverages.
+
+// TODO: include::requirements/requirements_class_laszip.adoc[]
+
+[[rc-encoding-png]]
+=== Requirements Class PNG
+
+==== Overview
+
+The PNG requirements class defines support for encoding a coverage response according to the https://www.w3.org/TR/2003/REC-PNG-20031110/[W3C Portable Network Graphics (PNG) Specification] (https://www.iso.org/standard/29581.html[ISO/IEC 15948:2003]).
+
+Because PNG encoding is limited to an integer data values, this requirements class defines additional parameters and response headers allowing a client to request
+a specific scale factor and offset to be used to quantize coverage values, and allowing the implementation to inform the client of the scale factor and offset
+used for that quantization.
+
+// TODO: include::requirements/requirements_class_png.adoc[]
+
+[[rc-encoding-jpegxl]]
+=== Requirements Class JPEG XL
+
+==== Overview
+
+The JPEG XL requirements class defines support for encoding a coverage response according to the https://jpeg.org/jpegxl/[JPEG XL] https://www.iso.org/standard/77977.html[ISO/IEC 18181 Standard].
+
+// JPEG XL supports a large number of bands, image dimensions, and floating points.
+
+// TODO: include::requirements/requirements_class_jpegxl.adoc[]
+
+[[rc-encoding-jpeg2000]]
+=== Requirements Class JPEG 2000
+
+==== Overview
+
+The JPEG 2000 requirements class defines support for encoding a coverage response according to the https://jpeg.org/jpeg2000/[JPEG 2000] https://www.iso.org/standard/78321.html[ISO/IEC 15444], with
+support for georeferencing with http://www.opengis.net/doc/IS/GMLJP2/2.1[GMLJP2].
+
+// TODO: .jpf for floating point support, and/or parameters like PNG?
+
+// TODO: include::requirements/requirements_class_jpeg2000.adoc[]
+
+[[rc-encoding-zarr]]
+=== Requirements Class (Geo)Zarr
+
+==== Overview
+
+The (Geo)Zarr requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/100727[OGC Zarr Community Standard], with
+eventual support for https://www.ogc.org/requests/ogc-to-form-geozarr-standards-working-group-public-comment-sought-on-draft-charter/[GeoZarr].
+
+// TODO: include::requirements/requirements_class_zarr.adoc[]
