@@ -19,15 +19,16 @@ Recipients of this document are requested to submit, with their comments, notifi
 The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
 
 * Heazeltech LLC
+* Ecere Corporation
 
 [big]*v.     Submitters*
 
 All questions regarding this submission should be directed to the editor or the submitters:
 
 |===
-^|Name  ^|Affiliation
-|Charles Heazel |HeazelTech
-|Stephan Meissl <stephan.meissl@eox.at> |https://eox.at[EOX IT Services GmbH]
-|Tom Kralidis <tom.kralidis@canada.ca> | Meteorological Service of Canada
-|Jerome St-Louis <jerome@ecere.com> | https://ecere.ca[Ecere Corporation]
+^|Name                                                ^|Affiliation
+|Charles Heazel (Editor)                               |HeazelTech
+|Jérôme Jacovella-St-Louis <jerome@ecere.com> (Editor) |https://ecere.ca[Ecere Corporation]
+|Stephan Meissl <stephan.meissl@eox.at>                |https://eox.at[EOX IT Services GmbH]
+|Tom Kralidis <tom.kralidis@canada.ca>                 |Meteorological Service of Canada
 |===

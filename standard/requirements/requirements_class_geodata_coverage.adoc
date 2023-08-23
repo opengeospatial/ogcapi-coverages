@@ -278,11 +278,10 @@ The `RangeSet` may be available as its own resource as well, if supported by the
 If `Metadata` is available, it will also be be available as its own resource.
 
 [[coverage-clause]]
-====== Coverage
 
 The `Coverage` operation returns all the components of the coverage (rangeset, domain set, range type, metadata). It is comparable to a WCS GetCoverage operation.
 
-======= Operation
+====== Coverage Operation
 
 The `Coverage` operation is defined by the following requirement.
 
@@ -293,7 +292,7 @@ The `Coverage` operation is defined by the following requirement.
 ^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage` to retrieve the coverage.
 |===
 
-======= Response
+====== Coverage Response
 
 A successful response to the `Coverage` operation shall meet the following requirement.
 
@@ -327,7 +326,7 @@ include::../examples/JSON/coverage_example.json[]
 ----
 ////
 
-======= Error situations
+====== Error situations
 
 [[req_geodata_coverage-failure]]
 [width="90%",cols="2,6a"]
@@ -339,11 +338,10 @@ include::../examples/JSON/coverage_example.json[]
 See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-domainset-clause]]
-====== Coverage Domain Set
 
 The `Coverage Domain Set` operation returns the coverage’s domain set.
 
-======= Operation
+====== Coverage Domain Set Operation
 
 The `Coverage Domain Set` operation is defined by the following requirement.
 
@@ -354,7 +352,7 @@ The `Coverage Domain Set` operation is defined by the following requirement.
 ^|A |The API SHALL support an HTTP GET operation for the resource linked to by the domain set link included in the coverage (collection) description resource (link relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset`).
 |===
 
-======= Response
+====== Coverage Domain Set Response
 
 A successful response to the `Coverage Domain Set` operation shall meet the following requirement.
 
@@ -384,16 +382,15 @@ The following JSON fragment is an example of a response to a Coverage DomainSet 
 include::../examples/JSON/coverage_domainset_example.json[]
 ----
 
-======= Error situations
+====== Error situations
 
 See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-rangetype-clause]]
-====== Coverage Range Type
 
 The `Coverage Range Type` operation returns the coverage’s range type information (i.e., a description of the data semantics)
 
-======= Operation
+====== Coverage Range Type Operation
 
 The `Coverage Range Type` operation is defined by the following requirement.
 
@@ -404,7 +401,7 @@ The `Coverage Range Type` operation is defined by the following requirement.
 ^|A |The API SHALL support an HTTP GET operation for the resource linked to by the range type link included in the coverage (collection) description resource (link relation type `http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype`).
 |===
 
-======= Response
+====== Coverage Range Type Response
 
 A successful response to the `Coverage Range Type` operation shall meet the following requirement.
 
@@ -434,16 +431,15 @@ The following JSON fragment is an example of a response to a Coverage RangeType 
 include::../examples/JSON/coverage_rangetype_example.json[]
 ----
 
-======= Error situations
+====== Error situations
 
 See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-rangeset-clause]]
-====== Coverage Range Set
 
 The `Coverage Range Set` operation returns the coverage’s range set, i.e., the actual values in the coverage’s Native Format (see <<media-types-section,Media Types>> for ways to retrieve inspecific formats)
 
-======= Operation
+====== Coverage Range Set Operation
 
 The `Coverage Range Set` operation is defined by the following requirement.
 
@@ -457,7 +453,7 @@ The `Coverage Range Set` operation is defined by the following requirement.
 * `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
 |===
 
-======= Response
+====== Coverage Range Set Response
 
 A successful response to the `Coverage Range Set` operation shall meet the following requirement.
 
@@ -489,16 +485,15 @@ include::../examples/JSON/coverage_rangeset_example.json[]
 ----
 ////
 
-======= Error situations
+====== Error situations
 
 See <<http-status-codes,HTTP Status Codes>> for general guidance.
 
 [[coverage-metadata-clause]]
-====== Coverage Metadata
 
 The `Coverage Metadata` operation returns the coverage’s metadata (may be empty)
 
-======= Operation
+====== Coverage Metadata Operation
 
 The `Coverage Metadata` operation is defined by the following requirement.
 
@@ -512,7 +507,7 @@ The `Coverage Metadata` operation is defined by the following requirement.
 * `collectionId` is the local identifier for a `Coverage`. It serves the same role and is subject to the same requirements as the `collectionid` parameter defined in API-Common.
 |===
 
-======= Response
+====== Coverage Metadata Response
 
 A successful response to the `Coverage Metadata` operation shall meet the following requirement.
 
@@ -544,6 +539,6 @@ include::../examples/JSON/coverage_metadata_example.json[]
 ----
 ////
 
-======= Error situations
+====== Error situations
 
 See <<http-status-codes,HTTP Status Codes>> for general guidance.

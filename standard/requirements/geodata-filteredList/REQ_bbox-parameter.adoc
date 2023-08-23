@@ -1,8 +1,0 @@
-[[req_geodata_filteredList-bbox-parameter]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/geodata-filteredList/bbox-parameter*
-^|A |An API implementing Common - Part 2: Geospatial data MAY support the Bounding Box (bbox) parameter for `/collections` requests.
-^|B |Requests which include the Bounding Box parameter SHALL comply with API-Common requirement `/req/core/rc-bbox-definition`.
-^|C |Responses SHALL be appropriately filtered, returning only collections whose spatial extent intersects with the specified bounding box parameter.
-|===
