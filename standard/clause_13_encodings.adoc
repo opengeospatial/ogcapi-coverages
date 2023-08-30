@@ -84,11 +84,20 @@ The netCDF requirements class defines support for encoding a coverage response a
 
 The CIS JSON requirements class defines support for encoding a coverage response according to the http://www.opengis.net/doc/IS/cis/1.1.1[OGC Coverage Implementation Schema (CIS) 1.1].
 
+The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage of its components according to this https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] Web API standard.
+A CIS JSON representation is required at least for the domain set and the range type, which can both either be embedded within the collection resource, or provided as separate resources.
+
+A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
+
+[#abstract-coverage-figure,reftext='{figure-caption} {counter:fig-num}']
+.Abstract Coverage
+image::figures/Abstract_Coverage.png[]
+
 The CIS JSON structures are defined using JSON Schema at https://schemas.opengis.net/cis/1.1/json/coverage-schema.json.
 A draft corrigendum is available at https://github.com/opengeospatial/coverage-implementation-schema/blob/main/standard/schemas/1.1/json/coverage-schema.json, with updated examples
 available at https://github.com/opengeospatial/coverage-implementation-schema/tree/main/standard/schemas/1.1/json/examples .
 
-The media type `application/json` is reserved for use with CIS JSON until a dedicated media type is registered.
+Specifically for the `../coverage` resource, the media type `application/json` is reserved for use with CIS JSON until a dedicated media type is registered.
 
 The CIS Standard defines four aspects of a coverage which are described in separate properties: the domain set, the range type, the rangeset, and the domain-specific metadata.
 By default, all of these aspects should be returned as part of a coverage response, with the domain-specific metadata being optional if none is available.
