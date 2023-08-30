@@ -4,91 +4,55 @@
 [[general-overview]]
 === General
 
-The OGC API family of standards enable access to resources using the HTTP protocol and its' associated operations (GET, PUT, POST, etc.). OGC API-Common defines a set of features which are applicable to all OGC APIs. Other OGC standards extend API-Common with features specific to a resource type. This OGC API-Coverages standard defines an API with two goals:
+_OGC API - Coverages - Part 1: Core_, hereafter sometimes referred to as the _Coverages API_, specifies the fundamental API building blocks for retrieving coverage data.
+The spatial data community uses the term _coverage_ for homogeneous collections of values located in space/time such as: spatio-temporal sensor, image, simulation, and statistical data.
+The _W3C/OGC Spatial Data on the Web Best Practices_ provide an overview of https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)].
 
-. Provide access to *_Coverages_* conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
-. Provide functionality comparable to that of the <<web-coverage-service-overview,OGC WCS standard>>.
+The OGC API family of standards enable access to resources using the HTTP protocol and its associated operations (GET, PUT, POST, etc.).
+_OGC API - Common_ defines a set of capabilities which are shared by several OGC API standards.
+Some of these other OGC API standards define capabilities to access data using a particular mechanism tailored to a specific resource type.
+These standards can be integrated within the framework defined by _OGC API - Common_, including the concept of a landing page, API definition and conformance declaration (_Part 1_),
+as well as providing access to one or more collections of geospatial data (_Part 2_).
+OGC API standards also re-use common Web API building blocks such as resource paths (including associated path parameters),
+response definitions for specific representations, schemas for request payloads and responses, or query parameters.
+This common framework ensures consistency and allow for the integration of multiple OGC API standards within a single Web API implementation.
 
-Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>> URIs are composed of three sections:
+This _OGC API - Coverages_ standard defines an API with two goals:
 
-* Dataset distribution API: The endpoint corresponding to a dataset distribution, where the landing page resource as defined in OGC API - Common - Part 1: Core is available (subsequently referred to as Base URI or `{datasetAPI}`)
+* Provide access to *_Coverages_* conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
+* Provide functionality comparable to that of the <<web-coverage-service-overview,OGC Web Coverage Service (WCS) standard>>.
+
+Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>>
+URIs are composed of three sections:
+
+* Dataset distribution API: The endpoint corresponding to a dataset distribution, where the landing page resource as defined in _OGC API - Common - Part 1: Core_ is available (subsequently referred to as Base URI or `{root}`)
 * Access Paths: Unique paths to Resources
-* Query: Parameters to adjust the representation of a Resource or Resources like encoding format or subsetting
+* Query: Parameters to adjust the representation of a Resource or Resources, such as requesting a particular subset or downsampled resolution of the data
 
-Access Paths are used to build resource identifiers. It is recommended, but not required, that these paths are used.
+Access Paths are used to build resource identifiers. Most of these paths are fixed, with the exception of the _OGC API - Common - Part 1_ `/api` service description / documentation.
 
-Most resources are also accessible through links on previously accessed resources. Unique relation types are used for each resource.
+All resources are also accessible by following links starting from the landing page, with a specific link relation type used from one resource to another, as detailed in <<conventions-link-relations>>.
 
-<<coverage-paths>> summarizes the access paths and relation types defined in this standard.
+The following table summarizes the resource paths defined in this standard, as well as those inherited from _OGC API - Common_.
 
 [#coverage-paths,reftext='{table-caption} {counter:table-num}']
-.Coverage API Resources
-[width="90%",cols="2,4",options="header"]
+._Coverages API_ Resources
+[width="100%",cols="3,5",options="header"]
 |===
-^|Resource URI ^|Description
-|<<landing-page,{datasetAPI}/>> |Landing page for this dataset distribution
-|<<api-definition,{datasetAPI}/api>> | API description (e.g. OpenAPI)
-|<<api-definition,{datasetAPI}/api>> |API documentation (optional, e.g. HTML)
-|<<conformance-classes,{datasetAPI}/conformance>> |Conformance Classes
-|<<collections,{datasetAPI}/collections>> |The list off all collections available, some or all of which may be accessible using this Coverage API. Each of these collection objects take the same form as that of the collection resource object described immediately below.
-|<<collectionInfo,{datasetAPI}/collections/{collectionId}>> |resource corresponding to the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource will describe key elements such as an `id`, `title`, `description`, available `crs` and `extent` (the coverage envelope) as well as links to resources pertaining to this collection. For coverages, it will either embed or link to a CIS JSON encoding of both the range type and the domain set. It is comparable to a WCS *_DescribeCoverage_* response, with the exception that the range type and domain set may have to be retrieved separately by following a link to accommodate the case where they may be considerably large, and the domain set may support query parameters to subset it.
-2+^|**Coverages**
-|<<coverage-clause,{datasetAPI}/collections/{collectionId}/coverage>> |returns the coverage including all of its components (domain set, range type, range set and metadata), to the extent that it is supported by the selected representation (see format encoding for ways to retrieve in specific formats). It is comparable to a WCS *_GetCoverage_* response.
-|<<coverage-rangeset-clause,{datasetAPI}/collections/{collectionId}/coverage/rangeset>> |if supported by the service and by the selected representation, returns only the coverage's range set, i.e., the actual values in the selected representation without any accompanying description or extra information.
-|<<coverage-rangetype-clause,{datasetAPI}/collections/{collectionId}/coverage/rangetype>> |if available separately from the collection resource, returns the coverage's range type information, i.e., a description of the data semantics (their components and data type).
-|<<coverage-domainset-clause,{datasetAPI}/collections/{collectionId}/coverage/domainset>> |if available separately from the collection resource, returns the coverage's domain set definition (the detailed n-dimensional space covered by the data).
-|<<coverage-metadata-clause,{datasetAPI}/collections/{collectionId}/coverage/metadata>> |if available, returns the associated coverage metadata as defined by the CIS model, which may be e.g. domain specific metadata.
+^|Resource URI                                   ^|Description
+2+|**_OGC API - Common - Part 1_**
+|`{root}/`                                    |Landing page for this dataset distribution
+|`{root}/api`                                 |API description (e.g., Open API Specification) and documentation (e.g., HTML)
+|`{root}/conformance`                         |Declaration of supported conformance classes
+2+|**_OGC API - Common - Part 2_** (extended with additional properties for the **_Coverages API_**)
+|`{root}/collections`                         |The list of all collections available, some or all of which may be accessible using this _Coverages API_. Each of these collections contains a minimal subset of the object collection resource object described immediately below.
+|`{root}/collections/{collectionId}`          |Description for the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource includes elements such as an `id`, `title`, `description`, available `crs` and `extent`. This `extent` describes the domain of the coverage for each dimension, including the overall envelope, detailed sub-intervals where data is available, and/or a regular or irregular `grid`. This object also includes links to resources pertaining to this collection. For coverages, a link to the record schema described below will be included. This resource is comparable to a WCS *_DescribeCoverage_* response, with the exception that the schema, corresponding to Coverage Implementation Schema (CIS) _range type_, needs to be retrieved separately.
+2+|**_OGC API - Coverages - Part 1_**
+|`{root}/collections/{collectionId}/schema`   |Returns the schema for the coverage fields or properties of values available at each direct position. At minimum, a _JSON Schema_ representation of this resource is available. This resource is comparable to the CIS _range type_ portion of the WCS *_DescribeCoverage_* response, and is retrieved separately from the collection description to accommodate more complex record schemas including several record fields and/or detailed semantic annotations.
+|`{root}/collections/{collectionId}/coverage` |Returns the coverage data, including any self-describing information (such as the _domain set_, _range type_ and _metadata_ components in addition to the _range set_ of CIS). This resource is comparable to a WCS *_GetCoverage_* response.
 |===
 
 Where:
 
-* {datasetAPI} = URI of the landing page for the API distributing the dataset
-* {collectionId} = an identifier for a specific coverage (collection)
-
-[[coverage-implementation-schema-overview]]
-=== Coverage Implementation Schema
-
-_OGC API - Coverages_ specifies the fundamental API building blocks for interacting with coverages. The spatial data community uses the term 'coverage' for homogeneous collections of values located in space/time such as: spatio-temporal sensor, image, simulation, and statistical data.
-
-The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage of its components according to this https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] Web API standard.
-A CIS JSON representation is required at least for the domain set and the range type, which can both either be embedded within the collection resource, or provided as separate resources.
-
-A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
-
-[#abstract-coverage-figure,reftext='{figure-caption} {counter:fig-num}']
-.Abstract Coverage
-image::figures/Abstract_Coverage.png[]
-
-If you are unfamiliar with the term 'coverage', the explanations on the http://myogc.org/go/coveragesDWG[Coverages DWG Wiki] provide more detail and links to educational material. Additionally, https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)] in the W3C/OGC Spatial Data on the Web Best Practice document may be considered.
-
-[[api-behavior-model-overview]]
-=== API Behavior Model
-
-The Coverages API is designed to be compatible but not conformant with the OGC Web Coverage Service. This allows API-Coverage and WCS implementations to co-exist in a single processing environment.
-
-https://www.opengeospatial.org/standards/wcs[OGC Web Coverage Service standard version 2] has an internal model of its storage organization based on which the classic operations GetCapabilities, DescribeCoverage, and GetCoverage can be explained naturally. This model consists of a single CoverageOffering resembling the complete WCS data store. It holds some service metadata describing service qualities (such as WCS extensions, encodings, CRSs, and interpolations supported, etc.). At its heart, this offering holds any number of OfferedCoverages. These contain the coverage payload to be served, but in addition can hold coverage-specific service-related metadata (such as the coverage's Native CRS).
-
-image::figures/WCS_CoverageOfferings.png[]
-
-Discussion has shown that the API model also assumes underlying service and object descriptions, so a convergence seems possible. In any case, it will be advantageous to have a similar "mental model" of the server store organization on hand to explain the various functionalities introduced below.
-
-[[dependencies-overview]]
-=== Dependencies
-
-NOTE: remove or update
-
-The _OGC API - Coverages_ standard is an extension of the OGC API-Common standard. Therefore, an implementation of API-Coverages must first satisfy the appropriate Requirements Classes from API-Common. <<mapping-to-common>> Identifies the API-Common Requirements Classes which are applicable to each section of this Standard. Instructions on when and how to apply these Requirements Classes are provided in each section.
-
-[#mapping-to-common,reftext='{table-caption} {counter:table-num}']
-.Mapping API-Coverages Sections to API-Common Requirements Classes
-[width="90%",cols="2,6"]
-|====
-^|*API-Coverage Section* ^|*API-Common Requirements Class*
-|<<landing-page,API Landing Page>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
-|<<api-definition,API Definition>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
-|<<conformance-classes,Declaration of Conformance Classes>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
-|<<collection-access-section,Collection Access>>| http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
-|<<requirements-class-openapi_3_0-clause,OpenAPI 3.0>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/oas30
-|<<requirements-class-json-clause,JSON>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/json
-|<<requirements-class-html-clause,HTML>>| http://www.opengis.net/spec/ogcapi-common-1/1.0/req/html
-|====
+* `{root}` = URI of the landing page for the API distributing the dataset
+* `{collectionId}` = an identifier for a specific coverage (collection)

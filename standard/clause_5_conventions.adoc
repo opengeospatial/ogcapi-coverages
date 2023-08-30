@@ -43,6 +43,7 @@ Whenever a data item from a CIS-external namespace is referenced this constitute
 |SML |sml |http://www.opengis.net/sensorml/2.0 |SensorML 2.0
 |====
 
+[[conventions-link-relations]]
 === Link relations
 
 To express relationships between resources, https://tools.ietf.org/rfc/rfc8288.txt[RFC 8288 (Web Linking)] is used.
@@ -59,7 +60,6 @@ The following https://www.iana.org/assignments/link-relations/link-relations.xh
 
 * **service-doc**: Identifies service documentation for the context that is primarily intended for human consumption.
 
-
 The following link relation types specified in the _Two Dimensional Tile Matrix Set and Tileset Metadata_ standard are used:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme**: The target IRI points to a resource that describes the TileMatrixSet according to the 2D-TMS standard.
@@ -68,7 +68,7 @@ The following link relation types specified in the _Two Dimensional Tile Matrix 
 
 * **http://www.opengis.net/def/rel/ogc/1.0/geodata**: The target IRI points to a resource representing a collection of geospatial data.
 
-The following link relation types specified in the _OGC API - Tiles_ candidate standard are used:
+The following link relation types specified in the _OGC API - Tiles_ standard are used:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage**: The target IRI points to a resource that describes how to provide tile sets of the context resource in coverage format.
 
@@ -77,10 +77,7 @@ The following link relation types specified in the _OGC API - Tiles_ candidate s
 In addition, the following link relation types are used for which no applicable registered link relation type could be identified:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/coverage**: The target IRI points to a resource representing the coverage, including all its components (domain set, range type, range set, metadata).
-* **http://www.opengis.net/def/rel/ogc/1.0/coverage-rangeset**: The target IRI points to a resource representing the coverage's range set component (the values for the range).
-* **http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype**: The target IRI points to a resource representing the coverage's range type component (the list of fields and their description).
-* **http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset**: The target IRI points to a resource representing the coverage's domain set component (the list of dimensions/axes and their bounds or discrete values)
-* **http://www.opengis.net/def/rel/ogc/1.0/coverage-metadata**: The target IRI points to a resource representing the coverage's metadata component (usually domain/application specific -- not general geospatial metadata such as ISO-19115, which should instead use `http://www.opengis.net/def/rel/ogc/1.0/data-meta`).
+* **http://www.opengis.net/def/rel/ogc/1.0/coverage-schema**: The target IRI points to a resource representing the schema of the coverage fields or properties, including the title, type and description of each field, as well as semantic annotations. This corresponds to the _range type_ of the Coverage Implementation Schema (CIS). However, an 'application/json` representation of such target resource is expected to be described using JSON Schema rather than CIS JSON.
 
 Used in combination with _OGC API - Features Part 1: Core_ or _OGC API - Common Part 1: Core_, other link relation types will be used, including:
 
