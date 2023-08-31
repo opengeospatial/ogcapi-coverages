@@ -1,9 +1,9 @@
 [[rc-coverage-tiles]]
-== Requirements Class Coverage Tiles
+== Requirements Class "Coverage Tiles"
 
 === Overview
 
-The Tiles Requirements Class defines how to combine the OGC API - Tiles building blocks with the Coverages API to request coverage tiles.
+The "Coverage Tiles" Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the _Coverages API_ to request coverage tiles.
 Coverages parameters such as for subsetting additional dimensions not covered by the Tiles 2D Tile Matrix Set (such as time or elevation),
 or for range subsetting, can be used together with the path for requesting individual tiles.
 

@@ -1,5 +1,5 @@
 [[rc-scaling]]
-== Requirements Class Coverage Scaling
+== Requirements Class "Scaling"
 
 === Overview
 
