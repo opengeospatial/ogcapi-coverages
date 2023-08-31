@@ -36,7 +36,7 @@ This section covers the <<coverage-clause,Coverage>> response for the
 
 // TODO: This will be adjusted to describe a `profile=domainset` query parameter
 
-[[req_cisjson_domainset-success]]
+[[rec_cisjson_domainset-success]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/cisjson/domainset-success*

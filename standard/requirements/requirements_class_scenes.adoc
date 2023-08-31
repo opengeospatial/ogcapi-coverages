@@ -33,7 +33,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 [[per_scenes-scene_list_post]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:rec-id}* |*/rec/scenes/scene-list-post*
+^|*Permission {counter:per-id}* |*/rec/scenes/scene-list-post*
 ^|A |The `/collections/{collectionId}/scenes` resource MAY additionally support a POST operation, for authenticated clients, allowing to create new scenes, also resulting in a modification to the overall collection coverage.
 |===
 
@@ -54,7 +54,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 [[per_scenes-scene_crud_extensions]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:rec-id}* |*/rec/scenes/scene-replace-update*
+^|*Permission {counter:per-id}* |*/rec/scenes/scene-replace-update*
 ^|A |The `/collections/{collectionId}/scenes/{sceneId}` resource MAY additionally support a `PUT` operation, for authenticated clients, allowing to update an existing scene, also resulting in a modification of the overall coverage.
 ^|B |The `/collections/{collectionId}/scenes/{sceneId}` resource MAY additionally support a `DELETE` operation, for authenticated clients, allowing to delete an existing scene, also resulting in a modification of the overall coverage.
 |===
@@ -85,7 +85,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 [[per_scenes-scene_queryables]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:rec-id}* |*/rec/scenes/scene-queryables*
+^|*Permission {counter:per-id}* |*/rec/scenes/scene-queryables*
 ^|A |A coverage request from a multi-scene collection MAY support scene-level filtering capabilities based on scene metadata queryables directly as part of the `/collections/{collectionId}/coverage` request,
 for example allowing to include certain scene IDs, or only scenes with a maximum cloud cover, as part of a coverage response.
 |===
