@@ -65,9 +65,16 @@ This resource should also match the draft https://github.com/opengeospatial/ogca
 [width="90%",cols="2,6"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/get-coverage*
-^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage` to retrieve the coverage.
+^|A |The implementation SHALL support the HTTP GET operation at the path `/collections/{collectionId}/coverage` to retrieve the coverage.
 ^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|C |The content of that response SHALL be the coverage data, along with the suported self-description capabilities of the negotiated content type.
 ^|D |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
 ^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+|===
+
+[[per_core-metadata]]
+[width="90%",cols="2,6"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/metadata-permission*
+^|A |The implementation MAY omit the CIS domain-specific metadata by default as part of the coverage response.
 |===
