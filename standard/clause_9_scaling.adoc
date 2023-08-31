@@ -7,6 +7,6 @@ The "Scaling" Requirements Class defines the `scale-factor`, `scale-axes` and `s
 
 === Scaling Examples
 
-See also <<scaling-examples, examples of caling requests>> in an annex.
+See also <<scaling-examples, examples of scaling requests>> in an annex.
 
 include::requirements/requirements_class_coverage_scaling.adoc[]
