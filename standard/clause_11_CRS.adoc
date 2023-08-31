@@ -3,10 +3,9 @@
 
 === Overview
 
-The `crs` parameter defines the output CRS (equivalent to `OUTPUTCRS` in WCS 2.0)
-This section describes how to request a coverage to be returned in a specific CRS.
+The "Coordinate Reference System" requirement class specifies a `crs` parameter allowing a client to select an output CRS (equivalent to `OUTPUTCRS` in WCS 2.0).
 
-As defined in this standard, coverage conceptually is associated with native CRS (also called a _storage CRS_) which is indicated in the collection description.
+As defined in this standard, a coverage is conceptually associated with native CRS (also called a _storage CRS_) which is indicated in the collection description.
 This native CRS is the default output CRS if no `crs` parameter is specified, and the only supported output CRS without support for this requirements class.
 The `Content-Crs:` header (see <<rc-core>>) specifies the CRS used in the response to avoid any confusion as to the CRS of a response.
 

@@ -1,17 +1,11 @@
 [[rc-fieldselection]]
-== Requirements Class Field Selection
+== Requirements Class "Field Selection"
 
 === Overview
 
-The Field Selection Requirements Class defines the `properties` parameter for selecting a subset of the DataRecord fields (defined in the Range Type, e.g. individual imagery bands)
-to retrieve from Range Sets, either of a Coverage resource, or a separate RangeSet resource of the coverage, using the HTTP GET operation.
-The effect is to generate a subset of the range set of the coverage. The order of the fields as listed in the value of the parameter also determines the order
-in which those fields will be ordered in the response, if the negotiated format has such a concept of field order.
-That subset is then returned to the client in the HTTP response.
-
-This query parameter affects both the `/collections/{collection_id}/coverage` and `/collections/{collection_id}/coverage/rangeset` resource paths.
-
-Range subsetting parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
+The "Field Selection" Requirements Class defines the `properties` parameter for selecting a subset of the fields to retrieve from the coverage resource (`/collections/{collection_id}/coverage`).
+The available fields for the coverage, for example individual imagery bands, are defined in the schema resource, and correspond to the _range type_ in CIS.
+The order of the fields as listed in the value of the parameter also determines the order in which those fields will be ordered in the response, if the negotiated format has such a concept of field order.
 
 === Field Selection Examples
 
