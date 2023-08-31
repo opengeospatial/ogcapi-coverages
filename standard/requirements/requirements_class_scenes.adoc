@@ -46,7 +46,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 ^|A |A GET operation on `/collections/{collectionId}/scenes/{sceneId}` SHALL return a successful response with a HTTP status code `200`.
 ^|B |The JSON response to the GET `/collections/{collectionId}/scenes/{sceneId}` operation SHALL be the object associated with the requested scene.
 ^|C |The scene object response SHALL include an `id` consistent with the requested id and the id in the `/scenes` response.
-^|D |The scene object response SHALL include a `links` property including a `self` link to the scene object, a link to the coverage request end-point (link relation `[ogc-rel:coverage]) and a link to the coverage schema (`[ogc-rel:coverage-schema]`) at `/collections/{collectionId}/schema` supporting a JSON Schema description of the coverage fields (_range type_).
+^|D |The scene object response SHALL include a `links` property including a `self` link to the scene object, a link to the coverage request end-point (link relation `[ogc-rel:coverage]`) and a link to the coverage schema (`[ogc-rel:coverage-schema]`) at `/collections/{collectionId}/schema` supporting a JSON Schema description of the coverage fields (_range type_).
 ^|E |The scene object response SHALL include an `extent` property as defined in the Uniform Additional Dimension extent schema.
 ^|F |The scene object response SHALL include a `crs` property defining the list of available output CRSs, and a `storageCRS` defining the native CRS, which is also the default output CRS for the scene.
 |===
