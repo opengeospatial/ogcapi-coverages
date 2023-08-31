@@ -1,14 +1,11 @@
-[[rc_json]]
+[[rc_cisjson]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
 2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cisjson
 |Target type |Web API
-|Dependency |<<rc_core,Requirements Class "API-Common Core">>
-|Dependency |http://www.opengis.net/spec/ogcapi-common-1/1.0/req/json[API-Common JSON]
-|Pre-conditions |
-1) The API advertises conformance to the CIS JSON Conformance Class +
-2) The client negotiates use of the JSON or CIS JSON encoding.
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency  |http://www.opengis.net/spec/CIS/1.1/req/json-coverage
 |===
 
 ==== Requirements
