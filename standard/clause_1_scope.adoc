@@ -16,7 +16,8 @@ Additional capabilities will be added based on community demand. The functionali
 * Field selection (retrieving only certain fields of the range, also known as range subsetting),
 * Scaling (retrieving a downsampled or upsampled coverage),
 * Selection of an output Coordinate Reference System (CRS) which may differ from the native CRS,
-* Retrieving part of a coverage as tiles (in combination with http://docs.ogc.org/DRAFTS/20-057.html[_OGC API - Tiles_], each tile corresponding to a specific subset trimmed along two spatial dimensions, and the response downsampled for lower resolution tile matrices).
+* Retrieving part of a coverage as tiles (in combination with http://docs.ogc.org/DRAFTS/20-057.html[_OGC API - Tiles_], each tile corresponding to a specific subset trimmed along two spatial dimensions, and the response downsampled for lower resolution tile matrices),
+* Listing, retrieval and retrieving data for individual scene of which an overall coverage may consist.
 
 === Content Scope
 The _OGC API - Coverages_ standard provides access to content which complies with https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
