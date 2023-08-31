@@ -58,3 +58,31 @@ The _Coordinate Reference System_ Requirements Class defines the ability to requ
 The Encoding Requirements Classes address support for formats commonly used for encoding coverage data.
 
 The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition to those defined in _OGC API - Common - Part 1: Core_ to facilitate identifying coverage resources from an OpenAPI 3.0 API Definition.
+
+=== Summary of conformance URIs
+
+[#table_conformance_urls,reftext='{table-caption} {counter:table-num}']
+.Conformance class URIs
+[cols="30,70",options="header"]
+|===
+| Corresponding requirements class | Conformance class URI
+| <<rc_core,Core>>                 | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
+| <<rc_scaling,Scaling>>           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling
+| <<rc_subsetting,Subsetting>>     | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting
+| <<rc_subsetting,Field Selection>>| http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection
+| <<rc_crs,CRS>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
+| <<rc_tiles,Coverage Tiles>>      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
+| <<rc_scenes,Coverage Scenes>>    | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scenes
+| <<rc_html,HTML>>                 | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
+| <<rc_tiff,GeoTIFF>>              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
+| <<rc_netcdf,netCDF>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
+| <<rc_cisjson,CIS JSON>>          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
+| <<rc_coveragejson,CoverageJSON>> | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
+| <<rc_las,LAS>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/las
+| <<rc_laszip,LASZip>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip
+| <<rc_png,PNG>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/png
+| <<rc_jpegxl,JPEG XL>>            | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpegxl
+| <<rc_jpeg2000,JPEG 2000>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpeg2000
+| <<rc_zarr,(Geo)Zarr>>            | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/zarr
+| <<rc_oas30,OpenAPI 3.0>>         | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
+|===

@@ -56,3 +56,16 @@ The results of using a scaling parameter are defined by the following Requiremen
 ^|D |When `scale-axes` is used, for each axis specified, the returned coverage SHALL contain the number of original sampled values, divided by the _factor_ specified for that axis, and the original number of sample values for unspecified axes.
 ^|E |When `scale-size` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===
+
+==== Downsampling permission
+
+[[req_coverage_scaling-permission]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/per/coverage-scaling/downsampling*
+^|A |In the case where a response to a request without a `scale-factor`, `scale-axes` or `scale-size` parameters would be larger than an advertised server limit, an implementation
+MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+|===
+
+NOTE: A client retrieving a coverage from an implementation advertising support for this "Scaling" requirements class should explicitly use `scale-factor=1` if it wants to ensure
+retrieving the coverage in its native resolution and prefers receiving an error instead of a downsampled version of the data.
