@@ -28,79 +28,20 @@ This section covers the <<coverage-clause,Coverage>> response for the
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/cisjson/coverage-success*
-^|**Restricts** |/req/core/coverage-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+^|A |A successful coverage request SHALL be reported as a response with a HTTP status code `200`.
 ^|B |The response SHALL be a CIS JSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage.json[coverage.json].
 |===
 
-===== Coverage Domain Set
+===== Profiling CIS components to include
 
 // TODO: This will be adjusted to describe a `profile=domainset` query parameter
-
-This section covers the <<coverage-domainset-clause,Coverage Domain Set>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/domainset` operation.
 
 [[req_cisjson_domainset-success]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/cisjson/domainset-success*
-^|**Restricts** |/req/core/domainset-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The response SHALL be a CIS JSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_domainset.json[coverage_domainset.json].
-|===
-
-===== Coverage Range Type
-
-// TODO: This will be adjusted to describe a `profile=rangetype` query parameter
-
-This section covers the <<coverage-rangetype-clause,Coverage Range Type>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/rangetype` operation.
-
-[[req_cisjson_rangetype-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cisjson/rangetype-success*
-^|**Restricts** |/req/core/rangetype-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The response SHALL be a CIS JSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_rangetype.json[coverage_rangetype.json].
-|===
-
-===== Coverage Range Set
-
-// TODO: This will be adjusted to describe a `profile=rangeset` query parameter
-
-This section covers the <<coverage-rangeset-clause,Coverage Range Set>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/rangeset` operation.
-
-[[req_cisjson_rangeset-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cisjson/rangeset-success*
-^|**Restricts** |/req/core/rangeset-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The response SHALL be a CIS JSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_rangeset.json[coverage_rangeset.json].
-|===
-
-[[req_domainset_subset-subset-select]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cisjson/domainset-subset-select*
-^|A |The `subset` parameter SHALL be applied to the domainset
-^|B |Only that part of the domainset addressed SHALL be selected that falls within the bounds of the subset expression whereby a `*` (asterisk) in the position of a lower or upper limit along an axis denotes the DomainSet's minimum or maximum extent along this axis, respectively. The DomainSet shall be adjusted accordingly to the new boundaries (in case of trimming) and the reduced dimension (in case of slicing).
-|===
-
-===== Coverage Metadata
-
-// TODO: This will be adjusted to describe a `profile=metadata` query parameter
-
-This section covers the <<coverage-metadata-clause,Coverage Metadata>> response for the
-`{datasetAPI}/collections/{collectionId}/coverage/metadata` operation.
-
-[[req_cisjson_metadata-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cisjson/metadata-success*
-^|**Restricts** |/req/core/metadata-success
-^|A |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|B |The response SHALL be a JSON document which validates against the JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage_metadata.json[coverage_metadata.json].
+^|*Recommendation {counter:rec-id}* |*/rec/cisjson/domainset-success*
+^|A |The coverage request operation SHOULD support a `profile` query parameter allowing to select specific CIS one or more coverage components to include (domainset, rangetype, rangeset and/or metadata).
+^|B |If supported, the response SHOULD only contain the selected element(s). For example, `../coverage/profile=domainset,rangetype` should only return the domain set and range type for the coverage.
+^|C |If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
+^|D |The implementation SHOULD return the metadata when explicitly requested to do so with the `profile` queyr parameter.
 |===
