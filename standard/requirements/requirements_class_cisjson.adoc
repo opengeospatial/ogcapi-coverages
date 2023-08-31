@@ -19,7 +19,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/cisjson/coverage-success*
 ^|A |The coverage resource, as defined in the Core requiement class, SHALL support negotiating a CIS JSON response using the `application/json` media type.
-^|B |The response SHALL be a CIS JSON document which validates against the CIS JSON schema link:https://raw.githubusercontent.com/opengeospatial/ogcapi-coverages/master/standard/openapi/schemas/coverage.json[coverage.json].
+^|B |The response SHALL be a CIS JSON document which validates against the CIS JSON schema https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/cis/coverage-schema.yaml[coverage-schema.yaml].
 |===
 
 ===== Profiling CIS components to include
