@@ -4,6 +4,7 @@
 === Overview
 
 The "Core" Requirement Class of the _Coverages API_ defines the mandatory requirements for any implementation of a Web API claiming conformance with this _OGC API - Coverages_ standard.
+All other requirement classes are optional.
 
 The requirement class depends on _OGC API - Common - Part 2: Geospatial data_, which defines how to list available collections of geospatial data and associate access mechanisms for these collections.
 

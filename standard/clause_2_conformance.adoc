@@ -10,6 +10,7 @@ as well as within Web API conforming to additional OGC API standards.
 
 This standard identifies nineteen Conformance Classes. Each Conformance Class has an associated Requirements Class.
 The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
+Only the Core requirements class is mandatory, all others are optional.
 
 The Requirements Classes for _OGC API - Coverages_ are:
 
