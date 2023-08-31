@@ -9,7 +9,7 @@
 
 === Requirements
 
-==== `properties` parameter
+==== Parameter `properties`
 
 [[req_fieldselection-properties]]
 [width="90%",cols="2,6a"]
