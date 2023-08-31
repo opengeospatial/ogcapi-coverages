@@ -66,7 +66,7 @@ The following table summarizes the resource paths defined in this standard, as w
 |`{root}/collections/{collectionId}/coverage/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` |Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
 2+|**_OGC API - Coverages - Part 1_ (Scenes requirements class)**
 |`{root}/collections/{collectionId}/scenes`                       |Returns the list of scenes available for this coverage (for multi-scenes coverages, when the _Scenes_ requirement class is supported)
-|`{root}/collections/{collectionId}/scenes/{sceneId}`             |Returns the scenes metadata for an individual scene
+|`{root}/collections/{collectionId}/scenes/{sceneId}`             |Returns the scene metadata for an individual scene
 |`{root}/collections/{collectionId}/scenes/{sceneId}/coverage`    |Returns the coverage data for an individual scene
 2+|**_OGC API - Tiles - Part 1_ (for multi-scene coverage)**
 |`{root}/collections/{collectionId}/scenes/{sceneId}/coverage/tiles`                                              |Returns the list of tilesets available for this scene's coverage
