@@ -14,6 +14,5 @@
 [width="90%",cols="2,6"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/oas30/oas-common*
-^|**Extends** |/req/core/api-common
 ^|A | The OpenAPI api description SHALL use an operationId ending with `.getCoverage` for coverage resources.
 |===
