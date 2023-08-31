@@ -4,7 +4,9 @@ The framework, concepts, and methodology for testing, and the criteria to claim 
 
 The one Standardization Target for this standard is Web APIs.
 
-_OGC API - Common_ provides a common foundation for OGC API standards. Therefore, this standard should be viewed as an extension to _OGC API - Common_.
+_OGC API - Common_ provides a common foundation for OGC API standards.
+Some conformance classes of this standard have a dependency on, or are designed to be easily integrated with, conformance classes defined in _OGC API - Common_ _Part 1_ and/or _Part 2,
+as well as within Web API conforming to additional OGC API standards.
 
 This standard identifies eighteen Conformance Classes. Each Conformance Class has an associated Requirements Class.
 The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
