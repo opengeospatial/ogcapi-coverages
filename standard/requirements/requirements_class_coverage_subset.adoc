@@ -7,6 +7,8 @@
 |Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |===
 
+=== Requirements
+
 [[bbox-parameter]]
 ==== Parameter `bbox`
 

@@ -2,7 +2,7 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-fieldselection
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/fieldselection
 |Target type |Web API
 |Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |===
@@ -11,40 +11,29 @@
 
 ==== `properties` parameter
 
-The `properties` parameter is defined in the following Requirement:
-
-[[req_coverage_rangesubset-definition]]
+[[req_fieldselection-properties]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-rangesubset/definition*
+^|*Requirement {counter:req-id}* |*/req/fieldselection/properties*
 ^|A |The operation SHALL support a parameter `properties` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
 [source,EBNF]
 ----
-  RangeSubsetSpec:   "properties"=band[,bandName]*
-  band:              {bandName}\|{bandIndex}\|"*"
-  bandName:          {text}
-  bandIndex:         {number}
+  propertiesSpec:    "properties"=field[,field]*
+  field:             {fieldName}\|{fieldIndex}\|"*"
+  fieldName:         {text}
+  fieldIndex:        {number}
 
   Where:
      {number} is an integer number, and
      {text} is some general ASCII text.
 ----
 
-^|B |The band name SHALL be the same as one of the `id` defined in the RangeType DataRecord fields, or else return a 400 status code.
-^|C |The band index SHALL be an integer between 0 and the number of bands - 1 defined in the RangeType DataRecord fields, or else return a 400 status code.
-^|D |If a valid band index conflicts with a band name, it SHALL be interpreted as a band name.
-|===
-
-The results of using a range-subset parameter are defined by the following Requirement:
-
-[[req_coverage_rangesubset-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/coverage-rangesubset/success*
-^|A |The `properties` parameter SHALL be applied to the coverage (and rangeset, if available as a separate resource).
-^|B |Only the fields of the coverage addressed SHALL be returned that correspond to one of the fields selected by the range subset expression
-whereby a `*` (asterisk) at the begining or at the end of the comma-separated list denotes all other fields before or after the listed fields, respectively.
-^|C |The RangeType describing the fields of the coverage being returned SHALL be adjusted accordingly to the new selected fields.
-^|D |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the list of selected fields.
+^|B |The implementation SHALL support selecting a field using the identifier corresponding to the top-level property keys of the coverage fields schema, and return 400 status code for an unrecognized selected field.
+^|C |The implementation SHALL support selecting a field using an index corresponding to an `x-ogc-field-index` property in the coverage fields schema, if present, and return a 400 status code for an unrecognized field index.
+^|D |The coverage fields schema SHALL not contani any potential conflict between a numeric band name and a band index.
+^|E |The implementation SHALL interpret an `*` (asterisk) at the begining or at the end of the comma-separated list as all other fields before or after the listed fields, as per the numeric `x-ogc-field-index` order, respectively.
+^|F |Only the selected fields of the coverage SHALL be returned from coverage request.
+^|G |If the coverage response can self-describes its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
+^|H |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
 |===

@@ -9,7 +9,7 @@
 
 === Requirements
 
-==== Extended collection response list (`/collections`)
+==== Extended collection list response (`/collections`)
 
 [[req_core-collection_list]]
 [width="90%",cols="2,6"]
