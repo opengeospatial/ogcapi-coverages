@@ -14,20 +14,21 @@
 
 ===== CIS JSON Coverage representation
 
-[[req_cisjson_coverage-success]]
+[[req_cisjson_coverage]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/cisjson/coverage-success*
-^|A |The coverage resource, as defined in the Core requiement class, SHALL support negotiating a CIS JSON response using the `application/json` media type.
+^|*Requirement {counter:req-id}* |*/req/cisjson/coverage*
+^|A |The coverage resource, as defined in the Core requirement class, SHALL support negotiating a CIS JSON response using the `application/json` media type.
 ^|B |The response SHALL be a CIS JSON document which validates against the CIS JSON schema https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/cis/coverage-schema.yaml[coverage-schema.yaml].
+^|C |The coverage object response SHALL be of type _CoverageByDomainAndRange_ (not _CoverageByPartitioning_, the implementation can instead consider supporting the "Scenes" requirement class to present individual parts of a coverage).
 |===
 
 ===== Profiling CIS components to include
 
-[[rec_cisjson_domainset-success]]
+[[rec_cisjson_profile]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:rec-id}* |*/rec/cisjson/domainset-success*
+^|*Recommendation {counter:rec-id}* |*/rec/cisjson/profile*
 ^|A |The coverage request operation SHOULD support a `profile` query parameter allowing to select specific one or more CIS coverage components to include (domainset, rangetype, rangeset and/or metadata).
 ^|B |If supported, the response SHOULD only contain the selected element(s). For example, `../coverage?profile=domainset,rangetype` should only return the domain set and range type for the coverage.
 ^|C |If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
