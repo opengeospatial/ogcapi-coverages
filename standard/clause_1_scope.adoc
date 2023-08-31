@@ -1,25 +1,25 @@
 == Scope
-This https://docs.opengeospatial.org/DRAFTS/19-087.html[_OGC API - Coverages_] draft specification establishes how to access
-coverages as defined by the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6] / https://www.iso.org/standard/40121.html[ISO 19123]
-_Schema for coverage geometry and functions_ through a Web API such as those described by the https://www.openapis.org/[OpenAPI specification].
+This https://docs.opengeospatial.org/DRAFTS/19-087.html[_OGC API - Coverages_] standard establishes an access mechanism
+for coverages as defined by the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6] / https://www.iso.org/standard/40121.html[ISO 19123]
+_Schema for coverage geometry and functions_ through a Web API which can be described by an API description language such as the https://www.openapis.org/[OpenAPI specification].
 
 === API Scope
-The functionality provided by _OGC API - Coverages_ resembles that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard].
-It is expected that _OGC API - Coverages_ and WCS implementations will be able to interoperate, allowing developers to pick the solution best suited for their requirements, and also to implement one as a facade on top of the other.
+The functionality provided by _OGC API - Coverages_ addresses a similar scope as that of the http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) 2.1 Interface Standard].
+It is expected that _OGC API - Coverages_ and WCS implementations will be able to interoperate, allowing developers to pick the solution best suited for their requirements, and also to implement one as a façade on top of the other.
 
-The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors. Additional capabilities will be added based on community demand.
+The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors.
+Additional capabilities will be added based on community demand. The functionality covered in _Part 1_ is:
 
-The functionality covered in Part 1 is:
-
-* Retrieval of a coverage and its individual components (domain set, range type, range set, metadata), with support for content type negotiation,
-* Subsetting of the coverage or range set (trimming or slicing along one or more dimensions/axes of its domain),
-* Subsetting of the domain set (for use cases where the domainset itself is large),
-* Range subsetting (retrieving only certain fields of the range),
-* Scaling (retrieving a downsampled or upsampled coverage or range set),
+* Description of a coverage, including its domain (dimensions/axes) and range (schema of the fields for the values of each cell),
+* Retrieval of a coverage with support for content type negotiation,
+* Subsetting (trimming or slicing along one or more dimensions/axes of its domain),
+* Field selection (retrieving only certain fields of the range, also known as range subsetting),
+* Scaling (retrieving a downsampled or upsampled coverage),
+* Selection of an output Coordinate Reference System (CRS) which may differ from the native CRS,
 * Retrieving part of a coverage as tiles (in combination with http://docs.ogc.org/DRAFTS/20-057.html[_OGC API - Tiles_], each tile corresponding to a specific subset trimmed along two spatial dimensions, and the response downsampled for lower resolution tile matrices).
 
 === Content Scope
-The _OGC API - Coverages_ specification provides access to content which complies with https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
+The _OGC API - Coverages_ standard provides access to content which complies with https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 This includes, but is not limited to, support for gridded (regular and irregular) and multi-point coverages (e.g., point clouds).
 
 The content of the coverage can be encoded using any suitable logical model and physical encodings, such as those defined by e.g.:
