@@ -69,10 +69,10 @@
 
 ==== Downsampling permission
 
-[[req_coverage_scaling-permission]]
+[[per_coverage_scaling-permission]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/per/coverage-scaling/downsampling*
+^|*Permission {counter:per-id}* |*/per/coverage-scaling/downsampling*
 ^|A |In the case where a response to a request without a `scale-factor`, `scale-axes` or `scale-size` parameters would be larger than an advertised server limit, an implementation
 MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
 |===
