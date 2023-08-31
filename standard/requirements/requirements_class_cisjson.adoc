@@ -41,7 +41,7 @@ This section covers the <<coverage-clause,Coverage>> response for the
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/cisjson/domainset-success*
 ^|A |The coverage request operation SHOULD support a `profile` query parameter allowing to select specific CIS one or more coverage components to include (domainset, rangetype, rangeset and/or metadata).
-^|B |If supported, the response SHOULD only contain the selected element(s). For example, `../coverage/profile=domainset,rangetype` should only return the domain set and range type for the coverage.
+^|B |If supported, the response SHOULD only contain the selected element(s). For example, `../coverage?profile=domainset,rangetype` should only return the domain set and range type for the coverage.
 ^|C |If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
 ^|D |The implementation SHOULD return the metadata when explicitly requested to do so with the `profile` queyr parameter.
 |===
