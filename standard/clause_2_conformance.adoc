@@ -8,7 +8,7 @@ _OGC API - Common_ provides a common foundation for OGC API standards.
 Some conformance classes of this standard have a dependency on, or are designed to be easily integrated with, conformance classes defined in _OGC API - Common_ _Part 1_ and/or _Part 2,
 as well as within Web API conforming to additional OGC API standards.
 
-This standard identifies eighteen Conformance Classes. Each Conformance Class has an associated Requirements Class.
+This standard identifies nineteen Conformance Classes. Each Conformance Class has an associated Requirements Class.
 The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
 
 The Requirements Classes for _OGC API - Coverages_ are:
@@ -17,10 +17,13 @@ The Requirements Classes for _OGC API - Coverages_ are:
 
 * <<rc-core,*Core*>>
 * <<rc-coverage-tiles,*Coverage Tiles*>>
+* <<rc-scenes,*Coverage Scenes*>>
 
 The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
 
 The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the Coverages API to request coverage tiles.
+
+The _Scenes_ Requirements Class defines how to present separate components of a coverage as individual scenes, in addition to an overall coverage of the whole collection.
 
 === Requirements classes defining query parameters
 

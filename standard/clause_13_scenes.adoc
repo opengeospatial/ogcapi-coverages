@@ -1,0 +1,14 @@
+[[rc-scenes]]
+== Requirements Class "Scenes"
+
+=== Overview
+
+The _Scenes_ Requirements Class defines the ability to present separate components of a coverage as individual scenes, in addition to an overall coverage for the collection as a whole.
+A list of scenes and a resource associated to each individual scene, including a description of its domain, are available, along with the ability to retrieve a coverage for each scene.
+The native CRS of the coverage for each scene and/or the resolution of the coverage data may differ from that of the overall collection.
+For example, the native CRS of an individual scene may be a particular UTM zone CRS based on its geospatial extent, whereas a global coverage for the collection is natively available in a WGS84 / EPSG:4326 geographic CRS.
+
+The API may also integrate additional functionality related to scenes, such as for advanced filtering capabilities when listing scenes, as defined in _OGC API - Records_ _Local Resource Catalogus_ and/or
+_SpatioTemporal Asset Catalog (STAC)_, the ability to create new scenes, update and delete existing scenes, or the ability to use scene-level metadata as part of requesting coverage data with a filtering extension.
+
+include::requirements/requirements_class_scenes.adoc[]

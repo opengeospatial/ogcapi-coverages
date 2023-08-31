@@ -1,0 +1,91 @@
+[[rc-scenes-table]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scenes
+|Target type   |Web API
+|Dependency    |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|===
+
+=== Requirements
+
+==== List of scenes (`/collections/{collectionId}/scenes`)
+
+[[req_scenes-scene_list]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scenes/scene-list*
+^|A |At least one collection available from the target implementation SHALL consist of multiple scenes.
+^|B |For multi-scenes collections, a GET operation on the `/collections/{collectionId}/scenes` resource SHALL return a successful response with a HTTP status code `200`.
+^|C |The JSON response to the GET `/collections/{collectionId}/scenes` operation SHALL include a `scenes` property being a JSON array of individual scenes
+^|D |Each element of the array of scenes SHALL include at minimum an `id`.
+|===
+
+[[rec_scenes-scene_filtering]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scenes/scene-list-filtering*
+^|A |A GET operation on `/collections/{collectionId}/scenes` SHOULD support additional query parameters to filter (`filter=`, `bbox=`, `datetime=`, `q=`) and/or page (`limit=`) the list of results,
+as defined by the _OGC API - Records_ Local Resource Catalogues requirements class and/or SpatioTemporal Asset Catalog (STAC), where the resources in this case are the scenes.
+^|B |Scene resources SHOULD support the relevant record fields as defined in other specifications such as _STAC_ and its extensions, and/or _OGC API - Records_ _Core properties_.
+|===
+
+[[per_scenes-scene_list_post]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:rec-id}* |*/rec/scenes/scene-list-post*
+^|A |The `/collections/{collectionId}/scenes` resource MAY additionally support a POST operation, for authenticated clients, allowing to create new scenes, also resulting in a modification to the overall collection coverage.
+|===
+
+==== Individual scene (`/collections/{collectionId}/scenes/{sceneId}`)
+
+[[req_scenes-scene_request]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scenes/scene-request*
+^|A |A GET operation on `/collections/{collectionId}/scenes/{sceneId}` SHALL return a successful response with a HTTP status code `200`.
+^|B |The JSON response to the GET `/collections/{collectionId}/scenes/{sceneId}` operation SHALL be the object associated with the requested scene.
+^|C |The scene object response SHALL include an `id` consistent with the requested id and the id in the `/scenes` response.
+^|D |The scene object response SHALL include a `links` property including a `self` link to the scene object, a link to the coverage request end-point (link relation `[ogc-rel:coverage]) and a link to the coverage schema (`[ogc-rel:coverage-schema]`) at `/collections/{collectionId}/schema` supporting a JSON Schema description of the coverage fields (_range type_).
+^|E |The scene object response SHALL include an `extent` property as defined in the Uniform Additional Dimension extent schema.
+^|F |The scene object response SHALL include a `crs` property defining the list of available output CRSs, and a `storageCRS` defining the native CRS, which is also the default output CRS for the scene.
+|===
+
+[[per_scenes-scene_crud_extensions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:rec-id}* |*/rec/scenes/scene-replace-update*
+^|A |The `/collections/{collectionId}/scenes/{sceneId}` resource MAY additionally support a `PUT` operation, for authenticated clients, allowing to update an existing scene, also resulting in a modification of the overall coverage.
+^|B |The `/collections/{collectionId}/scenes/{sceneId}` resource MAY additionally support a `DELETE` operation, for authenticated clients, allowing to delete an existing scene, also resulting in a modification of the overall coverage.
+|===
+
+==== Scene coverage (`/collections/{collectionId}/scenes/{sceneId}/coverage`)
+
+[[req_scenes-scene_coverage]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scenes/scene-coverage*
+^|A |A GET operation on the `/collections/{collectionId}/scenes/{sceneId}/coverage` resource SHALL return a successful response for the scene coverage with HTTP status code `200`.
+^|B |The response to a GET operation on the `/collections/{collectionId}/scenes/{sceneId}/coverage` resource SHALL return coverage consisting of only the data within the domain of the selected scene.
+^|C |The response for the scene coverage SHALL default to the native (`storageCRS`) for the scene, which may differ to that of the overall collection.
+^|D |If applicable, the `scale-factor` and `scale-axes` response SHALL be based on the resolutions described in the individual scene domain description (`extent` property), which may differ from the overall collection.
+^|E |The response for the scene coverage SHALL otherwise follow all of the same requirements as defined in the _Core_ requirements class for a collection coverage response.
+|===
+
+==== Scene coverage tiles (`/collections/{collectionId}/scenes/{sceneId}/coverage/tiles`)
+
+[[req_scenes-scene_coverage_tiles]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scenes/scene-coverage-tiles*
+^|A |If the _Coverage Tiles_ requirements class is also supported, tilesets resources at `/collections/{collectionId}/scenes/{sceneId}/coverage/tiles` SHALL be supported, as defined by that requirement class and _OGC API - Tiles_.
+|===
+
+==== Scene queryables
+[[per_scenes-scene_queryables]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:rec-id}* |*/rec/scenes/scene-replace-update*
+^|A |A coverage request from a multi-scene collection MAY support scene-level filtering capabilities based on scene metadata queryables directly as part of the `/collections/{collectionId}/coverage` request,
+for example allowing to include certain scene IDs, or only scenes with a maximum cloud cover, as part of a coverage response.
+|===
