@@ -4,7 +4,7 @@ This document uses the terms defined in Sub-clause 5 of https://github.com/openg
 For the purposes of this document, the following additional terms and definitions apply.
 
 === Coverage
-feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6
+function which returns values from its range for any direct position within its domain (as defined in OGC Abstract Topic 6)
 
 === Regular grid
 grid whose grid lines have a constant distance along each grid axis
@@ -20,6 +20,14 @@ coverage consisting of a collection of curves, surfaces, or solids, respectively
 
 === Partition [of a coverage]
 separately stored coverage acting, by being referenced in the coverage on hand, as one of its components
+
+=== Scene
+component of a coverage with its domain being a subset of the overall coverage for a coverage consisting of multiple scenes, similar to a partition
+
+(in the context of Earth Observation imagery data products and the _Scenes_ requirements class defined in this standard)
+
+Unlike Coverage Implementation Schema (CIS) _coverages by partitioning_, scenes are an optional capability of the API with corresponding individual resource paths rather than a potential aspect of a coverage resource.
+A client can either retrieve a coverage for the overall coverage or for an individual scene, but will never receive a special "partitioned coverage" response necessitating special handling considerations.
 
 === Sensor model
 mathematical model for estimating geolocations from recorded sensor data such as digital imagery
