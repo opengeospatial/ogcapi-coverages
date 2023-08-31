@@ -85,7 +85,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 [[per_scenes-scene_queryables]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:rec-id}* |*/rec/scenes/scene-replace-update*
+^|*Permission {counter:rec-id}* |*/rec/scenes/scene-queryables*
 ^|A |A coverage request from a multi-scene collection MAY support scene-level filtering capabilities based on scene metadata queryables directly as part of the `/collections/{collectionId}/coverage` request,
 for example allowing to include certain scene IDs, or only scenes with a maximum cloud cover, as part of a coverage response.
 |===
