@@ -4,11 +4,11 @@
 === Overview
 
 The "Field Selection" Requirements Class defines the `properties` parameter for selecting a subset of the fields to retrieve from the coverage resource (`/collections/{collection_id}/coverage`).
-The available fields for the coverage, for example individual imagery bands, are defined in the schema resource, and correspond to the _range type_ in CIS.
+The available fields for the coverage, for example individual imagery bands, are defined in the schema resource (corresponding to the CIS _range type_).
 The order of the fields as listed in the value of the parameter also determines the order in which those fields will be ordered in the response, if the negotiated format has such a concept of field order.
 
 === Field Selection Examples
 
 See also <<field-selection--examples, examples of field selection requests>> in an annex.
 
-include::requirements/requirements_class_coverage_rangesubset.adoc[]
+include::requirements/requirements_class_fieldselection.adoc[]

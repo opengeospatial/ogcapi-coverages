@@ -3,8 +3,7 @@
 
 === Overview
 
-The Scaling Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
-Scaling parameters may be mixed with other parameters, in no particular order, in the query part of a URL.
+The "Scaling" Requirements Class defines the `scale-factor`, `scale-axes` and `scale-size` parameters for retrieving coverage data at a specific resolution.
 
 === Scaling Examples
 

@@ -3,23 +3,26 @@
 
 === Overview
 
-API-Common starts with the assumption that spatial resources are organized into collections. An API will expose one or more collections. The API-Common Collections Requirements Class defines how to organize and provide access to a collection of collections.
+The "Core" Requirement Class of the _Coverages API_ defines the mandatory requirements for any implementation of a Web API claiming conformance with this _OGC API - Coverages_ standard.
 
-API-Coverages observes that a coverage is a collection of measured values. Therefore, a coverage is a collection.
+The requirement class depends on _OGC API - Common - Part 2: Geospatial data_, which defines how to list available collections of geospatial data and associate access mechanisms for these collections.
 
-The `GeoData-Coverage` Requirements Class extends API-Common to define the requirements for locating, understanding, and accessing a collection which is a coverage.
+This _Coverages API_ is presented as one such access mechanism for collections of geospatial data which can be modeled as a coverage, defined
+a function returning homogeneous values for any direct position part of its domain.
 
-Three resources and their operations are defined in this Requirements Class. They are summarized in <<collection-resources>>.
+This requirement class extends the `/collections` and `/collections/{collectionId}` resources defined by _OGC API - Common - Part 2_ with additional information for collections accessible using this _Coverages API_.
+Each collection accessible as a coverage needs to include a link to the `/collections/{resourceId}/coverage` resource using the `[ogc-rel:coverage]` link relation type, which is used to retrieve the coverage data.
+
+Each collection must also include a link to the `/collections/{collectionId}/schema` resource, using the `[ogc-rel:coverage-schema]` relation type, providing a schema of the fields of the coverage supporting a JSON Schema representation.
+This schema provides equivalent functionality to the Coverage Implementation Schema (CIS) _range type_, including for each field
+(the measured or observed property, such as a satellite imagery band, or sea surface temperature) an identifier (the property key), a `title`, a `description`, and a JSON Schema `type`.
+Semantic annotations may also be included providing additional useful information.
+
+The `extent` property of the collection description is also restricted to use a uniform schema for additional dimensions beyond spatial and temporal.
+As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dimension, each additional dimension must include an `interval` property to specify at minimum the overall envelope of the dimension, and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
+A `grid` property for these dimensions also allows describing the `cellsCount` of the grid, as well as a cell `resolution` for regular grids, or a list of individual `coordinates` for irregular grids using.
+This extent information provides equivalent information to the CIS _domain set_ for most use cases.
+For point cloud data, a separate detailed description of the domain is not practical, and a subset of the adomain is instead retrieved together with the data, as with the common LAS and LASZip point cloud encodings.
+In this case, only the overall interval, and optionally detailed sub-intervals where data is available, can be provided instead within the collection extent.
 
 include::requirements/requirements_class_core.adoc[]
-
-[#collection-resources,reftext='{table-caption} {counter:table-num}']
-.Collection Resources
-[width="90%",cols="10,10,5,20",options="header"]
-|===
-^|Resource ^|URI ^|HTTP Method ^|Description
-|<<collections-metadata-section,Collections>> |/collections ^|GET |Information which describes the set of available Collections
-|<<collection-description-section,Collection>> |/collections/{collectionId} ^|GET |Information about a specific collection of geospatial data with links to distribution
-|<<coverage-access-section,Coverages>> |/collections/{collectionId}/coverage ^|GET |A coverage conformant with the <<CIS_1_1,CIS>> Standard
-|===
-

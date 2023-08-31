@@ -22,6 +22,16 @@ This _OGC API - Coverages_ standard defines an API with two goals:
 * Provide access to *_Coverages_* conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 * Provide functionality comparable to that of the <<web-coverage-service-overview,OGC Web Coverage Service (WCS) standard>>.
 
+This API standard allows efficient access to multidimensional geospatial data cubes, particularly when additional optional requirements classes complementing the functionality
+defined in the "Core" requirements class allowing to subset the fields, area, time and resolution of interest, are implemented.
+
+This data cube functionality can be further extended by integrating it with advanced processing capabilities
+as defined by https://docs.ogc.org/is/18-062r2/18-062r2.html[_OGC API - Processes - Part 1: Core_] and https://docs.ogc.org/DRAFTS/21-009.html[_OGC API - Processes - Part 3: Workflows and Chaining_ (draft)]
+(the _collection input_ and _collection output_ requirements classes in particular).
+
+A future part extension to this standard is also foreseen for deriving new coverage fields based
+on a simple expression language such as the https://docs.ogc.org/DRAFTS/21-065.html[_OGC Common Query Language (CQL2)_], together with standardized mathematical and aggregation functions.
+
 Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>>
 URIs are composed of three sections:
 
