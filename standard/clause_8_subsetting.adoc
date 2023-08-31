@@ -7,4 +7,8 @@ The "Subsetting" Requirements Class specifies the `subset`, `bbox` and `datetime
 With the `subset` and `datetime` parameters, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
+==== Subsetting Examples
+
+See also <<subsetting-examples, examples of subsetting requests>> in an annex.
+
 include::requirements/requirements_class_coverage_subset.adoc[]

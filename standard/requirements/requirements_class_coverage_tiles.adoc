@@ -10,12 +10,13 @@
 
 === Requirements
 
+==== Coverage tilesets (`/collections/{collectionId}/coverage/tiles`)
 The capability to request tiles is defined in the following Requirement:
 
 [[req_coverage_tiles-definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-tiles/definition*
+^|*Requirement {counter:req-id}* |*/req/coverage-tiles/tilesets*
 ^|A |The coverage SHALL have an associated list of at least one coverage tilesets accessible at +
  `.../{collectionId}/coverage/tiles`, conforming to OGC API - Tiles - Part 1: Core
 ^|B |The coverage's collection description document at `.../{collectionId}` SHALL include a link with relation type http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
@@ -23,18 +24,10 @@ The capability to request tiles is defined in the following Requirement:
  `.../{collectionId}/coverage/tiles/{tileMatrixSetId}`
 ^|D |The tiles making up the tilesets SHALL be accessible from +
  `.../{collectionId}/coverage/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}`
-|===
-
-The results of requesting coverage tiles are defined by the following Requirement:
-
-[[req_coverage_tiles-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/coverage-tiles/success*
-^|A |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles specifications
-^|B |The response to a request for an individual tile SHALL return a subset of the coverage trimmed on the axes defined by the 2D Tile Matrix Set
+^|E |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles specifications
+^|F |The response to a request for an individual tile SHALL return a subset of the coverage trimmed on the axes defined by the 2D Tile Matrix Set
 to cover the exact geospatial extent of the tile.
-^|C |The response to a request for an individual tile SHALL be scaled down to a number of cells corresponding to the tile's pixel size,
+^|G |The response to a request for an individual tile SHALL be scaled down to a number of cells corresponding to the tile's pixel size,
    plus one if the coverage cells do not fully span the distance between them.
 |===
 

@@ -9,15 +9,47 @@
 
 === Requirements
 
-==== `scale-factor`, `scale-size` and `scale-axes` parameters
+==== Parameter `scale-factor`
 
-The scaling parameters are defined in the following Requirement:
-
-[[req_coverage_scaling-definition]]
+[[req_coverage_scaling-factor]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-scaling/definition*
-^|A |The operation SHALL support a parameter `scale-size` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/factor*
+^|A |The operation SHALL support a `scale-factor` numeric parameter for the coverage resource.
+^|B |For each axis, the returned coverage SHALL contain the number of original sampled values, divided by the specified factor.
+|===
+
+
+==== Parameter `scale-axes` parameters
+
+[[req_coverage_scaling-axes]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/axes*
+^|A |The operation SHALL support a parameter `scale-axes` for the coverage resource with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+
+[source,EBNF]
+----
+  ScalingSpec:       "scale-axes"=axisName({factor})[,axisName({factor})]*
+  axisName:          {text}
+
+  Where:
+     {factor} is an integer or floating-point number, and
+     {axisName} refers to a valid axis for the coverage
+----
+
+^|B |The implementation SHALL support the name of axes as per the extent of the collection description, which should also correspond to those defined to the abbreviations defined by the CRS
+(as defined bythe <gml:axisAbbrev> tags), and to the `axisLabels` defined in the _domain set_ for a CIS representationm, and return a 400 error for an unrecognized axis name.
+^|C |For each axis specified, the returned coverage SHALL contain the number of original sampled values, divided by the _factor_ specified for that axis, and the original number of sample values for unspecified axes.
+|===
+
+==== Parameter `scale-size`
+
+[[req_coverage_scaling-size]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/size*
+^|A |The operation SHALL support a parameter `scale-size` for the coverage resource with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
 [source,EBNF]
 ----
@@ -26,35 +58,13 @@ The scaling parameters are defined in the following Requirement:
 
   Where:
      {number} is an integer or floating-point number, and
+     {axisName} refers to a valid axis for the coverage
 
 ----
-^|B |The operation SHALL support `scale-factor` numeric parameter.
-^|C |The operation SHALL support a parameter `scale-axes` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
-
-[source,EBNF]
-----
-  ScalingSpec:       "scale-axes"=axisName({number})[,axisName({number})]*
-  axisName:          {NCName}
-
-  Where:
-     {number} is an integer or floating-point number, and
-----
-
-^|D |The axis name SHALL be the same as one of the `axisLabels` defined in the DomainSet, and shall match the abbreviations defined by the CRS
-(as defined bythe <gml:axisAbbrev> tags).  or else return a 400 status code.
-|===
-
-The results of using a scaling parameter are defined by the following Requirement:
-
-[[req_coverage_scaling-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/coverage-scaling/success*
-^|A |The `scale-size=AxisName(count)`, `scale-factor=factor` and `scale-axes=AxisName(factor)` parameters SHALL be supported for the coverage and range set resources.
-^|B |When `scale-size` is used, the returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified, and the original number of sample values for unspecified axes.
-^|C |When `scale-factor` is used, for each axis, the returned coverage SHALL contain the number of original sampled values, divided by _factor_.
-^|D |When `scale-axes` is used, for each axis specified, the returned coverage SHALL contain the number of original sampled values, divided by the _factor_ specified for that axis, and the original number of sample values for unspecified axes.
-^|E |When `scale-size` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
+^|B |The implementation SHALL support the name of axes as per the extent of the collection description, which should also correspond to those defined to the abbreviations defined by the CRS
+(as defined bythe <gml:axisAbbrev> tags), and to the `axisLabels` defined in the _domain set_ for a CIS representationm, and return a 400 error for an unrecognized axis name.
+^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by the `scale-size` parameter, and the original number of sample values for unspecified axes.
+^|D |When `scale-size` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===
 
 ==== Downsampling permission

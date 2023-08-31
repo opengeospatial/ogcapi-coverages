@@ -31,6 +31,8 @@ A successful GET response is described in the Coverages API core class (http://w
 ^|B |Any of the CRSs listed in the collection (or collections) description SHALL be supported. If the list of supported CRS is not present, only http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be supported.
 ^|C |If the spatial subsetting requirements class is supported, the `bbox-crs` and the `subset-crs` SHALL additionally support value specified in the crs parameter.
 ^|D |CRS expressed as URIs or as safe CURIEs SHALL be supported.
+^|E |The content of that response SHALL be consistent with the requested CRS.
+^|F |If the parameter value for `crs` is not valid for requested coverage, the status code of the response SHALL be 400.
 |===
 
 NOTE: When no crs parameters are specified, please refer to the Coverages API core conformance class to know about the default crs.
@@ -49,18 +51,3 @@ NOTE: The default CRS of the BBOX is http://www.opengis.net/def/crs/OGC/1.3/CRS8
 |===
 
 NOTE: This makes the notation compatible with WCS.
-
-==== Response
-
-[[req_crs_coverage-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/crs/coverage-success*
-^|A |The content of that response SHALL be consistent with the requested CRS.
-|===
-
-==== Error conditions
-
-A general summary of the HTTP status codes can be found in http://www.opengis.net/doc/IS/ogcapi-features-1/1.0[OGC API - Features - Part 1: Core, version 1.0] as well as in the https://docs.ogc.org/is/19-072/19-072.html[OGC API – Common – Part 1: Core] Standard.
-
-If the parameter value for `crs` is not valid for the collections, the status code of the response will be `400`.

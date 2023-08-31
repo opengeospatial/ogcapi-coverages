@@ -183,7 +183,3 @@ or simply return the properly geo-referenced values within the domain set.
  a lower dimensionality than the data (e.g. requesting a 2D image from a 3D coverage as PNG or GeoTIFF).
 ^|C |A query parameter defined by a custom or standardized extension MAY be made available to enable, disable or alter that behavior.
 |===
-
-==== Subsetting Examples
-
-See also <<subsetting-examples, examples of subsetting requests>> in an annex.
