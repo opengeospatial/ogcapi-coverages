@@ -11,7 +11,7 @@ The `GeoData-Coverage` Requirements Class extends API-Common to define the requi
 
 Three resources and their operations are defined in this Requirements Class. They are summarized in <<collection-resources>>.
 
-include::requirements/requirements_class_geodata_coverage.adoc[]
+include::requirements/requirements_class_core.adoc[]
 
 [#collection-resources,reftext='{table-caption} {counter:table-num}']
 .Collection Resources
