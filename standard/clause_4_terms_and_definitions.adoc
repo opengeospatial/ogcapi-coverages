@@ -27,7 +27,7 @@ component of a coverage with its domain being a subset of the overall coverage f
 (in the context of Earth Observation imagery data products and the _Scenes_ requirements class defined in this standard)
 
 Unlike Coverage Implementation Schema (CIS) _coverages by partitioning_, scenes are an optional capability of the API with corresponding individual resource paths rather than a potential aspect of a coverage resource.
-A client can either retrieve a coverage for the overall coverage or for an individual scene, but will never receive a special "partitioned coverage" response necessitating special handling considerations.
+A client can either retrieve a coverage for the overall collection or for an individual scene, but will never receive a special "partitioned coverage" response necessitating special handling considerations.
 
 === Sensor model
 mathematical model for estimating geolocations from recorded sensor data such as digital imagery
