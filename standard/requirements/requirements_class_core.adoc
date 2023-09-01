@@ -72,9 +72,9 @@ This resource should also match the draft https://github.com/opengeospatial/ogca
 ^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
 |===
 
-[[per_core-metadata]]
+[[per_core-cis-metadata]]
 [width="90%",cols="2,6"]
 |===
-^|*Requirement {counter:req-id}* |*/req/core/metadata-permission*
+^|*Permission {counter:per-id}* |*/per/core/cis-metadata*
 ^|A |The implementation MAY omit the CIS domain-specific metadata by default as part of the coverage response.
 |===
