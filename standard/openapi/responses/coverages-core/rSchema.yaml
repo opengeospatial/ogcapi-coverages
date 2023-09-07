@@ -1,0 +1,8 @@
+description: Collection schema describing all fields of the coverage
+content:
+   application/json:
+     schema:
+       $ref: '../../schemas/tms/propertiesSchema.yaml'
+   text/html:
+     schema:
+       type: string
