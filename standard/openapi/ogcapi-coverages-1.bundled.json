@@ -102,7 +102,7 @@
           "API"
         ],
         "operationId": "getAPICollections",
-        "summary": "Retrieve the list of collections available from this API implementation & deployment.",
+        "summary": "JSON enumeration of all the collections available from this API implementation & deployment (for inclusion in the API definition).",
         "parameters": [
           {
             "$ref": "#/components/parameters/f-metadata"
@@ -130,7 +130,7 @@
           "API"
         ],
         "operationId": "getAPICoverageCollections",
-        "summary": "Retrieve the list of coverages collections available from this API implementation & deployment.",
+        "summary": "JSON enumeration of the coverage collections available from this API implementation & deployment (for inclusion in the API definition).",
         "parameters": [
           {
             "$ref": "#/components/parameters/f-metadata"
@@ -158,7 +158,7 @@
           "API"
         ],
         "operationId": "getAPITileMatrixSets",
-        "summary": "Retrieve the list of shared TileMatrixSets available from this API implementation & deployment.",
+        "summary": "JSON enumeration of the shared TileMatrixSets available from this API implementation & deployment (for inclusion in the API definition).",
         "parameters": [
           {
             "$ref": "#/components/parameters/f-metadata"

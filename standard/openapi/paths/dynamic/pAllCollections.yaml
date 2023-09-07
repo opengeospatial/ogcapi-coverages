@@ -3,7 +3,7 @@ get:
    tags:
      - API
    operationId: getAPICollections
-   summary: Retrieve the list of collections available from this API implementation & deployment.
+   summary: JSON enumeration of all the collections available from this API implementation & deployment (for inclusion in the API definition).
    parameters:
      - $ref: '../../parameters/unspecified/f-metadata.yaml'
    responses:
