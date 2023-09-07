@@ -2,7 +2,8 @@ description: A coverage, including any self-describing information supported by 
 content:
    application/prs.coverage+json:
      schema:
-       $ref: 'https://schemas.opengis.net/covjson/1.0/coveragejson.json'
+       type: string
+       # SwaggerUI Validation errors? $ref: 'https://schemas.opengis.net/covjson/1.0/coveragejson.json'
    application/json:
      schema:
        $ref: '../../schemas/cis/coverage-schema.yaml'
