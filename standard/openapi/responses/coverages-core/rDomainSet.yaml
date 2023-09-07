@@ -1,8 +1,0 @@
-description: A coverages domainset.
-content:
-   application/json:
-     schema:
-       $ref: '../../schemas/cis/domainSet.yaml'
-   text/html:
-     schema:
-       type: string

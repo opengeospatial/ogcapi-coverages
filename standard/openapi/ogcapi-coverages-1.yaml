@@ -40,14 +40,8 @@ paths:
    # OGC API - Coverages - Part 1: Core
    /collections/{collectionId}/coverage:
       $ref: 'paths/coverages-core/pCoverage.yaml'
-   /collections/{collectionId}/coverage/domainset:
-      $ref: 'paths/coverages-core/pDomainSet.yaml'
-   /collections/{collectionId}/coverage/rangetype:
-      $ref: 'paths/coverages-core/pRangeType.yaml'
-   /collections/{collectionId}/coverage/rangeset:
-      $ref: 'paths/coverages-core/pRangeSet.yaml'
-   /collections/{collectionId}/coverage/metadata:
-      $ref: 'paths/coverages-core/pMetadata.yaml'
+   /collections/{collectionId}/schema:
+      $ref: 'paths/coverages-core/pSchema.yaml'
 
    # Coverage Tiles
    /collections/{collectionId}/coverage/tiles:
@@ -96,12 +90,6 @@ components:
          $ref: 'schemas/common-geodata/numberMatched.yaml'
 
       # CIS
-      domainSet:
-         $ref: 'schemas/cis/domainSet.yaml'
-      rangeType:
-         $ref: 'schemas/cis/rangeType.yaml'
-      rangeSet:
-         $ref: 'schemas/cis/rangeSet.yaml'
       coverageSchema:
          $ref: 'schemas/cis/coverage-schema.yaml'
 
@@ -166,12 +154,6 @@ components:
       # Coverages - Core (unspecified)
       f-coverage:
          $ref: 'parameters/unspecified/f-coverage.yaml'
-      f-rangeset:
-         $ref: 'parameters/unspecified/f-rangeset.yaml'
-      f-domainset:
-         $ref: 'parameters/unspecified/f-domainset.yaml'
-      f-rangetype:
-         $ref: 'parameters/unspecified/f-rangetype.yaml'
 
       # Tiles - Core
       tileMatrix:

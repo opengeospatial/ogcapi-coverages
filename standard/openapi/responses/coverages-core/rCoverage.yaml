@@ -1,5 +1,8 @@
-description: A full coverage.
+description: A coverage, including any self-describing information supported by the encoding.
 content:
+   application/prs.coverage+json:
+     schema:
+       $ref: 'https://schemas.opengis.net/covjson/1.0/coveragejson.json'
    application/json:
      schema:
        $ref: '../../schemas/cis/coverage-schema.yaml'
@@ -7,7 +10,31 @@ content:
      schema:
        type: string
        format: binary
-   multipart/related:
+   application/x-netcdf:
+     schema:
+       type: string
+       format: binary
+   vnd.las:
+     schema:
+       type: string
+       format: binary
+   vnd.laszip:
+     schema:
+       type: string
+       format: binary
+   image/png:
+     schema:
+       type: string
+       format: binary
+   image/jxl:
+     schema:
+       type: string
+       format: binary
+   image/jp2:
+     schema:
+       type: string
+       format: binary
+   application/x-zarr:
      schema:
        type: string
        format: binary

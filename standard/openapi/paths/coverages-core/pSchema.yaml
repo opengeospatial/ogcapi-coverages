@@ -1,0 +1,17 @@
+# Schema
+get:
+  tags:
+    - Coverage
+  summary: Retrieve the schema of the coverage identified by {collectionId}
+  description: |-
+    Schema for coverage identified by {collectionId}.
+    Use content negotiation to request required format.
+  operationId: getCoverageSchema
+  parameters:
+    - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
+    - $ref: '../../parameters/unspecified/f-metadata.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/coverages-core/rSchema.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'

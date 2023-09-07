@@ -1,8 +1,0 @@
-description: A coverage's range set.
-content:
-   application/json:
-     schema:
-       $ref: '../../schemas/cis/rangeSet.yaml'
-   text/html:
-     schema:
-       type: string

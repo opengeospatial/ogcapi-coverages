@@ -73,13 +73,16 @@ properties:
            type: integer
            default: 0
            minimum: 0
-         observedProperty:
+         x-ogc-observedProperty:
            type: string
-         observedPropertyURI:
-           type: string
-           format: uri
-         uom:
-           type: string
-         uomURI:
+         x-ogc-observedPropertyURI:
            type: string
            format: uri
+         x-ogc-uom:
+           type: string
+         x-ogc-uomURI:
+           type: string
+           format: uri
+         x-ogc-fieldIndex:
+           type: integer
+           minimum: 0
