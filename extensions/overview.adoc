@@ -2,18 +2,21 @@
 
 [[extensions-overview]]
 === Overview
-In addition to the OAPI - Coverages Core, which every implementation claiming conformance must implement, a number of extensions is defined which an implementation optionally may support. These extensions are as follows.
+In addition to the _OGC API - Coverages - Part 1: Core, _"Core"_ requirement class which every implementation claiming conformance must implement,
+a number of optional conformance classes are also defined in _Part 1: Core_ which an implementation optionally may support, and some additional extensions are planned. These extensions are as follows.
 
 
 [#mapping-to-common,reftext='{table-caption} {counter:table-num}']
-.Mapping Extensions to API-Coverages Core
+._OGC API - Coverages_ Extensions
 [width="90%",cols="2,6"]
 |====
 ^|*Extension* ^|*Purpose*
-| Processing | process WCPS analytics queries in the server
-| Transaction | insert, delete, or update a coverage on a server
+| Part 2: Filtering and deriving fields | only include cells for the resulting coverage if they match a query predicate, define new fields based on existing ones, using an expression language such as https://docs.ogc.org/DRAFTS/21-065.html[CQL2]. See #164.
+| https://docs.ogc.org/DRAFTS/21-009.html[OGC API - Processes - Part 1: Core and Part 3: Workflows and Chaining] | accept an OGC API - Coverage as an input to a process, or return an OGC API - Coverage as an output from a _OGC API - Procesess_ process
+| https://docs.ogc.org/is/08-068r3/08-068r3.html[Web Coverage Processing Service] | process WCPS analytics queries in the server (see #97)
+| Transactions | insert, delete, or update a coverage on a server (to be based on Common CRUD building blocks, see also https://docs.ogc.org/DRAFTS/19-087.html#rc-scenes[Scenes requirement class permissions for CRUD operations])
 | Range Subsetting _(now in Core)_ | extract range components ("bands", "variables") from a coverage
 | Scaling _(now in Core)_ | change resolution of a gridd coverage
-| CRS | change the projection of a coverage
+| CRS _(now in Core)_ | change the projection of a coverage
 | Interpolation | apply a particular interpolation method when interpolation occurs during request processing
 |====

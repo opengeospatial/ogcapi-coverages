@@ -33,7 +33,7 @@ The _Scenes_ Requirements Class defines how to present separate components of a 
 * <<rc-fieldselection,*Field Selection*>>
 * <<rc-crs,*Coordinate Reference System*>>
 
-The _Subset_ Requirements Class provides capabilities to select a sub-set of a `Coverage` using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
+The _Subset_ Requirements Class provides capabilities to select a sub-set of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
 The _Scaling_ Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
 
