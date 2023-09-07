@@ -112,7 +112,11 @@ Returns the coverage data for an individual scene
 
 `GET /collections/myCoverage/coverage`
 
-Retrieve a default coverage.
+Retrieve the whole coverage (the response may be downsampled if [Scaling](https://docs.ogc.org/DRAFTS/19-087.html#rc-scaling) is supported by the server).
+
+`GET /collections/myCoverage/coverage?scale-factor=1`
+
+Retrieve the whole coverage at native resolution (the server will likely return a 400 error for large datasets).
 
 `GET /collections/myCoverage/coverage?bbox=10,40,20,50`
 
