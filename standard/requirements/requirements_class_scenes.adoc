@@ -19,6 +19,7 @@
 ^|B |For multi-scenes collections, a GET operation on the `/collections/{collectionId}/scenes` resource SHALL return a successful response with a HTTP status code `200`.
 ^|C |The JSON response to the GET `/collections/{collectionId}/scenes` operation SHALL include a `scenes` property being a JSON array of individual scenes
 ^|D |Each element of the array of scenes SHALL include at minimum an `id`.
+^|E |The collection description at `/collections/{collectionId}` SHALL include in its `links` property a link to the `.../scenes` resource using relation type `[ogc-rel:coverage-scenes]`.
 |===
 
 [[rec_scenes-scene_filtering]]

@@ -84,8 +84,8 @@ The netCDF requirements class defines support for encoding a coverage response a
 
 The CIS JSON requirements class defines support for encoding a coverage response according to the http://www.opengis.net/doc/IS/cis/1.1.1[OGC Coverage Implementation Schema (CIS) 1.1].
 
-The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage of its components according to this https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] Web API standard.
-A CIS JSON representation is required at least for the domain set and the range type, which can both either be embedded within the collection resource, or provided as separate resources.
+The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage,
+including a self-description, according to this https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] Web API standard.
 
 A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
 
@@ -115,13 +115,15 @@ a _CoverageByPartitioning_ defined by a PartitionSet, unless a prior arrangement
 
 Similarly, this requirement class also specifies that the CIS JSON response will be self-contained (not linking to data available in separate resources),
 unless a prior arrangement (not specified by this Standard) is established with the client.
+Implementations wishing to present different constituent parts of a coverage as separate resources can consider implementing the <<rc-scenes, _Scenes_ requirements class>>, where
+both a coverage for the overall collection, as well as a coverage for individual scenes, can be retrieved by a client.
 
 Since the description of the coverage domain and range is easily available at the `/collections/{collectionId}` and `/collections/{collectionId}/schema` resources,
 implementations and clients are likely to prefer keeping to single-part encodings, and would select a binary encoding such as those defined in the other encoding requirements classes for efficient access.
 
 This requirements class also clarifies how to describe the _DomainSet_ of coverages based on whether the _RangeSet_ values correspond to cells whose geometry are a single point or an area,
 ensuring that the extent interval in the collection resource always fully cover the spatial extent described by the coverage and that this extent description is consistent with other
-OGC API Standards, such as OGC API - Maps (where map pixels always represent an area), which may be made available for the same collection resource.
+OGC API Standards, such as _OGC API - Maps_ (where map pixels always represent an area), which may be made available for the same collection resource.
 
 include::requirements/requirements_class_cisjson.adoc[]
 

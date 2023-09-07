@@ -35,8 +35,13 @@ Each of these elements are themselves an array of start and end bound values.
 ^|E |The name (JSON dictionary key) of each additional dimension SHALL correspond to the axis abbreviation for the CRS of that axis, to valid axis names for use with query parameters defined in optional requirements classes such as `subset` and `scale-axes`, as well as to axis names in the coverage response, if applicable.
 ^|F |If a particular dimension of the coverage is gridded, the description of that dimension in the extent SHALL describe this grid using the `grid` property, providing a `cellsCount`, as well as a `resolution` for regular grid or a set of `coordinates` for irregular grids.
 ^|G |For data referenced in relation to planet Earth, the coordinates in the `bbox` of the `spatial` dimensions of the `extent` SHALL be provided either as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]).
-^|H |The `storageCRS` property SHALL be set to the native CRS of the coverage, also correspondin to the default output CRS (used when the `crs` parameter is not specified and/or the CRS requirements class is not supported).
+^|H |The `storageCRS` property SHALL be set to the native CRS of the coverage, also corresponding to the default output CRS (used when the `crs` parameter is not specified and/or the CRS requirements class is not supported).
+^|I |The `crs` property in the collection object of a geospatial collection SHALL contain URIs or safe CURIEs for the list of CRSs supported by the server for that collection.
+^|J |If the collection is available more efficiently (e.g., if it is stored in the server in that CRS) using a particular CRS (the native CRS, also _called storage CRS_) that is not http://www.opengis.net/def/crs/OGC/1.3/CRS84, a `storageCrs` property in the collection object of a geospatial collection SHALL be the URI or the safe CURIE for that CRS.
+^|K |If a `storageCrs` property is used and that is not http://www.opengis.net/def/crs/OGC/1.3/CRS84, an extent SHALL be provided in a `storageCrsExtent` property following the same schema as the extent property.
 |===
+
+NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `http://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is _crs_.
 
 NOTE: A schema for this extended collection resource is available at https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodata/collectionInfo.yaml.
 
@@ -70,6 +75,20 @@ This resource should also match the draft https://github.com/opengeospatial/ogca
 ^|C |The content of that response SHALL be the coverage data, along with the suported self-description capabilities of the negotiated content type.
 ^|D |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
 ^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+^|F |The map response SHALL be in the native (`storageCRS`) specified in the collection description, or http://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
+^|G |The headers SHALL include a `Content-Crs:` header with the URI or the safe CURIEs of the CRS used to render the map, except if the content is in the http://www.opengis.net/def/crs/OGC/1.3/CRS84 CRS.
+^|H |If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual geospatial boundary of the coverage.
+^|I |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or http://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain four comma separated numbers representing the lower-left and upper right corners of the response honoring the CRS coordinates order.
+^|J |An implementation not supporting the <<rc-scaling, "Scaling" requirements class>> SHALL still accept a `scale-factor` query parameter for a GET operation on the coverage resource, but only for a value of exactly `1` (returning a 4xx error otherwise). In this case, the implementation will simply ignore the parameter, and either return the data at the native resolution as if the parameter was not used, or return an error if the selected subset or the whole coverage requested would exceed the server limits. This allows for clients wishing to ensure they always retrieve a native resolution coverage by always including a `scale-factor=1` parameter.
+|===
+
+[[rec_core-limits]]
+[width="90%",cols="2,6"]
+|===
+^|*Recommendation {counter:per-id}* |*/per/core/limits*
+^|A |The implementation SHOULD advertise maximum limits for individual dimensions and/or combined data size that it is willing to return in the `x-OGC-limits.coverage` property of the service metadata, provided as an extension of the info section of the API definition, as indicated in https://docs.ogc.org/is/19-072/19-072.html[_OGC API – Common – Part 1: Core_].
+^|B |The implementation SHOULD include in the `x-OGC-limits.coverage` `maxWidth`, `maxHeight` and maxCells` integer properties for implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages.
+^|C |The implementation SHOULD return an 4xx error for coverage requests exceeding any of those limits.
 |===
 
 [[per_core-cis-metadata]]

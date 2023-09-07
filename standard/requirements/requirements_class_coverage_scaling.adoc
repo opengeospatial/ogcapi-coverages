@@ -39,7 +39,7 @@
 ----
 
 ^|B |The implementation SHALL support the name of axes as per the extent of the collection description, which should also correspond to those defined to the abbreviations defined by the CRS
-(as defined bythe <gml:axisAbbrev> tags), and to the `axisLabels` defined in the _domain set_ for a CIS representationm, and return a 400 error for an unrecognized axis name.
+(as defined bythe <gml:axisAbbrev> tags), and to the `axisLabels` defined in the _domain set_ for a CIS representation, and return a 400 error for an unrecognized axis name.
 ^|C |For each axis specified, the returned coverage SHALL contain the number of original sampled values, divided by the _factor_ specified for that axis, and the original number of sample values for unspecified axes.
 |===
 
@@ -62,7 +62,7 @@
 
 ----
 ^|B |The implementation SHALL support the name of axes as per the extent of the collection description, which should also correspond to those defined to the abbreviations defined by the CRS
-(as defined bythe <gml:axisAbbrev> tags), and to the `axisLabels` defined in the _domain set_ for a CIS representationm, and return a 400 error for an unrecognized axis name.
+(as defined bythe <gml:axisAbbrev> tags), and to the `axisLabels` defined in the _domain set_ for a CIS representation, and return a 400 error for an unrecognized axis name.
 ^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by the `scale-size` parameter, and the original number of sample values for unspecified axes.
 ^|D |When `scale-size` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===

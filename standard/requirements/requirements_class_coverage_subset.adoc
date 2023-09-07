@@ -95,10 +95,6 @@ February 12, 2018, 23:20:52 GMT:
 `datetime=2018-02-12T23:20:52Z`
 =================
 
-For resources with a temporal property that is a timestamp (like `lastUpdate`), a date-time value would match all resources where the temporal property is identical.
-
-For resources with a temporal property that is a date or a time interval, a date-time value would match all resources where the timestamp is on that day or within the time interval.
-
 .Intervals
 =================
 February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:
@@ -138,13 +134,13 @@ March 18, 2018, 12:31:12 UTC or earlier:
      {number} is an integer or floating-point number, and
      {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
-^|B |The axis name SHALL correspond to one of the axis of the Coordinate Reference System (CRS) of the target resource or else return a 400 status code.
+^|B |The axis name SHALL correspond to one of the axis of the Coordinate Reference System (CRS) of the coverage or else return a 400 status code.
 ^|C |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 status code SHALL be returned
 ^|D |For a CRS where an axis can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
 be supported to indicate an extent crossing that wrapping point.
 ^|E |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|F |If a lower limit of the subset expression is populated with an asterix "*", then the minimum extent of the resource along that axis SHALL be selected.
-^|G |If a upper limit of the subset expression is populated with an asterix "*", then the maximum extent of the resource along that axis SHALL be selected.
+^|F |If a lower limit of the subset expression is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+^|G |If a upper limit of the subset expression is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
 |===
 
 NOTE: When the _intervalOrPoint_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,
