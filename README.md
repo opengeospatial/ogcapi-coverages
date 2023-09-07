@@ -62,7 +62,7 @@ Each of these collections contains a minimal subset of the object collection res
 
 Description for the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage.
 The resource includes elements such as an `id`, `title`, `description`, available `crs` and `extent`.
-This `extent` describes the domain of the coverage for each dimension, including the overall envelope, detailed sub-intervals where data is available, and/or a regular or irregular `grid`.
+This [`extent`](https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/common-geodata/extent-uad.yaml) describes the domain of the coverage for each dimension, including the overall envelope, detailed sub-intervals where data is available, and/or a regular or irregular `grid`.
 This object also includes links to resources pertaining to this collection. For coverages, a link to the record schema described below will be included.
 This resource is comparable to a WCS *_DescribeCoverage_* response, with the exception that the schema, corresponding to Coverage Implementation Schema (CIS) _range type_, needs to be retrieved separately.
 
@@ -70,7 +70,7 @@ This resource is comparable to a WCS *_DescribeCoverage_* response, with the exc
 
 `{root}/collections/{collectionId}/schema`
 
-Returns the schema for the coverage fields or properties of values available at each direct position.
+Returns the [schema](https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/tms/propertiesSchema.yaml) for the coverage fields or properties of values available at each direct position.
 At minimum, a _JSON Schema_ representation of this resource is available.
 This resource is comparable to the CIS _range type_ portion of the WCS *_DescribeCoverage_* response,
 and is retrieved separately from the collection description to accommodate more complex record schemas including several record fields and/or detailed semantic annotations.
@@ -88,7 +88,7 @@ Returns the list of tilesets available for this coverage.
 
 `{root}/collections/{collectionId}/coverage/tiles/{tileSetId}`
 
-Returns an individual coverage tileset for a particular 2D Tile Matrix Set
+Returns an individual coverage [tileset](https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/tms/tileSet.yaml) for a particular 2D Tile Matrix Set
 
 `{root}/collections/{collectionId}/coverage/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}`
 
