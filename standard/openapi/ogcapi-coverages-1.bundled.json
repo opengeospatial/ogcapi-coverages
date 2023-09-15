@@ -1258,6 +1258,47 @@
         "minimum": 0,
         "example": 127
       },
+      "coverages": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/collections"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "collections": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/coverageInfo"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "coverageInfo": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/collectionInfo"
+          },
+          {
+            "type": "object",
+            "required": [
+              "extent"
+            ],
+            "properties": {
+              "orderedAxes": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "description": "axis labels of all dimensions listed in CRS order. Spatial dimensions should be listed separately here."
+                }
+              }
+            }
+          }
+        ]
+      },
       "coverageSchema": {
         "title": "Coverage object",
         "description": "Component of OGC Coverage Implementation Schema 1.1. Last updated: 2016-may-18. Copyright (c) 2016 Open Geospatial Consortium, Inc. All Rights Reserved. To obtain additional rights of use, visit http://www.opengeospatial.org/legal/.",
@@ -3141,22 +3182,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/collections"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "collections": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/responses/Collection/content/application~1json/schema"
-                      }
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/components/schemas/coverages"
             },
             "example": {
               "links": [
@@ -3251,27 +3277,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/collectionInfo"
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "extent"
-                  ],
-                  "properties": {
-                    "orderedAxes": {
-                      "type": "array",
-                      "minItems": 1,
-                      "items": {
-                        "type": "string",
-                        "description": "axis labels of all dimensions listed in CRS order. Spatial dimensions should be listed separately here."
-                      }
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/components/schemas/coverageInfo"
             },
             "example": {
               "id": "elevation",

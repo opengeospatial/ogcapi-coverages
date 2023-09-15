@@ -89,6 +89,12 @@ components:
       numberMatched:
          $ref: 'schemas/common-geodata/numberMatched.yaml'
 
+      # Coverages - Core (this adds `orderedAxes`, which could possibly be defined in Common as well?)
+      coverages:
+         $ref: 'schemas/coverages-core/coverages.yaml'
+      coverageInfo:
+         $ref: 'schemas/coverages-core/coverageInfo.yaml'
+
       # CIS
       coverageSchema:
          $ref: 'schemas/cis/coverage-schema.yaml'
@@ -141,7 +147,7 @@ components:
       bbox-crs:
          $ref: 'parameters/common-crs/bbox-crs.yaml'
 
-      # Coverages - Core (unspecified)
+      # Coverages - Core
       scale-factor:
          $ref: 'parameters/coverages-core/scale-factor.yaml'
       scale-axes:
