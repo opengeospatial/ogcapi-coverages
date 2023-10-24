@@ -49,7 +49,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 ^|C |The scene object response SHALL include an `id` consistent with the requested id and the id in the `/scenes` response.
 ^|D |The scene object response SHALL include a `links` property including a `self` link to the scene object, a link to the coverage request end-point (link relation `[ogc-rel:coverage]`) and a link to the coverage schema (`[ogc-rel:coverage-schema]`) at `/collections/{collectionId}/schema` supporting a JSON Schema description of the coverage fields (_range type_).
 ^|E |The scene object response SHALL include an `extent` property as defined in the Uniform Additional Dimension extent schema.
-^|F |The scene object response SHALL include a `crs` property defining the list of available output CRSs, and a `storageCRS` defining the native CRS, which is also the default output CRS for the scene.
+^|F |The scene object response SHALL include a `crs` property defining the list of available output CRSs, and a `storageCrs` defining the native CRS, which is also the default output CRS for the scene.
 |===
 
 [[per_scenes-scene_crud_extensions]]
@@ -68,7 +68,7 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 ^|*Requirement {counter:req-id}* |*/req/scenes/scene-coverage*
 ^|A |A GET operation on the `/collections/{collectionId}/scenes/{sceneId}/coverage` resource SHALL return a successful response for the scene coverage with HTTP status code `200`.
 ^|B |The response to a GET operation on the `/collections/{collectionId}/scenes/{sceneId}/coverage` resource SHALL return coverage consisting of only the data within the domain of the selected scene.
-^|C |The response for the scene coverage SHALL default to the native (`storageCRS`) for the scene, which may differ to that of the overall collection.
+^|C |The response for the scene coverage SHALL default to the native (`storageCrs`) for the scene, which may differ to that of the overall collection.
 ^|D |If applicable, the `scale-factor` and `scale-axes` response SHALL be based on the resolutions described in the individual scene domain description (`extent` property), which may differ from the overall collection.
 ^|E |The response for the scene coverage SHALL otherwise follow all of the same requirements as defined in the _Core_ requirements class for a collection coverage response.
 |===
