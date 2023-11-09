@@ -878,7 +878,7 @@
             ]
           },
           "storageCrs": {
-            "description": "the native coordinate reference systems (i.e., the most efficient CRS in which to request the data, possibly how the data is stored on the server); this is the default output coordinate reference system for Maps and Coverages",
+            "description": "the native coordinate reference system (i.e., the most efficient CRS in which to request the data, possibly how the data is stored on the server); this is the default output coordinate reference system for Maps and Coverages",
             "type": "string",
             "default": "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
             "example": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
@@ -1247,7 +1247,7 @@
                   "wkt": {
                     "allOf": [
                       {
-                        "description": "A string defining the CRS using the JSON encodng for Well-known text representation of coordinate reference systems 2.0"
+                        "description": "An object defining the CRS using the JSON encoding for Well-known text representation of coordinate reference systems 2.0"
                       },
                       {
                         "type": "object"
@@ -1272,7 +1272,7 @@
         ]
       },
       "dataType": {
-        "oneOf": [
+        "anyOf": [
           {
             "type": "string"
           },
