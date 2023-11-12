@@ -87,7 +87,7 @@ This resource should also match the draft https://github.com/opengeospatial/ogca
 |===
 ^|*Recommendation {counter:per-id}* |*/per/core/limits*
 ^|A |The implementation SHOULD advertise maximum limits for individual dimensions and/or combined data size that it is willing to return in the `x-OGC-limits.coverage` property of the service metadata, provided as an extension of the info section of the API definition, as indicated in https://docs.ogc.org/is/19-072/19-072.html[_OGC API – Common – Part 1: Core_].
-^|B |The implementation SHOULD include in the `x-OGC-limits.coverage` `maxWidth`, `maxHeight` and maxCells` integer properties for implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages.
+^|B |The implementation SHOULD include in the `x-OGC-limits.coverage` `maxWidth`, `maxHeight` and `maxCells` integer properties for implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages.
 ^|C |The implementation SHOULD return an 4xx error for coverage requests exceeding any of those limits.
 |===
 
