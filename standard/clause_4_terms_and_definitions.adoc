@@ -33,5 +33,7 @@ A client can either retrieve a coverage for the overall collection or for an ind
 mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated coverage produced by a
 https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.5[sensor (3.5)]
 
+NOTE: Adapted from https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.6[ISO 19130-3 sensor model (3.6)]
+
 === Transformation grid
 grid whose direct positions are given by some transformation algorithm not further specified in this standard
