@@ -275,6 +275,28 @@
             "$ref": "#/components/parameters/scale-size"
           },
           {
+            "name": "width",
+            "in": "query",
+            "description": "Number of cells across the coverage dimension corresponding to the spatial dimension represented horizontally on a map, such as longitude or easting.",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "Number of cells across the coverage dimension corresponding to the spatial dimension represented vertically on a 2D map, such as latitude or northing.",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
             "$ref": "#/components/parameters/subset-crs"
           },
           {

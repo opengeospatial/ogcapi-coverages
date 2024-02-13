@@ -1,0 +1,9 @@
+name: height
+in: query
+description: >-
+   Number of cells across the coverage dimension corresponding to the spatial dimension represented vertically on a 2D map, such as latitude or northing.
+required: false
+style: form
+explode: false
+schema:
+  type: integer

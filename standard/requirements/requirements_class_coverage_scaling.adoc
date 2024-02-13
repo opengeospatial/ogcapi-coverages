@@ -67,14 +67,27 @@
 ^|D |When `scale-size` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===
 
+==== Parameter `width` and `height`
+
+[[req_coverage_scaling-width_and_height]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling/width-and-height*
+^|A |For coverages with a spatial dimension corresponding to the horizontal spatial axis as reprsented on a 2D map, such as longitude or easting, the operation SHALL support a parameter `width` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.:
+^|B |For coverages with a spatial dimension corresponding to the vertical spatial axis as reprsented on a 2D map, such as latitude or northing, the operation SHALL support a parameter `height` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.:
+^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by provided scaling  parameters, the original number of sample values for unspecified axes, and any defined server limits.
+^|D |When `width` and/or `height` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
+|===
+
 ==== Downsampling permission
 
 [[per_coverage_scaling-permission]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/coverage-scaling/downsampling*
-^|A |In the case where a response to a request without a `scale-factor`, `scale-axes` or `scale-size` parameters would be larger than an advertised server limit, an implementation
+^|A |In the case where a response to a request without a `scale-factor`, `scale-axes`, `scale-size`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
 MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+^|B |In the case where a `scale-size`, `scale-axes`, `width` or `height` does not explicitly specify dimensions for all axes of the coverage, an implementation MAY automatically proportionately adjust one or more unspecified dimensions.
 |===
 
 NOTE: A client retrieving a coverage from an implementation advertising support for this "Scaling" requirements class should explicitly use `scale-factor=1` if it wants to ensure

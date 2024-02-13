@@ -1,0 +1,9 @@
+name: width
+in: query
+description: >-
+   Number of cells across the coverage dimension corresponding to the spatial dimension represented horizontally on a map, such as longitude or easting.
+required: false
+style: form
+explode: false
+schema:
+  type: integer

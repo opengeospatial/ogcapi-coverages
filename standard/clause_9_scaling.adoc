@@ -3,7 +3,7 @@
 
 === Overview
 
-The "Scaling" Requirements Class defines the `scale-factor`, `scale-axes` and `scale-size` parameters for retrieving coverage data at a specific resolution.
+The "Scaling" Requirements Class defines the `scale-factor`, `scale-axes`, `scale-size`, `width` and `height` parameters for retrieving coverage data at a specific resolution.
 
 === Scaling Examples
 
