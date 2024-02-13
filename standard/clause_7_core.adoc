@@ -14,7 +14,7 @@ a function returning homogeneous values for any direct position part of its doma
 This requirement class extends the `/collections` and `/collections/{collectionId}` resources defined by _OGC API - Common - Part 2_ with additional information for collections accessible using this _Coverages API_.
 Each collection accessible as a coverage needs to include a link to the `/collections/{resourceId}/coverage` resource using the `[ogc-rel:coverage]` link relation type, which is used to retrieve the coverage data.
 
-Each collection must also include a link to the `/collections/{collectionId}/schema` resource, using the `[ogc-rel:coverage-schema]` relation type, providing a schema of the fields of the coverage supporting a JSON Schema representation.
+Each collection must also include a link to the `/collections/{collectionId}/schema` resource, using the `[ogc-rel:schema]` relation type, providing a schema of the fields of the coverage supporting a JSON Schema representation.
 This schema provides equivalent functionality to the Coverage Implementation Schema (CIS) _range type_, including for each field
 (the measured or observed property, such as a satellite imagery band, or sea surface temperature) an identifier (the property key), a `title`, a `description`, and a JSON Schema `type`.
 Semantic annotations may also be included providing additional useful information.

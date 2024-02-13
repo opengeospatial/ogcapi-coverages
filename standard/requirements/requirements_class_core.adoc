@@ -26,7 +26,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/collection-description*
 ^|A |For every collection accessible using the _Coverages API_, the collection description resource SHALL include in its `links` array a link to a coverage resource at `/collections/{collectionId}/coverage` using the link relation type `[ogc-rel:coverage]`.
-^|B |Each of these collection resources SHALL also include in its `links` array a link to a coverage schema at `/collections/{collectionId}/schema` using the link relation type `[ogc-rel:coverage-schema]`.
+^|B |Each of these collection resources SHALL also include in its `links` array a link to a coverage schema at `/collections/{collectionId}/schema` using the link relation type `[ogc-rel:schema]`.
 ^|C |Each of these collection resources SHALL use the uniform additional dimensions schema to describe its domain as part of the `extent` property of that collection.
 This implies using an `interval` array property to describe the overall envelope and optionally sub-intervals for sparsely populated data.
 The first element of the array is the overall envelope, while any additional elements detail where data is available within that overall interval.
@@ -59,10 +59,11 @@ https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodat
 ^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/schema` to retrieve the schema of the coverage fields.
 ^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|C |The content of that response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
+^|D |Each field SHALL include an `x-ogc-property-seq` property with an integer value establishing a sequential order for the fields.
 |===
 
 NOTE: A meta-schema for JSON Schema used as part of the _2D Tile Matrix Set and Tileset Metadata standard_ suitable for this resource is available at https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/tms/propertiesSchema.yaml .
-This resource should also match the draft https://github.com/opengeospatial/ogcapi-features/projects/11[_OGC API - Features - Part 5: Schemas_].
+This resource should also match the draft https://docs.ogc.org/DRAFTS/23-058.html[_OGC API - Features - Part 5: Schemas_].
 
 ==== Coverage data retrieval (`/collections/{collectionId}/coverage`)
 
