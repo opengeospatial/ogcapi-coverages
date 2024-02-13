@@ -30,7 +30,8 @@ Unlike Coverage Implementation Schema (CIS) _coverages by partitioning_, scenes 
 A client can either retrieve a coverage for the overall collection or for an individual scene, but will never receive a special "partitioned coverage" response necessitating special handling considerations.
 
 === Sensor model
-mathematical model for estimating geolocations from recorded sensor data such as digital imagery
+mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated coverage produced by a
+https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.5[sensor (3.5)]
 
 === Transformation grid
 grid whose direct positions are given by some transformation algorithm not further specified in this standard
