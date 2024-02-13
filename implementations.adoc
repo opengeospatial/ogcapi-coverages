@@ -12,7 +12,7 @@
 | OGC API - Coverages
 | https://github.com/tomkralidis[Tom Kralidis]
 
-| https://maps.ecere.com/ogcapi/[GNOSIS Map Server]
+| https://maps.gnosis.earth/ogcapi/[GNOSIS Map Server]
 | OGC API - Coverages
 | https://github.com/jerstlouis[Jerome St-Louis]
 
@@ -23,6 +23,22 @@
 | https://rasdaman.org/[rasdaman]
 | OGC API - Coverages
 | https://github.com/pebau[Peter Baumann]
+
+| https://www.webenterprisesuite.com/[Web Enterprise Suite]
+| OGC API - Coverages (T19 GDC API)
+| https://www.compusult.com/[Compusult]
+
+| http://oge.whu.edu.cn/geocube/gdc_api_t19/[WHU]
+| OGC API - Coverages (T19 GDC API)
+| https://en.whu.edu.cn/[Wuhan University]
+
+| https://testbed19.api.dev.brockmann-consult.de/api/ogc[Brockmann Consult]
+| OGC API - Coverages (T19 GDC API)
+|https://github.com/pont-us[Pontus Lurcock]
+
+| https://dev.openeo.eurac.edu/[Eurac GDC API]
+| OGC API - Coverages (T19 GDC API)
+| https://github.com/clausmichele[Michele Claus]
 
 | TBA
 | TBA
@@ -49,6 +65,22 @@
 | https://ecere.ca/gnosis[GNOSIS SDK / GNOSIS Cartographer]
 | OGC API - Coverages client
 | https://github.com/jerstlouis[Jerome St-Louis]
+
+| https://m-mohr.github.io/gdc-web-editor/[GDC Web Editor]
+| OGC API - Coverages client (T19 GDC API)
+| https://github.com/m-mohr[Matthias Mohr]
+
+| https://tm.gis.tw/testbed19client/[GIS FCU]
+| OGC API - Coverages client (T19 GDC API)
+| https://github.com/gisfcu[GIS FCU]
+
+|https://github.com/dcs4cop/xcube-ogccov/[xcube-ogccov]
+|OGC API - Coverages client (T19 GDC API)
+|https://github.com/pont-us[Pontus Lurcock]
+
+|https://www.geomatys.com/en/examind-suite/[Examind]
+|OGC API - Coverages client (T19 GDC API)
+|https://github.com/Geomatys[Geomatys]
 
 | TBA
 | TBA
