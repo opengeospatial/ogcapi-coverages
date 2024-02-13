@@ -10,7 +10,7 @@
 
 === Requirements
 
-==== Coverage tilesets (`/collections/{collectionId}/coverage/tiles`)
+==== Coverage tilesets (`/collections/{collectionId}/tiles`)
 The capability to request tiles is defined in the following Requirement:
 
 [[req_coverage_tiles-definition]]
@@ -18,12 +18,12 @@ The capability to request tiles is defined in the following Requirement:
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-tiles/tilesets*
 ^|A |The coverage SHALL have an associated list of at least one coverage tilesets accessible at +
- `.../{collectionId}/coverage/tiles`, conforming to OGC API - Tiles - Part 1: Core
+ `.../{collectionId}/tiles`, conforming to OGC API - Tiles - Part 1: Core
 ^|B |The coverage's collection description document at `.../{collectionId}` SHALL include a link with relation type http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
 ^|C |This list of coverage tilesets SHALL include a link to the full descriptions of these tilesets accessible at +
- `.../{collectionId}/coverage/tiles/{tileMatrixSetId}`
+ `.../{collectionId}/tiles/{tileMatrixSetId}`
 ^|D |The tiles making up the tilesets SHALL be accessible from +
- `.../{collectionId}/coverage/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}`
+ `.../{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}`
 ^|E |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles specifications
 ^|F |The response to a request for an individual tile SHALL return a subset of the coverage trimmed on the axes defined by the 2D Tile Matrix Set
 to cover the exact geospatial extent of the tile.
@@ -33,7 +33,7 @@ to cover the exact geospatial extent of the tile.
 
 As an example, considering that the _WorldCRS84Quad_ Tile Matrix Set has tile pixel sizes defined as 256 x 256,
 a request for tile +
-`.../coverage/tiles/WorldCRS84Quad/1/0/0` of a point coverage is equivalent to:
+`.../tiles/WorldCRS84Quad/1/0/0` of a point coverage is equivalent to:
 
 `.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=257,257`
 

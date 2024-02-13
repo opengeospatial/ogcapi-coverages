@@ -44,11 +44,11 @@ paths:
       $ref: 'paths/coverages-core/pSchema.yaml'
 
    # Coverage Tiles
-   /collections/{collectionId}/coverage/tiles:
+   /collections/{collectionId}/tiles:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTileSetsList.yaml'
-   /collections/{collectionId}/coverage/tiles/{tileMatrixSetId}:
+   /collections/{collectionId}/tiles/{tileMatrixSetId}:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTileSet.yaml'
-   /collections/{collectionId}/coverage/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+   /collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTile.yaml'
 
 components:

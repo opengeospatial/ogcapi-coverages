@@ -82,15 +82,15 @@ This resource is comparable to a WCS *_GetCoverage_* response.
 
 #### Defined in _Tiles - Part 1_ (_Coverage Tiles_)
 
-`{root}/collections/{collectionId}/coverage/tiles`
+`{root}/collections/{collectionId}/tiles`
 
 Returns the list of tilesets available for this coverage.
 
-`{root}/collections/{collectionId}/coverage/tiles/{tileSetId}`
+`{root}/collections/{collectionId}/tiles/{tileSetId}`
 
 Returns an individual coverage [tileset](https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/tms/tileSet.yaml) for a particular 2D Tile Matrix Set
 
-`{root}/collections/{collectionId}/coverage/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}`
+`{root}/collections/{collectionId}/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}`
 
 Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
 

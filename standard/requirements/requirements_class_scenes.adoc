@@ -73,13 +73,13 @@ as defined by the _OGC API - Records_ Local Resource Catalogues requirements cla
 ^|E |The response for the scene coverage SHALL otherwise follow all of the same requirements as defined in the _Core_ requirements class for a collection coverage response.
 |===
 
-==== Scene coverage tiles (`/collections/{collectionId}/scenes/{sceneId}/coverage/tiles`)
+==== Scene coverage tiles (`/collections/{collectionId}/scenes/{sceneId}/tiles`)
 
 [[req_scenes-scene_coverage_tiles]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scenes/scene-coverage-tiles*
-^|A |If the _Coverage Tiles_ requirements class is also supported, tilesets resources at `/collections/{collectionId}/scenes/{sceneId}/coverage/tiles` SHALL be supported, as defined by that requirement class and _OGC API - Tiles_.
+^|A |If the _Coverage Tiles_ requirements class is also supported, tilesets resources at `/collections/{collectionId}/scenes/{sceneId}/tiles` SHALL be supported, as defined by that requirement class and _OGC API - Tiles_.
 |===
 
 ==== Scene queryables

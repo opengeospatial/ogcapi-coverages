@@ -61,17 +61,17 @@ The following table summarizes the resource paths defined in this standard, as w
 |`{root}/collections/{collectionId}` `/schema`   |Returns the schema for the coverage fields or properties of values available at each direct position. At minimum, a _JSON Schema_ representation of this resource is available. This resource is comparable to the CIS _range type_ portion of the WCS *_DescribeCoverage_* response, and is retrieved separately from the collection description to accommodate more complex record schemas including several record fields and/or detailed semantic annotations.
 |`{root}/collections/{collectionId}` `/coverage` |Returns the coverage data, including any self-describing information (such as the _domain set_, _range type_ and _metadata_ components in addition to the _range set_ of CIS). This resource is comparable to a WCS *_GetCoverage_* response.
 2+|**_OGC API - Tiles - Part 1_**
-|`{root}/collections/{collectionId}` `/coverage/tiles`                                              |Returns the list of tilesets available for this coverage.
-|`{root}/collections/{collectionId}` `/coverage/tiles/{tileSetId}`                                  |Returns an individual coverage tileset for a particular 2D Tile Matrix Set
-|`{root}/collections/{collectionId}` `/coverage/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` |Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
+|`{root}/collections/{collectionId}` `/tiles`                                              |Returns the list of tilesets available for this coverage.
+|`{root}/collections/{collectionId}` `/tiles/{tileSetId}`                                  |Returns an individual coverage tileset for a particular 2D Tile Matrix Set
+|`{root}/collections/{collectionId}` `/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` |Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
 2+|**_OGC API - Coverages - Part 1_ (Scenes requirements class)**
 |`{root}/collections/{collectionId}` `/scenes`                       |Returns the list of scenes available for this coverage (for multi-scenes coverages, when the _Scenes_ requirement class is supported)
 |`{root}/collections/{collectionId}` `/scenes/{sceneId}`             |Returns the scene metadata for an individual scene
 |`{root}/collections/{collectionId}` `/scenes/{sceneId}/coverage`    |Returns the coverage data for an individual scene
 2+|**_OGC API - Tiles - Part 1_ (for multi-scene coverage)**
-|`{root}/collections/{collectionId}` `/scenes/{sceneId}/coverage/tiles`                                              |Returns the list of tilesets available for this scene's coverage
-|`{root}/collections/{collectionId}` `/scenes/{sceneId}/coverage/tiles/{tileSetId}`                                  |Returns an individual scene coverage tileset for a particular 2D Tile Matrix Set
-|`{root}/collections/{collectionId}` `/scenes/{sceneId}/coverage/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` |Returns an individual scene coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
+|`{root}/collections/{collectionId}` `/scenes/{sceneId}/tiles`                                              |Returns the list of tilesets available for this scene's coverage
+|`{root}/collections/{collectionId}` `/scenes/{sceneId}/tiles/{tileSetId}`                                  |Returns an individual scene coverage tileset for a particular 2D Tile Matrix Set
+|`{root}/collections/{collectionId}` `/scenes/{sceneId}/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` |Returns an individual scene coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
 |===
 
 Where:

@@ -514,7 +514,7 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/tiles": {
+    "/collections/{collectionId}/tiles": {
       "get": {
         "tags": [
           "Coverage Tiles"
@@ -545,7 +545,7 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/tiles/{tileMatrixSetId}": {
+    "/collections/{collectionId}/tiles/{tileMatrixSetId}": {
       "get": {
         "tags": [
           "Coverage Tiles"
@@ -579,7 +579,7 @@
         }
       }
     },
-    "/collections/{collectionId}/coverage/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
+    "/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
       "get": {
         "tags": [
           "Coverage Tiles"
