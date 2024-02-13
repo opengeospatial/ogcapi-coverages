@@ -136,7 +136,7 @@ Retrieve bands B02, B03 and B04 (field selection a.k.a. "range subsetting").
 
 `GET /collections/myCoverage/coverage?scale-size=Lon(800),Lat(400)`
 
-Retrieve a the coverage at a a resolution of 800 cells for the longitude axis and 400 cells for the latitude axis.
+Retrieve a the coverage at a resolution of 800 cells for the longitude axis and 400 cells for the latitude axis.
 
 `GET /collections/myCoverage/coverage?scale-factor=2`
 
