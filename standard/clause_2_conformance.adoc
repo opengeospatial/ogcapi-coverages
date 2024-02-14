@@ -37,7 +37,7 @@ The _Subset_ Requirements Class provides capabilities to select a sub-set of a c
 
 The _Scaling_ Requirements Class defines parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
 
-The _Field Selection_ (Range Subsetting) Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
+The _Field Selection_ (Range Subsetting) Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type which is described in the schema resource of the collection) to retrieve from Range Sets.
 
 The _Coordinate Reference System_ Requirements Class defines the ability to request coverage data in an alternate output coordinate reference system.
 

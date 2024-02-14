@@ -30,9 +30,9 @@
 ----
 
 ^|B |The implementation SHALL support selecting a field using the identifier corresponding to the top-level property keys of the coverage fields schema, and return 400 status code for an unrecognized selected field.
-^|C |The implementation SHALL support selecting a field using an index corresponding to an `x-ogc-field-index` property in the coverage fields schema, if present, and return a 400 status code for an unrecognized field index.
+^|C |The implementation SHALL support selecting a field using an index corresponding to an `x-ogc-property-seq` property in the coverage fields schema, if present, and return a 400 status code for an unrecognized field index.
 ^|D |The coverage fields schema SHALL not contain any potential conflict between a numeric band name and a band index.
-^|E |The implementation SHALL interpret an `*` (asterisk) at the begining or at the end of the comma-separated list as all other fields before or after the listed fields, respectively, as per the numeric `x-ogc-field-index` order.
+^|E |The implementation SHALL interpret an `*` (asterisk) at the begining or at the end of the comma-separated list as all other fields before or after the listed fields, respectively, as per the numeric `x-ogc-property-seq` order.
 ^|F |Only the selected fields of the coverage SHALL be returned from coverage request.
 ^|G |If the coverage response can self-describes its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
 ^|H |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
