@@ -29,7 +29,7 @@ component of a coverage with its domain being a subset of the overall coverage f
 Unlike Coverage Implementation Schema (CIS) _coverages by partitioning_, scenes are an optional capability of the API with corresponding individual resource paths rather than a potential aspect of a coverage resource.
 A client can either retrieve a coverage for the overall collection or for an individual scene, but will never receive a special "partitioned coverage" response necessitating special handling considerations.
 
-=== Sensor model
+=== (Geometric) Sensor model
 mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated coverage produced by a
 https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.5[sensor (3.5)]
 
