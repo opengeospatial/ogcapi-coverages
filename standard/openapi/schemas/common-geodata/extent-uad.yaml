@@ -10,7 +10,7 @@ allOf:
          The domain intervals for any additional dimensions of the extent (envelope) beyond those described in temporal and spatial.
        type: object
        oneOf:
-         - required: [ interval, crs ]
+         - required: [ interval, definition ]
          - required: [ interval, trs ]
          - required: [ interval, vrs ]
        properties:
@@ -40,9 +40,6 @@ allOf:
                - '2011-11-11T12:22:11Z'
                - 32.5
                - null
-         crs:
-           type: string
-           description: generic coordinate reference system suitable for any type of dimensions
          trs:
            type: string
            description: temporal coordinate reference system (e.g. as defined by Features for 'temporal')

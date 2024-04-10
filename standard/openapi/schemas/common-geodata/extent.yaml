@@ -108,12 +108,10 @@ properties:
             - 90
       crs:
         description: |-
-          Coordinate reference system of the coordinates in the spatial extent
-          (property `bbox`). The default reference system is WGS 84 longitude/latitude.
-          In the Core the only other supported coordinate reference system is
+          Coordinate reference system of the coordinates of the `bbox` property.
+          The default reference system is WGS 84 longitude/latitude.
           WGS 84 longitude/latitude/ellipsoidal height for coordinates with height.
-          Extensions may support additional coordinate reference systems and add
-          additional enum values.
+          For non-terrestrial coordinate reference system, another CRS may be specified.
         type: string
         enum:
           - 'http://www.opengis.net/def/crs/OGC/1.3/CRS84'
