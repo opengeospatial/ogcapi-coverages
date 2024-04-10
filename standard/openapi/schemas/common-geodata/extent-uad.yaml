@@ -83,3 +83,14 @@ allOf:
                example:
                  - "PT1H"
                  - 0.0006866455078
+         definition:
+           type: string
+           format: uri
+           description: A URI to the definition of the measured or observed property corresponding to this dimension.
+         unit:
+           type: string
+           description: The unit of measure in which the interval and/or grid values are expressed.
+         unitLang:
+           type: string
+           default: UCUM
+           description: The language (or vocabulary) in which the unit is expressed (defaults to "UCUM" if not specified).
