@@ -35,7 +35,7 @@ A successful GET response is described in the Coverages API core class (http://w
 ^|F |If the parameter value for `crs` is not valid for requested coverage, the status code of the response SHALL be 400.
 |===
 
-NOTE: When no crs parameters are specified, please refer to the Coverages API core conformance class to know about the default crs.
+NOTE: When no `crs` parameters are specified, the default output CRS is the native (`storage CRS`), which is CRS84 if none is specified (see <<rc-core,Core requirement class>> for additional details).
 
 NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `http://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is crs.
 

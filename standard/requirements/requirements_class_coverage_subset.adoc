@@ -54,7 +54,7 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 ^|*Requirement {counter:req-id}* |*/req/subsetting/bbox-crs*
 ^|A|The coverage resource SHALL support a `bbox-crs` parameter specifying the CRS used for the `bbox` parameter.
 ^|B|For Earth centric data, the implementation SHALL support http://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
-^|C|If the bbox-crs is not indicated http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
+^|C|If the `bbox-crs` is not indicated http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
 ^|D|The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes may allow additional values (see `crs` parameter definition).
 ^|E|The CRS expressed as URIs or as safe CURIEs SHALL be supported.
 ^|F|If the bbox parameter is not used, the `bbox-crs` SHALL be ignored.
@@ -117,7 +117,8 @@ March 18, 2018, 12:31:12 UTC or earlier:
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting/subset*
-^|A |The operation SHALL support a parameter `subset` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|A |The coverage request operation SHALL support a parameter `subset` to subset one or more of the dimensions of the coverage (as described in the collection information)
+with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
 
 [source,EBNF]
 ----
@@ -134,13 +135,30 @@ March 18, 2018, 12:31:12 UTC or earlier:
      {number} is an integer or floating-point number, and
      {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
-^|B |The axis name SHALL correspond to one of the axis of the Coordinate Reference System (CRS) of the coverage or else return a 400 status code.
-^|C |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 status code SHALL be returned
-^|D |For a CRS where an axis can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
-be supported to indicate an extent crossing that wrapping point.
-^|E |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|F |If a lower limit of the subset expression is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
-^|G |If a upper limit of the subset expression is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+
+^|B   |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
+^|C   |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
+^|D   |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
+^|E	|Axis names `Lat` and `Lon` SHALL be supported for geographic subsetting CRS and `E` and `N` for a projected subsetting CRS, which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
+^|F	|If a third spatial dimension is supported (if the resource’s spatial extent bounding box is three dimensional), the implementation SHALL also support a `h` dimension.
+      This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS and `z` for projected CRS, which are to be interpreted as the vertical axis in the CRS definition.
+^|G	|Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
+^|H	|Any name of the additional dimensions in the extent of the collection SHALL be supported as axis name.
+^|I	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to one of the axes of the subsetting CRS^2^, to a `time` temporal axis,
+       or to an additional dimension described in the collection extent.
+^|J	|If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
+^|K   |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
+       be supported to indicate an extent crossing that wrapping point.
+^|L   |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time (as specified in RFC 3339) if it is not specified in the temporal extent.
+^|M   |For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
+^|N   |If the subset parameter includes any of the dimensions corresponding to those of the `bbox` parameter, while that `bbox` parameter is also specified,
+       or if the subset parameter includes the `time` dimension while the `datetime` parameter is also specified, the server SHALL return a 400 client error.
+^|O   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+^|P   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+^|Q	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma separated)^1^.
+
+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
+2 Note that this is only valid of the spatial dimensions. The ‘additional’ dimensions rely on the names of the extent of the collection.
 |===
 
 NOTE: When the _intervalOrPoint_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,
@@ -148,6 +166,17 @@ the service is expected to return the non-empty portion of the coverage resultin
 For subsetting on the range set, and for coverage media types with no geo-referencing mechanisms (e.g. PNG), NO_DATA values or transparency should be used.
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
 or simply return the properly geo-referenced values within the domain set.
+
+[[rec_coverage_subset-crs-axis-names]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommentation {counter:per-id}* |*/rec/subsetting/subset-crs-axis-names
+^|A | The names of the axis SHOULD be the abbreviated names of the axis in the CRS definition (e.g. the ones defined in the EPSG database).
+^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
+^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.
+^|D |`Long` (lowercase/uppercase) or `Longitude` SHOULD be interpreted as synonymous of `Lon`.
+^|E |`Latitude` SHOULD be interpreted as synonymous of `Lat`.
+|===
 
 ==== Parameter `subset-crs`
 
