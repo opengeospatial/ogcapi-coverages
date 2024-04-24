@@ -499,21 +499,18 @@
                             "default": 0,
                             "minimum": 0
                           },
-                          "x-ogc-observedProperty": {
-                            "type": "string"
-                          },
-                          "x-ogc-observedPropertyURI": {
+                          "x-ogc-definition": {
                             "type": "string",
                             "format": "uri"
                           },
-                          "x-ogc-uom": {
+                          "x-ogc-unit": {
                             "type": "string"
                           },
-                          "x-ogc-uomURI": {
+                          "x-ogc-unitLang": {
                             "type": "string",
                             "format": "uri"
                           },
-                          "x-ogc-fieldIndex": {
+                          "x-ogc-propertySeq": {
                             "type": "integer",
                             "minimum": 0
                           }
