@@ -26,4 +26,26 @@ This extent information provides equivalent information to the CIS _domain set_ 
 For point cloud data, a separate detailed description of the domain is not practical, and a subset of the domain is instead retrieved together with the data, as with the common LAS and LASZip point cloud encodings.
 In this case, only the overall interval, and optionally detailed sub-intervals where data is available, can be provided instead within the collection extent.
 
+When describing the extent of a coverage, the geometry of the cells must be considered.
+
+[#span-extent,reftext='{figure-caption} {counter:fig-num}']
+.The span of a gridded coverage for _Value-is-Point_ (span = 0) and _Value-is-Area_ (span = 1), and a special case of _Value-is-Part-of-the-Area_ (span = 0.5)
+image::figures/span.png[width=400,align=center]
+
+The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of the cells.
+
+[#span,reftext='{figure-caption} {counter:fig-num}']
+.Example extent of a gridded coverage for _Value-is-Point_ (span = 0) and _Value-is-Area_ (span = 1)
+image::figures/spanExtent.png[]
+
+The reported extent (the CRS84 `bbox` and/or the native CRS `storageCrsBbox` in the spatial extent, and the interval bounds in the temporal and/or any additional dimensions of the extent) must correspond to the envelope of the geometry of all cells.
+For cells representing an area, the extent spans from the lower to the upper bounds of the areas of all those cells.
+For cells representing a point, the extent spans from the the lower to the upper coordinate of all those cells.
+
+For gridded coverages, considering the lower and upper bound specified in the interval / bounding box as well as the `cellsCount` and `resolution` specified in the `grid` property, the following applies.
+
+If cell values represent an area, `cellsCount = (highBound - lowBound) / resolution`.
+
+If cell values represent a point, `cellsCount = (highBound - lowBound) / resolution + 1`.
+
 include::requirements/requirements_class_core.adoc[]

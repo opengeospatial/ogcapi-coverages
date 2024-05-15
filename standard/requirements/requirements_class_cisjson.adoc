@@ -21,6 +21,11 @@
 ^|A |The coverage resource, as defined in the Core requirement class, SHALL support negotiating a CIS JSON response using the `application/json` media type.
 ^|B |The response SHALL be a CIS JSON document which validates against the CIS JSON schema https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/cis/coverage-schema.yaml[coverage-schema.yaml].
 ^|C |The coverage object response SHALL be of type _CoverageByDomainAndRange_ (not _CoverageByPartitioning_, the implementation can instead consider supporting the "Scenes" requirement class to present individual parts of a coverage).
+^|D |For a gridded coverage, the DomainSet SHALL be defined taking into consideration the geometry of the coverage cells, as per the following equation:
+
+**span** = (_RegularAxis_ `upperBound` - _RegularAxis_ `lowerBound`) / _RegularAxis_ `resolution` - (_IndexAxis_ `upperBound` - _IndexAxis_ `lowerBound`)
+
+where a _span_  of 1 indicates a coverage whose cell values represent an _area_, and a _span_ of 0 indicates a coverage whose cell values represent a _point_.
 |===
 
 ===== Profiling CIS components to include

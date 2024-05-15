@@ -4,7 +4,8 @@
 2+|*Requirements Class*
 2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |Target type   |Web API
-|Dependency    |http://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
+|Dependency    |http://www.opengis.net/spec/ogcapi-common-2/1.0/req/umd-collection
+|Dependency    |http://www.opengis.net/spec/ogcapi-common-2/1.0/req/schemas
 |===
 
 === Requirements
@@ -20,6 +21,9 @@
 |===
 
 ==== Extended collection description response (`/collections/{collectionId}`)
+
+This "Core" requirement class of OGC API - Coverages depends on the "Uniform Multi-dimension Collection" requirement class defined in _Common - Part 2: Geospatial data_,
+in addition to the basic "Collections" requirement class, allowing to describe the domain of the coverage, akin to the CIS DomainSet.
 
 [[req_core-collection_description]]
 [width="90%",cols="2,6"]
@@ -53,6 +57,9 @@ TODO: Discuss the ability to include a http://docs.opengeospatial.org/is/18-010r
 https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodata/projJSON.yaml[PROJ-JSON] definition of the CRS instead of a URI.
 
 ==== Collection schema response (`/collections/{collectionId}/schema`)
+
+This "Core" requirement class of OGC API - Coverages depends on the "Schemas" requirement class defined in _Common - Part 2: Geospatial data_,
+in addition to the basic "Collections" requirement class, allowing to describe the range of the coverage, askin to the CIS RangeType.
 
 [[req_core-coverage_schema]]
 [width="90%",cols="2,6"]
