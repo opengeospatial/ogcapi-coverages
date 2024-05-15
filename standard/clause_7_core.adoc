@@ -1,4 +1,4 @@
-[[rc-core]]
+[[rc_core]]
 == Requirements Class "Core"
 
 === Overview

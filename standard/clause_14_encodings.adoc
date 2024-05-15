@@ -6,17 +6,17 @@ Coverages can be encoded in any suitable data format.
 However, it does define requirements class for encodings which are expected to be commonly supported in implementations of this standard.
 These requirements classes include:
 
-* <<rc-encoding-html,HTML>>
-* <<rc-encoding-geotiff,GeoTIFF>>
-* <<rc-encoding-netcdf,netCDF>>
-* <<rc-encoding-cisjson,CIS JSON>>
-* <<rc-encoding-coveragejson,CoverageJSON>>
-* <<rc-encoding-las,LAS>>
-* <<rc-encoding-laszip,LASZip>>
-* <<rc-encoding-png,PNG>>
-* <<rc-encoding-jpegxl,JPEG XL>>
-* <<rc-encoding-jpeg2000,JPEG 2000>>
-* <<rc-encoding-zarr,(Geo)Zarr>>
+* <<rc_encoding-html,HTML>>
+* <<rc_encoding-geotiff,GeoTIFF>>
+* <<rc_encoding-netcdf,netCDF>>
+* <<rc_encoding-cisjson,CIS JSON>>
+* <<rc_encoding-coveragejson,CoverageJSON>>
+* <<rc_encoding-las,LAS>>
+* <<rc_encoding-laszip,LASZip>>
+* <<rc_encoding-png,PNG>>
+* <<rc_encoding-jpegxl,JPEG XL>>
+* <<rc_encoding-jpeg2000,JPEG 2000>>
+* <<rc_encoding-zarr,(Geo)Zarr>>
 
 None of these encodings is mandatory. An implementor of this standard may choose to implement none of them, selecting different encodings instead.
 
@@ -47,7 +47,7 @@ A table of the media types corresponding to each encoding requirements class def
 |(Geo)Zarr               |application/x-zarr (TODO: Register this media type?)
 |====
 
-[[rc-encoding-html]]
+[[rc_encoding-html]]
 === Requirements Class "HTML"
 
 ==== Overview
@@ -60,7 +60,7 @@ HTML is the core language of the World Wide Web. An API that supports HTML will 
 
 include::requirements/requirements_class_html.adoc[]
 
-[[rc-encoding-geotiff]]
+[[rc_encoding-geotiff]]
 === Requirements Class "GeoTIFF"
 
 ==== Overview
@@ -77,7 +77,7 @@ The netCDF requirements class defines support for encoding a coverage response a
 
 // TODO: include::requirements/requirements_class_netcdf.adoc[]
 
-[[rc-encoding-cisjson]]
+[[rc_encoding-cisjson]]
 === Requirements Class "CIS JSON"
 
 ==== Overview
@@ -115,7 +115,7 @@ a _CoverageByPartitioning_ defined by a PartitionSet, unless a prior arrangement
 
 Similarly, this requirement class also specifies that the CIS JSON response will be self-contained (not linking to data available in separate resources),
 unless a prior arrangement (not specified by this Standard) is established with the client.
-Implementations wishing to present different constituent parts of a coverage as separate resources can consider implementing the <<rc-scenes, _Scenes_ requirements class>>, where
+Implementations wishing to present different constituent parts of a coverage as separate resources can consider implementing the <<rc_scenes, _Scenes_ requirements class>>, where
 both a coverage for the overall collection, as well as a coverage for individual scenes, can be retrieved by a client.
 
 Since the description of the coverage domain and range is easily available at the `/collections/{collectionId}` and `/collections/{collectionId}/schema` resources,
@@ -127,7 +127,7 @@ OGC API Standards, such as _OGC API - Maps_ (where map pixels always represent a
 
 include::requirements/requirements_class_cisjson.adoc[]
 
-[[rc-encoding-coveragejson]]
+[[rc_encoding-coveragejson]]
 === Requirements Class "CoverageJSON"
 
 ==== Overview
@@ -136,7 +136,7 @@ The CoverageJSON requirements class defines support for encoding a coverage resp
 
 // TODO: include::requirements/requirements_class_coveragejson.adoc[]
 
-[[rc-encoding-las]]
+[[rc_encoding-las]]
 === Requirements Class "LAS"
 
 ==== Overview
@@ -147,7 +147,7 @@ This requirements class is particularly well suited for distributing point cloud
 
 // TODO: include::requirements/requirements_class_las.adoc[]
 
-[[rc-encoding-laszip]]
+[[rc_encoding-laszip]]
 === Requirements Class "LASZip"
 
 ==== Overview
@@ -159,7 +159,7 @@ This requirements class is particularly well suited for distributing point cloud
 
 // TODO: include::requirements/requirements_class_laszip.adoc[]
 
-[[rc-encoding-png]]
+[[rc_encoding-png]]
 === Requirements Class "PNG"
 
 ==== Overview
@@ -172,7 +172,7 @@ used for that quantization.
 
 // TODO: include::requirements/requirements_class_png.adoc[]
 
-[[rc-encoding-jpegxl]]
+[[rc_encoding-jpegxl]]
 === Requirements Class "JPEG XL"
 
 ==== Overview
@@ -183,7 +183,7 @@ The JPEG XL requirements class defines support for encoding a coverage response 
 
 // TODO: include::requirements/requirements_class_jpegxl.adoc[]
 
-[[rc-encoding-jpeg2000]]
+[[rc_encoding-jpeg2000]]
 === Requirements Class "JPEG 2000"
 
 ==== Overview
@@ -195,7 +195,7 @@ support for georeferencing with http://www.opengis.net/doc/IS/GMLJP2/2.1[GMLJP2]
 
 // TODO: include::requirements/requirements_class_jpeg2000.adoc[]
 
-[[rc-encoding-zarr]]
+[[rc_encoding-zarr]]
 === Requirements Class "(Geo)Zarr"
 
 ==== Overview

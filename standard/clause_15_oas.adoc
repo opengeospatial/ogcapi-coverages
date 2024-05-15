@@ -1,4 +1,4 @@
-[[rc-oas30]]
+[[rc_oas30]]
 == Requirements class "OpenAPI 3.0"
 
 === Overview

@@ -1,4 +1,4 @@
-[[rc_fieldselection]]
+[[rc_table_fieldselection]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*

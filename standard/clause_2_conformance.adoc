@@ -16,9 +16,9 @@ The Requirements Classes for _OGC API - Coverages_ are:
 
 === Requirements classes defining resources
 
-* <<rc-core,*Core*>>
-* <<rc-coverage-tiles,*Coverage Tiles*>>
-* <<rc-scenes,*Coverage Scenes*>>
+* <<rc_core,*Core*>>
+* <<rc_coverage-tiles,*Coverage Tiles*>>
+* <<rc_scenes,*Coverage Scenes*>>
 
 The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
 
@@ -28,10 +28,10 @@ The _Scenes_ Requirements Class defines how to present separate components of a 
 
 === Requirements classes defining query parameters
 
-* <<rc-subsetting,*Subsetting*>>
-* <<rc-scaling,*Scaling*>>
-* <<rc-fieldselection,*Field Selection*>>
-* <<rc-crs,*Coordinate Reference System*>>
+* <<rc_subsetting,*Subsetting*>>
+* <<rc_scaling,*Scaling*>>
+* <<rc_fieldselection,*Field Selection*>>
+* <<rc_crs,*Coordinate Reference System*>>
 
 The _Subset_ Requirements Class provides capabilities to select a sub-set of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
@@ -43,18 +43,18 @@ The _Coordinate Reference System_ Requirements Class defines the ability to requ
 
 === Requirements classes defining resource representations
 
-* <<rc-encoding-html,HTML>>
-* <<rc-encoding-geotiff,GeoTIFF>>
-* <<rc-encoding-netcdf,netCDF>>
-* <<rc-encoding-cisjson,CIS JSON>>
-* <<rc-encoding-coveragejson,CoverageJSON>>
-* <<rc-encoding-las,LAS>>
-* <<rc-encoding-laszip,LASZip>>
-* <<rc-encoding-png,PNG>>
-* <<rc-encoding-jpegxl,JPEG XL>>
-* <<rc-encoding-jpeg2000,JPEG 2000>>
-* <<rc-encoding-zarr,(Geo)Zarr>>
-* <<rc-oas30,*OpenAPI 3.0*>>
+* <<rc_encoding-html,HTML>>
+* <<rc_encoding-geotiff,GeoTIFF>>
+* <<rc_encoding-netcdf,netCDF>>
+* <<rc_encoding-cisjson,CIS JSON>>
+* <<rc_encoding-coveragejson,CoverageJSON>>
+* <<rc_encoding-las,LAS>>
+* <<rc_encoding-laszip,LASZip>>
+* <<rc_encoding-png,PNG>>
+* <<rc_encoding-jpegxl,JPEG XL>>
+* <<rc_encoding-jpeg2000,JPEG 2000>>
+* <<rc_encoding-zarr,(Geo)Zarr>>
+* <<rc_oas30,*OpenAPI 3.0*>>
 
 The Encoding Requirements Classes address support for formats commonly used for encoding coverage data.
 

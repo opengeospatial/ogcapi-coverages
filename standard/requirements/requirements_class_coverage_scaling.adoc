@@ -1,4 +1,4 @@
-[[rc_scaling]]
+[[rc_table_scaling]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*

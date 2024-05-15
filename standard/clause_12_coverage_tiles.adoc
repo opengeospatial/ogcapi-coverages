@@ -1,4 +1,4 @@
-[[rc-coverage-tiles]]
+[[rc_coverage-tiles]]
 == Requirements Class "Coverage Tiles"
 
 === Overview

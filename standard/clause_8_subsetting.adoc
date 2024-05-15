@@ -1,4 +1,4 @@
-[[rc-subsetting]]
+[[rc_subsetting]]
 == Requirements Class "Subsetting"
 
 === Overview

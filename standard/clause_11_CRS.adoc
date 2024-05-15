@@ -1,4 +1,4 @@
-[[rc-crs]]
+[[rc_crs]]
 == Requirement Class "Coordinate Reference System"
 
 === Overview
@@ -7,6 +7,6 @@ The "Coordinate Reference System" requirement class specifies a `crs` parameter 
 
 As defined in this standard, a coverage is conceptually associated with native CRS (also called a _storage CRS_) which is indicated in the collection description.
 This native CRS is the default output CRS if no `crs` parameter is specified, and the only supported output CRS without support for this requirements class.
-The `Content-Crs:` header (see <<rc-core>>) specifies the CRS used in the response to avoid any confusion as to the CRS of a response.
+The `Content-Crs:` header (see <<rc_core>>) specifies the CRS used in the response to avoid any confusion as to the CRS of a response.
 
 include::requirements/requirements_class_crs.adoc[]

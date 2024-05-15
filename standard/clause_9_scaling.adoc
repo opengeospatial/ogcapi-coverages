@@ -1,4 +1,4 @@
-[[rc-scaling]]
+[[rc_scaling]]
 == Requirements Class "Scaling"
 
 === Overview

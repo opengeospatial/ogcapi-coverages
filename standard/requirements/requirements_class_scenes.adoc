@@ -1,4 +1,4 @@
-[[rc-scenes-table]]
+[[rc_scenes-table]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*

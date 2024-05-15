@@ -1,4 +1,4 @@
-[[rc-subsetting-table]]
+[[rc_subsetting-table]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
@@ -19,7 +19,7 @@ Individual cells may occupy an area on the ground (the value of the cell represe
 [[bbox-definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/subset/rc-bbox-definition*
+^|*Requirement {counter:req-id}* |*/req/subset/bbox-definition*
 ^|A|The coverage resource SHALL support a `bbox` parameter representing a spatial area to subset.
 ^|B|The bounding box SHALL be provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth):
 

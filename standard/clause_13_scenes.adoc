@@ -1,4 +1,4 @@
-[[rc-scenes]]
+[[rc_scenes]]
 == Requirements Class "Scenes"
 
 === Overview

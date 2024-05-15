@@ -1,4 +1,4 @@
-[[rc-fieldselection]]
+[[rc_fieldselection]]
 == Requirements Class "Field Selection"
 
 === Overview
