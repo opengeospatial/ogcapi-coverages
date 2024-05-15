@@ -59,7 +59,7 @@ https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodat
 ==== Collection schema response (`/collections/{collectionId}/schema`)
 
 This "Core" requirement class of OGC API - Coverages depends on the "Schemas" requirement class defined in _Common - Part 2: Geospatial data_,
-in addition to the basic "Collections" requirement class, allowing to describe the range of the coverage, askin to the CIS RangeType.
+in addition to the basic "Collections" requirement class, allowing to describe the range of the coverage, akin to the CIS RangeType.
 
 [[req_core-coverage_schema]]
 [width="90%",cols="2,6"]
