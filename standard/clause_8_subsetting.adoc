@@ -19,7 +19,7 @@ The values to include in the response will be all **cells whose geometry's inter
 
 For cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 
-For cells whose geometry is an area, this will **exclude** the cells boundaries falls exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
+For cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
 
 [#subset-aligned,reftext='{figure-caption} {counter:fig-num}']
 .Responses for a subsetting request aligned to the coverage grid for _Value-is-Point_ (span = 0) vs. _Value-is-Area_ (span = 1)
