@@ -1,0 +1,17 @@
+# Scene
+get:
+  tags:
+    - Scenes
+  summary: Retrieve metadata for a particular scene
+  description: |-
+    Retrieve metadata for a particular scene
+  operationId: getScene
+  parameters:
+    - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
+    - $ref: '../../parameters/coverages-core/sceneId.yaml'
+    - $ref: '../../parameters/unspecified/f-metadata.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/coverages-core/rScene.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'

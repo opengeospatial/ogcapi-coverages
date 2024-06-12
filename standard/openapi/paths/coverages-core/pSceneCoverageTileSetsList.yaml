@@ -1,0 +1,18 @@
+get:
+   tags:
+     - Coverage Tiles
+   summary: Retrieve the list of available coverage tilesets for the specified coverage scene.
+   operationId: .collection.scene.coverage.getTileSetsList
+   parameters:
+     - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
+     - $ref: '../../parameters/coverages-core/sceneId.yaml'
+     - $ref: '../../parameters/unspecified/f-metadata.yaml'
+   responses:
+     '200':
+       $ref: '../../responses/tiles-core/rTileSetsList.yaml'
+     '404':
+       $ref: '../../responses/common-core/rNotFound.yaml'
+     '406':
+       $ref: '../../responses/common-core/rNotAcceptable.yaml'
+     '500':
+       $ref: '../../responses/common-core/rServerError.yaml'

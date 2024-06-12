@@ -275,26 +275,10 @@
             "$ref": "#/components/parameters/scale-size"
           },
           {
-            "name": "width",
-            "in": "query",
-            "description": "Number of cells across the coverage dimension corresponding to the spatial dimension represented horizontally on a map, such as longitude or easting.",
-            "required": false,
-            "style": "form",
-            "explode": false,
-            "schema": {
-              "type": "integer"
-            }
+            "$ref": "#/components/parameters/width"
           },
           {
-            "name": "height",
-            "in": "query",
-            "description": "Number of cells across the coverage dimension corresponding to the spatial dimension represented vertically on a 2D map, such as latitude or northing.",
-            "required": false,
-            "style": "form",
-            "explode": false,
-            "schema": {
-              "type": "integer"
-            }
+            "$ref": "#/components/parameters/height"
           },
           {
             "$ref": "#/components/parameters/subset-crs"
@@ -311,64 +295,37 @@
         ],
         "responses": {
           "200": {
-            "description": "A coverage, including any self-describing information supported by the encoding.",
+            "$ref": "#/components/responses/Coverage"
+          },
+          "default": {
+            "$ref": "#/components/responses/Exception"
+          }
+        }
+      }
+    },
+    "/collections/{collectionId}/schema": {
+      "get": {
+        "tags": [
+          "Coverage"
+        ],
+        "summary": "Retrieve the schema of the coverage identified by {collectionId}",
+        "description": "Schema for coverage identified by {collectionId}.\nUse content negotiation to request required format.",
+        "operationId": "getCollectionSchema",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/f-metadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Collection schema describing all fields of the coverage",
             "content": {
-              "application/prs.coverage+json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/coverageSchema"
-                }
-              },
-              "image/tiff; application=geotiff": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "application/x-netcdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "vnd.las": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "vnd.laszip": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "image/png": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "image/jxl": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "image/jp2": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "application/x-zarr": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "$ref": "#/components/schemas/schema"
                 }
               },
               "text/html": {
@@ -384,14 +341,14 @@
         }
       }
     },
-    "/collections/{collectionId}/schema": {
+    "/collections/{collectionId}/scenes": {
       "get": {
         "tags": [
-          "Coverage"
+          "Scenes"
         ],
-        "summary": "Retrieve the schema of the coverage identified by {collectionId}",
-        "description": "Schema for coverage identified by {collectionId}.\nUse content negotiation to request required format.",
-        "operationId": "getCoverageSchema",
+        "summary": "Retrieve the list of scenes comprising this collection",
+        "description": "The list of scenes comprising this collection.",
+        "operationId": "getCollectionScenes",
         "parameters": [
           {
             "$ref": "#/components/parameters/collectionId-coverage"
@@ -402,130 +359,101 @@
         ],
         "responses": {
           "200": {
-            "description": "Collection schema describing all fields of the coverage",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Attributes of the features or rangetypes of a coverage. Defined by a subset of the JSON Schema for the properties of a feature",
-                  "type": "object",
-                  "required": [
-                    "type",
-                    "properties"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "object"
-                      ]
-                    },
-                    "required": {
-                      "description": "Implements 'multiplicity' by citing property 'name' defined as 'additionalProperties'",
-                      "type": "array",
-                      "minItems": 1,
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "properties": {
-                      "type": "object",
-                      "default": {},
-                      "additionalProperties": {
-                        "description": "No property names are defined but any property name they should be described by JSON Schema. So 'additionalProperties' implements 'name'.",
-                        "type": "object",
-                        "properties": {
-                          "title": {
-                            "type": "string"
-                          },
-                          "description": {
-                            "description": "Implements 'description'",
-                            "type": "string"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "array",
-                              "boolean",
-                              "integer",
-                              "null",
-                              "number",
-                              "object",
-                              "string"
-                            ]
-                          },
-                          "enum": {
-                            "description": "Implements 'acceptedValues'",
-                            "type": "array",
-                            "minItems": 1,
-                            "items": {},
-                            "uniqueItems": true
-                          },
-                          "format": {
-                            "description": "Complements implementation of 'type'",
-                            "type": "string"
-                          },
-                          "contentMediaType": {
-                            "description": "Implements 'mediaType'",
-                            "type": "string"
-                          },
-                          "maximum": {
-                            "description": "Implements 'range'",
-                            "type": "number"
-                          },
-                          "exclusiveMaximum": {
-                            "description": "Implements 'range'",
-                            "type": "number"
-                          },
-                          "minimum": {
-                            "description": "Implements 'range'",
-                            "type": "number"
-                          },
-                          "exclusiveMinimum": {
-                            "description": "Implements 'range'",
-                            "type": "number"
-                          },
-                          "pattern": {
-                            "type": "string",
-                            "format": "regex"
-                          },
-                          "maxItems": {
-                            "description": "Implements 'upperMultiplicity'",
-                            "type": "integer",
-                            "minimum": 0
-                          },
-                          "minItems": {
-                            "description": "Implements 'lowerMultiplicity'",
-                            "type": "integer",
-                            "default": 0,
-                            "minimum": 0
-                          },
-                          "x-ogc-definition": {
-                            "type": "string",
-                            "format": "uri"
-                          },
-                          "x-ogc-unit": {
-                            "type": "string"
-                          },
-                          "x-ogc-unitLang": {
-                            "type": "string",
-                            "format": "uri"
-                          },
-                          "x-ogc-propertySeq": {
-                            "type": "integer",
-                            "minimum": 0
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              "text/html": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/components/responses/ScenesList"
+          },
+          "default": {
+            "$ref": "#/components/responses/Exception"
+          }
+        }
+      }
+    },
+    "/collections/{collectionId}/scenes/{sceneId}": {
+      "get": {
+        "tags": [
+          "Scenes"
+        ],
+        "summary": "Retrieve metadata for a particular scene",
+        "description": "Retrieve metadata for a particular scene",
+        "operationId": "getScene",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/sceneId"
+          },
+          {
+            "$ref": "#/components/parameters/f-metadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Scene"
+          },
+          "default": {
+            "$ref": "#/components/responses/Exception"
+          }
+        }
+      }
+    },
+    "/collections/{collectionId}/scenes/{sceneId}/coverage": {
+      "get": {
+        "tags": [
+          "Scenes"
+        ],
+        "summary": "Retrieve the coverage for scene {sceneId} of {collectionId}",
+        "description": "Coverage for scene {sceneId} of collection identified by {collectionId}.\nUse content negotiation to request required format.",
+        "operationId": "getSceneCoverage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/sceneId"
+          },
+          {
+            "$ref": "#/components/parameters/subset"
+          },
+          {
+            "$ref": "#/components/parameters/bbox"
+          },
+          {
+            "$ref": "#/components/parameters/datetime"
+          },
+          {
+            "$ref": "#/components/parameters/properties"
+          },
+          {
+            "$ref": "#/components/parameters/scale-factor"
+          },
+          {
+            "$ref": "#/components/parameters/scale-axes"
+          },
+          {
+            "$ref": "#/components/parameters/scale-size"
+          },
+          {
+            "$ref": "#/components/parameters/width"
+          },
+          {
+            "$ref": "#/components/parameters/height"
+          },
+          {
+            "$ref": "#/components/parameters/subset-crs"
+          },
+          {
+            "$ref": "#/components/parameters/bbox-crs"
+          },
+          {
+            "$ref": "#/components/parameters/crs"
+          },
+          {
+            "$ref": "#/components/parameters/f-coverage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Coverage"
           },
           "default": {
             "$ref": "#/components/responses/Exception"
@@ -620,6 +548,138 @@
           },
           {
             "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/subset"
+          },
+          {
+            "$ref": "#/components/parameters/crs"
+          },
+          {
+            "$ref": "#/components/parameters/subset-crs"
+          },
+          {
+            "$ref": "#/components/parameters/tileMatrixSetId"
+          },
+          {
+            "$ref": "#/components/parameters/f-coverageTile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/CoverageTile"
+          },
+          "204": {
+            "$ref": "#/components/responses/EmptyTile"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/collections/{collectionId}/scenes/{sceneId}/tiles": {
+      "get": {
+        "tags": [
+          "Coverage Tiles"
+        ],
+        "summary": "Retrieve the list of available coverage tilesets for the specified coverage scene.",
+        "operationId": ".collection.scene.coverage.getTileSetsList",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/sceneId"
+          },
+          {
+            "$ref": "#/components/parameters/f-metadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TileSetsList"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}": {
+      "get": {
+        "tags": [
+          "Coverage Tiles"
+        ],
+        "summary": "Retrieve the coverage scene tileset metadata for the specified collection, scene and tiling scheme (tile matrix set)",
+        "operationId": ".collection.scene.coverage.getTileSet",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/sceneId"
+          },
+          {
+            "$ref": "#/components/parameters/tileMatrixSetId"
+          },
+          {
+            "$ref": "#/components/parameters/f-metadata"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/TileSet"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "406": {
+            "$ref": "#/components/responses/NotAcceptable"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
+      "get": {
+        "tags": [
+          "Coverage Tiles"
+        ],
+        "summary": "Retrieve coverage scene tiles",
+        "operationId": ".collection.scene.coverage.getTile",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/tileMatrix"
+          },
+          {
+            "$ref": "#/components/parameters/tileRow"
+          },
+          {
+            "$ref": "#/components/parameters/tileCol"
+          },
+          {
+            "$ref": "#/components/parameters/datetime"
+          },
+          {
+            "$ref": "#/components/parameters/collectionId-coverage"
+          },
+          {
+            "$ref": "#/components/parameters/sceneId"
           },
           {
             "$ref": "#/components/parameters/subset"
@@ -1360,6 +1420,120 @@
         "type": "integer",
         "minimum": 0,
         "example": 127
+      },
+      "schema": {
+        "description": "Attributes of the features or rangetypes of a coverage. Defined by a subset of the JSON Schema for the properties of a feature",
+        "type": "object",
+        "required": [
+          "type",
+          "properties"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "object"
+            ]
+          },
+          "required": {
+            "description": "Implements 'multiplicity' by citing property 'name' defined as 'additionalProperties'",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "type": "object",
+            "default": {},
+            "additionalProperties": {
+              "description": "No property names are defined but any property name they should be described by JSON Schema. So 'additionalProperties' implements 'name'.",
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Implements 'description'",
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "array",
+                    "boolean",
+                    "integer",
+                    "null",
+                    "number",
+                    "object",
+                    "string"
+                  ]
+                },
+                "enum": {
+                  "description": "Implements 'acceptedValues'",
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {},
+                  "uniqueItems": true
+                },
+                "format": {
+                  "description": "Complements implementation of 'type'",
+                  "type": "string"
+                },
+                "contentMediaType": {
+                  "description": "Implements 'mediaType'",
+                  "type": "string"
+                },
+                "maximum": {
+                  "description": "Implements 'range'",
+                  "type": "number"
+                },
+                "exclusiveMaximum": {
+                  "description": "Implements 'range'",
+                  "type": "number"
+                },
+                "minimum": {
+                  "description": "Implements 'range'",
+                  "type": "number"
+                },
+                "exclusiveMinimum": {
+                  "description": "Implements 'range'",
+                  "type": "number"
+                },
+                "pattern": {
+                  "type": "string",
+                  "format": "regex"
+                },
+                "maxItems": {
+                  "description": "Implements 'upperMultiplicity'",
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "minItems": {
+                  "description": "Implements 'lowerMultiplicity'",
+                  "type": "integer",
+                  "default": 0,
+                  "minimum": 0
+                },
+                "x-ogc-definition": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "x-ogc-unit": {
+                  "type": "string"
+                },
+                "x-ogc-unitLang": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "x-ogc-propertySeq": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        }
       },
       "coverages": {
         "allOf": [
@@ -2517,7 +2691,7 @@
                       "description": "Properties represented by the features in this layer. Can be the attributes of a feature dataset (datatype=geometries) or the rangeType of a coverage (datatype=coverage)"
                     },
                     {
-                      "$ref": "#/paths/~1collections~1%7BcollectionId%7D~1schema/get/responses/200/content/application~1json/schema"
+                      "$ref": "#/components/schemas/schema"
                     }
                   ]
                 },
@@ -2981,6 +3155,15 @@
           "type": "string"
         }
       },
+      "sceneId": {
+        "name": "sceneId",
+        "in": "path",
+        "description": "Local identifier of a scene",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
       "scale-factor": {
         "name": "scale-factor",
         "in": "query",
@@ -3015,6 +3198,28 @@
         "required": false,
         "schema": {
           "type": "string"
+        }
+      },
+      "width": {
+        "name": "width",
+        "in": "query",
+        "description": "Number of cells across the coverage dimension corresponding to the spatial dimension represented horizontally on a map, such as longitude or easting.",
+        "required": false,
+        "style": "form",
+        "explode": false,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "height": {
+        "name": "height",
+        "in": "query",
+        "description": "Number of cells across the coverage dimension corresponding to the spatial dimension represented vertically on a 2D map, such as latitude or northing.",
+        "required": false,
+        "style": "form",
+        "explode": false,
+        "schema": {
+          "type": "integer"
         }
       },
       "f-coverage": {
@@ -3256,6 +3461,212 @@
           "application/vnd.oai.openapi+json;version=3.0": {
             "schema": {
               "type": "object"
+            }
+          },
+          "text/html": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Coverage": {
+        "description": "A coverage, including any self-describing information supported by the encoding.",
+        "content": {
+          "application/prs.coverage+json": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coverageSchema"
+            }
+          },
+          "image/tiff; application=geotiff": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "application/x-netcdf": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "vnd.las": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "vnd.laszip": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "image/png": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "image/jxl": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "image/jp2": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "application/x-zarr": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "text/html": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Scene": {
+        "description": "Information about a particular collection of (mostly geospatial) data available from this API. The collection is accessible via one or more OGC API set of specifications, for which a link to relevant accessible resources, e.g. /collections/{collectionId}/(items, coverage, map, tiles...) is contained in the response, with the corresponding relation type, as well as key information about the collection. This information includes:\n* a local identifier for the collection that is unique for the dataset;\n* a list of coordinate reference systems (CRS) in which data may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);\n* an optional title and description for the collection;\n* an optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;\n* for collections accessible via the Features or Records API, an optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coverageInfo"
+            },
+            "example": {
+              "id": "elevation",
+              "title": "Elevation",
+              "description": "Elevation in the city of Bonn.",
+              "extent": {
+                "spatial": {
+                  "bbox": [
+                    [
+                      7.01,
+                      50.63,
+                      7.22,
+                      50.78
+                    ]
+                  ]
+                }
+              },
+              "links": [
+                {
+                  "href": "http://data.example.org/collections/elevation/coverage/domainset",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset",
+                  "type": "application/json",
+                  "title": "Elevation"
+                },
+                {
+                  "href": "http://data.example.org/collections/elevation/coverage/rangetype",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype",
+                  "type": "application/json",
+                  "title": "Elevation"
+                },
+                {
+                  "href": "http://data.example.org/collections/elevation/coverage",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                  "type": "application/json",
+                  "title": "Elevation"
+                },
+                {
+                  "href": "http://data.example.org/collections/buildings/coverage.html",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                  "type": "text/html",
+                  "title": "Elevation"
+                },
+                {
+                  "href": "https://creativecommons.org/publicdomain/zero/1.0/",
+                  "rel": "license",
+                  "type": "text/html",
+                  "title": "CC0-1.0"
+                },
+                {
+                  "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
+                  "rel": "license",
+                  "type": "application/rdf+xml",
+                  "title": "CC0-1.0"
+                }
+              ]
+            }
+          },
+          "text/html": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ScenesList": {
+        "description": "The individual scenes comprising the coverage",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "links",
+                "scenes"
+              ],
+              "properties": {
+                "scenes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id"
+                    ],
+                    "properties": {
+                      "id": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "integer"
+                          }
+                        ]
+                      },
+                      "links": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/link"
+                        }
+                      }
+                    }
+                  }
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/link"
+                  }
+                },
+                "timeStamp": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "numberMatched": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "example": 1
+                },
+                "numberReturned": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "example": 1
+                }
+              }
             }
           },
           "text/html": {

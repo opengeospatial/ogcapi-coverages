@@ -6,7 +6,7 @@ get:
   description: |-
     Schema for coverage identified by {collectionId}.
     Use content negotiation to request required format.
-  operationId: getCoverageSchema
+  operationId: getCollectionSchema
   parameters:
     - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
     - $ref: '../../parameters/unspecified/f-metadata.yaml'

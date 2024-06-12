@@ -43,6 +43,14 @@ paths:
    /collections/{collectionId}/schema:
       $ref: 'paths/coverages-core/pSchema.yaml'
 
+   # Scenes
+   /collections/{collectionId}/scenes:
+      $ref: 'paths/coverages-core/pScenesList.yaml'
+   /collections/{collectionId}/scenes/{sceneId}:
+      $ref: 'paths/coverages-core/pScene.yaml'
+   /collections/{collectionId}/scenes/{sceneId}/coverage:
+      $ref: 'paths/coverages-core/pSceneCoverage.yaml'
+
    # Coverage Tiles
    /collections/{collectionId}/tiles:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTileSetsList.yaml'
@@ -50,6 +58,13 @@ paths:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTileSet.yaml'
    /collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTile.yaml'
+
+   /collections/{collectionId}/scenes/{sceneId}/tiles:
+      $ref: 'paths/coverages-core/pSceneCoverageTileSetsList.yaml'
+   /collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}:
+      $ref: 'paths/coverages-core/pSceneCoverageTileSet.yaml'
+   /collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+      $ref: 'paths/coverages-core/pSceneCoverageTile.yaml'
 
 components:
    schemas:
@@ -88,6 +103,8 @@ components:
          $ref: 'schemas/common-geodata/numberReturned.yaml'
       numberMatched:
          $ref: 'schemas/common-geodata/numberMatched.yaml'
+      schema:
+         $ref: 'schemas/tms/propertiesSchema.yaml'
 
       # Coverages - Core (this adds `orderedAxes`, which could possibly be defined in Common as well?)
       coverages:
@@ -148,6 +165,8 @@ components:
          $ref: 'parameters/common-crs/bbox-crs.yaml'
 
       # Coverages - Core
+      sceneId:
+         $ref: 'parameters/coverages-core/sceneId.yaml'
       scale-factor:
          $ref: 'parameters/coverages-core/scale-factor.yaml'
       scale-axes:
@@ -156,6 +175,10 @@ components:
          $ref: 'parameters/coverages-core/scale-size.yaml'
       properties:
          $ref: 'parameters/coverages-core/properties.yaml'
+      width:
+         $ref: 'parameters/coverages-core/width.yaml'
+      height:
+         $ref: 'parameters/coverages-core/height.yaml'
 
       # Coverages - Core (unspecified)
       f-coverage:
@@ -195,6 +218,14 @@ components:
          $ref: 'responses/common-core/rConformance.yaml'
       API:
          $ref: 'responses/common-core/rAPI.yaml'
+
+      # Coverages - Core
+      Coverage:
+         $ref: 'responses/coverages-core/rCoverage.yaml'
+      Scene:
+         $ref: 'responses/coverages-core/rScene.yaml'
+      ScenesList:
+         $ref: 'responses/coverages-core/rScenesList.yaml'
 
       # Dynamic enumeration of resources specific to this implementation
       Enumeration:

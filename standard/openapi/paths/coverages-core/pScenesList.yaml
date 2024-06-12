@@ -1,0 +1,16 @@
+# Scenes List
+get:
+  tags:
+    - Scenes
+  summary: Retrieve the list of scenes comprising this collection
+  description: |-
+    The list of scenes comprising this collection.
+  operationId: getCollectionScenes
+  parameters:
+    - $ref: '../../parameters/common-geodata/collectionId-coverage.yaml'
+    - $ref: '../../parameters/unspecified/f-metadata.yaml'
+  responses:
+    '200':
+      $ref: '../../responses/coverages-core/rScenesList.yaml'
+    default:
+      $ref: '../../responses/common-core/rException.yaml'

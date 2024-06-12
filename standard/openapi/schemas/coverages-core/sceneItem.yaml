@@ -1,0 +1,12 @@
+type: object
+required:
+- id
+properties:
+   id:
+      oneOf:
+      - type: string
+      - type: integer
+   links:
+      type: array
+      items:
+         $ref: '../common-core/link.yaml'

@@ -1,0 +1,27 @@
+type: object
+required:
+  - id
+  - crs
+  - storageCrs
+  - links
+properties:
+   id:
+      type:
+         oneOf:
+         - string
+         - integer
+   extent:
+      $ref: '../common-geodata/extent-uad.yaml'
+   crs:
+      type: array
+      items:
+         type: string
+         format: uri
+         minItems: 1
+   storageCrs:
+      type: string
+      format: uri
+   links:
+      type: array
+      items:
+         $ref: '../common-core/link.yaml'

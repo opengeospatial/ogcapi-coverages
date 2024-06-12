@@ -1,0 +1,6 @@
+name: sceneId
+in: path
+description: Local identifier of a scene
+required: true
+schema:
+  type: string

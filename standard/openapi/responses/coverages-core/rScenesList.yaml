@@ -1,0 +1,9 @@
+description: |-
+  The individual scenes comprising the coverage
+content:
+  application/json:
+    schema:
+      $ref: '../../schemas/coverages-core/scenesList.yaml'
+  text/html:
+    schema:
+      type: string
