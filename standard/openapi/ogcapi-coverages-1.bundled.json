@@ -3711,19 +3711,19 @@
                       "href": "http://data.example.org/collections/elevation/coverage.geotiff",
                       "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                       "type": "image/tiff; application=geotiff",
-                      "title": "Elevation (as GeoTIFF)"
+                      "title": "Elevation data (as GeoTIFF)"
                     },
                     {
                       "href": "http://data.example.org/collections/elevation/coverage.covjson",
                       "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                       "type": "application/prs.coverage+json",
-                      "title": "Elevation (as CoverageJSON)"
+                      "title": "Elevation data (as CoverageJSON)"
                     },
                     {
                       "href": "http://data.example.org/collections/elevation/coverage.cisjson",
                       "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                       "type": "application/json",
-                      "title": "Elevation (as CIS JSON)"
+                      "title": "Elevation data (as CIS JSON)"
                     },
                     {
                       "href": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -3783,19 +3783,19 @@
                   "href": "http://data.example.org/collections/elevation/coverage.tiff",
                   "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                   "type": "image/tiff; application=geotiff",
-                  "title": "Elevation data in GeoTIFF"
+                  "title": "Elevation data (as GeoTIFF)"
                 },
                 {
                   "href": "http://data.example.org/collections/elevation/coverage.covjson",
                   "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                   "type": "application/prs.coverage+json",
-                  "title": "Elevation in CoverageJSON"
+                  "title": "Elevation data (as CoverageJSON)"
                 },
                 {
                   "href": "http://data.example.org/collections/elevation/coverage.cisjson",
                   "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                   "type": "application/json",
-                  "title": "Elevation in CIS JSON"
+                  "title": "Elevation data (as CIS JSON)"
                 },
                 {
                   "href": "https://creativecommons.org/publicdomain/zero/1.0/",
