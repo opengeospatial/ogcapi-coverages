@@ -7,12 +7,20 @@ content:
        example:
          conformsTo:
            - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core
+           - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/landing-page
            - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json
            - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html
            - http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas30
            - http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections
-           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
+           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
            - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
            - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
-           - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-subset
            - http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30

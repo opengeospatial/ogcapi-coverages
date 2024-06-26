@@ -1,8 +1,0 @@
-allOf:
-  - $ref: '../common-geodata/collections.yaml'
-  - type: object
-    properties:
-      collections:
-        type: array
-        items:
-          $ref: 'coverageInfo.yaml'

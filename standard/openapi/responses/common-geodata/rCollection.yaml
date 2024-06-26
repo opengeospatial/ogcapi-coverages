@@ -6,45 +6,45 @@ description: |-
   * an optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;
   * for collections accessible via the Features or Records API, an optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').
 content:
-   application/json:
-     schema:
-      $ref: '../../schemas/coverages-core/coverageInfo.yaml'
-     example:
-        id: elevation
-        title: Elevation
-        description: Elevation in the city of Bonn.
-        extent:
-          spatial:
-            bbox:
-              - - 7.01
-                - 50.63
-                - 7.22
-                - 50.78
-        links:
-          - href: http://data.example.org/collections/elevation/coverage/domainset
-            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset
-            type: application/json
-            title: Elevation
-          - href: http://data.example.org/collections/elevation/coverage/rangetype
-            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype
-            type: application/json
-            title: Elevation
-          - href: http://data.example.org/collections/elevation/coverage
-            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
-            type: application/json
-            title: Elevation
-          - href: http://data.example.org/collections/buildings/coverage.html
-            rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
-            type: text/html
-            title: Elevation
-          - href: https://creativecommons.org/publicdomain/zero/1.0/
-            rel: license
-            type: text/html
-            title: CC0-1.0
-          - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
-            rel: license
-            type: application/rdf+xml
-            title: CC0-1.0
-   text/html:
-     schema:
-       type: string
+  application/json:
+    schema:
+      $ref: '../../schemas/common-geodata/collectionDesc.yaml'
+    example:
+      id: elevation
+      title: Elevation
+      description: Elevation in the city of Bonn.
+      extent:
+        spatial:
+          bbox:
+            - - 7.01
+              - 50.63
+              - 7.22
+              - 50.78
+      links:
+        - href: http://data.example.org/collections/elevation/schema
+          rel: http://www.opengis.net/def/rel/ogc/1.0/schema
+          type: application/schema+json
+          title: Schema (fields)
+        - href: http://data.example.org/collections/elevation/coverage.tiff
+          rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
+          type: image/tiff; application=geotiff
+          title: Elevation data (as GeoTIFF)
+        - href: http://data.example.org/collections/elevation/coverage.covjson
+          rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
+          type: application/prs.coverage+json
+          title: Elevation data (as CoverageJSON)
+        - href: http://data.example.org/collections/elevation/coverage.cisjson
+          rel: http://www.opengis.net/def/rel/ogc/1.0/coverage
+          type: application/json
+          title: Elevation data (as CIS JSON)
+        - href: https://creativecommons.org/publicdomain/zero/1.0/
+          rel: license
+          type: text/html
+          title: CC0-1.0
+        - href: https://creativecommons.org/publicdomain/zero/1.0/rdf
+          rel: license
+          type: application/rdf+xml
+          title: CC0-1.0
+  text/html:
+    schema:
+      type: string

@@ -85,8 +85,8 @@ components:
       # Common - Geospatial Data
       collections:
          $ref: 'schemas/common-geodata/collections.yaml'
-      collectionInfo:
-         $ref: 'schemas/common-geodata/collectionInfo.yaml'
+      collectionDesc:
+         $ref: 'schemas/common-geodata/collectionDesc.yaml'
       extent:
          $ref: 'schemas/common-geodata/extent.yaml'
       extent-uad:
@@ -105,12 +105,6 @@ components:
          $ref: 'schemas/common-geodata/numberMatched.yaml'
       schema:
          $ref: 'schemas/tms/propertiesSchema.yaml'
-
-      # Coverages - Core (this adds `orderedAxes`, which could possibly be defined in Common as well?)
-      coverages:
-         $ref: 'schemas/coverages-core/coverages.yaml'
-      coverageInfo:
-         $ref: 'schemas/coverages-core/coverageInfo.yaml'
 
       # CIS
       coverageSchema:
@@ -151,18 +145,8 @@ components:
          $ref: 'parameters/common-geodata/collectionId-coverage.yaml'
       datetime:
          $ref: 'parameters/common-geodata/datetime.yaml'
-      subset:
-         $ref: 'parameters/common-geodata/subset.yaml'
       bbox:
          $ref: 'parameters/common-geodata/bbox.yaml'
-
-      # Common - CRS
-      crs:
-         $ref: 'parameters/common-crs/crs.yaml'
-      subset-crs:
-         $ref: 'parameters/common-crs/subset-crs.yaml'
-      bbox-crs:
-         $ref: 'parameters/common-crs/bbox-crs.yaml'
 
       # Coverages - Core
       sceneId:
@@ -179,6 +163,14 @@ components:
          $ref: 'parameters/coverages-core/width.yaml'
       height:
          $ref: 'parameters/coverages-core/height.yaml'
+      subset:
+         $ref: 'parameters/coverages-core/subset.yaml'
+      crs:
+         $ref: 'parameters/coverages-core/crs.yaml'
+      subset-crs:
+         $ref: 'parameters/coverages-core/subset-crs.yaml'
+      bbox-crs:
+         $ref: 'parameters/coverages-core/bbox-crs.yaml'
 
       # Coverages - Core (unspecified)
       f-coverage:

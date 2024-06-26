@@ -755,15 +755,6 @@
             "description": "A hint indicating what the media type of the result of dereferencing the link should be.",
             "example": "application/geo+json"
           },
-          "templated": {
-            "type": "boolean",
-            "description": "This flag set to true if the link is a URL template."
-          },
-          "varBase": {
-            "description": "A base path to retrieve semantic information about the variables used in URL template.",
-            "type": "string",
-            "example": "/ogcapi/vars/"
-          },
           "hreflang": {
             "type": "string",
             "description": "A hint indicating what the language of the result of dereferencing the link should be.",
@@ -863,12 +854,12 @@
           "collections": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/collectionInfo"
+              "$ref": "#/components/schemas/collectionDesc"
             }
           }
         }
       },
-      "collectionInfo": {
+      "collectionDesc": {
         "type": "object",
         "required": [
           "id",
@@ -889,6 +880,10 @@
             "type": "string",
             "description": "a description of the data in the collection",
             "example": "A Digital Elevation Model."
+          },
+          "attribution": {
+            "type": "string",
+            "title": "attribution for the collection"
           },
           "links": {
             "type": "array",
@@ -1131,7 +1126,7 @@
                 "type": "array",
                 "minItems": 1,
                 "items": {
-                  "description": "Begin and end times of the time interval. The timestamps are in the\ntemporal coordinate reference system specified in `trs`. By default\nthis is the Gregorian calendar.\n\nThe value `null` for start or end time is supported and indicates a half-bounded time interval.",
+                  "description": "Begin and end times of the time interval. The timestamps are in the\ntemporal coordinate reference system specified in `trs`. By default\nthis is the Gregorian calendar, expressed using RFC 3339 section 5.6.\nNote that these times may be specified using time zone offsets to UTC time other than zero.\n\nThe value `null` for start or end time is supported and indicates a half-bounded time interval.",
                   "type": "array",
                   "minItems": 2,
                   "maxItems": 2,
@@ -1142,6 +1137,7 @@
                   },
                   "example": [
                     "2011-11-11T12:22:11Z",
+                    "2011-11-11T08:22:11-04:00",
                     null
                   ]
                 }
@@ -1253,6 +1249,7 @@
                     },
                     "example": [
                       "2011-11-11T12:22:11Z",
+                      "2011-11-11T08:22:11-04:00",
                       32.5,
                       null
                     ]
@@ -1410,7 +1407,7 @@
         "example": "2017-08-17T08:05:32Z"
       },
       "numberReturned": {
-        "description": "The number of features in the feature collection.\nA server may omit this information in a response, if the information\nabout the number of features is not known or difficult to compute.\nIf the value is provided, the value shall be identical to the number\nof items in the \"features\" array.",
+        "description": "The number of items in the response.\nA server may omit this information, if the information about the \nnumber of items is not known or difficult to compute.\nIf the value is provided, the value shall be identical to the number\nof items in the response.",
         "type": "integer",
         "minimum": 0,
         "example": 10
@@ -1534,47 +1531,6 @@
             }
           }
         }
-      },
-      "coverages": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/collections"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "collections": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/coverageInfo"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "coverageInfo": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/collectionInfo"
-          },
-          {
-            "type": "object",
-            "required": [
-              "extent"
-            ],
-            "properties": {
-              "orderedAxes": {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "type": "string",
-                  "description": "axis labels of all dimensions listed in CRS order. Spatial dimensions should be listed separately here."
-                }
-              }
-            }
-          }
-        ]
       },
       "coverageSchema": {
         "title": "Coverage object",
@@ -3075,7 +3031,7 @@
       "datetime": {
         "name": "datetime",
         "in": "query",
-        "description": "Either a date-time or an interval, half-bounded or bounded. Date and time expressions\nadhere to RFC 3339. Half-bounded intervals are expressed using double-dots.\n\nExamples:\n\n* A date-time: \"2018-02-12T23:20:50Z\"\n* A bounded interval: \"2018-02-12T00:00:00Z/2018-03-18T12:31:12Z\"\n* Half-bounded intervals: \"2018-02-12T00:00:00Z/..\" or \"../2018-03-18T12:31:12Z\"\n\nOnly features that have a temporal property that intersects the value of\n`datetime` are selected.\n\nIf a feature has multiple temporal properties, it is the decision of the\nserver whether only a single temporal property is used to determine\nthe extent or all relevant temporal properties.",
+        "description": "Either a date-time or an interval. Date and time expressions adhere to RFC 3339, section 5.6. Intervals may be bounded or half-bounded (double-dots at start or end). Server implementations may or may not support times expressed using time offsets from UTC, but need to support UTC time with the notation ending with a Z.\nExamples:\n* A date-time: \"2018-02-12T23:20:50Z\" * A bounded interval: \"2018-02-12T00:00:00Z/2018-03-18T12:31:12Z\" * Half-bounded intervals: \"2018-02-12T00:00:00Z/..\" or \"../2018-03-18T12:31:12Z\"\nOnly resources that have a temporal property that intersects the value of `datetime` are selected.\nIf a feature has multiple temporal properties, it is the decision of the server whether only a single temporal property is used to determine the extent or all relevant temporal properties.",
         "required": false,
         "schema": {
           "type": "string"
@@ -3083,24 +3039,10 @@
         "style": "form",
         "explode": false
       },
-      "subset": {
-        "name": "subset",
-        "in": "query",
-        "description": "Retrieve only part of the data by slicing or trimming along one or more axis\nFor trimming: {axisAbbrev}({low}:{high}) (preserves dimensionality)\n   An asterisk (`*`) can be used instead of {low} or {high} to indicate the minimum/maximum value.\nFor slicing:  {axisAbbrev}({value})      (reduces dimensionality)\n",
-        "style": "form",
-        "explode": false,
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
       "bbox": {
         "name": "bbox",
         "in": "query",
-        "description": "Only features that have a geometry that intersects the bounding box are selected. The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth):\n* Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Minimum value, coordinate axis 3 (optional) * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2 * Maximum value, coordinate axis 3 (optional)\nThe coordinate reference system of the values is WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in the parameter `bbox-crs`.\nFor WGS 84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).\nIf the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.\nIf a feature has multiple spatial geometry properties, it is the decision of the server whether only a single spatial geometry property is used to determine the extent or all relevant geometries.",
+        "description": "Only resources that have a geometry that intersects the bounding box are selected. The bounding box is provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (elevation or depth):\n* Lower left corner, coordinate axis 1 * Lower left corner, coordinate axis 2 * Minimum value, coordinate axis 3 (optional) * Upper right corner, coordinate axis 1 * Upper right corner, coordinate axis 2 * Maximum value, coordinate axis 3 (optional)\nIf the value consists of four numbers, the coordinate reference system is WGS84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84)  unless a different coordinate reference system is specified in the parameter `bbox-crs`.\nIf the value consists of six numbers, the coordinate reference system is WGS 84  longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h) unless a different coordinate reference system is specified in a parameter `bbox-crs`.\nFor WGS84 longitude/latitude the values are in most cases the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude. However, in cases where the box spans the antimeridian the first value (west-most box edge) is larger than the third value (east-most box edge).\nIf the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.\nIf a resource has multiple spatial geometry properties, it is the decision of the server  whether only a single spatial geometry property is used to determine the extent or all relevant geometries.",
         "required": false,
         "schema": {
           "type": "array",
@@ -3115,45 +3057,11 @@
             }
           ],
           "items": {
-            "type": "number",
-            "format": "double"
+            "type": "number"
           }
         },
         "style": "form",
         "explode": false
-      },
-      "crs": {
-        "name": "crs",
-        "in": "query",
-        "description": "reproject the output to the given crs",
-        "required": false,
-        "style": "form",
-        "explode": true,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "subset-crs": {
-        "name": "subset-crs",
-        "in": "query",
-        "description": "crs for the specified subset",
-        "required": false,
-        "style": "form",
-        "explode": true,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "bbox-crs": {
-        "name": "bbox-crs",
-        "in": "query",
-        "description": "crs for the specified bbox",
-        "required": false,
-        "style": "form",
-        "explode": true,
-        "schema": {
-          "type": "string"
-        }
       },
       "sceneId": {
         "name": "sceneId",
@@ -3220,6 +3128,53 @@
         "explode": false,
         "schema": {
           "type": "integer"
+        }
+      },
+      "subset": {
+        "name": "subset",
+        "in": "query",
+        "description": "Retrieve only part of the data by slicing or trimming along one or more axis\nFor trimming: {axisAbbrev}({low}:{high}) (preserves dimensionality)\n   An asterisk (`*`) can be used instead of {low} or {high} to indicate the minimum/maximum value.\nFor slicing:  {axisAbbrev}({value})      (reduces dimensionality)\n",
+        "style": "form",
+        "explode": false,
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "crs": {
+        "name": "crs",
+        "in": "query",
+        "description": "reproject the output to the given crs",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "subset-crs": {
+        "name": "subset-crs",
+        "in": "query",
+        "description": "crs for the specified subset",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "bbox-crs": {
+        "name": "bbox-crs",
+        "in": "query",
+        "description": "crs for the specified bbox",
+        "required": false,
+        "style": "form",
+        "explode": true,
+        "schema": {
+          "type": "string"
         }
       },
       "f-coverage": {
@@ -3362,7 +3317,7 @@
         }
       },
       "Exception": {
-        "description": "An error occured.",
+        "description": "An error occurred.",
         "content": {
           "application/json": {
             "schema": {
@@ -3415,7 +3370,7 @@
                   "href": "http://data.example.org/collections",
                   "rel": "http://www.opengis.net/def/rel/ogc/1.0/data",
                   "type": "application/json",
-                  "title": "Information about the collections (e.g. the coverages)"
+                  "title": "Information about the collections (i.e.,. the coverages)"
                 }
               ]
             }
@@ -3440,14 +3395,22 @@
               "example": {
                 "conformsTo": [
                   "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core",
+                  "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/landing-page",
                   "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json",
                   "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/html",
                   "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas30",
                   "http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections",
-                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geodata-coverage",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff",
+                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson",
                   "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson",
                   "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html",
-                  "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coverage-subset",
                   "http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30"
                 ]
               }
@@ -3539,11 +3502,11 @@
         }
       },
       "Scene": {
-        "description": "Information about a particular collection of (mostly geospatial) data available from this API. The collection is accessible via one or more OGC API set of specifications, for which a link to relevant accessible resources, e.g. /collections/{collectionId}/(items, coverage, map, tiles...) is contained in the response, with the corresponding relation type, as well as key information about the collection. This information includes:\n* a local identifier for the collection that is unique for the dataset;\n* a list of coordinate reference systems (CRS) in which data may be returned by the server. The first CRS is the default coordinate reference system (the default is always WGS 84 with axis order longitude/latitude);\n* an optional title and description for the collection;\n* an optional extent that can be used to provide an indication of the spatial and temporal extent of the collection - typically derived from the data;\n* for collections accessible via the Features or Records API, an optional indicator about the type of the items in the collection (the default value, if the indicator is not provided, is 'feature').",
+        "description": "Information about a particular scene of a coverage.",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/coverageInfo"
+              "$ref": "#/components/schemas/collectionDesc"
             },
             "example": {
               "id": "elevation",
@@ -3696,7 +3659,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/coverages"
+              "$ref": "#/components/schemas/collections"
             },
             "example": {
               "links": [
@@ -3739,28 +3702,28 @@
                   },
                   "links": [
                     {
-                      "href": "http://data.example.org/collections/elevation/coverage/domainset",
-                      "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset",
-                      "type": "application/json",
-                      "title": "Elevation"
+                      "href": "http://data.example.org/collections/elevation/schema",
+                      "rel": "http://www.opengis.net/def/rel/ogc/1.0/schema",
+                      "type": "application/schema+json",
+                      "title": "Schema (fields)"
                     },
                     {
-                      "href": "http://data.example.org/collections/elevation/coverage/rangetype",
-                      "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype",
-                      "type": "application/json",
-                      "title": "Elevation"
+                      "href": "http://data.example.org/collections/elevation/coverage.geotiff",
+                      "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                      "type": "image/tiff; application=geotiff",
+                      "title": "Elevation (as GeoTIFF)"
                     },
                     {
-                      "href": "http://data.example.org/collections/elevation/coverage",
-                      "rel": "items",
-                      "type": "application/json",
-                      "title": "Elevation"
+                      "href": "http://data.example.org/collections/elevation/coverage.covjson",
+                      "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                      "type": "application/prs.coverage+json",
+                      "title": "Elevation (as CoverageJSON)"
                     },
                     {
-                      "href": "http://data.example.org/collections/elevation/coverage.html",
-                      "rel": "items",
-                      "type": "text/html",
-                      "title": "Elevation"
+                      "href": "http://data.example.org/collections/elevation/coverage.cisjson",
+                      "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                      "type": "application/json",
+                      "title": "Elevation (as CIS JSON)"
                     },
                     {
                       "href": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -3791,7 +3754,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/coverageInfo"
+              "$ref": "#/components/schemas/collectionDesc"
             },
             "example": {
               "id": "elevation",
@@ -3811,28 +3774,28 @@
               },
               "links": [
                 {
-                  "href": "http://data.example.org/collections/elevation/coverage/domainset",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset",
-                  "type": "application/json",
-                  "title": "Elevation"
+                  "href": "http://data.example.org/collections/elevation/schema",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/schema",
+                  "type": "application/schema+json",
+                  "title": "Schema (fields)"
                 },
                 {
-                  "href": "http://data.example.org/collections/elevation/coverage/rangetype",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype",
-                  "type": "application/json",
-                  "title": "Elevation"
+                  "href": "http://data.example.org/collections/elevation/coverage.tiff",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                  "type": "image/tiff; application=geotiff",
+                  "title": "Elevation data in GeoTIFF"
                 },
                 {
-                  "href": "http://data.example.org/collections/elevation/coverage",
+                  "href": "http://data.example.org/collections/elevation/coverage.covjson",
+                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+                  "type": "application/prs.coverage+json",
+                  "title": "Elevation in CoverageJSON"
+                },
+                {
+                  "href": "http://data.example.org/collections/elevation/coverage.cisjson",
                   "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
                   "type": "application/json",
-                  "title": "Elevation"
-                },
-                {
-                  "href": "http://data.example.org/collections/buildings/coverage.html",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
-                  "type": "text/html",
-                  "title": "Elevation"
+                  "title": "Elevation in CIS JSON"
                 },
                 {
                   "href": "https://creativecommons.org/publicdomain/zero/1.0/",
