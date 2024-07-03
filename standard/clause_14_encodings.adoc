@@ -8,6 +8,7 @@ These requirements classes include:
 
 * <<rc_encoding-html,HTML>>
 * <<rc_encoding-geotiff,GeoTIFF>>
+* <<rc_encoding-cog,COG>>
 * <<rc_encoding-netcdf,netCDF>>
 * <<rc_encoding-cisjson,CIS JSON>>
 * <<rc_encoding-coveragejson,CoverageJSON>>
@@ -35,10 +36,10 @@ A table of the media types corresponding to each encoding requirements class def
 |====
 ^|*Encoding*            ^|*media type*
 |HTML                    |text/html
-|GeoTIFF                 |image/tiff; application=geotiff
+|GeoTIFF (including COG) |image/tiff; application=geotiff
 |netCDF                  |application/x-netcdf
 |CIS JSON                |application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
-|CoverageJSON            |application/prs.coverage+json
+|CoverageJSON            |application/vnd.cov+json
 |LAS                     |vnd.las
 |LASZip                  |vnd.laszip
 |PNG                     |image/png
@@ -67,7 +68,16 @@ include::requirements/requirements_class_html.adoc[]
 
 The GeoTIFF requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/is/19-008r4/19-008r4.html[OGC GeoTIFF standard].
 
-// TODO: include::requirements/requirements_class_geotiff.adoc[]
+include::requirements/requirements_class_geotiff.adoc[]
+
+[[rc_encoding-cog]]
+=== Requirements Class "Cloud Optimized GeoTIFF"
+
+==== Overview
+
+The Cloud Optimized GeoTIFF (COG) requirements class defines support for accessing a coverage response as a https://docs.ogc.org/is/21-026/21-026.html[COG] using HTTP range requests.
+
+include::requirements/requirements_class_cog.adoc[]
 
 === Requirements Class "netCDF"
 
@@ -75,7 +85,7 @@ The GeoTIFF requirements class defines support for encoding a coverage response 
 
 The netCDF requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/?artifact_id=43732[OGC netCDF standard].
 
-// TODO: include::requirements/requirements_class_netcdf.adoc[]
+include::requirements/requirements_class_netcdf.adoc[]
 
 [[rc_encoding-cisjson]]
 === Requirements Class "CIS JSON"
@@ -134,7 +144,7 @@ include::requirements/requirements_class_cisjson.adoc[]
 
 The CoverageJSON requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/cs/21-069r2/21-069r2.html[OGC CoverageJSON Community Standard].
 
-// TODO: include::requirements/requirements_class_coveragejson.adoc[]
+include::requirements/requirements_class_coveragejson.adoc[]
 
 [[rc_encoding-las]]
 === Requirements Class "LAS"
@@ -145,7 +155,7 @@ The LAS requirements class defines support for encoding a coverage response acco
 
 This requirements class is particularly well suited for distributing point cloud coverages.
 
-// TODO: include::requirements/requirements_class_las.adoc[]
+include::requirements/requirements_class_las.adoc[]
 
 [[rc_encoding-laszip]]
 === Requirements Class "LASZip"
@@ -157,7 +167,7 @@ https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASZip] compressio
 
 This requirements class is particularly well suited for distributing point cloud coverages.
 
-// TODO: include::requirements/requirements_class_laszip.adoc[]
+include::requirements/requirements_class_laszip.adoc[]
 
 [[rc_encoding-png]]
 === Requirements Class "PNG"
@@ -170,7 +180,7 @@ Because PNG encoding is limited to an integer data values, this requirements cla
 a specific scale factor and offset to be used to quantize coverage values, and allowing the implementation to inform the client of the scale factor and offset
 used for that quantization.
 
-// TODO: include::requirements/requirements_class_png.adoc[]
+include::requirements/requirements_class_png.adoc[]
 
 [[rc_encoding-jpegxl]]
 === Requirements Class "JPEG XL"
@@ -181,7 +191,7 @@ The JPEG XL requirements class defines support for encoding a coverage response 
 
 // JPEG XL supports a large number of bands, image dimensions, and floating points.
 
-// TODO: include::requirements/requirements_class_jpegxl.adoc[]
+include::requirements/requirements_class_jpegxl.adoc[]
 
 [[rc_encoding-jpeg2000]]
 === Requirements Class "JPEG 2000"
@@ -193,7 +203,7 @@ support for georeferencing with http://www.opengis.net/doc/IS/GMLJP2/2.1[GMLJP2]
 
 // TODO: .jpf for floating point support, and/or parameters like PNG?
 
-// TODO: include::requirements/requirements_class_jpeg2000.adoc[]
+include::requirements/requirements_class_jpeg2000.adoc[]
 
 [[rc_encoding-zarr]]
 === Requirements Class "(Geo)Zarr"
@@ -203,4 +213,4 @@ support for georeferencing with http://www.opengis.net/doc/IS/GMLJP2/2.1[GMLJP2]
 The (Geo)Zarr requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/100727[OGC Zarr Community Standard], with
 eventual support for https://www.ogc.org/requests/ogc-to-form-geozarr-standards-working-group-public-comment-sought-on-draft-charter/[GeoZarr].
 
-// TODO: include::requirements/requirements_class_zarr.adoc[]
+include::requirements/requirements_class_zarr.adoc[]

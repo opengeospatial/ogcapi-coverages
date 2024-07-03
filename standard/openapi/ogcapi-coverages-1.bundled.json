@@ -3436,7 +3436,7 @@
       "Coverage": {
         "description": "A coverage, including any self-describing information supported by the encoding.",
         "content": {
-          "application/prs.coverage+json": {
+          "application/vnd.cov+json": {
             "schema": {
               "type": "string"
             }
@@ -3716,7 +3716,7 @@
                     {
                       "href": "http://data.example.org/collections/elevation/coverage.covjson",
                       "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
-                      "type": "application/prs.coverage+json",
+                      "type": "application/vnd.cov+json",
                       "title": "Elevation data (as CoverageJSON)"
                     },
                     {
@@ -3788,7 +3788,7 @@
                 {
                   "href": "http://data.example.org/collections/elevation/coverage.covjson",
                   "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
-                  "type": "application/prs.coverage+json",
+                  "type": "application/vnd.cov+json",
                   "title": "Elevation data (as CoverageJSON)"
                 },
                 {

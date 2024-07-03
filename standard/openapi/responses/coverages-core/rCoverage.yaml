@@ -1,6 +1,6 @@
 description: A coverage, including any self-describing information supported by the encoding.
 content:
-   application/prs.coverage+json:
+   application/vnd.cov+json:
      schema:
        type: string
        # SwaggerUI Validation errors? $ref: 'https://schemas.opengis.net/covjson/1.0/coveragejson.json'
