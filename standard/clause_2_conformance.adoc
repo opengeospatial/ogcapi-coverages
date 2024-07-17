@@ -49,7 +49,7 @@ The _Coordinate Reference System_ Requirements Class defines the ability to requ
 * <<rc_encoding-cisjson,CIS JSON>>
 * <<rc_encoding-coveragejson,CoverageJSON>>
 * <<rc_encoding-las,LAS>>
-* <<rc_encoding-laszip,LASZip>>
+* <<rc_encoding-laszip,LASzip>>
 * <<rc_encoding-png,PNG>>
 * <<rc_encoding-jpegxl,JPEG XL>>
 * <<rc_encoding-jpeg2000,JPEG 2000>>
@@ -80,7 +80,7 @@ The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition 
 | <<rc_cisjson,CIS JSON>>          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
 | <<rc_coveragejson,CoverageJSON>> | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
 | <<rc_las,LAS>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/las
-| <<rc_laszip,LASZip>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip
+| <<rc_laszip,LASzip>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip
 | <<rc_png,PNG>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/png
 | <<rc_jpegxl,JPEG XL>>            | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpegxl
 | <<rc_jpeg2000,JPEG 2000>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpeg2000

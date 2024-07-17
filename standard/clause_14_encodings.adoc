@@ -40,8 +40,8 @@ A table of the media types corresponding to each encoding requirements class def
 |netCDF                  |application/x-netcdf
 |CIS JSON                |application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
 |CoverageJSON            |application/vnd.cov+json
-|LAS                     |vnd.las
-|LASZip                  |vnd.laszip
+|LAS                     |application/vnd.las
+|LASZip                  |application/vnd.laszip
 |PNG                     |image/png
 |JPEG XL                 |image/jxl
 |JPEG-2000               |image/jp2
@@ -84,6 +84,7 @@ include::requirements/requirements_class_cog.adoc[]
 ==== Overview
 
 The netCDF requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/?artifact_id=43732[OGC netCDF standard].
+This representation provides a compact way to return multi-dimensional data in a binary format.
 
 include::requirements/requirements_class_netcdf.adoc[]
 

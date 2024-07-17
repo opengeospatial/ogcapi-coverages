@@ -1,0 +1,24 @@
+[[rc_netcdf]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/netcdf
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency  |https://portal.ogc.org/files/?artifact_id=43732[OGC 10-090r3 Network Common Data Form Core Encoding Standard 1.0]
+|===
+
+==== Requirements
+
+[[requirements-class-netCDF-clause]]
+
+===== netCDF representation
+
+[[req_netcdf_coverage]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/netcdf/coverage*
+^|A |If a particular collection is suitable for a CIS JSON representation, the coverage resource as defined in the Core requirement class SHALL support negotiating a https://portal.ogc.org/files/?artifact_id=43732[netCDF] response using the `application/x-netcdf` media type.
+^|B |The response SHALL be a netCDF document which validates against the OGC netCDF standard.
+^|C |For dimensions that do not have a well-defined netCDF `standard_name`, the name of the corresponding variable SHALL match the name of the dimension in the collection description's extent.
+|===

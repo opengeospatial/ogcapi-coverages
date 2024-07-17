@@ -22,7 +22,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/geotiff/coverage*
-^|A |The coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] response using the `image/tiff; application=geotiff` media type.
+^|A |Two-dimensional coverage responses for the coverage resource as defined in the Core requirement class SHALL support negotiating a https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] response using the `image/tiff; application=geotiff` media type.
 ^|B |The response SHALL be a GeoTIFF document which validates against the GeoTIFF and TIFF standard.
 ^|C |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-OGC-property-seq` sequence.
 |===

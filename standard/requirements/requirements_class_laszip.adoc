@@ -1,0 +1,24 @@
+[[rc_laszip]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/laszip
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency  |https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASzip: lossless compression of LiDAR data]
+|Dependency  |https://portal.ogc.org/files/?artifact_id=74523[OGC 17-030r1 LAS Specification 1.4 Community Standard]
+|===
+
+==== Requirements
+
+[[requirements-class-laszip-clause]]
+
+===== LASzip representation
+
+[[req_laszip_coverage]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/laszip/coverage*
+^|A |If a particular collection such as point cloud is suitable for a LASzip representation, the coverage resource as defined in the Core requirement class SHALL support negotiating a LASzip: lossless compression of LiDAR data[LASzip] response using the `application/vnd.laszip` media type.
+^|B |The response SHALL be a LASzip point cloud which validates against the LASzip format, which can be used to losslessly compress point cloud data encoded in the OGC LAS Community Standard, using a Point Data Record Format suitable for the data being returned.
+|===

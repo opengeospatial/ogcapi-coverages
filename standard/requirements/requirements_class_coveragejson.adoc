@@ -18,6 +18,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coveragejson/coverage*
-^|A |The coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://docs.ogc.org/cs/21-069r2/21-069r2.html[CoverageJSON] response using the `application/vnd.cov+json` media type.
+^|A |If a particular collection is suitable for a CIS JSON representation, the coverage resource as defined in the Core requirement class SHALL support negotiating a https://docs.ogc.org/cs/21-069r2/21-069r2.html[CoverageJSON] response using the `application/vnd.cov+json` media type.
 ^|B |The response SHALL be a CoverageJSON document which validates against the CoverageJSON community standard.
 |===
