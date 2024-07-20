@@ -23,7 +23,7 @@ The `extent` property of the collection description is also restricted to use a 
 As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dimension, each additional dimension must include an `interval` property to specify at minimum the overall envelope of the dimension, and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
 A `grid` property for these dimensions also allows describing the `cellsCount` of the grid, as well as a cell `resolution` for regular grids, or a list of individual `coordinates` for irregular grids using.
 This extent information provides equivalent information to the CIS _domain set_ for most use cases.
-For point cloud data, a separate detailed description of the domain is not practical, and a subset of the domain is instead retrieved together with the data, as with the common LAS and LASZip point cloud encodings.
+For point cloud data, a separate detailed description of the domain is not practical, and a subset of the domain is instead retrieved together with the data, as with the common LAS and LASzip point cloud encodings.
 In this case, only the overall interval, and optionally detailed sub-intervals where data is available, can be provided instead within the collection extent.
 
 When describing the extent of a coverage, the geometry of the cells must be considered.

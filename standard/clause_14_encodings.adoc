@@ -13,7 +13,7 @@ These requirements classes include:
 * <<rc_encoding-cisjson,CIS JSON>>
 * <<rc_encoding-coveragejson,CoverageJSON>>
 * <<rc_encoding-las,LAS>>
-* <<rc_encoding-laszip,LASZip>>
+* <<rc_encoding-laszip,LASzip>>
 * <<rc_encoding-png,PNG>>
 * <<rc_encoding-jpegxl,JPEG XL>>
 * <<rc_encoding-jpeg2000,JPEG 2000>>
@@ -41,7 +41,7 @@ A table of the media types corresponding to each encoding requirements class def
 |CIS JSON                |application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
 |CoverageJSON            |application/vnd.cov+json
 |LAS                     |application/vnd.las
-|LASZip                  |application/vnd.laszip
+|LASzip                  |application/vnd.laszip
 |PNG                     |image/png
 |JPEG XL                 |image/jxl
 |JPEG-2000               |image/jp2
@@ -159,12 +159,12 @@ This requirements class is particularly well suited for distributing point cloud
 include::requirements/requirements_class_las.adoc[]
 
 [[rc_encoding-laszip]]
-=== Requirements Class "LASZip"
+=== Requirements Class "LASzip"
 
 ==== Overview
 
-The LASZip requirements class defines support for encoding a coverage response according to the
-https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASZip] compression extension of the https://portal.ogc.org/files/?artifact_id=74523[OGC LAS Community Standard].
+The LASzip requirements class defines support for encoding a coverage response according to the
+https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASzip] compression extension of the https://portal.ogc.org/files/?artifact_id=74523[OGC LAS Community Standard].
 
 This requirements class is particularly well suited for distributing point cloud coverages.
 
