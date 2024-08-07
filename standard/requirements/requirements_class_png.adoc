@@ -21,7 +21,7 @@
 ^|A |Two-dimensional coverage responses for the coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://www.w3.org/TR/png/[PNG] response using the `image/png` media type.
 ^|B |The PNG response SHALL use 16-bit values for fields requiring more than 8-bit to encode accurately.
 ^|C |The Implementation SHALL return a 400 error for requests for any number of fields other than 1 or 3.
-^|D |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-OGC-property-seq` sequence.
+^|D |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.
 ^|E | A `Values-Scale:` response header with a numeric real value SHALL be returned indicating the factor by which values were multiplied before an offset was added to result in the encoded 8-bit or 16-bit PNG unsigned integer values.
 ^|F | A `Values-Offset:` response header with a numeric real value SHALL be returned indicating the offset which was added after multiplying values by the scale factor to result in the encoded 8-bit or 16-bit PNG unsigned integer values.
 |===

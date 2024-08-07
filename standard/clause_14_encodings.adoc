@@ -188,7 +188,7 @@ include::requirements/requirements_class_png.adoc[]
 
 ==== Overview
 
-The JPEG XL requirements class defines support for encoding a coverage response according to the https://jpeg.org/jpegxl/[JPEG XL] https://www.iso.org/standard/77977.html[ISO/IEC 18181 Standard].
+The JPEG XL requirements class defines support for encoding a coverage response according to the https://jpeg.org/jpegxl/[JPEG XL] https://www.iso.org/standard/85066.html[ISO/IEC 18181-1:2024 Standard].
 
 // JPEG XL supports a large number of bands, image dimensions, and floating points.
 
@@ -199,7 +199,7 @@ include::requirements/requirements_class_jpegxl.adoc[]
 
 ==== Overview
 
-The JPEG 2000 requirements class defines support for encoding a coverage response according to the https://jpeg.org/jpeg2000/[JPEG 2000] https://www.iso.org/standard/78321.html[ISO/IEC 15444], with
+The JPEG 2000 requirements class defines support for encoding a coverage response according to the https://jpeg.org/jpeg2000/[JPEG 2000] https://www.iso.org/standard/78321.html[ISO/IEC 15444-1:2019], with
 support for georeferencing with http://www.opengis.net/doc/IS/GMLJP2/2.1[GMLJP2].
 
 // TODO: .jpf for floating point support, and/or parameters like PNG?
@@ -211,7 +211,7 @@ include::requirements/requirements_class_jpeg2000.adoc[]
 
 ==== Overview
 
-The (Geo)Zarr requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/100727[OGC Zarr Community Standard], with
+The (Geo)Zarr requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/100727[OGC Zarr Community Standard], within a https://www.iso.org/standard/60101.html[Zip] archive, with
 eventual support for https://www.ogc.org/requests/ogc-to-form-geozarr-standards-working-group-public-comment-sought-on-draft-charter/[GeoZarr].
 
 include::requirements/requirements_class_zarr.adoc[]

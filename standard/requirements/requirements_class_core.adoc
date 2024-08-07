@@ -68,7 +68,7 @@ in addition to the basic "Collections" requirement class, allowing to describe t
 ^|A |The API SHALL support the HTTP GET operation at the path `/collections/{collectionId}/schema` to retrieve the schema of the coverage fields.
 ^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|C |The content of that response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
-^|D |Each field SHALL include an `x-ogc-property-seq` property with an integer value establishing a sequential order for the fields.
+^|D |Each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
 |===
 
 NOTE: A meta-schema for JSON Schema used as part of the _2D Tile Matrix Set and Tileset Metadata standard_ suitable for this resource is available at https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/tms/propertiesSchema.yaml .

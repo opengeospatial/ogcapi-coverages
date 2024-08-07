@@ -1,0 +1,26 @@
+[[rc_jpegxl]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/jpegxl
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency  |https://www.iso.org/standard/85066.html[ISO/IEC 18181-1:2024]
+|Dependency  |https://www.iso.org/standard/85253.html[ISO/IEC 18181-2:2024]
+|===
+
+==== Requirements
+
+[[requirements-class-jpegxl-clause]]
+
+===== JPEG XL representation
+
+[[req_jpegxl_coverage]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/jpegxl/coverage*
+^|A |Two-dimensional coverage responses for the coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://jpeg.org/jpegxl/[JPEG XL] response using the `image/jxl` media type.
+^|B |The JPEG XL response SHALL use the appropriate data types most closely matching the coverage field (e.g., 8 bit or 16-bit integer, 32-bit floating point).
+^|C |The response SHALL contain all selected fields.
+^|D |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.
+|===

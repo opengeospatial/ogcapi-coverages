@@ -34,5 +34,5 @@ the https://docs.ogc.org/is/21-026/21-026.html#HTTPRangeSupportRequirements[`/re
 ^|A |The coverage resource, as defined in the Core requirement class, SHALL support content negotiation of a https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] using the cloud-optimized profile,
 (`Accept-Profile:`/`Content-Profile:` http://www.opengis.net/def/profile/geotiff/cloud-optimized`, `Accept:`/`Content-Type:` `image/tiff; application=geotiff` media type).
 ^|B |The response SHALL be a GeoTIFF document which validates against the GeoTIFF and TIFF standard.
-^|C |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-OGC-property-seq` sequence.
+^|C |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.
 |===

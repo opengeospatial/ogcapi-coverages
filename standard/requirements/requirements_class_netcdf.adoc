@@ -22,3 +22,6 @@
 ^|B |The response SHALL be a netCDF document which validates against the OGC netCDF standard.
 ^|C |For dimensions that do not have a well-defined netCDF `standard_name`, the name of the corresponding variable SHALL match the name of the dimension in the collection description's extent.
 |===
+
+NOTE: The https://portal.ogc.org/files/?artifact_id=50294[OGC netCDF Enhanced Data Model Extension] can be fully encoded using the
+https://docs.ogc.org/is/18-043r3/18-043r3.html[OGC Hierarchical Data Format Version 5 (HDF5®) Standard].

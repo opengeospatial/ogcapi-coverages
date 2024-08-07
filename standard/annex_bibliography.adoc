@@ -10,3 +10,4 @@
 * [[J2K]] International Telecommunication Union, *ITU-T.800 : Information technology - JPEG 2000 image coding system: Core coding system*, June, 2019, https://www.itu.int/rec/T-REC-T.800-201906-I/en
 * [[RDF]] W3C, *RDF 1.1 Semantics*, February 2014, https://www.w3.org/TR/rdf11-mt/
 * OGC: OGC 13-102r2, *Name type specification – Time and index coordinate reference system definitions* (OGC Policy Document), version 1, 2014
+* [[[Zarr2,Zarr2]]], Zarr Storage Specification Version 2. https://zarr-specs.readthedocs.io/en/latest/v2/v2.0.html
