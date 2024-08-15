@@ -8,7 +8,7 @@ All other requirement classes are optional.
 
 The requirement class depends on _OGC API - Common - Part 2: Geospatial data_, which defines how to list available collections of geospatial data and associate access mechanisms for these collections.
 
-This _Coverages API_ is presented as one such access mechanism for collections of geospatial data which can be modeled as a coverage, defined
+This _Coverages API_ is presented as one such access mechanism for collections of geospatial data which can be modeled as a coverage, defined as
 a function returning homogeneous values for any direct position part of its domain.
 
 This requirement class extends the `/collections` and `/collections/{collectionId}` resources defined by _OGC API - Common - Part 2_ with additional information for collections accessible using this _Coverages API_.
