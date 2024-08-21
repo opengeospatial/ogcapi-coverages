@@ -35,10 +35,10 @@ As an example, considering that the _WorldCRS84Quad_ Tile Matrix Set has tile pi
 a request for tile +
 `.../tiles/WorldCRS84Quad/1/0/0` of a point coverage is equivalent to:
 
-`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=257,257`
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=Lat(257),Lon(257)`
 
 and returns a tile containing one or more slices of 257 x 257 cells, while for an area coverage it is equivalent to:
 
-`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=256,256`
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=Lat(256),Lon(256)`
 
 and returns a tile containing one or more slices of 256 x 256 cells.
