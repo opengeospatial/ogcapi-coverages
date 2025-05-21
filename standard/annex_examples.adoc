@@ -19,6 +19,7 @@ These examples return a subset of a coverage in the negotiated format, including
 === Scaling Example
 
 * {datasetAPI}/collections/{collectionId}/coverage?resolutions=Lat(0.5),Lon(0.5) -- returns a coverage re-scaled at a 0.5 degree resolution for both latitude and longitude
+* {datasetAPI}/collections/{collectionId}/coverage?resolutions=spatial-distance(0.5) -- for a non-gridded coverage such as a point cloud, returns a coverage re-scaled at a 0.5 meters resolution (vectorial distance between samples)
 * {datasetAPI}/collections/{collectionId}/coverage?width=400&height=300 -- returns the entire coverage re-scaled to 300 pixels along its latitude or Northing/Y axis, and 400 samples along its longitude or Easting/X axis in the negotiated format
 * {datasetAPI}/collections/{collectionId}/coverage?resolutions=time(P1D) -- returns a coverage re-scaled to a daily temporal resolution for its primary temporal dimension
 

@@ -5,7 +5,7 @@
 
 The "Spatial Scaling" Requirements Class defines the `resolutions`, `width` and `height` query parameters for retrieving coverage data at a specific spatial resolution.
 The spatial dimensions are named `Lat` and `Lon` for a geographic output CRS, and `N` and `E` for a projected CRS.
-For three-dimensional output crs, resolution can also be specified for a third spatial dimension `h`, which corresponds to the height above the ellipsoid for a geographic CRS such as CRS84h or EPSG:4979,
+For a three-dimensional output CRS, resolution can also be specified for a third spatial dimension `h`, which corresponds to the height above the ellipsoid for a geographic CRS such as CRS84h or EPSG:4979,
 and to the third dimension often called _z_ in a Cartesian 3D CRS such as EPSG:4978.
 Common aliases for these dimensions are also recommended to be supported by servers, but clients should only use these required spatial dimension names to ensure interoperability.
 
