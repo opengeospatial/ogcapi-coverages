@@ -15,7 +15,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-scaling-spatial/resolutions*
-^|A |The coverage retrieval operation SHALL support a `resolutions` query parameter specifying the resolution for one or more of the spatial dimensions in the units of the spatial CRS
+^|A |The coverage retrieval operation SHALL support a `resolutions` query parameter specifying the resolution for one or more of the spatial dimensions in positive units of the spatial CRS
 (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.

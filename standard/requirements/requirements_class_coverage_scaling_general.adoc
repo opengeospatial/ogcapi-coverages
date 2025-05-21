@@ -16,7 +16,7 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-scaling-general/resolutions*
 ^|A |For data with a additional dimensions beyond spatial and a primary temporal dimension, the coverage retrieval operation SHALL support a `resolutions` query parameter
-specifying the resolution for the additional dimensions in the units of those dimensions (as well as potentially supporting additional dimensions specified by other requirements classes).
+specifying the resolution for the additional dimensions in positive units of those dimensions (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
 ^|D |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extend other than `spatial` and `temporal`.

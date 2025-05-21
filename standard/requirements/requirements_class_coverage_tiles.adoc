@@ -33,12 +33,20 @@ to cover the exact geospatial extent of the tile.
 
 As an example, considering that the _WorldCRS84Quad_ Tile Matrix Set has tile pixel sizes defined as 256 x 256,
 a request for tile +
-`.../tiles/WorldCRS84Quad/1/0/0` of a point coverage is equivalent to:
+`.../tiles/WorldCRS84Quad/1/0/0` of a point coverage (with cells having relative bounds / region of validity of 0..0) is equivalent to:
 
-`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=Lat(257),Lon(257)`
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&height=257&width=257`
 
-and returns a tile containing one or more slices of 257 x 257 cells, while for an area coverage it is equivalent to:
+and
 
-`.../coverage?subset=Lat(0:90),Lon(-180:-90)&scale-size=Lat(256),Lon(256)`
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolutions=Lat(0.3515625),Lon(0.3515625)`
+
+and returns a tile containing one or more slices of 257 x 257 cells, while for an area coverage (with cells having relative bounds / region of validity of -50%..50%) it is equivalent to:
+
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&height=256&width=256`
+
+and
+
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolutions=Lat(0.3515625),Lon(0.3515625)`
 
 and returns a tile containing one or more slices of 256 x 256 cells.
