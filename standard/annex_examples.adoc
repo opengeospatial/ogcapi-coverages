@@ -22,6 +22,7 @@ These examples return a subset of a coverage in the negotiated format, including
 * {datasetAPI}/collections/{collectionId}/coverage?resolutions=spatial-distance(0.5) -- for a non-gridded coverage such as a point cloud, returns a coverage re-scaled at a 0.5 meters resolution (vectorial distance between samples)
 * {datasetAPI}/collections/{collectionId}/coverage?width=400&height=300 -- returns the entire coverage re-scaled to 300 pixels along its latitude or Northing/Y axis, and 400 samples along its longitude or Easting/X axis in the negotiated format
 * {datasetAPI}/collections/{collectionId}/coverage?resolutions=time(P1D) -- returns a coverage re-scaled to a daily temporal resolution for its primary temporal dimension
+* {datasetAPI}/collections/{collectionId}/coverage?resolutions=Lat(),Lon(),time() -- returns a coverage using the native spatial and temporal resolution, ensuring the server will not automatically downsample, which might result in an error if the response is too large
 
 [[field-selection-examples]]
 === Field Selection (Range Subsetting) Example

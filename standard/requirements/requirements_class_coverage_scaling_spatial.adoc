@@ -9,7 +9,7 @@
 
 === Requirements
 
-==== Parameter `resolutions`
+==== Query parameter `resolutions`
 
 [[req_coverage_scaling-spatial-resolutions]]
 [width="90%",cols="2,6a"]
@@ -28,7 +28,7 @@ This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic 
 ^|I |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of &#916;N^2^ + &#916;E^2^ + Δh^2^) between two samples.
 |===
 
-==== Parameters `width` and `height`
+==== Query parameters `width` and `height`
 
 [[req_coverage_scaling-spatial-width_and_height]]
 [width="90%",cols="2,6a"]
@@ -55,14 +55,14 @@ adjust one or more unspecified dimensions.
 NOTE: A client retrieving a coverage from an implementation advertising support for this "Spatial Scaling" requirements class should explicitly use `resolutions=Lat(),Lon()` if it wants to ensure
 retrieving the coverage in its native spatial resolution and prefers receiving an error instead of a downsampled version of the data.
 
-==== Permission to support legacy scaling parameters
+==== Permission to support legacy scaling query parameters
 
 [[per_coverage_scaling-spatial-permission-legacy]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/coverage-scaling-spatial/legacy*
-^|A |Implementations MAY additionally support the `scale-factor` and `scale-axes` legacy query parameters expressing resolution as the factor by which the data's native resolution has been downsampled (a factor of 2 meaning two times coarser).
-^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension.
+^|A |Implementations MAY additionally support the `scale-factor` and `scale-axes` legacy query parameters expressing resolution as the factor by which the data's native resolution has been downsampled. For example, `scale-factor=2.0` meaning two times coarser; `scale-axes=Lat(1),Lon(1)` means native spatial resolution for a 2D geographic CRS.
+^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension. For example, `scale-size=Lat(300),Lon(400)` means 400 samples across the longitude axis and 300 samples across the latitude axis.
 |===
 
 IMPORTANT: To ensure interoperability, clients should use the `resolutions` and/or `width` and `height` query parameters rather than the legacy ones.

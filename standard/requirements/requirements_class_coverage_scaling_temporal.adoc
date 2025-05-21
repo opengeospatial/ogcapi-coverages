@@ -9,7 +9,7 @@
 
 === Requirements
 
-==== Parameter `resolutions`
+==== Query parameter `resolutions`
 
 [[req_coverage_scaling-temporal-resolutions]]
 [width="90%",cols="2,6a"]
@@ -39,7 +39,7 @@ MAY automatically downsample the coverage to a suitable resolution instead of re
 NOTE: A client retrieving a coverage from an implementation advertising support for this "Temporal Scaling" requirements class should explicitly use `resolutions=time()` if it wants to ensure
 retrieving the coverage in its native temporal resolution and prefers receiving an error instead of a downsampled version of the data.
 
-==== Permission to support legacy scaling parameters
+==== Permission to support legacy scaling query parameters
 
 [[per_coverage_scaling-temporal-permission-legacy]]
 [width="90%",cols="2,6a"]

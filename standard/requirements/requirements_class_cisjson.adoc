@@ -39,3 +39,10 @@ where a _span_  of 1 indicates a coverage whose cell values represent an _area_,
 ^|C |If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
 ^|D |The implementation SHOULD return the metadata when explicitly requested to do so with the `profile` query parameter.
 |===
+
+[[per_cisjson-cis-metadata]]
+[width="90%",cols="2,6"]
+|===
+^|*Permission {counter:per-id}* |*/per/cisjson/cis-metadata*
+^|A |The implementation MAY omit the CIS domain-specific metadata by default as part of the coverage response.
+|===
