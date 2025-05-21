@@ -28,14 +28,14 @@ This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic 
 ^|I |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of &#916;N^2^ + &#916;E^2^ + Δh^2^) between two samples.
 |===
 
-==== Parameter `width` and `height`
+==== Parameters `width` and `height`
 
 [[req_coverage_scaling-spatial-width_and_height]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-scaling-spatial/width-and-height*
-^|A |For coverages with a spatial dimension corresponding to the horizontal spatial axis as reprsented on a 2D map, such as longitude or easting, the operation SHALL support a parameter `width` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.:
-^|B |For coverages with a spatial dimension corresponding to the vertical spatial axis as reprsented on a 2D map, such as latitude or northing, the operation SHALL support a parameter `height` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.:
+^|A |For coverages with a spatial dimension corresponding to the horizontal spatial axis as represented on a 2D map, such as longitude or easting, the operation SHALL support a parameter `width` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
+^|B |For coverages with a spatial dimension corresponding to the vertical spatial axis as represented on a 2D map, such as latitude or northing, the operation SHALL support a parameter `height` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
 ^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by provided scaling  parameters, the original number of sample values for unspecified axes, and any defined server limits.
 ^|D |When `width` and/or `height` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===
