@@ -1,0 +1,53 @@
+[[rc_table_scaling_general]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-general
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|===
+
+=== Requirements
+
+==== Parameter `resolutions`
+
+[[req_coverage_scaling-general-resolutions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling-general/resolutions*
+^|A |For data with a additional dimensions beyond spatial and a primary temporal dimension, the coverage retrieval operation SHALL support a `resolutions` query parameter
+specifying the resolution for the additional dimensions in the units of those dimensions (as well as potentially supporting additional dimensions specified by other requirements classes).
+^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
+^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
+^|D |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extend other than `spatial` and `temporal`.
+^|E |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|F |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|G |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
+for the corresponding dimension.
+^|H |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, the implementation SHALL support an ISO 8601 period notation.
+|===
+
+==== Downsampling permission
+
+[[per_coverage_scaling-general-permission]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/coverage-scaling-general/downsampling*
+^|A |In the case where a response to a request without a `resolutions` parameters would be larger than an advertised server limit, an implementation
+MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+|===
+
+NOTE: A client retrieving a coverage from an implementation advertising support for this "General Scaling" requirements class should explicitly use e.g., `resolutions=pressure()` if it wants to ensure
+retrieving the coverage in its native resolution and prefers receiving an error instead of a downsampled version of the data.
+
+==== Permission to support legacy scaling parameters
+
+[[per_coverage_scaling-general-permission-legacy]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/coverage-scaling-general/legacy*
+^|A |Implementations MAY additionally support the `scale-factor` and `scale-axes` legacy query parameters expressing resolution as the factor by which the data's native resolution has been downsampled (a factor of 2 meaning two times coarser).
+^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension.
+|===
+
+IMPORTANT: To ensure interoperability, clients should use the `resolutions` query parameter rather than the legacy ones.

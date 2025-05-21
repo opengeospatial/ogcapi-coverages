@@ -18,9 +18,9 @@ These examples return a subset of a coverage in the negotiated format, including
 [[scaling-examples]]
 === Scaling Example
 
-* {datasetAPI}/collections/{collectionId}/coverage?scale-factor=1.5 -- returns a coverage re-scaled so as to contain 1.5 times less sample values along all of its axes
-* {datasetAPI}/collections/{collectionId}/coverage?scale-size=Lat(300),Lon(400) -- returns the entire coverage re-scaled to 300 pixels along its latitude axis, and 400 samples along its longitude axis in the negotiated format
-* {datasetAPI}/collections/{collectionId}/coverage?scale-axes=Lat(2) -- returns a coverage re-scaled so as to contain 2 times less sample values along its latitude axis, and all original values along all its other dimensions
+* {datasetAPI}/collections/{collectionId}/coverage?resolutions=Lat(0.5),Lon(0.5) -- returns a coverage re-scaled at a 0.5 degree resolution for both latitude and longitude
+* {datasetAPI}/collections/{collectionId}/coverage?width=400&height=300 -- returns the entire coverage re-scaled to 300 pixels along its latitude or Northing/Y axis, and 400 samples along its longitude or Easting/X axis in the negotiated format
+* {datasetAPI}/collections/{collectionId}/coverage?resolutions=time(P1D) -- returns a coverage re-scaled to a daily temporal resolution for its primary temporal dimension
 
 [[field-selection-examples]]
 === Field Selection (Range Subsetting) Example

@@ -1,0 +1,52 @@
+[[rc_table_scaling_temporal]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-temporal
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|===
+
+=== Requirements
+
+==== Parameter `resolutions`
+
+[[req_coverage_scaling-temporal-resolutions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling-temporal/resolutions*
+^|A |For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolutions` query parameter specifying the resolution for the primary temporal dimension using ISO 8601 period notation
+(as well as potentially supporting additional dimensions specified by other requirements classes).
+^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
+^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
+^|D |A `time` axis name SHALL be supported.
+^|E |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|F |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|G |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
+for the corresponding dimension.
+|===
+
+==== Downsampling permission
+
+[[per_coverage_scaling-temporal-permission]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/coverage-scaling-temporal/downsampling*
+^|A |In the case where a response to a request without a `resolutions` parameter would be larger than an advertised server limit, an implementation
+MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+|===
+
+NOTE: A client retrieving a coverage from an implementation advertising support for this "Temporal Scaling" requirements class should explicitly use `resolutions=time()` if it wants to ensure
+retrieving the coverage in its native temporal resolution and prefers receiving an error instead of a downsampled version of the data.
+
+==== Permission to support legacy scaling parameters
+
+[[per_coverage_scaling-temporal-permission-legacy]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/coverage-scaling-temporal/legacy*
+^|A |Implementations MAY additionally support the `scale-factor` and `scale-axes` legacy query parameters expressing resolution as the factor by which the data's native resolution has been downsampled (a factor of 2 meaning two times coarser).
+^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension.
+|===
+
+IMPORTANT: To ensure interoperability, clients should use the `resolutions` query parameter rather than the legacy ones.
