@@ -109,8 +109,8 @@ four or six comma-separated numbers representing the lower-left and upper right 
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/native-resolutions*
 ^|A |An implementation SHALL accept a `resolutions` query parameter for a GET operation on the coverage resource,
-for empty resolutions values (e.g., `resolutions=Lat(),Lon(),time()`) for the corresponding dimensions indicating a request for the native resolution of the corresponding dimension,
-whether it supports or not the <<rc_scaling_spatial, "Spatial Scaling">>, <<rc_scaling_spatial, "Temporal Scaling">> and/or <<rc_scaling_spatial, "General Scaling">> requirements classes.
+for empty resolutions values (e.g., `resolutions=Lat(),Lon(),time()`) indicating a request for the native resolution of the corresponding dimension(s),
+whether the implementation supports or not the <<rc_scaling_spatial, "Spatial Scaling">>, <<rc_scaling_spatial, "Temporal Scaling">> and/or <<rc_scaling_spatial, "General Scaling">> requirements classes.
 ^|B |An implementation not supporting scaling for a dimension for which a non-empty value has been specified using the `resolutions` query parameter SHALL return a 4xx error.
 |===
 
