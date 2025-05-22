@@ -151,12 +151,8 @@ components:
       # Coverages - Core
       sceneId:
          $ref: 'parameters/coverages-core/sceneId.yaml'
-      scale-factor:
-         $ref: 'parameters/coverages-core/scale-factor.yaml'
-      scale-axes:
-         $ref: 'parameters/coverages-core/scale-axes.yaml'
-      scale-size:
-         $ref: 'parameters/coverages-core/scale-size.yaml'
+      resolutions:
+         $ref: 'parameters/coverages-core/resolutions.yaml'
       properties:
          $ref: 'parameters/coverages-core/properties.yaml'
       width:

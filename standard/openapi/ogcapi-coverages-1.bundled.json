@@ -266,13 +266,7 @@
             "$ref": "#/components/parameters/properties"
           },
           {
-            "$ref": "#/components/parameters/scale-factor"
-          },
-          {
-            "$ref": "#/components/parameters/scale-axes"
-          },
-          {
-            "$ref": "#/components/parameters/scale-size"
+            "$ref": "#/components/parameters/resolutions"
           },
           {
             "$ref": "#/components/parameters/width"
@@ -424,13 +418,7 @@
             "$ref": "#/components/parameters/properties"
           },
           {
-            "$ref": "#/components/parameters/scale-factor"
-          },
-          {
-            "$ref": "#/components/parameters/scale-axes"
-          },
-          {
-            "$ref": "#/components/parameters/scale-size"
+            "$ref": "#/components/parameters/resolutions"
           },
           {
             "$ref": "#/components/parameters/width"
@@ -3068,28 +3056,10 @@
           "type": "string"
         }
       },
-      "scale-factor": {
-        "name": "scale-factor",
+      "resolutions": {
+        "name": "resolutions",
         "in": "query",
-        "description": "For each axis, the returned coverage will contain the number of original\nsampled values, divided by the scale-factor.",
-        "required": false,
-        "schema": {
-          "type": "number"
-        }
-      },
-      "scale-axes": {
-        "name": "scale-axes",
-        "in": "query",
-        "description": "Returns a coverage re-scaled so as to contain `{number}` times less sample\nvalues along the corresponding axisName axis, and all original values along\nthe dimensions of unspecified axes\n```\nScalingSpec:       \"scale-axes\"=axisName({number})[,axisName({number})]*\naxisName:          {NCName}\n\nWhere:\n   {number} is an integer or floating-point number, and {axisName} is the\n   same as one of the axisLabels defined in the DomainSet\n```",
-        "required": false,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "scale-size": {
-        "name": "scale-size",
-        "in": "query",
-        "description": "When `scale-size` is used, the returned coverage will contain exactly the\nspecified number of sample values along each axis which is specified, and\nthe original number of sample values for unspecified axes.\n```\nScalingSpec:       \"scale-size\"=axisName({number})[,axisName({number})]*\naxisName:          {text}\n\nWhere:\n   {number} is an integer or floating-point number and {axisName}\n   is the same as one of the axisLabels defined in the DomainSet\n```",
+        "description": "Request a specific resolution for one or more dimension in terms of the minimum distance between two samples.\nFor a regular grid coverage output, the resolution corresponds to the grid resolution.\nThe parameter value is a comma separated list of dimensions followed by values in parentheses.\nFor example, `resolutions=Lat(0.5),Lon(0.5),time(P1D)` specifies a 0.5 degrees spatial resolution and a daily temporal resolution.\nFor server supporting Spatial subsetting, the `Lat` and `Lon` dimensions are supported for a geographic output CRS,\nand the `E` and `N` dimensions are supported for a projected output CRS, with the resolution specified in positive CRS units.\nFor a 3D CRS, the resolution for an additional `h` dimension can be specified, corresponding to the height above the ellipsoid\nfor a geographic CRS, or to a vertical dimension usually called _z_ in a 3D Cartesian CRS.\nFor server supporting Temporal subsetting, the `time` dimension is supported referring to the primary temporal dimensions,\nwith units specified in ISO 8601 UTC / Gregorian date and time.\nFor server supporting General subsetting, a resolution for additional dimensions, as named in the collection description's extent,\ncan also be specified in the units of those dimensions.",
         "required": false,
         "schema": {
           "type": "string"
