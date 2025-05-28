@@ -28,14 +28,16 @@ The _Scenes_ Requirements Class defines how to present separate components of a 
 
 === Requirements classes defining query parameters
 
-* <<rc_subsetting,*Subsetting*>>
+* <<rc_subsetting_spatial,*Spatial Subsetting*>>
+* <<rc_subsetting_temporal,*Temporal Subsetting*>>
+* <<rc_subsetting_general,*General Subsetting*>>
 * <<rc_scaling_spatial,*Spatial Scaling*>>
-* <<rc_scaling_temporal,*Temoral Scaling*>>
+* <<rc_scaling_temporal,*Temporal Scaling*>>
 * <<rc_scaling_general,*General Scaling*>>
 * <<rc_fieldselection,*Field Selection*>>
 * <<rc_crs,*Coordinate Reference System*>>
 
-The _Subset_ Requirements Class provides capabilities to select a sub-set of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
+The _Spatial, Temporal, and General Subsetting_ Requirements Class provides capabilities to select a sub-set of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
 The _Spatial, Tepmoral and General Scaling_ Requirements Classes define parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
 
@@ -68,26 +70,28 @@ The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition 
 .Conformance class URIs
 [cols="30,70",options="header"]
 |===
-| Corresponding requirements class           | Conformance class URI
-| <<rc_core,Core>>                           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
-| <<rc_scaling_scaling,Spatial Scaling>>     | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-spatial
-| <<rc_scaling_temporal,Temporal Scaling>>   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-temporal
-| <<rc_scaling_general,General Scaling>>     | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
-| <<rc_subsetting,Subsetting>>               | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting
-| <<rc_subsetting,Field Selection>>          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection
-| <<rc_crs,CRS>>                             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
-| <<rc_tiles,Coverage Tiles>>                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
-| <<rc_scenes,Coverage Scenes>>              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scenes
-| <<rc_html,HTML>>                           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
-| <<rc_tiff,GeoTIFF>>                        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
-| <<rc_netcdf,netCDF>>                       | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
-| <<rc_cisjson,CIS JSON>>                    | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
-| <<rc_coveragejson,CoverageJSON>>           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
-| <<rc_las,LAS>>                             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/las
-| <<rc_laszip,LASzip>>                       | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip
-| <<rc_png,PNG>>                             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/png
-| <<rc_jpegxl,JPEG XL>>                      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpegxl
-| <<rc_jpeg2000,JPEG 2000>>                  | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpeg2000
-| <<rc_zarr,(Geo)Zarr>>                      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/zarr
-| <<rc_oas30,OpenAPI 3.0>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
+| Corresponding requirements class              | Conformance class URI
+| <<rc_core,Core>>                              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
+| <<rc_scaling_spatial,Spatial Scaling>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-spatial
+| <<rc_scaling_temporal,Temporal Scaling>>      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-temporal
+| <<rc_scaling_general,General Scaling>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
+| <<rc_subsetting_spatial,Spatial Subsetting>>  | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-spatial
+| <<rc_subsetting_temporal,Temporal Subsetting>>| http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-temporal
+| <<rc_subsetting_general,General Subsetting>>  | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-general
+| <<rc_subsetting,Field Selection>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection
+| <<rc_crs,CRS>>                                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
+| <<rc_tiles,Coverage Tiles>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
+| <<rc_scenes,Coverage Scenes>>                 | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scenes
+| <<rc_html,HTML>>                              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
+| <<rc_tiff,GeoTIFF>>                           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
+| <<rc_netcdf,netCDF>>                          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
+| <<rc_cisjson,CIS JSON>>                       | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
+| <<rc_coveragejson,CoverageJSON>>              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
+| <<rc_las,LAS>>                                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/las
+| <<rc_laszip,LASzip>>                          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip
+| <<rc_png,PNG>>                                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/png
+| <<rc_jpegxl,JPEG XL>>                         | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpegxl
+| <<rc_jpeg2000,JPEG 2000>>                     | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpeg2000
+| <<rc_zarr,(Geo)Zarr>>                         | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/zarr
+| <<rc_oas30,OpenAPI 3.0>>                      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
 |===
