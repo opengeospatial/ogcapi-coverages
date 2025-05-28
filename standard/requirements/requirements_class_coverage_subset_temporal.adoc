@@ -1,0 +1,133 @@
+[[rc_subsetting-temporal-table]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-temporal
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|===
+
+=== Requirements
+
+[[subset-temporal-parameter-subset-requirements]]
+==== Parameter `subset`
+
+[[req_coverage_subset_temporal-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/subset*
+^|A |The coverage request operation SHALL support a parameter `subset` to subset the primary temporal dimension of the coverage (corresponding to the `temporal` section of the collection description's extent)
+with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+
+[source,EBNF]
+----
+  SubsetSpec:       "subset"=axisName(intervalOrPoint)
+  axisName:         {text}
+  intervalOrPoint:  interval \| point
+  interval:         low : high
+  low:              point \| *
+  high:             point \| *
+  point:            {number} \| "{text}"
+
+  Where:
+     \" = double quote = ASCII code 0x42,
+     {number} is an integer or floating-point number, and
+     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
+----
+
+^|B   |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
+^|C   |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
+^|D   |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
+^|E	|Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
+^|F	|A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time`, or any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
+^|G	|If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
+^|H   |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time (as specified in RFC 3339) if it is not specified in the temporal extent.
+^|I   |If the subset parameter includes the `time` dimension while the `datetime` parameter is also specified, the server SHALL return a 400 client error.
+^|J   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+^|K   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+^|L	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma separated)^1^.
+
+2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
+|===
+
+NOTE: When the _intervalOrPoint_ values fall partially outside of the range of valid values defined by the TRS for the identified axis,
+the service is expected to return the non-empty portion of the coverage resulting from the subset.
+For subsetting on the range set, and for coverage media types with no geo-referencing mechanisms (e.g. PNG), NO_DATA values or transparency should be used.
+If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
+or simply return the properly geo-referenced values within the domain set.
+
+[[rec_coverage_subset-temporal-aliases]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommentation {counter:per-id}* |*/rec/subsetting-temporal/subset-crs-axis-aliases*
+^|A | The axis names `t` and `Time` SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
+|===
+
+IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
+
+[[datetime-parameter-subset-requirements]]
+==== Parameter `datetime`
+
+[[datetime-definition]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/datetime*
+^|A |The implementation SHALL support a `datetime` parameter expressed corresponding to either a date-time instant or a time interval, conforming to the following syntax (using link:https://tools.ietf.org/html/rfc5234[ABNF]):
+
+[source]
+----
+interval-closed     = date-time "/" date-time
+interval-open-start = [".."] "/" date-time
+interval-open-end   = date-time "/" [".."]
+interval            = interval-closed / interval-open-start / interval-open-end
+datetime            = date-time / interval
+----
+The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6].
+^|B |Only the portions of the coverage within the specified interval SHALL be part of coverage response, performing a trim operation for an interval or a slicing operation for an instant.
+^|C |The implementation SHALL support a double-dot (`..`) or an empty string for the start/end as indicating an unbounded or half-bounded interval (only having a start or end).
+^|D |If a `datetime` parameter is specified requesting a coverage without any temporal dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
+|===
+
+[width="90%",cols="2,6a"]
+|====
+| Note | ISO 8601-2 distinguishes unbounded start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unspecified start/end has the same effect as an unbounded start/end.
+|====
+
+.A date-time
+=================
+February 12, 2018, 23:20:52 GMT:
+
+`datetime=2018-02-12T23:20:52Z`
+=================
+
+.Intervals
+=================
+February 12, 2018, 00:00:00 GMT to March 18, 2018, 12:31:12 GMT:
+
+`datetime=2018-02-12T00:00:00Z/2018-03-18T12:31:12Z`
+
+February 12, 2018, 00:00:00 UTC or later:
+
+`datetime=2018-02-12T00:00:00Z/..`
+
+March 18, 2018, 12:31:12 UTC or earlier:
+
+`datetime=../2018-03-18T12:31:12Z`
+=================
+
+==== Permission for Slicing Sparse Dimensions
+
+[[per_slice_sparse_dimension_temporal]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/subsetting-temporal/slice-sparse-dimension*
+^|A |The empty portions in a coverage resulting from a slice operation on an axis (e.g. time), combined with a trimming operations on other axes (e.g. latitude and longitude)
+ which would either be empty or not cover the full extent of the trim operation MAY be filled with data values from the same trim operation
+ combined with a slicing operation on a different value of the slicing axis which would return non-empty values.
+ For example, the closest or last previous time for which data is available for a certain geospatial extent may be returned.
+ An Earth Observation use case for this permission is to allow retrieving a slice of the last available imagery on or before a certain date,
+ taking into account that a certain geographic area may only be observed every few days.
+^|B |This permission applies to both explicit slice operations using subset, as well as to implicit slicing from requesting an output format only supporting
+ a lower dimensionality than the data (e.g. requesting a 2D image from a 3D coverage as PNG or GeoTIFF).
+^|C |A query parameter defined by a custom or standardized extension MAY be made available to enable, disable or alter that behavior.
+|===
