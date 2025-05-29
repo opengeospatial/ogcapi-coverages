@@ -108,8 +108,6 @@ include::clause_11_CRS.adoc[]
 
 include::clause_12_coverage_tiles.adoc[]
 
-include::clause_13_scenes.adoc[]
-
 include::clause_14_encodings.adoc[]
 
 include::clause_15_oas.adoc[]

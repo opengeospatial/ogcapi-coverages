@@ -18,13 +18,10 @@ The Requirements Classes for _OGC API - Coverages_ are:
 
 * <<rc_core,*Core*>>
 * <<rc_coverage-tiles,*Coverage Tiles*>>
-* <<rc_scenes,*Coverage Scenes*>>
 
 The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
 
 The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the Coverages API to request coverage tiles.
-
-The _Scenes_ Requirements Class defines how to present separate components of a coverage as individual scenes, in addition to an overall coverage of the whole collection.
 
 === Requirements classes defining query parameters
 
@@ -81,7 +78,6 @@ The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition 
 | <<rc_subsetting,Field Selection>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection
 | <<rc_crs,CRS>>                                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
 | <<rc_tiles,Coverage Tiles>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
-| <<rc_scenes,Coverage Scenes>>                 | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scenes
 | <<rc_html,HTML>>                              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
 | <<rc_tiff,GeoTIFF>>                           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
 | <<rc_netcdf,netCDF>>                          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
