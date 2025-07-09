@@ -3,9 +3,9 @@
 
 === Overview
 
-The "Spatial Subsetting" Requirements Class specifies the `subset` and `bbox` parameters for the coverage resource, allowing to retrieve only a subset of the coverage along one or more spatial dimensions.
+The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more spatial dimensions.
 With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
-The `bbox` parameter always performs a trimming operation.
+
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
@@ -29,6 +29,10 @@ image::figures/spanSubset.png[]
 [#subset-non-aligned,reftext='{figure-caption} {counter:fig-num}']
 .Responses for a subsetting request not aligned to the coverage grid for _Value-is-Point_ (span = 0) vs. _Value-is-Area_ (span = 1)
 image::figures/spanSubsetNonAligned.png[]
+
+In addition to the `subset` parameter, server implementations must also support a convenience `bbox` parameter, which maps directly to an equivalent `subset` parameter performing a trimming operation.
+While the `subset` parameter allows to more explicitly reference a particular spatial axis and avoiding related confusion, the `bbox` parameter may feel simpler and more familiar to some users.
+Both the `subset` and the `bbox` parameters are aligned with the spatial subsetting capabilities of OGC API - Maps.
 
 include::requirements/requirements_class_coverage_subset_spatial.adoc[]
 

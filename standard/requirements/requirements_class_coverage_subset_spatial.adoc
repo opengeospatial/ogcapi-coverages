@@ -12,6 +12,9 @@
 [[subset-spatial-parameter-subset-requirements]]
 ==== Parameter `subset`
 
+The `subset` selects a spatial region consisting of any cells of the coverage whose geometry's interior intersects with the interior or boundary of the specified spatial region.
+Individual cells may occupy an area on the ground (the value of the cell represents an area), or an infinitely small point (the value of the cell represents a point).
+
 [[req_coverage_subset_spatial-definition]]
 [width="90%",cols="2,6a"]
 |===
@@ -92,9 +95,10 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 [[bbox-parameter]]
 ==== Parameter `bbox`
 
-The `bbox` parameter defines how to subset a coverage using a bounding box (in `bbox-crs` coordinates).
-This parameter selects a spatial region consisting of any cells of the coverage whose cell geometry's interior intersects with the interior or boundary of the specified bounding box .
-Individual cells may occupy an area on the ground (the value of the cell represents an area), or an infinitely small point (the value of the cell represents a point).
+The `bbox` convenience parameter maps to a trimming operation (which could also be expressed using `subset`).
+The parameter value consists of four coordinates which are to be interpreted as http://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
+or six coordinates to be interpreted as http://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`) by default (unless a `bbox-crs` parameter is specified).
+The equivalent `subset` parameter is simply the trimming operation from the first latitude to the second latitude, the first longitude to the second longitude, and the first height above the ellipsoid to the second height (if applicable).
 
 [[bbox-definition]]
 [width="90%",cols="2,6a"]
