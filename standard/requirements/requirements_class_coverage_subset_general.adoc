@@ -10,7 +10,7 @@
 === Requirements
 
 [[subset-general-parameter-subset-requirements]]
-==== Parameter `subset`
+==== Query parameter `subset`
 
 [[req_coverage_subset_general-definition]]
 [width="90%",cols="2,6a"]

@@ -10,7 +10,7 @@
 === Requirements
 
 [[subset-spatial-parameter-subset-requirements]]
-==== Parameter `subset`
+==== Query parameter `subset`
 
 The `subset` selects a spatial region consisting of any cells of the coverage whose geometry's interior intersects with the interior or boundary of the specified spatial region.
 Individual cells may occupy an area on the ground (the value of the cell represents an area), or an infinitely small point (the value of the cell represents a point).
@@ -78,7 +78,7 @@ or simply return the properly geo-referenced values within the domain set.
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
 
-==== Parameter `subset-crs`
+==== Query parameter `subset-crs`
 
 [[req_coverage_subset-subset-crs]]
 [width="90%",cols="2,6a"]
@@ -93,7 +93,7 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 |===
 
 [[bbox-parameter]]
-==== Parameter `bbox`
+==== Query parameter `bbox`
 
 The `bbox` convenience parameter maps to a trimming operation (which could also be expressed using `subset`).
 The parameter value consists of four coordinates which are to be interpreted as http://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
@@ -134,7 +134,7 @@ Note that the server should return an error if a latitude value of `160.0` is us
 If the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.
 
 [[bbox-crs-parameter]]
-==== Parameter `bbox-crs`
+==== Query parameter `bbox-crs`
 
 [[bbox-crs-definition]]
 [width="90%",cols="2,6a"]

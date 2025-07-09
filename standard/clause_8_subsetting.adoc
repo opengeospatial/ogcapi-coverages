@@ -41,8 +41,8 @@ include::requirements/requirements_class_coverage_subset_spatial.adoc[]
 
 === Overview
 
-The "Temporal Subsetting" Requirements Class specifies the `subset` and `datetime` parameters for the coverage resource, allowing to retrieve only a subset of the coverage along the primary temporal dimension.
-With the `subset` and `datetime` parameters, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
+The "Temporal Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along the primary temporal dimension.
+With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
@@ -58,6 +58,10 @@ The values to include in the response will be all **cells whose geometry's inter
 For cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 
 For cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
+
+In addition to the `subset` parameter, server implementations must also support a convenience `datetime` parameter, which maps directly to an equivalent `subset` parameter performing either a slicing or trimming operation.
+While the `subset` parameter allows to more explicitly reference the primary temporal dimension, the `datetime` parameter may feel simpler and more familiar to some users.
+Both the `subset` and the `bbox` parameters are aligned with the temporal subsetting capabilities of OGC API - Maps.
 
 include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 

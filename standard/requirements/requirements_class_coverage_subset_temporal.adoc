@@ -10,7 +10,18 @@
 === Requirements
 
 [[subset-temporal-parameter-subset-requirements]]
-==== Parameter `subset`
+==== Query parameter `subset`
+
+The `subset` parameter allows to retrieve temporal subset of a coverage by slicing or trimming the primary temporal dimension named `time`.
+If this primary temporal dimension can be mapped to UTC and the Gregorian calendar, then the server needs to support RFC 3339 notation.
+Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
+If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description temporal property would specify a different `trs` defining the valid input.
+
+When performing a slice operation, the slicing temporal isntant value is assumed to have no thickness.
+When performing a trimming operation (specifying two temporal instants), the starting (first) temporal instant is taken exactly as-is with any omitted time components assumed to be 0,
+whereas the ending (second) temporal instant is assumed to extend until the very end of that time component.
+For example, `subset=time("2020-01-01")` is equivalent to `subset=time("2020-01-01T00:00:00.000Z")`, whereas `subset=time("2020-01-01":"2020-01-31")` is equivalent to
+`subset=time("2020-01-01T00:00:00.000Z":"2020-01-31T23:59:59.999Z")`.
 
 [[req_coverage_subset_temporal-definition]]
 [width="90%",cols="2,6a"]
@@ -59,14 +70,28 @@ or simply return the properly geo-referenced values within the domain set.
 [[rec_coverage_subset-temporal-aliases]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommentation {counter:per-id}* |*/rec/subsetting-temporal/subset-crs-axis-aliases*
+^|*Recommentation {counter:rec-id}* |*/rec/subsetting-temporal/subset-temporal-aliases*
 ^|A | The axis names `t` and `Time` SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
 |===
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
 
+[[per_coverage_subset-components-omission]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/subsetting-temporal/subset-components-omission*
+^|A | Implementations MAY support the omission of any number of the last time components of RFC 3339 temporal instants.
+In such cases, the implementations will interpret these omitted components as 0 for the start of an interval or a slicing instant, and as the latest possible values for the ending instant of a temporal interval.
+^|B | Implementations MAY support the omission of the `Z` and time zone offset. In such cases, the implementations will interpret the temporal instant as UTC.
+|===
+
 [[datetime-parameter-subset-requirements]]
-==== Parameter `datetime`
+==== Query parameter `datetime`
+
+The `datetime` convenience parameter maps to a trimming or slicing operation (which could also be expressed using `subset`).
+When using a single temporal instant, the parameter corresponds to a slicing operation, whereas when using a pair of instants separated by a forward slash (`/`), the parameter corresponds to a trimming operation.
+The temporal instants are specified using UTC and Gregorian calendar, based on RFC 3339, also allowing for omission of some temporal components as with `subset`.
+For example, the query parameter `datetime=2020-01-01` is equivalent to `subset=time("2020-01-01")`, and the query parameter `datetime=2020-01-01/2020-01-31` is equivalent to `subset=time("2020-01-01":"2020-01-31")`.
 
 [[datetime-definition]]
 [width="90%",cols="2,6a"]
