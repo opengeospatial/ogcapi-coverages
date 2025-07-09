@@ -38,18 +38,19 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ^|B   |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
 ^|C   |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
 ^|D   |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
-^|E	|Axis names `Lat` and `Lon` SHALL be supported for geographic subsetting CRS and `E` and `N` for a projected subsetting CRS, which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
-^|F	|If a third spatial dimension is supported (if the resource’s spatial extent bounding box is three dimensional), the implementation SHALL also support a `h` dimension.
+^|E	|For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
+^|F	|For a projected subsetting CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
+^|G	|If a third spatial dimension is supported (if the resource’s spatial extent bounding box is three dimensional), the implementation SHALL also support a `h` dimension.
       This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS, and _z_ for 3D Cartesian CRS such as EPSG:4978, which are to be interpreted as the vertical axis in the CRS definition.
-^|G	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to one of the axes of the subsetting CRS^2^, , or to any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
-^|H	|If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
-^|I   |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
+^|H	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to one of the axes of the subsetting CRS^2^, or to any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
+^|I	|If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
+^|J   |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
        be supported to indicate an extent crossing that wrapping point.
-^|J   |For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
-^|K   |If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
-^|L   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
-^|M   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
-^|N	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma separated)^1^.
+^|K   |For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
+^|L   |If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
+^|M   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+^|N   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+^|O	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma separated)^1^.
 
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
 |===
@@ -81,7 +82,7 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-crs*
 ^|A |The coverage retrieval operation SHALL support a parameter `subset-crs` with the characteristics identifying the CRS in which the `subset` parameter is specified with a URI or safe CURIE.
-^|B |For Earth centric data, http://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value SHALL be supported.
+^|B |For data referenced to Earth, http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be supported as a value.
 ^|C |If the `subset-crs` is not indicated, http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
 ^|D |The native CRS (`storageCrs`) SHALL be supported as a value. Other requirements classes may allow additional values (see `crs` parameter definition).
 ^|E |CRSs expressed as URIs or as safe CURIEs SHALL be supported.
@@ -136,7 +137,7 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-crs*
 ^|A|The coverage resource SHALL support a `bbox-crs` parameter specifying the CRS used for the `bbox` parameter.
-^|B|For Earth centric data, the implementation SHALL support http://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
+^|B|For data referenced to Earth, the implementation SHALL support http://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
 ^|C|If the `bbox-crs` is not indicated http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
 ^|D|The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes may allow additional values (see `crs` parameter definition).
 ^|E|The CRS expressed as URIs or as safe CURIEs SHALL be supported.
