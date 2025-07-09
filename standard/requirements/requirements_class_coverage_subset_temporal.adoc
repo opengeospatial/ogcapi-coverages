@@ -17,7 +17,7 @@ If this primary temporal dimension can be mapped to UTC and the Gregorian calend
 Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
 If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description temporal property would specify a different `trs` defining the valid input.
 
-When performing a slice operation, the slicing temporal isntant value is assumed to have no thickness.
+When performing a slice operation, the slicing temporal instant value is assumed to have no thickness.
 When performing a trimming operation (specifying two temporal instants), the starting (first) temporal instant is taken exactly as-is with any omitted time components assumed to be 0,
 whereas the ending (second) temporal instant is assumed to extend until the very end of that time component.
 For example, `subset=time("2020-01-01")` is equivalent to `subset=time("2020-01-01T00:00:00.000Z")`, whereas `subset=time("2020-01-01":"2020-01-31")` is equivalent to
