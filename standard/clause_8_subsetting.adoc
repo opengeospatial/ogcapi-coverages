@@ -70,7 +70,7 @@ include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 
 === Overview
 
-The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more dimensions beyond spatial and the primarh temporal dimension.
+The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more dimensions beyond spatial and the primary temporal dimension.
 With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
