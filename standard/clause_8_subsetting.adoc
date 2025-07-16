@@ -11,16 +11,16 @@ Negotiating a response in a format with limited multidimensionality support, suc
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
-When subsetting a coverage, the geometry of the cells must be considered.
+When subsetting a coverage, the geometry of its individual components (such as the cells of a gridded coverage) must be considered.
 
-If the value for the cells of the coverage represent an area, the geometry of the cells extends over that whole area.
-If the value for the cells of the coverage represent a point, the geometry of the cells is only that infinitely small point.
+If the value for the cells of a gridded coverage represent an area, the geometry of the cells extends over that whole area.
+If the value for the cells of a gridded coverage coverage represent a point, the geometry of the cells is only that infinitely small point.
 
-The values to include in the response will be all **cells whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values to include in the response will be all **individual components (such as gridded coverage cells) whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
-For cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
+For gridded coverage cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 
-For cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
+For gridded coverage cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
 
 [#subset-aligned,reftext='{figure-caption} {counter:fig-num}']
 .Responses for a subsetting request aligned to the coverage grid for _Value-is-Point_ (span = 0) vs. _Value-is-Area_ (span = 1)
@@ -48,16 +48,16 @@ Negotiating a response in a format with limited multidimensionality support, suc
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
-When subsetting a coverage, the geometry of the cells must be considered.
+When subsetting a coverage, the geometry of its individual components (such as the cells of a gridded coverage) must be considered.
 
-If the value for the cells of the coverage represent an area, the geometry of the cells extends over that whole area.
-If the value for the cells of the coverage represent a point, the geometry of the cells is only that infinitely small point.
+If the value for the cells of a gridded coverage represent an area, the geometry of the cells extends over that whole area.
+If the value for the cells of a gridded coverage represent a point, the geometry of the cells is only that infinitely small point.
 
-The values to include in the response will be all **cells whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values to include in the response will be all **individual components whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
-For cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
+For gridded coverage cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 
-For cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
+For gridded coverage cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
 
 In addition to the `subset` parameter, server implementations must also support a convenience `datetime` parameter, which maps directly to an equivalent `subset` parameter performing either a slicing or trimming operation.
 While the `subset` parameter allows to more explicitly reference the primary temporal dimension, the `datetime` parameter may feel simpler and more familiar to some users.
@@ -77,15 +77,15 @@ Negotiating a response in a format with limited multidimensionality support, suc
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
-When subsetting a coverage, the geometry of the cells must be considered.
+When subsetting a coverage, the geometry of its individual components (such as the cells of a gridded coverage) must be considered.
 
-If the value for the cells of the coverage represent an area, the geometry of the cells extends over that whole area.
-If the value for the cells of the coverage represent a point, the geometry of the cells is only that infinitely small point.
+If the value for the cells of a gridded coverage represent an area, the geometry of the cells extends over that whole area.
+If the value for the cells of a gridded coverage represent a point, the geometry of the cells is only that infinitely small point.
 
-The values to include in the response will be all **cells whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values to include in the response will be all **individual components whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
-For cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
+For gridded coverage cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 
-For cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
+For gridded coverage cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
 
 include::requirements/requirements_class_coverage_subset_general.adoc[]

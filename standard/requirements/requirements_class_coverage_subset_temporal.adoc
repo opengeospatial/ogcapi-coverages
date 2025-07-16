@@ -83,7 +83,9 @@ but should always use `time` to refer to the primary temporal dimension as speci
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
 
-[[per_coverage_subset-components-omission]]
+[[per_coverage_subset-time-components-omission]]
+==== Permission for omitting last time components
+
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/subsetting-temporal/subset-components-omission*
