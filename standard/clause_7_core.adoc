@@ -11,41 +11,71 @@ The requirement class depends on _OGC API - Common - Part 2: Geospatial data_, w
 This _Coverages API_ is presented as one such access mechanism for collections of geospatial data which can be modeled as a coverage, defined as
 a function returning homogeneous values for any direct position part of its domain.
 
-This requirement class extends the `/collections` and `/collections/{collectionId}` resources defined by _OGC API - Common - Part 2_ with additional information for collections accessible using this _Coverages API_.
+This requirement class depends on the https://docs.ogc.org/DRAFTS/20-024.html#rc-collections-section[_collections_ requirements class] of _OGC API - Common - Part 2_ which defines
+the `/collections` and `/collections/{collectionId}` resources, as well as its https://docs.ogc.org/DRAFTS/20-024.html#rc-umd-collection-section[_uniform multi-dimension collection_ requirements class].
+introducing additional requirements standardizing the description of multidimensional data cubes and gridded data.
 Each collection accessible as a coverage needs to include a link to the `/collections/{resourceId}/coverage` resource using the `[ogc-rel:coverage]` link relation type, which is used to retrieve the coverage data.
 
-Each collection must also include a link to the `/collections/{collectionId}/schema` resource, using the `[ogc-rel:schema]` relation type, providing a schema of the fields of the coverage supporting a JSON Schema representation.
+==== Description of the coverage fields
+
+Each collection must also include a link to the `/collections/{collectionId}/schema` resource, using the `[ogc-rel:schema]` relation type, providing a schema of the fields of the coverage supporting a JSON Schema representation,
+as defined in _OGC API Common - Part 3: Schemas_ (identical to https://docs.ogc.org/DRAFTS/23-058.html[OGC API - Features - Part 5: Schemas]).
 This schema provides equivalent functionality to the Coverage Implementation Schema (CIS) _range type_, including for each field
 (the measured or observed property, such as a satellite imagery band, or sea surface temperature) an identifier (the property key), a `title`, a `description`, and a JSON Schema `type`.
-Semantic annotations may also be included providing additional useful information.
+Semantic annotations such as a definition URI and units describing the nature of each field in a machine-readable way should also be included.
 
-The `extent` property of the collection description is also restricted to use a uniform schema for additional dimensions beyond spatial and temporal.
-As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dimension, each additional dimension must include an `interval` property to specify at minimum the overall envelope of the dimension, and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
-A `grid` property for these dimensions also allows describing the `cellsCount` of the grid, as well as a cell `resolution` for regular grids, or a list of individual `coordinates` for irregular grids using.
-This extent information provides equivalent information to the CIS _domain set_ for most use cases.
+==== Description of the coverage domain
+
+The uniform multi-dimension collection requirements class restricts the addition of dimensions beyond spatial and temporal to the `extent` property of the collection description to use a uniform schema.
+As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dimension, each additional dimension must include an `interval` property to specify at minimum the overall envelope of the dimension,
+and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
+When describing the extent of a coverage, the geometry of its indivudal components, such as cells in the case of a gridded coverage, must be considered.
+
+The reported extent (the CRS84 `bbox` and/or the native CRS `storageCrsBbox` in the spatial extent, and the interval bounds in the temporal and/or any additional dimensions of the extent)
+must correspond to the extent of the geometry of the entire coverage.
+
+The extent of each component of a coverage for which values can be retrieved, such as a cell in the context of a gridded coverage, should consider the full _region of validity_ or _bounds_ of that component
+to which these values are associated.
+For example, in the case of a gridded coverage whose cells represent an area, the extent spans from the lower to the upper bounds of the areas of all those cells.
+In the case of a gridded coverage whose cells represent a point, the extent spans from the the lower to the upper coordinate of all those cells.
+
+With the ability to describe grids as detailed below, this collection extent information provides equivalent information to the CIS _domain set_ for most use cases.
 For point cloud data, a separate detailed description of the domain is not practical, and a subset of the domain is instead retrieved together with the data, as with the common LAS and LASzip point cloud encodings.
 In this case, only the overall interval, and optionally detailed sub-intervals where data is available, can be provided instead within the collection extent.
-
-When describing the extent of a coverage, the geometry of the cells must be considered.
 
 [#span-extent,reftext='{figure-caption} {counter:fig-num}']
 .The span of a gridded coverage for _Value-is-Point_ (span = 0) and _Value-is-Area_ (span = 1), and a special case of _Value-is-Part-of-the-Area_ (span = 0.5)
 image::figures/span.png[width=400,align=center]
 
-The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of the cells.
+The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of its individual components (such as the cells of a gridded coverage).
 
 [#span,reftext='{figure-caption} {counter:fig-num}']
 .Example extent of a gridded coverage for _Value-is-Point_ (span = 0) and _Value-is-Area_ (span = 1)
 image::figures/spanExtent.png[]
 
-The reported extent (the CRS84 `bbox` and/or the native CRS `storageCrsBbox` in the spatial extent, and the interval bounds in the temporal and/or any additional dimensions of the extent) must correspond to the envelope of the geometry of all cells.
-For cells representing an area, the extent spans from the lower to the upper bounds of the areas of all those cells.
-For cells representing a point, the extent spans from the the lower to the upper coordinate of all those cells.
+==== Description of gridded data
 
-For gridded coverages, considering the lower and upper bound specified in the interval / bounding box as well as the `cellsCount` and `resolution` specified in the `grid` property, the following applies.
+A `grid` property for each dimension allows describing the `cellsCount` of the grid.
+For regular grids, a `firstCoordinate` as well as well as a cell `resolution` must be specified.
+A set of `relativeBounds` coordinates can also be specified indicating the bounds (or region of validity) for each cell relative to `firstCoordinate + n * resolution`.
 
-If cell values represent an area, `cellsCount = (highBound - lowBound) / resolution`.
+For irregular grids, a list of individual `coordinates` is used instead.
+A parallel set of `boundsCoordinates` pairs can also be specified indicating the coordinates for the bounds (or region of validity) for each cell.
 
-If cell values represent a point, `cellsCount = (highBound - lowBound) / resolution + 1`.
+For regular grid coverages:
+
+- the lower bound specified in the `bbox` or `interval` should correspond to `firstCoordinate + relativeBounds[0]`
+(with `relativeBounds[0]` defaulting to `-resolution/2` if `relativeBounds` is not specified), while
+- the upper bound should correspond to `firstCoordinate + cellsCount * resolution + relativeBounds[1]` (with `relativeBounds[1]` defaulting to `resolution/2` if not specified).
+
+For cell values representing an area centered on each coordinate:
+
+- `relativeBounds` would be set to `[-resolution / 2, resolution / 2]` (the default), and
+- `cellsCount = (highBound - lowBound) / resolution`.
+
+For cell values representing a point instead:
+
+- `relativeBounds` would be set to `[0, 0]`, and
+- `cellsCount = (highBound - lowBound) / resolution + 1`.
 
 include::requirements/requirements_class_core.adoc[]
