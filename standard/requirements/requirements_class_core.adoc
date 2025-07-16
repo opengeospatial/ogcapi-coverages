@@ -39,7 +39,7 @@ Each of these elements are themselves an array of start and end bound values.
 ^|D |Any additional temporal dimension SHALL include in a `trs` property a URI or safe CURIE corresponding to the temporal reference system associated with that dimension.
 ^|E |For additional dimensions which are neither temporal nor spatial, the dimension SHALL include a `definition` property corresonding to a URI for the observed or measured property.
 ^|F |If applicable, units SHALL be specified in a `unit` property specifying the unit and an (optional) `unitLang` property specifying the language (defaulting to UCUM).
-^|G |The name (JSON dictionary key) of each additional dimension SHALL correspond to the axis abbreviation for the CRS of that axis, to valid axis names for use with query parameters defined in optional requirements classes such as `subset` and `resolutions`, as well as to axis names in the coverage response, if applicable.
+^|G |The name (JSON dictionary key) of each additional dimension SHALL correspond to the axis abbreviation for the CRS of that axis, to valid axis names for use with query parameters defined in optional requirements classes such as `subset` and `resolution`, as well as to axis names in the coverage response, if applicable.
 ^|H |If a particular dimension of the coverage is gridded, the description of that dimension in the extent SHALL describe this grid using the `grid` property, providing a `cellsCount`, as well as a `resolution` for regular grid or a set of `coordinates` for irregular grids.
 ^|I |For data referenced in relation to planet Earth, the coordinates in the `bbox` of the `spatial` dimensions of the `extent` SHALL be provided either as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]).
 ^|J |The `storageCrs` property SHALL be set to the native CRS of the coverage, also corresponding to the default output CRS (used when the `crs` query parameter is not specified and/or the CRS requirements class is not supported).
@@ -102,23 +102,23 @@ four or six comma-separated numbers representing the lower-left and upper right 
 (if returning a temporal slice) or datetime interval (if the response includes a temporal dimension) of the returned coverage.
 |===
 
-==== Query parameter `resolutions` (empty values for native resolution)
+==== Query parameter `resolution` (empty values for native resolution)
 
-[[req_core-native-resolutions]]
+[[req_core-native-resolution]]
 [width="90%",cols="2,6"]
 |===
-^|*Requirement {counter:req-id}* |*/req/core/native-resolutions*
-^|A |An implementation SHALL accept a `resolutions` query parameter for a GET operation on the coverage resource,
-for empty resolutions values (e.g., `resolutions=Lat(),Lon(),time()`) indicating a request for the native resolution of the corresponding dimension(s),
+^|*Requirement {counter:req-id}* |*/req/core/native-resolution*
+^|A |An implementation SHALL accept a `resolution` query parameter for a GET operation on the coverage resource,
+for empty resolution values (e.g., `resolution=Lat(),Lon(),time()`) indicating a request for the native resolution of the corresponding dimension(s),
 whether the implementation supports or not the <<rc_scaling_spatial, "Spatial Scaling">>, <<rc_scaling_spatial, "Temporal Scaling">> and/or <<rc_scaling_spatial, "General Scaling">> requirements classes.
-^|B |An implementation not supporting scaling for a dimension for which a non-empty value has been specified using the `resolutions` query parameter SHALL return a 4xx error.
+^|B |An implementation not supporting scaling for a dimension for which a non-empty value has been specified using the `resolution` query parameter SHALL return a 4xx error.
 |===
 
-NOTE: An implementation not supporting scaling for any dimension (not conforming to any of the scaling requirements classes) can simply ignore the `resolutions` query parameter, and return the data at the
+NOTE: An implementation not supporting scaling for any dimension (not conforming to any of the scaling requirements classes) can simply ignore the `resolution` query parameter, and return the data at the
 native resolution as if the query parameter was not used. The implementation would return an error if the selected subset or the whole coverage requested exceeds the server limits at this native resolution.
 
-IMPORTANT: Clients wishing to ensure they always retrieve a native resolution coverage can include in their coverage data request a `resolutions` query parameter specifying all dimensions with empty values:
-`resolutions=Lat(),Lon(),time()` (including any additional dimension), regardless of whether the server implements any of the Scaling requirements classes. For most large datasets, these clients
+IMPORTANT: Clients wishing to ensure they always retrieve a native resolution coverage can include in their coverage data request a `resolution` query parameter specifying all dimensions with empty values:
+`resolution=Lat(),Lon(),time()` (including any additional dimension), regardless of whether the server implements any of the Scaling requirements classes. For most large datasets, these clients
 would also need to include subsetting parameters (`subset`, `bbox` and/or `datetime`, assuming the server supports the corresponding subsetting requirements classes) to avoid an error response due
 to requesting more data than allowed by the server limits.
 

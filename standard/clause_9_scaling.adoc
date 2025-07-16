@@ -3,7 +3,7 @@
 
 === Overview
 
-The "Spatial Scaling" Requirements Class defines the `resolutions`, `width` and `height` query parameters for retrieving coverage data at a specific spatial resolution.
+The "Spatial Scaling" Requirements Class defines the `resolution`, `width` and `height` query parameters for retrieving coverage data at a specific spatial resolution.
 The spatial dimensions are named `Lat` and `Lon` for a geographic output CRS, and `N` and `E` for a projected CRS.
 For a three-dimensional output CRS, resolution can also be specified for a third spatial dimension `h`, which corresponds to the height above the ellipsoid for a geographic CRS such as CRS84h or EPSG:4979,
 and to the third dimension often called _z_ in a Cartesian 3D CRS such as EPSG:4978.
@@ -16,7 +16,7 @@ include::requirements/requirements_class_coverage_scaling_spatial.adoc[]
 
 === Overview
 
-The "Temporal Scaling" Requirements Class defines the `resolutions` query parameter and a dimension named `time` for retrieving coverage data at a specific temporal resolution using ISO 8601 period notation.
+The "Temporal Scaling" Requirements Class defines the `resolution` query parameter and a dimension named `time` for retrieving coverage data at a specific temporal resolution using ISO 8601 period notation.
 
 include::requirements/requirements_class_coverage_scaling_temporal.adoc[]
 
@@ -25,7 +25,7 @@ include::requirements/requirements_class_coverage_scaling_temporal.adoc[]
 
 === Overview
 
-The "General Scaling" Requirements Class defines the `resolutions` query parameter for additional dimensions beyond 3D space and the primary temporal dimension
+The "General Scaling" Requirements Class defines the `resolution` query parameter for additional dimensions beyond 3D space and the primary temporal dimension
 for retrieving coverage data at a specific resolution for those dimensions.
 These additional dimensions are named as described as additional property keys besides `"spatial"` and `"temporal"` in the `"extent"` section of the collection description.
 Additional temporal dimensions support the ISO 8601 period notation if its temporal reference system (`trs`)

@@ -151,8 +151,8 @@ components:
       # Coverages - Core
       sceneId:
          $ref: 'parameters/coverages-core/sceneId.yaml'
-      resolutions:
-         $ref: 'parameters/coverages-core/resolutions.yaml'
+      resolution:
+         $ref: 'parameters/coverages-core/resolution.yaml'
       properties:
          $ref: 'parameters/coverages-core/properties.yaml'
       width:
