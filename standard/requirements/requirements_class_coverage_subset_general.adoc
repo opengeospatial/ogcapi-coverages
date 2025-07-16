@@ -39,7 +39,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ^|C   |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
 ^|D   |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
 ^|E	|Any name of the additional dimensions in the extent of the collection SHALL be supported as axis name.
-^|F	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to an additional dimension described in the collection extent, or to any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
+^|F	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to an additional dimension described in the collection extent, or to any other axis supported in the context of other requirements classes (such as spatial and temporal subsetting).
 ^|G	|If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
 ^|H   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|I   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
