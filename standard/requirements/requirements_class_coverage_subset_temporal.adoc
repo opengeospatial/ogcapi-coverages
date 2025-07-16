@@ -56,7 +56,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ^|I   |If the subset parameter includes the `time` dimension while the `datetime` parameter is also specified, the server SHALL return a 400 client error.
 ^|J   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|K   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
-^|L	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma separated)^1^.
+^|L	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma-separated)^1^.
 
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
 |===
@@ -67,11 +67,18 @@ For subsetting on the range set, and for coverage media types with no geo-refere
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
 or simply return the properly geo-referenced values within the domain set.
 
+[[subset-temporal-parameter-aliases-recommendation]]
+==== Recommendation for `time` dimension aliases
+
+For convenience, this Standard recommends that Implementations recognize the different case variation and the shorthand `t` as an alias for the `time` dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
+but should always use `time` to refer to the primary temporal dimension as specified in the above requirement.
+
 [[rec_coverage_subset-temporal-aliases]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommentation {counter:rec-id}* |*/rec/subsetting-temporal/subset-temporal-aliases*
-^|A | The axis names `t` and `Time` SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
+^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
 |===
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.

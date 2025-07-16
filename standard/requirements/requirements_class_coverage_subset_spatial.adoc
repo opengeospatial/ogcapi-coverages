@@ -39,13 +39,14 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ----
 
 ^|B   |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|C   |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
-^|D   |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
+^|C   |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimensionality.
+^|D   |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimensionality.
 ^|E	|For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
 ^|F	|For a projected subsetting CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
 ^|G	|If a third spatial dimension is supported (if the resource’s spatial extent bounding box is three dimensional), the implementation SHALL also support a `h` dimension.
       This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS, and _z_ for 3D Cartesian CRS such as EPSG:4978, which are to be interpreted as the vertical axis in the CRS definition.
-^|H	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to one of the axes of the subsetting CRS^2^, or to any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
+^|H	|A 400 error status code SHALL be returned if an axis name in the subset parameter value does not correspond to one of the axes of the subsetting CRS,
+to an alias (see recommendation below), or to any other axis supported in the context of other requirements classes (such as temporal and general subsetting).
 ^|I	|If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
 ^|J   |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
        be supported to indicate an extent crossing that wrapping point.
@@ -53,7 +54,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ^|L   |If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
 ^|M   |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|N   |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
-^|O	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma separated)^1^.
+^|O	|Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma-separated)^1^.
 
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
 |===
@@ -63,6 +64,13 @@ the service is expected to return the non-empty portion of the coverage resultin
 For subsetting on the range set, and for coverage media types with no geo-referencing mechanisms (e.g. PNG), NO_DATA values or transparency should be used.
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
 or simply return the properly geo-referenced values within the domain set.
+
+[[subset-spatial-parameter-aliases-recommendation]]
+==== Recommendation for spatial dimensions aliases
+
+Because the definitions of CRSs of the same type sometimes use different names to refer to dimensions that can be considered equivalent for the purposes of subsetting, and in some cases the axis name abbreviation changed over time,
+this Standard recommends that Implementations recognize common equivalent names to facilitate the task of clients to identify a particular dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases, but only the axis names specified in the above requirement.
 
 [[rec_coverage_subset-crs-axis-aliases]]
 [width="90%",cols="2,6a"]
