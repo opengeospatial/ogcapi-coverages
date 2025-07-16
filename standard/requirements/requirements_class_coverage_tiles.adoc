@@ -39,7 +39,7 @@ a request for tile +
 
 and
 
-`.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolutions=Lat(0.3515625),Lon(0.3515625)`
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolution=Lat(0.3515625),Lon(0.3515625)`
 
 and returns a tile containing one or more slices of 257 x 257 cells, while for an area coverage (with cells having relative bounds / region of validity of -50%..50%) it is equivalent to:
 
@@ -47,6 +47,6 @@ and returns a tile containing one or more slices of 257 x 257 cells, while for a
 
 and
 
-`.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolutions=Lat(0.3515625),Lon(0.3515625)`
+`.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolution=Lat(0.3515625),Lon(0.3515625)`
 
 and returns a tile containing one or more slices of 256 x 256 cells.

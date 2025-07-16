@@ -9,13 +9,13 @@
 
 === Requirements
 
-==== Query parameter `resolutions`
+==== Query parameter `resolution`
 
-[[req_coverage_scaling-spatial-resolutions]]
+[[req_coverage_scaling-spatial-resolution]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-scaling-spatial/resolutions*
-^|A |The coverage retrieval operation SHALL support a `resolutions` query parameter specifying the resolution for one or more of the spatial dimensions in positive units of the spatial CRS
+^|*Requirement {counter:req-id}* |*/req/coverage-scaling-spatial/resolution*
+^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for one or more of the spatial dimensions in positive units of the spatial CRS
 (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
@@ -46,13 +46,13 @@ This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic 
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/coverage-scaling-spatial/downsampling*
-^|A |In the case where a response to a request without a `resolutions`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
+^|A |In the case where a response to a request without a `resolution`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
 MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
-^|B |In the case where a `resolutions`, `width` or `height` does not explicitly specify dimensions for all spatial axes of the coverage, an implementation MAY automatically proportionately
+^|B |In the case where a `resolution`, `width` or `height` does not explicitly specify dimensions for all spatial axes of the coverage, an implementation MAY automatically proportionately
 adjust one or more unspecified dimensions.
 |===
 
-NOTE: A client retrieving a coverage from an implementation advertising support for this "Spatial Scaling" requirements class should explicitly use `resolutions=Lat(),Lon()` if it wants to ensure
+NOTE: A client retrieving a coverage from an implementation advertising support for this "Spatial Scaling" requirements class should explicitly use `resolution=Lat(),Lon()` if it wants to ensure
 retrieving the coverage in its native spatial resolution and prefers receiving an error instead of a downsampled version of the data.
 
 ==== Permission to support legacy scaling query parameters
@@ -65,4 +65,4 @@ retrieving the coverage in its native spatial resolution and prefers receiving a
 ^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension. For example, `scale-size=Lat(300),Lon(400)` means 400 samples across the longitude axis and 300 samples across the latitude axis.
 |===
 
-IMPORTANT: To ensure interoperability, clients should use the `resolutions` and/or `width` and `height` query parameters rather than the legacy ones.
+IMPORTANT: To ensure interoperability, clients should use the `resolution` and/or `width` and `height` query parameters rather than the legacy ones.
