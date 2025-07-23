@@ -76,7 +76,21 @@ including support for JSON Schema when negoiating the `application/schema+json` 
 ^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|C |The content of that response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
 ^|D |Each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
+^|E |If some fields are available at different spatial resolutions than others, each field SHALL include an `x-ogc-resolution` property with an object property mapping a value for each dimension
+which differs from the resolution specified in the collection's grid description to the name of the dimension (e.g., "Lon" for longitude, "E" for easting, "time" for the primary temporal dimension).
 |===
+
+////
+TODO: Review and include an example
+{
+ "B08" : {
+      "title" : "Band 8 (nir) - wavelength: 0.6901-0.9801 μm",
+      "type" : "number",
+      "x-ogc-propertySeq" : 9,
+      "x-ogc-resolution": { "Lat": 0.00001, "Lon": 0.00001, "time": "P1D" }
+   }
+}
+////
 
 NOTE: This schema is a logical schema, and not intended to be used directly for validation.
 The use of JSON Schema is therefore not limited to describe only coverages encoded in JSON-based encodings.

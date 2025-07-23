@@ -26,6 +26,8 @@ This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic 
 ^|G |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
 ^|H |For a non-gridded coverage (e.g., a point cloud), when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
 ^|I |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of &#916;N^2^ + &#916;E^2^ + Δh^2^) between two samples.
+^|J |When returning the native resolution for one or more dimension for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support
+returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
 |===
 
 ==== Query parameters `width` and `height`

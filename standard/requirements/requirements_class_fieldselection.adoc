@@ -37,3 +37,13 @@
 ^|G |If the coverage response can self-describes its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
 ^|H |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
 |===
+
+==== Mismatched resolution without scaling support
+
+[[req_fieldselection-mismatched-resolution]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/fieldselection/mismatched-resolution*
+^|A |For requests including multiple fields which have different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those
+different fields together at these different resolutions, the Implementation SHALL return a 4xx error if it does not support the Scaling requirements class.
+|===
