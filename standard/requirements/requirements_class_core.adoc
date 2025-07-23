@@ -76,7 +76,7 @@ including support for JSON Schema when negoiating the `application/schema+json` 
 ^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|C |The content of that response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
 ^|D |Each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
-^|E |If some fields are available at different spatial resolutions than others, each field SHALL include an `x-ogc-resolution` property with an object property mapping a value for each dimension
+^|E |If some fields are available at different resolution than others, each field SHALL include an `x-ogc-resolution` property with an object property mapping a value for each dimension
 which differs from the resolution specified in the collection's grid description to the name of the dimension (e.g., "Lon" for longitude, "E" for easting, "time" for the primary temporal dimension).
 |===
 
