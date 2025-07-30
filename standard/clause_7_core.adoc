@@ -22,13 +22,18 @@ Each collection must also include a link to the `/collections/{collectionId}/sch
 as defined in _OGC API Common - Part 3: Schemas_ (identical to https://docs.ogc.org/DRAFTS/23-058.html[OGC API - Features - Part 5: Schemas]).
 This schema provides equivalent functionality to the Coverage Implementation Schema (CIS) _range type_, including for each field
 (the measured or observed property, such as a satellite imagery band, or sea surface temperature) an identifier (the property key), a `title`, a `description`, and a JSON Schema `type`.
-Semantic annotations such as a definition URI and units describing the nature of each field in a machine-readable way should also be included.
+Semantic annotations such as the https://docs.ogc.org/DRAFTS/23-058r1.html#_ordering_properties[sequence number of the field], https://docs.ogc.org/DRAFTS/23-058r1.html#_special_null_values[special null values],
+a definition URI (see https://docs.ogc.org/DRAFTS/23-058r1.html#_semantic_definition_of_a_property[Semantic definition of a property]),
+https://docs.ogc.org/DRAFTS/23-058r1.html#_the_unit_of_measure_for_a_numeric_property[units] describing the nature of each field in a machine-readable way,
+or a <<req_core-coverage_fields_schema, resolution specific to a particular field>> should also be included.
 
 ==== Description of the coverage domain
 
 The uniform multi-dimension collection requirements class restricts the addition of dimensions beyond spatial and temporal to the `extent` property of the collection description to use a uniform schema.
 As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dimension, each additional dimension must include an `interval` property to specify at minimum the overall envelope of the dimension,
 and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
+The nature of the additional dimensions are also specified using a semantic definition URI from a suitable semantic vocabulary such as QUDT.
+For example, a dimension could be identified as representing atmospheric pressure using the URI `https://qudt.org/vocab/quantitykind/AtmosphericPressure`.
 When describing the extent of a coverage, the geometry of its indivudal components, such as cells in the case of a gridded coverage, must be considered.
 
 The reported extent (the CRS84 `bbox` and/or the native CRS `storageCrsBbox` in the spatial extent, and the interval bounds in the temporal and/or any additional dimensions of the extent)

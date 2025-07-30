@@ -7,6 +7,10 @@
 
 // TODO:
 
+=== Collection Description examples
+
+Extra dimension `definition` example: https://qudt.org/vocab/quantitykind/AtmosphericPressure
+
 [[subsetting-examples]]
 === Subsetting Example
 
