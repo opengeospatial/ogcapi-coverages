@@ -11,6 +11,14 @@
 
 Extra dimension `definition` example: https://qudt.org/vocab/quantitykind/AtmosphericPressure
 
+Units of measures example:
+
+"unitLang": "ucum",
+"unit": "m/s"
+
+"unitLang": "qudt",
+"unit": "https://qudt.org/vocab/unit/HectoPA"
+
 [[subsetting-examples]]
 === Subsetting Example
 

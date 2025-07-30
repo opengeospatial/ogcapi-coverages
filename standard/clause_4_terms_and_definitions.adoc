@@ -37,3 +37,14 @@ NOTE: Adapted from https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v
 
 === Transformation grid
 grid whose direct positions are given by some transformation algorithm not further specified in this standard
+
+
+=== Abbreviated terms
+
+CIS::  Coverage Implementation Schema
+
+SWE::  Sensors Web Enablement
+
+UCUM:: Unified Code for Units of Measure
+
+WCS::  Web Coverage Service

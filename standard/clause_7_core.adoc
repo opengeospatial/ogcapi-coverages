@@ -34,6 +34,8 @@ As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dim
 and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
 The nature of the additional dimensions are also specified using a semantic definition URI from a suitable semantic vocabulary such as QUDT.
 For example, a dimension could be identified as representing atmospheric pressure using the URI `https://qudt.org/vocab/quantitykind/AtmosphericPressure`.
+If applicable, the unit of measure can also be specified using the case sensitive UCUM representation, or using another unit language by specifying an alternative value for `unitLang`.
+For example, if `QUDT` is used, the unit can be a URI from the QUDT Units Vocabulary.
 When describing the extent of a coverage, the geometry of its indivudal components, such as cells in the case of a gridded coverage, must be considered.
 
 The reported extent (the CRS84 `bbox` and/or the native CRS `storageCrsBbox` in the spatial extent, and the interval bounds in the temporal and/or any additional dimensions of the extent)
