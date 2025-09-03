@@ -26,9 +26,11 @@ The following organizations submitted this Document to the Open Geospatial Conso
 All questions regarding this submission should be directed to the editor or the submitters:
 
 |===
-^|Name                                                ^|Affiliation
-|Charles Heazel (Editor)                               |HeazelTech
-|Jérôme Jacovella-St-Louis <jerome@ecere.com> (Editor) |https://ecere.ca[Ecere Corporation]
-|Stephan Meissl <stephan.meissl@eox.at>                |https://eox.at[EOX IT Services GmbH]
-|Tom Kralidis <tom.kralidis@canada.ca>                 |Meteorological Service of Canada
+^|Name                                                          ^|Affiliation
+|Charles Heazel (Editor)                                         |HeazelTech
+|Jérôme Jacovella-St-Louis <jerome@ecere.com> (Editor)           |https://ecere.ca[Ecere Corporation]
+|Stephan Meissl <stephan.meissl@eox.at>                          |https://eox.at[EOX IT Services GmbH]
+|Tom Kralidis <tom.kralidis@canada.ca>                           |Meteorological Service of Canada
+|Joan Masó Pau <joan.maso@ieee.org>                              |Universitat Autònoma de Barcelona (CREAF)
+|Francis Charette-Migneault <francis.charette-migneault@crim.ca> |https://crim.ca[Computer Research Institute of Montréal (CRIM)]
 |===
