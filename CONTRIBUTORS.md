@@ -2,3 +2,5 @@
 * Stephan Meissl [@Schpidi](https://github.com/Schpidi)
 * Jerome Jacovella-St-Louis [@jerstlouis](https://github.com/jerstlouis)
 * Tom Kralidis [@tomkralidis](https://github.com/tomkralidis)
+* Joan Masó Pau [@joanma747](https://github.com/joanma747)
+* Francis Charette-Migneault [@fmigneault](https://github.com/fmigneault)
