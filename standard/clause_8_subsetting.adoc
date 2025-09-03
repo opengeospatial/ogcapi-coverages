@@ -5,6 +5,7 @@
 
 The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more spatial dimensions.
 With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
+A client wishing to preserve dimensionality while requesting a single coordinate value may duplicate this value into an interval, for example: `subset=lon(20:20)`.
 
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
@@ -89,3 +90,22 @@ For gridded coverage cells whose geometry is a point, this will **include** all 
 For gridded coverage cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
 
 include::requirements/requirements_class_coverage_subset_general.adoc[]
+
+[[rc_multi_slicing]]
+== Requirements Class "Multi Slicing"
+
+=== Overview
+
+The "Multi Slicing" Requirements Class specifies the ability to use a comma-separated list of arbitrary values with the `subset` parameter for the coverage resource,
+allowing to retrieve specific slices from the coverage along a particular dimension. This requirements class is automatically applicable for subsetting with the dimensions supported by any of the
+spatial, temporal and general subsetting requirements classes.
+
+While slicing generally reduces the dimensionality of the results, since this operation always returns multiple slices, the dimensionality is preserved.
+
+For example, this requirements class, in combination with General Subsetting, is useful to request specific pressure levels: `subset=pressure(200,300,500,700,850)`.
+
+Another common practical use case for this conformance class is to request specific temporal slices which may be at irregular intervals, for example: `subset=time("2025-10-01", "2025-10-04", "2025-10-05")`.
+
+This capability is also useful for requesting a subset of the data for multiple categories along a categorical dimension, for example `subset=species("wildcats", "frogs")`.
+
+include::requirements/requirements_class_coverage_multi_slicing.adoc[]

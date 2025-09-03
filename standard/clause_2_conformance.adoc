@@ -28,6 +28,7 @@ The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Ti
 * <<rc_subsetting_spatial,*Spatial Subsetting*>>
 * <<rc_subsetting_temporal,*Temporal Subsetting*>>
 * <<rc_subsetting_general,*General Subsetting*>>
+* <<rc_multi_slicing,*Multi Slicing*>>
 * <<rc_scaling_spatial,*Spatial Scaling*>>
 * <<rc_scaling_temporal,*Temporal Scaling*>>
 * <<rc_scaling_general,*General Scaling*>>
@@ -36,7 +37,9 @@ The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Ti
 
 The _Spatial, Temporal, and General Subsetting_ Requirements Class provides capabilities to select a sub-set of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
-The _Spatial, Tepmoral and General Scaling_ Requirements Classes define parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
+The _Multi Slicing_ Requirements Class extends the subsetting Requirements Class with the ability to request multiple slices at specific coordinates, including for irregular grids and categorical values.
+
+The _Spatial, Temporal and General Scaling_ Requirements Classes define parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
 
 The _Field Selection_ (Range Subsetting) Requirements Class defines parameters for selecting a subset of the bands (defined in the Range Type which is described in the schema resource of the collection) to retrieve from Range Sets.
 
@@ -69,12 +72,13 @@ The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition 
 |===
 | Corresponding requirements class              | Conformance class URI
 | <<rc_core,Core>>                              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
-| <<rc_scaling_spatial,Spatial Scaling>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-spatial
-| <<rc_scaling_temporal,Temporal Scaling>>      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-temporal
-| <<rc_scaling_general,General Scaling>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
 | <<rc_subsetting_spatial,Spatial Subsetting>>  | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-spatial
 | <<rc_subsetting_temporal,Temporal Subsetting>>| http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-temporal
 | <<rc_subsetting_general,General Subsetting>>  | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-general
+| <<rc_multi_slicing,Multi Slicing>>            | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
+| <<rc_scaling_spatial,Spatial Scaling>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-spatial
+| <<rc_scaling_temporal,Temporal Scaling>>      | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-temporal
+| <<rc_scaling_general,General Scaling>>        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
 | <<rc_subsetting,Field Selection>>             | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/fieldselection
 | <<rc_crs,CRS>>                                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
 | <<rc_tiles,Coverage Tiles>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
