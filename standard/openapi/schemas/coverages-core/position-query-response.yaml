@@ -1,0 +1,11 @@
+anyOf:
+- type: object
+  example: { "temperature": 28, "relativeHumidity": 0.35 }
+- type: array
+  items:
+    anyOf:
+    - type: object
+      example: { "temperature": 28, "relativeHumidity": 0.35 }
+    - example: 352
+  example: [ "foxes", "wolves" ]
+- example: 352

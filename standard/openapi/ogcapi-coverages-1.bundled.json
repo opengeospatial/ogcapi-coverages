@@ -3099,7 +3099,7 @@
       "subset": {
         "name": "subset",
         "in": "query",
-        "description": "Retrieve only part of the data by slicing or trimming along one or more axis\nFor trimming: {axisAbbrev}({low}:{high}) (preserves dimensionality)\nFor slicing:  {axisAbbrev}({value})      (reduces dimensionality)\nAn asterisk (`*`) can be used instead of {low} or {high} to indicate the minimum/maximum value.\nFor a temporal dimension, a single asterisk can be used to indicate the high value.\nSupport for `*` is required for time, but optional for spatial and other dimensions.\n",
+        "description": "Retrieve only part of the data by slicing or trimming along one or more axis\nFor trimming: {axisAbbrev}({low}:{high}) (preserves dimensionality)\nFor slicing:  {axisAbbrev}({value})      (reduces dimensionality)\nFor multi-slicing:  {axisAbbrev}({value1},{value2}[,...])      (reduces dimensionality)\nAn asterisk (`*`) can be used instead of {low} or {high} to indicate the minimum/maximum value.\nFor a temporal dimension, a single asterisk can be used to indicate the high value.\nSupport for `*` is required for time, but optional for spatial and other dimensions.\n",
         "style": "form",
         "explode": false,
         "required": false,
@@ -3409,7 +3409,46 @@
           },
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/coverageSchema"
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/coverageSchema"
+                },
+                {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "example": {
+                        "temperature": 28,
+                        "relativeHumidity": 0.35
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "example": {
+                              "temperature": 28,
+                              "relativeHumidity": 0.35
+                            }
+                          },
+                          {
+                            "example": 352
+                          }
+                        ]
+                      },
+                      "example": [
+                        "foxes",
+                        "wolves"
+                      ]
+                    },
+                    {
+                      "example": 352
+                    }
+                  ]
+                }
+              ]
             }
           },
           "image/tiff; application=geotiff": {

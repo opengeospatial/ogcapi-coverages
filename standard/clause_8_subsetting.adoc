@@ -109,3 +109,72 @@ Another common practical use case for this conformance class is to request speci
 This capability is also useful for requesting a subset of the data for multiple categories along a categorical dimension, for example `subset=species("wildcats", "frogs")`.
 
 include::requirements/requirements_class_coverage_multi_slicing.adoc[]
+
+[[rc_position_query]]
+== Requirements Class "Position Query"
+
+=== Overview
+
+The "Position Query" Requirements Class specifies the ability to query the value(s) for a specific point position by slicing on every dimension of the coverage therefore
+reducing the dimensionality of the response to zero. In the common use case, the response consists of a single numerical value.
+Raster or gridded coverage formats are typically not well suited to express such responses.
+In these cases, information about the domain or range, other metadata, as well as the more complex format structures are also not necessary and can negatively affect the
+bandiwdth usage and performance for a very large numbers of these queries.
+This requirements class introduces a simple JSON representation which needs to be supported by the server.
+Implementations could also implement additional representations, for example GeoJSON.
+
+include::requirements/requirements_class_coverage_position_query.adoc[]
+
+=== Examples
+
+The following examples illustrate the JSON response to position queries where all dimensions of the coverage have been sliced on,
+reducing the dimensionality of the response to zero.
+
+==== Single field, single element
+
+`GET /collections/dem/coverage?subset=Lat(45.4844),Lon(-75.72205)`
+
+[source,json]
+----
+68.869
+----
+
+==== Multiple fields, single element
+
+`GET /collections/weather/coverage?subset=Lat(45.4844),Lon(-75.72205),time("2025-07-05")`
+
+
+[source,json]
+----
+{ "temperature": 28.1, "relativeHumidity": 0.35 }
+
+----
+
+==== Single fields, multiple elements
+
+`GET /collections/animals/coverage?subset=Lat(45.4844),Lon(-75.72205)`
+
+[source,json]
+----
+[ "foxes", "wolves" ]
+----
+
+==== Multiple fields, multiple elements
+
+`GET /collections/weather-stations/coverage?subset=Lat(45.4844),Lon(-75.72205),time("2025-07-05")`
+
+[source,json]
+----
+[
+   {
+      "temperature": 28.1,
+      "relativeHumidity": 0.35,
+      "deviceID": "AB123"
+   },
+   {
+      "temperature": 28.2,
+      "relativeHumidity": 0.34,
+      "deviceID": "CD456"
+   }
+]
+----

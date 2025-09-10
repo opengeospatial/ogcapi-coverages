@@ -6,7 +6,9 @@ content:
        # SwaggerUI Validation errors? $ref: 'https://schemas.opengis.net/covjson/1.0/coveragejson.json'
    application/json:
      schema:
-       $ref: '../../schemas/cis/coverage-schema.yaml'
+       anyOf:
+       - $ref: '../../schemas/cis/coverage-schema.yaml'
+       - $ref: '../../schemas/coverages-core/position-query-response.yaml'
    image/tiff; application=geotiff:
      schema:
        type: string

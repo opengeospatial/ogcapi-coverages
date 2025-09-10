@@ -1,0 +1,38 @@
+[[rc_table_position_query]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/position-query
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|===
+
+=== Requirements
+
+==== Position query for subsetting parameters (`subset`, `bbox`, `datetime`)
+
+[[req_coverage_position_query_position_query]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/coverage-position-query/coverage-position-query*
+^|A |The coverage retrieval operation SHALL support the ability to slice on all dimensions using the `subset` and/or `bbox` and/or `datetime` query parameters effectively reducing the dimensionality
+of the response to zero dimensions (a point).
+^|B |The Implementation SHALL support negotiating a JSON response (through request header `Accept: application/json`) for such point query which in a common scenario consists of an object with one
+property being the name of the field (for each default or selected field) and its associated values.
+^|C |In the case where the coverage is a multi-function (for example, a multi-polygon feature collection backing data store), the response SHALL instead be an array of such objects.
+^|D |In the case where a single field is being returned (whether the coverage consists of a single field, the default list of fields is a single field, or the client requests a single field through the
+Field Selection requirements class), the response SHALL be the value of the field directly (rather than an object with the field name), or in the case of the coverage multi-function, an array of values.
+|===
+
+NOTE: This position query requirements class relies on the definition of the `subset`, `bbox` and `datetime` parameter defined in the "Spatial Subsetting", "Temporal Subsetting" and "General Subsetting"
+requirement classes.
+However, this requirement class does specify a dependency on these requirements classes to allow implementation supporting only the "Core" requirements class (returning the entire coverage), as well
+as the ability to query specific points, without providing the ability to return fragments of the coverage larger than a single point.
+
+[[rec_coverage_position_query_interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/coverage-position-query/interpolation*
+^|A |In the case where the requested position is not centered within the region of validity (the bounds) of an individual element of the coverage, the Implementation SHOULD
+decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the variable type of each field being returned.
+|===
