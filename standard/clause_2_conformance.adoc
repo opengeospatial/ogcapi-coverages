@@ -8,7 +8,7 @@ _OGC API - Common_ provides a common foundation for OGC API standards.
 Some conformance classes of this standard have a dependency on, or are designed to be easily integrated with, conformance classes defined in _OGC API - Common_ _Part 1_ and/or _Part 2_,
 as well as within a Web API conforming to additional OGC API standards.
 
-This standard identifies twenty-four Conformance Classes. Each Conformance Class has an associated Requirements Class.
+This standard identifies twenty-five Conformance Classes. Each Conformance Class has an associated Requirements Class.
 The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
 Only the Core requirements class is mandatory, all others are optional.
 
@@ -50,6 +50,7 @@ The _Coordinate Reference System_ Requirements Class defines the ability to requ
 * <<rc_position_query,*Position Query*>>
 * <<rc_encoding-html,HTML>>
 * <<rc_encoding-geotiff,GeoTIFF>>
+* <<rc_encoding-cog,Cloud Optimized GeoTIFF>>
 * <<rc_encoding-netcdf,netCDF>>
 * <<rc_encoding-cisjson,CIS JSON>>
 * <<rc_encoding-coveragejson,CoverageJSON>>
@@ -86,6 +87,7 @@ The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition 
 | <<rc_tiles,Coverage Tiles>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
 | <<rc_html,HTML>>                              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
 | <<rc_tiff,GeoTIFF>>                           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
+| <<rc_tiff,Cloud Optimized GeoTIFF>>           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cog
 | <<rc_netcdf,netCDF>>                          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
 | <<rc_cisjson,CIS JSON>>                       | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
 | <<rc_coveragejson,CoverageJSON>>              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
