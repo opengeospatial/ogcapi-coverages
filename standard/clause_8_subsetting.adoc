@@ -123,6 +123,9 @@ bandiwdth usage and performance for a very large numbers of these queries.
 This requirements class introduces a simple JSON representation which needs to be supported by the server.
 Implementations could also implement additional representations, for example GeoJSON.
 
+NOTE: This requirements class defines an operation corresponding directly to the definition of a coverage -- returning a set of values
+(or multiple sets of values in the case of a multifunction coverage) for a given position.
+
 include::requirements/requirements_class_coverage_position_query.adoc[]
 
 === Examples

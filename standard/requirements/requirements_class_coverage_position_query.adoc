@@ -26,7 +26,7 @@ Field Selection requirements class), the response SHALL be the value of the fiel
 
 NOTE: This position query requirements class relies on the definition of the `subset`, `bbox` and `datetime` parameter defined in the "Spatial Subsetting", "Temporal Subsetting" and "General Subsetting"
 requirement classes.
-However, this requirement class does specify a dependency on these requirements classes to allow implementation supporting only the "Core" requirements class (returning the entire coverage), as well
+However, this requirement class does not specify a dependency on these requirements classes to allow implementing only the "Core" requirements class (returning the entire coverage), as well
 as the ability to query specific points, without providing the ability to return fragments of the coverage larger than a single point.
 
 [[rec_coverage_position_query_interpolation]]
@@ -34,5 +34,6 @@ as the ability to query specific points, without providing the ability to return
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/coverage-position-query/interpolation*
 ^|A |In the case where the requested position is not centered within the region of validity (the bounds) of an individual element of the coverage, the Implementation SHOULD
-decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the variable type of each field being returned.
+decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the variable type of each field being returned,
+as well as the variable or spatiotemporal type of each dimension being sliced on.
 |===
