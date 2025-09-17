@@ -75,7 +75,7 @@ Generic clients intended to be interoperable with all Implementations of this St
 [[rec_coverage_subset-crs-axis-aliases]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommentation {counter:per-id}* |*/rec/subsetting-spatial/subset-crs-axis-aliases*
+^|*Recommendation {counter:per-id}* |*/rec/subsetting-spatial/subset-crs-axis-aliases*
 ^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous of the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
 ^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
 ^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.

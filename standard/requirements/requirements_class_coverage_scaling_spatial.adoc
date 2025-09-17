@@ -55,7 +55,7 @@ Generic clients intended to be interoperable with all Implementations of this St
 [[rec_coverage_scaling-crs-axis-aliases]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommentation {counter:per-id}* |*/rec/scaling-spatial/resolution-crs-axis-aliases*
+^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/resolution-crs-axis-aliases*
 ^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous of the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
 ^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
 ^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.
@@ -65,6 +65,26 @@ Generic clients intended to be interoperable with all Implementations of this St
 |===
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
+
+[[scaling-spatial-resampling-recommendation]]
+==== Recommendation for resampling implementation guidance
+
+This Core part of the OGC API - Coverages Standard does not define a mechanism for the client to request a specific interpolation method.
+However, the following recommendation provides guidance for implementations such as some important considerations to take into account when performing interpolation.
+This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
+or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
+
+This guidance also applies to interpolation which could also be performed by clients.
+The detailed information provided by the server in the collection description and the collection logical schema provides useful information
+the `x-ogc-variableType` of a particular field, allowing to select a proper interpolation method.
+
+[[rec_coverage_scaling-spatial-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/interpolation*
+^|A | Implementations SHOULD NOT perform interpolation using a method other than _nearest neighbor_ for fields of a variable type other than `continuous`.
+^|B | Implementations SHOULD use the best available interpolation method which will not degrade response time or put too much strain on the server resources.
+|===
 
 ==== Downsampling permission
 

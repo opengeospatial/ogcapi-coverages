@@ -61,6 +61,14 @@ for Earth-referenced data collections to be described using OGC:CRS84.
 TODO: Discuss the ability to include a http://docs.opengeospatial.org/is/18-010r7/18-010r7.html[Well Known Text] definition and/or
 https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodata/projJSON.yaml[PROJ-JSON] definition of the CRS instead of a URI.
 
+[[rec_core-coverage_dimensions_variable_type]]
+[width="90%",cols="2,6"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/coverage-dimensions-variable-type*
+^|A |Additional dimensions beyond space and time based on a variable SHOULD include a `variableType` property with values `continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`,
+or `numericalNominal` providing useful information relevant to how to properly perform interpolation along that dimension.
+|===
+
 ==== Collection schema (`/collections/{collectionId}/schema`)
 
 This "Core" requirements class of OGC API - Coverages depends on the "Schemas" requirements class defined in _OGC API - Common - Part 3: Schemas_
@@ -97,6 +105,14 @@ The use of JSON Schema is therefore not limited to describe only coverages encod
 
 NOTE: A meta-schema for JSON Schema used as part of the _2D Tile Matrix Set and Tileset Metadata standard_ suitable for this resource is available at
 https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/tms/propertiesSchema.yaml .
+
+[[rec_core-coverage_schema_variable_type]]
+[width="90%",cols="2,6"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/coverage-schema-variable-type*
+^|A |The logical schema for the collection SHOULD include an `x-ogc-variableType` for each field with possible values `continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`,
+or `numericalNominal` providing useful information relevant to how to properly perform interpolation for that field.
+|===
 
 ==== Coverage data retrieval (`/collections/{collectionId}/coverage`)
 
