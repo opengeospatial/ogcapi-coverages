@@ -19,10 +19,11 @@
 (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
-^|D |A `time` axis name SHALL be supported.
-^|E |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|F |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|G |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
+^|D |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
+^|E |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time`, or any other axis supported in the context of other requirements classes (such as spatial and general scaling).
+^|F |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|G |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|H |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
 for the corresponding dimension.
 |===
 
@@ -38,6 +39,22 @@ MAY automatically downsample the coverage to a suitable resolution instead of re
 
 NOTE: A client retrieving a coverage from an implementation advertising support for this "Temporal Scaling" requirements class should explicitly use `resolution=time()` if it wants to ensure
 retrieving the coverage in its native temporal resolution and prefers receiving an error instead of a downsampled version of the data.
+
+[[scaling-temporal-parameter-aliases-recommendation]]
+==== Recommendation for `time` dimension aliases
+
+For convenience, this Standard recommends that Implementations recognize the different case variation and the shorthand `t` as an alias for the `time` dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
+but should always use `time` to refer to the primary temporal dimension as specified in the above requirement.
+
+[[rec_coverage_scaling-temporal-aliases]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommentation {counter:rec-id}* |*/rec/scaling-temporal/resolution-temporal-aliases*
+^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
+|===
+
+IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
 
 ==== Permission to support legacy scaling query parameters
 

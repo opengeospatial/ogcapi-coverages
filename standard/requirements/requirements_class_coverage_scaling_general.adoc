@@ -20,11 +20,13 @@ specifying the resolution for the additional dimensions in positive units of tho
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
 ^|D |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extent other than `spatial` and `temporal`.
-^|E |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|F |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|G |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
+^|E |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to an additional dimension described in the collection extent,
+or to any other axis supported in the context of other requirements classes (such as spatial and temporal scaling).
+^|F |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|G |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|H |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
 for the corresponding dimension.
-^|H |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, the implementation SHALL support an ISO 8601 period notation.
+^|I |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, the implementation SHALL support an ISO 8601 period notation.
 |===
 
 ==== Downsampling permission

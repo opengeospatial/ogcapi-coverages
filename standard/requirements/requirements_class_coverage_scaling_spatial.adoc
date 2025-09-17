@@ -19,14 +19,17 @@
 (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|D |Axis names `Lat` and `Lon` SHALL be supported for geographic output CRS, and `E` and `N` for a projected output CRS, which are to be interpreted as the best matching spatial axis in the output CRS definition.
-^|E |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the implementation SHALL also support a `h` dimension.
-This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS and _z_ for projected CRS, which are to be interpreted as the vertical axis in the CRS definition.
-^|F |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|G |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|H |For a non-gridded coverage (e.g., a point cloud), when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|I |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of &#916;N^2^ + &#916;E^2^ + Δh^2^) between two samples.
-^|J |When returning the native resolution for one or more dimension for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support
+^|D |For a geographic output CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the output CRS definition.
+^|E |For a projected output CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the output CRS definition.
+^|F |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the implementation SHALL also support a `h` dimension.
+This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS, and _z_ for 3D Cartesian CRS such as EPSG:4978, which are to be interpreted as the vertical axis in the CRS definition.
+^|G |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to one of the axes of the output CRS,
+to an alias (see recommendation below), or to any other axis supported in the context of other requirements classes (such as temporal and general scaling).
+^|H |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|I |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|J |For a non-gridded coverage (e.g., a point cloud), when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|K |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of &#916;N^2^ + &#916;E^2^ + Δh^2^) between two samples.
+^|L |When returning the native resolution for one or more dimension for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support
 returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
 |===
 
@@ -41,6 +44,27 @@ returning those different fields together at these different resolutions, the Im
 ^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by provided scaling  parameters, the original number of sample values for unspecified axes, and any defined server limits.
 ^|D |When `width` and/or `height` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
 |===
+
+[[scaling-spatial-dimension-aliases-recommendation]]
+==== Recommendation for spatial dimensions aliases
+
+Because the definitions of CRSs of the same type sometimes use different names to refer to dimensions that can be considered equivalent for the purposes of scaling, and in some cases the axis name abbreviation changed over time,
+this Standard recommends that Implementations recognize common equivalent names to facilitate the task of clients to identify a particular dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases, but only the axis names specified in the above requirement.
+
+[[rec_coverage_scaling-crs-axis-aliases]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommentation {counter:per-id}* |*/rec/scaling-spatial/resolution-crs-axis-aliases*
+^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous of the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
+^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
+^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.
+^|D |`Z`, (lowercase/uppercase) or `H` (uppercase) SHOULD be interpreted as synonymous of `h`.
+^|D |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous of `Lon`.
+^|E |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous of `Lat`.
+|===
+
+IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
 
 ==== Downsampling permission
 
