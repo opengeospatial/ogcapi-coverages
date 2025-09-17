@@ -37,7 +37,7 @@ or for automatic resampling in order to avoid returning too much data (as descri
 
 This guidance also applies to interpolation which could also be performed by clients.
 The detailed information provided by the server in the collection description and the collection logical schema provides useful information
-the `x-ogc-variableType` of a particular field, allowing to select a proper interpolation method.
+such as the `x-ogc-variableType` of a particular field, allowing to select a proper interpolation method.
 
 [[rec_coverage_scaling-temporal-interpolation]]
 [width="90%",cols="2,6a"]
