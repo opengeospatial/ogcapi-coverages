@@ -2,21 +2,7 @@ name: properties
 in: query
 description: |-
   Select specific data record fields (measured/observed properties) to be returned.
-
-  ```
-  RangeSubsetSpec:   "properties"=field[,fieldName]*
-  field:              {fieldName}|{fieldIndex}|"*"
-  fieldName:          {text}
-  fieldIndex:         {number}
-
-  Where:
-     {number} is an integer number, and
-     {text} is some general ASCII text.
-  ```
-
-  The field name must be one of the id defined in the RangeType DataRecord fields.
-  The field index must be an integer between 0 and the number of fields - 1 defined in the RangeType DataRecord fields.
-  An asterisk indicates to also include subsequent fields.
+  The selected field names must be one of the fields defined in the collection's logical schema (the fields of the RangeType DataRecord in the Coverage Implementation Schema model).
 
 required: false
 schema:

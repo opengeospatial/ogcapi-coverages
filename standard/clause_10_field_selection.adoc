@@ -3,7 +3,8 @@
 
 === Overview
 
-The "Field Selection" Requirements Class defines the `properties` parameter for selecting a subset of the fields to retrieve from the coverage resource (`/collections/{collection_id}/coverage`).
+The "Field Selection" Requirements Class defines the `properties` parameter for selecting a subset of the fields to retrieve from the coverage resource (`/collections/{collection_id}/coverage`),
+or alternatively a client can also use `exclude-properties` to return all fields except those enumerated.
 The available fields for the coverage, for example individual imagery bands, are defined in the schema resource (corresponding to the CIS _range type_).
 The order of the fields as listed in the value of the parameter also determines the order in which those fields will be ordered in the response, if the negotiated format has such a concept of field order.
 

@@ -14,6 +14,7 @@ get:
     - $ref: '../../parameters/common-geodata/bbox.yaml'
     - $ref: '../../parameters/common-geodata/datetime.yaml'
     - $ref: '../../parameters/coverages-core/properties.yaml'
+    - $ref: '../../parameters/coverages-core/exclude-properties.yaml'
     - $ref: '../../parameters/coverages-core/resolution.yaml'
     - $ref: '../../parameters/coverages-core/width.yaml'
     - $ref: '../../parameters/coverages-core/height.yaml'

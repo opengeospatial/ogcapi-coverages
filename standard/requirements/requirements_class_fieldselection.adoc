@@ -15,28 +15,26 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/fieldselection/properties*
-^|A |The operation SHALL support a parameter `properties` with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
-
-[source,EBNF]
-----
-  propertiesSpec:    "properties"=field[,field]*
-  field:             {fieldName}\|{fieldIndex}\|"*"
-  fieldName:         {text}
-  fieldIndex:        {number}
-
-  Where:
-     {number} is an integer number, and
-     {text} is some general ASCII text.
-----
-
+^|A |The coverage retrieval operation SHALL support a `properties` query parameter where the value is a comma-separated list of field names to be returned.
 ^|B |The implementation SHALL support selecting a field using the identifier corresponding to the top-level property keys of the coverage fields schema, and return 400 status code for an unrecognized selected field.
-^|C |The implementation SHALL support selecting a field using an index corresponding to an `x-ogc-propertySeq` property in the coverage fields schema, if present, and return a 400 status code for an unrecognized field index.
-^|D |The coverage fields schema SHALL not contain any potential conflict between a numeric band name and a band index.
-^|E |The implementation SHALL interpret an `*` (asterisk) at the begining or at the end of the comma-separated list as all other fields before or after the listed fields, respectively, as per the numeric `x-ogc-propertySeq` order.
-^|F |Only the selected fields of the coverage SHALL be returned from coverage request.
-^|G |If the coverage response can self-describes its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
-^|H |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
+^|C |Only the selected fields of the coverage SHALL be returned in the coverage response.
+^|D |If the coverage response can self-describes its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
+^|E |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
 |===
+
+==== `exclude-properties` query parameter
+
+[[req_fieldselection-properties]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/fieldselection/exclude-properties
+^|A |The coverage retrieval operation SHALL support an `exclude-properties` query parameter where the value is a comma-separated list of fields not to be returned.
+^|B |The Implementation SHALL support selecting fields not to return using the identifier corresponding to the top-level property keys of the coverage fields schema, and return 400 status code for an unrecognized selected field.
+^|C |All but the selected fields SHALL be returned from the zone data request (including fields potentially not included in the `defaultFields` of the collection description).
+^|D |The Implementation SHALL return a 4xx error when using the both the `properties` and `exclude-properties` query parameters in the same request.
+^|E |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the sequence order of the `x-ogc-propertySeq` of the fields listed in the logical schema (ignoring the excluded fields).
+^|F |The Implementation SHALL interpret an empty value for this the `exclude-properties` query parameter as a request for all fields listed in the logical schema (e.g., in the case where the `defaultFields` are a subset of the fields available).
+|====
 
 ==== Mismatched resolution without scaling support
 

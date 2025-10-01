@@ -155,6 +155,8 @@ components:
          $ref: 'parameters/coverages-core/resolution.yaml'
       properties:
          $ref: 'parameters/coverages-core/properties.yaml'
+      exclude-properties:
+         $ref: 'parameters/coverages-core/exclude-properties.yaml'
       width:
          $ref: 'parameters/coverages-core/width.yaml'
       height:
