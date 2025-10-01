@@ -166,12 +166,12 @@ to requesting more data than allowed by the server limits.
 [[rec_core-limits]]
 [width="90%",cols="2,6"]
 |===
-^|*Recommendation {counter:per-id}* |*/per/core/limits*
+^|*Recommendation {counter:rec-id}* |*/rec/core/limits*
 ^|A |The implementation SHOULD advertise maximum limits for individual dimensions and/or combined data size that it is willing to return in a `coverage` object property of
 an `x-OGC-limits` property of the service metadata `info` object property of a JSON document linked to from the landing page using the `service-meta` link relation.
 ^|B |The implementation SHOULD include in this `coverage` property of the service metadata `x-OGC-limits`: `maxWidth`, `maxHeight` and `maxCells` integer properties for
 implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages.
-^|C |The implementation SHOULD return a 4xx error for coverage requests exceeding any of those limits.
+^|C |The implementation SHOULD return a 4xx error (e.g., 400 Generic client error, or 413 Content too large) for coverage requests exceeding any of those limits.
 |===
 
 NOTE: An example of service metadata is provided in https://docs.ogc.org/is/19-072/19-072.html#service-metadata-examples[_OGC API – Common – Part 1: Core_].
