@@ -9,7 +9,7 @@
 
 === Requirements
 
-==== Parameter `properties`
+==== Query parameter `properties`
 
 [[req_fieldselection-properties]]
 [width="90%",cols="2,6a"]
@@ -22,19 +22,19 @@
 ^|E |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
 |===
 
-==== `exclude-properties` query parameter
+==== Query parameter `exclude-properties`
 
-[[req_fieldselection-properties]]
+[[req_fieldselection-exclude-properties]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/fieldselection/exclude-properties
+^|*Requirement {counter:req-id}* |*/req/fieldselection/exclude-properties*
 ^|A |The coverage retrieval operation SHALL support an `exclude-properties` query parameter where the value is a comma-separated list of fields not to be returned.
 ^|B |The Implementation SHALL support selecting fields not to return using the identifier corresponding to the top-level property keys of the coverage fields schema, and return 400 status code for an unrecognized selected field.
 ^|C |All but the selected fields SHALL be returned from the zone data request (including fields potentially not included in the `defaultFields` of the collection description).
 ^|D |The Implementation SHALL return a 4xx error when using the both the `properties` and `exclude-properties` query parameters in the same request.
 ^|E |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the sequence order of the `x-ogc-propertySeq` of the fields listed in the logical schema (ignoring the excluded fields).
 ^|F |The Implementation SHALL interpret an empty value for this the `exclude-properties` query parameter as a request for all fields listed in the logical schema (e.g., in the case where the `defaultFields` are a subset of the fields available).
-|====
+|===
 
 ==== Mismatched resolution without scaling support
 
