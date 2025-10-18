@@ -2,49 +2,40 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class Coordinate Reference System*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/crs
+2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/crs
 |Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency  |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |===
 
 === Requirements
 
 ==== Parameter `crs`
-A successful GET response is described in the Coverages API core class (http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core).
+A successful GET response is described in the Coverages API core class (https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core).
 
 [[req_crs_crs-definition]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/crs/crs-definition*
-^|A |The coverage retrieval operation SHALL support a parameter `crs` with the characteristics defined in the OpenAPI Specification 3.0 fragment
-[source,YAML]
-----
-  crs:
-    name: crs
-    in: query
-    description: A coordinate reference system of the coverage response. A list of all supported CRS values can be found under the collection metadata.
-    required: false
-    schema:
-      type: string
-    example: http://www.opengis.net/def/crs/OGC/1.3/CRS84
-----
+^|A |The coverage retrieval operation SHALL support a query parameter `crs` specifying the output CRS using a URI or safe CURIE referencing a registered CRS
+e.g., `https://www.opengis.net/def/crs/OGC/1.3/CRS84` or `[OGC:CRS84]`.
 ^|B |The list of supported output CRSs SHALL be included in the `crs` property of the collection description at `/collections/{collectionId}` as URIs.
 All of these listed CRSs SHALL be supported as output CRSs by the server for that collection.
 If the list of supported CRS is not present, the native CRS (`storageCrs` in the collection description) SHALL be supported, which defaults to
-`http://www.opengis.net/def/crs/OGC/1.3/CRS84` if not specified.
-^|C |If the spatial subsetting requirements class is supported, the `bbox-crs` and the `subset-crs` SHALL additionally support the value specified in the `crs` parameter.
-^|D |CRS expressed as URIs or as safe CURIEs SHALL be supported.
-^|E |The content of that response SHALL be consistent with the requested CRS.
-^|F |If the parameter value for `crs` is not valid for requested coverage, the status code of the response SHALL be 400.
+`https://www.opengis.net/def/crs/OGC/1.3/CRS84` if not specified.
+^|C |If present, the list of output CRSs SHALL include the default output CRS, which is the `storageCrs` if specified, or `https://www.opengis.net/def/crs/OGC/1.3/CRS84` otherwise.
+^|D |If the spatial subsetting requirements class is supported, the `bbox-crs` and the `subset-crs` SHALL additionally support the value specified in the `crs` parameter.
+^|E |CRS expressed as URIs or as safe CURIEs SHALL be supported.
+^|F |The content of that response SHALL be consistent with the requested CRS.
+^|G |If the parameter value for `crs` is not valid for requested coverage, the status code of the response SHALL be 400.
 |===
 
-NOTE: When no `crs` parameters are specified, the default output CRS is the native (`storage CRS`), which is CRS84 if none is specified (see <<rc_core,Core requirement class>> for additional details).
+NOTE: When no `crs` parameters are specified, the default output CRS is the native (`storageCrs`), which is CRS84 if none is specified (see <<rc_core,Core requirement class>> for additional details).
 
-NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `http://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is crs.
+NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `https://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is crs.
 
-See how to determine the native (storage) CRS for the coverage in <<rc_core>> respectively.
+See how to determine the native (storage) CRS for the coverage in <<rc_core>>.
 
-NOTE: The default CRS of the BBOX is http://www.opengis.net/def/crs/OGC/1.3/CRS84 but the default CRS of the coverage is the native (storage) CRS
+NOTE: The default CRS of the BBOX is https://www.opengis.net/def/crs/OGC/1.3/CRS84 but the default CRS of the coverage is the native (storage) CRS
 
 [[per_crs_crs-curie]]
 [width="90%",cols="2,6a"]
@@ -53,4 +44,4 @@ NOTE: The default CRS of the BBOX is http://www.opengis.net/def/crs/OGC/1.3/CRS8
 ^|A |Un-safe CURIE without square brackets MAY be supported.
 |===
 
-NOTE: This makes the notation compatible with WCS.
+NOTE: This makes the notation compatible with WCS with the exception of CRS:84 which should be OGC:CRS84 for OGC API - Coverages.

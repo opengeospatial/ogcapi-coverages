@@ -2,10 +2,10 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |Target type   |Web API
-|Dependency    |http://www.opengis.net/spec/ogcapi-common-2/1.0/req/umd-collection
-|Dependency    |http://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas
+|Dependency    |https://www.opengis.net/spec/ogcapi-common-2/1.0/req/umd-collection
+|Dependency    |https://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas
 |===
 
 === Requirements
@@ -31,7 +31,7 @@ This `links` array SHALL be present within the elements of the `collections` arr
 using the link relation type `[ogc-rel:schema]`.
 ^|C |At least one collection SHALL be accessible as a coverage.
 ^|D |If the collection is available more efficiently (e.g., if it is stored in the server in that CRS) using a particular CRS (the native CRS, also _called storage CRS_) that is not
-http://www.opengis.net/def/crs/OGC/1.3/CRS84, a `storageCrs` property in the collection object of a geospatial collection SHALL be the URI for that CRS.
+https://www.opengis.net/def/crs/OGC/1.3/CRS84, a `storageCrs` property in the collection object of a geospatial collection SHALL be the URI or safe CURIE for that CRS.
 This `storageCrs` also corresponds to the default output CRS (used when the `crs` query parameter is not specified and/or the CRS requirements class is not supported).
 ^|E |If a `storageCrs` property is used and that is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, an overall bounding box (and optional inner bounding boxes for sparse data)
 SHALL be provided in a `storageCrsBbox` property within the `spatial` dimension of the `extent` following the same schema as the CRS84 `bbox`.
@@ -48,17 +48,17 @@ Each of these elements are themselves an array of start and end bound values.
 ^|F |If applicable, units SHALL be specified in a `unit` property specifying the unit and an (optional) `unitLang` property specifying the language (defaulting to UCUM).
 ^|G |The name (JSON dictionary key) of each additional dimension SHALL correspond to the axis abbreviation for the CRS of that axis, to valid axis names for use with query parameters defined in optional requirements classes such as `subset` and `resolution`, as well as to axis names in the coverage response, if applicable.
 ^|H |If a particular dimension of the coverage is gridded, the description of that dimension in the extent SHALL describe this grid using the `grid` property, providing a `cellsCount`, as well as a `resolution` for regular grid or a set of `coordinates` for irregular grids.
-^|I |For data referenced in relation to planet Earth, the coordinates in the `bbox` of the `spatial` dimensions of the `extent` SHALL be provided either as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84[http://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h[http://www.opengis.net/def/crs/OGC/0/CRS84h]).
+^|I |For data referenced in relation to planet Earth, the coordinates in the `bbox` of the `spatial` dimensions of the `extent` SHALL be provided either as WGS 84 longitude/latitude (https://www.opengis.net/def/crs/OGC/1.3/CRS84[https://www.opengis.net/def/crs/OGC/1.3/CRS84]) or as WGS 84 longitude/latitude/ellipsoidal height (https://www.opengis.net/def/crs/OGC/0/CRS84h[https://www.opengis.net/def/crs/OGC/0/CRS84h]).
 ////
 
-NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `http://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is _crs_.
+NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `https://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is _crs_.
 
 NOTE: The schema for the collection resource is available at https://github.com/opengeospatial/ogcapi-common/blob/master/collections/openapi/schemas/common-geodata/collectionDesc.yaml.
 
 NOTE: A property indicating for which planetary body a CRS is applicable is being considered as part of CRS definitions, which will facilitate validating the requirement
 for Earth-referenced data collections to be described using OGC:CRS84.
 
-TODO: Discuss the ability to include a http://docs.opengeospatial.org/is/18-010r7/18-010r7.html[Well Known Text] definition and/or
+TODO: Discuss the ability to include a https://docs.opengeospatial.org/is/18-010r7/18-010r7.html[Well Known Text] definition and/or
 https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodata/projJSON.yaml[PROJ-JSON] definition of the CRS instead of a URI.
 
 [[rec_core-coverage_dimensions_variable_type]]
@@ -127,7 +127,7 @@ or `numericalNominal` providing useful information relevant to how to properly p
 ^|C |The content of that response SHALL be the coverage data, along with the suported self-description capabilities of the negotiated content type.
 ^|D |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
 ^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
-^|F |The coverage response SHALL be in the native (`storageCrs`) specified in the collection description, or http://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
+^|F |The coverage response SHALL be in the native (`storageCrs`) specified in the collection description, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
 ^|G |If the coverage response format has a concept of field order (for lack of descriptive field metadata, as in GeoTIFF 1.0), that order SHALL match the fields being requested, either based on the selected fields
 (see Field Selection requirements class), the `defaultFields` if specified in the collection description, or otherwise the `x-ogc-propertySeq` in the collection schema.
 |===
@@ -137,9 +137,9 @@ or `numericalNominal` providing useful information relevant to how to properly p
 [[req_core-coverage_response_headers]]
 [width="90%",cols="2,6"]
 |===
-^|A |The coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response, except if the content is in the http://www.opengis.net/def/crs/OGC/1.3/CRS84 CRS.
+^|A |The coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response, except if the content is in the https://www.opengis.net/def/crs/OGC/1.3/CRS84 CRS.
 ^|B |If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual geospatial boundary of the coverage.
-^|C |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or http://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain
+^|C |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain
 four or six comma-separated numbers representing the lower-left and upper right corners of the response honoring the CRS coordinates order.
 ^|D |If the coverage includes a temporal dimension which can be expressed in RFC3339 format, the headers of the response SHALL include a `Content-Datetime:` header in that format with the actual datetime instant
 (if returning a temporal slice) or datetime interval (if the response includes a temporal dimension) of the returned coverage.

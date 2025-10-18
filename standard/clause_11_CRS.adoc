@@ -1,9 +1,9 @@
 [[rc_crs]]
-== Requirement Class "Coordinate Reference System"
+== Requirement Class "Coordinate Reference System by Reference"
 
 === Overview
 
-The "Coordinate Reference System" requirement class specifies a `crs` parameter allowing a client to select an output CRS (equivalent to `OUTPUTCRS` in WCS 2.0).
+The "Coordinate Reference System by Reference" requirement class specifies a `crs` parameter allowing a client to select an output CRS (equivalent to `OUTPUTCRS` in WCS 2.0).
 
 As defined in this standard, a coverage is conceptually associated with native CRS (also called a _storage CRS_) which is indicated in the collection description.
 This native CRS is the default output CRS if no `crs` parameter is specified, and the only supported output CRS without support for this requirements class.
