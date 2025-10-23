@@ -65,3 +65,8 @@ NOTE: Collection filtering should be a profile of Records Local Resource Catalog
 * Using OAPI-Common bbox syntax (fixed, 2D axis sequence): http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collections intersecting that is in the New Zealand economic zone.
 
 ////
+
+=== Link relations
+Include example usage of link relation `data` from Landing page linking to /collections
+
+Include example usage of link relation `geodata` from tileset (/collections/{collectionId}/tiles/{tileMatrixSetId} linking back to collection (/collections/{collectionId}. This a request in the issue #201
