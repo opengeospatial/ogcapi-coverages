@@ -38,8 +38,18 @@ If applicable, the unit of measure can also be specified using the case sensitiv
 For example, if `QUDT` is used, the unit can be a URI from the QUDT Units Vocabulary.
 When describing the extent of a coverage, the geometry of its indivudal components, such as cells in the case of a gridded coverage, must be considered.
 
-The reported extent (the CRS84 `bbox` and/or the native CRS `storageCrsBbox` in the spatial extent, and the interval bounds in the temporal and/or any additional dimensions of the extent)
-must correspond to the extent of the geometry of the entire coverage.
+The native CRS of the data is specified in the `storageCrs` property of the collection description.
+For OGC API - Coverages, this native CRS usually specifies the CRS in which the data is most efficiently retrieved and
+corresponds to the default output CRS (which may be overridden with a `crs` query parameter if the implementation supports the "Coordinate Reference System" requirements class).
+Note that this native CRS is not necessarily how the data is stored internally, as in some use cases different parts of the coverage
+might actually be stored in different CRSs (e.g., one per UTM zone), while a CRS like `[OGC:CRS84]` allows to provide the entire coverage in a single unifying CRS.
+
+The `crs` specified in the `spatial` property of the `extent` specifies only the coordinate reference system of the `bbox`, which is primarily for the purpose of discovery and identifying whether the data
+spans an area of interest, and does not imply a particular native / storage CRS nor a default output CRS.
+For data referenced to Earth, this `crs` will always be `[OGC:CRS84]` or `[OGC:CRS84h]`.
+The `storageCrsBbox` property of the `spatial` property of the `extent` allows to specify the bounding box in the native CRS.
+
+The `bbox`, `storageCrsBbox` and the interval bounds in the temporal and/or any additional dimensions of the extent must correspond to the extent of the geometry of the entire coverage.
 
 The extent of each component of a coverage for which values can be retrieved, such as a cell in the context of a gridded coverage, should consider the full _region of validity_ or _bounds_ of that component
 to which these values are associated.

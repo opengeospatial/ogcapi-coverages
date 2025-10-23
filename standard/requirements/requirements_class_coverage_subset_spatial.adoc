@@ -2,9 +2,9 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-spatial
+2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-spatial
 |Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency  |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |===
 
 === Requirements
@@ -92,9 +92,9 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-crs*
-^|A |The coverage retrieval operation SHALL support a parameter `subset-crs` with the characteristics identifying the CRS in which the `subset` parameter is specified with a URI or safe CURIE.
-^|B |For data referenced to Earth, http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be supported as a value.
-^|C |If the `subset-crs` is not indicated, http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
+^|A |The coverage retrieval operation SHALL support a parameter `subset-crs` identifying the CRS in which the `subset` parameter is specified with a URI or safe CURIE.
+^|B |For data referenced to Earth, https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be supported as a value.
+^|C |If the `subset-crs` is not indicated, https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
 ^|D |The native CRS (`storageCrs`) SHALL be supported as a value. Other requirements classes may allow additional values (see `crs` parameter definition).
 ^|E |CRSs expressed as URIs or as safe CURIEs SHALL be supported.
 ^|F |If no `subset` parameter refers to an axis of the CRS value specified for the `subset-crs` parameter, this parameter SHALL be ignored.
@@ -104,8 +104,8 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 ==== Query parameter `bbox`
 
 The `bbox` convenience parameter maps to a trimming operation (which could also be expressed using `subset`).
-The parameter value consists of four coordinates which are to be interpreted as http://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
-or six coordinates to be interpreted as http://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`) by default (unless a `bbox-crs` parameter is specified).
+The parameter value consists of four coordinates which are to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
+or six coordinates to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`) by default (unless a `bbox-crs` parameter is specified).
 The equivalent `subset` parameter is simply the trimming operation from the first latitude to the second latitude, the first longitude to the second longitude, and the first height above the ellipsoid to the second height (if applicable).
 
 [[bbox-definition]]
@@ -122,8 +122,8 @@ The equivalent `subset` parameter is simply the trimming operation from the firs
 * Upper right corner, coordinate axis 2
 * Maximum value, coordinate axis 3 (optional)
 
-^|C|If the bounding box consists of four numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (http://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
-^|D|If the bounding box consists of six numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude/ellipsoidal height (http://www.opengis.net/def/crs/OGC/0/CRS84h) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+^|C|If the bounding box consists of four numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (https://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+^|D|If the bounding box consists of six numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude/ellipsoidal height (https://www.opengis.net/def/crs/OGC/0/CRS84h) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
 ^|E|Only the portion of the coverage within the specified boundings box SHALL be part of the response, performing a trim subsetting operation.
 ^|F|If a `bbox` parameter is specified requesting a coverage without any spatial dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
 ^|G|For a bounding box specified in a geographic CRS, a bounding box where the first longitude value is larger than the second longitude value SHALL be interpreted as crossing the anti-meridian.
@@ -149,8 +149,8 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-crs*
 ^|A|The coverage resource SHALL support a `bbox-crs` parameter specifying the CRS used for the `bbox` parameter.
-^|B|For data referenced to Earth, the implementation SHALL support http://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
-^|C|If the `bbox-crs` is not indicated http://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
+^|B|For data referenced to Earth, the implementation SHALL support https://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
+^|C|If the `bbox-crs` is not indicated https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
 ^|D|The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes may allow additional values (see `crs` parameter definition).
 ^|E|The CRS expressed as URIs or as safe CURIEs SHALL be supported.
 ^|F|If the `bbox` parameter is not used, the `bbox-crs` SHALL be ignored.
