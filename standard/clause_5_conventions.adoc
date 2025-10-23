@@ -48,6 +48,9 @@ Whenever a data item from a CIS-external namespace is referenced this constitute
 
 To express relationships between a target IRI from a context point of view (simple cases for the 'context' is the actual page contain the link or a item of an array in the actual page), https://tools.ietf.org/rfc/rfc8288.txt[RFC 8288 (Web Linking)] is used.
 
+Note that the CURIE based on the pattern `[ogc-rel:<relation>]` is also considered equivalent.
+For example, `[ogc-rel:coverage]` corresponds to https://www.opengis.net/def/rel/ogc/1.0/coverage.
+
 The following https://www.iana.org/assignments/link-relations/link-relations.xhtml[IANA link relation types] are used in this document:
 
 * **alternate**: The target IRI refers to a substitute for this context IRI.
@@ -81,7 +84,6 @@ The following link relation types specified in the _OGC API - Features - Part 5_
 In addition, the following link relation types are used for which no applicable registered link relation type could be identified:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/coverage**: The target IRI points to a resource representing the coverage, including self-description aspects supported by the encoding (such as the domain set, range type, range set and metadata for the Coverage Implementation Schema).
-* **http://www.opengis.net/def/rel/ogc/1.0/coverage-scenes**: The target IRI points to a list of scenes of which the coverage collection is comprised, as defined by the <<rc_scenes, "Scenes" requirements class>>.
 
 Used in combination with _OGC API - Features Part 1: Core_ or _OGC API - Common Part 1: Core_, other link relation types will be used, including:
 
@@ -98,3 +100,10 @@ Each resource representation includes an array of links. Implementations are fre
 === Use of HTTPS
 
 For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS." In fact, most servers are expected to use https://tools.ietf.org/html/rfc2818[HTTPS], not https://www.ietf.org/rfc/rfc2616.txt[HTTP].
+
+=== Use of CURIEs
+
+Everywhere a URI is expected in a server response, a safe CURIE can be returned instead.
+Everywhere a URI is expected in a query parameter, the implementation also needs to support a safe CURIE.
+A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `https://www.opengis.net/def/{objectType}/{authority}/0/{id}`.
+If `-{objectType}` is missing, the default object type is `crs`.
