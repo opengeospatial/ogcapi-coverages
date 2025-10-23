@@ -39,10 +39,13 @@ For example, if `QUDT` is used, the unit can be a URI from the QUDT Units Vocabu
 When describing the extent of a coverage, the geometry of its indivudal components, such as cells in the case of a gridded coverage, must be considered.
 
 The native CRS of the data is specified in the `storageCrs` property of the collection description.
-For OGC API - Coverages, this native CRS corresponds to the default output CRS (which may be overridden with a `crs` query parameter if the implementation supports the "Coordinate Reference System" requirements class).
+For OGC API - Coverages, this native CRS usually specifies the CRS in which the data is most efficiently retrieved and
+corresponds to the default output CRS (which may be overridden with a `crs` query parameter if the implementation supports the "Coordinate Reference System" requirements class).
+Note that this native CRS is not necessarily how the data is stored internally, as in some use cases different parts of the coverage
+might actually be stored in different CRSs (e.g., one per UTM zone), while a CRS like `[OGC:CRS84]` allows to provide the entire coverage in a single unifying CRS.
 
 The `crs` specified in the `spatial` property of the `extent` specifies only the coordinate reference system of the `bbox`, which is primarily for the purpose of discovery and identifying whether the data
-spans an area of interest, and is unrelated to how the data might be stored internally or retrieved most efficiently.
+spans an area of interest, and does not imply a particular native / storage CRS nor a default output CRS.
 For data referenced to Earth, this `crs` will always be `[OGC:CRS84]` or `[OGC:CRS84h]`.
 The `storageCrsBbox` property of the `spatial` property of the `extent` allows to specify the bounding box in the native CRS.
 
