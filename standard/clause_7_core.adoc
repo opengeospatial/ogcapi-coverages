@@ -51,6 +51,16 @@ The `storageCrsBbox` property of the `spatial` property of the `extent` allows t
 
 The `bbox`, `storageCrsBbox` and the interval bounds in the temporal and/or any additional dimensions of the extent must correspond to the extent of the geometry of the entire coverage.
 
+For datasets with one or more temporal dimension, the primary temporal dimension is described by the `temporal` property of the extent, while additional temporal dimensions
+(e.g., the time at which a forecast was calculated) would be described in additional dimensions.
+All temporal dimensions need to include a `trs` or `definition` with a value set to a URI.
+For the `trs`, URI should identify a temporal reference system, whereas for `definition`, the URI should identify the semantic definition of the temporal dimension, and can optionally be accompanied by a `unit`.
+
+For data where the Gregorian calendar and ISO-8601 notation is applicable to the time scale, the `trs` property would be used and set to `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime`,
+(or `https://www.opengis.net/def/uom/ISO-8601/0/Gregorian` for compatibility with OGC API - Features).
+For other temporal scales such as geological time, the `definition` property would be used and set to a different URI such as `https://qudt.org/vocab/quantitykind/Time`.
+The `unit` can also be specified e.g., `https://qudt.org/vocab/unit/MegaYR` for millions of years, with `unitLang` set to "QUDT" (or otherwise using the default UCUM unit language, simply setting `"unit": "Ma"`).
+
 The extent of each component of a coverage for which values can be retrieved, such as a cell in the context of a gridded coverage, should consider the full _region of validity_ or _bounds_ of that component
 to which these values are associated.
 For example, in the case of a gridded coverage whose cells represent an area, the extent spans from the lower to the upper bounds of the areas of all those cells.
