@@ -53,7 +53,7 @@ The `bbox`, `storageCrsBbox` and the interval bounds in the temporal and/or any 
 
 For datasets with one or more temporal dimension, the primary temporal dimension is described by the `temporal` property of the extent, while additional temporal dimensions
 (e.g., the time at which a forecast was calculated) would be described in additional dimensions.
-All temporal dimensions need to include a `trs` or `definition` with a value set to a URI.
+All temporal dimensions need to include a `trs` or `definition` with a value set to a URI, except for the primary temporal dimension which defaults to the ISO-8601 Gregorian calendar date and time if none is specified.
 For the `trs`, URI should identify a temporal reference system, whereas for `definition`, the URI should identify the semantic definition of the temporal dimension, and can optionally be accompanied by a `unit`.
 
 For data where the Gregorian calendar and ISO-8601 notation is applicable to the time scale, the `trs` property would be used and set to `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime`,
