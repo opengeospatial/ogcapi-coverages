@@ -27,6 +27,16 @@
 ^|C |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.
 |===
 
+[[rec_geotiff_nodata]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/geotiff/nodata*
+^|A |Where applicable, regions of no data in the coverage SHOULD be represented using a single no data value (shared by all fields / bands), identified with the `GDAL_NODATA` TIFF tag (42113).
+^|B |For imagery data where pure black is not necessary for the image itself, a no data value of 0 SHOULD be used (using only the existing RGB channels).
+^|C |For RGB imagery data where pure black should be preserved, a separate alpha channel SHOULD be used to encode the lack of data, with values either at full opacity or full translucency,
+except for anti-aliasing along the edges between both.
+|===
+
 ===== GeoTIFF parameters
 
 [[rec_geotiff_compression]]
