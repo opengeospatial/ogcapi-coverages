@@ -85,7 +85,7 @@ https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodat
 or `numericalNominal` providing useful information relevant to how to properly perform interpolation along that dimension.
 |===
 
-==== Collection schema (`/collections/{collectionId}/schema`)
+==== Collection schema
 
 This "Core" requirements class of OGC API - Coverages depends on the "Schemas" requirements class defined in _OGC API - Common - Part 3: Schemas_
 (identical to https://docs.ogc.org/DRAFTS/23-058r1.html[OGC API - Features - Part 5: Schemas]),

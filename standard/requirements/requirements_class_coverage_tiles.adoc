@@ -2,28 +2,25 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-tiles
+2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-tiles
 |Target type |Web API
-|Dependency |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|Dependency |http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets
+|Dependency |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Dependency |https://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets
 |===
 
 === Requirements
 
-==== Coverage tilesets (`/collections/{collectionId}/tiles`)
+==== Coverage tilesets
 The capability to request tiles is defined in the following Requirement:
 
 [[req_coverage_tiles-definition]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/coverage-tiles/tilesets*
-^|A |The coverage SHALL have an associated list of at least one coverage tilesets accessible at +
- `.../{collectionId}/tiles`, conforming to OGC API - Tiles - Part 1: Core
-^|B |The coverage's collection description document at `.../{collectionId}` SHALL include a link with relation type http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
-^|C |This list of coverage tilesets SHALL include a link to the full descriptions of these tilesets accessible at +
- `.../{collectionId}/tiles/{tileMatrixSetId}`
-^|D |The tiles making up the tilesets SHALL be accessible from +
- `.../{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}`
+^|A |The coverage SHALL have an associated list of at least one coverage tilesets accessible, typically at `/collections/{collectionId}/tiles`, conforming to OGC API - Tiles - Part 1: Core
+^|B |The coverage's collection description document at `/collections/{collectionId}` SHALL include a link with relation type https://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
+^|C |This list of coverage tilesets SHALL include a link to the full descriptions of these tilesets, typically accessible at `/collections/{collectionId}/tiles/{tileMatrixSetId}`
+^|D |The tiles making up the tilesets SHALL be accessible from the tiles template described within the tileset, typically at `/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}`
 ^|E |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles specifications
 ^|F |The response to a request for an individual tile SHALL return a subset of the coverage trimmed on the axes defined by the 2D Tile Matrix Set
 to cover the exact geospatial extent of the tile.
