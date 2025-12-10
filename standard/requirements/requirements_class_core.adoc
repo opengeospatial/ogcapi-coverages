@@ -183,16 +183,50 @@ to requesting more data than allowed by the server limits.
 
 ==== Server limits recommendations
 
+Implementations might wish to set certain limits regarding how much data clients can retrieve within a single request.
+This limit may consist of a single total number of values (`maxCells`), or possibly be constrained for an individual dimension (`maxCellsPerDimension`).
+A server can advertise these limits using the service metadata described in https://docs.ogc.org/is/19-072/19-072.html#service-metadata-examples[OGC API - Common - Part 1: Core] with the `service-meta` link relation.
+
+NOTE: The service metadata might be embedded directly within an OpenAPI API definition, meaning that the `service-meta` and `service-desc` links may point to the same JSON document.
+
 [[rec_core-limits]]
 [width="90%",cols="2,6"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/core/limits*
 ^|A |The implementation SHOULD advertise maximum limits for individual dimensions and/or combined data size that it is willing to return in a `coverage` object property of
 an `x-OGC-limits` property of the service metadata `info` object property of a JSON document linked to from the landing page using the `service-meta` link relation.
-^|B |The implementation SHOULD include in this `coverage` property of the service metadata `x-OGC-limits`: `maxWidth`, `maxHeight` and `maxCells` integer properties for
-implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages.
+^|B |The implementation SHOULD include in this `coverage` property of the service metadata `x-OGC-limits`: `maxCellsPerDimension` and `maxCells` integer properties for
+implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages. If absent, the server imposes no limit.
 ^|C |The implementation SHOULD return a 4xx error (e.g., 400 Generic client error, or 413 Content too large) for coverage requests exceeding any of those limits.
 |===
 
-NOTE: An example of service metadata is provided in https://docs.ogc.org/is/19-072/19-072.html#service-metadata-examples[_OGC API – Common – Part 1: Core_].
-The service metadata might be embedded directly within an OpenAPI API definition, meaning that the `service-meta` and `service-desc` links may point to the same JSON document.
+The following is an example of how to include server coverage limits within the service metadata:
+
+```yaml
+info:
+  title: My OGC API - Coverages deployment
+  version: 1.0.0
+  description: This example shows how to provide service metadata including
+    specific limits for OGC API - Coverages
+  x-OGC-limits:
+    type: object
+    properties:
+      coverages:
+        type: object
+        properties:
+          maxCellsPerDimension:
+            type: integer
+            description:
+              Maximum number of cells along a single dimension in the coverage response.
+            example: 8192
+          maxCells:
+            type: integer
+            description:
+              Maximum total number of cells (product of all dimensions) in the coverage response.
+            example: 67108864
+          maxPoints:
+            type: integer
+            description:
+              Maximum number of points within a point cloud coverage response.
+            example: 67108864
+```
