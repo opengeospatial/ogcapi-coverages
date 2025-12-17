@@ -110,4 +110,9 @@ For cell values representing a point instead:
 - `relativeBounds` would be set to `[0, 0]`, and
 - `cellsCount = (highBound - lowBound) / resolution + 1`.
 
+IMPORTANT: The resolution advertised in the `grid` property within the `extent` of the collection description refers to the grid spacing, which might differ from the resolution of the sensors or measurement
+techniques used to capture the original data. This advertised resolution does not necessarily imply suitability for purpose for usage with specific resolution requirements, since
+additional processing that may have already been applied to the data, or the server implementation may automatically perform to return data at that resolution
+(for example, this might happen when re-projecting data with different source resolution throughout its domain, possibly because of data partitions using different CRSs such as UTM zones).
+
 include::requirements/requirements_class_core.adoc[]

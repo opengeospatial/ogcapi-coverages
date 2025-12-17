@@ -161,7 +161,7 @@ four or six comma-separated numbers representing the lower-left and upper right 
 (if returning a temporal slice) or datetime interval (if the response includes a temporal dimension) of the returned coverage.
 |===
 
-==== Query parameter `resolution` (empty values for native resolution)
+==== Query parameter `resolution` (native resolution requested using empty values)
 
 [[req_core-native-resolution]]
 [width="90%",cols="2,6"]

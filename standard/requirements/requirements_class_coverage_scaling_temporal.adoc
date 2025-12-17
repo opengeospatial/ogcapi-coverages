@@ -37,7 +37,7 @@ or for automatic resampling in order to avoid returning too much data (as descri
 
 This guidance also applies to interpolation which could also be performed by clients.
 Including an accurate description of the domain and range in a coverage response provided by the server allows to select a proper interpolation method.
-The collection description and the collection logical schema also provides this information for all fields and dimensions of the full resolution coverage,
+The collection description and the collection logical schema also provides this information for all fields and dimensions of the coverage,
 such as the `x-ogc-variableType` of a particular field, as well as a description of the gridded dimensions,
 including the region of validity of individual grid cells where applicable.
 

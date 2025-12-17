@@ -6,28 +6,26 @@ For the purposes of this document, the following additional terms and definition
 === Coverage
 function which returns values from its range for any direct position within its domain (as defined in OGC Abstract Topic 6)
 
+NOTE: Although a coverage is most often thought of as a regularly gridded data, the internal model of the coverage function may also consist of other things such as
+iregularly gridded data, a point cloud, or a collection of curves, surfaces, or solids, or a purely mathematical function.
+
 === Regular grid
 grid whose grid lines have a constant distance along each grid axis
 
 === Irregular grid
 Grid whose grid lines have individual distances along each grid axis
 
-=== Displaced grid
-grid whose direct positions are topologically aligned to a grid, but whose geometric positions can vary arbitrarily
-
-=== Mesh
-coverage consisting of a collection of curves, surfaces, or solids, respectively
-
 === Partition [of a coverage]
 separately stored coverage acting, by being referenced in the coverage on hand, as one of its components
 
-=== Scene
-component of a coverage with its domain being a subset of the overall coverage for a coverage consisting of multiple scenes, similar to a partition
+=== Resolution [of a grid]
+the distance between data points on a regular grid
 
-(in the context of Earth Observation imagery data products and the _Scenes_ requirements class defined in this standard)
+NOTE: The `resolution` query parameter of this API allows clients to request data resampled to a particular resolution, whether the output is returned in a gridded or non-gridded coverage format,
+but that output data may not be suitable for purposes requiring data at the true resolution being requested.
 
-Unlike Coverage Implementation Schema (CIS) _coverages by partitioning_, scenes are an optional capability of the API with corresponding individual resource paths rather than a potential aspect of a coverage resource.
-A client can either retrieve a coverage for the overall collection or for an individual scene, but will never receive a special "partitioned coverage" response necessitating special handling considerations.
+=== Resolution [of data]
+the smallest difference between observations or measurements that can be meaningfully distinguished, whether the data is actually gridded or not
 
 === (Geometric) Sensor model
 mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated coverage produced by a
@@ -37,7 +35,6 @@ NOTE: Adapted from https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v
 
 === Transformation grid
 grid whose direct positions are given by some transformation algorithm not further specified in this standard
-
 
 === Abbreviated terms
 
