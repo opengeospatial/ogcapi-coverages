@@ -137,8 +137,6 @@ However, in cases where the box spans the anti-meridian (180th meridian) the fir
 The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S) would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]` and in a query as `bbox=160.6,-55.95,-170,-25.89`.
 =================
 
-Note that the server should return an error if a latitude value of `160.0` is used.
-
 If the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.
 
 [[bbox-crs-parameter]]
