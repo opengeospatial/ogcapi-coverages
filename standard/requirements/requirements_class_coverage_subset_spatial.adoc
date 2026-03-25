@@ -55,7 +55,9 @@ be supported to indicate an extent crossing that wrapping point.
 ^|M |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|N |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
 ^|O |Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma-separated)^1^.
-
+^|P |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
+(`resolution` query parameter defined in the corresponding Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
+For example, `subset=time("2020-01-01T15:00")&resolution=time(P1H)` (slicing) would be an invalid request, while `subset=time("2020-01-01T15:00":"2020-01-31T15:00")&resolution=time(P1H)` (trimming).
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
 |===
 
@@ -169,4 +171,61 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 ^|B |This permission applies to both explicit slice operations using subset, as well as to implicit slicing from requesting an output format only supporting
  a lower dimensionality than the data (e.g. requesting a 2D image from a 3D coverage as PNG or GeoTIFF).
 ^|C |A query parameter defined by a custom or standardized extension MAY be made available to enable, disable or alter that behavior.
+|===
+
+IMPORTANT: Slicing (a `subset` specifiying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
+(using the `resolution` query parameter as defined in the relevant Scaling requirements class).
+
+===== Examples of applying the permission for slicing on sparse dimensions
+
+In this first example, a client requests a bounding box for (40 N, 30 E)-(70 N, 50 E), while slicing a date:
+
+`datetime=2025-01-01&f=image/tiff&bbox=30,40,50,70`.
+
+Because the time dimension is sparse due to some satellites only covering some of the Earth's surface on a given day, data is not available for that specific date for some of the
+spatial region covered. In this case, the server can use data from a nearby date to fill those regions.
+
+In this second example, the subsetting operation is a trim, but because the GeoTIFF format is inherently 2D, it implies a "flattening" of the response such that this permission
+also applies:
+
+`Accept: image/tiff`
+
+`GET /collections/sentinel2-l2a/coverage?datetime=2025-01-01/2025-01-31&bbox=30,40,50,70`
+
+The server can then perform a mosaic of the month of January with the most recent images displayed on top.
+
+In a different scenario, the slicing dimension could be space while the trim is performed on the temporal dimension:
+
+`Accept: application/x-netcdf`
+
+`GET /collections/temperature/coverage?datetime=2025-01-01/2025-12-31&subset=lat(30),lon(40)`
+
+The weather data is requested for a specific position of some weather station over the year 2025. For some particular dates, there is no data available from that station,
+but observations are available for nearby stations. The server can then use the nearest station (e.g., at `lat(31),lon(42)`) to fill the gaps within the time series returned.
+
+==== Recommendation for interpolation preference when supporting slicing on sparse dimensions
+
+[[rec_slice_spatial_prefer]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:per-id}* |*/rec/subsetting-spatial/slice-prefer-header*
+^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
+definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being sliced. Example: `Prefer: interpolation=time([ogc-interpolation:nearest])`
+^|C |The implementation SHOULD support an `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
+definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest])`.
+^a|D | The implementation SHOULD consider support the following interpolations methods, with the following meaning in the context of the slicing sparsed dimensions permission:
+
+- `[ogc-interpolation:next]`: Use the next available data point from the sliced dimension,
+- `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,
+- `[ogc-interpolation:nearest-neighbor]`: Use the nearest data point from the sliced dimension,
+- `[ogc-interpolation:linear]`: Perform a linear interpolation between the previous and next available data point from the sliced dimension,
+- `[ogc-interpolation:quadratic]`: Perform a quadaratic interpolation between the previous and next available data point from the sliced dimension,
+- `[ogc-interpolation:none]`: Only return a value if the sliced dimension corresponds exactly to an available data point, return NODATA otherwise (hit or miss)
+^|E | The implementation SHOULD use either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]` when no preference is specified by the client.
+^|F | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+`Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest])`.
+^|G | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
+(note that the handling parameter applies to the request as a whole, rather than to any specific preference).
 |===

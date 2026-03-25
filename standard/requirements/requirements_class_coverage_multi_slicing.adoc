@@ -27,3 +27,6 @@ Temporal Subsetting and General Subsetting requirements classes
 ^|A |For responses in an encoding unsuitable for sparse data or irregular grids (such as GeoTIFF 1.x),
 a regular grid encompassing the overall interval of all slices with null values for coordinates not explicitly requested MAY be used.
 |===
+
+The permission regarding slicing on separate dimensions (<<per_slice_sparse_dimension_spatial>>) and the recommendation regarding supporting the `Prefer:` header
+(<<rec_slice_spatial_prefer>>) for requesting a particular interpolation method also applies for multi-slicing, exactly as if each slice was requested separately.
