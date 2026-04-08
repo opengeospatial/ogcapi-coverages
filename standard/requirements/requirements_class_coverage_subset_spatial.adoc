@@ -211,20 +211,20 @@ but observations are available for nearby stations. The server can then use the 
 ^|*Recommendation {counter:per-id}* |*/rec/subsetting-spatial/slice-prefer-header*
 ^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being sliced. Example: `Prefer: interpolation=time([ogc-interpolation:nearest])`
+definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being sliced. Example: `Prefer: interpolation=time([ogc-interpolation:nearest-neighbor])`
 ^|C |The implementation SHOULD support an `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest])`.
+definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
 ^a|D | The implementation SHOULD consider support the following interpolations methods, with the following meaning in the context of the slicing sparsed dimensions permission:
 
 - `[ogc-interpolation:next]`: Use the next available data point from the sliced dimension,
 - `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,
 - `[ogc-interpolation:nearest-neighbor]`: Use the nearest data point from the sliced dimension,
 - `[ogc-interpolation:linear]`: Perform a linear interpolation between the previous and next available data point from the sliced dimension,
-- `[ogc-interpolation:quadratic]`: Perform a quadaratic interpolation between the previous and next available data point from the sliced dimension,
+- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation between the previous and next available data point from the sliced dimension,
 - `[ogc-interpolation:none]`: Only return a value if the sliced dimension corresponds exactly to an available data point, return NODATA otherwise (hit or miss)
 ^|E | The implementation SHOULD use either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]` when no preference is specified by the client.
 ^|F | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
-`Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest])`.
+`Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
 ^|G | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
 value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
