@@ -71,6 +71,71 @@ MAY automatically downsample the coverage to a suitable resolution instead of re
 NOTE: A client retrieving a coverage from an implementation advertising support for this "General Scaling" requirements class should explicitly use e.g., `resolution=pressure()` if it wants to ensure
 retrieving the coverage in its native resolution and prefers receiving an error instead of a downsampled version of the data.
 
+==== Recommendation for interpolation preference when scaling on a general dimension
+
+[[rec_coverage_scaling-general_prefer]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-general/scale-prefer-header*
+^|A |When supporting scaling on a general dimension (dimension other than spatial or temporal), the Implementation SHOULD understand a `Prefer:` header
+(as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
+definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being scaled. Example: `Prefer: interpolation=pressure([ogc-interpolation:nearest-neighbor])`
+^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
+definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
+^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
+field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
+`Prefer: properties-interpolation=temperature(pressure:[ogc-interpolation:linear])`.
+^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the dimension being scaled:
+
+- `[ogc-interpolation:linear]`: Perform a linear interpolation (weighted average) between the values being represented along the scaled dimension,
+- `[ogc-interpolation:nearest-neighbor]`: Use the available value nearest to the center within the values being represented along the scaled dimension,
+- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation between the previous and next available data point from the scaled dimension,
+- `[ogc-interpolation:mean]`: Use the mean of all values being represented along the scaled dimension,
+- `[ogc-interpolation:minimum]`: Use the minimum of all values being represented along the scaled dimension,
+- `[ogc-interpolation:maximum]`: Use the maximum of all values being represented along the scaled dimension,
+- `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
+^|F | The implementation SHOULD use either `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]` when no preference is specified by the client for fields with a variable
+type `continuous` along a continuous dimension, and `[ogc-interpolation:nearest-neighbor]` otherwise.
+^|G | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+Preference-Applied: interpolation=pressure([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
+^|H | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
+(note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+|===
+
+==== Permission to only support certain resolutions
+
+[[per_coverage_scaling-general-permission-specific-resolutions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/coverage-scaling-general/specific*
+^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property of the dimension being scaled (any resolution is considered available if the sub-property is missing).
+The units of each resolution are the units specified in the `unit` property of the dimension, the units implied by the semantic `definition`, the units implied
+by the Temporal Reference System (`trs`), or the units implied by the Vertical Reference System (`vrs`), just like the `resolution` sub-property.
+^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution more detailed than the `resolution` declared for the dimension.
+^|C |Implementations MAY return either the closest resolution available, or a 4xx client error when requesting a resolution differing by more than 5% from any listed resolution.
+|===
+
+NOTE: In general, the Scaling requirements classes are intended primarily for clients to request downsampled (less detailed) data.
+Clients wishing to upsample data can request the native resolution and perform upsampling on their end, saving both bandwidth and server processing resources.
+
+Example of specific resolutions available for a pressure dimension (using hectopascals here):
+
+```
+      "pressure" : {
+         "definition": "https://qudt.org/vocab/quantitykind/AtmosphericPressure",
+         "unit" : "hPa",
+         "interval" : [ [ 1.0, 1001.0 ] ],
+         "grid" : {
+            "cellsCount" : 21,
+            "resolution": 50,
+            "availableResolutions": [ 50, 100, 250 ]
+         }
+      }
+   }
+```
+
 ==== Permission to support legacy scaling query parameters
 
 [[per_coverage_scaling-general-permission-legacy]]

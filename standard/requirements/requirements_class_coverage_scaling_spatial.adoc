@@ -114,13 +114,16 @@ retrieving the coverage in its native spatial resolution and prefers receiving a
 [[rec_coverage_scaling-spatial_prefer]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/scale-prefer-header*
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/scale-prefer-header*
 ^|A |When supporting scaling on spatial dimensions, the Implementation SHOULD understand a `Prefer:` header (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being scaled. Example: `Prefer: interpolation=time([ogc-interpolation:nearest-neighbor])`
-^|C |The implementation SHOULD support an `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
+definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being scaled. Example: `Prefer: interpolation=lat([ogc-interpolation:nearest-neighbor]),lon([ogc-interpolation:nearest-neighbor])`
+^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
 definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
-^a|D | The implementation SHOULD consider support the following interpolations methods, with the following meaning in the context of the dimension being scaled:
+^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
+field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
+`Prefer: properties-interpolation=temperature(lat:[ogc-interpolation:linear],lon:[ogc-interpolation:linear])`.
+^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the dimension being scaled:
 
 - `[ogc-interpolation:linear]`: Perform a linear interpolation (weighted average) between the values being represented along the scaled dimension,
 - `[ogc-interpolation:nearest-neighbor]`: Use the available value nearest to the center within the values being represented along the scaled dimension,
@@ -129,11 +132,11 @@ definition server's (https://www.opengis.net/def/interpolation) for specific fie
 - `[ogc-interpolation:minimum]`: Use the minimum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:maximum]`: Use the maximum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
-^|E | The implementation SHOULD use either `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]` when no preference is specified by the client for fields with a variable
+^|F | The implementation SHOULD use either `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]` when no preference is specified by the client for fields with a variable
 type `continuous`, and `[ogc-interpolation:nearest-neighbor]` otherwise.
-^|F | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
-Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
-+^|G | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+^|G | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+Preference-Applied: interpolation=lat([ogc-interpolation:linear],lon([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
+^|H | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
 value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
 |===
@@ -145,18 +148,21 @@ value of `handling=strict` SHOULD return a 4xx error if the server is not able t
 |===
 ^|*Permission {counter:per-id}* |*/per/coverage-scaling-spatial/specific*
 ^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property of the dimension being scaled (any resolution is considered available if the sub-property is missing).
+The units of each resolution are the units of the native (from the `storageCrs` if specified, otherwise CRS84), just like the `resolution` sub-property.
 ^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution outside of the `maxCellSize` and `minCellSize` interval.
-^|C |Implementations MAY return either the closest resolution available, or a 4xx client error when requesting a resolution differing by more than 5% from any listed resolution.
+^|C |When neither `availableResolutions` nor `minCellSize` is present, implementations MAY return a 4xx error for a requested resolution more detailed than the `resolution` declared for the dimension.
+^|D |Implementations MAY return either the closest resolution available, or a 4xx client error when requesting a resolution differing by more than 5% from any listed resolution.
 |===
 
 NOTE: In general, the Scaling requirements classes are intended primarily for clients to request downsampled (less detailed) data.
-Clients wishing to upsample data can request the native resolution and perform upsampling on their, saving both bandwidth and server processing resources.
+Clients wishing to upsample data can request the native resolution and perform upsampling on their end, saving both bandwidth and server processing resources.
 
-Example of specific spatial resolutions available:
+Example of specific spatial resolutions available (in degrees for CRS84 here):
 
 ```
    "spatial":
    {
+      "bbox" : [ [ -180, -90, 180, 90 ] ],
       "grid": [
          { "cellsCount": 131072, "resolution": 0.00274658203125, "availableResolutions" : [ 0.00274658203125, 0.0054931640625, 0.010986328125 ] },
          { "cellsCount": 65536, "resolution": 0.00274658203125, "availableResolutions" : [ 0.00274658203125, 0.0054931640625, 0.010986328125 ] }
