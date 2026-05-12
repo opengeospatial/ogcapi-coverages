@@ -15,7 +15,7 @@
 The `subset` selects a spatial region consisting of any cells of the coverage whose geometry's interior intersects with the interior or boundary of the specified spatial region.
 Individual cells may occupy an area on the ground (the value of the cell represents an area), or an infinitely small point (the value of the cell represents a point).
 
-[[req_coverage_subset_spatial-definition]]
+[[req_subsetting-spatial_subset]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset*
@@ -74,10 +74,10 @@ Because the definitions of CRSs of the same type sometimes use different names t
 this Standard recommends that Implementations recognize common equivalent names to facilitate the task of clients to identify a particular dimension.
 Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases, but only the axis names specified in the above requirement.
 
-[[rec_coverage_subset-crs-axis-aliases]]
+[[rec_subsetting-spatial_subset-crs-axis-aliases]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:per-id}* |*/rec/subsetting-spatial/subset-crs-axis-aliases*
+^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/subset-crs-axis-aliases*
 ^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous of the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
 ^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
 ^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.
@@ -90,7 +90,7 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 
 ==== Query parameter `subset-crs`
 
-[[req_coverage_subset-subset-crs]]
+[[req_subsetting-spatial_subset-crs]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-crs*
@@ -110,7 +110,7 @@ The parameter value consists of four coordinates which are to be interpreted as 
 or six coordinates to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`) by default (unless a `bbox-crs` parameter is specified).
 The equivalent `subset` parameter is simply the trimming operation from the first latitude to the second latitude, the first longitude to the second longitude, and the first height above the ellipsoid to the second height (if applicable).
 
-[[bbox-definition]]
+[[req_subsetting-spatial_bbox-definition]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-definition*
@@ -144,7 +144,7 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 [[bbox-crs-parameter]]
 ==== Query parameter `bbox-crs`
 
-[[bbox-crs-definition]]
+[[req_subsetting-spatial_bbox-crs]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-crs*
@@ -158,7 +158,7 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 
 ==== Permission for Slicing Sparse Dimensions
 
-[[per_slice_sparse_dimension_spatial]]
+[[per_subsetting-spatial_slice-sparse-dimension]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/subsetting-spatial/slice-sparse-dimension*
@@ -180,20 +180,24 @@ IMPORTANT: Slicing (a `subset` specifiying a single value for a particular dimen
 
 In this example, the slicing dimension is space while the trim is performed on the temporal dimension:
 
-`Accept: application/x-netcdf`
-
-`GET /collections/temperature/coverage?datetime=2025-01-01/2025-12-31&subset=lat(30),lon(40)`
+[source,http]
+----
+GET /collections/temperature/coverage?datetime=2025-01-01/2025-12-31&subset=lat(30),lon(40)
+Accept: application/x-netcdf
+----
 
 The weather data is requested for a specific position of some weather station over the year 2025. For some particular dates, there is no data available from that station,
 but observations are available for nearby stations. The server can then use the nearest station (e.g., at `lat(31),lon(42)`) to fill the gaps within the time series returned.
 
 ==== Recommendation for interpolation preference when supporting slicing on sparse dimensions
 
-[[rec_slice_spatial_prefer]]
+[[rec_subsetting-spatial_slice-prefer-header]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/slice-prefer-header*
-^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
+^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header
+(as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
+<<conventions-interpolation-methods, interpolation method>>.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
 definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being sliced. Example: `Prefer: interpolation=lat([ogc-interpolation:linear]),lon([ogc-interpolation:linear])`
 ^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
@@ -209,10 +213,52 @@ field and dimension, which will override interpolation for that field only for t
 - `[ogc-interpolation:linear]`: Perform a linear interpolation between the previous and next available data point from the sliced dimension,
 - `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation between the previous and next available data point from the sliced dimension,
 - `[ogc-interpolation:none]`: Only return a value if the sliced dimension corresponds exactly to an available data point, return NODATA otherwise (hit or miss)
-^|F | The implementation SHOULD use either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]` when no preference is specified by the client.
-^|G | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+|===
+
+==== Recommendation for default interpolation method when supporting slicing on sparse dimensions
+
+[[rec_subsetting-spatial_slice-default-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/slice-default-interpolation*
+^|A | The implementation SHOULD use either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`
+when no preference is specified by the client.
+|===
+
+==== Requirement for indicating a preference has been applied when supporting slicing on sparse dimensions
+
+[[req_subsetting-spatial_slice-preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/slice-preference-applied*
+^|A | If an Implementation supports <<rec_subsetting-spatial_slice-prefer-header, client preferences for interpolation>>,
+the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
 `Preference-Applied: interpolation=lat([ogc-interpolation:linear]),lon([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
-^|H | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
-value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
+|===
+
+==== Requirement for strict or lenient preference handling when supporting slicing on sparse dimensions
+
+[[req_subsetting-spatial_slice-preference-handling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/slice-preference-handling*
+^|A | If an Implementation supports <<rec_subsetting-spatial_slice-prefer-header, client preferences for interpolation>>,
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
+interpolation preferences.
+|===
+
+==== Permission for only supporting aligned spatial interpolation preferences
+
+[[per_subsetting-spatial_aligned-spatial-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/aligned-spatial-interpolation*
+^|A |When implementing spatial interpolation preferences for slicing on sparse dimensions,
+the Implementation MAY only support aligned preferences
+between the multiple spatial dimensions, such as the latitude (`lat`) and longitude (`lon`), or the Easting (`E`) and Northing (`N`).
+^|B |The Implementation MAY ignore preferences if the client indicates distinct preferences for the different axes. In this case,
+the `Preference-Applied:` response header will not be included for those specific axes where the preference was ignored.
 |===

@@ -11,10 +11,10 @@
 
 ==== Query parameter `resolution`
 
-[[req_coverage_scaling-temporal-resolution]]
+[[req_scaling-temporal_resolution]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-scaling-temporal/resolution*
+^|*Requirement {counter:req-id}* |*/req/scaling-temporal/resolution*
 ^|A |For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for the primary temporal dimension using ISO 8601 period notation
 (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
@@ -41,7 +41,7 @@ The collection description and the collection logical schema also provides this 
 such as the `x-ogc-variableType` of a particular field, as well as a description of the gridded dimensions,
 including the region of validity of individual grid cells where applicable.
 
-[[rec_coverage_scaling-temporal-interpolation]]
+[[rec_scaling-temporal-interpolation]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:per-id}* |*/rec/scaling-temporal/interpolation*
@@ -57,10 +57,10 @@ applied to the source data to produce that output, to the extent that the negoti
 
 ==== Downsampling permission
 
-[[per_coverage_scaling-temporal-permission]]
+[[per_scaling-temporal_downsampling]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:per-id}* |*/per/coverage-scaling-temporal/downsampling*
+^|*Permission {counter:per-id}* |*/per/scaling-temporal/downsampling*
 ^|A |In the case where a response to a request without a `resolution` parameter would be larger than an advertised server limit, an implementation
 MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
 |===
@@ -76,7 +76,7 @@ For convenience, this Standard recommends that Implementations recognize the dif
 Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
 but should always use `time` to refer to the primary temporal dimension as specified in the above requirement.
 
-[[rec_coverage_scaling-temporal-aliases]]
+[[rec_scaling-temporal_resolution-temporal-aliases]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/scaling-temporal/resolution-temporal-aliases*
@@ -87,11 +87,13 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 
 ==== Recommendation for interpolation preference when scaling temporally
 
-[[rec_coverage_scaling-temporal_prefer]]
+[[rec_scaling-temporal_prefer-header]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:rec-id}* |*/rec/scaling-temporal/scale-prefer-header*
-^|A |When supporting scaling on a temporal dimension, the Implementation SHOULD understand a `Prefer:` header (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-temporal/prefer-header*
+^|A |When supporting scaling on a temporal dimension, the Implementation SHOULD understand a `Prefer:` header
+(as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
+<<conventions-interpolation-methods, interpolation method>>.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
 definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being scaled. Example: `Prefer: interpolation=time([ogc-interpolation:nearest-neighbor])`
 ^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
@@ -108,29 +110,66 @@ field and dimension, which will override interpolation for that field only for t
 - `[ogc-interpolation:minimum]`: Use the minimum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:maximum]`: Use the maximum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
-^|F | The implementation SHOULD use either `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]` when no preference is specified by the client for fields with a variable
+|===
+
+==== Recommendation for default interpolation method when scaling temporally
+
+[[rec_scaling-temporal_default-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-temporal/default-interpolation*
+^|A | The implementation SHOULD default to a weighted interpolation method,
+such as `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]`,
+when no preference is specified by the client for fields with a variable
 type `continuous`, and `[ogc-interpolation:nearest-neighbor]` otherwise.
-^|G | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+|===
+
+==== Requirement for indicating a preference has been applied when scaling temporally
+
+[[req_scaling-temporal_preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-temporal/preference-applied*
+^|A | If an Implementation supports <<rec_scaling-temporal_prefer-header, client preferences for interpolation>>,
+the implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
 Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
-^|H | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
-value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
+|===
+
+==== Requirement for strict or lenient preference handling when scaling temporally
+
+[[req_scaling-temporal_preference-handling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-temporal/preference-handling*
+^|A | If an Implementation supports <<rec_scaling-temporal_prefer-header, client preferences for interpolation>>,
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
+interpolation preferences.
 |===
 
 ==== Permission to only support certain resolutions
 
-[[per_coverage_scaling-temporal-permission-specific-resolutions]]
+[[per_scaling-temporal_specific-resolutions]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:per-id}* |*/per/coverage-scaling-temporal/specific*
-^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property of the dimension being scaled (any resolution is considered available if the sub-property is missing).
+^|*Permission {counter:per-id}* |*/per/scaling-temporal/specific-resolutions*
+^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property
+(as defined in the https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions of OGC API - Common - Part 2])
+of the dimension being scaled (any resolution is considered available if the sub-property is missing).
 The units of each resolution are the units of the Temporal Reference System (`trs`), just like the `resolution` sub-property.
-^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution more detailed than the `resolution` declared for the dimension.
-^|C |Implementations MAY return either the closest resolution available, or a 4xx client error when requesting a resolution differing by more than 5% from any listed resolution.
+^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution more detailed than the native `resolution` declared for the dimension.
+^|C |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
 |===
 
-NOTE: In general, the Scaling requirements classes are intended primarily for clients to request downsampled (less detailed) data.
-Clients wishing to upsample data can request the native resolution and perform upsampling on their end, saving both bandwidth and server processing resources.
+NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser)
+data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
+or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
+processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
+or beyond a certain scaling factor past the native resolution. However, for some use cases, support for data upsampling server-side
+might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
+climate forecast model using computational fluid dynamics.
 
 Example of specific temporal resolutions available (using ISO-8601 periods for the Gregorian Calendar / UTC default here):
 
@@ -144,10 +183,10 @@ Example of specific temporal resolutions available (using ISO-8601 periods for t
 
 ==== Permission to support legacy scaling query parameters
 
-[[per_coverage_scaling-temporal-permission-legacy]]
+[[per_scaling-temporal_legacy]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:per-id}* |*/per/coverage-scaling-temporal/legacy*
+^|*Permission {counter:per-id}* |*/per/scaling-temporal/legacy*
 ^|A |Implementations MAY additionally support the `scale-factor` and `scale-axes` legacy query parameters expressing resolution as the factor by which the data's native resolution has been downsampled (a factor of 2 meaning two times coarser).
 ^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension.
 |===

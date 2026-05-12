@@ -126,6 +126,10 @@ https://www.opengis.net/def/interpolation. The interpolation methods referenced 
 
 where, as an example, the equivalent CURIE form for linear interpolation is `[ogc-interpolation:linear]`.
 
+This list is not exhaustive -- additional interpolation methods may be proposed for addition to the OGC definition server,
+and different URIs may be understood by specific implementations when an adequate URI has not yet been registered for other
+supported interpolation methods.
+
 === Use of HTTPS
 
 For simplicity, this document in general only refers to the HTTP protocol. This is not meant to exclude the use of HTTPS and simply is a shorthand notation for "HTTP or HTTPS." In fact, most servers are expected to use https://tools.ietf.org/html/rfc2818[HTTPS], not https://www.ietf.org/rfc/rfc2616.txt[HTTP].

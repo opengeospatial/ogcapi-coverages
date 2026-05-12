@@ -1,8 +1,8 @@
-[[rc_table_,multi_slicing]]
+[[rc_table_scaling_spatial]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/multi-slicing
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-spatial
 |Target type |Web API
 |Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |===
@@ -11,10 +11,10 @@
 
 ==== Query parameter `resolution`
 
-[[req_coverage_scaling-spatial-resolution]]
+[[req_scaling-spatial_resolution]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-scaling-spatial/resolution*
+^|*Requirement {counter:req-id}* |*/req/scaling-spatial/resolution*
 ^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for one or more of the spatial dimensions in positive units of the spatial CRS
 (as well as potentially supporting additional dimensions specified by other requirements classes).
 ^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
@@ -35,10 +35,10 @@ returning those different fields together at these different resolutions, the Im
 
 ==== Query parameters `width` and `height`
 
-[[req_coverage_scaling-spatial-width_and_height]]
+[[req_scaling-spatial_width-and-height]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-scaling-spatial/width-and-height*
+^|*Requirement {counter:req-id}* |*/req/scaling-spatial/width-and-height*
 ^|A |For coverages with a spatial dimension corresponding to the horizontal spatial axis as represented on a 2D map, such as longitude or easting, the operation SHALL support a parameter `width` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
 ^|B |For coverages with a spatial dimension corresponding to the vertical spatial axis as represented on a 2D map, such as latitude or northing, the operation SHALL support a parameter `height` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
 ^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by provided scaling  parameters, the original number of sample values for unspecified axes, and any defined server limits.
@@ -52,7 +52,7 @@ Because the definitions of CRSs of the same type sometimes use different names t
 this Standard recommends that Implementations recognize common equivalent names to facilitate the task of clients to identify a particular dimension.
 Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases, but only the axis names specified in the above requirement.
 
-[[rec_coverage_scaling-crs-axis-aliases]]
+[[rec_scaling-spatial_resolution-crs-axis-aliases]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/resolution-crs-axis-aliases*
@@ -80,7 +80,7 @@ The collection description and the collection logical schema also provides this 
 such as the `x-ogc-variableType` of a particular field, as well as a description of the gridded dimensions,
 including the region of validity of individual grid cells where applicable.
 
-[[rec_coverage_scaling-spatial-interpolation]]
+[[rec_scaling-spatial_interpolation]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/interpolation*
@@ -96,10 +96,10 @@ applied to the source data to produce that output, to the extent that the negoti
 
 ==== Downsampling permission
 
-[[per_coverage_scaling-spatial-permission]]
+[[per_scaling-spatial_downsampling]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:per-id}* |*/per/coverage-scaling-spatial/downsampling*
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/downsampling*
 ^|A |In the case where a response to a request without a `resolution`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
 MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
 ^|B |In the case where a `resolution`, `width` or `height` does not explicitly specify dimensions for all spatial axes of the coverage, an implementation MAY automatically proportionately
@@ -111,11 +111,13 @@ retrieving the coverage in its native spatial resolution and prefers receiving a
 
 ==== Recommendation for interpolation preference when scaling spatially
 
-[[rec_coverage_scaling-spatial_prefer]]
+[[rec_scaling-spatial_prefer-header]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/scale-prefer-header*
-^|A |When supporting scaling on spatial dimensions, the Implementation SHOULD understand a `Prefer:` header (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred interpolation method.
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/prefer-header*
+^|A |When supporting scaling on spatial dimensions, the Implementation SHOULD understand a `Prefer:` header
+(as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
+<<conventions-interpolation-methods, interpolation method>>.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
 definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being scaled. Example: `Prefer: interpolation=lat([ogc-interpolation:nearest-neighbor]),lon([ogc-interpolation:nearest-neighbor])`
 ^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
@@ -132,30 +134,79 @@ field and dimension, which will override interpolation for that field only for t
 - `[ogc-interpolation:minimum]`: Use the minimum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:maximum]`: Use the maximum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
-^|F | The implementation SHOULD use either `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]` when no preference is specified by the client for fields with a variable
+|===
+
+==== Recommendation for default interpolation method when scaling spatially
+
+[[rec_scaling-spatial_default-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/default-interpolation*
+^|A | The implementation SHOULD default to a weighted interpolation method,
+such as `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]`,
+when no preference is specified by the client for fields with a variable
 type `continuous`, and `[ogc-interpolation:nearest-neighbor]` otherwise.
-^|G | The implementation SHOULD use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+|===
+
+==== Requirement for indicating a preference has been applied when scaling spatially
+
+[[req_scaling-spatial_preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-spatial/preference-applied*
+^|A | If an Implementation supports <<rec_scaling-spatial_prefer-header, client preferences for interpolation>>,
+the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
 Preference-Applied: interpolation=lat([ogc-interpolation:linear],lon([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
-^|H | The implementation SHOULD support the `Prefer: handling` parameter where a value of `handling=lenient` would simply ignore an unsupported preference, while a
-value of `handling=strict` SHOULD return a 4xx error if the server is not able to fulfill the preference of the client
+|===
+
+==== Requirement for strict or lenient preference handling when scaling spatially
+
+[[req_scaling-spatial_preference-handling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-spatial/preference-handling*
+^|A | If an Implementation supports <<rec_scaling-spatial_prefer-header, client preferences for interpolation>>,
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
+interpolation preferences.
+|===
+
+==== Permission for only supporting aligned spatial interpolation preferences
+
+[[per_scaling-spatial_aligned-spatial-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/aligned-spatial-interpolation*
+^|A |When implementing spatial interpolation preferences for scaling, the Implementation MAY only support aligned preferences
+between the multiple spatial dimensions, such as the latitude (`lat`) and longitude (`lon`), or the Easting (`E`) and Northing (`N`).
+^|B |The Implementation MAY ignore preferences if the client indicates distinct preferences for the different axes. In this case,
+the `Preference-Applied:` response header will not be included for those specific axes where the preference was ignored.
 |===
 
 ==== Permission to only support certain resolutions
 
-[[per_coverage_scaling-spatial-permission-specific-resolutions]]
+[[per_scaling-spatial_specific-resolutions]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:per-id}* |*/per/coverage-scaling-spatial/specific*
-^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property of the dimension being scaled (any resolution is considered available if the sub-property is missing).
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/specific-resolutions*
+^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property
+(as defined in the https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions of OGC API - Common - Part 2])
+of the dimension being scaled (any resolution is considered available if the sub-property is missing).
 The units of each resolution are the units of the native (from the `storageCrs` if specified, otherwise CRS84), just like the `resolution` sub-property.
 ^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution outside of the `maxCellSize` and `minCellSize` interval.
-^|C |When neither `availableResolutions` nor `minCellSize` is present, implementations MAY return a 4xx error for a requested resolution more detailed than the `resolution` declared for the dimension.
-^|D |Implementations MAY return either the closest resolution available, or a 4xx client error when requesting a resolution differing by more than 5% from any listed resolution.
+^|C |When neither `availableResolutions` nor `minCellSize` is present, implementations MAY return a 4xx error for a requested resolution more detailed than the native `resolution` declared for the dimension.
+^|D |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
 |===
 
-NOTE: In general, the Scaling requirements classes are intended primarily for clients to request downsampled (less detailed) data.
-Clients wishing to upsample data can request the native resolution and perform upsampling on their end, saving both bandwidth and server processing resources.
+NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser)
+data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
+or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
+processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
+or beyond a certain scaling factor past the native resolution. However, for some use cases, support for data upsampling server-side
+might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
+climate forecast model using computational fluid dynamics.
 
 Example of specific spatial resolutions available (in degrees for CRS84 here):
 
@@ -172,10 +223,10 @@ Example of specific spatial resolutions available (in degrees for CRS84 here):
 
 ==== Permission to support legacy scaling query parameters
 
-[[per_coverage_scaling-spatial-permission-legacy]]
+[[per_scaling-spatial_legacy]]
 [width="90%",cols="2,6a"]
 |===
-^|*Permission {counter:per-id}* |*/per/coverage-scaling-spatial/legacy*
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/legacy*
 ^|A |Implementations MAY additionally support the `scale-factor` and `scale-axes` legacy query parameters expressing resolution as the factor by which the data's native resolution has been downsampled. For example, `scale-factor=2.0` meaning two times coarser; `scale-axes=Lat(1),Lon(1)` means native spatial resolution for a 2D geographic CRS.
 ^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension. For example, `scale-size=Lat(300),Lon(400)` means 400 samples across the longitude axis and 300 samples across the latitude axis.
 |===

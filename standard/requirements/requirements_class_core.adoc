@@ -134,7 +134,7 @@ or `numericalNominal` providing useful information relevant to how to properly p
 
 ==== Coverage data retrieval
 
-[[req_core-get_coverage]]
+[[req_core_get-coverage]]
 [width="90%",cols="2,6"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/get-coverage*
@@ -148,11 +148,24 @@ or `numericalNominal` providing useful information relevant to how to properly p
 (see Field Selection requirements class), the `defaultFields` if specified in the collection description, or otherwise the `x-ogc-propertySeq` in the collection schema.
 |===
 
-==== Response headers
+==== Recommendation to use RFC 7807 for JSON error reports
 
-[[req_core-coverage_response_headers]]
+[[rec_core_json-errors]]
 [width="90%",cols="2,6"]
 |===
+^|*Recommendation {counter:rec-id}* |*/rec/core/json-errors*
+^|A | For error situations, an implementation SHOULD return error responses based on https://www.rfc-editor.org/rfc/rfc7807.txt[RFC 7807],
+with a `Content-Type: application/problem+json` as also recommended in
+https://docs.ogc.org/is/19-072/19-072.html#mediatype-problems[OGC API - Common - Part 1],
+or a corresponding HTML representation when the content negotiation favors HTML over JSON (e.g., from a browser request).
+|===
+
+==== Response headers
+
+[[req_core_response-headers]]
+[width="90%",cols="2,6"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/response-headers*
 ^|A |The coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response, except if the content is in the https://www.opengis.net/def/crs/OGC/1.3/CRS84 CRS.
 ^|B |If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual geospatial boundary of the coverage.
 ^|C |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain

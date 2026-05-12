@@ -72,6 +72,10 @@ include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 === Overview
 
 The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more dimensions beyond spatial and the primary temporal dimension.
+These additional dimensions are named as described as additional property keys besides `"spatial"` and `"temporal"` in the `"extent"` section of the collection description,
+as specified by the
+https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions requirements class of OGC API - Common - Part 2: Geospatial Data].
+
 With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 

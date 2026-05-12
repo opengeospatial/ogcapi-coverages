@@ -37,7 +37,9 @@ include::requirements/requirements_class_coverage_scaling_temporal.adoc[]
 
 The "General Scaling" Requirements Class defines the `resolution` query parameter for additional dimensions beyond 3D space and the primary temporal dimension
 for retrieving a coverage at a specific resolution for those dimensions.
-These additional dimensions are named as described as additional property keys besides `"spatial"` and `"temporal"` in the `"extent"` section of the collection description.
+These additional dimensions are named as described as additional property keys besides `"spatial"` and `"temporal"` in the `"extent"` section of the collection description,
+as specified by the
+https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions requirements class of OGC API - Common - Part 2: Geospatial Data].
 Additional temporal dimensions support the ISO 8601 period notation if its temporal reference system (`trs`)
 is specified as `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime`.
 
