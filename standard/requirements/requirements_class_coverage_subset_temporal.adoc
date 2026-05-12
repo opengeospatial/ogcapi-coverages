@@ -195,7 +195,7 @@ The server can then perform a mosaic of the month of January with the most recen
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/subsetting-temporal/slice-prefer-header*
-^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header
+^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` request header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC

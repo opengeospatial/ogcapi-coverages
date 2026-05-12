@@ -69,8 +69,9 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 [[scaling-spatial-interpolation-recommendation]]
 ==== Recommendation for interpolation guidance
 
-This Core part of the OGC API - Coverages Standard does not define a mechanism for the client to request a specific interpolation method.
-However, the following recommendation provides guidance for implementations such as some important considerations to take into account when performing interpolation.
+This Core part of the OGC API - Coverages Standard does not require the server to implement a mechanism allowing a client to request a specific interpolation method,
+but it does recommend supporting a `Prefer:` request header for the client to indicate a preference.
+The following recommendation also provides guidance for implementations such as some important considerations to take into account when performing interpolation.
 This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
 or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
 
@@ -115,7 +116,7 @@ retrieving the coverage in its native spatial resolution and prefers receiving a
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/prefer-header*
-^|A |When supporting scaling on spatial dimensions, the Implementation SHOULD understand a `Prefer:` header
+^|A |When supporting scaling on spatial dimensions, the Implementation SHOULD understand a `Prefer:` request header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
 ^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
