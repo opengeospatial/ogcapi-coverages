@@ -198,10 +198,10 @@ but observations are available for nearby stations. The server can then use the 
 ^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
-^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being sliced. Example: `Prefer: interpolation=lat([ogc-interpolation:linear]),lon([ogc-interpolation:linear])`
-^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific dimensions being sliced. Example: `Prefer: interpolation=lat([ogc-interpolation:linear]),lon([ogc-interpolation:linear])`
+^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
 ^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
 field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
 `Prefer: properties-interpolation=temperature(lat:[ogc-interpolation:linear],lon:[ogc-interpolation:linear])`.

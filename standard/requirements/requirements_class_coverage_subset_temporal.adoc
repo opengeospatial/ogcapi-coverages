@@ -175,7 +175,7 @@ In this first example, a client requests a bounding box for (40 N, 30 E)-(70 N, 
 
 `datetime=2025-01-01&f=image/tiff&bbox=30,40,50,70`.
 
-Because the time dimension is sparse due to some satellites only covering some of the Earth's surface on a given day, data is not available for that specific date for some of the
+Because the primary temporal dimension is sparse due to some satellites only covering some of the Earth's surface on a given day, data is not available for that specific date for some of the
 spatial region covered. In this case, the server can use data from a nearby date to fill those regions.
 
 In this second example, the subsetting operation is a trim, but because the GeoTIFF format is inherently 2D, it implies a "flattening" of the response such that this permission
@@ -198,11 +198,11 @@ The server can then perform a mosaic of the month of January with the most recen
 ^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
-^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being sliced. Example: `Prefer: interpolation=time([ogc-interpolation:linear])`
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific dimensions being sliced. Example: `Prefer: interpolation=time([ogc-interpolation:linear])`
 ^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method for specifics field being returned,
-which will override interpolation methods specified in any `interpolation` preference for any dimension, using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation). Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
+which will override interpolation methods specified in any `interpolation` preference for any dimension, using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1). Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
 ^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
 field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
 `Prefer: properties-interpolation=landCover(time:[ogc-interpolation:nearest-neighbor])`.

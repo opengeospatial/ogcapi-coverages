@@ -80,10 +80,10 @@ retrieving the coverage in its native resolution and prefers receiving an error 
 ^|A |When supporting scaling on a general dimension (dimension other than spatial or temporal), the Implementation SHOULD understand a `Prefer:` header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
-^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific dimensions being scaled. Example: `Prefer: interpolation=pressure([ogc-interpolation:nearest-neighbor])`
-^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI from the OGC
-definition server's (https://www.opengis.net/def/interpolation) for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific dimensions being scaled. Example: `Prefer: interpolation=pressure([ogc-interpolation:nearest-neighbor])`
+^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
 ^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
 field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
 `Prefer: properties-interpolation=temperature(pressure:[ogc-interpolation:linear])`.
@@ -123,7 +123,7 @@ type `continuous` along a continuous dimension, and `[ogc-interpolation:nearest-
 ^|*Requirement {counter:req-id}* |*/req/scaling-general/preference-applied*
 ^|A | If an Implementation supports <<rec_scaling-general_prefer-header, client preferences for interpolation>>,
 the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
-Preference-Applied: interpolation=pressure([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
+`Preference-Applied: interpolation=pressure([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
 |===
 
 ==== Requirement for strict or lenient preference handling when scaling on a general dimension
@@ -154,7 +154,7 @@ by the Temporal Reference System (`trs`), or the units implied by the Vertical R
 ^|C |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
 |===
 
-NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser)
+NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser resolution)
 data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
 or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
 processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
@@ -164,7 +164,8 @@ climate forecast model using computational fluid dynamics.
 
 Example of specific resolutions available for a pressure dimension (using hectopascals here):
 
-```
+[source,json]
+----
       "pressure" : {
          "definition": "https://qudt.org/vocab/quantitykind/AtmosphericPressure",
          "unit" : "hPa",
@@ -176,7 +177,7 @@ Example of specific resolutions available for a pressure dimension (using hectop
          }
       }
    }
-```
+----
 
 ==== Permission to support legacy scaling query parameters
 
