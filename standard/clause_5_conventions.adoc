@@ -104,25 +104,25 @@ Recommendations for supporting a `Prefer:` request header in the <<rc_scaling_sp
 interpolation methods using a URI (or CURIE) referencing interpolation methods registered on the OGC definition server at
 https://www.opengis.net/def/interpolation. The interpolation methods referenced in this document are:
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/none**: Only return a value if an exact data point is available, return NODATA otherwise (hit or miss)
+* **https://www.opengis.net/def/interpolation/OGC/1/none**: Only return a value if an exact data point is available, return NODATA otherwise (hit or miss)
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/linear**: Perform a linear interpolation (weighted average) between the values being represented,
+* **https://www.opengis.net/def/interpolation/OGC/1/linear**: Perform a linear interpolation (weighted average) between the values being represented,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/nearest-neighbor**: Use the nearest data point,
+* **https://www.opengis.net/def/interpolation/OGC/1/nearest-neighbor**: Use the nearest data point,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/quadratic**: Perform a quadratic interpolation between the previous and next available data point,
+* **https://www.opengis.net/def/interpolation/OGC/1/quadratic**: Perform a quadratic interpolation between the previous and next available data point,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/mean**: Use the mean of all values being represented,
+* **https://www.opengis.net/def/interpolation/OGC/1/mean**: Use the mean of all values being represented,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/minimum**: Use the minimum of all values being represented,
+* **https://www.opengis.net/def/interpolation/OGC/1/minimum**: Use the minimum of all values being represented,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/maximum**: Use the maximum of all values being represented,
+* **https://www.opengis.net/def/interpolation/OGC/1/maximum**: Use the maximum of all values being represented,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/median**: Use the median of all values being represented,
+* **https://www.opengis.net/def/interpolation/OGC/1/median**: Use the median of all values being represented,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/next**: Use the next available data point,
+* **https://www.opengis.net/def/interpolation/OGC/1/next**: Use the next available data point,
 
-* **https://www.opengis.net/def/interpolation/ogc/1.0/previous**: Use the previous available data point,
+* **https://www.opengis.net/def/interpolation/OGC/1/previous**: Use the previous available data point,
 
 where, as an example, the equivalent CURIE form for linear interpolation is `[ogc-interpolation:linear]`.
 
