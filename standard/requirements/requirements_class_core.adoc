@@ -171,7 +171,7 @@ or a corresponding HTML representation when the content negotiation favors HTML 
 ^|C |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain
 four or six comma-separated numbers representing the lower-left and upper right corners of the response honoring the CRS coordinates order.
 ^|D |If the coverage includes a temporal dimension which can be expressed in RFC3339 format, the headers of the response SHALL include a `Content-Datetime:` header in that format with the actual datetime instant
-(if returning a temporal slice) or datetime interval (if the response includes a temporal dimension) of the returned coverage.
+(if returning a temporal slice) or datetime interval (if the response includes a temporal dimension, or multiple temporal slices were flattened due to a limitation of the response format) of the returned coverage.
 |===
 
 ==== Query parameter `resolution` (native resolution requested using empty values)
