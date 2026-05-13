@@ -173,8 +173,8 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 ^|C |A query parameter defined by a custom or standardized extension MAY be made available to enable, disable or alter that behavior.
 |===
 
-IMPORTANT: Slicing (a `subset` specifiying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
-(using the `resolution` query parameter as defined in the relevant Scaling requirements class).
+IMPORTANT: Slicing (a `subset` specifying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
+as per <<req_subsetting-spatial_subset>> (using the `resolution` query parameter as defined in the relevant Scaling requirements class).
 
 ===== Example of applying the permission for slicing on sparse dimensions
 
