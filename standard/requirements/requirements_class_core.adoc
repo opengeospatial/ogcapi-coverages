@@ -166,8 +166,9 @@ or a corresponding HTML representation when the content negotiation favors HTML 
 [width="90%",cols="2,6"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/response-headers*
-^|A |The coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response, except if the content is in the https://www.opengis.net/def/crs/OGC/1.3/CRS84 CRS.
-^|B |If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual geospatial boundary of the coverage.
+^|A |If the content is referenced to a CRS which is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, the coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response
+(this does not preclude the possibility of including the `Content-Crs:` for the default https://www.opengis.net/def/crs/OGC/1.3/CRS84 case).
+^|B |If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual spatial extent of the coverage.
 ^|C |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain
 four or six comma-separated numbers representing the lower-left and upper right corners of the response honoring the CRS coordinates order.
 ^|D |If the coverage includes a temporal dimension which can be expressed in RFC3339 format, the headers of the response SHALL include a `Content-Datetime:` header in that format with the actual datetime instant
