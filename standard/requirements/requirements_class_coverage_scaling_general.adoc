@@ -90,13 +90,15 @@ field and dimension, which will override interpolation for that field only for t
 `Prefer: properties-interpolation=temperature(pressure:[ogc-interpolation:linear])`.
 ^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the dimension being scaled:
 
-- `[ogc-interpolation:linear]`: Perform a linear interpolation (weighted average) between the values being represented along the scaled dimension,
+- `[ogc-interpolation:linear]`: Perform a linear interpolation among the values being represented along the scaled dimension,
 - `[ogc-interpolation:nearest-neighbor]`: Use the available value nearest to the center within the values being represented along the scaled dimension,
-- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation between the previous and next available data point from the scaled dimension,
+- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation among the values being represented along the scaled dimension,
+- `[ogc-interpolation:cubic]`: Perform a cubic interpolation among the values being represented along the scaled dimension,
 - `[ogc-interpolation:mean]`: Use the mean of all values being represented along the scaled dimension,
 - `[ogc-interpolation:minimum]`: Use the minimum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:maximum]`: Use the maximum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
+- `[ogc-interpolation:modal]`: Use the most frequent value of all values represented along the scaled dimension,
 |===
 
 NOTE: In the examples mentioned above, `pressure` is an additional dimension described by the
@@ -110,10 +112,10 @@ while `landcover` and `temperature` are fields described by the https://docs.ogc
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/scaling-general/default-interpolation*
-^|A | The implementation SHOULD default to a weighted interpolation method,
-such as `[ogc-interpolation:linear]` or `[ogc-interpolation:quadratic]`,
+^|A | The implementation SHOULD default to a continuous interpolation method,
+such as `[ogc-interpolation:linear]`, `[ogc-interpolation:quadratic]` or `[ogc-interpolation:cubic]`,
 when no preference is specified by the client for fields with a variable
-type `continuous` along a continuous dimension, and `[ogc-interpolation:nearest-neighbor]` otherwise.
+type `continuous` along a continuous dimension, and `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` otherwise.
 |===
 
 ==== Requirement for indicating a preference has been applied when scaling on a general dimension

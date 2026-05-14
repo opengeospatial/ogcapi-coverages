@@ -110,7 +110,9 @@ https://www.opengis.net/def/interpolation. The interpolation methods referenced 
 
 * **https://www.opengis.net/def/interpolation/OGC/1/nearest-neighbor**: Use the nearest data point,
 
-* **https://www.opengis.net/def/interpolation/OGC/1/quadratic**: Perform a quadratic interpolation between the previous and next available data point,
+* **https://www.opengis.net/def/interpolation/OGC/1/quadratic**: Perform a quadratic interpolation among data points around the slicing point along the dimension,
+
+* **https://www.opengis.net/def/interpolation/OGC/1/cubic**: Perform a cubic interpolation among data points around the slicing point along the dimension,
 
 * **https://www.opengis.net/def/interpolation/OGC/1/mean**: Use the mean of all values being represented,
 
@@ -119,6 +121,8 @@ https://www.opengis.net/def/interpolation. The interpolation methods referenced 
 * **https://www.opengis.net/def/interpolation/OGC/1/maximum**: Use the maximum of all values being represented,
 
 * **https://www.opengis.net/def/interpolation/OGC/1/median**: Use the median of all values being represented,
+
+* **https://www.opengis.net/def/interpolation/OGC/1/modal**: Use the most frequent value of all values represented,
 
 * **https://www.opengis.net/def/interpolation/OGC/1/next**: Use the next available data point,
 

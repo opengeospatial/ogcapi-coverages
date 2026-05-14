@@ -98,7 +98,8 @@ field and dimension, which will override interpolation for that field only for t
 - `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,
 - `[ogc-interpolation:nearest-neighbor]`: Use the nearest data point from the sliced dimension,
 - `[ogc-interpolation:linear]`: Perform a linear interpolation between the previous and next available data point from the sliced dimension,
-- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation between the previous and next available data point from the sliced dimension,
+- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation among data points around the slicing point along the dimension,
+- `[ogc-interpolation:cubic]`: Perform a cubic interpolation among data points around the slicing point along the dimension,
 - `[ogc-interpolation:none]`: Only return a value if the sliced dimension corresponds exactly to an available data point, return NODATA otherwise (hit or miss)
 |===
 
