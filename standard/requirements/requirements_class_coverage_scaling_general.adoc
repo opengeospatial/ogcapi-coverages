@@ -74,19 +74,19 @@ information.
 [[scaling-general-default-interpolation-recommendation]]
 ==== Recommendation for default interpolation method when scaling on a general dimension
 
-Two different aspects of a coverage needs to be considered in interpolation: the dimensions of the domain, and the variable values
-of the range. Each of these aspects can be either categorical or continouous.
-The interpolation is always applied to the variable values of the range.
-However, since those variables are interpolated along specific dimenions, the nature of the dimensions also plays a role in
+Two different aspects of a coverage needs to be considered in interpolation: the dimensions of the domain,
+and the the field values of the range. Each of these aspects can be either categorical or continouous.
+The interpolation is always applied to the field values of the range.
+However, since those values are interpolated along specific dimensions, the nature of the dimensions also plays a role in
 the validitity of the interpolation method selected.
 
-For continuous variables, the interpolation performed should respect the gradual change in the variables
+For fields with a continuous variable type, the interpolation performed should respect the gradual change in the values
 so that the more detailed values is a best guess of what values might actually lie in between.
 
-For categorical variables, the interpolation performed should only produce valid values that are directly related to
+For fields with a categorical variable type, the interpolation performed should only produce valid values that are directly related to
 the source values. For example, averaging the numerical values associated with categories is not valid.
 
-For categorical dimensions, only some aggregation methods are appropriate, which may also depend on the nature of the variables.
+For categorical dimensions, only some aggregation methods are appropriate, which may also depend on the variable types of the fields.
 
 [[rec_scaling-general_default-interpolation]]
 [width="90%",cols="2,6a"]

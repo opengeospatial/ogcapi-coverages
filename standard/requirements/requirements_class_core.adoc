@@ -55,7 +55,7 @@ If the coverage represents gridded data, the grid description requirements apply
 For both regular and irregular grids, a `cellsCount` property specifies the number of cells.
 For regular grids, a `firstCoordinate` and `resolution` is specified, with optional `relativeBounds`.
 For irregular grids, a list of `coordinates` is specified, with optional `boundsCoordinates` pairs.
-The collection description will also include a link to the logical schema describing the coverage fields avilable as JSON Schema using the link relation type https://www.opengis.net/def/rel/ogc/1.0/schema.
+The collection description will also include a link to the logical schema describing the coverage fields available as JSON Schema using the link relation type https://www.opengis.net/def/rel/ogc/1.0/schema.
 
 [[req_core-collection_description]]
 [width="90%",cols="2,6"]

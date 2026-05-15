@@ -66,7 +66,7 @@ The server can then perform a mosaic of the month of January with the most recen
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/sparse-dimensions-collapse-temporal/slice-default-interpolation*
-^|A | When the permissions for slicing or flattening on sparse dimentions is implemented, the default interpolation method used
+^|A | When the permissions for slicing or flattening on sparse dimensions is implemented, the default interpolation method used
 SHOULD be either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`.
 |===
 

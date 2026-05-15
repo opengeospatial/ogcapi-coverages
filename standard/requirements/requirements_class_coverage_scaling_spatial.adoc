@@ -102,13 +102,13 @@ applied to the source data to produce that output, to the extent that the negoti
 
 ==== Recommendation for default interpolation method when scaling spatially
 
-Interpolation is applied to the variable values of the range.
-Since spatial dimensions are always continuous, only the nature of the variables of the range needs additional consideration.
+Interpolation is applied to the field values of the range.
+Since spatial dimensions are always continuous, only the variable types of the fields needs additional consideration.
 
-For continuous variables, the interpolation performed should respect the gradual change in the variables
+For fields with a continuous variable type, the interpolation performed should respect the gradual change in the values
 so that the more detailed values is a best guess of what values might actually lie in between.
 
-For categorical variables, the interpolation performed should only produce valid values that are directly related to
+For fields with a categorical variable type, the interpolation performed should only produce valid values that are directly related to
 the source values. For example, averaging the numerical values associated with categories is not valid.
 
 [[rec_scaling-spatial_default-interpolation]]
