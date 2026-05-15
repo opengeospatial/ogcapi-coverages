@@ -16,8 +16,8 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-general/slice-sparse-dimension*
 ^|A |For a slicing operation on a general dimension combined with a trimming operation on other axes
-(such as latitude and longitude), the Implementation SHALL fill empty portions (NODATA) with data values from visiting other
-nearby values along that general dimension until data is found.
+(such as latitude and longitude), the Implementation SHALL fill empty portions (NODATA) with data values from other
+nearby non-empty values along that general dimension.
 For example, the closest pressure level for which data is available for a certain geospatial extent may be returned.
 |===
 

@@ -16,8 +16,8 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-temporal/slice-sparse-dimension*
 ^|A |For a slicing operation on the temporal dimension combined with a trimming operation on other axes
-(such as latitude and longitude), the Implementation SHALL fill empty portions (NODATA) with data values from visiting other
-nearby values along the temporal dimension until data is found.
+(such as latitude and longitude), the Implementation SHALL fill empty portions (NODATA) with data values from other
+nearby non-empty values along the temporal dimension.
 For example, the closest or last previous time for which data is available for a certain geospatial extent may be returned.
 An Earth Observation use case for this permission is to allow retrieving a slice of the last available imagery on or before a
 certain date, taking into account that a certain geographic area may only be observed every few days.

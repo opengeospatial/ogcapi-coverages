@@ -16,8 +16,8 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/slice-sparse-dimension*
 ^|A |For a slicing operation on spatial dimension(s) combined with a trimming operation on other axes
-(such as time), the Implementation SHALL fill empty portions (NODATA) with data values from visiting other
-nearby values along the spatial dimensions until data is found.
+(such as time), the Implementation SHALL fill empty portions (NODATA) with data values from other
+nearby non-empty values along the spatial dimensions.
 For example, the closest spatial location for which data is available for a certain temporal instant may be returned.
 |===
 
