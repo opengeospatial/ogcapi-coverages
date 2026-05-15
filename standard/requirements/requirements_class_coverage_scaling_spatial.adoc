@@ -15,8 +15,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-spatial/resolution*
-^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for one or more of the spatial dimensions in positive units of the spatial CRS
-(as well as potentially supporting additional dimensions specified by other requirements classes).
+^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for one or more of
+the spatial dimensions in positive units of the spatial CRS
 ^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|D |For a geographic output CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the output CRS definition.
@@ -32,6 +32,9 @@ to an alias (see recommendation below), or to any other axis supported in the co
 ^|L |When returning the native resolution for one or more dimension for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support
 returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
 |===
+
+NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by
+the <<rc_table_scaling_temporal, temporal>> and <<rc_table_scaling_general, general>> requirements classes.
 
 ==== Query parameters `width` and `height`
 
@@ -66,11 +69,13 @@ Generic clients intended to be interoperable with all Implementations of this St
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
 
-[[scaling-spatial-interpolation-recommendation]]
+[[scaling-spatial-interpolation-guidance-recommendation]]
 ==== Recommendation for interpolation guidance
 
 This Core part of the OGC API - Coverages Standard does not require the server to implement a mechanism allowing a client to request a specific interpolation method,
 but it does recommend supporting a `Prefer:` request header for the client to indicate a preference.
+Describing the inner workings of interpolation methods is out of scope for this document.
+Some interpolation methods are described in https://docs.ogc.org/as/07-011r2/07-011r2.pdf[informative annex B of OGC Topic 6.1].
 The following recommendation also provides guidance for implementations such as some important considerations to take into account when performing interpolation.
 This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
 or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
@@ -85,7 +90,7 @@ including the region of validity of individual grid cells where applicable.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/interpolation*
-^|A | Implementations SHOULD NOT perform interpolation using a method other than _nearest neighbor_ for fields of a variable type other than `continuous`.
+^|A | Implementations SHOULD perform interpolation using a _nearest neighbor_ for fields of a variable type other than `continuous`.
 ^|B | Implementations SHOULD use the best available interpolation method which will not significantly degrade response time or put too much strain on the server resources.
 ^|C | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
 the dimensions' grid description (within the collection description's `extent`), typically considering the center of that region of validity for interpolation calculations.
@@ -93,6 +98,30 @@ When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular 
 the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being centered within the region of validity.
 ^|D | Implementations SHOULD include in all coverage responses an accurate description of the domain and range of the returned coverage, as well as a description of any interpolation
 applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that information.
+|===
+
+==== Recommendation for default interpolation method when scaling spatially
+
+Interpolation is applied to the variable values of the range.
+Since spatial dimensions are always continuous, only the nature of the variables of the range needs additional consideration.
+
+For continuous variables, the interpolation performed should respect the gradual change in the variables
+so that the more detailed values is a best guess of what values might actually lie in between.
+
+For categorical variables, the interpolation performed should only produce valid values that are directly related to
+the source values. For example, averaging the numerical values associated with categories is not valid.
+
+[[rec_scaling-spatial_default-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/default-interpolation*
+^|A | For fields with a continuous variable type along the spatial dimension,
+the implementation SHOULD default to a continuous interpolation method,
+such as `[ogc-interpolation:linear]`, `[ogc-interpolation:quadratic]` or `[ogc-interpolation:cubic]`,
+when no preference is specified by the client.
+^|B | For fields with a non-continuous variable type along the spatial dimension,
+the implementation SHOULD default to `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` interpolation method,
+when no preference is specified by the client.
 |===
 
 ==== Downsampling permission
@@ -137,18 +166,6 @@ field and dimension, which will override interpolation for that field only for t
 - `[ogc-interpolation:maximum]`: Use the maximum of all values being represented along the scaled dimension,
 - `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
 - `[ogc-interpolation:modal]`: Use the most frequent value of all values represented along the scaled dimension,
-|===
-
-==== Recommendation for default interpolation method when scaling spatially
-
-[[rec_scaling-spatial_default-interpolation]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/default-interpolation*
-^|A | The implementation SHOULD default to a continuous interpolation method,
-such as `[ogc-interpolation:linear]`, `[ogc-interpolation:quadratic]` or `[ogc-interpolation:cubic]`,
-when no preference is specified by the client for fields with a variable
-type `continuous`, and `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` otherwise.
 |===
 
 ==== Requirement for indicating a preference has been applied when scaling spatially

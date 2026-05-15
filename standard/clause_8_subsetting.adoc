@@ -37,6 +37,24 @@ Both the `subset` and the `bbox` parameters are aligned with the spatial subsett
 
 include::requirements/requirements_class_coverage_subset_spatial.adoc[]
 
+[[rc_sparse-dimensions-collapse-spatial]]
+== Requirements Class "Collapsing Sparse Spatial Dimensions"
+
+=== Overview
+
+Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
+another dimension.
+
+For example, weather stations capturing observations at different times.
+
+Implementing this requirements class simplifies the use of such data by collapsing the values along spatial dimension(s)
+around a specified position of interest.
+
+NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
+the list of supported conformance classes will differ for each collection, as described in <<req_core_conformance_success>>.
+
+include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spatial.adoc[]
+
 [[rc_subsetting_temporal]]
 == Requirements Class "Temporal Subsetting"
 
@@ -66,6 +84,25 @@ Both the `subset` and the `bbox` parameters are aligned with the temporal subset
 
 include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 
+[[rc_sparse-dimensions-collapse-temporal]]
+== Requirements Class "Collapsing Sparse Temporal Dimension"
+
+=== Overview
+
+Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
+another dimension.
+
+For example, satellite imagery with scenes captured over a certain spatial extent at a certain time conditioned by
+the orbit of the satellite.
+
+Implementing this requirements class simplifies the use of such data by collapsing the values along a temporal dimension
+around a specified time of interest.
+
+NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
+the list of supported conformance classes will differ for each collection, as described in <<req_core_conformance_success>>.
+
+include::requirements/requirements_class_coverage_sparse_dimensions_collapse_temporal.adoc[]
+
 [[rc_subsetting_general]]
 == Requirements Class "General Subsetting"
 
@@ -94,6 +131,26 @@ For gridded coverage cells whose geometry is a point along a dimension, this wil
 For gridded coverage cells whose geometry is a region, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of the region excludes its boundary**).
 
 include::requirements/requirements_class_coverage_subset_general.adoc[]
+
+[[rc_sparse-dimensions-collapse-general]]
+== Requirements Class "Collapsing Sparse General Dimensions"
+
+=== Overview
+
+Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
+another dimension.
+
+For example, requesting a 2D image in PNG for a specific pressure level from a 4D coverage with space, time and pressure.
+
+For example, a 4D coverage with some data only available at some pressure level for particular temporal instant.
+
+Implementing this requirements class simplifies the use of such data by collapsing the values along a general dimension
+around a specified position of interest.
+
+NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
+the list of supported conformance classes will differ for each collection, as described in <<req_core_conformance_success>>.
+
+include::requirements/requirements_class_coverage_sparse_dimensions_collapse_general.adoc[]
 
 [[rc_multi_slicing]]
 == Requirements Class "Multi Slicing"

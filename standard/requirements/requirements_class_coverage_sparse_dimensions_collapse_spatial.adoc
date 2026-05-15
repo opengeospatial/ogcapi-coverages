@@ -1,0 +1,125 @@
+[[rc_sparse-dimensions-collapse-spatial-table]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/sparse-dimensions-collapse-spatial
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-spatial
+|===
+
+=== Requirements
+
+==== Requirement for Slicing Sparse Dimensions
+
+[[req_sparse-dimensions-collapse-spatial_slice-sparse-dimension]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/slice-sparse-dimension*
+^|A |For a slicing operation on spatial dimension(s) combined with a trimming operation on other axes
+(such as time), the Implementation SHALL fill empty portions (NODATA) with data values from visiting other
+nearby values along the spatial dimensions until data is found.
+For example, the closest spatial location for which data is available for a certain temporal instant may be returned.
+|===
+
+IMPORTANT: Slicing (a `subset` specifying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
+as per <<req_subsetting-spatial_subset>> (using the `resolution` query parameter as defined in the relevant Scaling requirements class).
+
+===== Example of slicing on sparse dimensions
+
+In this example, the slicing dimension is space while the trim is performed on the temporal dimension:
+
+[source,http]
+----
+GET /collections/temperature/coverage?datetime=2025-01-01/2025-12-31&subset=lat(30),lon(40)
+Accept: application/x-netcdf
+----
+
+The weather data is requested for a specific position of some weather station over the year 2025. For some particular dates, there is no data available from that station,
+but observations are available for nearby stations. The server can then use the nearest station (e.g., at `lat(31),lon(42)`) to fill the gaps within the time series returned.
+
+==== Requirement for Flattening Sparse Dimensions
+
+[[req_sparse-dimensions-collapse-spatial_flattening-sparse-dimension]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-spatial/flattening-sparse-dimension*
+^|A |For a trimming operation on the spatial dimension combined with a trimming operation on other axes
+(such as time), requested for a format which does not support including a spatial dimension in the response,
+the Implementation SHALL flatten the resulting coverage, collapsing the spatial dimension while preserving non-empty portions.
+For example, requesting a time series image for a specific bounding box from a spatiotemporal 3D coverage.
+|===
+
+==== Recommendation for interpolation preference
+
+[[rec_sparse-dimensions-collapse-spatial_slice-prefer-header]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/slice-prefer-header*
+^|A |The Implementation SHOULD understand a `Prefer:` request header
+(as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
+<<conventions-interpolation-methods, interpolation method>>.
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific dimensions being sliced. Example: `Prefer: interpolation=lat([ogc-interpolation:linear]),lon([ogc-interpolation:linear])`
+^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific fields being returned. Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
+^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
+field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
+`Prefer: properties-interpolation=temperature(lat:[ogc-interpolation:linear],lon:[ogc-interpolation:linear])`.
+^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the slicing sparsed dimensions permission:
+
+- `[ogc-interpolation:next]`: Use the next available data point from the sliced dimension,
+- `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,
+- `[ogc-interpolation:nearest-neighbor]`: Use the nearest data point from the sliced dimension,
+- `[ogc-interpolation:linear]`: Perform a linear interpolation between the previous and next available data point from the sliced dimension,
+- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation among data points around the slicing point along the dimension,
+- `[ogc-interpolation:cubic]`: Perform a cubic interpolation among data points around the slicing point along the dimension,
+- `[ogc-interpolation:none]`: Only return a value if the sliced dimension corresponds exactly to an available data point, return NODATA otherwise (hit or miss)
+|===
+
+==== Recommendation for default interpolation method
+
+[[rec_sparse-dimensions-collapse-spatial-default-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/slice-default-interpolation*
+^|A | The implementation SHOULD use either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`
+when no preference is specified by the client.
+|===
+
+==== Requirement for indicating a preference has been applied
+
+[[req_sparse-dimensions-collapse-spatial_slice-preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/slice-preference-applied*
+^|A | If an Implementation supports <<rec_subsetting-spatial_slice-prefer-header, client preferences for interpolation>>,
+the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+`Preference-Applied: interpolation=lat([ogc-interpolation:linear]),lon([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
+|===
+
+==== Requirement for strict or lenient preference handling
+
+[[req_sparse-dimensions-collapse-spatial_slice-preference-handling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/slice-preference-handling*
+^|A | If an Implementation supports <<rec_subsetting-spatial_slice-prefer-header, client preferences for interpolation>>,
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
+(note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
+interpolation preferences.
+|===
+
+==== Permission for only supporting aligned spatial interpolation preferences
+
+[[per_sparse-dimensions-collapse-spatial_aligned-spatial-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/aligned-spatial-interpolation*
+^|A |When implementing spatial interpolation preferences for slicing on sparse dimensions,
+the Implementation MAY only support aligned preferences
+between the multiple spatial dimensions, such as the latitude (`lat`) and longitude (`lon`), or the Easting (`E`) and Northing (`N`).
+^|B |The Implementation MAY ignore preferences if the client indicates distinct preferences for the different axes. In this case,
+the `Preference-Applied:` response header will not be included for those specific axes where the preference was ignored.
+|===

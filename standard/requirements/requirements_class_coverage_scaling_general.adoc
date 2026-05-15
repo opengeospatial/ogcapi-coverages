@@ -15,25 +15,33 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-general/resolution*
-^|A |For data with a additional dimensions beyond spatial and a primary temporal dimension, the coverage retrieval operation SHALL support a `resolution` query parameter
-specifying the resolution for the additional dimensions in positive units of those dimensions (as well as potentially supporting additional dimensions specified by other requirements classes).
-^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
-^|D |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extent other than `spatial` and `temporal`.
-^|E |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to an additional dimension described in the collection extent,
+^|A |For data with additional dimensions beyond spatial and a primary temporal dimension, the coverage retrieval operation SHALL support a `resolution` query parameter
+specifying the resolution for the additional dimensions in the units specified for those dimensions.
+For a dimension whose values are expressed as a single number, the resolution value will always be a positive number.
+^|B |For categorical values whose semantic definition supports multiple levels of classification, the Implementation SHALL support the name of those levels as the resolution
+(which could be explicitly listed in the `availableResolutions` of that dimension grid definition).
+^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
+^|D |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
+^|E |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extent other than `spatial` and `temporal`.
+^|F |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to an additional dimension described in the collection extent,
 or to any other axis supported in the context of other requirements classes (such as spatial and temporal scaling).
-^|F |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|G |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|H |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
+^|G |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|H |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|I |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
 for the corresponding dimension.
-^|I |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, the implementation SHALL support an ISO 8601 period notation.
+^|J |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, the implementation SHALL support an ISO 8601 period notation.
 |===
 
-[[scaling-general-interpolation-recommendation]]
-==== Recommendation for interpolation guidance
+NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by
+the <<rc_table_scaling_temporal, temporal>> and <<rc_table_scaling_spatial, spatial>> requirements classes.
+
+[[scaling-general-interpolation-guidance-recommendation]]
+==== Recommendation for interpolation guidance when scaling on a general dimension
 
 This Core part of the OGC API - Coverages Standard does not require the server to implement a mechanism allowing a client to request a specific interpolation method,
 but it does recommend supporting a `Prefer:` request header for the client to indicate a preference.
+Describing the inner workings of interpolation methods is out of scope for this document.
+Some interpolation methods are described in https://docs.ogc.org/as/07-011r2/07-011r2.pdf[informative annex B of OGC Topic 6.1].
 The following recommendation also provides guidance for implementations such as some important considerations to take into account when performing interpolation.
 This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
 or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
@@ -48,15 +56,54 @@ including the region of validity of individual grid cells where applicable.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:per-id}* |*/rec/scaling-general/interpolation*
-^|A | Implementations SHOULD NOT perform interpolation using a method other than _nearest neighbor_ for fields of a variable type other than `continuous`.
-^|B | Implementations SHOULD NOT perform interpolation using a method other than _nearest neighbor_ for values along a dimension based on a variable with variable type other than `continuous`.
-^|C | Implementations SHOULD use the best available interpolation method which will not significantly degrade response time or put too much strain on the server resources.
-^|D | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
-the dimension's grid description (within the collection description's `extent`), typically considering the center of that region of validity for interpolation calculations.
+^|A | Implementations SHOULD default to the best available interpolation method which will not significantly degrade response time or
+put too much strain on the server resources.
+^|B | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for
+ndividual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
+the dimension's grid description (within the collection description's `extent`), typically considering the center of that
+region of validity for interpolation calculations.
 When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular grids) are omitted,
-the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being centered within the region of validity.
-^|E | Implementations SHOULD include in all coverage responses an accurate description of the domain and range of the returned coverage, as well as a description of any interpolation
-applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that information.
+the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being
+centered within the region of validity.
+^|C | Implementations SHOULD include in all coverage responses an accurate description of the domain and range of the returned
+coverage, as well as a description of any interpolation
+applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that
+information.
+|===
+
+[[scaling-general-default-interpolation-recommendation]]
+==== Recommendation for default interpolation method when scaling on a general dimension
+
+Two different aspects of a coverage needs to be considered in interpolation: the dimensions of the domain, and the variable values
+of the range. Each of these aspects can be either categorical or continouous.
+The interpolation is always applied to the variable values of the range.
+However, since those variables are interpolated along specific dimenions, the nature of the dimensions also plays a role in
+the validitity of the interpolation method selected.
+
+For continuous variables, the interpolation performed should respect the gradual change in the variables
+so that the more detailed values is a best guess of what values might actually lie in between.
+
+For categorical variables, the interpolation performed should only produce valid values that are directly related to
+the source values. For example, averaging the numerical values associated with categories is not valid.
+
+For categorical dimensions, only some aggregation methods are appropriate, which may also depend on the nature of the variables.
+
+[[rec_scaling-general_default-interpolation]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-general/default-interpolation*
+^|A | For fields with a continuous variable type along a continuous dimension,
+the implementation SHOULD default to a continuous interpolation method,
+such as `[ogc-interpolation:linear]`, `[ogc-interpolation:quadratic]` or `[ogc-interpolation:cubic]`,
+when no preference is specified by the client.
+^|B | For fields with a continuous variable type along a non-continuous dimension,
+the implementation SHOULD default to `[ogc-interpolation:mean]` or `[ogc-interpolation:median]` interpolation method,
+when no preference is specified by the client.
+^|C | For fields with a non-continuous variable type along a continuous dimension,
+the implementation SHOULD default to `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` interpolation method,
+when no preference is specified by the client.
+^|D | For fields with a non-continuous variable type along a non-continuous dimension,
+the implementation SHOULD default to `[ogc-interpolation:modal]` interpolation method, when no preference is specified by the client.
 |===
 
 ==== Downsampling permission
@@ -105,18 +152,6 @@ NOTE: In the examples mentioned above, `pressure` is an additional dimension des
 https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions]
 (with a semantic definition such as `"definition": "https://qudt.org/vocab/quantitykind/AtmosphericPressure"`),
 while `landcover` and `temperature` are fields described by the https://docs.ogc.org/DRAFTS/23-058r2.html[collection schema].
-
-==== Recommendation for default interpolation method when scaling on a general dimension
-
-[[rec_scaling-general_default-interpolation]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/scaling-general/default-interpolation*
-^|A | The implementation SHOULD default to a continuous interpolation method,
-such as `[ogc-interpolation:linear]`, `[ogc-interpolation:quadratic]` or `[ogc-interpolation:cubic]`,
-when no preference is specified by the client for fields with a variable
-type `continuous` along a continuous dimension, and `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` otherwise.
-|===
 
 ==== Requirement for indicating a preference has been applied when scaling on a general dimension
 

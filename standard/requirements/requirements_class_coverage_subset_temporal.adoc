@@ -46,9 +46,10 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
      {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
 
-^|B |Only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|C |If a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
-^|D |If an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
+^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>,
+only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
+^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>, if a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
+^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>, if an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
 ^|E |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
 ^|F |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time`, or any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
 ^|G |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
@@ -148,106 +149,3 @@ March 18, 2018, 12:31:12 UTC or earlier:
 
 `datetime=../2018-03-18T12:31:12Z`
 =================
-
-==== Permission for Slicing Sparse Dimensions
-
-[[per_subsetting-temporal_slice-sparse-dimension]]
-[width="90%",cols="2,6a"]
-|===
-^|*Permission {counter:per-id}* |*/per/subsetting-temporal/slice-sparse-dimension*
-^|A |The empty portions in a coverage resulting from a slice operation on an axis (e.g. time), combined with a trimming operations on other axes (e.g. latitude and longitude)
- which would either be empty or not cover the full extent of the trim operation MAY be filled with data values from the same trim operation
- combined with a slicing operation on a different value of the slicing axis which would return non-empty values.
- For example, the closest or last previous time for which data is available for a certain geospatial extent may be returned.
- An Earth Observation use case for this permission is to allow retrieving a slice of the last available imagery on or before a certain date,
- taking into account that a certain geographic area may only be observed every few days.
-^|B |This permission applies to both explicit slice operations using subset, as well as to implicit slicing from requesting an output format only supporting
- a lower dimensionality than the data (e.g. requesting a 2D image from a 3D coverage as PNG or GeoTIFF).
-^|C |A query parameter defined by a custom or standardized extension MAY be made available to enable, disable or alter that behavior.
-|===
-
-IMPORTANT: Slicing (a `subset` specifying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
-as per <<req_subsetting-spatial_subset>> (using the `resolution` query parameter as defined in the relevant Scaling requirements class).
-
-===== Example of applying the permission for slicing on sparse dimensions
-
-In this first example, a client requests a bounding box for (40 N, 30 E)-(70 N, 50 E), while slicing a date:
-
-`datetime=2025-01-01&f=image/tiff&bbox=30,40,50,70`.
-
-Because the primary temporal dimension is sparse due to some satellites only covering some of the Earth's surface on a given day, data is not available for that specific date for some of the
-spatial region covered. In this case, the server can use data from a nearby date to fill those regions.
-
-In this second example, the subsetting operation is a trim, but because the GeoTIFF format is inherently 2D, it implies a "flattening" of the response such that this permission
-also applies:
-
-[source,http]
-----
-GET /collections/sentinel2-l2a/coverage?datetime=2025-01-01/2025-01-31&bbox=30,40,50,70
-Accept: image/tiff
-----
-
-The server can then perform a mosaic of the month of January with the most recent images displayed on top.
-
-==== Recommendation for interpolation preference when supporting slicing on sparse dimensions
-
-[[rec_subsetting-temporal_slice-prefer-header]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/subsetting-temporal/slice-prefer-header*
-^|A |When supporting slicing on sparse dimensions, the Implementation SHOULD understand a `Prefer:` request header
-(as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
-<<conventions-interpolation-methods, interpolation method>>.
-^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
-definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific dimensions being sliced. Example: `Prefer: interpolation=time([ogc-interpolation:linear])`
-^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method for specifics field being returned,
-which will override interpolation methods specified in any `interpolation` preference for any dimension, using a safe CURIEs or URI, such as from the OGC
-definition server (https://www.opengis.net/def/interpolation/OGC/1). Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
-^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
-field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
-`Prefer: properties-interpolation=landCover(time:[ogc-interpolation:nearest-neighbor])`.
-^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the slicing sparsed dimensions permission:
-
-- `[ogc-interpolation:next]`: Use the next available data point from the sliced dimension,
-- `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,
-- `[ogc-interpolation:nearest-neighbor]`: Use the nearest data point from the sliced dimension,
-- `[ogc-interpolation:linear]`: Perform a linear interpolation between the previous and next available data point from the sliced dimension,
-- `[ogc-interpolation:quadratic]`: Perform a quadratic interpolation among data points around the slicing point along the dimension,
-- `[ogc-interpolation:cubic]`: Perform a cubic interpolation among data points around the slicing point along the dimension,
-- `[ogc-interpolation:none]`: Only return a value if the sliced dimension corresponds exactly to an available data point, return NODATA otherwise (hit or miss)
-|===
-
-==== Recommendation for default interpolation method when supporting slicing on sparse dimensions
-
-[[rec_subsetting-temporal_slice-default-interpolation]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/subsetting-temporal/slice-default-interpolation*
-^|A | The implementation SHOULD use either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`
-when no preference is specified by the client.
-|===
-
-==== Requirement for indicating a preference has been applied when supporting slicing on sparse dimensions
-
-[[req_subsetting-temporal_slice-preference-applied]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/slice-preference-applied*
-^|A | If an Implementation supports <<req_subsetting-temporal_slice-prefer-header, client preferences for interpolation>>,
-the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
-`Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
-|===
-
-==== Requirement for strict or lenient preference handling when supporting slicing on sparse dimensions
-
-[[req_subsetting-temporal_slice-preference-handling]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/slice-preference-handling*
-^|A | If an Implementation supports <<req_subsetting-temporal_slice-prefer-header, client preferences for interpolation>>,
-the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
-value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
-(note that the handling parameter applies to the request as a whole, rather than to any specific preference).
-^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
-interpolation preferences.
-|===
