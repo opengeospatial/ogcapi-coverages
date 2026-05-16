@@ -69,6 +69,57 @@ Generic clients intended to be interoperable with all Implementations of this St
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
 
+==== Downsampling permission
+
+[[per_scaling-spatial_downsampling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/downsampling*
+^|A |In the case where a response to a request without a `resolution`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
+MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+^|B |In the case where a `resolution`, `width` or `height` does not explicitly specify dimensions for all spatial axes of the coverage, an implementation MAY automatically proportionately
+adjust one or more unspecified dimensions.
+|===
+
+NOTE: A client retrieving a coverage from an implementation advertising support for this "Spatial Scaling" requirements class should explicitly use `resolution=Lat(),Lon()` if it wants to ensure
+retrieving the coverage in its native spatial resolution and prefers receiving an error instead of a downsampled version of the data.
+
+==== Permission to only support certain resolutions
+
+[[per_scaling-spatial_specific-resolutions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-spatial/specific-resolutions*
+^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property
+(as defined in the https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions of OGC API - Common - Part 2])
+of the dimension being scaled (any resolution is considered available if the sub-property is missing).
+The units of each resolution are the units of the native (from the `storageCrs` if specified, otherwise CRS84), just like the `resolution` sub-property.
+^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution outside of the `maxCellSize` and `minCellSize` interval.
+^|C |When neither `availableResolutions` nor `minCellSize` is present, implementations MAY return a 4xx error for a requested resolution more detailed than the native `resolution` declared for the dimension.
+^|D |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
+|===
+
+NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser resolution)
+data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
+or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
+processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
+or beyond a certain scaling factor past the native resolution. However, for some use cases, support for data upsampling server-side
+might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
+climate forecast model using computational fluid dynamics.
+
+Example of specific spatial resolutions available (in degrees for CRS84 here):
+
+```
+   "spatial":
+   {
+      "bbox" : [ [ -180, -90, 180, 90 ] ],
+      "grid": [
+         { "cellsCount": 131072, "resolution": 0.00274658203125, "availableResolutions" : [ 0.00274658203125, 0.0054931640625, 0.010986328125 ] },
+         { "cellsCount": 65536, "resolution": 0.00274658203125, "availableResolutions" : [ 0.00274658203125, 0.0054931640625, 0.010986328125 ] }
+      ]
+   },
+```
+
 [[scaling-spatial-interpolation-guidance-recommendation]]
 ==== Recommendation for interpolation guidance
 
@@ -122,21 +173,6 @@ when no preference is specified by the client.
 the implementation SHOULD default to `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` interpolation method,
 when no preference is specified by the client.
 |===
-
-==== Downsampling permission
-
-[[per_scaling-spatial_downsampling]]
-[width="90%",cols="2,6a"]
-|===
-^|*Permission {counter:per-id}* |*/per/scaling-spatial/downsampling*
-^|A |In the case where a response to a request without a `resolution`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
-MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
-^|B |In the case where a `resolution`, `width` or `height` does not explicitly specify dimensions for all spatial axes of the coverage, an implementation MAY automatically proportionately
-adjust one or more unspecified dimensions.
-|===
-
-NOTE: A client retrieving a coverage from an implementation advertising support for this "Spatial Scaling" requirements class should explicitly use `resolution=Lat(),Lon()` if it wants to ensure
-retrieving the coverage in its native spatial resolution and prefers receiving an error instead of a downsampled version of the data.
 
 ==== Recommendation for interpolation preference when scaling spatially
 
@@ -204,42 +240,6 @@ between the multiple spatial dimensions, such as the latitude (`lat`) and longit
 the `Preference-Applied:` response header will not be included for those specific axes where the preference was ignored.
 |===
 
-==== Permission to only support certain resolutions
-
-[[per_scaling-spatial_specific-resolutions]]
-[width="90%",cols="2,6a"]
-|===
-^|*Permission {counter:per-id}* |*/per/scaling-spatial/specific-resolutions*
-^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property
-(as defined in the https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions of OGC API - Common - Part 2])
-of the dimension being scaled (any resolution is considered available if the sub-property is missing).
-The units of each resolution are the units of the native (from the `storageCrs` if specified, otherwise CRS84), just like the `resolution` sub-property.
-^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution outside of the `maxCellSize` and `minCellSize` interval.
-^|C |When neither `availableResolutions` nor `minCellSize` is present, implementations MAY return a 4xx error for a requested resolution more detailed than the native `resolution` declared for the dimension.
-^|D |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
-|===
-
-NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser resolution)
-data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
-or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
-processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
-or beyond a certain scaling factor past the native resolution. However, for some use cases, support for data upsampling server-side
-might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
-climate forecast model using computational fluid dynamics.
-
-Example of specific spatial resolutions available (in degrees for CRS84 here):
-
-```
-   "spatial":
-   {
-      "bbox" : [ [ -180, -90, 180, 90 ] ],
-      "grid": [
-         { "cellsCount": 131072, "resolution": 0.00274658203125, "availableResolutions" : [ 0.00274658203125, 0.0054931640625, 0.010986328125 ] },
-         { "cellsCount": 65536, "resolution": 0.00274658203125, "availableResolutions" : [ 0.00274658203125, 0.0054931640625, 0.010986328125 ] }
-      ]
-   },
-```
-
 ==== Permission to support legacy scaling query parameters
 
 [[per_scaling-spatial_legacy]]
@@ -250,4 +250,4 @@ Example of specific spatial resolutions available (in degrees for CRS84 here):
 ^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension. For example, `scale-size=Lat(300),Lon(400)` means 400 samples across the longitude axis and 300 samples across the latitude axis.
 |===
 
-IMPORTANT: To ensure interoperability, clients should use the `resolution` and/or `width` and `height` query parameters rather than the legacy ones.
+IMPORTANT: To ensure interoperability, clients need to use the `resolution` and/or `width` and `height` query parameters rather than the legacy ones.

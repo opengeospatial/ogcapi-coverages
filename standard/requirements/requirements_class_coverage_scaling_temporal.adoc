@@ -30,6 +30,71 @@ for the corresponding dimension.
 NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by
 the <<rc_table_scaling_general, general>> and <<rc_table_scaling_spatial, spatial>> requirements classes.
 
+[[scaling-temporal-parameter-aliases-recommendation]]
+
+==== Recommendation for `time` dimension aliases
+
+For convenience, this Standard recommends that Implementations recognize the different case variation and the shorthand `t` as an alias for the `time` dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
+but should always use `time` to refer to the primary temporal dimension as specified in the above requirement.
+
+[[rec_scaling-temporal_resolution-temporal-aliases]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-temporal/resolution-temporal-aliases*
+^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
+|===
+
+IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
+
+[[scaling-temporal-downsampling-permission]]
+
+==== Downsampling permission
+
+[[per_scaling-temporal_downsampling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-temporal/downsampling*
+^|A |In the case where a response to a request without a `resolution` parameter would be larger than an advertised server limit, an implementation
+MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+|===
+
+NOTE: A client retrieving a coverage from an implementation advertising support for this "Temporal Scaling" requirements class should explicitly use `resolution=time()` if it wants to ensure
+retrieving the coverage in its native temporal resolution and prefers receiving an error instead of a downsampled version of the data.
+
+==== Permission to only support certain resolutions
+
+[[per_scaling-temporal_specific-resolutions]]
+[width="90%",cols="2,6a"]
+|===
+^|*Permission {counter:per-id}* |*/per/scaling-temporal/specific-resolutions*
+^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property
+(as defined in the https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions of OGC API - Common - Part 2])
+of the dimension being scaled (any resolution is considered available if the sub-property is missing).
+The units of each resolution are the units of the Temporal Reference System (`trs`), just like the `resolution` sub-property.
+^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution more detailed than the native `resolution` declared for the dimension.
+^|C |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
+|===
+
+NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser resolution)
+data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
+or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
+processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
+or beyond a certain scaling factor past the native resolution. However, for some use cases, support for data upsampling server-side
+might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
+climate forecast model using computational fluid dynamics.
+
+Example of specific temporal resolutions available (using ISO-8601 periods for the Gregorian Calendar / UTC default here):
+
+[source,json]
+----
+   "temporal":
+   {
+      "interval" : [ [ "2025-01-01T00:00:00Z", "2025-12-31T23:00:00Z" ] ],
+      "grid": { "cellsCount": 8760, "resolution": "P1H", "availableResolutions" : [ "P1H", "P1D", "P1M" ] }
+   },
+----
+
 [[scaling-temporal-interpolation-guidance-recommendation]]
 ==== Recommendation for interpolation guidance
 
@@ -83,36 +148,6 @@ when no preference is specified by the client.
 the implementation SHOULD default to `[ogc-interpolation:nearest-neighbor]` or `[ogc-interpolation:modal]` interpolation method,
 when no preference is specified by the client.
 |===
-
-==== Downsampling permission
-
-[[per_scaling-temporal_downsampling]]
-[width="90%",cols="2,6a"]
-|===
-^|*Permission {counter:per-id}* |*/per/scaling-temporal/downsampling*
-^|A |In the case where a response to a request without a `resolution` parameter would be larger than an advertised server limit, an implementation
-MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
-|===
-
-NOTE: A client retrieving a coverage from an implementation advertising support for this "Temporal Scaling" requirements class should explicitly use `resolution=time()` if it wants to ensure
-retrieving the coverage in its native temporal resolution and prefers receiving an error instead of a downsampled version of the data.
-
-[[scaling-temporal-parameter-aliases-recommendation]]
-
-==== Recommendation for `time` dimension aliases
-
-For convenience, this Standard recommends that Implementations recognize the different case variation and the shorthand `t` as an alias for the `time` dimension.
-Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
-but should always use `time` to refer to the primary temporal dimension as specified in the above requirement.
-
-[[rec_scaling-temporal_resolution-temporal-aliases]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/scaling-temporal/resolution-temporal-aliases*
-^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
-|===
-
-IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
 
 ==== Recommendation for interpolation preference when scaling temporally
 
@@ -168,39 +203,6 @@ value of `handling=strict` SHALL return a 4xx error if the server is not able to
 interpolation preferences.
 |===
 
-==== Permission to only support certain resolutions
-
-[[per_scaling-temporal_specific-resolutions]]
-[width="90%",cols="2,6a"]
-|===
-^|*Permission {counter:per-id}* |*/per/scaling-temporal/specific-resolutions*
-^|A |Implementations MAY support only specific resolutions listed in the `availableResolutions` sub-property of the `grid` property
-(as defined in the https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions of OGC API - Common - Part 2])
-of the dimension being scaled (any resolution is considered available if the sub-property is missing).
-The units of each resolution are the units of the Temporal Reference System (`trs`), just like the `resolution` sub-property.
-^|B |When `availableResolutions` is not present, implementations MAY return a 4xx error for a requested resolution more detailed than the native `resolution` declared for the dimension.
-^|C |When `availableResolutions` is present, Implementations MAY return a 4xx client error for a requested resolution not matching (within some rounding error tolerance) any listed available resolution.
-|===
-
-NOTE: A common use case for the Scaling requirements classes is the ability for clients to request downsampled (coarser resolution)
-data compared to the native resolution. For the purpose of upsampling finer than the native resolution using, for example, a linear
-or cubic interpolation, it is usually more efficient to perform this upsampling client-side, saving both bandwidth and server
-processing resources. The server is therefore allowed to reject requests for data upsampled beyond the native resolution,
-or beyond a certain scaling factor past the native resolution. However, for some use cases, support for data upsampling server-side
-might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
-climate forecast model using computational fluid dynamics.
-
-Example of specific temporal resolutions available (using ISO-8601 periods for the Gregorian Calendar / UTC default here):
-
-[source,json]
-----
-   "temporal":
-   {
-      "interval" : [ [ "2025-01-01T00:00:00Z", "2025-12-31T23:00:00Z" ] ],
-      "grid": { "cellsCount": 8760, "resolution": "P1H", "availableResolutions" : [ "P1H", "P1D", "P1M" ] }
-   },
-----
-
 ==== Permission to support legacy scaling query parameters
 
 [[per_scaling-temporal_legacy]]
@@ -211,4 +213,4 @@ Example of specific temporal resolutions available (using ISO-8601 periods for t
 ^|B |Implementations MAY additionally support the `scale-size` legacy query parameter expressing the number of samples expected in the output for each dimension.
 |===
 
-IMPORTANT: To ensure interoperability, clients should use the `resolution` query parameter rather than the legacy ones.
+IMPORTANT: To ensure interoperability, clients need to use the `resolution` query parameter rather than the legacy ones.
