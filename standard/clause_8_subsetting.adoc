@@ -51,7 +51,7 @@ Implementing this requirements class simplifies the use of such data by collapsi
 around a specified position of interest.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
-the list of supported conformance classes will differ for each collection, as described in <<req_core_conformance_success>>.
+the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
 include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spatial.adoc[]
 
@@ -99,7 +99,7 @@ Implementing this requirements class simplifies the use of such data by collapsi
 around a specified time of interest.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
-the list of supported conformance classes will differ for each collection, as described in <<req_core_conformance_success>>.
+the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
 include::requirements/requirements_class_coverage_sparse_dimensions_collapse_temporal.adoc[]
 
@@ -140,15 +140,13 @@ include::requirements/requirements_class_coverage_subset_general.adoc[]
 Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
 another dimension.
 
-For example, requesting a 2D image in PNG for a specific pressure level from a 4D coverage with space, time and pressure.
-
-For example, a 4D coverage with some data only available at some pressure level for particular temporal instant.
+For example, a 3D coverage with data only available at some pressure level for particular spatial regions.
 
 Implementing this requirements class simplifies the use of such data by collapsing the values along a general dimension
 around a specified position of interest.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
-the list of supported conformance classes will differ for each collection, as described in <<req_core_conformance_success>>.
+the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
 include::requirements/requirements_class_coverage_sparse_dimensions_collapse_general.adoc[]
 
