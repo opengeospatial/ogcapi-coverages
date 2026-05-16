@@ -103,7 +103,8 @@ Example of specific temporal resolutions available (using ISO-8601 periods for t
 This Core part of the OGC API - Coverages Standard does not require the server to implement a mechanism allowing a client to request a specific interpolation method,
 but it does recommend supporting a `Prefer:` request header for the client to indicate a preference.
 Describing the inner workings of interpolation methods is out of scope for this document.
-Some interpolation methods are described in https://docs.ogc.org/as/07-011r2/07-011r2.pdf[informative annex B of OGC Topic 6.1].
+Some interpolation methods are described in https://docs.ogc.org/as/07-011r2/07-011r2.pdf[informative annex B of OGC Topic 6.1],
+and some <<conventions-interpolation-methods, interpolation methods>> are registered on the OGC definition server and referenced in this document.
 The following recommendation also provides guidance for implementations such as some important considerations to take into account when performing interpolation.
 This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
 or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).

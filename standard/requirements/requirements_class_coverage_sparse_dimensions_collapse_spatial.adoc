@@ -52,7 +52,7 @@ which most Implementations of this requirements class would support as per the
 ^|A |For a trimming operation on the spatial dimension combined with a trimming operation on other axes
 (such as time), requested for a format which does not support including a spatial dimension in the response,
 the Implementation SHALL flatten the resulting coverage, collapsing the spatial dimension while preserving non-empty portions
-based on a default or selected interpolation preference.
+based on a default or selected <<conventions-interpolation-methods, interpolation method>> preference.
 For example, requesting a time series image for a specific bounding box from a spatiotemporal 3D coverage.
 |===
 
@@ -118,7 +118,7 @@ value of `handling=strict` SHALL return a 4xx error if the server is not able to
 interpolation preferences.
 |===
 
-==== Permission for only supporting aligned spatial interpolation preferences
+==== Permission to only support aligned spatial interpolation preferences
 
 [[per_sparse-dimensions-collapse-spatial_aligned-spatial-interpolation]]
 [width="90%",cols="2,6a"]

@@ -38,7 +38,7 @@ which most Implementations of this requirements class would support as per the
 ^|A |For a trimming operation on a general dimension combined with a trimming operation on other axes
 (such as latitude and longitude), requested for a format which does not support including that general dimension in the response,
 the Implementation SHALL flatten the resulting coverage, collapsing that general dimension while preserving non-empty portions
-based on a default or selected interpolation preference.
+based on a default or selected <<conventions-interpolation-methods, interpolation method>> preference.
 For example, requesting a 2D image in PNG for a specific pressure level from a 3D coverage with space and pressure.
 |===
 
@@ -48,8 +48,8 @@ For example, requesting a 2D image in PNG for a specific pressure level from a 3
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/sparse-dimensions-collapse-general/slice-default-interpolation*
-^|A | The implementation SHOULD default to either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`
-when no preference is specified by the client.
+^|A | The implementation SHOULD default to either the `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`
+<<conventions-interpolation-methods, interpolation method>> when no preference is specified by the client.
 |===
 
 ==== Recommendation for interpolation preference

@@ -49,7 +49,7 @@ spatial region covered. In this case, the server can use data from a nearby date
 ^|A |For a trimming operation on the temporal dimension combined with a trimming operation on other axes
 (such as latitude and longitude), requested for a format which does not support including a temporal dimension in the response,
 the Implementation SHALL flatten the resulting coverage, collapsing the temporal dimension while preserving non-empty portions
-based on a default or selected interpolation preference.
+based on a default or selected <<conventions-interpolation-methods, interpolation method>> preference.
 For example, requesting a 2D image in PNG for a specific time interval from a spatiotemporal 3D coverage.
 |===
 
@@ -72,7 +72,8 @@ The server can then perform a mosaic of the month of January with the most recen
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/sparse-dimensions-collapse-temporal/slice-default-interpolation*
-^|A | When the permissions for slicing or flattening on sparse dimensions is implemented, the default interpolation method used
+^|A | When the permissions for slicing or flattening on sparse dimensions is implemented, the default
+<<conventions-interpolation-methods, interpolation method>> used
 SHOULD be either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`.
 |===
 
