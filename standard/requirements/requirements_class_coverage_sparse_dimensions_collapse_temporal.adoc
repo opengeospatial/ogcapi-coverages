@@ -26,6 +26,11 @@ certain date, taking into account that a certain geographic area may only be obs
 IMPORTANT: Slicing (a `subset` specifying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
 as per <<req_subsetting-spatial_subset>> (using the `resolution` query parameter as defined in the relevant Scaling requirements class).
 
+NOTE: Clients wishing to avoid this filling behavior can specify a request header such as
+`Prefer: interpolation=time([ogc-interpolation:none]),
+which most Implementations of this requirements class would support as per the
+<<rec_sparse-dimensions-collapse-temporal_slice-prefer-header, recommendation for interpolation preferences>>.
+
 ===== Example slicing sparse dimensions
 
 In this example, a client requests a bounding box for (40 N, 30 E)-(70 N, 50 E), while slicing a date:
@@ -43,7 +48,8 @@ spatial region covered. In this case, the server can use data from a nearby date
 ^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-temporal/flattening-sparse-dimension*
 ^|A |For a trimming operation on the temporal dimension combined with a trimming operation on other axes
 (such as latitude and longitude), requested for a format which does not support including a temporal dimension in the response,
-the Implementation SHALL flatten the resulting coverage, collapsing the temporal dimension while preserving non-empty portions.
+the Implementation SHALL flatten the resulting coverage, collapsing the temporal dimension while preserving non-empty portions
+based on a default or selected interpolation preference.
 For example, requesting a 2D image in PNG for a specific time interval from a spatiotemporal 3D coverage.
 |===
 
@@ -103,8 +109,8 @@ field and dimension, which will override interpolation for that field only for t
 [[req_sparse-dimensions-collapse-temporal_slice-preference-applied]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/slice-preference-applied*
-^|A | If an Implementation supports <<req_subsetting-temporal_slice-prefer-header, client preferences for interpolation>>,
+^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-temporal/slice-preference-applied*
+^|A | If an Implementation supports <<req_sparse-dimensions-collapse-temporal_slice-prefer-header, client preferences for interpolation>>,
 the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
 `Preference-Applied: interpolation=time([ogc-interpolation:linear])` and `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
 |===
@@ -114,8 +120,8 @@ the Implementation SHALL use a response header `Preference-Applied:` when it app
 [[req_sparse-dimensions-collapse-temporal_slice-preference-handling]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/slice-preference-handling*
-^|A | If an Implementation supports <<req_subsetting-temporal_slice-prefer-header, client preferences for interpolation>>,
+^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-temporal/slice-preference-handling*
+^|A | If an Implementation supports <<req_sparse-dimensions-collapse-temporal_slice-prefer-header, client preferences for interpolation>>,
 the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
 value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
