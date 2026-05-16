@@ -17,7 +17,9 @@
 ^|*Requirement {counter:req-id}* |*/req/scaling-spatial/resolution*
 ^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for one or more of
 the spatial dimensions in positive units of the spatial CRS
-^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
+^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension,
+or for all dimensions.
+For example, `resolution=` and `resolution=Lat(),Lon()` SHALL both be considered as requesting the native spatial resolution.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|D |For a geographic output CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the output CRS definition.
 ^|E |For a projected output CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the output CRS definition.

@@ -21,7 +21,9 @@ For a dimension whose values are expressed as a single number, the resolution va
 ^|B |For categorical values whose semantic definition supports multiple levels of classification, the Implementation SHALL support the name of those levels as the resolution
 (which could be explicitly listed in the `availableResolutions` of that dimension grid definition).
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|D |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension.
+^|D |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension,
+or for all dimensions.
+For example, `resolution=` and `resolution=pressure()` SHALL both be considered as requesting the native pressure resolution.
 ^|E |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extent other than `spatial` and `temporal`.
 ^|F |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to an additional dimension described in the collection extent,
 or to any other axis supported in the context of other requirements classes (such as spatial and temporal scaling).
