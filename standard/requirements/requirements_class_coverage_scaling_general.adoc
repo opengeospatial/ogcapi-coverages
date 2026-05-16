@@ -137,7 +137,7 @@ However, since those values are interpolated along specific dimensions, the natu
 the validitity of the interpolation method selected.
 
 For fields with a continuous variable type, the interpolation performed should respect the gradual change in the values
-so that the more detailed values is a best guess of what values might actually lie in between.
+so that the more detailed values is a best guess of what values might actually lie in between available data points in the native resolution.
 
 For fields with a categorical variable type, the interpolation performed should only produce valid values that are directly related to
 the source values. For example, averaging the numerical values associated with categories is not valid.
