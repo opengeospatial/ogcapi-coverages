@@ -59,7 +59,7 @@ including the region of validity of individual grid cells where applicable.
 ^|A | Implementations SHOULD default to the best available interpolation method which will not significantly degrade response time or
 put too much strain on the server resources.
 ^|B | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for
-ndividual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
+individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
 the dimension's grid description (within the collection description's `extent`), typically considering the center of that
 region of validity for interpolation calculations.
 When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular grids) are omitted,

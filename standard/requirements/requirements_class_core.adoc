@@ -26,9 +26,9 @@ The conformance declaration response mainly consists of a list of links.
 ^|*Requirement {counter:req-id}* |*/req/core/conformance-success*
 ^|A |If the API instance has a mechanism to advertise conformance classes, the list of conformance classes SHALL include the
 ones defined in this Standard and listed in <<table_conformance_urls>> that are supported by this API implementation instance.
-^|B |If some conformance classes of this Standard are only supported by particular collections, Implementations SHALL
-the API instance has a mechanism to advertise conformance classes, each collection supporting additional
-requirements classes SHALL be listed in a resource linked to from the collection description as described in
+^|B |If some conformance classes of this Standard are only supported by particular collections,
+requirements classes supported by these collections SHALL be listed in a resource linked to from the
+collection description as described in
 the https://docs.ogc.org/DRAFTS/20-024.html#per_collections_conformance[OGC API - Common - Part 2 per-collection conformance permission].
 |===
 

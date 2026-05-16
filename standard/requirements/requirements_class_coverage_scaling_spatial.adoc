@@ -90,13 +90,12 @@ including the region of validity of individual grid cells where applicable.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/interpolation*
-^|A | Implementations SHOULD perform interpolation using a _nearest neighbor_ for fields of a variable type other than `continuous`.
-^|B | Implementations SHOULD use the best available interpolation method which will not significantly degrade response time or put too much strain on the server resources.
-^|C | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
+^|A | Implementations SHOULD default to the best available interpolation method which will not significantly degrade response time or put too much strain on the server resources.
+^|B | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
 the dimensions' grid description (within the collection description's `extent`), typically considering the center of that region of validity for interpolation calculations.
 When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular grids) are omitted,
 the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being centered within the region of validity.
-^|D | Implementations SHOULD include in all coverage responses an accurate description of the domain and range of the returned coverage, as well as a description of any interpolation
+^|C | Implementations SHOULD include in all coverage responses an accurate description of the domain and range of the returned coverage, as well as a description of any interpolation
 applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that information.
 |===
 
