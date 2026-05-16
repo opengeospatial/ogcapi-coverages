@@ -188,6 +188,7 @@ four or six comma-separated numbers representing the lower-left and upper right 
 ^|*Requirement {counter:req-id}* |*/req/core/native-resolution*
 ^|A |An implementation SHALL accept a `resolution` query parameter for a GET operation on the coverage resource,
 for empty resolution values (e.g., `resolution=Lat(),Lon(),time()`) indicating a request for the native resolution of the corresponding dimension(s),
+as well as a completely empty resolution query parameter (e.g., `resolution=`) indicating a request for the native resolution of all dimensions,
 whether the implementation supports or not the <<rc_scaling_spatial, "Spatial Scaling">>, <<rc_scaling_spatial, "Temporal Scaling">> and/or <<rc_scaling_spatial, "General Scaling">> requirements classes.
 ^|B |An implementation not supporting scaling for a dimension for which a non-empty value has been specified using the `resolution` query parameter SHALL return a 4xx error.
 |===
@@ -196,8 +197,8 @@ NOTE: An implementation not supporting scaling for any dimension (not conforming
 native resolution as if the query parameter was not used. The implementation would return an error if the selected subset or the whole coverage requested exceeds the server limits at this native resolution.
 
 IMPORTANT: Clients wishing to ensure they always retrieve a native resolution coverage can include in their coverage data request a `resolution` query parameter specifying all dimensions with empty values:
-`resolution=Lat(),Lon(),time()` (including any additional dimension), regardless of whether the server implements any of the Scaling requirements classes. For most large datasets, these clients
-would also need to include subsetting parameters (`subset`, `bbox` and/or `datetime`, assuming the server supports the corresponding subsetting requirements classes) to avoid an error response due
+`resolution=Lat(),Lon(),time()` (including any additional dimension), or a completely empty `resolution` query parameter: `resolution=`, regardless of whether the server implements any of the Scaling requirements classes.
+For most large datasets, these clients would also need to include subsetting parameters (`subset`, `bbox` and/or `datetime`, assuming the server supports the corresponding subsetting requirements classes) to avoid an error response due
 to requesting more data than allowed by the server limits.
 
 ==== Server limits recommendations
