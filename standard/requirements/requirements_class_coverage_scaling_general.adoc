@@ -101,7 +101,9 @@ This guidance applies whether the resampling is performed as a result of the use
 or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
 
 This guidance also applies to interpolation which could also be performed by clients.
-Including an accurate description of the domain and range in a coverage response provided by the server allows to select a proper interpolation method.
+Including an accurate description of the domain and range in a coverage response provided by the server
+(within the content of the response, as specified by the negotiated format such as GeoTIFF or netCDF)
+allows to select a proper interpolation method.
 The collection description and the collection logical schema also provides this information for all fields and dimensions of the coverage,
 such as the `variableType` of a particular dimension, the `x-ogc-variableType` of a particular field, as well as a description of the gridded dimensions,
 including the region of validity of individual grid cells where applicable.
@@ -119,7 +121,7 @@ region of validity for interpolation calculations.
 When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular grids) are omitted,
 the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being
 centered within the region of validity.
-^|C | Implementations SHOULD include in all coverage responses an accurate description of the domain and range of the returned
+^|C | Implementations SHOULD include within the content of all coverage responses an accurate description of the domain and range of the returned
 coverage, as well as a description of any interpolation
 applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that
 information.
