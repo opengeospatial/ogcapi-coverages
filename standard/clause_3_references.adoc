@@ -8,8 +8,10 @@ The following normative documents contain provisions that, through reference in 
 * [[rfc3987]] Duerst, M., Suignard, M.: IETF RFC 3987, *Internationalized Resource Identifiers (IRIs)*, https://tools.ietf.org/html/rfc3987[RFC 3987]
 * [[rfc6570]] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M., Orchard, D.: IETF RFC 6570, *URI Template*, https://tools.ietf.org/html/rfc6570[RFC 6570]
 * [[rfc8288]] Nottingham, M.: IETF RFC 8288, *Web Linking*, http://tools.ietf.org/rfc/rfc8288.txt[RFC 8288]
-* [[OAPI_Common-Core]] OGC 19-072: *OGC API - Common - Part 1: Core*, (Draft) https://github.com/opengeospatial/oapi_common/blob/Master/19-072.pdf[https://github.com/opengeospatial/oapi_common/blob/Master/19-072.pdf]
-* [[OAPI_Common-Geodata]] OGC 20-024: *OGC API - Common - Part 2: Geospatial Data*, (Draft) https://github.com/opengeospatial/oapi_common/blob/Master/20-024.pdf[https://github.com/opengeospatial/oapi_common/blob/Master/20-024.pdf]
+* [[OGC19-072]] OGC 19-072: *OGC API - Common - Part 1: Core*, https://docs.ogc.org/is/19-072/19-072.html[https://docs.ogc.org/is/19-072/19-072.html]
+* [[OGC20-024]] OGC 20-024: *OGC API - Common - Part 2: Geospatial Data*, (Draft) https://docs.ogc.org/DRAFTS/20-024.html[https://docs.ogc.org/DRAFTS/20-024.html]
+* [[OGC23-058r2]] OGC 23-058r2: *OGC API - Common - Part 3: Schemas*, https://docs.ogc.org/is/23-058r2/23-058r2.html[https://docs.ogc.org/is/23-058r2/23-058r2.html]
+* [[OAPI_Common-Geodata]] OGC 20-024: *OGC API - Common - Part 2: Geospatial Data*, (Draft) https://docs.ogc.org/DRAFTS/20-024.html[https://docs.ogc.org/DRAFTS/20-024.html]
 * [[CIS_1_1]] OGC 09-146: *OGC Coverage Implementation Schema (CIS)*, version 1.1, https://portal.opengeospatial.org/files/?artifact_id=72392&version=2[CIS]
 * [[GeoTIFF]] OGC 19-008: *OGC GeoTIFF Standard*, Version 1.1, http://docs.opengeospatial.org/is/19-008r4/19-008r4.html
 * [[CIS_JSON_Schema]] OGC Schema: *OGC JSON Schema for Coverage Implementation Schema*, version 1.1, 2017, http://schemas.opengis.net/cis/1.1/json/coverage-schema.json//[CIS Schema]

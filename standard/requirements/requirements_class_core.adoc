@@ -129,7 +129,7 @@ The use of JSON Schema is therefore not limited to describe only coverages encod
 NOTE: A meta-schema for JSON Schema used as part of the _2D Tile Matrix Set and Tileset Metadata standard_ suitable for this resource is available at
 https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/tms/propertiesSchema.yaml .
 
-[[rec_core-coverage_schema_variable_type]]
+[[rec_core_coverage-schema-variable-type]]
 [width="90%",cols="2,6"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/core/coverage-schema-variable-type*

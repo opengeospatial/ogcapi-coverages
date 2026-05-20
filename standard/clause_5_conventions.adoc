@@ -100,7 +100,7 @@ Each resource representation includes an array of links. Implementations are fre
 [[conventions-interpolation-methods]]
 === Interpolation methods
 
-Recommendations for supporting a `Prefer:` request header in the <<rc_scaling_spatial, Scaling>> and <<rc_subsetting_spatial, Subsetting>> requirements classes allow clients to specify a preferred
+Recommendations for supporting a `Prefer:` request header in the <<rc_scaling_spatial, Scaling>> and <<rc_sparse-dimensions-collapse-spatial, Collapsing Sparse Dimensions>> requirements classes allow clients to specify a preferred
 interpolation methods using a URI (or CURIE) referencing interpolation methods registered on the OGC definition server at
 https://www.opengis.net/def/interpolation. The interpolation methods referenced in this document are:
 
