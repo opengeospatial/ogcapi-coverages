@@ -1,6 +1,21 @@
 [big]*i.     Abstract*
 
-<Insert Abstract Text here>
+The OGC API - Coverages - Part 1: Core Standard defines a Web API for requesting coverage data over the Web.
+A coverage is a function which returns values from its range for any direct position within its domain.
+The coverage data response from this Web API consists of a collection of values usually representing observations or measurements for
+one or more fields within a multidimensional domain, often including spatiotemporal dimensions.
+
+Implementations of the OGC API - Coverages Standard are designed for a client to easily:
+
+- Request data values from a specific coverage;
+- Select a subset of the domain (space, time, or other dimensions) for which to retrieve values;
+- Select specific fields for which to retrieve values;
+- Select a particular resolution at which to retrieve the data (such as downsampling from the native resolution);
+- Select a particular output coordinate reference system.
+
+A server that implements OGC API - Coverages provides information about which coverages are offered.
+OGC API - Coverages addresses use cases similar to those addressed by the
+http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC 17-089r1 OGC® Web Coverage Service (WCS) Interface Standard].
 
 [big]*ii.    Keywords*
 
@@ -21,6 +36,9 @@ The following organizations submitted this Document to the Open Geospatial Conso
 * Heazeltech LLC
 * Ecere Corporation
 * Centre de Recherche Informatique de Montréal (CRIM)
+* EOX IT Services GmbH
+* Meteorological Service of Canada
+* Universitat Autònoma de Barcelona (CREAF)
 
 [big]*v.     Submitters*
 
