@@ -31,6 +31,8 @@ Semantic annotations such as the https://docs.ogc.org/is/23-058r2/23-058r2.html#
 a definition URI (see https://docs.ogc.org/is/23-058r2/23-058r2.html#_semantic_definition_of_a_property[Semantic definition of a property]),
 https://docs.ogc.org/is/23-058r2/23-058r2.html#_the_unit_of_measure_for_a_numeric_property[units] describing the nature of each field in a machine-readable way,
 or a <<req_core-coverage_fields_schema, resolution specific to a particular field>> should also be included.
+<<schemas-field-annotation>> summarizes the JSON Schema extensions for annotating fields defined by OGC API - Common - Part 3
+as well as those introduced in this Standard.
 
 [#schemas-field-annotation,reftext='{table-caption} {counter:table-num}']
 .Schemas field annotations
