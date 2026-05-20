@@ -153,6 +153,19 @@ or `numericalNominal` providing useful information relevant to how to properly p
 (see Field Selection requirements class), the `defaultFields` if specified in the collection description, or otherwise the `x-ogc-propertySeq` in the collection schema.
 |===
 
+==== Recommendation to support the `HEAD` method
+
+[[rec_core_head-method]]
+[width="90%",cols="2,6"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/head-method*
+^|A |The Implementation SHOULD support the HTTP 1.1 method `HEAD` for all resources that support the method `GET`,
+in particular the `/collections/{collectionId}/coverage` which is likely to return a large amount of data.
+A `HEAD` response can help clients validating the georeferencing of the content (see <<req_core_response-headers, response headers for spatiotemporal referencing>>),
+the interpolation methods used (see <<rec_core_interpolation-applied, headers for interpolation methods>>), and avoid wasteful exchange of data that
+might end up discarded.
+|===
+
 ==== Recommendation to use RFC 7807 for JSON error reports
 
 [[rec_core_json-errors]]
@@ -165,7 +178,7 @@ https://docs.ogc.org/is/19-072/19-072.html#mediatype-problems[OGC API - Common -
 or a corresponding HTML representation when the content negotiation favors HTML over JSON (e.g., from a browser request).
 |===
 
-==== Response headers
+==== Response headers for spatiotemporal referencing
 
 [[req_core_response-headers]]
 [width="90%",cols="2,6"]
@@ -178,6 +191,44 @@ or a corresponding HTML representation when the content negotiation favors HTML 
 four or six comma-separated numbers representing the lower-left and upper right corners of the response honoring the CRS coordinates order.
 ^|D |If the coverage includes a temporal dimension which can be expressed in RFC3339 format, the headers of the response SHALL include a `Content-Datetime:` header in that format with the actual datetime instant
 (if returning a temporal slice) or datetime interval (if the response includes a temporal dimension, or multiple temporal slices were flattened due to a limitation of the response format) of the returned coverage.
+|===
+
+==== Response headers indicating the interpolation methods applied
+
+The following recommendation describes how a server can indicate the <<conventions-interpolation-methods, interpolation methods>>
+applied to the data, whether selected by default or as the result of a preference indicated by the client, when the
+<<rc_scaling_spatial, Scaling requirements classes>> and/or the
+<<rc_sparse-dimensions-collapse-spatial, Collapsing Sparse Dimensions requirements classes>> are involved.
+
+[[rec_core_interpolation-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/interpolation-applied*
+^|A | The Implementation SHOULD indicate which <<conventions-interpolation-methods, interpolation methods>> were applied in relation
+to any of the Scaling or Collapsing Sparse Dimensions requirements classes,
+either for all dimensions and fields, or for individual dimension and field combination, using a response header
+`Content-Interpolation:`, with the syntax illustrated in the following examples.
+
+A single interpolation method used for all fields and dimensions:
+
+`Content-Interpolation: [ogc-interpolation:cubic]`
+
+An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific dimensions:
+
+`Content-Interpolation: [ogc-interpolation:cubic]; dimensions=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear])`
+
+An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific fields:
+
+`Content-Interpolation: [ogc-interpolation:cubic]; properties=temperature([ogc-interpolation:linear])`
+
+An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific combinations
+of fields and dimensions:
+
+`Content-Interpolation: [ogc-interpolation:cubic]; properties=temperature(pressure:[ogc-interpolation:linear])`
+
+An explicit list of interpolation method for each dimension:
+
+`Content-Interpolation: dimensions=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear]),time([ogc-interpolation:cubic])`
 |===
 
 ==== Query parameter `resolution` (native resolution requested using empty values)
