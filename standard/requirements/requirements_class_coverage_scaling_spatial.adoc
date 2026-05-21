@@ -149,7 +149,7 @@ including the region of validity of individual grid cells where applicable.
 ^|A | Implementations SHOULD default to the best available interpolation method which will not significantly degrade response time or put too much strain on the server resources.
 ^|B | When interpolating gridded data, implementations SHOULD take into account the region of validity of values for individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
 the dimensions' grid description (within the collection description's `extent`), typically considering the center of that region of validity for interpolation calculations.
-When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular grids) are omitted,
+When `relativeBounds` (for regular grids) or `boundsCoordinates` (for <<term-irregular-grid, irregular grids>>) are omitted,
 the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being centered within the region of validity.
 ^|C | Implementations SHOULD include within the content of all coverage responses an accurate description of the domain and range of the returned coverage, as well as a description of any interpolation
 applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that information.
@@ -158,9 +158,9 @@ applied to the source data to produce that output, to the extent that the negoti
 ==== Recommendation for default interpolation method when scaling spatially
 
 Interpolation is applied to the field values of the range.
-Since spatial dimensions are always continuous, only the variable types of the fields needs additional consideration.
+Since spatial dimensions are always continuous, only the <<term-variable-type, variable type>> of the fields needs additional consideration.
 
-For fields with a continuous variable type, the interpolation performed should respect the gradual change in the values
+For fields with a continuous <<term-variable-type, variable type>>, the interpolation performed should respect the gradual change in the values
 so that the more detailed values is a best guess of what values might actually lie in between data points in the native resolution.
 
 For fields with a categorical variable type, the interpolation performed should only produce valid values that are directly related to

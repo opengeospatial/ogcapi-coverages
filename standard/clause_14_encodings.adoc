@@ -121,7 +121,7 @@ one or more subsetting parameters (`subset`, `bbox` or `datetime`).
 
 The CIS standard defines a number of alternative way in which a coverage encoding can be structured.
 In order to maximize interoperability, this requirements class specifies that the response will be a _CoverageByDomainAndRange_ consisting of either a DomainSet described by a
-_GeneralGridCoverage_ (for coverages consisting of one or more dimensions of regular and/or irregular grids) or a _DirectMultiPoint_ coverage (for point clouds), excluding
+_GeneralGridCoverage_ (for coverages consisting of one or more dimensions of <<term-regular-grid, regular>> and/or <<term-irregular-grid, irregular grids>>) or a _DirectMultiPoint_ coverage (for point clouds), excluding
 a _CoverageByPartitioning_ defined by a PartitionSet, unless a prior arrangement (not specified by this Standard) is established with the client.
 
 Similarly, this requirement class also specifies that the CIS JSON response will be self-contained (not linking to data available in separate resources),

@@ -71,7 +71,7 @@ as well as those introduced in this Standard.
 2+| _Introduced in this Standard_
 
 | <<rec_core_coverage-schema-variable-type, *x-ogc-variableType*>>
-| The type of variable (`continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`, `numericalNominal`), which notably provides context about proper <<conventions-interpolation-methods, interpolation methods>> (see also https://docs.ogc.org/DRAFTS/20-024.html#conceptual-model[Common - Part 2 UML Diagram])
+| The <<term-variable-type, type of variable>> (`continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`, `numericalNominal`), which notably provides context about proper <<conventions-interpolation-methods, interpolation methods>> (see also https://docs.ogc.org/DRAFTS/20-024.html#conceptual-model[Common - Part 2 UML Diagram])
 
 | <<req_core-coverage_fields_schema, *x-ogc-resolution*>>
 | Resolution for each dimension (in units of the dimension) applying to this particular field (e.g., higher panchromatic band resolution, lower scene classification layer)
@@ -163,10 +163,10 @@ image::figures/spanExtent.png[]
 ==== Description of gridded data
 
 A `grid` property for each dimension allows describing the `cellsCount` of the grid.
-For regular grids, a `firstCoordinate` as well as well as a cell `resolution` must be specified.
+For <<term-regular-grid, regular grids>>, a `firstCoordinate` as well as well as a cell `resolution` must be specified.
 A set of `relativeBounds` coordinates can also be specified indicating the bounds (or region of validity) for each cell relative to `firstCoordinate + n * resolution`.
 
-For irregular grids, a list of individual `coordinates` is used instead.
+For <<term-irregular-grid, irregular grids>>, a list of individual `coordinates` is used instead.
 A parallel set of `boundsCoordinates` pairs can also be specified indicating the coordinates for the bounds (or region of validity) for each cell.
 
 For regular grid coverages:

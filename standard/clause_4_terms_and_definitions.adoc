@@ -3,20 +3,56 @@ This document uses the terms defined in Sub-clause 5 of https://github.com/openg
 
 For the purposes of this document, the following additional terms and definitions apply.
 
+=== Collapse [of a sparse dimension]
+a mosaic operation filling empty values of a sparse dimension slice with neighboring non-empty values,
+or flattening a sparse dimension trim to a lower dimensionality
+
 === Coverage
-function which returns values from its range for any direct position within its domain (as defined in OGC Abstract Topic 6)
+function which returns values from its range for any direct position within its domain
 
 NOTE: Although a coverage is most often thought of as a regularly gridded data, the internal model of the coverage function may also consist of other things such as
-iregularly gridded data, a point cloud, or a collection of curves, surfaces, or solids, or a purely mathematical function.
+iregularly gridded data, a point cloud, or a collection of curves, surfaces, or solids (with associated properties), or a purely mathematical function.
 
-=== Regular grid
-grid whose grid lines have a constant distance along each grid axis
+[.source]
+<<OGC 07-011r2>>
 
+=== Domain [of a coverage]
+set of geometric objects
+
+NOTE: The domain of a coverage is expressed in terms of specific regions within a multidimensional space
+
+[.source]
+<<OGC 07-011r2>>
+
+[[term-field]]
+=== Field
+a specific observation or measurement (property) of the range of a coverage
+
+=== Interpolation method [in the context of this Standard]
+specific algorithm applied to generate new values from the source data values when resampling (scaling) data along a dimension or
+collapsing a sparse dimension
+
+[[term-irregular-grid]]
 === Irregular grid
 Grid whose grid lines have individual distances along each grid axis
 
-=== Partition [of a coverage]
-separately stored coverage acting, by being referenced in the coverage on hand, as one of its components
+=== Range [of a coverage]
+set of values associated by a function, the coverage, with the domain of a coverage
+
+[.source]
+<<OGC 07-011r2>>
+
+[[term-range-type]]
+=== Range type [of a coverage]
+the logical schema consisting of the data types and associated semantic information for each field of the range of a coverage
+
+[[term-regular-grid]]
+=== Regular grid
+grid whose grid lines have a constant distance along each grid axis
+
+=== Resampling
+applying a particular interpolation method to obtain a new set of values with a different distance between data points
+compared to original source data values
 
 === Resolution [of a grid]
 the distance between data points on a regular grid
@@ -27,14 +63,45 @@ but that output data may not be suitable for purposes requiring data at the true
 === Resolution [of data]
 the smallest difference between observations or measurements that can be meaningfully distinguished, whether the data is actually gridded or not
 
-=== (Geometric) Sensor model
+=== Sparse dimension
+a dimension along which different extents of the other dimensions are filled at different positions
+
+=== [Geometric] Sensor model
 mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated coverage produced by a
 https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.5[sensor (3.5)]
 
 NOTE: Adapted from https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.6[ISO 19130-3 sensor model (3.6)]
 
+[[term-slicing]]
+=== Slicing
+extracting a hyperplane of data along a particular dimension, resulting in a dataset of reduced dimensionality
+
+[.source]
+<<OGC21-060r2>>
+
+=== Subsetting
+performing a slicing or trimming operation on one or more dimension
+
 === Transformation grid
 grid whose direct positions are given by some transformation algorithm not further specified in this standard
+
+[[term-trimming]]
+=== Trimming
+extracting a subset of data between a lower and upper bound along one or more dimensions, preserving dimensionality
+
+[.source]
+<<OGC21-060r2>>
+
+[[term-variable-type]]
+=== Variable type
+
+type of variable which may inform correct interpretation and interpolation method
+(one of `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`).
+
+NOTE: Each dimension of the domain and field of the range of a coverage have a specific variable type.
+
+[.source]
+<<OGC20-024>>
 
 === Abbreviated terms
 

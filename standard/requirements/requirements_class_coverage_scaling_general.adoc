@@ -119,7 +119,7 @@ put too much strain on the server resources.
 individual grid cells, as identified in `relativeBounds` or `boundsCoordinates` of
 the dimension's grid description (within the collection description's `extent`), typically considering the center of that
 region of validity for interpolation calculations.
-When `relativeBounds` (for regular grids) or `boundsCoordinates` (for irregular grids) are omitted,
+When `relativeBounds` (for regular grids) or `boundsCoordinates` (for <<term-irregular-grid, irregular grids>>) are omitted,
 the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordinates` for irregular grids) are assumed as being
 centered within the region of validity.
 ^|C | Implementations SHOULD include within the content of all coverage responses an accurate description of the domain and range of the returned
@@ -137,7 +137,7 @@ The interpolation is always applied to the field values of the range.
 However, since those values are interpolated along specific dimensions, the nature of the dimensions also plays a role in
 the validitity of the interpolation method selected.
 
-For fields with a continuous variable type, the interpolation performed should respect the gradual change in the values
+For fields with a continuous <<term-variable-type, variable type>>, the interpolation performed should respect the gradual change in the values
 so that the more detailed values is a best guess of what values might actually lie in between available data points in the native resolution.
 
 For fields with a categorical variable type, the interpolation performed should only produce valid values that are directly related to
@@ -149,7 +149,7 @@ For categorical dimensions, only some aggregation methods are appropriate, which
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/scaling-general/default-interpolation*
-^|A | For fields with a continuous variable type along a continuous dimension,
+^|A | For fields with a continuous <<term-variable-type, variable type>> along a continuous dimension,
 the implementation SHOULD default to a continuous interpolation method,
 such as `[ogc-interpolation:linear]`, `[ogc-interpolation:quadratic]` or `[ogc-interpolation:cubic]`,
 when no preference is specified by the client.
