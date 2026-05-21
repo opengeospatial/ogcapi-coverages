@@ -11,7 +11,6 @@ The following normative documents contain provisions that, through reference in 
 * [[OGC19-072]] OGC 19-072: *OGC API - Common - Part 1: Core*, https://docs.ogc.org/is/19-072/19-072.html[https://docs.ogc.org/is/19-072/19-072.html]
 * [[OGC20-024]] OGC 20-024: *OGC API - Common - Part 2: Geospatial Data*, (Draft) https://docs.ogc.org/DRAFTS/20-024.html[https://docs.ogc.org/DRAFTS/20-024.html]
 * [[OGC23-058r2]] OGC 23-058r2: *OGC API - Common - Part 3: Schemas*, https://docs.ogc.org/is/23-058r2/23-058r2.html[https://docs.ogc.org/is/23-058r2/23-058r2.html]
-* [[OAPI_Common-Geodata]] OGC 20-024: *OGC API - Common - Part 2: Geospatial Data*, (Draft) https://docs.ogc.org/DRAFTS/20-024.html[https://docs.ogc.org/DRAFTS/20-024.html]
 * [[CIS_1_1]] OGC 09-146: *OGC Coverage Implementation Schema (CIS)*, version 1.1, https://portal.opengeospatial.org/files/?artifact_id=72392&version=2[CIS]
 * [[GeoTIFF]] OGC 19-008: *OGC GeoTIFF Standard*, Version 1.1, http://docs.opengeospatial.org/is/19-008r4/19-008r4.html
 * [[CIS_JSON_Schema]] OGC Schema: *OGC JSON Schema for Coverage Implementation Schema*, version 1.1, 2017, http://schemas.opengis.net/cis/1.1/json/coverage-schema.json//[CIS Schema]
