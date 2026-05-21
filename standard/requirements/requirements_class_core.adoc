@@ -155,15 +155,16 @@ or `numericalNominal` providing useful information relevant to how to properly p
 
 ==== Recommendation to support the `HEAD` method
 
+This recommendation to support the `HEAD` method helps clients to validate the georeferencing of the content (see <<req_core_response-headers, response headers for spatiotemporal referencing>>),
+the interpolation methods used (see <<rec_core_interpolation-applied, headers for interpolation methods>>), and avoids wasteful exchange of data that
+might end up discarded.
+
 [[rec_core_head-method]]
 [width="90%",cols="2,6"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/core/head-method*
 ^|A |The Implementation SHOULD support the HTTP 1.1 method `HEAD` for all resources that support the method `GET`,
-in particular the `/collections/{collectionId}/coverage` which is likely to return a large amount of data.
-A `HEAD` response can help clients validating the georeferencing of the content (see <<req_core_response-headers, response headers for spatiotemporal referencing>>),
-the interpolation methods used (see <<rec_core_interpolation-applied, headers for interpolation methods>>), and avoid wasteful exchange of data that
-might end up discarded.
+in particular the `/collections/{collectionId}/coverage` resource which is likely to return a large amount of data.
 |===
 
 ==== Recommendation to use RFC 7807 for JSON error reports
