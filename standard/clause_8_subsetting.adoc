@@ -24,11 +24,11 @@ For gridded coverage cells whose geometry is a point, this will **include** all 
 For gridded coverage cells whose geometry is an area, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of an area excludes its boundary**).
 
 [#subset-aligned,reftext='{figure-caption} {counter:fig-num}']
-.Responses for a subsetting request aligned to the coverage grid for _Value-is-Point_ (span = 0) vs. _Value-is-Area_ (span = 1)
+.Responses for a subsetting request aligned to the coverage grid for _Value-is-Point_ (relativeBounds: [0, 0]) vs. _Value-is-Area_ (relativeBounds: [0, 0.25])
 image::figures/spanSubset.png[]
 
 [#subset-non-aligned,reftext='{figure-caption} {counter:fig-num}']
-.Responses for a subsetting request not aligned to the coverage grid for _Value-is-Point_ (span = 0) vs. _Value-is-Area_ (span = 1)
+.Responses for a subsetting request not aligned to the coverage grid for _Value-is-Point_ (relativeBounds: [0, 0]) vs. _Value-is-Area_ (relativeBounds: [0, 0.25])
 image::figures/spanSubsetNonAligned.png[]
 
 In addition to the `subset` parameter, server implementations must also support a convenience `bbox` parameter, which maps directly to an equivalent `subset` parameter performing a trimming operation.

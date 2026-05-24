@@ -11,7 +11,7 @@ The tiles response for a coverage corresponds to a subsetting request for the ti
 Note that the number of cells in the response for a _Value-Is-Point_ coverage is one more than the tile pixel size of the TileMatrixSet.
 
 [#span-coverage-tiles,reftext='{figure-caption} {counter:fig-num}']
-.The cells returned for a tile response of a gridded coverage for _Value-is-Point_ (span = 0) and _Value-is-Area_ (span = 1)
+.The cells returned for a tile response of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25])
 image::figures/spanCoverageTiles.png[]
 
 === Coverage Tiles Examples
