@@ -163,9 +163,9 @@ The {swgname} SWG work program also include development of extensions to the OGC
 
 Part 2 will address a number of server-side processing use cases (e.g., calculation of an NDVI index) by leveraging the OGC Common Query Language (CQL2).
 Part 3 will address the transactional aspect by allowing to manage (Create/Retrieve/Replace/Update/Delete) individual scenes (or parts / granules) of a coverage,
-listing and discover these scenes, while also supporting STAC items representations for these scenes.
+listing and discovering these scenes, while also supporting STAC items representations for these scenes.
 
-The {swgname} SWG will define requirements classes as part of OGC API - Coverages for coverage data respones in format standards:
+The {swgname} SWG will define requirements classes as part of OGC API - Coverages for coverage data responses in format standards:
 
 * GeoTIFF (including Cloud Optimized GeoTIFF)
 * NetCDF (including version 4 based on HDF5)
