@@ -3,8 +3,8 @@
 
 === Overview
 
-The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more spatial dimensions.
-With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
+The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along one or more spatial dimensions.
+With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 A client wishing to preserve dimensionality while requesting a single coordinate value may duplicate this value into an interval, for example: `subset=lon(20:20)`.
 
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
@@ -12,7 +12,7 @@ Negotiating a response in a format with limited multidimensionality support, suc
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
-When subsetting a coverage, the geometry of its individual components (such as the cells of a gridded coverage) must be considered.
+When subsetting a coverage, the geometry of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage) must be considered.
 
 If the value for the cells of a gridded coverage represent an area, the geometry of the cells extends over that whole area.
 If the value for the cells of a gridded coverage coverage represent a point, the geometry of the cells is only that infinitely small point.
@@ -42,12 +42,12 @@ include::requirements/requirements_class_coverage_subset_spatial.adoc[]
 
 === Overview
 
-Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
+Some collections are <<term-sparse-dimension, sparse>> by nature, with data not filling the entire extent of some dimensions at each point along
 another dimension.
 
 For example, weather stations capturing observations at different times.
 
-Implementing this requirements class simplifies the use of such data by collapsing the values along spatial dimension(s)
+Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along spatial dimension(s)
 around a specified position of interest.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
@@ -60,14 +60,14 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spa
 
 === Overview
 
-The "Temporal Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along the primary temporal dimension.
-With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
+The "Temporal Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along the primary temporal dimension.
+With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
-When subsetting a temporal coverage, the time of its individual components (such as the cells of a gridded coverage) must be considered.
+When subsetting a temporal coverage, the time of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage) must be considered.
 
 If the value for the temporal cells of a gridded coverage represent an interval, the time of the cells extends over that whole interval.
 If the value for the temporal cells of a gridded coverage represent an instant, the time of the cells is only that infinitely small instant.
@@ -89,13 +89,13 @@ include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 
 === Overview
 
-Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
+Some collections are <<term-sparse-dimension, sparse>> by nature, with data not filling the entire extent of some dimensions at each point along
 another dimension.
 
 For example, satellite imagery with scenes captured over a certain spatial extent at a certain time conditioned by
 the orbit of the satellite.
 
-Implementing this requirements class simplifies the use of such data by collapsing the values along a temporal dimension
+Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a temporal dimension
 around a specified time of interest.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
@@ -108,18 +108,18 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_tem
 
 === Overview
 
-The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a subset of the coverage along one or more dimensions beyond spatial and the primary temporal dimension.
+The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along one or more dimensions beyond spatial and the primary temporal dimension.
 These additional dimensions are named as described as additional property keys besides `"spatial"` and `"temporal"` in the `"extent"` section of the collection description,
 as specified by the
 https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions requirements class of OGC API - Common - Part 2: Geospatial Data].
 
-With the `subset` parameter, a subset operation may be a trimming operation (preserving dimensionality) or slicing operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
+With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
-When subsetting a coverage, the n-dimensional geometry of its individual components (such as the cells of a gridded coverage) must be considered.
+When subsetting a coverage, the n-dimensional geometry of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage) must be considered.
 
 If the value for the cells of a gridded coverage represent a region, the geometry of the cells extends over that whole region.
 If the value for the cells of a gridded coverage represent a point along the dimension, the geometry of the cells is only that infinitely small point.
@@ -137,12 +137,12 @@ include::requirements/requirements_class_coverage_subset_general.adoc[]
 
 === Overview
 
-Some collections are sparse by nature, with data not filling the entire extent of some dimensions at each point along
+Some collections are <<term-sparse-dimension, sparse>> by nature, with data not filling the entire extent of some dimensions at each point along
 another dimension.
 
 For example, a 3D coverage with data only available at some pressure level for particular spatial regions.
 
-Implementing this requirements class simplifies the use of such data by collapsing the values along a general dimension
+Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a general dimension
 around a specified position of interest.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
@@ -156,7 +156,7 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_gen
 === Overview
 
 The "Multi Slicing" Requirements Class specifies the ability to use a comma-separated list of arbitrary values with the `subset` parameter for the coverage resource,
-allowing to retrieve specific slices from the coverage along a particular dimension. This requirements class is automatically applicable for subsetting with the dimensions supported by any of the
+allowing to retrieve specific <<term-slicing,slices>> from the coverage along a particular dimension. This requirements class is automatically applicable for subsetting with the dimensions supported by any of the
 spatial, temporal and general subsetting requirements classes.
 
 While slicing generally reduces the dimensionality of the results, since this operation always returns multiple slices, the dimensionality is preserved.
@@ -174,7 +174,7 @@ include::requirements/requirements_class_coverage_multi_slicing.adoc[]
 
 === Overview
 
-The "Position Query" Requirements Class specifies the ability to query the value(s) for a specific point position by slicing on every dimension of the coverage therefore
+The "Position Query" Requirements Class specifies the ability to query the value(s) for a specific point <<term-direct-position,direct position>> by slicing on every dimension of the coverage therefore
 reducing the dimensionality of the response to zero. In the common use case, the response consists of a single numerical value.
 Raster or gridded coverage formats are typically not well suited to express such responses.
 In these cases, information about the domain or range, other metadata, as well as the more complex format structures are also not necessary and can negatively affect the

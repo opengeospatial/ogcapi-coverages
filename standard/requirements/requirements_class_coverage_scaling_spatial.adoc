@@ -15,9 +15,9 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-spatial/resolution*
-^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the resolution for one or more of
+^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for one or more of
 the spatial dimensions in positive units of the spatial CRS
-^|B |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension,
+^|B |The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension,
 or for all dimensions.
 For example, `resolution=` and `resolution=Lat(),Lon()` SHALL both be considered as requesting the native spatial resolution.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
@@ -31,7 +31,7 @@ to an alias (see recommendation below), or to any other axis supported in the co
 ^|I |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
 ^|J |For a non-gridded coverage (e.g., a point cloud), when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
 ^|K |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of &#916;N^2^ + &#916;E^2^ + Δh^2^) between two samples.
-^|L |When returning the native resolution for one or more dimension for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support
+^|L |When returning the native resolution for one or more dimension for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support
 returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
 |===
 
@@ -131,14 +131,14 @@ Describing the inner workings of interpolation methods is out of scope for this 
 Some interpolation methods are described in https://docs.ogc.org/as/07-011r2/07-011r2.pdf[informative annex B of OGC Topic 6.1],
 and some <<conventions-interpolation-methods, interpolation methods>> are registered on the OGC definition server and referenced in this document.
 The following recommendation also provides guidance for implementations such as some important considerations to take into account when performing interpolation.
-This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
-or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
+This guidance applies whether the <<term-resampling,resampling>> is performed as a result of the use of the scaling query parameters by the client,
+or for automatic resampling in order to avoid returning too much data (as described in the <<term-downsampling,downsampling>> permission above).
 
 This guidance also applies to interpolation which could also be performed by clients.
 Including an accurate description of the domain and range in a coverage response provided by the server
 (within the content of the response, as specified by the negotiated format such as GeoTIFF or netCDF)
 allows to select a proper interpolation method.
-The collection description and the collection logical schema also provides this information for all fields and dimensions of the coverage,
+The collection description and the collection logical schema also provides this information for all <<term-field,fields>> and dimensions of the coverage,
 such as the `x-ogc-variableType` of a particular field, as well as a description of the gridded dimensions,
 including the region of validity of individual grid cells where applicable.
 
@@ -155,12 +155,13 @@ the coordinates (`firstCoordinate + n * resolution` for regular grids, `coordina
 applied to the source data to produce that output, to the extent that the negotiated output format supports carrying that information.
 |===
 
+[[scaling-spatial-default-interpolation]]
 ==== Recommendation for default interpolation method when scaling spatially
 
-Interpolation is applied to the field values of the range.
-Since spatial dimensions are always continuous, only the <<term-variable-type, variable type>> of the fields needs additional consideration.
+Interpolation is applied to the <<term-field,field>> values of the <<term-range,range>>.
+Since spatial dimensions are always <<term-continuous-dimension,continuous>>, only the <<term-variable-type, variable type>> of the fields needs additional consideration.
 
-For fields with a continuous <<term-variable-type, variable type>>, the interpolation performed should respect the gradual change in the values
+For fields with a continuous variable type, the interpolation performed should respect the gradual change in the values
 so that the more detailed values is a best guess of what values might actually lie in between data points in the native resolution.
 
 For fields with a categorical variable type, the interpolation performed should only produce valid values that are directly related to
@@ -179,6 +180,7 @@ the implementation SHOULD default to `[ogc-interpolation:nearest-neighbor]` or `
 when no preference is specified by the client.
 |===
 
+[[scaling-spatial-preference]]
 ==== Recommendation for interpolation preference when scaling spatially
 
 [[rec_scaling-spatial_prefer-header]]

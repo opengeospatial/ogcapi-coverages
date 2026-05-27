@@ -24,7 +24,7 @@ certain date, taking into account that a certain geographic area may only be obs
 |===
 
 IMPORTANT: Slicing (a `subset` specifying a single value for a particular dimension) is mutually exclusive with scaling on that same dimension
-as per <<req_subsetting-spatial_subset>> (using the `resolution` query parameter as defined in the relevant Scaling requirements class).
+(using the `resolution` query parameter as defined in the relevant Scaling requirements class) as per <<subset-temporal-parameter-subset-requirements>>.
 
 NOTE: Clients wishing to avoid this filling behavior can specify a request header such as
 `Prefer: interpolation=time([ogc-interpolation:none]),
@@ -72,7 +72,7 @@ The server can then perform a mosaic of the month of January with the most recen
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/sparse-dimensions-collapse-temporal/slice-default-interpolation*
-^|A | When the permissions for slicing or flattening on sparse dimensions is implemented, the default
+^|A | For the purpose of slicing or flattening sparse dimensions, the default
 <<conventions-interpolation-methods, interpolation method>> used
 SHOULD be either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-neighbor]`.
 |===
@@ -94,7 +94,7 @@ definition server (https://www.opengis.net/def/interpolation/OGC/1). Example: `P
 ^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
 field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
 `Prefer: properties-interpolation=landCover(time:[ogc-interpolation:nearest-neighbor])`.
-^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the slicing sparsed dimensions permission:
+^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the slicing and flattening sparse dimensions requirements:
 
 - `[ogc-interpolation:next]`: Use the next available data point from the sliced dimension,
 - `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,

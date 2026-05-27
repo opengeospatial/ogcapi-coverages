@@ -43,7 +43,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
   Where:
      \" = double quote = ASCII code 0x42,
      {number} is an integer or floating-point number, and
-     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
+     {text} is some general ASCII text (such as a time and date notation in <<ISO_8601-1,ISO 8601>>).
 ----
 
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>,
@@ -117,7 +117,8 @@ interval-open-end   = date-time "/" [".."]
 interval            = interval-closed / interval-open-start / interval-open-end
 datetime            = date-time / interval
 ----
-The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6].
+The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6]
+with the extension of allowing an hour value of 24 as defined in <<ISO_8601-1,ISO 8601-1>>.
 ^|B |Only the portions of the coverage within the specified interval SHALL be part of coverage response, performing a trim operation for an interval or a slicing operation for an instant.
 ^|C |The implementation SHALL support a double-dot (`..`) or an empty string for the start/end as indicating an unbounded or half-bounded interval (only having a start or end).
 ^|D |If a `datetime` parameter is specified requesting a coverage without any temporal dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
@@ -125,7 +126,7 @@ The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc33
 
 [width="90%",cols="2,6a"]
 |====
-| Note | ISO 8601-2 distinguishes unbounded start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unspecified start/end has the same effect as an unbounded start/end.
+| Note | <<ISO_8601-2,ISO 8601-2>> distinguishes unbounded start/end timestamps (double-dot) and unknown start/end timestamps (empty string). For queries, an unspecified start/end has the same effect as an unbounded start/end.
 |====
 
 .A date-time

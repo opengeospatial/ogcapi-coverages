@@ -24,7 +24,7 @@
 ^|*Requirement {counter:req-id}* |*/req/cog/http-range*
 ^|A |The coverage resource (`/coverage`), as defined in the Core requirement class, SHALL support HTTP range requests as specified in
 the https://docs.ogc.org/is/21-026/21-026.html#HTTPRangeSupportRequirements[`/req/http-range` requirement class of COG].
-^|B |Implementations SHALL only be expected to support HTTP range requests on the coverage resource when used with no query parameters, or with the native resolution (empty values for all dimensions).
+^|B |Implementations SHALL only be expected to support HTTP range requests on the coverage resource when used with no query parameters, or with the <<term-native-resolution,native resolution>> (empty values for all dimensions).
 |===
 
 [[req_cog_cloud-optimized]]

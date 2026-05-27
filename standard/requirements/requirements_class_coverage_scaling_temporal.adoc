@@ -16,9 +16,9 @@
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-temporal/resolution*
 ^|A |For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolution` query parameter specifying
-the resolution for the primary temporal dimension using ISO 8601 period notation.
+the <<term-resolution,resolution>> for the primary temporal dimension using <<ISO_8601-1,ISO 8601>> period notation.
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|C |The server SHALL support an empty resolution value as referring to the native resolution for that particular dimension,
+^|C |The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension,
 or for all dimensions.
 For example, `resolution=` and `resolution=time()` SHALL both be considered as requesting the native resolution for the primary temporal dimension.
 ^|D |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
@@ -86,7 +86,7 @@ or beyond a certain scaling factor past the native resolution. However, for some
 might make sense, for example when this upsampling capability implies downscaling a subset of the data available with a
 climate forecast model using computational fluid dynamics.
 
-Example of specific temporal resolutions available (using ISO-8601 periods for the Gregorian Calendar / UTC default here):
+Example of specific temporal resolutions available (using <<ISO_8601-1,ISO 8601>> periods for the Gregorian Calendar / UTC default here):
 
 [source,json]
 ----
@@ -106,8 +106,8 @@ Describing the inner workings of interpolation methods is out of scope for this 
 Some interpolation methods are described in https://docs.ogc.org/as/07-011r2/07-011r2.pdf[informative annex B of OGC Topic 6.1],
 and some <<conventions-interpolation-methods, interpolation methods>> are registered on the OGC definition server and referenced in this document.
 The following recommendation also provides guidance for implementations such as some important considerations to take into account when performing interpolation.
-This guidance applies whether the resampling is performed as a result of the use of the scaling query parameters by the client,
-or for automatic resampling in order to avoid returning too much data (as described in the downsampling permission below).
+This guidance applies whether the <<term-resampling,resampling>> is performed as a result of the use of the scaling query parameters by the client,
+or for automatic resampling in order to avoid returning too much data (as described in the <<term-downsampling,downsampling>> permission above).
 
 This guidance also applies to interpolation which could also be performed by clients.
 Including an accurate description of the domain and range in a coverage response provided by the server

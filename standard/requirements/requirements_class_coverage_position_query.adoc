@@ -33,7 +33,7 @@ as the ability to query specific points, without providing the ability to return
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/coverage-position-query/interpolation*
-^|A |In the case where the requested position is not centered within the region of validity (the bounds) of an individual element of the coverage, the Implementation SHOULD
-decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the variable type of each field being returned,
-as well as the variable or spatiotemporal type of each dimension being sliced on.
+^|A |In the case where the requested position does not fall within the defined bounds (region of validity) of an individual cell, the Implementation SHOULD
+decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the <<term-variable-type,variable type>> of each <<term-field,field>> being returned,
+as well as the variable type of each dimension being sliced on.
 |===

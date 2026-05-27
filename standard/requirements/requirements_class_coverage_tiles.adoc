@@ -1,11 +1,11 @@
-[[rc_coverage_tiles]]
+[[rc_table_tiles]]
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
 2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-tiles
 |Target type |Web API
 |Dependency |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|Dependency |https://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets
+|Dependency |https://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/geodata-tilesets
 |===
 
 === Requirements
@@ -34,7 +34,7 @@ a request for tile +
 
 `.../coverage?subset=Lat(0:90),Lon(-180:-90)&height=257&width=257`
 
-and
+which can alternatively be specified using `resolution` for those spatial dimensions as:
 
 `.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolution=Lat(0.3515625),Lon(0.3515625)`
 
@@ -42,7 +42,7 @@ and returns a tile containing one or more slices of 257 x 257 cells, while for a
 
 `.../coverage?subset=Lat(0:90),Lon(-180:-90)&height=256&width=256`
 
-and
+which can alternatively be specified using `resolution` for those spatial dimensions as:
 
 `.../coverage?subset=Lat(0:90),Lon(-180:-90)&resolution=Lat(0.3515625),Lon(0.3515625)`
 

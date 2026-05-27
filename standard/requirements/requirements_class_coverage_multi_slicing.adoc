@@ -29,4 +29,5 @@ a regular grid encompassing the overall interval of all slices with null values 
 |===
 
 The requirements classes for <<rc_sparse-dimensions-collapse-spatial, collapsing sparse dimensions>> and the recommendations regarding supporting the `Prefer:` header
-(<<rec_scaling-spatial_prefer-header>>) for requesting a particular interpolation method also applies for multi-slicing, exactly as if each slice was requested separately.
+(<<scaling-spatial-preference>>) for requesting a particular <<conventions-interpolation-methods,interpolation method>> also apply for multi-slicing, exactly as if
+each slice was requested separately.

@@ -93,7 +93,7 @@ Used in combination with _OGC API - Features Part 1: Core_ or _OGC API - CommonÂ
 
 * **http://www.opengis.net/def/rel/ogc/1.0/data**: The target IRI points to a list of geospatial resources (e.g. the collections available for a dataset). (Use `http://www.opengis.net/def/rel/ogc/1.0/geodata` to point to a geospatial resource: e.g. a collection in a dataset)
 
-* **http://www.opengis.net/def/rel/ogc/1.0/data-meta**: The target IRI points to a resource representing general metadata for the context resource (e.g. collection of geospatial data) (e.g., ISO-19115 -- not the domain/application metadata as defined in CIS).
+* **http://www.opengis.net/def/rel/ogc/1.0/data-meta**: The target IRI points to a resource representing general metadata for the context resource (e.g. collection of geospatial data) (e.g., <<ISO_19115-1,ISO-19115>> -- not the domain/application metadata as defined in CIS).
 
 Each resource representation includes an array of links. Implementations are free to add additional links for all resources provided by the Web API.
 
@@ -101,7 +101,7 @@ Each resource representation includes an array of links. Implementations are fre
 === Interpolation methods
 
 Recommendations for supporting a `Prefer:` request header in the <<rc_scaling_spatial, Scaling>> and <<rc_sparse-dimensions-collapse-spatial, Collapsing Sparse Dimensions>> requirements classes allow clients to specify a preferred
-interpolation methods using a URI (or CURIE) referencing interpolation methods registered on the OGC definition server at
+<<term-interpolation-method,interpolation method>> using a URI (or CURIE) referencing interpolation methods registered on the OGC definition server at
 https://www.opengis.net/def/interpolation. The interpolation methods referenced in this document are:
 
 * **https://www.opengis.net/def/interpolation/OGC/1/none**: Only return a value if an exact data point is available, return NODATA otherwise (hit or miss)

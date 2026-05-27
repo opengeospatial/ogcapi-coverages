@@ -3,71 +3,160 @@ This document uses the terms defined in Sub-clause 5 of https://github.com/openg
 
 For the purposes of this document, the following additional terms and definitions apply.
 
-=== Collapse [of a sparse dimension]
-a mosaic operation filling empty values of a sparse dimension slice with neighboring non-empty values,
-or flattening a sparse dimension trim to a lower dimensionality
+[[term-cell]]
+=== Cell
 
+smallest identifiable constituent element of a <<term-coverage,coverage>>'s <<term-domain,domain>> with which a distinct set of <<term-range,range>> values is associated.
+
+NOTE: Cells represent the atomic units of any coverage type across its multi-dimensional domain.
+
+NOTE: This definition intentionally generalizes and diverges from the more rigid geometric constraints found in ISO 19123-1 / OGC 07-011r2.
+While that abstract standard ties cells to strict, space-partitioning geometric tessellations, this standard treats a cell as a functional, data-bearing component.
+This allows the framework to natively accommodate domains containing internal gaps, variable structural geometries, or overlapping footprints.
+
+[[term-grid-cell]]
+=== [grid] cell
+
+<<term-cell,cell>> whose bounds are defined relative to the intersections of the curves forming a <<term-grid,grid>>
+
+NOTE: Depending on the coverage structure, the physical bounds of a grid cell may be defined as a zero-dimensional position at an intersection,
+the space between intersecting curves, or an arbitrary variation of either case.
+
+NOTE: Grid cells are not required to form a strict geometric tessellation; they may contain gaps or physically overlap depending on how their individual bounds are defined.
+
+[[term-collapse-sparse-dimension]]
+=== Collapse [of a sparse dimension]
+a mosaic operation filling empty values of a sparse dimension <<term-slicing,slice>> with neighboring non-empty values,
+or flattening a <<term-sparse-dimension,sparse dimension>> <<term-trimming,trim>> to a lower dimensionality while preserving some of the non-empty values
+
+[[term-continuous-dimension]]
+=== Continuous dimension
+dimension of a <<term-coverage,coverage>> whose <<term-variable-type,variable type>> is continuous
+
+NOTE: A continuous dimension allows the coverage function to be evaluated at any arbitrary <<term-direct-position,direct position>> along its axis.
+
+[[term-coverage]]
 === Coverage
-function which returns values from its range for any direct position within its domain
+function which returns values from its <<term-range,range>> for any <<term-direct-position,direct position>> within its <<term-domain,domain>>
 
 NOTE: Although a coverage is most often thought of as a regularly gridded data, the internal model of the coverage function may also consist of other things such as
 iregularly gridded data, a point cloud, or a collection of curves, surfaces, or solids (with associated properties), or a purely mathematical function.
 
 [.source]
-<<OGC 07-011r2>>
+<<OGC07-011r2>>
 
+[[term-direct-position]]
+=== Direct position
+position described by a single coordinate tuple within a coordinate reference system
+
+NOTE: A direct position is an ordered sequence of coordinates whose dimensions and properties are established by the axes of the coordinate reference system.
+
+NOTE: This specification maintains the coordinate-centric definition from ISO 19123:2005 / OGC 07-011 to ensure the coverage function remains compatible with any underlying
+data structures. Newer ISO 19123-1 redefines a direct position relative to instantiated geometric objects within the coverage, which is not implied by this standard.
+
+<<OGC07-011>>
+
+[[term-discrete-dimension]]
+=== Discrete dimension
+dimension of a <<term-coverage,coverage>> <<term-domain,domain>> whose <<term-variable-type,variable type>> is discrete
+
+NOTE: A discrete dimension restricts evaluation of the coverage function to the bounds of the defined <<term-cell,cells>> along its axis.
+
+[[term-domain]]
 === Domain [of a coverage]
-set of geometric objects
+the complete set of <<term-direct-position,direct positions>> for which a <<term-coverage,coverage>> function can return values
 
-NOTE: The domain of a coverage is expressed in terms of specific regions within a multidimensional space
+NOTE: The <<term-domain,domain>> of a coverage establishes its valid multi-dimensional extent and coordinate space, which may be represented as a continuous mathematical space
+or a collection of bounded <<term-cell,cells>>.
 
-[.source]
-<<OGC 07-011r2>>
+NOTE: This standard generalizes the definition of a domain to maintain consistency with the coverage function model.
+While ISO 19123-1 / OGC 07-011r2 defines a domain as a _set of geometric objects_, this standard focuses on the underlying coordinate space to maintain
+compatibility with purely mathematical functions and continuous coordinate spaces.
+
+[[term-downsampling]]
+=== Downsampling
+<<term-resampling,resampling>> resulting in a coarser <<term-resolution,resolution>> (fewer <<term-cell,cells>>)
 
 [[term-field]]
 === Field
-a specific observation or measurement (property) of the range of a coverage
+component of a <<term-coverage,coverage>>'s <<term-range,range>> that maps a single observation or measurement value to each <<term-direct-position,direct position>> across the <<term-domain,domain>>
 
+NOTE: Analytically, a field represents a continuous or discrete phenomenon - such as temperature, elevation, or a classification - that extends across the multi-dimensional
+domain space.
+
+[[term-grid]]
+=== Grid
+
+covering of a multi-dimensional region using quadrilateral shapes (in the 2D case) or their n-dimensional generalization (in the n-D case) with no overlaps and gaps
+
+NOTE: While networks using non-quadrilateral structures - such as triangular or hexagonal tessellations - represent valid configurations of a grid, they are excluded from the
+primary grid representation model of this standard. In the context of this Standard and the
+https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[OGC API - Common - Part 2 "Uniform Additional Dimensions" requirements class],
+a grid is represented by independently defining the coordinate steps or intervals along each individual axis. This does not preclude an implementation from utilizing a
+non-quadrilateral underlying data store (such as a hierarchical hexagonal framework) and dynamically mapping its constituent cell bounds to the orthogonal axis-by-axis
+structure presented by the Web API.
+
+NOTE: While the mathematical grid framework partitions space as a continuous tessellation with no gaps or overlaps, the individual <<term-grid-cell,grid cells>> mapped to this
+framework are governed by their own defined bounds. This ensures this standard natively supports discrete point-based data (which introduce internal spatial gaps) or sensor\
+footprints (which may physically overlap) within the overall grid structure.
+
+[.source]
+<<OGC07-011r2>>
+
+[[term-interpolation-method]]
 === Interpolation method [in the context of this Standard]
-specific algorithm applied to generate new values from the source data values when resampling (scaling) data along a dimension or
-collapsing a sparse dimension
+specific algorithm applied to generate new values from the source data values when <<term-resampling,resampling>> (scaling) data along a dimension or
+<<term-collapse-sparse-dimension,collapsing a sparse dimension>>
 
 [[term-irregular-grid]]
 === Irregular grid
-Grid whose grid lines have individual distances along each grid axis
+<<term-grid,grid>> whose grid lines have variable distances along each grid axis
 
+[[term-native-resolution]]
+=== Native resolution [in the context of this Standard]
+the <<term-resolution,resolution>> of the underlying source data for a particular <<term-coverage,coverage>> as declared by the Web API implementation before any <<term-resampling,resampling>> performed
+as requested by a client (or triggered automatically to prevent excessive data retrieval when native resolution is not explicitly requested)
+
+NOTE: While the underlying data within a <<term-domain,domain>> may feature variable or non-uniform resolutions across different regions, the native resolution informs clients
+about the resolution inherent to the coverage to help evaluate its suitability for their specific use cases and guide data requests.
+
+[[term-range]]
 === Range [of a coverage]
-set of values associated by a function, the coverage, with the domain of a coverage
+set of values associated by a function, the <<term-coverage,coverage>>, with the <<term-domain,domain>> of a coverage
 
 [.source]
-<<OGC 07-011r2>>
+<<OGC07-011r2>>
 
 [[term-range-type]]
 === Range type [of a coverage]
-the logical schema consisting of the data types and associated semantic information for each field of the range of a coverage
+the logical schema consisting of the data types and associated semantic information for each <<term-field,field>> of the <<term-range,range>> of a <<term-coverage,coverage>>
 
 [[term-regular-grid]]
 === Regular grid
-grid whose grid lines have a constant distance along each grid axis
+<<term-grid,grid>> whose grid lines have a constant distance along each grid axis
 
+[[term-resampling]]
 === Resampling
-applying a particular interpolation method to obtain a new set of values with a different distance between data points
-compared to original source data values
+applying a particular <<term-interpolation-method,interpolation method>> to map <<term-range,range>> values onto a new configuration of <<term-cell,cells>> along
+one or more dimensions of a <<term-coverage,coverage>> <<term-domain,domain>>
 
+[[grid-resolution]]
 === Resolution [of a grid]
-the distance between data points on a regular grid
+the distance between the coordinate anchors of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
 
-NOTE: The `resolution` query parameter of this API allows clients to request data resampled to a particular resolution, whether the output is returned in a gridded or non-gridded coverage format,
-but that output data may not be suitable for purposes requiring data at the true resolution being requested.
+NOTE: The `resolution` query parameter defined in this standard allows clients to request data <<term-resampling,resampled>> to a particular resolution, whether the output is
+returned in a gridded or non-gridded coverage format, but that output data may not be suitable for purposes requiring data at the true resolution being requested.
 
+[[term-resolution]]
 === Resolution [of data]
 the smallest difference between observations or measurements that can be meaningfully distinguished, whether the data is actually gridded or not
 
+[[term-sparse-dimension]]
 === Sparse dimension
-a dimension along which different extents of the other dimensions are filled at different positions
+a dimension along which different extents of the other dimensions are filled at different positions, leaving no data present at several intersections with that sparse dimension
 
 === [Geometric] Sensor model
-mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated coverage produced by a
+mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated <<term-coverage,coverage>> produced by a
 https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.5[sensor (3.5)]
 
 NOTE: Adapted from https://www.iso.org/obp/ui/en/#iso:std:iso:ts:19130:-3:ed-1:v1:en:term:3.6[ISO 19130-3 sensor model (3.6)]
@@ -79,11 +168,14 @@ extracting a hyperplane of data along a particular dimension, resulting in a dat
 [.source]
 <<OGC21-060r2>>
 
+[[term-subsetting]]
 === Subsetting
-performing a slicing or trimming operation on one or more dimension
+performing a <<term-slicing,slicing>> or <<term-trimming,trimming>> operation on one or more dimension (in the context of subsetting the <<term-domain,domain>> of a <<term-coverage,coverage>>),
+or selecting specific <<term-field,fields>> (in the context of subsetting the <<term-range,range>> of a coverage)
 
+[[term-transformation-grid]]
 === Transformation grid
-grid whose direct positions are given by some transformation algorithm not further specified in this standard
+<<term-grid,grid>> whose <<term-direct-position,direct positions>> are given by some transformation algorithm not further specified in this standard
 
 [[term-trimming]]
 === Trimming
@@ -92,11 +184,19 @@ extracting a subset of data between a lower and upper bound along one or more di
 [.source]
 <<OGC21-060r2>>
 
+[[term-upsampling]]
+=== Upsampling
+<<term-resampling,resampling>> resulting in a finer <<term-resolution,resolution>> (more <<term-cell,cells>>)
+
+
 [[term-variable-type]]
 === Variable type
 
-type of variable which may inform correct interpretation and interpolation method
-(one of `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`).
+type of variable which may inform correct interpretation and <<term-interpolation-method,interpolation method>>
+(one of `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`)
+
+NOTE: The variable type `continuous` represents a continuous spectrum of values, while `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, and `categoricalNominal`
+represent discrete variable types.
 
 NOTE: Each dimension of the domain and field of the range of a coverage have a specific variable type.
 
@@ -106,6 +206,8 @@ NOTE: Each dimension of the domain and field of the range of a coverage have a s
 === Abbreviated terms
 
 CIS::  Coverage Implementation Schema
+
+CRS::  Coordinate Reference System
 
 SWE::  Sensors Web Enablement
 

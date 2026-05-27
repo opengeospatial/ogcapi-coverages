@@ -110,5 +110,5 @@ The following Augmented Backus-Naur Form (ABNF) is from <<rfc3339,IETF RFC 3339>
   full-time      = partial-time time-offset
   date-time      = full-date "T" full-time
 
-Note that unlike ISO 8601, the local time zone offset is required by RFC 3339.
+Note that unlike <<ISO_8601-1,ISO 8601>>, the local time zone offset is required by RFC 3339.
 

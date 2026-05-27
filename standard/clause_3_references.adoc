@@ -19,7 +19,7 @@ The following normative documents contain provisions that, through reference in 
 * [[OpenAPI]] Open API Initiative: *OpenAPI Specification 3.0.2*, https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md[OpenAPI]
 * [[schema.org]] *Schema.org*: http://schema.org/docs/schemas.html[Schema.org]
 * [[HTML5]] W3C: *HTML5*, W3C Recommendation, http://www.w3.org/TR/html5/[HTML5]
-* OGC: OGC 07-011, *Abstract Specification Topic 6: The Coverage Type and its Subtypes*, version 7.0 (identical to ISO 19123:2005), 2007
+* [[OGC07-011r2,OGC 07-011r2]] OGC: OGC 07-011r2, *OGC Abstract Specification Topic 6: Schema for Coverage Geometry and Functions – Part 1: Fundamentals*, version 2.0 (consistent with ISO 19123-1:2023), 2023 https://docs.ogc.org/as/07-011r2/07-011r2.pdf
 * OGC: OGC 08-094, *OGC® SWE Common Data Model Encoding Standard*, version 2, 2011
 * OGC: OGC 12-000, *OGC® SensorML: Model and XML Encoding Standard*, version 2, 2014
 * OGC: OGC 09-146r2, *GML 3.2.1 Application Schema – Coverages*, version 1.0.1, 2012
@@ -35,3 +35,5 @@ The following normative documents contain provisions that, through reference in 
 * [[JPEG_XL2,ISO/IEC 18181-2:2024]] ISO/IEC 18181-2:2024, JPEG XL image coding system — Part 2: File format
 * [[ZIPISO,ISO/IEC 21320-1]] ISO/IEC 21320-1:2015, Document Container File (Zip File Format)
 * [[tiff6]] Aldus Developers Desk, TIFF Revision 6.0, 1992. https://www.itu.int/itudoc/itu-t/com16/tiff-fx/docs/tiff6.pdf
+* [[ISO_8601-1,ISO 8601-1:2019/Amd 1:2022]] ISO 8601-1:2019/Amd 1:2022, _Date and time — Representations for information interchange — Part 1: Basic rules — Amendment 1: Technical corrections_ https://www.iso.org/standard/70907.html
+* [[ISO_8601-2,ISO 8601-2:2019]] ISO 8601-2:2019, _Date and time — Representations for information interchange — Part 2: Extensions_ https://www.iso.org/standard/70908.html
