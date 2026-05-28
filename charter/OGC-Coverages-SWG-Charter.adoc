@@ -31,15 +31,15 @@ To: OGC members & interested parties
 
 Recharting the Web Coverage Service (WCS) Standards Working Group (SWG).
 
-The OGC members listed below have proposed that the Web Coverage Service SWG be rechartered as the "{swgname} SWG". 
-The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures. 
+The OGC members listed below have proposed that the Web Coverage Service SWG be rechartered as the "{swgname} SWG".
+The SWG proposal provided in this document meets the requirements of the OGC Technical Committee (TC) Policies and Procedures.
 The SWG name, statement of purpose, scope, list of deliverables, audience, and language specified in the proposal will constitute the SWG’s official charter.
 
 This SWG will operate under the OGC IPR Policy. The eligibility requirements for becoming a participant in the SWG meetings (see details below) are that:
 
 * You must be an employee of an OGC member organization or an individual member of OGC;
 * The OGC member must have signed the OGC Membership agreement;
-* You must notify the SWG chair of your intent to participate to the meetings. Members may do so by logging onto the OGC Portal and navigating 
+* You must notify the SWG chair of your intent to participate to the meetings. Members may do so by logging onto the OGC Portal and navigating
 to the Observer page and clicking on the link for the SWG they wish to join and;
 
 Participants may join the SWG at any time. The OGC and the SWG welcome all interested parties.
@@ -54,6 +54,7 @@ The purpose of this Standards Working Group is to:
 
 * Develop and maintain the OGC Web Coverage Service standards suite.
 * Develop and maintain additions and extensions to the WCS standards suite.
+* Develop and maintain the OGC Web Coverage Processing Service standard.
 * Develop and maintain the OGC API - Coverages standards suite
 * Develop and maintain additions and extensions to the OGC API - Coverages standards suite.
 * Develop and maintain standards for metadata exposed through Web Coverage Services or APIs.
@@ -61,30 +62,31 @@ The purpose of this Standards Working Group is to:
 
 === Business Value Proposition
 
-The quarterly Space Foundation https://promo.spacefoundation.org/tsr/quarterly-reports/TheSpaceReport19Q1.pdf[2019 first quarter Space Report] 
-states that 38 percent of the 465 spacecraft deployed in 2018 were deployed for Earth Observation or Remote Sensing missions. 
-A majority of those spacecraft were deployed for commercial purposes. In a separate http://www.euroconsult-ec.com/earthobservation[report] by a consulting firm specializing in 
+The quarterly Space Foundation https://promo.spacefoundation.org/tsr/quarterly-reports/TheSpaceReport19Q1.pdf[2019 first quarter Space Report]
+states that 38 percent of the 465 spacecraft deployed in 2018 were deployed for Earth Observation or Remote Sensing missions.
+A majority of those spacecraft were deployed for commercial purposes. In a separate http://www.euroconsult-ec.com/earthobservation[report] by a consulting firm specializing in
 space markets , the market for data and services derived from Earth observation (EO) satellites is forecasted to reach $8.5 billion by 2026.
 
-Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how 
-communities can improve their management of natural resources. Other applications include, for example, competitor analysis in 
+Much of the coverage data produced by EO satellite programs is used by scientists to help understand environmental change and how
+communities can improve their management of natural resources. Other applications include, for example, competitor analysis in
 business and geospatial intelligence in defense and security.
 
-In the European INSPIRE legal framework for a common Spatial Data Infrastructure coverages play a central role. 
-In 9 of the 13 themes data appear modeled as coverages, such as Elevation, Land cover, Orthoimagery, Soil, Energy resources, 
+In the European INSPIRE legal framework for a common Spatial Data Infrastructure coverages play a central role.
+In 9 of the 13 themes data appear modeled as coverages, such as Elevation, Land cover, Orthoimagery, Soil, Energy resources,
 Species distribution, Natural risk zones, and Geology.
 
-With the volume of coverage data growing daily, there is an significant need to find ways to leverage recent advances 
-in technology that can improve the ability of users to discover and access coverages. The goal of the OGC API - Coverages 
+With the volume of coverage data growing daily, there is an significant need to find ways to leverage recent advances
+in technology that can improve the ability of users to discover and access coverages. The goal of the OGC API - Coverages
 Standards work is to leverage some of those technological advances.
 === Scope of Work
 
 * Coverages, as defined in Abstract Topic 6 and Coverage Implementation Schema (CIS), have proven valuable as a unified, comprehensive representation of spatio-temporal grids, point clouds, and meshes. In particular, coverages serve to model "datacubes".
 * Web Coverage Service (WCS) with its easy to implement and use core and the manifold extensions has proven a powerful way to access, process, filter, analyse, and combine coverage data, being used on multi-Petabyte satellite image and atmospheric data, among others.
+* Web Coverage Processing Service (WCPS) is a high-level, declarative query language for spatio-temporal geo datacubes allowing to extract, process, analyze, and combine grid coverages.
 * OGC API - Coverages is a service model based on OpenAPI frameworks. These have helped make describing and sharing API definitions more suitable for interoperability standardization. The concept of a OGC API - Coverages was demonstrated in various OGC Innovation Program initiatives.
 
-Regarding OGC API - Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document an 
-OGC API - Coverages candidate standard that will provide a modernized, common, and consistent interface to services that aligns 
+Regarding OGC API - Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document an
+OGC API - Coverages candidate standard that will provide a modernized, common, and consistent interface to services that aligns
 with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
 
 Before finalizing parts of the future versions of the Coverage Standards, completion of goals should be verified:
@@ -146,9 +148,12 @@ Capabilities for richer {resource} interfaces or extension for unique geospatial
 
 Formal approval of the core OGC API - Coverages is envisaged to take place nearer October 2026.
 
-The {swgname} SWG is developing Coverage encodings for:
+The {swgname} SWG is developing Coverage encodings, in addition to the existing CIS XML and JSON encodings, for:
 
 * CoverageJSON
+
+The {swgname} SWG provides maintenance and enhancement on OGC the WCS and WCPS standards.
+
 
 ==== Additional SWG Tasks
 
@@ -207,10 +212,11 @@ The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG c
 The following standards work may be applicable to the work of the proposed SWG:
 
 * 19-072 OGC API - Common - Part 1: Core
-* ISO 19123-1:(working draft) Coverage Fundamentals
-* ISO 19123-2:2018 Coverage implementation schema
-* OGC Web Coverage Service
-* OGC Web Coverage Processing Service
+* ISO 19123-1:2023 Coverage Fundamentals (identical to OGC Abstract Topic 6.1)
+* ISO 19123-2:2026 Coverage Implementation Schema (under re-adoption by OGC)
+* ISO 19123-2:2023 Coverage Processing Fundamentals (identical to OGC Abstract Topic 6.3, based on OGC WCPS)
+* OGC Web Coverage Service (WCS)
+* OGC Web Coverage Processing Service (WCPS) geo datacube query language
 * EO-GeoJSON
 * GML in JPEG2000
 * GeoTIFF
@@ -238,7 +244,7 @@ The following people support this proposal and are committed to the Charter and 
 |Tom Kralidis | Meteorological Service of Canada
 |Chuck Heazel | Heazel Tech
 |Chris Little | UK Met Office
-|Peter Baumann | Jacobs University, rasdaman GmbH
+|Peter Baumann | Constructor (ex Jacobs) University, rasdaman GmbH
 |James Passmore | United Kingdom Research Institute (UKRI)
 |Panagiotis (Peter) A. Vretanos | CubeWerx Inc.
 |===
