@@ -15,7 +15,7 @@ When subsetting a coverage, the geometry of its individual <<term-cell,cells>> (
 If the value for the cells of a gridded coverage represent an area, the geometry of the cells extends over that whole area.
 If the value for the cells of a gridded coverage coverage represent a point, the geometry of the cells is only that infinitely small point.
 
-The values to include in the response will be all **individual components (such as gridded coverage cells) whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values to include in the response will be all **individual <<term-cell,cells>> (such as <<term-grid-cell,gridded coverage cells>>) whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
 For gridded coverage cells whose geometry is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 
@@ -71,7 +71,7 @@ When subsetting a temporal coverage, the time of its individual <<term-cell,cell
 If the value for the temporal cells of a gridded coverage represent an interval, the time of the cells extends over that whole interval.
 If the value for the temporal cells of a gridded coverage represent an instant, the time of the cells is only that infinitely small instant.
 
-The values to include in the response will be all **individual components whose time's interior** intersects the **interior or the boundary of the subsetting temporal extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values to include in the response will be all **individual <<term-cell,cells>> whose time's interior** intersects the **interior or the boundary of the subsetting temporal extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
 For gridded coverage cells whose time is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of an instant is the instant itself**).
 
@@ -124,7 +124,7 @@ When subsetting a coverage, the n-dimensional geometry of its individual <<term-
 If the value for the cells of a gridded coverage represent a region, the geometry of the cells extends over that whole region.
 If the value for the cells of a gridded coverage represent a point along the dimension, the geometry of the cells is only that infinitely small point.
 
-The values to include in the response will be all **individual components whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values to include in the response will be all **individual <<term-cell,cells>> whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
 For gridded coverage cells whose geometry is a point along a dimension, this will **include** all cells falling exactly on the boundary of the subset (**the interior of a point is the point itself**).
 

@@ -155,7 +155,7 @@ In this case, only the overall interval, and optionally detailed sub-intervals w
 .The cell bounds of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25]), and a special case of _Value-is-Part-of-the-Area_ (relativeBounds: [-0.25, 0.25])
 image::figures/span.png[width=400,align=center]
 
-The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of its individual components (such as the cells of a gridded coverage).
+The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage).
 
 [#span,reftext='{figure-caption} {counter:fig-num}']
 .Example extent of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25])
