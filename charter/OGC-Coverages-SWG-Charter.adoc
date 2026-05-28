@@ -51,6 +51,7 @@ The purpose of this Standards Working Group is to:
 
 * Develop and maintain the OGC Web Coverage Service standards suite.
 * Develop and maintain additions and extensions to the WCS standards suite.
+* Develop and maintain the OGC Web Coverage Processing Service standard.
 * Develop and maintain the OGC API - Coverages standards suite
 * Develop and maintain additions and extensions to the OGC API - Coverages standards suite.
 * Develop and maintain standards for metadata exposed through Web Coverage Services or APIs.
@@ -70,6 +71,7 @@ With the volume of coverage data growing daily, there is an significant need to 
 
 * Coverages, as defined in Abstract Topic 6 and Coverage Implementation Schema (CIS), have proven valuable as a unified, comprehensive representation of spatio-temporal grids, point clouds, and meshes. In particular, coverages serve to model "datacubes".
 * Web Coverage Service (WCS) with its easy to implement and use core and the manifold extensions has proven a powerful way to access, process, filter, analyse, and combine coverage data, being used on multi-Petabyte satellite image and atmospheric data, among others.
+* Web Coverage Processing Service (WCPS) is a high-level, declarative query language for spatio-temporal geo datacubes allowing to extract, process, analyze, and combine grid coverages.
 * OGC API - Coverages is a service model base on OpenAPI frameworks. These have helped make describing and sharing API definitions more suitable for interoperability standardization. The concept of a OGC API - Coverages was demonstrated in various OGC Innovation Program initiatives.
 
 Regarding OGC API - Coverages, the {swgname} SWG will build on those preliminary efforts to more fully develop and document an OGC API - Coverages candidate standard that will provide a modernized, common, and consistent interface to services that aligns with the current architecture of the Web and the Spatial Data on the Web Best Practices (https://www.w3.org/TR/sdw-bp/).
@@ -131,9 +133,12 @@ Part 1 will cover basic capabilities to GET, PUT, PATCH, POST, and DELETE {resou
 
 Work on this deliverable has been proceeding under the WCS SWG. This work will transition to the {swgname} SWG once the charter is approved. Formal approval of the core OGC API - Coverages is envisaged to take place nearer {target_end_date}.
 
-The {swgname} SWG is developing Coverage encodings for:
+The {swgname} SWG is developing Coverage encodings, in addition to the existing CIS XML and JSON encodings, for:
 
 * CoverageJSON
+
+The {swgname} SWG provides maintenance and enhancement on OGC the WCS and WCPS standards.
+
 
 ==== Additional SWG Tasks
 
@@ -194,10 +199,11 @@ The {dwg_review} will review the proof-of-concept at {githubrepo} and this SWG c
 The following standards work may be applicable to the work of the proposed SWG:
 
 * 19-072 OGC API - Common - Part 1: Core
-* ISO 19123-1:(working draft) Coverage Fundamentals
-* ISO 19123-2:2018 Coverage implementation schema
-* OGC Web Coverage Service
-* OGC Web Coverage Processing Service
+* ISO 19123-1:2023 Coverage Fundamentals (identical to OGC Abstract Topic 6.1)
+* ISO 19123-2:2026 Coverage Implementation Schema (under re-adoption by OGC)
+* ISO 19123-2:2023 Coverage Processing Fundamentals (identical to OGC Abstract Topic 6.3, based on OGC WCPS)
+* OGC Web Coverage Service (WCS)
+* OGC Web Coverage Processing Service (WCPS) geo datacube query language
 * EO-GeoJSON
 * GML in JPEG2000
 * GeoTIFF
@@ -225,7 +231,7 @@ The following people support this proposal and are committed to the Charter and 
 |Tom Kralidis | Meteorological Service of Canada
 |Chuck Heazel | Heazel Tech
 |Chris Little | UK Met Office
-|Peter Baumann | Jacobs University, rasdaman GmbH
+|Peter Baumann | Constructor (ex Jacobs) University, rasdaman GmbH
 |James Passmore | United Kingdom Research Institute (UKRI)
 |Panagiotis (Peter) A. Vretanos | CubeWerx Inc.
 |===
