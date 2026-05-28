@@ -7,8 +7,6 @@ The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for
 With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 A client wishing to preserve dimensionality while requesting a single coordinate value may duplicate this value into an interval, for example: `subset=lon(20:20)`.
 
-Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
-
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
 
@@ -50,6 +48,8 @@ For example, weather stations capturing observations at different times.
 Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along spatial dimension(s)
 around a specified position of interest.
 
+When this requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
+
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
@@ -62,7 +62,6 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spa
 
 The "Temporal Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along the primary temporal dimension.
 With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
-Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
@@ -98,6 +97,8 @@ the orbit of the satellite.
 Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a temporal dimension
 around a specified time of interest.
 
+When this requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
+
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
@@ -114,7 +115,6 @@ as specified by the
 https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions requirements class of OGC API - Common - Part 2: Geospatial Data].
 
 With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
-Negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
 When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
@@ -144,6 +144,8 @@ For example, a 3D coverage with data only available at some pressure level for p
 
 Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a general dimension
 around a specified position of interest.
+
+When this requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
