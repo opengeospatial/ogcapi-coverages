@@ -97,7 +97,7 @@ non-quadrilateral underlying data store (such as a hierarchical hexagonal framew
 structure presented by the Web API.
 
 NOTE: While the mathematical grid framework partitions space as a continuous tessellation with no gaps or overlaps, the individual <<term-grid-cell,grid cells>> mapped to this
-framework are governed by their own defined bounds. This ensures this standard natively supports discrete point-based data (which introduce internal spatial gaps) or sensor\
+framework are governed by their own defined bounds. This ensures this standard natively supports discrete point-based data (which introduce internal spatial gaps) or sensor
 footprints (which may physically overlap) within the overall grid structure.
 
 [.source]
