@@ -6,7 +6,7 @@ For the purposes of this document, the following additional terms and definition
 [[term-cell]]
 === Cell
 
-smallest identifiable constituent element of a <<term-coverage,coverage>>'s <<term-domain,domain>> with which a distinct set of <<term-range,range>> values is associated.
+smallest identifiable constituent element of a <<term-coverage,coverage>>'s <<term-domain,domain>> with which a distinct set of <<term-range,range>> values is associated
 
 NOTE: Cells represent the atomic units of any coverage type across its multi-dimensional domain.
 
@@ -26,7 +26,7 @@ NOTE: Grid cells are not required to form a strict geometric tessellation; they 
 
 [[term-collapse-sparse-dimension]]
 === Collapse [of a sparse dimension]
-a mosaic operation filling empty values of a sparse dimension <<term-slicing,slice>> with neighboring non-empty values,
+mosaic operation filling empty values of a sparse dimension <<term-slicing,slice>> with neighboring non-empty values,
 or flattening a <<term-sparse-dimension,sparse dimension>> <<term-trimming,trim>> to a lower dimensionality while preserving some of the non-empty values
 
 [[term-continuous-dimension]]
@@ -64,7 +64,7 @@ NOTE: A discrete dimension restricts evaluation of the coverage function to the 
 
 [[term-domain]]
 === Domain [of a coverage]
-the complete set of <<term-direct-position,direct positions>> for which a <<term-coverage,coverage>> function can return values
+complete set of <<term-direct-position,direct positions>> for which a <<term-coverage,coverage>> function can return values
 
 NOTE: The <<term-domain,domain>> of a coverage establishes its valid multi-dimensional extent and coordinate space, which may be represented as a continuous mathematical space
 or a collection of bounded <<term-cell,cells>>.
@@ -114,7 +114,7 @@ specific algorithm applied to generate new values from the source data values wh
 
 [[term-native-resolution]]
 === Native resolution [in the context of this Standard]
-the <<term-resolution,resolution>> of the underlying source data for a particular <<term-coverage,coverage>> as declared by the Web API implementation before any <<term-resampling,resampling>> performed
+<<term-resolution,resolution>> of the underlying source data for a particular <<term-coverage,coverage>> as declared by the Web API implementation before any <<term-resampling,resampling>> performed
 as requested by a client (or triggered automatically to prevent excessive data retrieval when native resolution is not explicitly requested)
 
 NOTE: While the underlying data within a <<term-domain,domain>> may feature variable or non-uniform resolutions across different regions, the native resolution informs clients
@@ -129,7 +129,7 @@ set of values associated by a function, the <<term-coverage,coverage>>, with the
 
 [[term-range-type]]
 === Range type [of a coverage]
-the logical schema consisting of the data types and associated semantic information for each <<term-field,field>> of the <<term-range,range>> of a <<term-coverage,coverage>>
+logical schema consisting of the data types and associated semantic information for each <<term-field,field>> of the <<term-range,range>> of a <<term-coverage,coverage>>
 
 [[term-regular-grid]]
 === Regular grid
@@ -142,18 +142,18 @@ one or more dimensions of a <<term-coverage,coverage>> <<term-domain,domain>>
 
 [[grid-resolution]]
 === Resolution [of a grid]
-the distance between the coordinate anchors of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
+distance between the coordinate anchors of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
 
 NOTE: The `resolution` query parameter defined in this standard allows clients to request data <<term-resampling,resampled>> to a particular resolution, whether the output is
 returned in a gridded or non-gridded coverage format, but that output data may not be suitable for purposes requiring data at the true resolution being requested.
 
 [[term-resolution]]
 === Resolution [of data]
-the smallest difference between observations or measurements that can be meaningfully distinguished, whether the data is actually gridded or not
+smallest difference between observations or measurements that can be meaningfully distinguished, whether the data is actually gridded or not
 
 [[term-sparse-dimension]]
 === Sparse dimension
-a dimension along which different extents of the other dimensions are filled at different positions, leaving no data present at several intersections with that sparse dimension
+dimension along which different extents of the other dimensions are filled at different positions, leaving no data present at several intersections with that sparse dimension
 
 === [Geometric] Sensor model
 mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated <<term-coverage,coverage>> produced by a
