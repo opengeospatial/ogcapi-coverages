@@ -4,7 +4,7 @@
 [[general-overview]]
 === General
 
-_OGC API - Coverages - Part 1: Core_, hereafter sometimes referred to as the _Coverages API_, specifies the fundamental API building blocks for retrieving coverage data.
+_OGC API - Coverages - Part 1: Core_, hereafter sometimes referred to as the _Coverages API_, specifies the fundamental API building blocks for retrieving <<term-coverage,coverage>> data.
 The spatial data community uses the term _coverage_ for homogeneous collections of values located in space/time such as: spatio-temporal sensor, image, simulation, and statistical data.
 The _W3C/OGC Spatial Data on the Web Best Practices_ provide an overview of https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)].
 
@@ -19,7 +19,7 @@ This common framework ensures consistency and allow for the integration of multi
 
 This _OGC API - Coverages_ standard defines an API with two goals:
 
-* Provide access to *_Coverages_* conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
+* Provide access to <<term-coverage,*_Coverages_*>> conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 * Provide functionality comparable to that of the <<web-coverage-service-overview,OGC Web Coverage Service (WCS) standard>>.
 
 This API standard allows efficient access to multidimensional geospatial data cubes, particularly when additional optional requirements classes complementing the functionality
