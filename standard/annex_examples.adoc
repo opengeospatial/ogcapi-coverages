@@ -62,7 +62,7 @@ NOTE: Collection filtering should be a profile of Records Local Resource Catalog
 [[collections-metadata-examples]]
 === Bounding Box Example
 
-* Using OAPI-Common bbox syntax (fixed, 2D axis sequence): http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collections intersecting that is in the New Zealand economic zone.
+* Using OGC API - Common bbox syntax (fixed, 2D axis sequence): http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collections intersecting that is in the New Zealand economic zone.
 
 ////
 
