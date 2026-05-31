@@ -3,12 +3,13 @@
 
 === Overview
 
-The "Coverage Tiles" Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the _Coverages API_ to request coverage tiles.
-Coverages parameters such as for subsetting additional dimensions not covered by the Tiles 2D Tile Matrix Set (such as time or elevation),
-or for field selection, can be used together with the path for requesting individual tiles.
+The "Coverage Tiles" Requirements Class defines how to combine the https://docs.ogc.org/is/20-057/20-057.html[_OGC API - Tiles_] building blocks with the _Coverages API_ to request coverage tiles.
+Coverages parameters such as for <<term-subsetting,subsetting>> additional dimensions not covered by the Tiles https://docs.ogc.org/is/17-083r4/17-083r4.html[2D Tile Matrix Set]
+(such as <<rc_subsetting_temporal,time>>, <<rc_subsetting_spatial,elevation above the ellipsoid>> or <<rc_subsetting_general,pressure>>),
+or for <<rc_fieldselection,field selection>>, can be used together with the resource path for requesting individual tiles.
 
 The tiles response for a coverage corresponds to a subsetting request for the tile extent.
-Note that the number of cells in the response for a _Value-Is-Point_ coverage is one more than the tile pixel size of the TileMatrixSet.
+Note that the number of <<term-cell,cells>> in the response for a _Value-Is-Point_ coverage is one more than the tile pixel size of the TileMatrixSet.
 
 [#span-coverage-tiles,reftext='{figure-caption} {counter:fig-num}']
 .The cells returned for a tile response of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25])

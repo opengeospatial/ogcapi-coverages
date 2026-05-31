@@ -110,14 +110,14 @@ For example:
 ==== Description of the coverage domain
 
 The https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions Collections requirements class] restricts the addition of dimensions beyond
-spatial and temporal to the `extent` property of the collection description to use a uniform schema.
+spatial and temporal to the `extent` property of the collection description to use a uniform schema for describing the <<term-domain,domain>> of a <<term-coverage,coverage>>.
 As with the `temporal` dimension, and similar to the `bbox` of the `spatial` dimension, each additional dimension must include an `interval` property to specify at minimum the overall envelope of the dimension,
 and optionally sub-intervals where data is available, if the overall interval is sparsely populated.
 The nature of the additional dimensions are also specified using a semantic definition URI from a suitable semantic vocabulary such as QUDT.
 For example, a dimension could be identified as representing atmospheric pressure using the URI `https://qudt.org/vocab/quantitykind/AtmosphericPressure`.
 If applicable, the unit of measure can also be specified using the case sensitive UCUM representation, or using another unit language by specifying an alternative value for `unitLang`.
 For example, if `QUDT` is used, the unit can be a URI from the QUDT Units Vocabulary.
-When describing the extent of a coverage, the geometry of its indivudal components, such as cells in the case of a gridded coverage, must be considered.
+When describing the extent of a coverage, the geometry of its individual <<term-cell,cells>>, such as <<term-grid-cell,gridded cells>> in the case of a <<term-grid,gridded>> coverage, must be considered.
 
 The native CRS of the data is specified in the `storageCrs` property of the collection description.
 For OGC API - Coverages, this native CRS usually specifies the CRS in which the data is most efficiently retrieved and
@@ -142,20 +142,20 @@ For data where the Gregorian calendar and <<ISO_8601-1,ISO 8601>> notation is ap
 For other temporal scales such as geological time, the `definition` property would be used and set to a different URI such as `https://qudt.org/vocab/quantitykind/Time`.
 The `unit` can also be specified e.g., `https://qudt.org/vocab/unit/MegaYR` for millions of years, with `unitLang` set to "QUDT" (or otherwise using the default UCUM unit language, simply setting `"unit": "Ma"`).
 
-The extent of each <<term-cell,cell>> of a coverage for which values can be retrieved, such as a <<term-grid-cell,grid cell>> in the context of a gridded coverage, should consider the full _region of validity_ or _bounds_ of that component
+The extent of each <<term-cell,cell>> of a coverage for which values can be retrieved, such as a <<term-grid-cell,grid cell>> in the context of a gridded coverage, should consider the full _region of validity_ or _bounds_ of that cell
 to which these values are associated.
 For example, in the case of a gridded coverage whose cells represent an area, the extent spans from the lower to the upper bounds of the areas of all those cells.
 In the case of a gridded coverage whose cells represent a point, the extent spans from the the lower to the upper coordinate of all those cells.
 
 With the ability to describe <<term-grid,grids>> as detailed below, this collection extent information provides equivalent information to the CIS _domain set_ for most use cases.
-For point cloud data, a separate detailed description of the <<term-domain,domain>> is not practical, and a subset of the domain is instead retrieved together with the data, as with the common LAS and LASzip point cloud encodings.
+For point cloud data, a separate detailed description of the domain is not practical, and a <<term-subsetting,subset>> of the domain is instead retrieved together with the data, as with the common LAS and LASzip point cloud encodings.
 In this case, only the overall interval, and optionally detailed sub-intervals where data is available, can be provided instead within the collection extent.
 
 [#span-extent,reftext='{figure-caption} {counter:fig-num}']
 .The cell bounds of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25]), and a special case of _Value-is-Part-of-the-Area_ (relativeBounds: [-0.25, 0.25])
 image::figures/span.png[width=400,align=center]
 
-The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage).
+The multidimensional extent being described is the extent of the coverage up to the boundary of the geometry of its individual cells.
 
 [#span,reftext='{figure-caption} {counter:fig-num}']
 .Example extent of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25])
