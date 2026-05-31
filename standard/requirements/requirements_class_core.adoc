@@ -66,7 +66,10 @@ include in its `links` array a link to a coverage resource, typically at `/colle
 This `links` array SHALL be present within the elements of the `collections` array of the `/collections` resource, as well as at the `/collections/{collectionId}` resource.
 ^|B |At least one collection SHALL be accessible as a coverage.
 ^|C |If the collection is available more efficiently (e.g., if it is stored in the server in that CRS) using a particular CRS (the native CRS, also _called storage CRS_) that is not
-https://www.opengis.net/def/crs/OGC/1.3/CRS84, a `storageCrs` property in the collection object of a geospatial collection SHALL be the URI or safe CURIE for that CRS.
+https://www.opengis.net/def/crs/OGC/1.3/CRS84, a `storageCrs` property in the collection object of a geospatial collection SHALL be the URI or safe CURIE
+for a registered CRS if one is available, or a full description of the CRS otherwise using e.g., a
+https://docs.opengeospatial.org/is/18-010r7/18-010r7.html[WKT2CRS] string, or a https://proj.org/en/stable/specifications/projjson.html[PROJJSON], or
+https://github.com/opengeospatial/CRS-JSON-Encoding[CRS-JSON] object.
 This `storageCrs` also corresponds to the default output CRS (used when the `crs` query parameter is not specified and/or the CRS requirements class is not supported).
 ^|D |If a `storageCrs` property is used and that is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, an overall bounding box (and optional inner bounding boxes for sparse data)
 SHALL be provided in a `storageCrsBbox` property within the `spatial` dimension of the `extent` following the same schema as the CRS84 `bbox`.
@@ -78,9 +81,6 @@ NOTE: The schema for the collection resource is available at https://github.com/
 
 NOTE: A property indicating for which planetary body a CRS is applicable is being considered as part of CRS definitions, which will facilitate validating the requirement
 for Earth-referenced data collections to be described using OGC:CRS84.
-
-TODO: Discuss the ability to include a https://docs.opengeospatial.org/is/18-010r7/18-010r7.html[Well Known Text] definition and/or
-https://schemas.opengis.net/ogcapi/tiles/part1/1.0/openapi/schemas/common-geodata/projJSON.yaml[PROJ-JSON] definition of the CRS instead of a URI.
 
 [[rec_core-coverage_dimensions_variable_type]]
 [width="90%",cols="2,6"]

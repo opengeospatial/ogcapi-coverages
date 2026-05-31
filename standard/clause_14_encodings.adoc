@@ -38,14 +38,14 @@ A table of the media types corresponding to each encoding requirements class def
 |HTML                    |text/html
 |GeoTIFF (including COG) |image/tiff; application=geotiff
 |netCDF                  |application/x-netcdf
-|CIS JSON                |application/json (TODO: either OGC API will adopt a mechanism for negotiation by profile, or a more specific media type will be registered)
+|CIS JSON                |application/json
 |CoverageJSON            |application/vnd.cov+json
 |LAS                     |application/vnd.las
 |LASzip                  |application/vnd.laszip
 |PNG                     |image/png
 |JPEG XL                 |image/jxl
 |JPEG-2000               |image/jp2
-|(Geo)Zarr               |application/x-zarr (TODO: Register this media type?)
+|(Geo)Zarr               |application/vnd.zarr
 |====
 
 [[rc_encoding-html]]
