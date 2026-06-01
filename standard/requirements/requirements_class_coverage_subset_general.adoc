@@ -12,6 +12,18 @@
 [[subset-general-parameter-subset-requirements]]
 ==== Query parameter `subset`
 
+When implementing this General Subsetting requirements class, the `subset` query parameter allows to retrieve a <<term-subsetting,subset>> of a coverage by <<term-slicing,slicing>> or <<term-trimming,trimming>> along dimensions other than the spatial and primary temporal dimensions.
+For a non-primary temporal dimension which can be mapped to UTC and the Gregorian calendar, then the server needs to support link:https://tools.ietf.org/html/rfc3339[RFC 3339] notation (extended with support for an hour value of 24).
+Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
+For any other dimension, the syntax for coordinates along that dimension is defined by the `trs`, or `definition` and `unit` specified for each dimension
+as declared in the collection description.
+
+For temporal additional dimensions, when performing a slice operation, the slicing temporal instant value is assumed to have no thickness.
+When performing a trimming operation (specifying two temporal instants), the starting (first) temporal instant is taken exactly as-is with any omitted time components assumed to be 0,
+whereas the ending (second) temporal instant is assumed to extend until the very end of that time component.
+For example, `subset=forecast_time("2020-01-01")` is equivalent to `subset=forecast_time("2020-01-01T00:00:00.000Z")`, whereas `subset=forecast_time("2020-01-01":"2020-01-31")` is equivalent to
+`subset=forecast_time("2020-01-01T00:00:00.000Z":"2020-01-31T23:59:59.999Z")`.
+
 [[req_subsetting-general_subset]]
 [width="90%",cols="2,6a"]
 |===
@@ -52,4 +64,4 @@ NOTE: When the _intervalOrPoint_ values fall partially outside of the range of v
 the service is expected to return the non-empty portion of the coverage resulting from the subset.
 For subsetting on the range set, and for coverage media types with no geo-referencing mechanisms (e.g. PNG), NO_DATA values or transparency should be used.
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
-or simply return the properly geo-referenced values within the domain set.
+or simply return the properly geo-referenced values within the <<term-domain,domain>> set.

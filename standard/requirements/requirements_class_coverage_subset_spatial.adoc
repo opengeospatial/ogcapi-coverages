@@ -12,8 +12,8 @@
 [[subset-spatial-parameter-subset-requirements]]
 ==== Query parameter `subset`
 
-The `subset` selects a spatial region consisting of any cells of the coverage whose geometry's interior intersects with the interior or boundary of the specified spatial region.
-Individual cells may occupy an area on the ground (the value of the cell represents an area), or an infinitely small point (the value of the cell represents a point).
+The `subset` query parameter selects a spatial region consisting of any <<term-cell,cells>> of the coverage whose geometry's interior intersects with the interior or boundary of the specified spatial region.
+Individual cells may occupy an area on the ground (the value of the cell represents an area), an infinitely small point (the value of the cell represents a point), or some other configuration.
 
 [[req_subsetting-spatial_subset]]
 [width="90%",cols="2,6a"]
@@ -39,8 +39,8 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ----
 
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimensionality.
-^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimensionality.
+^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single point is provided for an axis, the coverage response SHALL be the result of a <<term-slicing,slicing>> operation for the dimension corresponding to that axis, reducing the dimensionality.
+^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if an interval is provided for an axis, the coverage response SHALL be the result of a <<term-trimming,trimming>> operation for the dimension corresponding to that axis, preserving the dimensionality.
 ^|E |For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
 ^|F |For a projected subsetting CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
 ^|G |If a third spatial dimension is supported (if the data's spatial extent bounding box is three dimensional), the implementation SHALL also support a `h` dimension.

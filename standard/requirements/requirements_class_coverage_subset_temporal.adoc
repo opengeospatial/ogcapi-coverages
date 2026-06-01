@@ -12,7 +12,7 @@
 [[subset-temporal-parameter-subset-requirements]]
 ==== Query parameter `subset`
 
-The `subset` parameter allows to retrieve a temporal subset of a coverage by slicing or trimming the primary temporal dimension named `time`.
+The `subset` query parameter allows to retrieve a temporal subset of a coverage by <<term-slicing,slicing>> or <<term-trimming,trimming>> the primary temporal dimension named `time`.
 If this primary temporal dimension can be mapped to UTC and the Gregorian calendar, then the server needs to support link:https://tools.ietf.org/html/rfc3339[RFC 3339] notation (extended with support for an hour value of 24).
 Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
 If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description `temporal`
