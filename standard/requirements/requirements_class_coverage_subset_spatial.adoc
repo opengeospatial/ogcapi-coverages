@@ -35,7 +35,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
   Where:
      \" = double quote = ASCII code 0x42,
      {number} is an integer or floating-point number, and
-     {text} is some general ASCII text (such as a time and date notation in <<ISO_8601-1,ISO 8601>>).
+     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
 
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.

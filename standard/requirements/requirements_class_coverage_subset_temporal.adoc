@@ -13,9 +13,10 @@
 ==== Query parameter `subset`
 
 The `subset` parameter allows to retrieve a temporal subset of a coverage by slicing or trimming the primary temporal dimension named `time`.
-If this primary temporal dimension can be mapped to UTC and the Gregorian calendar, then the server needs to support RFC 3339 notation.
+If this primary temporal dimension can be mapped to UTC and the Gregorian calendar, then the server needs to support link:https://tools.ietf.org/html/rfc3339[RFC 3339] notation (extended with support for an hour value of 24).
 Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
-If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description temporal property would specify a different `trs` defining the valid input.
+If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description `temporal`
+property would specify a different `trs`.
 
 When performing a slice operation, the slicing temporal instant value is assumed to have no thickness.
 When performing a trimming operation (specifying two temporal instants), the starting (first) temporal instant is taken exactly as-is with any omitted time components assumed to be 0,
@@ -43,7 +44,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
   Where:
      \" = double quote = ASCII code 0x42,
      {number} is an integer or floating-point number, and
-     {text} is some general ASCII text (such as a time and date notation in <<ISO_8601-1,ISO 8601>>).
+     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
 ----
 
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>,
@@ -53,7 +54,7 @@ only that part of the coverage that falls within the bounds of the subset expres
 ^|E |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
 ^|F |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time`, or any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
 ^|G |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
-^|H |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time (as specified in RFC 3339) if it is not specified in the temporal extent.
+^|H |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time (as specified in link:https://tools.ietf.org/html/rfc3339[RFC 3339], extended with support for an hour value of 24) if it is not specified in the temporal extent.
 ^|I |If the subset parameter includes the `time` dimension while the `datetime` parameter is also specified, the server SHALL return a 400 client error.
 ^|J |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|K |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
@@ -90,7 +91,7 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/subsetting-temporal/subset-components-omission*
-^|A | Implementations MAY support the omission of any number of the last time components of RFC 3339 temporal instants.
+^|A | Implementations MAY support the omission of any number of the last time components of by link:https://tools.ietf.org/html/rfc3339[RFC 3339] temporal instants.
 In such cases, the implementations will interpret these omitted components as 0 for the start of an interval or a slicing instant, and as the latest possible values for the ending instant of a temporal interval.
 ^|B | Implementations MAY support the omission of the `Z` and time zone offset. In such cases, the implementations will interpret the temporal instant as UTC.
 |===
@@ -98,16 +99,18 @@ In such cases, the implementations will interpret these omitted components as 0 
 [[datetime-parameter-subset-requirements]]
 ==== Query parameter `datetime`
 
-The `datetime` convenience query parameter maps to a trimming or slicing operation (which could also be expressed using `subset`).
+The `datetime` convenience query parameter maps to a trimming or slicing operation along the primary temporal dimension (which could also be expressed using `subset` and the `time` dimension).
 When using a single temporal instant, the parameter corresponds to a slicing operation, whereas when using a pair of instants separated by a forward slash (`/`), the parameter corresponds to a trimming operation.
-The temporal instants are specified using UTC and Gregorian calendar, based on RFC 3339, also allowing for omission of some temporal components as with `subset`.
+When compatible with the primary temporal dimension, the temporal instants are specified using UTC and Gregorian calendar, based on link:https://tools.ietf.org/html/rfc3339[RFC 3339], also allowing for omission of some temporal components as with `subset` and an hour value of 24.
+If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description `temporal`
+property would specify a different `trs` determining the valid input.
 For example, the query parameter `datetime=2020-01-01` is equivalent to `subset=time("2020-01-01")`, and the query parameter `datetime=2020-01-01/2020-01-31` is equivalent to `subset=time("2020-01-01":"2020-01-31")`.
 
 [[req_subsetting-temporal_datetime]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/datetime*
-^|A |The implementation SHALL support a `datetime` parameter expressed corresponding to either a date-time instant or a time interval, conforming to the following syntax (using link:https://tools.ietf.org/html/rfc5234[ABNF]):
+^|A |The implementation SHALL support a `datetime` parameter expressed corresponding to either a `date-time` instant or a time interval, conforming to the following syntax (using link:https://tools.ietf.org/html/rfc5234[ABNF]):
 
 [source]
 ----
@@ -117,8 +120,9 @@ interval-open-end   = date-time "/" [".."]
 interval            = interval-closed / interval-open-start / interval-open-end
 datetime            = date-time / interval
 ----
-The syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6]
+When the primary temporal dimension can be mapped to UTC and the Gregorian calendar, the syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6]
 with the extension of allowing an hour value of 24 as defined in <<ISO_8601-1,ISO 8601-1>>.
+Otherwise, the syntax of `date-time` depends on the `trs` specified in the `temporal` property of the collection description's `extent`.
 ^|B |Only the portions of the coverage within the specified interval SHALL be part of coverage response, performing a trim operation for an interval or a slicing operation for an instant.
 ^|C |The implementation SHALL support a double-dot (`..`) or an empty string for the start/end as indicating an unbounded or half-bounded interval (only having a start or end).
 ^|D |If a `datetime` parameter is specified requesting a coverage without any temporal dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
