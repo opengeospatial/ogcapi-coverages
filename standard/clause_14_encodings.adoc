@@ -126,7 +126,7 @@ a _CoverageByPartitioning_ defined by a PartitionSet, unless a prior arrangement
 
 Similarly, this requirement class also specifies that the CIS JSON response will be self-contained (not linking to data available in separate resources),
 unless a prior arrangement (not specified by this Standard) is established with the client.
-Implementations wishing to present different constituent parts of a coverage as separate resources can consider implementing the <<rc_scenes, _Scenes_ requirements class>>, where
+Implementations wishing to present different constituent parts of a coverage as separate resources can consider implementing an eventual _Scenes_ extension, where
 both a coverage for the overall collection, as well as a coverage for individual scenes, can be retrieved by a client.
 
 Since the description of the coverage domain and range is easily available at the `/collections/{collectionId}` and `/collections/{collectionId}/schema` resources,
