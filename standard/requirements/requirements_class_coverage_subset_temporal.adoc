@@ -98,7 +98,7 @@ In such cases, the implementations will interpret these omitted components as 0 
 [[datetime-parameter-subset-requirements]]
 ==== Query parameter `datetime`
 
-The `datetime` convenience parameter maps to a trimming or slicing operation (which could also be expressed using `subset`).
+The `datetime` convenience query parameter maps to a trimming or slicing operation (which could also be expressed using `subset`).
 When using a single temporal instant, the parameter corresponds to a slicing operation, whereas when using a pair of instants separated by a forward slash (`/`), the parameter corresponds to a trimming operation.
 The temporal instants are specified using UTC and Gregorian calendar, based on RFC 3339, also allowing for omission of some temporal components as with `subset`.
 For example, the query parameter `datetime=2020-01-01` is equivalent to `subset=time("2020-01-01")`, and the query parameter `datetime=2020-01-01/2020-01-31` is equivalent to `subset=time("2020-01-01":"2020-01-31")`.

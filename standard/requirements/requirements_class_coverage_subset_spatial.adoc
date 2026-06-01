@@ -105,7 +105,7 @@ IMPORTANT: To ensure interoperability, clients should always use the prescribed 
 [[bbox-parameter]]
 ==== Query parameter `bbox`
 
-The `bbox` convenience parameter maps to a trimming operation (which could also be expressed using `subset`).
+The `bbox` convenience query parameter maps to a trimming operation (which could also be expressed using `subset`).
 The parameter value consists of four coordinates which are to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
 or six coordinates to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`) by default (unless a `bbox-crs` parameter is specified).
 The equivalent `subset` parameter is simply the trimming operation from the first latitude to the second latitude, the first longitude to the second longitude, and the first height above the ellipsoid to the second height (if applicable).
