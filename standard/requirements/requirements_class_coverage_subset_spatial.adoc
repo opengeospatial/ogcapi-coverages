@@ -144,6 +144,9 @@ If the vertical axis is included, the third and the sixth number are the bottom 
 [[bbox-crs-parameter]]
 ==== Query parameter `bbox-crs`
 
+A `bbox-crs` query parameter is defined to qualify the `bbox` convenience query parameter, similar to how the `subset-crs` qualifies the CRS for the
+spatial dimensions of the `subset` query parameter.
+
 [[req_subsetting-spatial_bbox-crs]]
 [width="90%",cols="2,6a"]
 |===
