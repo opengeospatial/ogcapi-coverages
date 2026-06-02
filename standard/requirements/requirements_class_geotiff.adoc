@@ -27,6 +27,17 @@
 ^|C |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.
 |===
 
+[[req_geotiff_raster_type]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:rec-id}* |*/req/geotiff/raster-type*
+^|A |If the bounds of the coverage response's <<term-grid-cell,grid cells>> are defined as the entire area between <<term-grid,grid>> lines, the GeoTIFF coverage response SHALL include a `GTRasterTypeGeoKey` (Tag 1025) with a value set to `RasterPixelIsArea` (1).
+^|B |If the bounds of the coverage response's <<term-grid-cell,grid cells>> are defined as a zero-dimensional point at the intersections of grid lines, the GeoTIFF coverage response SHALL include a `GTRasterTypeGeoKey` (Tag 1025) with a value set to `RasterPixelIsPoint` (2).
+|===
+
+NOTE: If the server uses a GeoTIFF as its native backing store, the `GTRasterTypeGeoKey` configuration is to be used to inform which <<term-cell,cells>>
+are extracted during <<term-subsetting,subsetting>> operations, and that key is to be preserved and propagated in the resulting response.
+
 [[rec_geotiff_nodata]]
 [width="90%",cols="2,6a"]
 |===
@@ -37,13 +48,13 @@
 except for anti-aliasing along the edges between both.
 |===
 
-===== GeoTIFF parameters
+===== GeoTIFF query parameters
 
 [[rec_geotiff_compression]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geotiff/compression*
-^|A |The coverage resource SHOULD support a `compression` parameter.
+^|A |The coverage resource SHOULD support a `compression` query parameter.
 ^|B |The possible values for the `compression` parameter SHOULD be `none`, `packbits`, `huffman`, `lzw`, `deflate`.
 ^|C |The GeoTIFF coverage response SHOULD use the compression method specified.
 |===
@@ -52,7 +63,7 @@ except for anti-aliasing along the edges between both.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geotiff/predictor*
-^|A |The coverage resource SHOULD support a `predictor` parameter.
+^|A |The coverage resource SHOULD support a `predictor` query parameter.
 ^|B |The possible values for the `compression` parameter SHOULD be `none`, `horizontal`, `floating-point`.
 ^|C |The GeoTIFF coverage response SHOULD use the predictor specified.
 |===
@@ -61,7 +72,7 @@ except for anti-aliasing along the edges between both.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geotiff/interleave*
-^|A |The coverage resource SHOULD support a `interleave` parameter.
+^|A |The coverage resource SHOULD support a `interleave` query parameter.
 ^|B |The possible values for the `interleave` parameter SHOULD be `pixel` (PlanarConfiguration value 1 for chunky, PLANARCONFIG_CONTIG in libtiff) and `band`
 (PlanarConfiguration value 2 for planar configuration, PLANARCONFIG_SEPARATE in libtiff).
 ^|C |The GeoTIFF coverage response SHOULD use the interleave setting specified (corresponding to the PlanarConfiguration in TIFF terminology).
@@ -71,7 +82,7 @@ except for anti-aliasing along the edges between both.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geotiff/tiling*
-^|A |The coverage resource SHOULD support a boolean `tiling` parameter.
+^|A |The coverage resource SHOULD support a boolean `tiling` query parameter.
 ^|B |The GeoTIFF coverage response SHOULD use tiling if `tiling` is true, or strips otherwise.
 |===
 
@@ -79,7 +90,7 @@ except for anti-aliasing along the edges between both.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geotiff/tile-width-height*
-^|A |The coverage resource SHOULD support integer multiple of 16 `tile-width` and `tile-height` parameters when a `tiling` parameter is used.
+^|A |The coverage resource SHOULD support integer multiple of 16 `tile-width` and `tile-height` query parameters when a `tiling` parameter is used.
 ^|B |The Implementation SHOULD return an error if these parameters are provided without a `tiling` parameter, or if their value is not a multiple of 16 greater than 0.
 ^|C |The GeoTIFF coverage response SHOULD use these tile width and tile height (TileLength in TIFF terminology).
 |===
@@ -88,9 +99,9 @@ except for anti-aliasing along the edges between both.
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/geotiff/overview-count*
-^|A |The coverage resource SHOULD support a integer `overview-count`.
+^|A |The coverage resource SHOULD support an integer `overview-count` query parameter.
 ^|B |The Implementation SHOULD return an error if this parameter is smaller than 0.
 ^|C |The GeoTIFF coverage response SHOULD generate progressively smaller overviews based on that requested number of overviews.
 |===
 
-NOTE: Clients can use a combination of `tiling`, `tile-width`, `tile-height` and `overview-count` to get a GeoTIFF conforming to the https://docs.ogc.org/is/21-026/21-026.html[OGC Cloud Optimize GeoTIFF] standard.
+NOTE: Clients can use a combination of `tiling`, `tile-width`, `tile-height` and `overview-count` to get a GeoTIFF conforming to the https://docs.ogc.org/is/21-026/21-026.html[OGC Cloud Optimized GeoTIFF] standard (see also <<rc_cog>>).
