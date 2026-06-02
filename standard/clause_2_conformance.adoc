@@ -89,8 +89,8 @@ The _OpenAPI 3.0_ Requirements Class defines additonal requirements in addition 
 | <<rc_crs,CRS>>                                | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
 | <<rc_tiles,Coverage Tiles>>                   | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
 | <<rc_html,HTML>>                              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
-| <<rc_tiff,GeoTIFF>>                           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
-| <<rc_tiff,Cloud Optimized GeoTIFF>>           | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cog
+| <<rc_geotiff,GeoTIFF>>                        | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
+| <<rc_cog,Cloud Optimized GeoTIFF>>            | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cog
 | <<rc_netcdf,netCDF>>                          | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
 | <<rc_cisjson,CIS JSON>>                       | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
 | <<rc_coveragejson,CoverageJSON>>              | http://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
