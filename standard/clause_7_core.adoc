@@ -96,13 +96,13 @@ For example:
 ----
 
 | *x-ogc-observingProcedure*
-| A workflow, protocol, plan, algorithm, or technique specifying how to execute an observation
+| URI for a workflow, protocol, plan, algorithm, or technique specifying how to execute an observation
 | *x-ogc-observer*
-| The active entity—such as a sensor, device, algorithm, or person—that executes the observing procedure to estimate the value of an observed property
+| URI for the active entity—such as a sensor, device, algorithm, or person—that executes the observing procedure to estimate the value of an observed property
 | *x-ogc-featureOfInterest*
-| The real-world entity whose property is being observed and estimated
+| URI for the real-world entity whose property is being observed and estimated
 | *x-ogc-platform*
-| An entity that hosts other entities, such as sensors, actuators, samplers, or other platforms
+| URI for an entity that hosts other entities, such as sensors, actuators, samplers, or other platforms
 
 |===
 
