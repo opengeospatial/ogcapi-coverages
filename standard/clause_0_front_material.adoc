@@ -53,3 +53,14 @@ All questions regarding this submission should be directed to the editor or the 
 |Joan Masó Pau <joan.maso@ieee.org>                              |Universitat Autònoma de Barcelona (CREAF)
 |Francis Charette-Migneault <francis.charette-migneault@luqia.ca>|https://luqia.ca[Technologies Luqia]
 |===
+
+[big]*vi.     Acknowledgements*
+
+Some of the work leading to the creation of this OGC Standard was undertaken as part of
+GeoConnections 2020-2021 and 2025-2027 projects GNS20-21IFP02 (Modular OGC API Workflows) and
+GNS25-27IFP2 (Advancing and Implementing OGC Standards for GeoDataCubes, DGGSs, Data Stores for Digital Twins and Cartographic Symbology).
+
+Financial support provided by GeoConnections, a national collaborative initiative led by Natural Resources Canada.
+GeoConnections supports the modernization of the Canadian Geospatial Data Infrastructure (CGDI).
+The CGDI is the collection of geospatial data, standards, policies, applications, and governance that facilitate its
+access, use, integration, and preservation.
