@@ -49,7 +49,7 @@ All questions regarding this submission should be directed to the editor or the 
 |Charles Heazel (Editor)                                         |HeazelTech
 |Jérôme Jacovella-St-Louis <jerome@ecere.com> (Editor)           |https://ecere.ca[Ecere Corporation]
 |Stephan Meissl <stephan.meissl@eox.at>                          |https://eox.at[EOX IT Services GmbH]
-|Tom Kralidis <tom.kralidis@canada.ca>                           |Meteorological Service of Canada
+|Tom Kralidis <tom.kralidis@ec.gc.ca>                           |Meteorological Service of Canada
 |Joan Masó Pau <joan.maso@ieee.org>                              |Universitat Autònoma de Barcelona (CREAF)
 |Francis Charette-Migneault <francis.charette-migneault@luqia.ca>|https://luqia.ca[Technologies Luqia]
 |===
