@@ -10,7 +10,10 @@ It is expected that _OGC API - Coverages_ and WCS implementations will be able t
 The OGC is using an incremental approach to their API development. The initial goal is to develop a relatively simple API standard which will meet the needs of a large percentage of implementors.
 Additional capabilities will be added based on community demand. The functionality covered in _Part 1_ is:
 
-* Description of a coverage, including its domain (dimensions/axes) and range (schema of the fields for the values of each cell),
+* Description of a coverage, including its domain (dimensions/axes, based on the Uniform Additional Dimensions of https://docs.ogc.org/DRAFTS/20-024.html[OGC API - Common - Part 2: Geospatial Data])
+and range (schema of the fields for the values of each cell, based on https://docs.ogc.org/is/23-058r2/23-058r2.html[OGC API - Common - Part 3: Schemas]) --
+these OGC API - Common components provide equivalent functionality to the DomainSet and RangeType of the OGC Coverage Implementation Schema (CIS), but using a different logical model
+which is consistent across multiple OGC Web API Standards,
 * Retrieval of a coverage with support for content type negotiation,
 * Subsetting (trimming or slicing along one or more dimensions/axes of its domain),
 * Field selection (retrieving only certain fields of the range, also known as range subsetting),

@@ -148,7 +148,7 @@ or `numericalNominal` providing useful information relevant to how to properly p
 ^|C |The content of that response SHALL be the coverage data, along with the suported self-description capabilities of the negotiated content type.
 ^|D |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
 ^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
-^|F |The coverage response SHALL be in the native (`storageCrs`) specified in the collection description, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
+^|F |The coverage response SHALL be in the native CRS (`storageCrs`) specified in the collection description, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
 ^|G |If the coverage response format has a concept of field order (for lack of descriptive field metadata, as in GeoTIFF 1.0), that order SHALL match the fields being requested, either based on the selected fields
 (see Field Selection requirements class), the `defaultFields` if specified in the collection description, or otherwise the `x-ogc-propertySeq` in the collection schema.
 |===
