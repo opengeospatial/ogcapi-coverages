@@ -14,16 +14,6 @@ NOTE: This definition intentionally generalizes and diverges from the more rigid
 While that abstract standard ties cells to strict, space-partitioning geometric tessellations, this standard treats a cell as a functional, data-bearing component.
 This allows the framework to natively accommodate domains containing internal gaps, variable structural geometries, or overlapping footprints.
 
-[[term-grid-cell]]
-=== [grid] cell
-
-<<term-cell,cell>> whose bounds are defined relative to the intersections of the curves forming a <<term-grid,grid>>
-
-NOTE: Depending on the coverage structure, the physical bounds of a grid cell may be defined as a zero-dimensional position at an intersection,
-the space between intersecting curves, or an arbitrary variation of either case.
-
-NOTE: Grid cells are not required to form a strict geometric tessellation; they may contain gaps or physically overlap depending on how their individual bounds are defined.
-
 [[term-collapse-sparse-dimension]]
 === Collapse [of a sparse dimension]
 mosaic operation filling empty values of a sparse dimension <<term-slicing,slice>> with neighboring non-empty values,
@@ -102,6 +92,16 @@ footprints (which may physically overlap) within the overall grid structure.
 
 [.source]
 <<OGC07-011r2>>
+
+[[term-grid-cell]]
+=== grid cell
+
+<<term-cell,cell>> whose bounds are defined relative to the intersections of the curves forming a <<term-grid,grid>>
+
+NOTE: Depending on the coverage structure, the physical bounds of a grid cell may be defined as a zero-dimensional position at an intersection,
+the space between intersecting curves, or an arbitrary variation of either case.
+
+NOTE: Grid cells are not required to form a strict geometric tessellation; they may contain gaps or physically overlap depending on how their individual bounds are defined.
 
 [[term-interpolation-method]]
 === Interpolation method [in the context of this Standard]
