@@ -104,7 +104,7 @@ with the resource typically available at `/collections/{collectionId}/schema`. T
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/coverage-fields-schema*
 ^|A |The content of the schema response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
-^|B |Each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
+^|B |If the coverage contains multiple fields and is available in an order-dependent representation (e.g., GeoTIFF), each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
 ^|C |If some fields are available at different resolutions than others, each field SHALL include an `x-ogc-resolution` property with an object property mapping a value for each dimension
 which differs from the resolution specified in the collection's grid description to the name of the dimension (e.g., "Lon" for longitude, "E" for easting, "time" for the primary temporal dimension).
 ^|D |If the implementation supports field selection, and not all fields described in the collection schema are returned by default, a `defaultFields` property in the collection description SHALL
@@ -147,7 +147,7 @@ or `numericalNominal` providing useful information relevant to how to properly p
 ^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
 ^|C |The content of that response SHALL be the coverage data, along with the suported self-description capabilities of the negotiated content type.
 ^|D |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
-^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource.
+^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource (when the `type` property is present).
 ^|F |The coverage response SHALL be in the native CRS (`storageCrs`) specified in the collection description, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
 ^|G |If the coverage response format has a concept of field order (for lack of descriptive field metadata, as in GeoTIFF 1.0), that order SHALL match the fields being requested, either based on the selected fields
 (see Field Selection requirements class), the `defaultFields` if specified in the collection description, or otherwise the `x-ogc-propertySeq` in the collection schema.

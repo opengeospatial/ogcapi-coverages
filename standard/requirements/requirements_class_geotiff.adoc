@@ -30,7 +30,7 @@
 [[req_geotiff_raster_type]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:rec-id}* |*/req/geotiff/raster-type*
+^|*Requirement {counter:req-id}* |*/req/geotiff/raster-type*
 ^|A |If the bounds of the coverage response's <<term-grid-cell,grid cells>> are defined as the entire area between <<term-grid,grid>> lines, the GeoTIFF coverage response SHALL include a `GTRasterTypeGeoKey` (Tag 1025) with a value set to `RasterPixelIsArea` (1).
 ^|B |If the bounds of the coverage response's <<term-grid-cell,grid cells>> are defined as a zero-dimensional point at the intersections of grid lines, the GeoTIFF coverage response SHALL include a `GTRasterTypeGeoKey` (Tag 1025) with a value set to `RasterPixelIsPoint` (2).
 |===

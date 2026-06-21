@@ -1,4 +1,4 @@
-[[rc_fieldselection]]
+[[rc_field-selection]]
 == Requirements Class "Field Selection"
 
 === Overview
@@ -10,6 +10,6 @@ The order of the fields as listed in the value of the parameter also determines 
 
 === Field Selection Examples
 
-See also <<field-selection--examples, examples of field selection requests>> in an annex.
+See also <<field-selection-examples, examples of field selection requests>> in an annex.
 
 include::requirements/requirements_class_fieldselection.adoc[]

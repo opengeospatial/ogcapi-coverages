@@ -42,9 +42,10 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 ^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single point is provided for an axis, the coverage response SHALL be the result of a <<term-slicing,slicing>> operation for the dimension corresponding to that axis, reducing the dimensionality.
 ^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if an interval is provided for an axis, the coverage response SHALL be the result of a <<term-trimming,trimming>> operation for the dimension corresponding to that axis, preserving the dimensionality.
 ^|E |For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
-^|F |For a projected subsetting CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
-^|G |If a third spatial dimension is supported (if the data's spatial extent bounding box is three dimensional), the implementation SHALL also support a `h` dimension.
-This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS, and _z_ for 3D Cartesian CRS such as EPSG:4978, which are to be interpreted as the vertical axis in the CRS definition.
+^|F |For a projected subsetting CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as Earth-Centered Earth-Fixed EPSG:4978), axis names `x` and `y` SHALL be supported. These are to be interpreted as the best matching spatial axes in the subsetting CRS definition.
+^|G |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or
+projected CRS that includes a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h), and the axis name `z` SHALL be supported for a
+3D Cartesian coordinate reference system (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
 ^|H |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to one of the axes of the subsetting CRS,
 to an alias (see recommendation below), or to any other axis supported in the context of other requirements classes (such as temporal and general subsetting).
 ^|I |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
@@ -78,15 +79,15 @@ Generic clients intended to be interoperable with all Implementations of this St
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/subset-crs-axis-aliases*
-^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous of the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
-^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
-^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.
-^|D |`Z`, (lowercase/uppercase) or `H` (uppercase) SHOULD be interpreted as synonymous of `h`.
-^|D |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous of `Lon`.
-^|E |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous of `Lat`.
+^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous with the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
+^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous with `E`.
+^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous with `N`.
+^|D |`Z` (lowercase/uppercase) or `H` (lowercase/uppercase) SHOULD be interpreted as synonymous with whichever vertical axis (height above the ellipsoid `h` or 3D Cartesian axis `z`) is applicable to the coordinate reference system.
+^|E |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lon`.
+^|F |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lat`.
 |===
 
-IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
+IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`, `x`, `y`, `z`) and not rely on any of the aliases.
 
 ==== Query parameter `subset-crs`
 

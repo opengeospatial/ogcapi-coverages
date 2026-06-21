@@ -94,7 +94,7 @@ footprints (which may physically overlap) within the overall grid structure.
 <<OGC07-011r2>>
 
 [[term-grid-cell]]
-=== grid cell
+=== Grid cell
 
 <<term-cell,cell>> whose bounds are defined relative to the intersections of the curves forming a <<term-grid,grid>>
 

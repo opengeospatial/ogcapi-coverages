@@ -22,9 +22,11 @@ or for all dimensions.
 For example, `resolution=` and `resolution=Lat(),Lon()` SHALL both be considered as requesting the native spatial resolution.
 ^|C |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|D |For a geographic output CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the output CRS definition.
-^|E |For a projected output CRS, axis names `E` and `N` SHALL be supported, which are to be interpreted as the best matching spatial axis in the output CRS definition.
-^|F |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the implementation SHALL also support a `h` dimension.
-This is the elevation above the ellipsoid in EPSG:4979 or CRS84h for geographic CRS, and _z_ for 3D Cartesian CRS such as EPSG:4978, which are to be interpreted as the vertical axis in the CRS definition.
+^|E |For a projected output CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as ECEF EPSG:4978), axis names `x` and `y` SHALL be supported.
+These are to be interpreted as the best matching spatial axes in the output CRS definition.
+^|F |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or
+projected CRS containing a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h) to represent the vertical dimension, and the axis
+name `z` SHALL be supported for a 3D Cartesian CRS (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
 ^|G |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to one of the axes of the output CRS,
 to an alias (see recommendation below), or to any other axis supported in the context of other requirements classes (such as temporal and general scaling).
 ^|H |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
@@ -60,16 +62,16 @@ Generic clients intended to be interoperable with all Implementations of this St
 [[rec_scaling-spatial_resolution-crs-axis-aliases]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:per-id}* |*/rec/scaling-spatial/resolution-crs-axis-aliases*
-^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous of the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
-^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous of `E`.
-^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous of `N`.
-^|D |`Z`, (lowercase/uppercase) or `H` (uppercase) SHOULD be interpreted as synonymous of `h`.
-^|D |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous of `Lon`.
-^|E |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous of `Lat`.
+^|*Recommendation {counter:rec-id}* |*/rec/scaling-spatial/resolution-crs-axis-aliases*
+^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous with the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
+^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous with `E`.
+^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous with `N`.
+^|D |`Z` (lowercase/uppercase) or `H` (lowercase/uppercase) SHOULD be interpreted as synonymous with whichever vertical axis (height above the ellipsoid `h` or 3D Cartesian axis `z`) is applicable to the output coordinate reference system.
+^|E |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lon`.
+^|F |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lat`.
 |===
 
-IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`) and not rely on any of the aliases.
+IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`, `x`, `y`, `z`) and not rely on any of the aliases.
 
 ==== Downsampling permission
 
@@ -228,7 +230,7 @@ the Implementation SHALL use a response header `Preference-Applied:` when it app
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-spatial/preference-handling*
 ^|A | If an Implementation supports <<rec_scaling-spatial_prefer-header, client preferences for interpolation>>,
-the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
 value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
 ^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of

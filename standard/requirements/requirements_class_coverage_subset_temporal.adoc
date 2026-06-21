@@ -54,7 +54,10 @@ only that part of the coverage that falls within the bounds of the subset expres
 ^|E |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
 ^|F |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time`, or any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
 ^|G |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
-^|H |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time (as specified in link:https://tools.ietf.org/html/rfc3339[RFC 3339], extended with support for an hour value of 24) if it is not specified in the temporal extent.
+^|H |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time
+(as specified in link:https://tools.ietf.org/html/rfc3339[RFC 3339],
+extended with support for an hour value of 24) if it is not specified in the temporal extent.
+Interval ends SHALL be evaluated using implicit duration thickness based on the smallest specified component, with the exception of an extended hour value of `24` (valid only with zero sub-components under ISO 8601 rules) which SHALL be interpreted exactly as hour `00` of the following calendar day, evaluating up to, but excluding, that temporal instant without applying implicit thickness.
 ^|I |If the subset parameter includes the `time` dimension while the `datetime` parameter is also specified, the server SHALL return a 400 client error.
 ^|J |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|K |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
@@ -114,14 +117,17 @@ For example, the query parameter `datetime=2020-01-01` is equivalent to `subset=
 
 [source]
 ----
-interval-closed     = date-time "/" date-time
-interval-open-start = [".."] "/" date-time
-interval-open-end   = date-time "/" [".."]
-interval            = interval-closed / interval-open-start / interval-open-end
-datetime            = date-time / interval
+interval-bounded         = date-time "/" date-time
+interval-unbounded-start = [".."] "/" date-time
+interval-unbounded-end   = date-time "/" [".."]
+interval                 = interval-bounded / interval-unbounded-start / interval-unbounded-end
+datetime                 = date-time / interval
 ----
-When the primary temporal dimension can be mapped to UTC and the Gregorian calendar, the syntax of `date-time` is specified by link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6]
-with the extension of allowing an hour value of 24 as defined in <<ISO_8601-1,ISO 8601-1>>.
+When the primary temporal dimension can be mapped to UTC and the Gregorian calendar, the syntax of `date-time` is specified by
+link:https://tools.ietf.org/html/rfc3339#section-5.6[RFC 3339, 5.6] with the extension of allowing an hour value of 24 as defined in <<ISO_8601-1,ISO 8601-1>>.
+Interval ends SHALL be evaluated using implicit duration thickness based on the smallest specified component, with the exception of an extended hour value of `24`
+(valid only with zero sub-components under ISO 8601 rules) which SHALL be interpreted exactly as hour `00` of the following calendar day, evaluating up to, but excluding,
+that temporal instant without applying implicit thickness.
 Otherwise, the syntax of `date-time` depends on the `trs` specified in the `temporal` property of the collection description's `extent`.
 ^|B |Only the portions of the coverage within the specified interval SHALL be part of coverage response, performing a trim operation for an interval or a slicing operation for an instant.
 ^|C |The implementation SHALL support a double-dot (`..`) or an empty string for the start/end as indicating an unbounded or half-bounded interval (only having a start or end).

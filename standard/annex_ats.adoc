@@ -2,18 +2,1279 @@
 :appendix-caption: Annex
 == Conformance Class Abstract Test Suite (Normative)
 
-[NOTE]
-Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
+=== Conformance Class: Core
 
-=== Conformance Class A
+[cols="20h,80d",width="100%"]
+|===
 
-==== Requirement 1
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/core/conformance-success +
+Abstract Test A.{counter:ats-summary}: /conf/core/collection-description +
+Abstract Test A.{counter:ats-summary}: /conf/core/coverage-fields-schema +
+Abstract Test A.{counter:ats-summary}: /conf/core/get-coverage +
+Abstract Test A.{counter:ats-summary}: /conf/core/response-headers +
+Abstract Test A.{counter:ats-summary}: /conf/core/native-resolution
+|===
+
+**Abstract Test A.{counter:ats-id}:** Conformance Success
 [cols=">20h,<80d",width="100%"]
 |===
-|Test id: |/conf/conf-class-a/req-name-1
-|Requirement: |/req/req-class-a/req-name-1
-|Test purpose: | Verify that...
-|Test method: | Inspect...
+
+|test id: |/conf/core/conformance-success
+|requirement: |/req/core/conformance-success
+|test purpose: |Verify the global and per-collection conformance declarations.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard. +
+*When:* Conformance declarations are requested through available global or per-collection mechanisms. +
+*Then:* +
+- Assert that, if a global conformance declaration resource is available, it includes all standard-defined conformance class URIs supported by the API instance. +
+- Assert that any collection-specific conformance classes are discoverable through a link or property within that specific collection's description resource.
 |===
 
-==== Requirement 2
+**Abstract Test A.{counter:ats-id}:** Collection Description
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/core/collection-description
+|requirement: |/req/core/collection-description
+|test purpose: |Verify the coverage properties, links, and coordinate reference systems in collection descriptions.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard. +
+*When:* Collection descriptions are retrieved from the API's collection resources. +
+*Then:* +
+- Assert that each collection accessible using the Coverages API includes a link in its `links` array targeting a coverage resource with the link relation type `[ogc-rel:coverage]` (or its equivalent full URI). +
+- Assert that at least one collection is accessible as a coverage. +
+- Assert that, if a `storageCrs` property is present, it contains a valid URI, safe CURIE, WKT2, PROJJSON, or CRS-JSON object describing a registered or full CRS definition. +
+- Assert that, if a `storageCrs` property is present and its value is not the standard CRS84 URI, a `storageCrsBbox` property is provided within the spatial dimension of the `extent` object adhering to the specified bounding box schema.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Coverage Fields Schema
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/core/coverage-fields-schema
+|requirement: |/req/core/coverage-fields-schema
+|test purpose: |Verify the coverage fields schema properties, ordering, variable resolutions, and default selections.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard. +
+*When:* The coverage fields schema definitions and associated collection descriptions are retrieved from the API. +
+*Then:* +
+- Assert that the schema response contains a list of coverage fields where each field includes a property key identifier, a `title`, a `type`, and optionally a `description`. +
+- Assert that, if the coverage contains multiple fields and is available in an order-dependent representation (e.g., GeoTIFF, each field includes an `x-ogc-propertySeq` property containing an integer value defining its sequential order. +
+- Assert that, if a field is available at a resolution that differs from the collection's grid description, it includes an `x-ogc-resolution` object mapping the differing resolution values to their corresponding dimension names. +
+- Assert that, if field selection is supported and a subset of fields is returned by default, a `defaultFields` property is present in the collection description listing those default fields in their response output order.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Get Coverage
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/core/get-coverage
+|requirement: |/req/core/get-coverage
+|test purpose: |Verify the operational execution, status codes, content negotiation, coordinate reference systems, and field ordering of the coverage retrieval endpoint.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard. +
+*When:* A coverage resource is requested via an HTTP GET operation using the endpoint identified by the `[ogc-rel:coverage]` link relation type in the collection description. +
+*Then:* +
+- Assert that a successful execution returns an HTTP status code `200`. +
+- Assert that the response body contains the coverage data and utilizes the self-description capabilities of the negotiated content type. +
+- Assert that the response is encoded using the format negotiated through the HTTP protocol. +
+- Assert that, if no format is negotiated and a `type` property is present in the link object within the collection description resource, the response is encoded using the media type format specified by that property. +
+- Assert that the coverage response is in the native CRS (`storageCrs`) specified in the collection description, or the standard CRS84 URI if none is specified, unless overridden by a specific query parameter. +
+- Assert that, if the response format uses a concept of field order (e.g., GeoTIFF), that order matches the requested fields based on explicit selection, `defaultFields` in the collection description, or the `x-ogc-propertySeq` sequence in the collection schema.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Response Headers
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/core/response-headers
+|requirement: |/req/core/response-headers
+|test purpose: |Verify the coordinate reference system, spatial bounding box, and temporal information provided in the coverage response headers.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard. +
+*When:* A coverage resource is retrieved from the API. +
+*Then:* +
+- Assert that, if the content is referenced to a CRS other than CRS84, the response includes a `Content-Crs:` header containing the URI of the response CRS. +
+- Assert that, if the returned coverage has a spatial extent, the response includes a `Content-Bbox:` header containing the actual spatial extent of the coverage. +
+- Assert that, when present, the `Content-Bbox:` coordinates are expressed in the response CRS, formatted as four or six comma-separated numbers representing the lower-left and upper-right corners, and honor the coordinate axis order of that CRS. +
+- Assert that, if the coverage includes a temporal dimension expressible in RFC3339 format, the response includes a `Content-Datetime:` header containing either a single datetime instant for a single temporal slice, or a datetime interval when the response spans a temporal dimension or contains data originating from multiple aggregated or mosaiced temporal slices.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Native Resolution
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/core/native-resolution
+|requirement: |/req/core/native-resolution
+|test purpose: |Verify that requests for native resolution are supported.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard. +
+*When:* Requests are made to the coverage resource using the `resolution` query parameter. +
+*Then:* +
+- Assert that the implementation accepts requests where specific dimensions have empty resolution values (e.g., `resolution=Lat(),Lon(),time()`) and returns the coverage data at the native resolution for those dimensions. +
+- Assert that the implementation accepts a completely empty resolution parameter (e.g., `resolution=`) and either returns the coverage data at the native resolution for all dimensions or returns an HTTP `4xx` error code if the requested native payload size exceeds server processing limits. +
+- Assert that, if the implementation does not support scaling for a requested dimension and a non-empty resolution value is specified, the server returns an HTTP `4xx` error status code.
+|===
+
+=== Conformance Class: Spatial subsetting
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-spatial
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-spatial
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/subset +
+Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/subset-crs +
+Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-definition +
+Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
+|===
+
+**Abstract Test A.{counter:ats-id}:** Spatial Subset Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/subsetting-spatial/subset
+|requirement: |/req/subsetting-spatial/subset
+|test purpose: |Verify the trimming, slicing, axis mappings, boundary conditions, error handling, and parameter interactions of the spatial `subset` query parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class. +
+*When:* Coverage resource requests are executed using single or multiple instances of the `subset` query parameter. +
+*Then:* +
+- Assert that the implementation parses and accepts valid `subset` expressions for both intervals and discrete points across one or more dimensions. +
+- Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified subsetting coordinates or intervals. +
+- Assert that a single point subset on an axis executes a slicing operation that reduces the dimensionality of the response. +
+- Assert that an interval subset on an axis executes a trimming operation that preserves the dimensionality of the response. +
+- Assert that axis names `Lat` and `Lon` are supported for geographic subsetting CRSs and map to the corresponding spatial axes. +
+- Assert that axis names `E` and `N` are supported for projected subsetting CRSs, and axis names `x` and `y` are supported for 3D Cartesian CRSs. +
+- Assert that for a 3D geographic or projected subsetting CRS containing a vertical dimension (such as EPSG:4979 or OGC:CRS84h), the axis name `h` is supported to target the vertical dimension. +
+- Assert that for a 3D Cartesian subsetting CRS (such as EPSG:4978), the axis name `z` is supported to target the third spatial axis. +
+- Assert that the server returns an HTTP `400` status code if a requested axis name does not match any axis of the subsetting CRS, an alias, or other supported extension axes. +
+- Assert that the server returns an HTTP `204` or `404` status code if the subset values fall entirely outside the valid range of the identified axis. +
+- Assert that a subset interval crossing a wrapping point (where the `low` value is greater than the `high` value) is supported on wrap-around axes. +
+- Assert that spatial subset coordinates are interpreted using the CRS specified by the `subset-crs` parameter, defaulting to `[OGC:CRS84]` (or `CRS84h`) if the parameter is absent. +
+- Assert that the server returns an HTTP `400` status code if both a spatial dimension is targeted in a `subset` parameter and a `bbox` parameter is specified in the same request. +
+- Assert that an asterisk `*` used as the lower limit of a subset interval correctly selects the minimum extent of the coverage along that axis. +
+- Assert that an asterisk `*` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis. +
+- Assert that providing multiple `subset` parameters in a single request is correctly combined and interpreted as a single comma-separated subset specification. +
+- Assert that the server returns an HTTP `4xx` status code if a slicing operation and a scaling operation are simultaneously requested on the same dimension.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Spatial Subset CRS Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/subsetting-spatial/subset-crs
+|requirement: |/req/subsetting-spatial/subset-crs
+|test purpose: |Verify the resolution, defaulting, and validation of coordinate reference systems targeted via the `subset-crs` query parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class. +
+*When:* Coverage resource requests are executed using the `subset-crs` query parameter. +
+*Then:* +
+- Assert that the implementation accepts the `subset-crs` parameter containing a URI or safe CURIE identifier. +
+- Assert that for Earth-referenced data, `[OGC:CRS84]` (and its corresponding URI) is supported as a valid parameter value. +
+- Assert that, if the `subset-crs` parameter is absent, `[OGC:CRS84]` is assumed by default. +
+- Assert that the native CRS (`storageCrs`) of the collection is supported as a valid parameter value. +
+- Assert that CRSs encoded as full URIs or as safe CURIEs are successfully resolved. +
+- Assert that the `subset-crs` parameter is ignored if no `subset` parameter targets an axis belonging to the specified CRS.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Bounding Box Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/subsetting-spatial/bbox-definition
+|requirement: |/req/subsetting-spatial/bbox-definition
+|test purpose: |Verify the dimension-count interpretation, axis coordinate ordering, trimming behavior, anti-meridian crossing, and error handling of the `bbox` query parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class. +
+*When:* Coverage resource requests are executed using the `bbox` query parameter. +
+*Then:* +
+- Assert that the implementation accepts a `bbox` parameter structured as either four or six comma-separated numbers. +
+- Assert that the coordinate values in the `bbox` parameter adhere strictly to the spatial axis positions honoring the CRS coordinate order: lower-left corner axis 1, lower-left corner axis 2, optional minimum axis 3, followed by upper-right corner axis 1, upper-right corner axis 2, and optional maximum axis 3. +
+- Assert that a four-number bounding box is interpreted using `[OGC:CRS84]` unless an alternative coordinate reference system is specified via the `bbox-crs` parameter. +
+- Assert that a six-number bounding box is interpreted using `[OGC:CRS84h]` unless an alternative coordinate reference system is specified via the `bbox-crs` parameter. +
+- Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified bounding box limits. +
+- Assert that, if a `bbox` parameter is specified for a coverage dataset that contains no spatial dimensions, the server either ignores the parameter or returns an HTTP `4xx` error code. +
+- Assert that a geographic bounding box where the first coordinate value is greater than the third coordinate value is successfully interpreted as an extent crossing the anti-meridian.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Bounding Box CRS Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/subsetting-spatial/bbox-crs
+|requirement: |/req/subsetting-spatial/bbox-crs
+|test purpose: |Verify the resolution, defaulting, and validation of coordinate reference systems targeted via the `bbox-crs` query parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class. +
+*When:* Coverage resource requests are executed using the `bbox-crs` query parameter. +
+*Then:* +
+- Assert that the implementation accepts the `bbox-crs` parameter containing a URI or safe CURIE identifier. +
+- Assert that for Earth-referenced data, `[OGC:CRS84]` (and its corresponding full URI) is supported as a valid parameter value. +
+- Assert that, if the `bbox-crs` parameter is absent, `[OGC:CRS84]` is assumed by default. +
+- Assert that the native CRS (`storageCrs`) of the collection is supported as a valid parameter value. +
+- Assert that CRSs encoded as full URIs or as safe CURIEs are successfully resolved. +
+- Assert that the `bbox-crs` parameter is ignored if the `bbox` parameter is not present in the request.
+|===
+
+=== Conformance Class: Collapsing Sparse Spatial Dimensions
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/sparse-dimensions-collapse-spatial
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/sparse-dimensions-collapse-spatial
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-spatial/slice-sparse-dimension +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-spatial/flattening-sparse-dimension +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-spatial/slice-preference-applied +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-spatial/slice-preference-handling
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Sparse Spatial Dimension
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-spatial/slice-sparse-dimension
+|requirement: |/req/sparse-dimensions-collapse-spatial/slice-sparse-dimension
+|test purpose: |Verify that slicing operations on sparse spatial dimensions populate NODATA portions with nearby available data values.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Spatial Dimensions requirements class. +
+*When:* A coverage resource request is executed combining a slicing operation on a sparse spatial dimension with a trimming operation on other axes. +
+*Then:* +
+- Assert that, if data values exist at alternative locations along the sliced spatial dimensions for the requested subset, any potential NODATA portions are populated using those nearby non-empty values.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Flattening Sparse Spatial Dimension
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-spatial/flattening-sparse-dimension
+|requirement: |/req/sparse-dimensions-collapse-spatial/flattening-sparse-dimension
+|test purpose: |Verify that trimming operations on spatial dimensions flatten and collapse the spatial structure when requesting a format that cannot include spatial dimensions.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Spatial Dimensions requirements class. +
+*When:* A coverage resource request is executed combining a spatial trimming operation with a trimming operation on other axes, specifying an output format that does not support spatial dimensions. +
+*Then:* +
+- Assert that the response returns a flattened coverage where the spatial dimensions are collapsed. +
+- Assert that non-empty data portions are preserved across the collapsed space according to the default or selected interpolation method preference.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Preference Applied
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-spatial/slice-preference-applied
+|requirement: |/req/sparse-dimensions-collapse-spatial/slice-preference-applied
+|test purpose: |Verify the presence and structure of the `Preference-Applied:` response header when client-specified interpolation preferences are honored.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Spatial Dimensions requirements class that supports client preferences for interpolation. +
+*When:* A coverage resource request is executed specifying interpolation preferences via the designated client preference mechanism. +
+*Then:* +
+- Assert that, if the server honors and applies the client's interpolation preference, the response includes a `Preference-Applied:` header reflecting the applied interpolation method.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Preference Handling
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-spatial/slice-preference-handling
+|requirement: |/req/sparse-dimensions-collapse-spatial/slice-preference-handling
+|test purpose: |Verify the behavior of the `Prefer: handling` parameter when processing client interpolation preferences.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Spatial Dimensions requirements class that supports client preferences for interpolation. +
+*When:* Coverage resource requests are executed with interpolation preferences and varying `Prefer: handling` configurations. +
+*Then:* +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=lenient` value, the server ignores the preference and processes the request. +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=strict` value, the server returns an HTTP `4xx` error code. +
+- Assert that, if no handling preference is explicitly specified in the request, the server defaults to lenient handling for the interpolation preferences.
+|===
+
+=== Conformance Class: Temporal Subsetting
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-temporal
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-temporal
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/subset
+|===
+
+**Abstract Test A.{counter:ats-id}:** Temporal Subset Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/subsetting-temporal/subset
+|requirement: |/req/subsetting-temporal/subset
+|test purpose: |Verify the temporal slice and trim subsetting functionality of the `subset` parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class. +
+*When:* Coverage resource requests are executed using single or multiple instances of the `subset` query parameter. +
+*Then:* +
+- Assert that the implementation parses and accepts valid `subset` expressions for both intervals and discrete points across one or more dimensions. +
+- Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified subsetting coordinates or intervals. +
+- Assert that a single point subset on an axis executes a slicing operation that reduces the dimensionality of the response. +
+- Assert that an interval subset on an axis executes a trimming operation that preserves the dimensionality of the response. +
+- Assert that the axis name `time` is supported if the collection describes a temporal dimension in its extent. +
+- Assert that the server returns an HTTP `400` status code if a requested axis name does not match `time`, an alias, or other supported extension axes. +
+- Assert that the server returns an HTTP `204` or `404` status code if the subset values fall entirely outside the valid range of the identified axis. +
+- Assert that temporal subset coordinates are interpreted using the `trs` specified in the collection's temporal extent, defaulting to Gregorian UTC time adhering to RFC 3339 if not specified in the temporal extent. +
+- Assert that interval ends are evaluated using implicit duration thickness based on the smallest specified component, with the exception of an extended hour value of `24` which evaluates up to, but excluding, that temporal instant on the following calendar day without applying implicit thickness. +
+- Assert that the server returns an HTTP `400` status code if both the `time` dimension is targeted in a `subset` parameter and a `datetime` parameter is specified in the same request. +
+- Assert that an asterisk `*` used as the lower limit of a subset interval correctly selects the minimum extent of the coverage along that axis. +
+- Assert that an asterisk `*` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis. +
+- Assert that providing multiple `subset` parameters in a single request is correctly combined and interpreted as a single comma-separated subset specification.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Datetime Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/subsetting-temporal/datetime
+|requirement: |/req/subsetting-temporal/datetime
+|test purpose: |Verify the slicing, trimming, error handling, and half-bounded or unbounded interval behavior of the `datetime` query parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class. +
+*When:* Coverage resource requests are executed using the `datetime` query parameter. +
+*Then:* +
+- Assert that the implementation parses and accepts valid `datetime` expressions for instants, bounded intervals, and half-bounded or unbounded intervals. +
+- Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified datetime instant or interval. +
+- Assert that interval ends are evaluated using implicit duration thickness based on the smallest specified component, with the exception of an extended hour value of `24` which evaluates up to, but excluding, that temporal instant on the following calendar day without applying implicit thickness. +
+- Assert that a double-dot (`..`) or an empty string used at the start or end of an interval is correctly processed as a half-bounded or unbounded temporal limit. +
+- Assert that, if a `datetime` parameter is specified for a coverage dataset that contains no temporal dimensions, the server either ignores the parameter or returns an HTTP `4xx` error code.
+|===
+
+=== Conformance Class: Collapsing Sparse Temporal Dimensions
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/sparse-dimensions-collapse-temporal
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/sparse-dimensions-collapse-temporal
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-temporal/slice-sparse-dimension +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-temporal/flattening-sparse-dimension +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-temporal/slice-preference-applied +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-temporal/slice-preference-handling
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Sparse Temporal Dimension
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-temporal/slice-sparse-dimension
+|requirement: |/req/sparse-dimensions-collapse-temporal/slice-sparse-dimension
+|test purpose: |Verify that slicing operations on sparse temporal dimensions fill NODATA portions with alternative available data values along the time axis.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Temporal Dimensions requirements class. +
+*When:* A coverage resource request is executed combining a slicing operation on a sparse temporal dimension with a trimming operation on other axes. +
+*Then:* +
+- Assert that, if data values exist at alternative locations along the sliced temporal dimension for the requested subset, any potential NODATA portions are populated using those alternative non-empty values.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Flattening Sparse Temporal Dimension
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-temporal/flattening-sparse-dimension
+|requirement: |/req/sparse-dimensions-collapse-temporal/flattening-sparse-dimension
+|test purpose: |Verify that trimming operations on temporal dimensions flatten and collapse the temporal structure when requesting a format that cannot include temporal dimensions.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Temporal Dimensions requirements class. +
+*When:* A coverage resource request is executed combining a temporal trimming operation with a trimming operation on other axes, specifying an output format that does not support temporal dimensions. +
+*Then:* +
+- Assert that the response returns a flattened coverage where the temporal dimensions are collapsed. +
+- Assert that non-empty data portions are preserved across the collapsed space according to the default or selected interpolation method preference.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Preference Applied
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/sparse-dimensions-collapse-temporal/slice-preference-applied
+|requirement: |/req/sparse-dimensions-collapse-temporal/slice-preference-applied
+|test purpose: |Verify the presence and structure of the `Preference-Applied:` response header when client-specified interpolation preferences are honored.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Temporal Dimensions requirements class that supports client preferences for interpolation. +
+*When:* A coverage resource request is executed specifying interpolation preferences via the designated client preference mechanism. +
+*Then:* +
+- Assert that, if the server honors and applies the client's interpolation preference, the response includes a `Preference-Applied:` header reflecting the applied interpolation methods.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Preference Handling
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/sparse-dimensions-collapse-temporal/slice-preference-handling
+|requirement: |/req/sparse-dimensions-collapse-temporal/slice-preference-handling
+|test purpose: |Verify the behavior of the `Prefer: handling` parameter when processing client interpolation preferences.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Temporal Dimensions requirements class that supports client preferences for interpolation. +
+*When:* Coverage resource requests are executed with interpolation preferences and varying `Prefer: handling` configurations. +
+*Then:* +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=lenient` value, the server ignores the preference and processes the request. +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=strict` value, the server returns an HTTP `4xx` error code. +
+- Assert that, if no handling preference is explicitly specified in the request, the server defaults to lenient handling for the interpolation preferences.
+|===
+
+=== Conformance Class: General Subsetting
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-general
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-general
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset
+|===
+
+**Abstract Test A.{counter:ats-id}:** General Subset Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/subsetting-general/subset
+|requirement: |/req/subsetting-general/subset
+|test purpose: |Verify the slicing and trimming functionality of the `subset` parameter on additional non-spatial and non-primary-temporal dimensions.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - General Subsetting requirements class. +
+*When:* Coverage resource requests are executed using single or multiple instances of the `subset` query parameter. +
+*Then:* +
+- Assert that the implementation parses and accepts valid `subset` expressions for both intervals and discrete points across one or more dimensions. +
+- Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified subsetting coordinates or intervals. +
+- Assert that a single point subset on an axis executes a slicing operation that reduces the dimensionality of the response. +
+- Assert that an interval subset on an axis executes a trimming operation that preserves the dimensionality of the response. +
+- Assert that all extra dimensions declared in the collection description (excluding spatial dimensions and the primary temporal dimension) are supported as valid axis names. +
+- Assert that the server returns an HTTP `400` status code if a requested axis name does not match an additional dimension described in the collection extent, an alias, or other supported extension axes. +
+- Assert that the server returns an HTTP `204` or `404` status code if the subset values fall entirely outside the valid range of the identified axis. +
+- Assert that an asterisk `*` used as the lower limit of a subset interval correctly selects the minimum extent of the coverage along that axis. +
+- Assert that an asterisk `*` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis. +
+- Assert that providing multiple `subset` parameters in a single request is correctly combined and interpreted as a single comma-separated subset specification.
+|===
+
+=== Conformance Class: Collapsing Sparse General Dimensions
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/sparse-dimensions-collapse-general
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/sparse-dimensions-collapse-general
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-general/slice-sparse-dimension +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-general/flattening-sparse-dimension +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-general/slice-preference-applied +
+Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-general/slice-preference-handling
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Sparse General Dimension
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-general/slice-sparse-dimension
+|requirement: |/req/sparse-dimensions-collapse-general/slice-sparse-dimension
+|test purpose: |Verify that slicing operations on sparse general dimensions fill NODATA portions with alternative available data values along that axis.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse General Dimensions requirements class. +
+*When:* A coverage resource request is executed combining a slicing operation on a sparse general dimension with a trimming operation on other axes. +
+*Then:* +
+- Assert that, if data values exist at alternative locations along the sliced general dimension for the requested subset, any potential NODATA portions are populated using those alternative non-empty values.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Flattening Sparse General Dimension
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-general/flattening-sparse-dimension
+|requirement: |/req/sparse-dimensions-collapse-general/flattening-sparse-dimension
+|test purpose: |Verify that trimming operations on general dimensions flatten and collapse the dimension when requesting a format that cannot include that dimension.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse General Dimensions requirements class. +
+*When:* A coverage resource request is executed combining a general trimming operation with a trimming operation on other axes, specifying an output format that does not support that general dimension. +
+*Then:* +
+- Assert that the response returns a flattened coverage where the specified general dimension is collapsed. +
+- Assert that non-empty data portions are preserved across the collapsed space according to the default or selected interpolation method preference.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Preference Applied
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/sparse-dimensions-collapse-general/slice-preference-applied
+|requirement: |/req/sparse-dimensions-collapse-general/slice-preference-applied
+|test purpose: |Verify the presence and structure of the `Preference-Applied:` response header when client-specified interpolation preferences are honored.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse General Dimensions requirements class that supports client preferences for interpolation. +
+*When:* A coverage resource request is executed specifying interpolation preferences via the designated client preference mechanism. +
+*Then:* +
+- Assert that, if the server honors and applies the client's interpolation preference, the response includes a `Preference-Applied:` header reflecting the applied interpolation methods.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Slice Preference Handling
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/sparse-dimensions-collapse-general/slice-preference-handling
+|requirement: |/req/sparse-dimensions-collapse-general/slice-preference-handling
+|test purpose: |Verify the behavior of the `Prefer: handling` parameter when processing client interpolation preferences.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse General Dimensions requirements class that supports client preferences for interpolation. +
+*When:* Coverage resource requests are executed with interpolation preferences and varying `Prefer: handling` configurations. +
+*Then:* +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=lenient` value, the server ignores the preference and processes the request. +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=strict` value, the server returns an HTTP `4xx` error code. +
+- Assert that, if no handling preference is explicitly specified in the request, the server defaults to lenient handling for the interpolation preferences.
+|===
+
+=== Conformance Class: Multi-Slicing
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/multi-slicing
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/multi-slicing
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/multi-slicing/multi-slicing
+|===
+
+**Abstract Test A.{counter:ats-id}:** Multi-Slicing
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/multi-slicing/multi-slicing
+|requirement: |/req/multi-slicing/multi-slicing
+|test purpose: |Verify the extraction of multiple coordinates using comma-separated values in the `subset` parameter.
+|test method: |
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - Multi-Slicing requirements class. +
+*When:* A coverage resource request is executed using a comma-separated list of multiple coordinate values within a dimension specified in the `subset` parameter. +
+*Then:* +
+- Assert that the implementation accepts comma-separated list values for those spatial, temporal, and general dimensions whose respective requirements classes are supported by the API instance. +
+- Assert that the returned coverage data contains values exclusively for the coordinates explicitly specified in the request.
+|===
+
+=== Conformance Class: Position Query
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/position-query
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/position-query
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/position-query/position-query
+|===
+
+**Abstract Test A.{counter:ats-id}:** Position Query
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/position-query/position-query
+|requirement: |/req/position-query/position-query
+|test purpose: |Verify point-based slicing and JSON content negotiation structure for zero-dimensional coverage requests.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Position Query requirements class. +
+*When:* Coverage resource requests are executed that slice all dimensions down to zero dimensions using the `subset` and/or `bbox` and/or `datetime` parameters while requesting JSON encoding. +
+*Then:* +
+- Assert that the Implementation supports reducing the dimensionality of the response to zero dimensions via the `subset` and/or `bbox` and/or `datetime` query parameters. +
+- Assert that a negotiated JSON response structure contains an object where properties match the default or selected field names mapped to their values. +
+- Assert that, if the backing coverage is a multi-function data store, a negotiated JSON response is structured as an array of these field-value objects. +
+- Assert that, if only a single field is returned, a negotiated JSON response evaluates to the value of the field directly (or an array of values for multi-functions) rather than a wrapping object.
+|===
+
+=== Conformance Class: Spatial Scaling
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-spatial
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-spatial
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/resolution +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/preference-applied +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/preference-handling
+|===
+
+**Abstract Test A.{counter:ats-id}:** Spatial Resolution Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-spatial/resolution
+|requirement: |/req/scaling-spatial/resolution
+|test purpose: |Verify the dimension resolution overrides, axis mappings, sampling distance behaviors, and multi-field grid handling of the `resolution` query parameter.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class. +
+*When:* Coverage resource requests are executed using the `resolution` query parameter targeting spatial dimensions. +
+*Then:* +
+- Assert that the Implementation accepts a `resolution` parameter specifying positive grid unit spacing values formatted as a comma-separated list of dimension names followed by values in parentheses. +
+- Assert that empty resolution assignments (such as `resolution=` or `resolution=Lat(),Lon()`) return the coverage data at its native spatial resolution. +
+- Assert that axis names `Lat` and `Lon` are supported for geographic output CRSs and map to the corresponding spatial axes. +
+- Assert that axis names `E` and `N` are supported for projected output CRSs, and axis names `x` and `y` are supported for 3D Cartesian CRSs. +
+- Assert that for a 3D geographic or projected output CRS containing a vertical dimension (such as EPSG:4979 or OGC:CRS84h), the axis name `h` is supported to target the vertical dimension. +
+- Assert that for a 3D Cartesian output CRS (such as EPSG:4978), the axis name `z` is supported to target the third spatial axis. +
+- Assert that the server returns an HTTP `400` status code if a requested axis name does not match any axis of the output CRS, an alias, or other supported extension axes. +
+- Assert that for a regularly gridded coverage, the distance between sample points matches the explicitly requested values. +
+- Assert that for irregularly gridded or non-gridded coverages, the sampling distance along the targeted dimensions matches or exceeds the specified parameter values. +
+- Assert that for non-gridded coverages, a special dimension named `spatial-distance` is supported to specify the minimum vectorial distance between two samples. +
+- Assert that when returning multiple fields with varying native resolutions in an output format that does not support mixed-resolution fields, the Implementation resamples all fields to the finest resolution.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Width and Height Parameters
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-spatial/width-and-height
+|requirement: |/req/scaling-spatial/width-and-height
+|test purpose: |Verify the pixel dimension scaling, grid cell counts, subset alignment, and server constraint handling of the `width` and `height` query parameters.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class. +
+*When:* Coverage resource requests are executed using the `width` and/or `height` query parameters. +
+*Then:* +
+- Assert that the Implementation accepts an integer value for the `width` parameter to scale the horizontal spatial axis. +
+- Assert that the Implementation accepts an integer value for the `height` parameter to scale the vertical spatial axis. +
+- Assert that the returned coverage contains exactly the requested number of sample values along the specified scaled axes, adhering to original counts for unspecified axes and any defined server processing limits. +
+- Assert that when `width` or `height` parameters are used together with spatial subsetting, the requested number of grid samples maps directly to the subset window, even if the subset boundaries fall partially outside the coverage extent.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Spatial Scaling Preference Applied
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-spatial/preference-applied
+|requirement: |/req/scaling-spatial/preference-applied
+|test purpose: |Verify the presence and structure of the `Preference-Applied:` response header when client-specified interpolation preferences are honored during spatial scaling.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class that supports client preferences for interpolation. +
+*When:* A coverage resource request is executed specifying interpolation preferences via the designated client preference mechanism. +
+*Then:* +
+- Assert that, if the server honors and applies the client's interpolation preference, the response includes a `Preference-Applied:` header reflecting the applied interpolation methods.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Spatial Scaling Preference Handling
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-spatial/preference-handling
+|requirement: |/req/scaling-spatial/preference-handling
+|test purpose: |Verify the behavior of the `Prefer: handling` parameter when processing client interpolation preferences during spatial scaling.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class that supports client preferences for interpolation. +
+*When:* Coverage resource requests are executed with interpolation preferences and varying `Prefer: handling` configurations. +
+*Then:* +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=lenient` value, the server ignores the preference and processes the request. +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=strict` value, the server returns an HTTP `4xx` error code. +
+- Assert that, if no handling preference is explicitly specified in the request, the server defaults to lenient handling for the interpolation preferences.
+|===
+
+=== Conformance Class: Temporal Scaling
+
+[cols="20h,80d",width="100%"]
+|===
+
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-temporal
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-temporal
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/resolution +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/preference-applied +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/preference-handling
+|===
+
+**Abstract Test A.{counter:ats-id}:** Temporal Resolution Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-temporal/resolution
+|requirement: |/req/scaling-temporal/resolution
+|test purpose: |Verify the dimension resolution overrides, axis mappings, and sampling distance behaviors of the `resolution` query parameter on temporal dimensions.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class. +
+*When:* Coverage resource requests are executed using the `resolution` query parameter targeting temporal dimensions. +
+*Then:* +
+- Assert that the Implementation accepts a `resolution` parameter specifying ISO 8601 period values formatted as a comma-separated list of dimension names followed by values in parentheses. +
+- Assert that empty resolution assignments (such as `resolution=` or `resolution=time()`) return the coverage data at its native temporal resolution. +
+- Assert that the axis name `time` is supported if the collection describes a temporal dimension in its extent. +
+- Assert that the server returns an HTTP `400` status code if a requested axis name does not match `time`, an alias, or other supported extension axes. +
+- Assert that for a regularly gridded coverage, the distance between sample points matches the explicitly requested ISO 8601 duration value. +
+- Assert that for irregularly gridded or non-gridded coverages, the sampling distance along the targeted dimensions matches or exceeds the specified parameter values.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Temporal Scaling Preference Applied
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-temporal/preference-applied
+|requirement: |/req/scaling-temporal/preference-applied
+|test purpose: |Verify the presence and structure of the `Preference-Applied:` response header when client-specified interpolation preferences are honored during temporal scaling.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class that supports client preferences for interpolation. +
+*When:* A coverage resource request is executed specifying interpolation preferences via the designated client preference mechanism. +
+*Then:* +
+- Assert that, if the server honors and applies the client's interpolation preference, the response includes a `Preference-Applied:` header reflecting the applied interpolation methods.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Temporal Scaling Preference Handling
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/scaling-temporal/preference-handling
+|requirement: |/req/scaling-temporal/preference-handling
+|test purpose: |Verify the behavior of the `Prefer: handling` parameter when processing client interpolation preferences during temporal scaling.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class that supports client preferences for interpolation. +
+*When:* Coverage resource requests are executed with interpolation preferences and varying `Prefer: handling` configurations. +
+*Then:* +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=lenient` value, the server ignores the preference and processes the request. +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=strict` value, the server returns an HTTP `4xx` error code. +
+- Assert that, if no handling preference is explicitly specified in the request, the server defaults to lenient handling for the interpolation preferences.
+|===
+
+=== Conformance Class: General Scaling
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-general
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/scaling-general/resolution +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-general/preference-applied +
+Abstract Test A.{counter:ats-summary}: /conf/scaling-general/preference-handling
+|===
+
+**Abstract Test A.{counter:ats-id}:** General Resolution Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-general/resolution
+|requirement: |/req/scaling-general/resolution
+|test purpose: |Verify the dimension resolution overrides, axis mappings, and sampling distance behaviors of the `resolution` query parameter on additional dimensions.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class. +
+*When:* Coverage resource requests are executed using the `resolution` query parameter targeting additional dimensions beyond spatial and primary temporal axes. +
+*Then:* +
+- Assert that the Implementation accepts a `resolution` parameter specifying positive numerical values, categorical level names, or ISO 8601 period strings formatted as a comma-separated list of dimension names followed by values in parentheses. +
+- Assert that categorical dimensions support requested classification level names, matching any specified `availableResolutions` values. +
+- Assert that empty resolution assignments (such as `resolution=` or `resolution=pressure()`) return the coverage data at its native dimension resolution. +
+- Assert that all extra dimensions declared in the collection description (excluding spatial dimensions and the primary temporal dimension) are supported as valid axis names. +
+- Assert that the server returns an HTTP `400` status code if a requested axis name does not match an additional dimension described in the collection extent, an alias, or other supported extension axes. +
+- Assert that for a regularly gridded coverage, the distance between sample points matches the explicitly requested resolution values. +
+- Assert that for irregularly gridded or non-gridded coverages, the sampling distance along the targeted dimensions matches or exceeds the specified parameter values. +
+- Assert that for additional dimensions using a Gregorian DateTime temporal reference system, ISO 8601 period strings are accepted as valid resolution values.
+|===
+
+**Abstract Test A.{counter:ats-id}:** General Scaling Preference Applied
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-general/preference-applied
+|requirement: |/req/scaling-general/preference-applied
+|test purpose: |Verify the presence and structure of the `Preference-Applied:` response header when client-specified interpolation preferences are honored during general dimension scaling.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class that supports client preferences for interpolation. +
+*When:* A coverage resource request is executed specifying interpolation preferences via the designated client preference mechanism. +
+*Then:* +
+- Assert that, if the server honors and applies the client's interpolation preference, the response includes a `Preference-Applied:` header reflecting the applied interpolation methods.
+|===
+
+**Abstract Test A.{counter:ats-id}:** General Scaling Preference Handling
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/scaling-general/preference-handling
+|requirement: |/req/scaling-general/preference-handling
+|test purpose: |Verify the behavior of the `Prefer: handling` parameter when processing client interpolation preferences during general dimension scaling.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class that supports client preferences for interpolation. +
+*When:* Coverage resource requests are executed with interpolation preferences and varying `Prefer: handling` configurations. +
+*Then:* +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=lenient` value, the server ignores the preference and processes the request. +
+- Assert that, if an unsupported interpolation preference is specified alongside a `handling=strict` value, the server returns an HTTP `4xx` error code. +
+- Assert that, if no handling preference is explicitly specified in the request, the server defaults to lenient handling for the interpolation preferences.
+|===
+
+=== Conformance Class: Field Selection
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/field-selection
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/field-selection
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/field-selection/properties +
+Abstract Test A.{counter:ats-summary}: /conf/field-selection/exclude-properties +
+Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resolution
+|===
+
+**Abstract Test A.{counter:ats-id}:** Field Selection Properties Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/field-selection/properties
+|requirement: |/req/field-selection/properties
+|test purpose: |Verify field extraction, error handling, metadata filtering, and sequence preservation via the `properties` query parameter.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class. +
+*When:* Coverage resource requests are executed using the `properties` query parameter. +
+*Then:* +
+- Assert that the Implementation accepts the `properties` parameter containing a comma-separated list of field names. +
+- Assert that the Implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
+- Assert that the coverage response contains exclusively the fields requested via the parameter values. +
+- Assert that if the output format supports a self-describing field catalog (such as a CIS range type structure), the embedded field metadata is modified to reflect only the selected properties. +
+- Assert that if the negotiated encoding retains a structured band or property layout sequence, fields are ordered precisely matching the index order of the requested list.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Field Selection Exclude Properties Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/field-selection/exclude-properties
+|requirement: |/req/field-selection/exclude-properties
+|test purpose: |Verify field omission, sequence ordering fallback, constraint conflicts, and empty assignment overrides via the `exclude-properties` query parameter.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class. +
+*When:* Coverage resource requests are executed using the `exclude-properties` query parameter. +
+*Then:* +
+- Assert that the Implementation accepts the `exclude-properties` parameter containing a comma-separated list of field names. +
+- Assert that the Implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
+- Assert that the coverage response returns all fields except those explicitly specified in the exclusion list, including available fields that sit outside the default collection output configuration. +
+- Assert that the server returns an HTTP `4xx` error code if both the `properties` parameter and the `exclude-properties` parameter are specified in the same request. +
+- Assert that if the negotiated encoding retains a structured property layout sequence, the remaining non-excluded fields are ordered matching the original `x-ogc-propertySeq` indices defined in the logical schema. +
+- Assert that an empty parameter assignment (such as `exclude-properties=`) returns all fields enumerated in the logical schema, overriding any default limited property profiles.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Mismatched Resolution Handling
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/field-selection/mismatched-resolution
+|requirement: |/req/field-selection/mismatched-resolution
+|test purpose: |Verify that an error is generated for mismatched-resolution fields in non-scaling implementations when the output format does not support mixed resolutions.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class that does not implement the Spatial Scaling requirements class. +
+*When:* A coverage resource request includes multiple fields possessing different resolution definitions (per `x-ogc-resolution`), and the target output encoding format does not support mixed-resolution fields. +
+*Then:* +
+- Assert that the server returns an HTTP `4xx` error code.
+|===
+
+=== Conformance Class: Coordinate Reference System by Reference
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/crs
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/crs/crs-definition
+|===
+
+**Abstract Test A.{counter:ats-id}:** CRS Definition Parameter
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/crs/crs-definition
+|requirement: |/req/crs/crs-definition
+|test purpose: |Verify the resolution, defaulting, parameter alignment, data consistency, and error handling of the `crs` query parameter.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - CRS by Reference requirements class. +
+*When:* Coverage resource requests are executed using the `crs` query parameter. +
+*Then:* +
+- Assert that the Implementation accepts the `crs` parameter containing a URI or safe CURIE identifier referencing a registered CRS. +
+- Assert that all CRSs advertised in the `crs` property of the collection metadata description are accepted as valid output CRSs. +
+- Assert that if the `crs` property list is absent, the collection's `storageCrs` is supported (defaulting to `[OGC:CRS84]` if not specified). +
+- Assert that the advertised output CRS list contains the collection's designated default output CRS (`storageCrs` or `[OGC:CRS84]`). +
+- Assert that if the spatial subsetting requirements class is supported, the `bbox-crs` and `subset-crs` parameters accept the value specified for the `crs` parameter. +
+- Assert that the spatial coordinate layout and data content of the coverage payload match the requested output CRS definition. +
+- Assert that the server returns an HTTP `400` status code if the parameter value for `crs` is invalid for the requested coverage.
+|===
+
+=== Conformance Class: Coverage Tiles
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/tiles
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/tiles/tilesets
+|===
+
+**Abstract Test A.{counter:ats-id}:** Coverage Tilesets
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/tiles/tilesets
+|requirement: |/req/tiles/tilesets
+|test purpose: |Verify the discovery, metadata structure, template routing, compliance, and coordinate space trimming of coverage tilesets.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Coverage Tiles requirements class. +
+*When:* Coverage tileset list, metadata, and individual tile resource requests are executed. +
+*Then:* +
+- Assert that the coverage has at least one associated coverage tileset list resource conforming to OGC API - Tiles - Part 1: Core. +
+- Assert that the collection description includes a link with the relation type `https://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage` pointing to the tilesets resource. +
+- Assert that the coverage tilesets list contains links targeting full tileset metadata descriptions. +
+- Assert that individual tiles are accessible through the template URI provided in the tileset definition. +
+- Assert that the responses for the tileset list, tileset metadata, and distinct tiles meet all structural requirements of the OGC API - Tiles specification. +
+- Assert that the response payload for a specific tile contains a coverage subset trimmed on the designated 2D Tile Matrix Set axes matching the exact spatial window of the tile. +
+- Assert that a tile response is scaled to match the tile's pixel size dimensions, adding one cell if the coverage cells do not completely span the interval between sample centers.
+|===
+
+=== Conformance Class: HTML
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/html
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/html/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** HTML Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/html/coverage
+|requirement: |/req/html/coverage
+|test purpose: |Verify content negotiation, document validity, and representation accuracy for coverage resources requested in HTML format.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - HTML Encoding requirements class. +
+*When:* A coverage resource request is executed requesting an HTML response through the `text/html` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns an HTML response when requested via the `text/html` media type. +
+- Assert that the returned payload is a valid HTML document. +
+- Assert that the HTML document provides a valid representation of the coverage resource.
+|===
+
+=== Conformance Class: GeoTIFF
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/geotiff
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/geotiff/coverage +
+Abstract Test A.{counter:ats-summary}: /conf/geotiff/raster-type
+|===
+
+**Abstract Test A.{counter:ats-id}:** GeoTIFF Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/geotiff/coverage
+|requirement: |/req/geotiff/coverage
+|test purpose: |Verify media type negotiation, document standard validation, and multi-field band sequencing for two-dimensional coverage responses in GeoTIFF format.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoTIFF requirements class. +
+*When:* A two-dimensional coverage resource request is executed requesting a GeoTIFF response through the `image/tiff; application=geotiff` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a GeoTIFF response when requested via the `image/tiff; application=geotiff` media type. +
+- Assert that the returned payload is a valid GeoTIFF document that complies with the GeoTIFF and TIFF standards. +
+- Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.
+|===
+
+**Abstract Test A.{counter:ats-id}:** GeoTIFF Raster Type
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/geotiff/raster-type
+|requirement: |/req/geotiff/raster-type
+|test purpose: |Verify that the GeoTIFF raster type key is correctly populated based on the grid cell area or point geometry definition.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoTIFF requirements class. +
+*When:* Coverage resource requests are executed that return a GeoTIFF document. +
+*Then:* +
+- Assert that, if the returned coverage response grid cells represent the entire area between grid lines, the GeoTIFF document contains a `GTRasterTypeGeoKey` (Tag 1025) set to `RasterPixelIsArea` (1). +
+- Assert that, if the returned coverage response grid cells represent a zero-dimensional point at the intersection of grid lines, the GeoTIFF document contains a `GTRasterTypeGeoKey` (Tag 1025) set to `RasterPixelIsPoint` (2).
+|===
+
+=== Conformance Class: Cloud Optimized GeoTIFF
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cog
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cog
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/cog/http-range +
+Abstract Test A.{counter:ats-summary}: /conf/cog/cloud-optimized
+|===
+
+**Abstract Test A.{counter:ats-id}:** Cloud Optimized GeoTIFF HTTP Range Support
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/cog/http-range
+|requirement: |/req/cog/http-range
+|test purpose: |Verify implementation support for HTTP Range requests on unparameterized or native-resolution coverage resource endpoints.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Cloud Optimized GeoTIFF requirements class. +
+*When:* Coverage resource requests are executed using HTTP Range headers under varying query configuration states. +
+*Then:* +
+- Assert that the implementation supports HTTP range requests on the `/coverage` resource in compliance with the COG specification. +
+- Assert that HTTP range request capabilities are successfully exposed when the request uses no query parameters, or uses empty values specifying native resolution across all dimensions.
+|===
+
+**Abstract Test A.{counter:ats-id}:** Cloud Optimized GeoTIFF Content Profile
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/cog/cloud-optimized
+|requirement: |/req/cog/cloud-optimized
+|test purpose: |Verify negotiation of the cloud-optimized profile using Content-Profile and Accept-Profile headers.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Cloud Optimized GeoTIFF requirements class. +
+*When:* A coverage resource request is executed specifying the `http://www.opengis.net/def/profile/geotiff/cloud-optimized` profile URI via the profile headers along with the `image/tiff; application=geotiff` media type. +
+*Then:* +
+- Assert that the implementation successfully negotiates a cloud-optimized profile GeoTIFF response.
+|===
+
+=== Conformance Class: NetCDF
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/netcdf
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/netcdf
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/netcdf/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** NetCDF Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+
+|test id: |/conf/netcdf/coverage
+|requirement: |/req/netcdf/coverage
+|test purpose: |Verify media type negotiation, netCDF document validation, and dimension variable naming mappings.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - NetCDF requirements class. +
+*When:* A coverage resource request is executed requesting a netCDF response through the `application/x-netcdf` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a netCDF response when requested via the `application/x-netcdf` media type. +
+- Assert that the returned payload is a valid netCDF document that complies with the OGC netCDF standard. +
+- Assert that for dimensions lacking a well-defined netCDF `standard_name`, the corresponding variable name matches the dimension name listed in the collection description's extent.
+|===
+
+=== Conformance Class: CIS JSON
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cisjson
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/cisjson/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** CIS JSON Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/cisjson/coverage
+|requirement: |/req/cisjson/coverage
+|test purpose: |Verify media type negotiation, CIS JSON schema validation, structural type enforcement, and domain set cell math configuration.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - CIS JSON requirements class. +
+*When:* A coverage resource request is executed requesting a JSON response through the `application/json` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a JSON response. +
+- Assert that the returned payload is a valid CIS JSON document that complies with the official `coverage-schema.yaml` specification. +
+- Assert that the structural root of the JSON coverage object matches the `CoverageByDomainAndRange` type. +
+- Assert that for a gridded coverage, the calculated span—defined as the grid resolution interval difference divided by resolution minus the index index coordinate
+distance—evaluates to 1 if the grid cell values represent an area, and evaluates to 0 if the grid cell values represent a point.
+|===
+
+=== Conformance Class: CoverageJSON
+
+[cols="20h,80d",width="100%"]
+|===
+
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coveragejson
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/coveragejson/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** CoverageJSON Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/coveragejson/coverage
+|requirement: |/req/coveragejson/coverage
+|test purpose: |Verify media type negotiation and document validation for the CoverageJSON format.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - CoverageJSON requirements class, where the targeted collection is suitable for a CoverageJSON representation. +
+*When:* A coverage resource request is executed requesting a CoverageJSON response through the `application/vnd.cov+json` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.cov+json` media type. +
+- Assert that the returned payload is a valid CoverageJSON document that complies with the CoverageJSON community standard.
+|===
+
+=== Conformance Class: LAS
+
+[cols="20h,80d",width="100%"]
+|===
+
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/las
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/las
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/las/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** LAS Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/las/coverage
+|requirement: |/req/las/coverage
+|test purpose: |Verify media type negotiation and document validation for the OGC LAS point cloud format.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - LAS requirements class, where the targeted collection is suitable for a LAS representation. +
+*When:* A coverage resource request is executed requesting a LAS response through the `application/vnd.las` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.las` media type. +
+- Assert that the returned payload is a valid LAS point cloud dataset that complies with the OGC LAS Community Standard. +
+- Assert that the point cloud dataset is encoded using a Point Data Record Format suitable for the properties and flags of the underlying data being returned.
+|===
+
+=== Conformance Class: LASzip
+
+[cols="20h,80d",width="100%"]
+|===
+
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/laszip
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/laszip/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** LASzip Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/laszip/coverage
+|requirement: |/req/laszip/coverage
+|test purpose: |Verify media type negotiation and document validation for the losslessly compressed LASzip point cloud format.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - LASzip requirements class, where the targeted collection is suitable for a LASzip representation. +
+*When:* A coverage resource request is executed requesting a LASzip response through the `application/vnd.laszip` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.laszip` media type. +
+- Assert that the returned payload is a valid compressed LASzip dataset. +
+- Assert that the decompressed data maps to a valid point cloud structure complying with the OGC LAS Community Standard. +
+- Assert that the dataset utilizes a Point Data Record Format suitable for the properties and attributes of the data being returned.
+|===
+
+=== Conformance Class: PNG
+
+[cols="20h,80d",width="100%"]
+|===
+
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/png
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/png
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/png/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** PNG Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/png/coverage
+|requirement: |/req/png/coverage
+|test purpose: |Verify media type negotiation, bit-depth accuracy, field-count constraints, multi-field band sequencing, and quantitative value re-scaling metadata headers for two-dimensional PNG coverage responses.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - PNG requirements class. +
+*When:* A two-dimensional coverage resource request is executed requesting a PNG response through the `image/png` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a PNG response when requested via the `image/png` media type. +
+- Assert that the PNG document uses 16-bit values for fields whose accurate representation requires more than 8 bits of dynamic range. +
+- Assert that the server returns an HTTP `400` status code if the request specifies a total number of selected fields other than exactly 1 or 3. +
+- Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence. +
+- Assert that the response includes a `Values-Scale:` header containing a numeric real value mapping the scaling multiplier applied to the cell arrays. +
+- Assert that the response includes a `Values-Offset:` header containing a numeric real value mapping the displacement offset added to generate the final unsigned integer bit values.
+|===
+
+=== Conformance Class: JPEG XL
+
+[cols="20h,80d",width="100%"]
+|===
+
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpegxl
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/jpegxl
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/jpegxl/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** JPEG XL Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/jpegxl/coverage
+|requirement: |/req/jpegxl/coverage
+|test purpose: |Verify media type negotiation, appropriate data type precision mapping, full field inclusion, and multi-field band sequencing for JPEG XL coverage responses.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - JPEG XL requirements class. +
+*When:* A two-dimensional coverage resource request is executed requesting a JPEG XL response through the `image/jxl` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a JPEG XL response when requested via the `image/jxl` media type. +
+- Assert that the JPEG XL document encodes values using the data type (e.g., 8-bit or 16-bit integer, 32-bit floating point) that most closely matches the native precision of the coverage field. +
+- Assert that the returned payload contains all selected fields requested by the client. +
+- Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.
+|===
+
+=== Conformance Class: JPEG 2000
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/jpeg2000
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/jpeg2000
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/jpeg2000/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** JPEG 2000 Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/jpeg2000/coverage
+|requirement: |/req/jpeg2000/coverage
+|test purpose: |Verify media type negotiation, data type mapping, field extraction, band sequencing, and GMLJP2 georeferencing alignment for JPEG 2000 coverage responses.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - JPEG 2000 requirements class. +
+*When:* A two-dimensional coverage resource request is executed requesting a JPEG 2000 response through the `image/jp2` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a JPEG 2000 response when requested via the `image/jp2` media type. +
+- Assert that the JPEG 2000 document encodes values using the data type (e.g., 8-bit or 16-bit integer, 32-bit floating point) that most closely matches the native precision of the coverage field. +
+- Assert that the returned payload contains all selected fields requested by the client. +
+- Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence. +
+- Assert that georeferencing information is embedded within the response using the GMLJP2 metadata standard, matching the exact spatial window of the requested coverage domain subset.
+|===
+
+=== Conformance Class: (Geo)Zarr
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/zarr
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/zarr
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/zarr/coverage
+|===
+
+**Abstract Test A.{counter:ats-id}:** Zarr Coverage Response
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/zarr/coverage
+|requirement: |/req/zarr/coverage
+|test purpose: |Verify media type negotiation, Zip packaging structure, data type mapping, field extraction, and multi-field band sequencing for Zarr coverage responses.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoZarr requirements class. +
+*When:* A coverage resource request is executed requesting a Zarr response through the `application/zarr+zip` media type. +
+*Then:* +
+- Assert that the Implementation successfully negotiates and returns a Zarr response packaged inside a Zip container when requested via the `application/zarr+zip` media type. +
+- Assert that the Zarr dataset encodes values using the data types that most closely match the native precision of the coverage fields. +
+- Assert that the returned payload contains all selected fields requested by the client. +
+- Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.
+|===
+
+=== Conformance Class: OpenAPI 3.0
+
+[cols="20h,80d",width="100%"]
+|===
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/oas30
+|Target Type |Web API
+|Conformance Tests |
+Abstract Test A.{counter:ats-summary}: /conf/oas30/oas-common
+|===
+
+**Abstract Test A.{counter:ats-id}:** OpenAPI Coverage Operation ID
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/oas30/oas-common
+|requirement: |/req/oas30/oas-common
+|test purpose: |Verify that the OpenAPI definition document enforces the mandatory `operationId` naming convention for coverage retrieval endpoints.
+|test method: |
+*Given:* An API Description document claiming conformance to the OGC API - Coverages - OpenAPI 3.0 requirements class. +
+*When:* The definition is validated for paths exposing coverage resources. +
+*Then:* +
+- Assert that the designated coverage resource paths use an `operationId` that ends strictly with the suffix `.getCoverage`.
+|===

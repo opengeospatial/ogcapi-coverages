@@ -14,7 +14,7 @@
 [[req_coverage_position_query_position_query]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-position-query/coverage-position-query*
+^|*Requirement {counter:req-id}* |*/req/position-query/position-query*
 ^|A |The coverage retrieval operation SHALL support the ability to slice on all dimensions using the `subset` and/or `bbox` and/or `datetime` query parameters effectively reducing the dimensionality
 of the response to zero dimensions (a point).
 ^|B |The Implementation SHALL support negotiating a JSON response (through request header `Accept: application/json`) for such point query which in a common scenario consists of an object with one
@@ -32,7 +32,7 @@ as the ability to query specific points, without providing the ability to return
 [[rec_coverage_position_query_interpolation]]
 [width="90%",cols="2,6a"]
 |===
-^|*Recommendation {counter:rec-id}* |*/rec/coverage-position-query/interpolation*
+^|*Recommendation {counter:rec-id}* |*/rec/position-query/interpolation*
 ^|A |In the case where the requested position does not fall within the defined bounds (region of validity) of an individual cell, the Implementation SHOULD
 decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the <<term-variable-type,variable type>> of each <<term-field,field>> being returned,
 as well as the variable type of each dimension being sliced on.

@@ -82,7 +82,7 @@ SHOULD be either `[ogc-interpolation:previous]` or `[ogc-interpolation:nearest-n
 [[rec_sparse-dimensions-collapse-temporal_slice-prefer-header]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/rec/sparse-dimensions-collapse-temporal/slice-prefer-header*
+^|*Recommendation {counter:rec-id}* |*/rec/sparse-dimensions-collapse-temporal/slice-prefer-header*
 ^|A |The Implementation SHOULD understand a `Prefer:` request header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
@@ -123,7 +123,7 @@ the Implementation SHALL use a response header `Preference-Applied:` when it app
 |===
 ^|*Requirement {counter:req-id}* |*/req/sparse-dimensions-collapse-temporal/slice-preference-handling*
 ^|A | If an Implementation supports <<req_sparse-dimensions-collapse-temporal_slice-prefer-header, client preferences for interpolation>>,
-the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7249 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
 value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
 (note that the handling parameter applies to the request as a whole, rather than to any specific preference).
 ^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of

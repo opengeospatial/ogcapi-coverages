@@ -2,7 +2,7 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class*
-2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/coverage-tiles
+2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/tiles
 |Target type |Web API
 |Dependency |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
 |Dependency |https://www.opengis.net/spec/ogcapi-tiles-1/1.0/req/geodata-tilesets
@@ -16,7 +16,7 @@ The capability to request tiles is defined in the following Requirement:
 [[req_coverage_tiles-definition]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/coverage-tiles/tilesets*
+^|*Requirement {counter:req-id}* |*/req/tiles/tilesets*
 ^|A |The coverage SHALL have an associated list of at least one coverage tilesets accessible, typically at `/collections/{collectionId}/tiles`, conforming to OGC API - Tiles - Part 1: Core
 ^|B |The coverage's collection description document at `/collections/{collectionId}` SHALL include a link with relation type https://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
 ^|C |This list of coverage tilesets SHALL include a link to the full descriptions of these tilesets, typically accessible at `/collections/{collectionId}/tiles/{tileMatrixSetId}`
