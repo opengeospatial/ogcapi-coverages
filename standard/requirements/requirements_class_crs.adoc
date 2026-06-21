@@ -9,7 +9,7 @@
 
 === Requirements
 
-==== Parameter `crs`
+==== Query parameter `crs`
 A successful GET response is described in the Coverages API core class (https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core).
 
 [[req_crs_crs-definition]]

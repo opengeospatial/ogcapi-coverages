@@ -37,3 +37,5 @@ as the ability to query specific points, without providing the ability to return
 decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the <<term-variable-type,variable type>> of each <<term-field,field>> being returned,
 as well as the variable type of each dimension being sliced on.
 |===
+
+NOTE: See also the <<interpolation-guidance-recommendation,recommendations and permissions>> related to interpolation.

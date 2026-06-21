@@ -232,6 +232,32 @@ An explicit list of interpolation method for each dimension:
 `Content-Interpolation: dimensions=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear]),time([ogc-interpolation:cubic])`
 |===
 
+==== Response header for indicating a preference has been applied
+
+[[req_core-preference-applied]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/preference-applied*
+^|A | If an Implementation supports <<interpolation-preference, client preferences for interpolation>>,
+the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
+`Preference-Applied: interpolation=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear])`,time([ogc-interpolation:linear]),pressure([ogc-interpolation:linear]) and
+`Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
+|===
+
+==== Strict or lenient preference handling
+
+[[req_core-preference-handling]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/core/preference-handling*
+^|A | If an Implementation supports <<interpolation-preference, client preferences for interpolation>>,
+the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
+value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
+(note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
+interpolation preferences.
+|===
+
 ==== Query parameter `resolution` (native resolution requested using empty values)
 
 [[req_core-native-resolution]]

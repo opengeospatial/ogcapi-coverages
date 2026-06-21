@@ -47,7 +47,7 @@ with the following characteristics (using an Extended Backus Naur Form (EBNF) fr
 projected CRS that includes a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h), and the axis name `z` SHALL be supported for a
 3D Cartesian coordinate reference system (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
 ^|H |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to one of the axes of the subsetting CRS,
-to an alias (see recommendation below), or to any other axis supported in the context of other requirements classes (such as temporal and general subsetting).
+to an alias (see <<spatial-aliases-recommendation,recommendation>>), or to any other axis supported in the context of other requirements classes (such as temporal and general subsetting).
 ^|I |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
 ^|J |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
 be supported to indicate an extent crossing that wrapping point.
@@ -68,26 +68,7 @@ For subsetting on the range set, and for coverage media types with no geo-refere
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
 or simply return the properly geo-referenced values within the domain set.
 
-[[subset-spatial-parameter-aliases-recommendation]]
-==== Recommendation for spatial dimensions aliases
-
-Because the definitions of CRSs of the same type sometimes use different names to refer to dimensions that can be considered equivalent for the purposes of subsetting, and in some cases the axis name abbreviation changed over time,
-this Standard recommends that Implementations recognize common equivalent names to facilitate the task of clients to identify a particular dimension.
-Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases, but only the axis names specified in the above requirement.
-
-[[rec_subsetting-spatial_subset-crs-axis-aliases]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/subsetting-spatial/subset-crs-axis-aliases*
-^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous with the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
-^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous with `E`.
-^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous with `N`.
-^|D |`Z` (lowercase/uppercase) or `H` (lowercase/uppercase) SHOULD be interpreted as synonymous with whichever vertical axis (height above the ellipsoid `h` or 3D Cartesian axis `z`) is applicable to the coordinate reference system.
-^|E |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lon`.
-^|F |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lat`.
-|===
-
-IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`, `x`, `y`, `z`) and not rely on any of the aliases.
+NOTE: See also the <<spatial-aliases-recommendation,recommendation>> to support spatial dimension name aliases applicable to this requirements class.
 
 ==== Query parameter `subset-crs`
 

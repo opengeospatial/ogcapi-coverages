@@ -1,0 +1,38 @@
+[[spatial-aliases-recommendation]]
+==== Recommendation for spatial dimensions aliases
+
+Because the definitions of CRSs of the same type sometimes use different names to refer to dimensions that can be considered equivalent for the purposes of subsetting, and in some cases the axis name abbreviation changed over time,
+this Standard recommends that Implementations recognize common equivalent names to facilitate the task of clients to identify a particular dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases, but only the axis names specified in the requirements for the
+<<subset-spatial-parameter-subset-requirements,`subset`>> and <<req_scaling-spatial_resolution,`resolution`>> query parameters.
+
+[[rec_spatial-aliases]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/spatial-aliases*
+^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous with the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
+^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous with `E`.
+^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous with `N`.
+^|D |`Z` (lowercase/uppercase) or `H` (lowercase/uppercase) SHOULD be interpreted as synonymous with whichever vertical axis (height above the ellipsoid `h` or 3D Cartesian axis `z`) is applicable to the coordinate reference system.
+^|E |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lon`.
+^|F |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lat`.
+|===
+
+IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`, `x`, `y`, `z`) and not rely on any of the aliases.
+
+[[temporal-aliases-recommendation]]
+==== Recommendation for `time` dimension aliases
+
+For convenience, this Standard recommends that Implementations recognize the different case variation and the shorthand `t` as an alias for the `time` dimension.
+Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
+but should always use `time` to refer to the primary temporal dimension as specified in the requirements for the <<subset-temporal-parameter-subset-requirements,`subset`>>
+and <<req_scaling-temporal_resolution,`resolution`>> query parameters.
+
+[[rec_temporal-aliases]]
+[width="90%",cols="2,6a"]
+|===
+^|*Recommendation {counter:rec-id}* |*/rec/core/temporal-aliases*
+^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
+|===
+
+IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.

@@ -1,0 +1,19 @@
+[[interpolation_recommendations]]
+== Recommendations and Permissions related to Subsetting, Scaling and Interpolation
+
+=== Recommendations about dimension aliases
+
+The following recommendations related to dimension aliases are applicable for all requirements classes involving the `subset` (<<rc_subsetting_spatial, Subsetting>>,
+<<rc_multi_slicing, Multi-slicing>>) or `resolution` (<<rc_scaling_spatial, Scaling>>) query parameters.
+
+include::requirements/aliases_recommendations.adoc[]
+
+=== Recommendations and permissions about interpolation and scaling
+
+The following recommendations and permissions specified in this section related to interpolation are applicable when interpolation is involved
+for Implementations supporting the <<rc_scaling_spatial, Scaling>>,
+the <<rc_sparse-dimensions-collapse-spatial,Collapsing sparse dimensions>>, or
+the <<rc_position_query,Position Query>> requirements classes
+for Spatial, Temporal and/or General dimensions.
+
+include::requirements/interpolation_recommendations.adoc[]

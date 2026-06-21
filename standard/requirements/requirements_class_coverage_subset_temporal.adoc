@@ -52,7 +52,7 @@ only that part of the coverage that falls within the bounds of the subset expres
 ^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>, if a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
 ^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-temporal>>, if an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
 ^|E |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
-^|F |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time`, or any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
+^|F |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time` (see <<spatial-aliases-recommendation, recommendation>>), or any other axis supported in the context of other requirements classes (such as spatial and general subsetting).
 ^|G |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
 ^|H |For the `time` axis, coordinates SHALL be interpreted as values for the named axis of the `trs` specified in the collection's temporal extent, or Gregorian UTC time
 (as specified in link:https://tools.ietf.org/html/rfc3339[RFC 3339],
@@ -72,21 +72,7 @@ For subsetting on the range set, and for coverage media types with no geo-refere
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values
 or simply return the properly geo-referenced values within the domain set.
 
-[[subset-temporal-parameter-aliases-recommendation]]
-==== Recommendation for `time` dimension aliases
-
-For convenience, this Standard recommends that Implementations recognize the different case variation and the shorthand `t` as an alias for the `time` dimension.
-Generic clients intended to be interoperable with all Implementations of this Standard should not use these aliases,
-but should always use `time` to refer to the primary temporal dimension as specified in the above requirement.
-
-[[rec_subsetting-temporal_subset-temporal-aliases]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/subsetting-temporal/subset-temporal-aliases*
-^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
-|===
-
-IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.
+NOTE: See also the <<temporal-aliases-recommendation,recommendation>> to support primary temporal dimension name aliases applicable to this requirements class.
 
 ==== Permission for omitting last time components
 
