@@ -29,7 +29,20 @@ Attention is drawn to the possibility that some of the elements of this document
 
 Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
 
-[big]*iv.    Submitting organizations*
+[big]*iv.   Security Considerations*
+
+Implementations of OGC API - Coverages should apply standard web security practices, including the use of Transport Layer Security (TLS/HTTPS), user authentication, and
+granular access control mechanisms to protect sensitive data resources.
+
+In addition to baseline web security, the on-demand data transformation capabilities defined in this standard introduce specific resource consumption risks. Because operations
+like spatial-temporal subsetting, scaling, and format translations can be processed dynamically in real time, a server can be exposed to intentional or accidental
+Denial of Service (DoS) attacks. For example, a single request combining an immense data footprint with fine-grained resampling or massive output dimensions can trigger
+resource exhaustion across server memory and CPU channels.
+
+To protect the infrastructure from resource exhaustion, implementations should explicitly advertise and enforce server processing limits, returning appropriate HTTP `4xx` error
+codes when client requests violate those configured structural boundaries.
+
+[big]*v.    Submitting organizations*
 
 The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
 
@@ -40,7 +53,7 @@ The following organizations submitted this Document to the Open Geospatial Conso
 * Meteorological Service of Canada
 * Universitat Autònoma de Barcelona (CREAF)
 
-[big]*v.     Submitters*
+[big]*vi.     Submitters*
 
 All questions regarding this submission should be directed to the editor or the submitters:
 
@@ -54,7 +67,7 @@ All questions regarding this submission should be directed to the editor or the 
 |Francis Charette-Migneault <francis.charette-migneault@luqia.ca>|https://luqia.ca[Technologies Luqia]
 |===
 
-[big]*vi.     Acknowledgements*
+[big]*vii.     Acknowledgements*
 
 Some of the work leading to the creation of this OGC Standard was undertaken as part of
 GeoConnections 2020-2021 and 2025-2027 projects GNS20-21IFP02 (Modular OGC API Workflows) and
