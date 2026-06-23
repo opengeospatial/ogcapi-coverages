@@ -9,7 +9,7 @@ particular API definition language and/or version, such as the
 https://docs.ogc.org/is/19-072/19-072.html#rc_oas30-section[OpenAPI 3.0 requirements class defined in OGC API — Common — Part 1: Core], or an eventual requirements class for
 OpenAPI 3.1.
 
-For API definition language and versions where this is applicable, this requirements class defines the `.getCoverage` operationId suffix to be used in order to facilitate the
+For API definition languages and versions where this is applicable, this requirements class defines the `.getCoverage` operationId suffix to be used in order to facilitate the
 identification of coverage resources available from an API.
 
 ==== Web API description
