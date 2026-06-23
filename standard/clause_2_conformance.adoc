@@ -61,7 +61,11 @@ The _Coordinate Reference System by Reference_ Requirements Class defines the ab
 * <<rc_encoding-jpeg2000,JPEG 2000>>
 * <<rc_encoding-zarr,(Geo)Zarr>>
 
-The Encoding Requirements Classes address support for formats commonly used for encoding coverage data.
+The _Position Query_ Requirements Classes defines a simple JSON representation for the response to querying a coverage at a <<term-direct-position,direct position>>,
+which is usually zero-dimensional (if not including the geometry of resulting <<term-cell,cell(s)>>),
+having lost all its dimensionality through complete <<term-slicing,slicing>>.
+
+The <<encodings-section,Encoding Requirements Classes>> address support for formats commonly used for encoding coverage data.
 
 === Requirements class related to API definition
 
