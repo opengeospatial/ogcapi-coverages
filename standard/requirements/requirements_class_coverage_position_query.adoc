@@ -24,8 +24,8 @@ property being the name of the field (for each default or selected field) and it
 Field Selection requirements class), the response SHALL be the value of the field directly (rather than an object with the field name), or in the case of the coverage multi-function, an array of values.
 |===
 
-NOTE: This position query requirements class relies on the definition of the `subset`, `bbox` and `datetime` parameter defined in the "Spatial Subsetting", "Temporal Subsetting" and "General Subsetting"
-requirement classes.
+NOTE: This position query requirements class relies on the definition of the `subset`, `bbox` and `datetime` parameter defined in the
+<<rc_subsetting_spatial,Spatial Subsetting>>, <<rc_subsetting_temporal,Temporal Subsetting>> and <<rc_subsetting_general,General Subsetting>> requirement classes.
 However, this requirement class does not specify a dependency on these requirements classes to allow implementing only the "Core" requirements class (returning the entire coverage), as well
 as the ability to query specific points, without providing the ability to return fragments of the coverage larger than a single point.
 
@@ -37,5 +37,8 @@ as the ability to query specific points, without providing the ability to return
 decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the <<term-variable-type,variable type>> of each <<term-field,field>> being returned,
 as well as the variable type of each dimension being sliced on.
 |===
+
+NOTE: See also the recommendations to support <<spatial-aliases-recommendation,spatial>> and primary <<temporal-aliases-recommendation,temporal>> dimension name aliases
+applicable to this requirements class.
 
 NOTE: See also the <<interpolation-guidance-recommendation,recommendations and permissions>> related to interpolation.

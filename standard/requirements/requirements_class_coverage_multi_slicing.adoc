@@ -15,8 +15,8 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/multi-slicing/multi-slicing*
-^|A |The coverage retrieval operation SHALL support a comma-separated list of coordinate values for the `subset` query parameter for each dimension supported by the Spatial Subsetting,
-Temporal Subsetting and General Subsetting requirements classes
+^|A |The coverage retrieval operation SHALL support a comma-separated list of coordinate values for the `subset` query parameter for each dimension supported by the
+<<rc_subsetting_spatial,Spatial Subsetting>>, <<rc_subsetting_temporal,Temporal Subsetting>> and <<rc_subsetting_general,General Subsetting>> requirements classes
 ^|B |For the dimensions for which a multi-slice subset query parameter is specified, the coverage response SHALL only contain values for the coordinates explicitly listed.
 |===
 
