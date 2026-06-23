@@ -1090,26 +1090,43 @@ Abstract Test A.{counter:ats-summary}: /conf/zarr/coverage
 - Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.
 |===
 
-=== Conformance Class: OpenAPI 3.0
+=== Conformance Class: API Operations
 
 [cols="20h,80d",width="100%"]
 |===
-|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/oas30
-|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/oas30
+|Identifier |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/api-operations
+|Requirements Class |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/api-operations
 |Target Type |Web API
 |Conformance Tests |
-Abstract Test A.{counter:ats-summary}: /conf/oas30/oas-common
+Abstract Test A.{counter:ats-summary}: /conf/api-operations/completeness +
+Abstract Test A.{counter:ats-summary}: /conf/api-operations/operation-id
 |===
 
-**Abstract Test A.{counter:ats-id}:** OpenAPI Coverage Operation ID
+**Abstract Test A.{counter:ats-id}:** API Definition Completeness
 [cols=">20h,<80d",width="100%"]
 |===
-|test id: |/conf/oas30/oas-common
-|requirement: |/req/oas30/oas-common
-|test purpose: |Verify that the OpenAPI definition document enforces the mandatory `operationId` naming convention for coverage retrieval endpoints.
+|test id: |/conf/api-operations/completeness
+|requirement: |/req/api-operations/completeness
+|test purpose: |Verify that the API definition completely and accurately documents the coverage resource path and its associated query parameters.
 |test method: |
-*Given:* An API Description document claiming conformance to the OGC API - Coverages - OpenAPI 3.0 requirements class +
-*When:* The definition is validated for paths exposing coverage resources +
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages "API Operations" requirements class +
+*When:* The API definition document is retrieved using the designated service description link from the landing page +
 *Then:* +
-- Assert that the designated coverage resource paths use an `operationId` that ends strictly with the suffix `.getCoverage`.
+- Assert that the API definition contains a valid resource path corresponding to the coverage endpoint. +
+- Assert that the coverage path defined in the API definition matches the literal target URL found in the `[ogc-rel:coverage]` link relation of the collections metadata. +
+- Assert that the coverage path definition documents all active query parameters required by the server's declared extension conformance classes (such as subsetting or scaling parameters).
+|===
+
+**Abstract Test A.{counter:ats-id}:** Path Operation Identifiers
+
+[cols=">20h,<80d",width="100%"]
+|===
+|test id: |/conf/api-operations/operation-id
+|requirement: |/req/api-operations/operation-id
+|test purpose: |Verify that the operation identifier for the coverage resource path utilizes the correct identifying suffix.
+|test method: |
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages "API Operations" requirements class, utilizing an API definition format that supports operation identifiers +
+*When:* The API definition document is retrieved and parsed +
+*Then:* +
+- Assert that the operation identifier value assigned to the coverage resource path ends strictly with the suffix `.getCoverage`.
 |===

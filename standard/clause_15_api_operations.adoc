@@ -1,0 +1,35 @@
+[[rc_api_operations]]
+== Requirements Class "API Operations"
+
+=== Overview
+
+The "API Operations" requirements class defines requirements for providing a definition of a Web API implementing the OGC API - Coverages Standard using an
+API definition language. This requirements class is intended to be combined with another requirements class specifying requirements for providing an API definition in a
+particular API definition language and/or version, such as the
+https://docs.ogc.org/is/19-072/19-072.html#rc_oas30-section[OpenAPI 3.0 requirements class defined in OGC API — Common — Part 1: Core], or an eventual requirements class for
+OpenAPI 3.1.
+
+For API definition language and versions where this is applicable, this requirements class defines the `.getCoverage` operationId suffix to be used in order to facilitate the
+identification of coverage resources available from an API.
+
+==== Web API description
+
+The API definition provides a description of the complete list of API resources available at an endpoint.
+Reading this description, an application would have the full picture of the resources that the API implementation provides, how to retrieve resources, and what responses
+are expected for successful and unsuccessful requests. Without an API description or documentation, an application would be forced to traverse all links,
+starting with the landing page, to get an equivalent full list of resources.
+
+The OpenAPI Specification 3.0 (`oas30`) requirements class from OGC API — Common — Part 1: Core provides many
+details on general requirements that can be used in conjunction with this requirements class. This requirements class depends on the OGC API — Common landing page requirements
+class which provides details on how to request an API definition.
+
+==== Reusable API components
+
+Reusable components for creating API definitions for implementations of this OGC API — Coverages Standard using OpenAPI 3.0 can be found at
+https://github.com/opengeospatial/ogcapi-coverages/tree/master/standard/openapi.
+
+A server implementation can use the content in the `openapi/` directory to generate a response for the API description using OpenAPI 3.0.
+The schema files include reusable paths, parameters, responses, and schemas that can be integrated as-is. An implementation should only include the paths and query parameters
+(such as the subsetting or scaling parameters) that are actually implemented by the deployment.
+
+include::requirements/requirements_class_api_operations.adoc[]

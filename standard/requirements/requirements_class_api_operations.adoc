@@ -1,0 +1,45 @@
+[[rc_table_api-operations]]
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class*
+2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/api-operations
+|Target type |Web API
+|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+// Implementations providing an OAS 3.0 API definition can explicitly declare conformance to common/oas30, but this is no longer a strict dependency
+// |Dependency  |http://www.opengis.net/spec/ogcapi-common-1/1.0/req/oas30
+|===
+
+=== Requirements
+
+==== API Definition Completeness
+
+The API definition resulting as a response to this request needs to take into consideration the relevant resources specified in this OGC API - Coverages Standard.
+
+[[req_api-operations_completeness]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/api-operations/completeness*
+^|A | The API definition SHALL provide a path for the coverage resource (typically `/collections/{collectionId}/coverage`) provided by the API instance.
+^|B | The resource path defined in the API definition SHALL be consistent with the link explicitly matching the `[ogc-rel:coverage]` (or the equivalent URI) relation type
+provided by the collection description resource.
+^|C | The resource path defined in the API definition SHALL provide descriptions of all query parameters that the coverage resource needs to operate, as specified in the
+corresponding conformance classes implemented by the API instance.
+|===
+
+==== Path Operation Identifiers
+
+The API definition provides a client application with a set of paths that the client can use to interact with the API endpoint and retrieve resources.
+However, because this standard does not mandate a fixed set of literal paths, there is a need to definitively associate the resource paths in the API definition with the
+requirements classes defined in this standard.
+
+This standard uses a suffix mechanism to be applied to the operation identifiers of the path (e.g., the `operationId` property in OpenAPI 3.0 Specifications) to identify the
+endpoint. Each path should have a unique operation identifier, so it is expected that the API instance provides an implementation-specific prefix to the proposed suffix to
+guarantee uniqueness.
+
+[[req_api-operations_operation-id]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/api-operations/operation-id*
+^|A | For API definitions with a concept of operation identifiers, the path defining the coverage resource SHALL have an operation identifier value ending with the
+dot-separated suffix `.getCoverage`.
+|===
