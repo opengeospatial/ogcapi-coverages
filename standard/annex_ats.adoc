@@ -180,7 +180,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify the baseline slicing, trimming, axis mappings, and coordinate interpretations of the spatial `subset` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* A coverage resource request is executed using a valid single coordinate or interval expression targeting spatial dimensions matching the defined ABNF grammar +
+*When:* Requesting a coverage resource using a valid single coordinate or interval expression targeting spatial dimensions matching the defined ABNF grammar +
 *Then:* +
 - Assert that the implementation parses and accepts valid `subset` expressions for both intervals and discrete coordinates across one or more dimensions. +
 - Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified subsetting coordinates or intervals. +
@@ -199,7 +199,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify that the vertical spatial axis token `h` or `z` is supported depending on the nature of the target three-dimensional dataset coordinate reference system.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class with a three-dimensional collection extent +
-*When:* A coverage resource request includes a `subset` parameter targeting the third spatial dimension using the axis name `h` or `z` +
+*When:* Requesting a coverage resource including a `subset` parameter targeting the third spatial dimension using the axis name `h` or `z` +
 *Then:* +
 - Assert that for a 3D geographic or projected subsetting CRS containing a vertical dimension (such as EPSG:4979 or OGC:CRS84h), the axis name `h` is supported to target the vertical dimension. +
 - Assert that for a 3D Cartesian subsetting CRS (such as EPSG:4978), the axis name `z` is supported to target the third spatial axis.
@@ -213,7 +213,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify that the server returns an HTTP 400 error when an unrecognized or invalid axis name is targeted for spatial subsetting.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* A coverage resource request includes an axis name in the `subset` parameter that does not correspond to a subsetting CRS axis, an alias, or other supported extension axes +
+*When:* Requesting a coverage resource including an axis name in the `subset` parameter that does not correspond to a subsetting CRS axis, an alias, or other supported extension axes +
 *Then:* +
 - Assert that the server returns an HTTP `400` status code if a requested axis name does not match any axis of the subsetting CRS, an alias, or other supported extension axes.
 |===
@@ -226,7 +226,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify that the server returns an HTTP 204 or 404 code if spatial subset values fall completely outside the valid range of an axis.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* A coverage resource request specifies spatial interval boundaries or a single coordinate that fall entirely outside the valid range defined for the identified axis +
+*When:* Requesting a coverage resource specifying spatial interval boundaries or a single coordinate that fall entirely outside the valid range defined for the identified axis +
 *Then:* +
 - Assert that the server returns an HTTP `204` or `404` status code if the subset values fall entirely outside the valid range of the identified axis.
 |===
@@ -239,7 +239,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify that subset intervals crossing an axis wrapping point are supported on wrap-around axes like the anti-meridian.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* A coverage resource request targets a wrap-around capable axis where the `low` coordinate value is numerically greater than the `high` coordinate value +
+*When:* Requesting a coverage resource targeting a wrapping spatial axis where the `low` coordinate value is numerically greater than the `high` coordinate value +
 *Then:* +
 - Assert that a subset interval crossing a wrapping point (where the `low` value is greater than the `high` value) is supported on wrap-around axes.
 |===
@@ -279,7 +279,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify that multiple distinct `subset` parameters are interpreted as if all dimension subsetting values were provided in a single `subset` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* A coverage resource request is executed using multiple distinct instances of the `subset` query parameter +
+*When:* Requesting a coverage resource using multiple distinct instances of the `subset` query parameter +
 *Then:* +
 - Assert that multiple `subset` query parameters are interpreted as if all dimension subsetting values were provided in a single `subset` query parameter.
 |===
@@ -292,7 +292,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify that the server rejects requests and returns an HTTP 4xx error if a slicing operation and a scaling operation are requested simultaneously on the same dimension axis.
 |test method: |
 *Given:* An API implementation claiming conformance to both the Spatial Subsetting and Spatial Scaling requirements classes +
-*When:* A coverage resource request specifies a single coordinate slicing operation along a spatial dimension while simultaneously invoking a spatial `resolution` query parameter on that exact same dimension +
+*When:* Requesting a coverage resource specifying a single coordinate slicing operation along a spatial dimension while simultaneously invoking a spatial `resolution` query parameter on that exact same dimension +
 *Then:* +
 - Assert that the server returns an HTTP `4xx` status code if a slicing operation and a scaling operation are simultaneously requested on the same dimension.
 |===
@@ -305,7 +305,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify the resolution, defaulting, and validation of coordinate reference systems targeted via the `subset-crs` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* Coverage resource requests are executed using the `subset-crs` query parameter +
+*When:* Requesting coverage resources using the `subset-crs` query parameter +
 *Then:* +
 - Assert that the implementation accepts the `subset-crs` parameter containing a URI or safe CURIE identifier. +
 - Assert that for Earth-referenced data, `[OGC:CRS84]` (and its corresponding URI) is supported as a valid parameter value. +
@@ -323,7 +323,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify the dimension-count interpretation, axis coordinate ordering, trimming behavior, anti-meridian crossing, and error handling of the `bbox` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* Coverage resource requests are executed using the `bbox` query parameter +
+*When:* Requesting coverage resources using the `bbox` query parameter +
 *Then:* +
 - Assert that the implementation accepts a `bbox` parameter structured as either four or six comma-separated numbers. +
 - Assert that the coordinate values in the `bbox` parameter adhere strictly to the spatial axis positions honoring the CRS coordinate order: lower-left corner axis 1, lower-left corner axis 2, optional minimum axis 3, followed by upper-right corner axis 1, upper-right corner axis 2, and optional maximum axis 3. +
@@ -342,7 +342,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-spatial/bbox-crs
 |test purpose: |Verify the resolution, defaulting, and validation of coordinate reference systems targeted via the `bbox-crs` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Spatial Subsetting requirements class +
-*When:* Coverage resource requests are executed using the `bbox-crs` query parameter +
+*When:* Requesting coverage resources using the `bbox-crs` query parameter +
 *Then:* +
 - Assert that the implementation accepts the `bbox-crs` parameter containing a URI or safe CURIE identifier. +
 - Assert that for Earth-referenced data, `[OGC:CRS84]` (and its corresponding full URI) is supported as a valid parameter value. +
@@ -372,7 +372,7 @@ Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-spatial/
 |test purpose: |Verify that slicing operations on sparse spatial dimensions populate NODATA portions with nearby available data values.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Spatial Dimensions requirements class +
-*When:* A coverage resource request is executed combining a slicing operation on a sparse spatial dimension with a trimming operation on other axes +
+*When:* Requesting a coverage resource combining a slicing operation on a sparse spatial dimension with a trimming operation on other axes +
 *Then:* +
 - Assert that, if data values exist at alternative locations along the sliced spatial dimensions for the requested subset, any potential NODATA portions are populated using those nearby non-empty values.
 |===
@@ -385,7 +385,7 @@ Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-spatial/
 |test purpose: |Verify that trimming operations on spatial dimensions flatten and collapse the spatial structure when requesting a format that cannot include spatial dimensions.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Spatial Dimensions requirements class +
-*When:* A coverage resource request is executed combining a spatial trimming operation with a trimming operation on other axes, specifying an output format that does not support spatial dimensions +
+*When:* Requesting a coverage resource combining a spatial trimming operation with a trimming operation on other axes, specifying an output format that does not support spatial dimensions +
 *Then:* +
 - Assert that the response returns a flattened coverage where the spatial dimensions are collapsed. +
 - Assert that non-empty data portions are preserved across the collapsed space according to the default or selected interpolation method preference.
@@ -417,7 +417,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 |test purpose: |Verify the baseline slicing, trimming, axis mappings, coordinate interpretations, and implicit duration thickness calculations of the `subset` parameter on the primary temporal dimension.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class +
-*When:* A coverage resource request is executed using a valid single coordinate or interval expression targeting the `time` axis matching the defined ABNF grammar +
+*When:* Requesting a coverage resource using a valid single coordinate or interval expression targeting the `time` axis matching the defined ABNF grammar +
 *Then:* +
 - Assert that the implementation parses and accepts valid `subset` expressions for both intervals and discrete coordinates on the `time` dimension. +
 - Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified subsetting coordinates or intervals. +
@@ -436,7 +436,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 |test purpose: |Verify that the server returns an HTTP 400 error when an unrecognized or invalid axis name is targeted for temporal subsetting.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class +
-*When:* A coverage resource request includes an axis name in the `subset` parameter that does not correspond to `time`, a recommended alias, or a supported extension axis +
+*When:* Requesting a coverage resource including an axis name in the `subset` parameter that does not correspond to `time`, a recommended alias, or a supported extension axis +
 *Then:* +
 - Assert that the server returns an HTTP `400` status code if a requested axis name does not match `time`, an alias, or other supported extension axes.
 |===
@@ -449,7 +449,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 |test purpose: |Verify that the server handles temporal subset values that fall completely outside the valid range of the `time` axis.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class +
-*When:* A coverage resource request specifies temporal interval boundaries or a single time coordinate that fall entirely outside the valid range defined for the `time` axis +
+*When:* Requesting a coverage resource specifying temporal interval boundaries or a single time coordinate that fall entirely outside the valid range defined for the `time` axis +
 *Then:* +
 - Assert that the server returns an HTTP `204` or `404` status code if the subset values fall entirely outside the valid range of the identified axis.
 |===
@@ -489,7 +489,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 |test purpose: |Verify that multiple distinct `subset` parameters are interpreted as if all dimension subsetting values were provided in a single `subset` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class +
-*When:* A coverage resource request is executed using multiple distinct instances of the `subset` query parameter +
+*When:* Requesting a coverage resource using multiple distinct instances of the `subset` query parameter +
 *Then:* +
 - Assert that multiple `subset` query parameters are interpreted as if all dimension subsetting values were provided in a single `subset` query parameter.
 |===
@@ -502,7 +502,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 |test purpose: |Verify that the server rejects requests and returns an HTTP 4xx error if a slicing operation and a scaling operation are requested simultaneously on the `time` axis.
 |test method: |
 *Given:* An API implementation claiming conformance to both the Temporal Subsetting and Temporal Scaling requirements classes +
-*When:* A coverage resource request specifies a single coordinate slicing operation on the `time` axis while simultaneously invoking a temporal `resolution` query parameter on that exact same dimension +
+*When:* Requesting a coverage resource specifying a single coordinate slicing operation on the `time` axis while simultaneously invoking a temporal `resolution` query parameter on that exact same dimension +
 *Then:* +
 - Assert that the server returns an HTTP `4xx` status code if a slicing operation and a scaling operation are simultaneously requested on the same dimension.
 |===
@@ -515,7 +515,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 |test purpose: |Verify the slicing, trimming, error handling, and half-bounded or unbounded interval behavior of the `datetime` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Temporal Subsetting requirements class +
-*When:* Coverage resource requests are executed using the `datetime` query parameter +
+*When:* Requesting coverage resources using the `datetime` query parameter +
 *Then:* +
 - Assert that the implementation parses and accepts valid `datetime` expressions for instants, bounded intervals, and half-bounded or unbounded intervals. +
 - Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified datetime instant or interval. +
@@ -544,7 +544,7 @@ Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-temporal
 |test purpose: |Verify that slicing operations on sparse temporal dimensions fill NODATA portions with alternative available data values along the time axis.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Temporal Dimensions requirements class +
-*When:* A coverage resource request is executed combining a slicing operation on a sparse temporal dimension with a trimming operation on other axes +
+*When:* Requesting a coverage resource combining a slicing operation on a sparse temporal dimension with a trimming operation on other axes +
 *Then:* +
 - Assert that, if data values exist at alternative locations along the sliced temporal dimension for the requested subset, any potential NODATA portions are populated using those alternative non-empty values.
 |===
@@ -557,7 +557,7 @@ Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-temporal
 |test purpose: |Verify that trimming operations on temporal dimensions flatten and collapse the temporal structure when requesting a format that cannot include temporal dimensions.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse Temporal Dimensions requirements class +
-*When:* A coverage resource request is executed combining a temporal trimming operation with a trimming operation on other axes, specifying an output format that does not support temporal dimensions +
+*When:* Requesting a coverage resource combining a temporal trimming operation with a trimming operation on other axes, specifying an output format that does not support temporal dimensions +
 *Then:* +
 - Assert that the response returns a flattened coverage where the temporal dimensions are collapsed. +
 - Assert that non-empty data portions are preserved across the collapsed space according to the default or selected interpolation method preference.
@@ -588,7 +588,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset-scaling-e
 |test purpose: |Verify the baseline slicing, trimming, axis mappings, and coordinate interpretations of the `subset` parameter on additional non-spatial and non-primary-temporal dimensions.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - General Subsetting requirements class +
-*When:* A coverage resource request is executed using a valid single coordinate or interval expression targeting an additional dimension axis matching the defined ABNF grammar +
+*When:* Requesting a coverage resource using a valid single coordinate or interval expression targeting an additional dimension axis matching the defined ABNF grammar +
 *Then:* +
 - Assert that the implementation parses and accepts valid `subset` expressions for both intervals and discrete coordinates across one or more dimensions. +
 - Assert that the returned coverage data includes only those constituent cells whose interiors intersect the interior of the specified subsetting coordinates or intervals. +
@@ -606,7 +606,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset-scaling-e
 |test purpose: |Verify that the server returns an HTTP 400 error when an unrecognized axis name is targeted for general subsetting.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - General Subsetting requirements class +
-*When:* A coverage resource request includes an axis name in the `subset` parameter that does not correspond to an additional dimension described in the collection extent, an alias, or a supported extension axis +
+*When:* Requesting a coverage resource including an axis name in the `subset` parameter that does not correspond to an additional dimension described in the collection extent, an alias, or a supported extension axis +
 *Then:* +
 - Assert that the server returns an HTTP `400` status code if a requested axis name does not match an additional dimension described in the collection extent, an alias, or other supported extension axes.
 |===
@@ -620,7 +620,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset-scaling-e
 |test purpose: |Verify that the server handles general subset values that fall completely outside the valid range of the identified axis.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - General Subsetting requirements class +
-*When:* A coverage resource request specifies interval boundaries or a single coordinate that fall entirely outside the valid range defined for an additional dimension axis +
+*When:* Requesting a coverage resource specifying interval boundaries or a single coordinate that fall entirely outside the valid range defined for an additional dimension axis +
 *Then:* +
 - Assert that the server returns an HTTP `204` or `404` status code if the subset values fall entirely outside the valid range of the identified axis.
 |===
@@ -649,7 +649,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset-scaling-e
 |test purpose: |Verify that multiple distinct `subset` parameters are interpreted as if all dimension subsetting values were provided in a single `subset` query parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - General Subsetting requirements class +
-*When:* A coverage resource request is executed using multiple distinct instances of the `subset` query parameter +
+*When:* Requesting a coverage resource using multiple distinct instances of the `subset` query parameter +
 *Then:* +
 - Assert that multiple `subset` query parameters are interpreted as if all dimension subsetting values were provided in a single `subset` query parameter.
 |===
@@ -663,7 +663,7 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset-scaling-e
 |test purpose: |Verify that the server rejects requests and returns an HTTP 4xx error if a slicing operation and a scaling operation are requested simultaneously on the same additional dimension axis.
 |test method: |
 *Given:* An API implementation claiming conformance to both the General Subsetting and General Scaling requirements classes +
-*When:* A coverage resource request specifies a single coordinate slicing operation along an additional dimension while simultaneously invoking a general `resolution` query parameter on that exact same dimension +
+*When:* Requesting a coverage resource specifying a single coordinate slicing operation along an additional dimension while simultaneously invoking a general `resolution` query parameter on that exact same dimension +
 *Then:* +
 - Assert that the server returns an HTTP `4xx` status code if a slicing operation and a scaling operation are simultaneously requested on the same additional dimension.
 |===
@@ -688,7 +688,7 @@ Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-general/
 |test purpose: |Verify that slicing operations on sparse general dimensions fill NODATA portions with alternative available data values along that axis.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse General Dimensions requirements class +
-*When:* A coverage resource request is executed combining a slicing operation on a sparse general dimension with a trimming operation on other axes +
+*When:* Requesting a coverage resource combining a slicing operation on a sparse general dimension with a trimming operation on other axes +
 *Then:* +
 - Assert that, if data values exist at alternative locations along the sliced general dimension for the requested subset, any potential NODATA portions are populated using those alternative non-empty values.
 |===
@@ -701,7 +701,7 @@ Abstract Test A.{counter:ats-summary}: /conf/sparse-dimensions-collapse-general/
 |test purpose: |Verify that trimming operations on general dimensions flatten and collapse the dimension when requesting a format that cannot include that dimension.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Collapsing Sparse General Dimensions requirements class +
-*When:* A coverage resource request is executed combining a general trimming operation with a trimming operation on other axes, specifying an output format that does not support that general dimension +
+*When:* Requesting a coverage resource combining a general trimming operation with a trimming operation on other axes, specifying an output format that does not support that general dimension +
 *Then:* +
 - Assert that the response returns a flattened coverage where the specified general dimension is collapsed. +
 - Assert that non-empty data portions are preserved across the collapsed space according to the default or selected interpolation method preference.
@@ -726,7 +726,7 @@ Abstract Test A.{counter:ats-summary}: /conf/multi-slicing/multi-slicing
 |test purpose: |Verify the extraction of multiple coordinates using comma-separated values in the `subset` parameter.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Multi-Slicing requirements class +
-*When:* A coverage resource request is executed using a comma-separated list of multiple coordinate values within a dimension specified in the `subset` parameter +
+*When:* Requesting a coverage resource using a comma-separated list of multiple coordinate values within a dimension specified in the `subset` parameter +
 *Then:* +
 - Assert that the implementation accepts comma-separated list values for those spatial, temporal, and general dimensions whose respective requirements classes are supported by the API instance. +
 - Assert that the returned coverage data contains values exclusively for the coordinates explicitly specified in the request.
@@ -751,7 +751,7 @@ Abstract Test A.{counter:ats-summary}: /conf/position-query/position-query
 |test purpose: |Verify point-based slicing and JSON content negotiation structure for zero-dimensional coverage requests.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Position Query requirements class +
-*When:* Coverage resource requests are executed that slice all dimensions down to zero dimensions using the `subset` and/or `bbox` and/or `datetime` parameters while requesting JSON encoding +
+*When:* Requesting coverage resources that slice all dimensions down to zero dimensions using the `subset` and/or `bbox` and/or `datetime` parameters while requesting JSON encoding +
 *Then:* +
 - Assert that the Implementation supports reducing the dimensionality of the response to zero dimensions via the `subset` and/or `bbox` and/or `datetime` query parameters. +
 - Assert that a negotiated JSON response structure contains an object where properties match the default or selected field names mapped to their values. +
@@ -784,7 +784,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 |test purpose: |Verify the dimension resolution overrides, axis mappings, and sampling distance behaviors of the `resolution` query parameter.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class +
-*When:* A coverage resource request is executed using a valid `resolution` parameter specifying positive unit spacing values targeting spatial dimensions +
+*When:* Requesting a coverage resource using a valid `resolution` parameter specifying positive unit spacing values targeting spatial dimensions +
 *Then:* +
 - Assert that the Implementation accepts a `resolution` parameter specifying positive unit spacing values formatted as a comma-separated list of dimensions names followed by values in parentheses. +
 - Assert that axis names `Lat` and `Lon` are supported for geographic output CRSs and map to the corresponding spatial axes. +
@@ -801,7 +801,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 |test purpose: |Verify that empty resolution assignments successfully request the native spatial resolution for all targeted dimensions or a specific dimension.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class +
-*When:* A coverage resource request is executed using an empty `resolution` parameter (`resolution=`) or using a dimension name followed by empty parentheses +
+*When:* Requesting a coverage resource using an empty `resolution` parameter (`resolution=`) or using a dimension name followed by empty parentheses +
 *Then:* +
 - Assert that an empty resolution value is supported as referring to the native resolution for that particular dimension, or for all dimensions, ensuring `resolution=` and e.g., `resolution=Lat(),Lon()` are both considered as requesting the native spatial resolution.
 |===
@@ -815,7 +815,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 |test purpose: |Verify that the vertical spatial axis token `h` or `z` is supported depending on the nature of the target three-dimensional output coordinate reference system.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class with a three-dimensional collection extent +
-*When:* A coverage resource request includes a `resolution` parameter targeting the third spatial dimension using the axis name `h` or `z` +
+*When:* Requesting a coverage resource including a `resolution` parameter targeting the third spatial dimension using the axis name `h` or `z` +
 *Then:* +
 - Assert that for a 3D geographic or projected output CRS containing a vertical dimension (such as EPSG:4979 or OGC:CRS84h), the axis name `h` is supported to target the vertical dimension. +
 - Assert that for a 3D Cartesian output CRS (such as EPSG:4978), the axis name `z` is supported to target the third spatial axis.
@@ -829,7 +829,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 |test purpose: |Verify that the server returns an HTTP 400 error when an unrecognized or invalid axis name is targeted for spatial scaling.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class +
-*When:* A coverage resource request includes an axis name in the `resolution` parameter that does not correspond to an output CRS axis, an alias, or a supported scaling axis from other requirements classes +
+*When:* Requesting a coverage resource including an axis name in the `resolution` parameter that does not correspond to an output CRS axis, an alias, or a supported scaling axis from other requirements classes +
 *Then:* +
 - Assert that the server returns an HTTP `400` status code if a requested axis name does not match any axis of the output CRS, an alias, or other supported extension axes.
 |===
@@ -842,7 +842,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 |test purpose: |Verify that non-gridded coverages support the special `spatial-distance` dimension name to define minimum structural sample spacing.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class serving a non-gridded coverage +
-*When:* A coverage resource request is executed using the special dimension keyword `spatial-distance` within the `resolution` query parameter +
+*When:* Requesting a coverage resource using the special dimension keyword `spatial-distance` within the `resolution` query parameter +
 *Then:* +
 - Assert that for non-gridded coverages, a special dimension named `spatial-distance` is supported to specify the minimum vectorial distance between two samples.
 |===
@@ -868,7 +868,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 |test purpose: |Verify the pixel dimension scaling, grid cell counts, subset alignment, and server constraint handling of the `width` and `height` query parameters.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class +
-*When:* Coverage resource requests are executed using the `width` and/or `height` query parameters +
+*When:* Requesting coverage resources using the `width` and/or `height` query parameters +
 *Then:* +
 - Assert that the Implementation accepts an integer value for the `width` parameter to scale the horizontal spatial axis. +
 - Assert that the Implementation accepts an integer value for the `height` parameter to scale the vertical spatial axis. +
@@ -898,7 +898,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/multi-field-resolu
 |test purpose: |Verify the dimension resolution overrides, axis mappings, and sampling distance behaviors of the `resolution` query parameter on temporal dimensions.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class +
-*When:* A coverage resource request is executed using a valid `resolution` parameter specifying positive unit spacing values using ISO 8601 period notation targeting the `time` axis +
+*When:* Requesting a coverage resource using a valid `resolution` parameter specifying positive unit spacing values using ISO 8601 period notation targeting the `time` axis +
 *Then:* +
 - Assert that the Implementation accepts a `resolution` parameter specifying ISO 8601 period values formatted as a comma-separated list of dimension names followed by values in parentheses. +
 - Assert that the axis name `time` is supported if the collection describes a temporal dimension in its extent. +
@@ -914,7 +914,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/multi-field-resolu
 |test purpose: |Verify that empty resolution assignments successfully request the native temporal resolution for the primary temporal dimension.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class +
-*When:* A coverage resource request is executed using an empty `resolution` parameter (`resolution=`) or using the `time` dimension followed by empty parentheses +
+*When:* Requesting a coverage resource using an empty `resolution` parameter (`resolution=`) or using the `time` dimension followed by empty parentheses +
 *Then:* +
 - Assert that an empty resolution value is supported as referring to the native resolution for that particular dimension, or for all dimensions, ensuring `resolution=` and e.g., `resolution=time()` are both considered as requesting the native resolution for the primary temporal dimension.
 |===
@@ -927,7 +927,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/multi-field-resolu
 |test purpose: |Verify that the server returns an HTTP 400 error when an unrecognized or invalid axis name is targeted for temporal scaling.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class +
-*When:* A coverage resource request includes an axis name in the `resolution` parameter that does not correspond to `time`, a recommended alias, or a supported scaling axis from other requirements classes +
+*When:* Requesting a coverage resource including an axis name in the `resolution` parameter that does not correspond to `time`, a recommended alias, or a supported scaling axis from other requirements classes +
 *Then:* +
 - Assert that the server returns an HTTP `400` status code if a requested axis name does not match `time`, an alias, or other supported extension axes.
 |===
@@ -967,7 +967,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-general/multi-field-resolut
 |test purpose: |Verify the dimension resolution overrides, axis mappings, and sampling distance behaviors of the `resolution` query parameter on additional dimensions.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class +
-*When:* A coverage resource request is executed using a valid `resolution` parameter specifying numerical values or valid textual resolution values targeting additional dimensions +
+*When:* Requesting a coverage resource using a valid `resolution` parameter specifying numerical values or valid textual resolution values targeting additional dimensions +
 *Then:* +
 - Assert that the Implementation accepts a `resolution` parameter specifying positive numerical values, taxon level names, or ISO 8601 period strings formatted as a comma-separated list of dimension names followed by values in parentheses. +
 - Assert that all extra dimensions declared in the collection description (excluding spatial dimensions and the primary temporal dimension) are supported as valid axis names. +
@@ -985,7 +985,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-general/multi-field-resolut
 |test purpose: |Verify that empty resolution assignments successfully request the native resolution for targeted additional dimensions.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class +
-*When:* A coverage resource request is executed using an empty `resolution` parameter (`resolution=`) or using an additional dimension name followed by empty parentheses +
+*When:* Requesting a coverage resource using an empty `resolution` parameter (`resolution=`) or using an additional dimension name followed by empty parentheses +
 *Then:* +
 - Assert that an empty resolution value is supported as referring to the native resolution for that particular dimension, or for all dimensions, ensuring `resolution=` and e.g., `resolution=pressure()` are both considered as requesting the native pressure resolution.
 |===
@@ -998,7 +998,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-general/multi-field-resolut
 |test purpose: |Verify that the server returns an HTTP 400 error when an unrecognized or invalid axis name is targeted for general scaling.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class +
-*When:* A coverage resource request includes an axis name in the `resolution` parameter that does not correspond to an additional dimension described in the collection extent, a recommended alias, or a supported scaling axis from other requirements classes +
+*When:* Requesting a coverage resource including an axis name in the `resolution` parameter that does not correspond to an additional dimension described in the collection extent, a recommended alias, or a supported scaling axis from other requirements classes +
 *Then:* +
 - Assert that the server returns an HTTP `400` status code if a requested axis name does not match an additional dimension described in the collection extent, an alias, or other supported extension axes.
 |===
@@ -1038,7 +1038,7 @@ Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resoluti
 |test purpose: |Verify field extraction, error handling, metadata filtering, and sequence preservation via the `properties` query parameter.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class +
-*When:* Coverage resource requests are executed using the `properties` query parameter +
+*When:* Requesting coverage resources using the `properties` query parameter +
 *Then:* +
 - Assert that the Implementation accepts the `properties` parameter containing a comma-separated list of field names. +
 - Assert that the Implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
@@ -1055,7 +1055,7 @@ Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resoluti
 |test purpose: |Verify field omission, sequence ordering fallback, constraint conflicts, and empty assignment overrides via the `exclude-properties` query parameter.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class +
-*When:* Coverage resource requests are executed using the `exclude-properties` query parameter +
+*When:* Requesting coverage resources using the `exclude-properties` query parameter +
 *Then:* +
 - Assert that the Implementation accepts the `exclude-properties` parameter containing a comma-separated list of field names. +
 - Assert that the Implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
@@ -1073,7 +1073,7 @@ Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resoluti
 |test purpose: |Verify that an error is generated for mismatched-resolution fields in non-scaling implementations when the output format does not support mixed resolutions.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class that does not implement the Spatial Scaling requirements class +
-*When:* A coverage resource request includes multiple fields possessing different resolution definitions (per `x-ogc-resolution`), and the target output encoding format does not support mixed-resolution fields +
+*When:* Requesting a coverage resource including multiple fields possessing different resolution definitions (per `x-ogc-resolution`), and the target output encoding format does not support mixed-resolution fields +
 *Then:* +
 - Assert that the server returns an HTTP `4xx` error code.
 |===
@@ -1097,7 +1097,7 @@ Abstract Test A.{counter:ats-summary}: /conf/crs/crs-definition
 |test purpose: |Verify the resolution, defaulting, parameter alignment, data consistency, and error handling of the `crs` query parameter.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - CRS by Reference requirements class +
-*When:* Coverage resource requests are executed using the `crs` query parameter +
+*When:* Requesting coverage resources using the `crs` query parameter +
 *Then:* +
 - Assert that the Implementation accepts the `crs` parameter containing a URI or safe CURIE identifier referencing a registered CRS. +
 - Assert that all CRSs advertised in the `crs` property of the collection metadata description are accepted as valid output CRSs. +
@@ -1127,7 +1127,7 @@ Abstract Test A.{counter:ats-summary}: /conf/tiles/tilesets
 |test purpose: |Verify the discovery, metadata structure, template routing, compliance, and coordinate space trimming of coverage tilesets.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Coverage Tiles requirements class +
-*When:* Coverage tileset list, metadata, and individual tile resource requests are executed +
+*When:* Requesting coverage tileset list, tileset metadata, and individual tile resources +
 *Then:* +
 - Assert that the coverage has at least one associated coverage tileset list resource conforming to OGC API - Tiles - Part 1: Core. +
 - Assert that the collection description includes a link with the relation type `https://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage` pointing to the tilesets resource. +
@@ -1157,7 +1157,7 @@ Abstract Test A.{counter:ats-summary}: /conf/html/coverage
 |test purpose: |Verify content negotiation, document validity, and representation accuracy for coverage resources requested in HTML format.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - HTML Encoding requirements class +
-*When:* A coverage resource request is executed requesting an HTML response through the `text/html` media type +
+*When:* Requesting a coverage resource negotiating an HTML response through the `text/html` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns an HTML response when requested via the `text/html` media type. +
 - Assert that the returned payload is a valid HTML document. +
@@ -1199,7 +1199,7 @@ Abstract Test A.{counter:ats-summary}: /conf/geotiff/raster-type
 |test purpose: |Verify that the GeoTIFF raster type key is correctly populated based on the grid cell area or point geometry definition.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoTIFF requirements class +
-*When:* Coverage resource requests are executed that return a GeoTIFF document +
+*When:* Requesting coverage resources that return a GeoTIFF document +
 *Then:* +
 - Assert that, if the returned coverage response grid cells represent the entire area between grid lines, the GeoTIFF document contains a `GTRasterTypeGeoKey` (Tag 1025) set to `RasterPixelIsArea` (1). +
 - Assert that, if the returned coverage response grid cells represent a zero-dimensional point at the intersection of grid lines, the GeoTIFF document contains a `GTRasterTypeGeoKey` (Tag 1025) set to `RasterPixelIsPoint` (2).
@@ -1225,7 +1225,7 @@ Abstract Test A.{counter:ats-summary}: /conf/cog/cloud-optimized
 |test purpose: |Verify implementation support for HTTP Range requests on unparameterized or native-resolution coverage resource endpoints.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Cloud Optimized GeoTIFF requirements class +
-*When:* Coverage resource requests are executed using HTTP Range headers under varying query configuration states +
+*When:* Requesting coverage resources using HTTP Range headers under varying query configuration states +
 *Then:* +
 - Assert that the implementation supports HTTP range requests on the `/coverage` resource in compliance with the COG specification. +
 - Assert that HTTP range request capabilities are successfully exposed when the request uses no query parameters, or uses empty values specifying native resolution across all dimensions.
@@ -1239,7 +1239,7 @@ Abstract Test A.{counter:ats-summary}: /conf/cog/cloud-optimized
 |test purpose: |Verify negotiation of the cloud-optimized profile using Content-Profile and Accept-Profile headers.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Cloud Optimized GeoTIFF requirements class +
-*When:* A coverage resource request is executed specifying the `http://www.opengis.net/def/profile/geotiff/cloud-optimized` profile URI via the profile headers along with the `image/tiff; application=geotiff` media type +
+*When:* Requesting a coverage resource specifying the `http://www.opengis.net/def/profile/geotiff/cloud-optimized` profile URI via the profile headers along with the `image/tiff; application=geotiff` media type +
 *Then:* +
 - Assert that the implementation successfully negotiates a cloud-optimized profile GeoTIFF response.
 |===
@@ -1263,7 +1263,7 @@ Abstract Test A.{counter:ats-summary}: /conf/netcdf/coverage
 |test purpose: |Verify media type negotiation, netCDF document validation, and dimension variable naming mappings.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - NetCDF requirements class +
-*When:* A coverage resource request is executed requesting a netCDF response through the `application/x-netcdf` media type +
+*When:* Requesting a coverage resource negotiating a netCDF response through the `application/x-netcdf` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a netCDF response when requested via the `application/x-netcdf` media type. +
 - Assert that the returned payload is a valid netCDF document that complies with the OGC netCDF standard. +
@@ -1289,7 +1289,7 @@ Abstract Test A.{counter:ats-summary}: /conf/cisjson/coverage
 |test purpose: |Verify media type negotiation, CIS JSON schema validation, structural type enforcement, and domain set cell math configuration.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - CIS JSON requirements class +
-*When:* A coverage resource request is executed requesting a JSON response through the `application/json` media type +
+*When:* Requesting a coverage resource negotiating a JSON response through the `application/json` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a JSON response. +
 - Assert that the returned payload is a valid CIS JSON document that complies with the official `coverage-schema.yaml` specification. +
@@ -1318,7 +1318,7 @@ Abstract Test A.{counter:ats-summary}: /conf/coveragejson/coverage
 |test purpose: |Verify media type negotiation and document validation for the CoverageJSON format.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - CoverageJSON requirements class, where the targeted collection is suitable for a CoverageJSON representation +
-*When:* A coverage resource request is executed requesting a CoverageJSON response through the `application/vnd.cov+json` media type +
+*When:* Requesting a coverage resource negotiating a CoverageJSON response through the `application/vnd.cov+json` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.cov+json` media type. +
 - Assert that the returned payload is a valid CoverageJSON document that complies with the CoverageJSON community standard.
@@ -1344,7 +1344,7 @@ Abstract Test A.{counter:ats-summary}: /conf/las/coverage
 |test purpose: |Verify media type negotiation and document validation for the OGC LAS point cloud format.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - LAS requirements class, where the targeted collection is suitable for a LAS representation +
-*When:* A coverage resource request is executed requesting a LAS response through the `application/vnd.las` media type +
+*When:* Requesting a coverage resource negotiating a LAS response through the `application/vnd.las` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.las` media type. +
 - Assert that the returned payload is a valid LAS point cloud dataset that complies with the OGC LAS Community Standard. +
@@ -1371,7 +1371,7 @@ Abstract Test A.{counter:ats-summary}: /conf/laszip/coverage
 |test purpose: |Verify media type negotiation and document validation for the losslessly compressed LASzip point cloud format.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - LASzip requirements class, where the targeted collection is suitable for a LASzip representation +
-*When:* A coverage resource request is executed requesting a LASzip response through the `application/vnd.laszip` media type +
+*When:* Requesting a coverage resource negotiating a LASzip response through the `application/vnd.laszip` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.laszip` media type. +
 - Assert that the returned payload is a valid compressed LASzip dataset. +
@@ -1456,7 +1456,7 @@ Abstract Test A.{counter:ats-summary}: /conf/jpeg2000/coverage
 |test purpose: |Verify media type negotiation, data type mapping, field extraction, band sequencing, and GMLJP2 georeferencing alignment for JPEG 2000 coverage responses.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - JPEG 2000 requirements class +
-*When:* A two-dimensional coverage resource request is executed requesting a JPEG 2000 response through the `image/jp2` media type +
+*When:* Requesting a two-dimensional coverage resource negotiating a JPEG 2000 response through the `image/jp2` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a JPEG 2000 response when requested via the `image/jp2` media type. +
 - Assert that the JPEG 2000 document encodes values using the data type (e.g., 8-bit or 16-bit integer, 32-bit floating point) that most closely matches the native precision of the coverage field. +
@@ -1484,7 +1484,7 @@ Abstract Test A.{counter:ats-summary}: /conf/zarr/coverage
 |test purpose: |Verify media type negotiation, Zip packaging structure, data type mapping, field extraction, and multi-field band sequencing for Zarr coverage responses.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoZarr requirements class +
-*When:* A coverage resource request is executed requesting a Zarr response through the `application/zarr+zip` media type +
+*When:* Requesting a coverage resource negotiating a Zarr response through the `application/zarr+zip` media type +
 *Then:* +
 - Assert that the Implementation successfully negotiates and returns a Zarr response packaged inside a Zip container when requested via the `application/zarr+zip` media type. +
 - Assert that the Zarr dataset encodes values using the data types that most closely match the native precision of the coverage fields. +
