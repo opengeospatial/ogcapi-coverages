@@ -15,18 +15,34 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-temporal/resolution*
-^|A |For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolution` query parameter specifying
-the <<term-resolution,resolution>> for the primary temporal dimension using <<ISO_8601-1,ISO 8601>> period notation.
+^|A |For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for the primary temporal dimension using <<ISO_8601-1,ISO 8601>> period notation.
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|C |The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension,
-or for all dimensions.
+^|C |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
+^|D |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+^|E |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+^|F |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+|===
+
+[[req_scaling-temporal_native-resolution]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-temporal/native-resolution*
+^|A |The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension, or for all dimensions.
 For example, `resolution=` and `resolution=time()` SHALL both be considered as requesting the native resolution for the primary temporal dimension.
-^|D |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
-^|E |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time` (see <<spatial-aliases-recommendation, recommendation>>), or any other axis supported in the context of other requirements classes (such as spatial and general scaling).
-^|F |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|G |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|H |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution
-for the corresponding dimension.
+|===
+
+[[req_scaling-temporal_invalid-axis]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-temporal/resolution-invalid-axis*
+^|A |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time` (see <<spatial-aliases-recommendation, recommendation>>), or any other axis supported in the context of other requirements classes (such as <<rc_scaling_spatial,spatial>> and <<rc_scaling_general,general>> scaling).
+|===
+
+[[req_scaling-temporal_multi-field-resolution]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/scaling-temporal/multi-field-resolution*
+^|A |When returning the native resolution for the primary temporal dimension for multiple <<term-field,fields>> with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
 |===
 
 NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by

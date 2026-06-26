@@ -19,50 +19,95 @@ Individual cells may occupy an area on the ground (the value of the cell represe
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset*
-^|A |The coverage request operation SHALL support a parameter `subset` to subset one or more of the dimensions of the coverage (as described in the collection information)
-with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|A a|The coverage request operation SHALL support a parameter `subset` to subset one or more of the spatial dimensions of the coverage (as described in the `spatial` section of the description's extent)
+with the following characteristics (using an Augmented Backus-Naur Form (ABNF) fragment):
 
-[source,EBNF]
+[source,ABNF]
 ----
-  SubsetSpec:       "subset"=axisName(intervalOrPoint)
-  axisName:         {text}
-  intervalOrPoint:  interval \| point
-  interval:         low : high
-  low:              point \| *
-  high:             point \| *
-  point:            {number} \| "{text}"
-
-  Where:
-     \" = double quote = ASCII code 0x42,
-     {number} is an integer or floating-point number, and
-     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
+  SubsetSpec       = "subset" "=" axisName "(" intervalOrSingle ")"
+  intervalOrSingle = interval / single
+  interval         = low ":" high
+  low              = single / "*"
+  high             = single / "*"
+  single           = number
 ----
+where:
 
+* `axisName` is one of the abbreviations identifying an axis described in the following requirements parts, starting by a lowercase or uppercase letter A-Z.
+* `number` is an integer or decimal real number.
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single point is provided for an axis, the coverage response SHALL be the result of a <<term-slicing,slicing>> operation for the dimension corresponding to that axis, reducing the dimensionality.
+^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single coordinate is provided for an axis, the coverage response SHALL be the result of a <<term-slicing,slicing>> operation for the dimension corresponding to that axis, reducing the dimensionality.
 ^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if an interval is provided for an axis, the coverage response SHALL be the result of a <<term-trimming,trimming>> operation for the dimension corresponding to that axis, preserving the dimensionality.
 ^|E |For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
 ^|F |For a projected subsetting CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as Earth-Centered Earth-Fixed EPSG:4978), axis names `x` and `y` SHALL be supported. These are to be interpreted as the best matching spatial axes in the subsetting CRS definition.
-^|G |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or
+^|G |For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
+|===
+
+[[req_subsetting-spatial_3d-axis]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/3d-axis*
+^|A |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or
 projected CRS that includes a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h), and the axis name `z` SHALL be supported for a
 3D Cartesian coordinate reference system (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
-^|H |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to one of the axes of the subsetting CRS,
+|===
+
+[[req_subsetting-spatial_invalid-axis]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-invalid-axis*
+^|A |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to one of the axes of the subsetting CRS,
 to an alias (see <<spatial-aliases-recommendation,recommendation>>), or to any other axis supported in the context of other requirements classes (such as temporal and general subsetting).
-^|I |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
-^|J |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
+|===
+
+[[req_subsetting-spatial_out-of-bounds]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/out-of-bounds*
+^|A |If the _intervalOrSingle_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
+|===
+
+[[req_subsetting-spatial_wrap-around]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/wrap-around*
+^|A |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
 be supported to indicate an extent crossing that wrapping point.
-^|K |For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
-^|L |If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
-^|M |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
-^|N |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
-^|O |Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma-separated)^1^.
-^|P |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
-(`resolution` query parameter defined in the corresponding Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
-For example, `subset=time("2020-01-01T15:00")&resolution=time(P1H)` (slicing) would be an invalid request, while `subset=time("2020-01-01T15:00":"2020-01-31T15:00")&resolution=time(P1H)` (trimming).
+|===
+
+[[req_subsetting-spatial_subset-bbox-exclusivity]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-bbox-exclusivity*
+^|A |If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
+|===
+
+[[req_subsetting-spatial_wildcard-limits]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/wildcard-limits*
+^|A |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+^|B |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+|===
+
+[[req_subsetting-spatial_multiple-subset]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/multiple-subset*
+^|A |Multiple `subset` query parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single `subset` parameter (comma-separated)^1^.
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
 |===
 
-NOTE: When the _intervalOrPoint_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,
+[[req_subsetting-spatial_subset-scaling-exclusivity]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-scaling-exclusivity*
+^|A |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
+(`resolution` query parameter defined in the corresponding Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
+For example, `subset=time("2020-01-01T15:00")&resolution=time(P1H)` (slicing) would be an invalid request, while `subset=time("2020-01-01T15:00":"2020-01-31T15:00")&resolution=time(P1H)` (trimming).
+|===
+
+NOTE: When the _intervalOrSingle_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,
 the service is expected to return the non-empty portion of the coverage resulting from the subset.
 For subsetting on the range set, and for coverage media types with no geo-referencing mechanisms (e.g. PNG), NO_DATA values or transparency should be used.
 If a georeferencing mechanism is available within the negotiated media type, the service could decide whether to use NO_DATA values

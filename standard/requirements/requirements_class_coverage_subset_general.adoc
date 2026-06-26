@@ -28,36 +28,64 @@ For example, `subset=forecast_time("2020-01-01")` is equivalent to `subset=forec
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-general/subset*
-^|A |The coverage request operation SHALL support a parameter `subset` to subset one or more of the dimensions of the coverage (as described in the collection information)
-with the following characteristics (using an Extended Backus Naur Form (EBNF) fragment):
+^|A a|The coverage request operation SHALL support a parameter `subset` to subset one or more of the additional dimensions of the coverage (as described in the collection description's extent) with the following characteristics (using an Augmented Backus-Naur Form (ABNF) fragment):
 
-[source,EBNF]
+[source,ABNF]
 ----
-  SubsetSpec:       "subset"=axisName(intervalOrPoint)
-  axisName:         {text}
-  intervalOrPoint:  interval \| point
-  interval:         low : high
-  low:              point \| *
-  high:             point \| *
-  point:            {number} \| "{text}"
+  SubsetSpec       = "subset" "=" axisName "(" intervalOrSingle ")"
+  intervalOrSingle = interval / single
+  interval         = low ":" high
+  low              = single / "*"
+  high             = single / "*"
+  single           = number / text
+----
+where:
 
-  Where:
-     \" = double quote = ASCII code 0x42,
-     {number} is an integer or floating-point number, and
-     {text} is some general ASCII text (such as a time and date notation in ISO 8601).
-----
+* `axisName` is an abbreviation identifying an axis described in the following requirements parts, starting by a lowercase or uppercase letter A-Z.
+* `number` is an integer or decimal real number.
+* `text` is some general ASCII text (such as a time and date notation in ISO 8601) enclosed in double-quotes (`"`, ASCII code 0x22).
 
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, if a single point is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
+^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, if a single coordinate is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
 ^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, if an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
 ^|E |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extent other than `spatial` and `temporal`.
-^|F |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to an additional dimension described in the collection extent, or to any other axis supported in the context of other requirements classes (such as spatial and temporal subsetting).
-^|G |If the _intervalOrPoint_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
-^|H |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
-^|I |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
-^|J |Multiple subset parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single subset parameter (comma-separated)^1^.
+|===
 
+[[req_subsetting-general_invalid-axis]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-general/subset-invalid-axis*
+^|A |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to an additional dimension described in the collection extent, or to any other axis supported in the context of other requirements classes (such as spatial and temporal subsetting).
+|===
+
+[[req_subsetting-general_out-of-bounds]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-general/out-of-bounds*
+^|A |If the _intervalOrSingle_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
+|===
+
+[[req_subsetting-general_wildcard-limits]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-general/wildcard-limits*
+^|A |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+^|B |If an upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+|===
+
+[[req_subsetting-general_multiple-subset]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-general/multiple-subset*
+^|A |Multiple `subset` query parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single `subset` parameter (comma-separated)^1^.
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
+|===
+
+[[req_subsetting-general_subset-scaling-exclusivity]]
+[width="90%",cols="2,6a"]
+|===
+^|*Requirement {counter:req-id}* |*/req/subsetting-general/subset-scaling-exclusivity*
+^|A |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same additional dimension for which a scaling operation (`resolution` query parameter defined in the corresponding General Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
 |===
 
 NOTE: When the _intervalOrPoint_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,
