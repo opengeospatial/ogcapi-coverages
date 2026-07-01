@@ -17,8 +17,8 @@ Abstract Test A.{counter:ats-summary}: /conf/core/coverage-fields-schema +
 Abstract Test A.{counter:ats-summary}: /conf/core/get-coverage +
 Abstract Test A.{counter:ats-summary}: /conf/core/response-headers +
 Abstract Test A.{counter:ats-summary}: /conf/core/preference-applied +
-Abstract Test A.{counter:ats-summary}: /conf/core/preference-handling +
-Abstract Test A.{counter:ats-summary}: /conf/core/native-resolution
+Abstract Test A.{counter:ats-summary}: /conf/core/preference-handling-interpolation +
+Abstract Test A.{counter:ats-summary}: /conf/core/preference-handling-resolution
 |===
 
 **Abstract Test A.{counter:ats-id}:** Conformance Success
@@ -121,8 +121,8 @@ header to be missing only if the interpolation remains constant at the server's 
 **Abstract Test A.{counter:ats-id}:** Interpolation Preference Handling
 [cols=">20h,<80d",width="100%"]
 |===
-|test id: |/conf/core/preference-handling
-|requirement: |/req/core/preference-handling
+|test id: |/conf/core/preference-handling-interpolation
+|requirement: |/req/core/preference-handling-interpolation
 |test purpose: |Verify the behavior of the `Prefer: handling` parameter when requesting a preference for client interpolation methods.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages +
@@ -138,16 +138,17 @@ requirements classes), while varying the `Prefer: handling` configuration +
 **Abstract Test A.{counter:ats-id}:** Native Resolution
 [cols=">20h,<80d",width="100%"]
 |===
-|test id: |/conf/core/native-resolution
-|requirement: |/req/core/native-resolution
-|test purpose: |Verify that requests for native resolution are supported.
+|test id: |/conf/core/preference-handling-resolution
+|requirement: |/req/core/preference-handling-resolution
+|test purpose: |Verify that requests using `Prefer: handling=strict` without explicit resolution request always return native resolution or 413 error.
 |test method: |
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - Part 1: Core standard +
-*When:* Requests are made to the coverage resource using the `resolution` query parameter +
+*When:* Requests are made to the coverage resource using the `Prefer: handling=strict` request header +
 *Then:* +
-- Assert that the implementation accepts requests where specific dimensions have empty resolution values (e.g., `resolution=Lat(),Lon(),time()`) and returns the coverage data at the native resolution for those dimensions. +
-- Assert that the implementation accepts a completely empty resolution parameter (e.g., `resolution=`) and either returns the coverage data at the native resolution for all dimensions or returns an HTTP `4xx` error code if the requested native payload size exceeds server processing limits. +
-- Assert that, if the implementation does not support scaling for a requested dimension and a non-empty resolution value is specified, the server returns an HTTP `4xx` error status code.
+- Assert that the implementation accepts requests using a `Prefer: handling=strict` request header. +
+- Assert that the implementation accepts either returns the coverage data at the native resolution for all dimensions or returns an HTTP `413` error code if
+the response payload size at the native resolution exceeds <<server-limits-recommendations,advertised server limits>> when no `resolution`, `width` or `height` query parameter explicitly requests otherwise. +
+- Assert that the implementation defaults to a `lenient` handling, where the server is allowed to default to a downsampled resolution instead of a `413` error per the <<downsampling-permission, downsampling permission>>.
 |===
 
 === Conformance Class: Spatial subsetting
