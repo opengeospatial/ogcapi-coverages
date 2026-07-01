@@ -31,6 +31,14 @@
 For example, `resolution=` and `resolution=time()` SHALL both be considered as requesting the native resolution for the primary temporal dimension.
 |===
 
+IMPORTANT: Clients wishing to ensure they always retrieve a <<term-native-resolution,native resolution>> coverage from a server supporting a Scaling requirements class
+irrespective of the <<downsampling-permission, downsampling permission>> can include in their coverage data request a `resolution` query parameter specifying all dimensions
+with empty values such as `resolution=time()` (including any additional dimension), or a completely empty `resolution` query parameter: `resolution=`.
+For most large datasets, these clients would also need to include subsetting parameters (`subset` or `datetime`, assuming the server supports the Temporal subsetting requirements class)
+to avoid an error response due to requesting more data than allowed by the <<server-limits-recommendations,server limits>>.
+Alternatively, to ensure such a request also works with servers not implementing the `resolution` query parameter defined in the Scaling requirements classes, clients
+can specify instead the `Prefer: handling=strict` request header (see <<req_core-preference-handling-resolution>>).
+
 [[req_scaling-temporal_invalid-axis]]
 [width="90%",cols="2,6a"]
 |===

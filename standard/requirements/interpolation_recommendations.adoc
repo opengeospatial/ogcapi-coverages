@@ -5,8 +5,10 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/core/downsampling*
-^|A |In the case where a response to a request without a `resolution`, `width`, or `height` parameters would be larger than an advertised server limit, an implementation
-MAY automatically downsample the coverage to a suitable resolution instead of returning a 4xx client error.
+^|A |In the case of a request not explicitly specifying a resolution for a particular dimension (with a `resolution`, `width`, or `height` query parameter)
+and for which a `Prefer: handling=strict` request header was not included with the request (see <<req_core-preference-handling-resolution>>),
+where the response would be larger than an <<server-limits-recommendations,advertised server limit>>, an implementation
+MAY automatically downsample the resolution of the coverage for that dimension to a suitable resolution instead of returning a 413 _Content Too Large_ client error.
 ^|B |In the case where a `resolution`, `width` or `height` does not explicitly specify dimensions for all spatial axes of the coverage, an implementation MAY automatically proportionately
 adjust one or more unspecified spatial dimensions.
 |===
@@ -14,6 +16,8 @@ adjust one or more unspecified spatial dimensions.
 NOTE: A client retrieving a coverage from an implementation advertising support for a (Spatial, Temporal or General) Scaling requirements class should explicitly use `resolution=` or
 e.g, `resolution=Lat(),Lon(),time(),pressure()` if it wants to ensure retrieving the coverage in the native resolution of one or more dimensions and prefers receiving an error
 instead of a downsampled version of the data.
+For ensuring native resolution data across any server, whether they support the `resolution` query parameter from a Scaling requirements class or not, clients can instead use
+the `Prefer: handling=strict` request header.
 
 ==== Permission to only support certain resolutions
 

@@ -240,45 +240,46 @@ An explicit list of interpolation method for each dimension:
 ^|*Requirement {counter:req-id}* |*/req/core/preference-applied*
 ^|A | If an Implementation supports <<interpolation-preference, client preferences for interpolation>>,
 the Implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
-`Preference-Applied: interpolation=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear])`,time([ogc-interpolation:linear]),pressure([ogc-interpolation:linear]) and
+`Preference-Applied: interpolation=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear]),time([ogc-interpolation:linear]),pressure([ogc-interpolation:linear])` and
 `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
 |===
 
-==== Strict or lenient preference handling
+==== Strict or lenient request handling
 
-[[req_core-preference-handling]]
+[[req_core-preference-handling-interpolation]]
 [width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/core/preference-handling*
+^|*Requirement {counter:req-id}* |*/req/core/preference-handling-interpolation*
 ^|A | If an Implementation supports <<interpolation-preference, client preferences for interpolation>>,
-the Implementation SHALL support the `Prefer: handling` parameter defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4] where a value of `handling=lenient` would simply ignore an unsupported preference, while a
-value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the preference of the client
-(note that the handling parameter applies to the request as a whole, rather than to any specific preference).
+the Implementation SHALL support the `Prefer: handling` request header defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4] where a value of
+`handling=lenient` would simply ignore an unsupported interpolation method preference, while a
+value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the interpolation method preference of the client
 ^|B | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of
 interpolation preferences.
 |===
 
-==== Query parameter `resolution` (native resolution requested using empty values)
-
-[[req_core-native-resolution]]
-[width="90%",cols="2,6"]
+[[req_core-preference-handling-resolution]]
+[width="90%",cols="2,6a"]
 |===
-^|*Requirement {counter:req-id}* |*/req/core/native-resolution*
-^|A |An implementation SHALL accept a `resolution` query parameter for a GET operation on the coverage resource,
-for empty resolution values (e.g., `resolution=Lat(),Lon(),time()`) indicating a request for the <<term-native-resolution,native resolution>> of the corresponding dimension(s),
-as well as a completely empty resolution query parameter (e.g., `resolution=`) indicating a request for the native resolution of all dimensions,
-whether the implementation supports or not the <<rc_scaling_spatial, "Spatial Scaling">>, <<rc_scaling_spatial, "Temporal Scaling">> and/or <<rc_scaling_spatial, "General Scaling">> requirements classes.
-^|B |An implementation not supporting scaling for a dimension for which a non-empty value has been specified using the `resolution` query parameter SHALL return a 4xx error.
+^|*Requirement {counter:req-id}* |*/req/core/preference-handling-resolution*
+^|A | If an Implementation supporting the a <<rc_scaling_spatial, Scaling requirements class>> takes advantage of the <<downsampling-permission, downsampling permission>>,
+that Implementation SHALL support the `Prefer: handling` request header defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4].
+^|B | When a value of `handling=lenient` is specified, the downsampling permission SHALL be applicable, allowing to return a downsampled resolution for a dimension for which a
+resolution was not explicitly specified (using the `resolution`, `width` or `height` query parameter).
+^|C | When a value of `handling=strict` is specified, the downsampling permission SHALL NOT be applicable, and the implementation SHALL always return
+the native resolution for any dimensions for which a specific resolution was not explicitly requested, or a 413 _Content too large_ error if the response payload would exceed
+the <<server-limits-recommendations, advertised server limits>>.
+^|D | If no handling preference is specified, the Implementation SHALL default to lenient handling for the purpose of the downsampling permission.
 |===
 
-NOTE: An implementation not supporting scaling for any dimension (not conforming to any of the scaling requirements classes) can simply ignore the `resolution` query parameter, and return the data at the
-native resolution as if the query parameter was not used. The implementation would return an error if the selected subset or the whole coverage requested exceeds the server limits at this native resolution.
+NOTE: The handling parameter of the `Prefer:` request header applies to the request as a whole, rather than to any specific preference or other aspect of the request.
 
-IMPORTANT: Clients wishing to ensure they always retrieve a <<term-native-resolution,native resolution>> coverage can include in their coverage data request a `resolution` query parameter specifying all dimensions with empty values:
-`resolution=Lat(),Lon(),time()` (including any additional dimension), or a completely empty `resolution` query parameter: `resolution=`, regardless of whether the server implements any of the Scaling requirements classes.
-For most large datasets, these clients would also need to include subsetting parameters (`subset`, `bbox` and/or `datetime`, assuming the server supports the corresponding subsetting requirements classes) to avoid an error response due
-to requesting more data than allowed by the server limits.
+IMPORTANT: Clients wishing to ensure they always retrieve a <<term-native-resolution,native resolution>> coverage can include in their coverage data request a `Prefer: handling=strict` request header.
+For most large datasets, these clients would also need to include subsetting parameters (`subset`, `bbox` and/or `datetime`, assuming the server supports the corresponding
+subsetting requirements classes), or use `Range:` request headers if supported e.g., as per the <<rc_encoding-cog, COG requirements class>>, to avoid an error response due to
+requesting more data than allowed by the server limits.
 
+[[server-limits-recommendations]]
 ==== Server limits recommendations
 
 Implementations might wish to set certain limits regarding how much data clients can retrieve within a single request.
