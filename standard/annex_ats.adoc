@@ -478,7 +478,8 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-temporal/datetime
 *When:* A temporal subset interval is requested on the `time` axis where the upper boundary, lower boundary, or both boundaries are populated with an asterisk `+*+` character +
 *Then:* +
 - Assert that an asterisk `+*+` used as the lower limit of a subset interval correctly selects the minimum extent of the coverage along that axis. +
-- Assert that an asterisk `+*+` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis.
+- Assert that an asterisk `+*+` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis. +
+- Assert that an asterisk `+*+` used as a single coordinate correctly slices on the latest available temporal instant of the primary temporal dimension.
 |===
 
 **Abstract Test A.{counter:ats-id}:** Multiple Subset Parameter Interpretation
@@ -637,7 +638,8 @@ Abstract Test A.{counter:ats-summary}: /conf/subsetting-general/subset-scaling-e
 *When:* A general subset interval is requested where the upper boundary, lower boundary, or both boundaries are populated with an asterisk `+*+` character +
 *Then:* +
 - Assert that an asterisk `+*+` used as the lower limit of a subset interval correctly selects the minimum extent of the coverage along that axis. +
-- Assert that an asterisk `+*+` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis.
+- Assert that an asterisk `+*+` used as the upper limit of a subset interval correctly selects the maximum extent of the coverage along that axis. +
+- Assert that an asterisk `+*+` used as a single coordinate correctly slices on the latest available temporal instant of an additional temporal dimension.
 |===
 
 **Abstract Test A.{counter:ats-id}:** Multiple Subset Parameter Interpretation

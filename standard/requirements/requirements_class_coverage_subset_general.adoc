@@ -33,18 +33,19 @@ For example, `subset=forecast_time("2020-01-01")` is equivalent to `subset=forec
 [source,ABNF]
 ----
   SubsetSpec       = "subset" "=" axisName "(" intervalOrSingle ")"
-  intervalOrSingle = interval / single
+  intervalOrSingle = interval / single / latest
   interval         = low ":" high
   low              = single / "*"
   high             = single / "*"
   single           = number / text
+  latest           = "*"
 ----
 where:
 
 * `axisName` is an abbreviation identifying an axis described in the following requirements parts, starting by a lowercase or uppercase letter A-Z.
 * `number` is an integer or decimal real number.
 * `text` is some general ASCII text (such as a time and date notation in ISO 8601) enclosed in double-quotes (`"`, ASCII code 0x22).
-
+* the `latest` rule is only applicable to temporal dimensions.
 ^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
 ^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, if a single coordinate is provided for an axis, the coverage response SHALL be the result of a slicing operation for the dimension corresponding to that axis, reducing the dimension.
 ^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-general>>, if an interval is provided for an axis, the coverage response SHALL be the result of a trimming operation for the dimension corresponding to that axis, preserving the dimension.
@@ -71,6 +72,7 @@ where:
 ^|*Requirement {counter:req-id}* |*/req/subsetting-general/wildcard-limits*
 ^|A |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|B |If an upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+^|C |If a single asterisk `*` is provided for a temporal dimension, this SHALL be interpreted as slicing on the latest coordinate of that temporal dimension.
 |===
 
 [[req_subsetting-general_multiple-subset]]

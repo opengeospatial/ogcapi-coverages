@@ -33,11 +33,12 @@ For example, `subset=time("2020-01-01")` is equivalent to `subset=time("2020-01-
 [source,ABNF]
 ----
   SubsetSpec       = "subset" "=" axisName "(" intervalOrSingle ")"
-  intervalOrSingle = interval / single
+  intervalOrSingle = interval / single / latest
   interval         = low ":" high
   low              = single / "*"
   high             = single / "*"
   single           = number / text
+  latest           = "*"
 ----
 where:
 
@@ -79,6 +80,7 @@ where:
 ^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/wildcard-limits*
 ^|A |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
 ^|B |If an upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+^|C |If a single asterisk `*` is provided, this SHALL be interpreted as slicing on the latest coordinate of primary temporal dimension.
 |===
 
 [[req_subsetting-temporal_multiple-subset]]
