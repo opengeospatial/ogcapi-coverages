@@ -51,7 +51,7 @@ It integrates with the OGC API family of standards through [OGC API - Common](ht
 
 `{root}/conformance` The conformance declaration.
 
-#### Extended from [**_OGC API - Common - Part 2_**](https://docs.ogc.org/DRAFTS/20-024.html) with additional properties
+#### Defined in [**_OGC API - Common - Part 2_**](https://docs.ogc.org/DRAFTS/20-024.html)
 
 `{root}/collections`
 
@@ -94,29 +94,23 @@ Returns an individual coverage [tileset](https://github.com/opengeospatial/ogcap
 
 Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
 
-#### Defined in _Coverages - Part 1 "Scenes"_ requirements class
-
-`{root}/collections/{collectionId}/scenes`
-
-Returns the list of scenes available for this coverage (for multi-scenes coverages, when the _Scenes_ requirement class is supported)
-
-`{root}/collections/{collectionId}/scenes/{sceneId}`
-
-Returns the scene metadata for an individual scene
-
-`{root}/collections/{collectionId}/scenes/{sceneId}/coverage`
-
-Returns the coverage data for an individual scene
-
 ### Examples
 
 `GET /collections/myCoverage/coverage`
 
-Retrieve the whole coverage (the response may be downsampled if [Scaling](https://docs.ogc.org/DRAFTS/19-087.html#rc-scaling) is supported by the server).
+Retrieve the whole coverage (the response may be downsampled if [Scaling](https://docs.ogc.org/DRAFTS/19-087.html#rc-scaling-spatial) is supported by the server
+and a `Prefer: handling=strict` request header is not used).
 
-`GET /collections/myCoverage/coverage?scale-factor=1`
+`GET /collections/myCoverage/coverage?resolution=` (for a server implementing a Scaling requirements class), or
 
-Retrieve the whole coverage at native resolution (the server will likely return a 400 error for large datasets).
+```http
+GET /collections/myCoverage/coverage
+Prefer: handling=strict
+```
+
+(for any server, regardless of whether they implement the `resolution` query parameter or not)
+
+Retrieve the whole coverage at native resolution (the server will likely return a 413 error for large datasets, without a `Range:` header or a subsetting query parameter).
 
 `GET /collections/myCoverage/coverage?bbox=10,40,20,50`
 
@@ -134,18 +128,13 @@ Retrieve a coverage spatial subset using the `subset` query parameter.
 
 Retrieve bands B02, B03 and B04 (field selection a.k.a. "range subsetting").
 
-`GET /collections/myCoverage/coverage?scale-size=Lon(800),Lat(400)`
+`GET /collections/myCoverage/coverage?resolution=Lon(0.25),Lat(0.25)`
 
-Retrieve a the coverage at a resolution of 800 cells for the longitude axis and 400 cells for the latitude axis.
+Retrieve a the coverage at a resolution of 0.25 degrees / cell for the latitude and longitude axes.
 
-`GET /collections/myCoverage/coverage?scale-factor=2`
+`GET /collections/myCoverage/coverage?crs=[EPSG:3395]&resolution=E(500),N(500)`
 
-Retrieve a the coverage at a downsampled (2x) resolution.
-
-`GET /collections/myCoverage/coverage?scale-axes=Lon(2)`
-
-Retrieve a the coverage at a downsampled (2x) resolution for the longitude axis.
-
+Retrieve a the coverage in a Mercator CRS, at a resolution of 500 meters / cell for the easting and northing axes.
 
 ### Conformance Classes
 
@@ -153,43 +142,50 @@ Retrieve a the coverage at a downsampled (2x) resolution for the longitude axis.
 
 * [Core](https://docs.ogc.org/DRAFTS/19-087.html#rc-core)
 * [Coverage Tiles](https://docs.ogc.org/DRAFTS/19-087.html#rc-coverage-tiles)
-* [Coverage Scenes](https://docs.ogc.org/DRAFTS/19-087.html#rc-scenes)
 
 The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
 
 The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the Coverages API to request coverage tiles.
 
-The _Scenes_ Requirements Class defines how to present separate components of a coverage as individual scenes, in addition to an overall coverage of the whole collection.
-
 #### Requirements classes defining query parameters
 
-* [Subsetting](https://docs.ogc.org/DRAFTS/19-087.html#rc-subsetting)
-* [Scaling](https://docs.ogc.org/DRAFTS/19-087.html#rc-scaling)
-* [Field Selection](https://docs.ogc.org/DRAFTS/19-087.html#rc-fieldselection)
-* [Coordinate Reference System](https://docs.ogc.org/DRAFTS/19-087.html#rc-crs)
+* Subsetting ([spatial](https://docs.ogc.org/DRAFTS/19-087.html#rc_subsetting_spatial), [temporal](https://docs.ogc.org/DRAFTS/19-087.html#rc_subsetting_temporal), [general](https://docs.ogc.org/DRAFTS/19-087.html#rc_subsetting_general))
+* Scaling ([spatial](https://docs.ogc.org/DRAFTS/19-087.html#rc_scaling_spatial), [temporal](https://docs.ogc.org/DRAFTS/19-087.html#rc_scaling_temporal), [general](https://docs.ogc.org/DRAFTS/19-087.html#rc_scaling_general))
+* Collapsing sparse dimensions ([spatial](https://docs.ogc.org/DRAFTS/19-087.html#rc_sparse-dimensions-collapse-spatial), [temporal](https://docs.ogc.org/DRAFTS/19-087.html#rc_sparse-dimensions-collapse-temporal), [general](https://docs.ogc.org/DRAFTS/19-087.html#rc_sparse-dimensions-collapse-general))
+* [Multi-slicing](https://docs.ogc.org/DRAFTS/19-087.html#rc_multi_slicing)
+* [Field Selection](https://docs.ogc.org/DRAFTS/19-087.html#rc_field-selection)
+* [Coordinate Reference System](https://docs.ogc.org/DRAFTS/19-087.html#rc_crs)
 
-The _Subset_ Requirements Class defines the `subset`, `bbox` and `datetime` parameters to select a subset of a coverage of any coordinate reference system and any dimension.
+The _Subset_ Requirements Classes defines the `subset`, `bbox` and `datetime` query parameters to select a subset of a coverage of any coordinate reference system and any dimension.
 
-The _Scaling_ Requirements Class defines the `scale-factor`, `scale-size` and `scale-axes` parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
+The _Scaling_ Requirements Class defines the `resolution` query parameters for retrieving data from n-dimensional Range Sets at a resolution different than the original.
 
-The _Field Selection_ (Range Subsetting) Requirements Class defines the `properties` parameter for selecting a subset of the bands (defined in the Range Type) to retrieve from Range Sets.
+The _Field Selection_ (Range Subsetting) Requirements Class defines the `properties` and `exclude-properties` query parameters for selecting a subset of the fields/bands (defined in the Range Type) to retrieve from Range Sets.
 
 The _Coordinate Reference System_ Requirements Class defines the `crs` parameter to request coverage data in an alternate output coordinate reference system.
 
-#### Requirements classes defining resource representations
+#### Requirements class for position queries
 
-* [HTML](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-html)
-* [GeoTIFF](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-geotiff)
+* [Position Query](https://docs.ogc.org/DRAFTS/19-087.html#rc_position_query)
+
+#### Requirements classes defining encodings
+
+* [HTML](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-html)
+* [GeoTIFF](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-geotiff)
+* [Cloud Optimized GeoTIFF](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-cog)
 * [netCDF](https://docs.ogc.org/DRAFTS/19-087.html#_requirements_class_netcdf)
-* [CIS JSON](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-cisjson)
-* [CoverageJSON](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-coveragejson)
-* [LAS](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-las)
-* [LASZip](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-laszip)
-* [PNG](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-png)
-* [JPEG XL](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-jpegxl)
-* [JPEG 2000](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-jpeg2000)
-* [(Geo)Zarr](https://docs.ogc.org/DRAFTS/19-087.html#rc-encoding-zarr)
-* [OpenAPI 3.0](https://docs.ogc.org/DRAFTS/19-087.html#rc-oas30)
+* [CIS JSON](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-cisjson)
+* [CoverageJSON](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-coveragejson)
+* [LAS](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-las)
+* [LASZip](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-laszip)
+* [PNG](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-png)
+* [JPEG XL](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-jpegxl)
+* [JPEG 2000](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-jpeg2000)
+* [(Geo)Zarr](https://docs.ogc.org/DRAFTS/19-087.html#rc_encoding-zarr)
+
+#### Requirements class related to API definition
+
+* [API Operations](https://docs.ogc.org/DRAFTS/19-087.html#rc_api_operations)
 
 The Encoding Requirements Classes address support for formats commonly used for encoding coverage data.
 
@@ -216,6 +212,22 @@ so browse there to get a good idea of what is happening, as well as past decisio
 ## Additional parts of OGC API - Coverages
 
 * [Part 2: Filtering and deriving fields](https://github.com/opengeospatial/ogcapi-coverages/issues/164)
+
+* [Part 3: Scenes](https://github.com/opengeospatial/ogcapi-coverages/blob/master/proposals/clause_13_scenes.adoc)
+
+The _Scenes_ extension defines how to present separate components of a coverage as individual scenes, in addition to an overall coverage of the whole collection.
+
+`{root}/collections/{collectionId}/scenes`
+
+Returns the list of scenes available for this coverage (for multi-scenes coverages, when the _Scenes_ requirement class is supported)
+
+`{root}/collections/{collectionId}/scenes/{sceneId}`
+
+Returns the scene metadata for an individual scene
+
+`{root}/collections/{collectionId}/scenes/{sceneId}/coverage`
+
+Returns the coverage data for an individual scene
 
 See also [OGC API - Processes - Part 3: Workflows and Chaining](https://docs.ogc.org/DRAFTS/21-009.html), "Collection Input" and "Collection Output" requirements class in particular,
 for how an _OGC API - Coverage_ coverage can be the input and/or the output of an _OGC API - Processes_ process.
