@@ -21,11 +21,15 @@ The capability to request tiles is defined in the following Requirement:
 ^|B |The coverage's collection description document at `/collections/{collectionId}` SHALL include a link with relation type https://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage linking to that resource listing available coverage tilesets
 ^|C |This list of coverage tilesets SHALL include a link to the full descriptions of these tilesets, typically accessible at `/collections/{collectionId}/tiles/{tileMatrixSetId}`
 ^|D |The tiles making up the tilesets SHALL be accessible from the tiles template described within the tileset, typically at `/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}`
-^|E |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles specifications
+^|E |The responses for the list of tilesets, tileset metadata and tiles SHALL comply to all requirements of the OGC API - Tiles standard for all dependency and declared requirements classes
 ^|F |The response to a request for an individual tile SHALL return a subset of the coverage trimmed on the axes defined by the 2D Tile Matrix Set
 to cover the exact geospatial extent of the tile.
 ^|G |The response to a request for an individual tile SHALL be scaled down to a number of cells corresponding to the tile's pixel size,
    plus one if the coverage cells do not fully span the distance between them.
+^|H |The tiled coverage data resources SHALL support the relevant query parameters (`subset`, `resolution`, `datetime`, `properties`, `exclude-properties`) and associated
+requirements defined in requirements classes of this OGC API - Coverages standard to which the Implementation declares conformance,
+with the exception of aspects related to the dimensions inherent to the spatial dimensions of the 2D Tile Matrix Set (e.g., latitude and longitude, or easting and northing)
+for which subsetting and scaling is already implied by a tile identifier.
 |===
 
 As an example, considering that the _WorldCRS84Quad_ Tile Matrix Set has tile pixel sizes defined as 256 x 256,

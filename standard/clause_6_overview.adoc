@@ -43,6 +43,8 @@ Access Paths are used to build resource identifiers. Most of these paths are fix
 
 All resources are also accessible by following links starting from the landing page, with a specific link relation type used from one resource to another, as detailed in <<conventions-link-relations>>.
 
+=== Resource Paths
+
 The following table summarizes the resource paths defined in this standard, as well as those inherited from _OGC API - Common_.
 
 [#coverage-paths,reftext='{table-caption} {counter:table-num}']
@@ -50,23 +52,122 @@ The following table summarizes the resource paths defined in this standard, as w
 [width="100%",cols="3,5",options="header"]
 |===
 ^|Resource URI                                   ^|Description
-2+|**_OGC API - Common - Part 1_**
-|`{root}/`                                    |Landing page for this dataset distribution
-|`{root}/api`                                 |API description (e.g., Open API Specification) and documentation (e.g., HTML)
-|`{root}/conformance`                         |Declaration of supported conformance classes
-2+|**_OGC API - Common - Part 2_** (extended with additional properties for the **_Coverages API_**)
-|`{root}/collections`                         |The list of all collections available, some or all of which may be accessible using this _Coverages API_. Each of these collections contains a minimal subset of the object collection resource object described immediately below.
-|`{root}/collections/{collectionId}`          |Description for the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource includes elements such as an `id`, `title`, `description`, available `crs` and `extent`. This `extent` describes the <<term-domain,domain>> of the coverage for each dimension, including the overall envelope, detailed sub-intervals where data is available, and/or a <<term-regular-grid,regular>> or <<term-irregular-grid,irregular>> <<term-grid,`grid`>>. This object also includes links to resources pertaining to this collection. For coverages, a link to the record schema described below will be included. This resource is comparable to a WCS *_DescribeCoverage_* response, with the exception that the schema, corresponding to Coverage Implementation Schema (CIS) _range type_, needs to be retrieved separately.
-2+|**_OGC API - Coverages - Part 1_** (example paths)
-|`{root}/collections/{collectionId}` `/schema`   |Returns the schema for the coverage <<term-field,fields>> or properties of values available at each <<term-direct-position,direct position>>. At minimum, a _JSON Schema_ representation of this resource is available. This resource is comparable to the CIS <<term-range-type,_range type_>> portion of the WCS *_DescribeCoverage_* response, and is retrieved separately from the collection description to accommodate more complex record schemas including several record fields and/or detailed semantic annotations.
-|`{root}/collections/{collectionId}` `/coverage` |Returns the <<term-coverage,coverage>> data, including any self-describing information (such as the _domain set_, _range type_ and _metadata_ components in addition to the _<<term-range,range>> set_ of CIS). This resource is comparable to a WCS *_GetCoverage_* response.
-2+|**_OGC API - Tiles - Part 1_**  (example paths)
-|`{root}/collections/{collectionId}` `/tiles`                                              |Returns the list of tilesets available for this coverage.
-|`{root}/collections/{collectionId}` `/tiles/{tileSetId}`                                  |Returns an individual coverage tileset for a particular 2D Tile Matrix Set
-|`{root}/collections/{collectionId}` `/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` |Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
+2+|https://docs.ogc.org/is/19-072/19-072.html[**_OGC API - Common - Part 1_**]
+|`{root}/` +
+(see <<_landing_page,example B.1>>) |Landing page for this dataset distribution
+|`{root}/api` +
+(see https://github.com/opengeospatial/ogcapi-coverages/tree/master/standard/openapi[example OpenAPI definition])  |API description (e.g., Open API Specification) and documentation (e.g., HTML)
+|`{root}/conformance` +
+(see <<_conformance_declaration_2,example B.2>>)                         |Declaration of supported conformance classes
+2+|https://docs.ogc.org/DRAFTS/20-024.html[**_OGC API - Common - Part 2_**]
+|`{root}/collections` +
+(see <<_list_of_collections,example B.3>>)                        |The list of all collections available, some or all of which may be accessible using this _Coverages API_. Each of these collections contains a minimal subset of the object collection resource object described immediately below.
+|`{root}/collections/{collectionId}` +
+(see <<collection-description-example,example B.4>>)         |Description for the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource includes elements such as an `id`, `title`, `description`, available `crs` and `extent`. This `extent` describes the <<term-domain,domain>> of the coverage for each dimension, including the overall envelope, detailed sub-intervals where data is available, and/or a <<term-regular-grid,regular>> or <<term-irregular-grid,irregular>> <<term-grid,`grid`>>. This object also includes links to resources pertaining to this collection. For coverages, a link to the record schema described below will be included. This resource is comparable to a WCS *_DescribeCoverage_* response, with the exception that the schema, corresponding to Coverage Implementation Schema (CIS) _range type_, needs to be retrieved separately.
+2+|https://docs.ogc.org/is/23-058r2/23-058r2.html[**_OGC API - Common - Part 3_**]
+|`{root}/collections/{collectionId}` `/schema` +
+(see <<_schema_resource_range_type,example B.5>>)  |Returns the schema for the coverage <<term-field,fields>> or properties of values available at each <<term-direct-position,direct position>>. At minimum, a _JSON Schema_ representation of this resource is available. This resource is comparable to the CIS <<term-range-type,_range type_>> portion of the WCS *_DescribeCoverage_* response, and is retrieved separately from the collection description to accommodate more complex record schemas including several record fields and/or detailed semantic annotations.
+2+|<<rc_core,**_OGC API - Coverages - Part 1_**>> (example path)
+|`{root}/collections/{collectionId}` `/coverage` +
+(see <<_core_data_request,example B.6>>) |Returns the <<term-coverage,coverage>> data, including any self-describing information (such as the _domain set_, _range type_ and _metadata_ components in addition to the _<<term-range,range>> set_ of CIS). This resource is comparable to a WCS *_GetCoverage_* response.
+2+|https://docs.ogc.org/is/20-057/20-057.html[**_OGC API - Tiles - Part 1_**]  (example paths)
+|`{root}/collections/{collectionId}` `/tiles` +
+(see <<_discovering_available_tilesets,example B.15.1>>)                                             |Returns the list of tilesets available for this coverage.
+|`{root}/collections/{collectionId}` `/tiles/{tileSetId}` +
+(see <<_retrieving_a_tileset_metadata_resource,example B.15.2>>)                                 |Returns an individual coverage tileset for a particular 2D Tile Matrix Set
+|`{root}/collections/{collectionId}` `/tiles/{tileSetId}/{tileMatrix}/{tileRow}/{tileCol}` +
+(see examples <<_retrieving_tiled_coverage_data_by_slicing_dimensions,B.15.3>> and <<_retrieving_multi_dimensional_tiled_coverage_data,B.15.4>>) |Returns an individual coverage tile for a particular 2D Tile Matrix Set, tile matrix, tile row and tile column
 |===
 
 Where:
 
 * `{root}` = URI of the landing page for the API distributing the dataset
 * `{collectionId}` = an identifier for a specific coverage (collection)
+
+[[coverage-query-parameters]]
+=== Coverage resource query parameters
+
+The table below summarizes the query parameters available for the `{root}/collections/{collectionId}/coverage` endpoint to subset (slice, trim, select fields),
+resample and reproject coverage data defined by optional requirements classes.
+
+[#coverage-parameters-table,reftext='{table-caption} {counter:table-num}']
+.Overview of query parameters for `/collections/{collectionId}/coverage`
+[width="100%",cols="2,4,6,4",options="header"]
+|===
+^|Query parameter ^|Purpose ^| Examples ^|Defined by +
+(requirements class)
+
+|**`bbox`**
+|Trim data within a 2D or 3D spatial bounding box
+|`bbox=-75.0,40.0,-65.0,50.0` +
+(see <<_axis_subsetting_slicing_and_trimming, B.7>>)
+|<<rc_subsetting_spatial,*Spatial Subsetting*>>
+
+|**`bbox-crs`**
+|Define the coordinate reference system for `bbox`
+|`bbox-crs=[EPSG:3395]`
+|<<rc_subsetting_spatial,*Spatial Subsetting*>>
+
+|**`datetime`**
+|Slice (single value) or trims (interval) data along the primary temporal dimension
+|`datetime=2026-01-01/2026-07-03` +
+`datetime=2026-01-01T12:00:00Z` +
+(see <<_axis_subsetting_slicing_and_trimming, B.7>>, <<_sparse_dimensions_slicing_and_flattening, B.8>>)
+|<<rc_subsetting_temporal,*Temporal Subsetting*>>, <<rc_sparse-dimensions-collapse-temporal,*Collapsing Sparse Temporal Dimensions*>>
+
+|**`subset`**
+|Slice (single value) or trims (interval) any data axis
+|`subset=Lat(40:50),time("2026-07-03")` +
+(see <<_axis_subsetting_slicing_and_trimming, B.7>>, <<_sparse_dimensions_slicing_and_flattening, B.8>>, <<_multi_slicing, B.9>>, <<_position_query, B.10>>)
+|<<rc_subsetting_spatial,*Spatial Subsetting*>>, +
+<<rc_subsetting_temporal,*Temporal Subsetting*>>, +
+<<rc_subsetting_general,*General Subsetting*>>, +
+<<rc_multi_slicing,*Multi Slicing*>>, +
+*Collapsing Sparse  <<rc_sparse-dimensions-collapse-spatial, Spatial>>, +
+<<rc_sparse-dimensions-collapse-temporal, Temporal>>, +
+<<rc_sparse-dimensions-collapse-general, General>> Dimensions*, +
+<<rc_position_query, *Position Query*>>
+
+|**`subset-crs`**
+|Define the coordinate reference system for `subset`
+|`subset-crs=[EPSG:3395]`
+|<<rc_subsetting_spatial,*Spatial Subsetting*>>
+
+|**`width`**
+|Set explicit count of cells for the output's dimension corresponding to longitude or easting
+|`width=800` +
+(see <<_explicit_grid_size_scaling_via_width_and_height, B.11.2>>)
+|<<rc_scaling_spatial,*Spatial Scaling*>>
+
+|**`height`**
+|Set explicit count of cells for the output's dimension corresponding to latitude or northing
+|`height=600` +
+(see <<_explicit_grid_size_scaling_via_width_and_height, B.11.2>>)
+|<<rc_scaling_spatial,*Spatial Scaling*>>
+
+|**`resolution`**
+|Specify distance between cells for resampling
+|`resolution=Lat(10),Lon(10),time(P1D)` +
+(see <<_scaling, B.11>>)
+|<<rc_scaling_spatial,*Spatial Scaling*>>, +
+<<rc_scaling_temporal,*Temporal Scaling*>>, +
+<<rc_scaling_general,*General Scaling*>>
+
+|**`properties`**
+|Select specific fields from the <<term-field,field schema>>
+|`properties=B02,B03,B04` +
+(see <<_field_selection_via_the_properties_query_parameter,B.13.1>>)
+|<<rc_field-selection,*Field Selection*>>
+
+|**`exclude-properties`**
+|Exclude specific fields from the <<term-field,field schema>>
+|`exclude-properties=temp,rh` +
+(see <<_excluding_fields_via_the_exclude_properties_query_parameter,B.13.2>>)
+|<<rc_field-selection,*Field Selection*>>
+
+|**`crs`**
+|Reproject the output data to a target CRS
+|`crs=[EPSG:3395]` +
+(see <<_output_crs_selection, B.14>>)
+|<<rc_crs,*Coordinate Reference System by Reference*>>
+|===

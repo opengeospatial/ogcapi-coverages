@@ -104,4 +104,4 @@ except for anti-aliasing along the edges between both.
 ^|C |The GeoTIFF coverage response SHOULD generate progressively smaller overviews based on that requested number of overviews.
 |===
 
-NOTE: Clients can use a combination of `tiling`, `tile-width`, `tile-height` and `overview-count` to get a GeoTIFF conforming to the https://docs.ogc.org/is/21-026/21-026.html[OGC Cloud Optimized GeoTIFF] standard (see also <<rc_cog>>).
+NOTE: Clients can use a combination of `tiling`, `tile-width`, `tile-height` and `overview-count` to get a GeoTIFF conforming to the https://docs.ogc.org/is/21-026/21-026.html[OGC Cloud Optimized GeoTIFF] standard (see also <<rc_encoding-cog>>).

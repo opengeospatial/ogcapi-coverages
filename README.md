@@ -66,7 +66,7 @@ This [`extent`](https://github.com/opengeospatial/ogcapi-coverages/blob/master/s
 This object also includes links to resources pertaining to this collection. For coverages, a link to the record schema described below will be included.
 This resource is comparable to a WCS *_DescribeCoverage_* response, with the exception that the schema, corresponding to Coverage Implementation Schema (CIS) _range type_, needs to be retrieved separately.
 
-#### Defined in _Coverages - Part 1_
+#### Defined in [**_OGC API - Common - Part 3_**](https://docs.ogc.org/is/23-058r2/23-058r2.html)
 
 `{root}/collections/{collectionId}/schema`
 
@@ -74,6 +74,8 @@ Returns the [schema](https://github.com/opengeospatial/ogcapi-coverages/blob/mas
 At minimum, a _JSON Schema_ representation of this resource is available.
 This resource is comparable to the CIS _range type_ portion of the WCS *_DescribeCoverage_* response,
 and is retrieved separately from the collection description to accommodate more complex record schemas including several record fields and/or detailed semantic annotations.
+
+#### Defined in **_OGC API - Coverages - Part 1_**
 
 `{root}/collections/{collectionId}/coverage`
 

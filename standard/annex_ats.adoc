@@ -1038,7 +1038,7 @@ Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resoluti
 |===
 |test id: |/conf/field-selection/properties
 |requirement: |/req/field-selection/properties
-|test purpose: |Verify field extraction, error handling, metadata filtering, and sequence preservation via the `properties` query parameter.
+|test purpose: |Verify field selection, error handling, and sequence preservation via the `properties` query parameter.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class +
 *When:* Requesting coverage resources using the `properties` query parameter +
@@ -1139,6 +1139,10 @@ Abstract Test A.{counter:ats-summary}: /conf/tiles/tilesets
 - Assert that the responses for the tileset list, tileset metadata, and distinct tiles meet all structural requirements of the OGC API - Tiles specification. +
 - Assert that the response payload for a specific tile contains a coverage subset trimmed on the designated 2D Tile Matrix Set axes matching the exact spatial window of the tile. +
 - Assert that a tile response is scaled to match the tile's pixel size dimensions, adding one cell if the coverage cells do not completely span the interval between sample centers.
+- Assert that the tiled coverage data resources support the relevant query parameters (`subset`, `resolution`, `datetime`, `properties`, `exclude-properties`) and associated
+requirements defined in requirements classes of this OGC API - Coverages standard to which the Implementation declares conformance,
+with the exception of aspects related to the dimensions inherent to the spatial dimensions of the 2D Tile Matrix Set (e.g., latitude and longitude, or easting and northing)
+for which subsetting and scaling is already implied by a tile identifier.
 |===
 
 === Conformance Class: HTML

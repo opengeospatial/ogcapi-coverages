@@ -163,17 +163,18 @@ the implementation SHOULD default to `[ogc-interpolation:modal]` interpolation m
 ^|A |The Implementation SHOULD understand a `Prefer:` request header
 (as defined in https://datatracker.ietf.org/doc/html/rfc7240[RFC 7240]) value provided by the client hinting at the preferred
 <<conventions-interpolation-methods, interpolation method>>.
-^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
+^|B |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific fallback interpolation method using a safe CURIEs or URI, such as from the OGC definition server (https://www.opengis.net/def/interpolation/OGC/1), to apply uniformly across all dimensions and fields unless overridden. Example: `Prefer: interpolation=[ogc-interpolation:linear]`
+^|C |The implementation SHOULD support an `interpolation=` value for that `Prefer:` header selecting one specific interpolation method using a safe CURIEs or URI, such as from the OGC
 definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific dimensions being scaled. Example: `Prefer: interpolation=Lat([ogc-interpolation:nearest-neighbor]),Lon([ogc-interpolation:nearest-neighbor]),time([ogc-interpolation:nearest-neighbor]),pressure([ogc-interpolation:nearest-neighbor])`
-^|C |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method
+^|D |The implementation SHOULD support a `properties-interpolation=` value for that `Prefer:` header selecting one specific interpolation method
 which will override interpolation methods specified in any `interpolation` preference for any dimension, using a safe CURIEs or URI,
 such as from the OGC definition server (https://www.opengis.net/def/interpolation/OGC/1), for specific fields being returned.
 Example: `Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])`.
-^|D |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
+^|E |The implementation SHOULD also support in the context of that `properties-interpolation=` value the selection of an interpolation method for a specific
 field and dimension, which will override interpolation for that field only for that dimension, using the `dimension:URI` syntax inside the parentheses, for example:
 `Prefer: properties-interpolation=temperature(Lat:[ogc-interpolation:linear],Lon:[ogc-interpolation:linear],time:[ogc-interpolation:linear],pressure:[ogc-interpolation:linear])`.
 
-^a|E | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of a dimension being scaled:
+^a|F | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of a dimension being scaled:
 
 - `[ogc-interpolation:linear]`: Perform a linear interpolation among the values being represented along the scaled dimension,
 - `[ogc-interpolation:nearest-neighbor]`: Use the available value nearest to the center within the values being represented along the scaled dimension,
@@ -185,7 +186,7 @@ field and dimension, which will override interpolation for that field only for t
 - `[ogc-interpolation:median]`: Use the median of all values being represented along the scaled dimension,
 - `[ogc-interpolation:modal]`: Use the most frequent value of all values represented along the scaled dimension,
 
-^a|F | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the slicing and flattening sparse dimensions requirements:
+^a|G | The implementation SHOULD consider supporting the following interpolations methods, with the following meaning in the context of the slicing and flattening sparse dimensions requirements:
 
 - `[ogc-interpolation:next]`: Use the next available data point from the sliced dimension,
 - `[ogc-interpolation:previous]`: Use the previous available data point from the sliced dimension,

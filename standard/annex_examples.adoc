@@ -2,71 +2,2894 @@
 :appendix-caption: Annex
 == Examples (Informative)
 
-[[basic-coverage-examples]]
-=== Basic Coverage Retrieval Example
+This annex demonstrates requests and responses for the resource paths defined by this OGC API - Coverages standard.
+For clarity, the multi-dimensional examples within this section are encoded using the https://covjson.org[CoverageJSON] format, which is described by the
+https://www.opengis.net/doc/CS/covjson/1.0[OGC CoverageJSON Community Standard].
+While CoverageJSON is utilized here to illustrate structured coverage data output, this OGC API - Coverages standard is completely decoupled and agnostic from any single data encoding.
+Implementations are required to support content negotiation as part of the Core requirements class.
+Servers are free to support other data formats — such as NetCDF, GeoTIFF (including Cloud Optimized with support for HTTP range requests),
+JPEG-XL, or LAZ (for point clouds) — based on client request negotiation, and no single data format is universally mandatory.
+Supporting binary encodings will provide more efficient bandwidth utilization and processing performance.
+https://ubjson.org/[Universal Binary JSON] can be considered as a simple mechanism to turn JSON data into a more efficient binary payload.
 
-// TODO:
+=== Landing Page
 
-=== Collection Description examples
+The landing page provides the main entry point to the API, advertising conformance classes and routing clients
+to the collections catalog through explicit link relations.
 
-Extra dimension `definition` example: https://qudt.org/vocab/quantitykind/AtmosphericPressure
+==== Request
 
-Units of measures example:
+A client requests the top-level API landing page.
 
-"unitLang": "ucum",
-"unit": "m/s"
+[source,http]
+----
+GET /ogcapi/ HTTP/1.1
+Host: example.com
+Accept: application/json
+----
 
-"unitLang": "qudt",
-"unit": "https://qudt.org/vocab/unit/HectoPA"
+==== Response
 
-[[subsetting-examples]]
-=== Subsetting Example
+The server returns the landing page payload. The metadata block contains a `links` array that routes clients to the collections list.
 
-These examples return a subset of a coverage in the negotiated format, including domain set, range type (and metadata if applicable) to the extent than they can be described in that format:
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
 
-* {datasetAPI}/collections/{collectionId}/coverage?subset=Lat(40:50),Lon(10:20) -- returns a cutout (trim) from the coverage for the extent between corner coordinates (Lat: 40, Lon: 10) and (Lat: 50, Lon: 20)
-* {datasetAPI}/collections/{collectionId}/coverage?subset=time("2019-03-27") -- returns a coverage slice at the timestamp (if the coverage is has 2D spatial dimensions plus time, the result will be a 2D image with its full spatial extent)
+[source,json]
+----
+{
+  "title": "OGC API - Coverages Server",
+  "description": "Environmental and atmospheric coverage data server",
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/json",
+      "title": "This document",
+      "href": "/ogcapi/"
+    },
+    {
+      "rel": "conformance",
+      "type": "application/json",
+      "title": "OGC API Conformance Classes",
+      "href": "/ogcapi/conformance"
+    },
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/data",
+      "type": "application/json",
+      "title": "Collections index",
+      "href": "/ogcapi/collections"
+    },
+    {
+       "rel": "service-desc",
+       "type": "application/vnd.oai.openapi+json;version=3.0",
+       "title": "OpenAPI 3.0 API Definition",
+       "href": "/ogcapi/api"
+    },
+    {
+       "rel": "service-doc",
+       "type": "text/html",
+       "title": "Human-readable API Documentation",
+       "href": "/ogcapi/api.html"
+    }
+  ]
+}
+----
 
-[[scaling-examples]]
-=== Scaling Example
+=== Conformance declaration
 
-* {datasetAPI}/collections/{collectionId}/coverage?resolution=Lat(0.5),Lon(0.5) -- returns a coverage re-scaled at a 0.5 degree resolution for both latitude and longitude
-* {datasetAPI}/collections/{collectionId}/coverage?resolution=spatial-distance(0.5) -- for a non-gridded coverage such as a point cloud, returns a coverage re-scaled at a 0.5 meters resolution (vectorial distance between samples)
-* {datasetAPI}/collections/{collectionId}/coverage?width=400&height=300 -- returns the entire coverage re-scaled to 300 pixels along its latitude or Northing/Y axis, and 400 samples along its longitude or Easting/X axis in the negotiated format
-* {datasetAPI}/collections/{collectionId}/coverage?resolution=time(P1D) -- returns a coverage re-scaled to a daily temporal resolution for its primary temporal dimension
-* {datasetAPI}/collections/{collectionId}/coverage?resolution=Lat(),Lon(),time() -- returns a coverage using the native spatial and temporal resolution, ensuring the server will not automatically downsample, which might result in an error if the response is too large
+The conformance declaration page lists the requirements classes supported by the server implementation, allowing clients
+to dynamically verify the capabilities of the coverage endpoint.
 
-[[field-selection-examples]]
-=== Field Selection (Range Subsetting) Example
+==== Request
 
-These examples return a range subset of a coverage in the negotiated format, including domain set, range type (and metadata if applicable) to the extent than they can be described in that format:
+A client requests the top-level conformance resource.
 
-* {datasetAPI}/collections/{collectionId}/coverage?properties=B02,B03,B04 -- returns only the bands with IDs B02, B03 and B04 from the coverage
-* {datasetAPI}/collections/{collectionId}/coverage?properties=3,4,5 -- returns the 4th, 5th and 6th band (0-based indexing, as listed in the Range Type) from the coverage
-* {datasetAPI}/collections/{collectionId}/coverage?properties=B07,* -- returns the band B07 and all subsequent bands from the coverage
+[source,http]
+----
+GET /ogcapi/conformance HTTP/1.1
+Host: example.com
+Accept: application/json
+----
 
-[[coverage-tiles-examples]]
-=== Coverage Tiles Example
+==== Response
 
-// TODO:
+The server returns the conformance payload containing the target requirements class URIs defined by the standard.
 
-////
-=== Domainset Subsetting Example
-// No longer a thing
-////
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
 
-////
+[source,json]
+----
+{
+  "conformsTo": [
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core",
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/landing-page",
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json",
+    "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/oas30",
+    "https://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections",
+    "https://www.opengis.net/spec/ogcapi-common-2/1.0/conf/uad-collections",
+    "https://www.opengis.net/spec/ogcapi-common-2/1.0/conf/json",
+    "http://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas",
+    "http://www.opengis.net/spec/ogcapi-common-3/1.0/req/returnables-and-receivables",
+    "http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/core",
+    "http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tileset",
+    "http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/tilesets-list",
+    "http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/geodata-tilesets",
+    "http://www.opengis.net/spec/ogcapi-tiles-1/1.0/conf/datetime",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-spatial",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-temporal",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/subsetting-general",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/sparse-dimensions-collapse-spatial",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/sparse-dimensions-collapse-temporal",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/multi-slicing",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/position-query",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-spatial",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-temporal",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/field-selection",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/coveragejson",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/laszip",
+    "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff"
+  ]
+}
+----
 
-NOTE: Collection filtering should be a profile of Records Local Resource Catalogs for Collections resources defined in a requirements class of OGC API - Common - Part 2: Geospatial Data
+=== List of Collections
 
-[[collections-metadata-examples]]
-=== Bounding Box Example
+The collections index enumerates all available data resources, detailing the dimensions, variables, and
+available tilesets for each collection.
 
-* Using OGC API - Common bbox syntax (fixed, 2D axis sequence): http://acme.com/oapi/collections?bbox=160.6,-55.95,-170,-25.89  -- returns a list of all collections intersecting that is in the New Zealand economic zone.
+==== Request
 
-////
+A client requests the collections metadata catalog index.
 
-=== Link relations
-Include example usage of link relation `data` from Landing page linking to /collections
+[source,http]
+----
+GET /ogcapi/collections HTTP/1.1
+Host: example.com
+Accept: application/json
+----
 
-Include example usage of link relation `geodata` from tileset (/collections/{collectionId}/tiles/{tileMatrixSetId} linking back to collection (/collections/{collectionId}. This a request in the issue #201
+==== Response
+
+The server returns the collections array. This metadata entry provides a link relation pointing directly to
+the available tilesets resource for the specific collection.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
+
+[source,json]
+----
+{
+  "collections": [
+    {
+      "id": "climate:era5",
+      "title": "ERA5 Atmospheric Fields",
+      "extent": {
+        "spatial": {
+          "bbox": [ [ -180.0, -90.0, 180.0, 90.0 ] ],
+          "crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+        }
+      },
+      "links": [
+        {
+          "rel": "self",
+          "type": "application/json",
+          "title": "Collection description for climate:era5",
+          "href": "/ogcapi/collections/climate:era5"
+        },
+        {
+          "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+          "type": "application/prs.coverage+json",
+          "title": "Coverage resource endpoint",
+          "href": "/ogcapi/collections/climate:era5/coverage"
+        },
+        {
+          "rel": "http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage",
+          "type": "application/json",
+          "title": "Coverage tilesets available for this collection",
+          "href": "/ogcapi/collections/climate:era5/tiles"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/json",
+      "title": "Collections index list",
+      "href": "/ogcapi/collections"
+    }
+  ]
+}
+----
+
+[[collection-description-example]]
+=== Collection Description (Domain)
+
+This example demonstrates how a multi-dimensional coverage collection describes its domain structure within the collection description.
+The dataset represents a 4D atmospheric datacube with spatial axes, a temporal axis, and an atmospheric pressure coordinate axis.
+
+The example incorporates explicit grid topology descriptions, including `relativeBounds` for regular grid dimensions (representing the cell-centered offset distance to the
+cell edge) and `boundsCoordinates` for irregular grid intervals. For the spatial longitude axis, the 2049 cells at a 0.17578125-degree resolution span exactly 360.0 degrees
+from -180.0 to 180.0, indicating a _Value-Is-Point_ grid topology where the outer boundaries represent wrapping point coordinates. Consequently, the spatial `relativeBounds`
+collapse to zero. The temporal grid stores instantaneous snapshots, represented by a zero-length duration. For the irregular pressure dimension, `boundsCoordinates` is
+structured as an array of arrays of 2 values to define the absolute lower and upper bounds for each pressure level; because these represent exact point-in-space measurements,
+the bounds collapse to match the exact coordinate of each level.
+
+==== Request
+
+A client retrieves the collection description for a specific coverage collection to inspect its multi-dimensional domain, grid description, and boundary extents.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity HTTP/1.1
+Host: example.com
+Accept: application/json
+----
+
+==== Response
+
+The server returns the collection description document detailing the 4D domain extent, supported output coordinate reference systems, and the grid description.
+
+[source,json]
+----
+{
+  "id": "climate:era5:relativeHumidity",
+  "title": "ERA5 Relative Humidity",
+  "attribution": "<a href='https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-pressure-levels'>Copernicus Climate Data Store</a>",
+  "attributionMediaType": "text/html",
+  "extent": {
+    "spatial": {
+      "bbox": [ [ -180.0, -90.0, 180.0, 90.0 ] ],
+      "grid": [
+        {
+          "cellsCount": 2049,
+          "resolution": 0.17578125,
+          "relativeBounds": [ 0.0, 0.0 ]
+        },
+        {
+          "cellsCount": 1025,
+          "resolution": 0.17578125,
+          "relativeBounds": [ 0.0, 0.0 ]
+        }
+      ]
+    },
+    "temporal": {
+      "interval": [ [ "2023-04-01T00:00:00Z", "2023-04-06T23:00:00Z" ] ],
+      "grid": {
+        "cellsCount": 144,
+        "resolution": "PT1H",
+        "relativeBounds": [ "PT0H", "PT0H" ]
+      }
+    },
+    "pressure": {
+      "definition": "https://qudt.org/vocab/quantitykind/AtmosphericPressure",
+      "unitLang": "qudt",
+      "unit": "https://qudt.org/vocab/unit/HectoPA",
+      "interval": [ [ 1.0, 1000.0 ] ],
+      "grid": {
+        "cellsCount": 37,
+        "coordinates": [ 1.0, 2.0, 3.0, 5.0, 7.0, 10.0, 20.0, 30.0, 50.0, 70.0, 100.0, 125.0, 150.0, 175.0, 200.0, 225.0, 250.0, 300.0, 350.0, 400.0, 450.0, 500.0, 550.0, 600.0, 650.0, 700.0, 750.0, 775.0, 800.0, 825.0, 850.0, 875.0, 900.0, 925.0, 950.0, 975.0, 1000.0 ],
+        "boundsCoordinates": [ [1.0, 1.0], [2.0, 2.0], [3.0, 3.0], [5.0, 5.0], [7.0, 7.0], [10.0, 10.0], [20.0, 20.0], [30.0, 30.0], [50.0, 50.0], [70.0, 70.0], [100.0, 100.0], [125.0, 125.0], [150.0, 150.0], [175.0, 175.0], [200.0, 200.0], [225.0, 225.0], [250.0, 250.0], [300.0, 300.0], [350.0, 350.0], [400.0, 400.0], [450.0, 450.0], [500.0, 500.0], [550.0, 550.0], [600.0, 600.0], [650.0, 650.0], [700.0, 700.0], [750.0, 750.0], [775.0, 775.0], [800.0, 800.0], [825.0, 825.0], [850.0, 850.0], [875.0, 875.0], [900.0, 900.0], [925.0, 925.0], [950.0, 950.0], [975.0, 975.0], [1000.0, 1000.0] ]
+      }
+    }
+  },
+  "minCellSize": 0.17578125,
+  "minScaleDenominator": 69885283.00358972,
+  "crs": [
+    "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+    "http://www.opengis.net/def/crs/EPSG/0/4326",
+    "http://www.opengis.net/def/crs/EPSG/0/3857",
+    "http://www.opengis.net/def/crs/EPSG/0/3395"
+  ],
+  "storageCrs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+  "links": [
+    {
+      "rel": "self",
+      "title": "Information about the ERA5 Relative Humidity collection",
+      "href": "/ogcapi/collections/climate:era5:relativeHumidity",
+      "type": "application/json"
+    },
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/schema",
+      "title": "Schema resource describing the range type",
+      "href": "/ogcapi/collections/climate:era5:relativeHumidity/schema",
+      "type": "application/schema+json"
+    },
+    {
+      "rel": "https://www.opengis.net/def/rel/ogc/1.0/coverage",
+      "title": "Coverage for Relative Humidity (as Coverage JSON)",
+      "href": "/ogcapi/collections/climate:era5:relativeHumidity/coverage",
+      "type": "application/prs.coverage+json"
+    },
+    {
+      "rel": "http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage",
+      "title": "Coverage tilesets available for this collection",
+      "href": "/ogcapi/collections/climate:era5:relativeHumidity/tiles",
+      "type": "application/json"
+    }
+  ]
+}
+----
+
+=== Schema Resource (Range Type)
+
+This example illustrates how a multi-dimensional coverage collection describes its range type using a standard schema resource per OGC API - Common - Part 3:
+Schemas and the Coverages Core requirements class. The resource presents a logical schema defining the fields of the range associated with each coverage cell.
+While serialized as a JSON Schema, it serves as a logical description of the data properties rather than a payload validator, ensuring compatibility across
+both JSON-based and binary multi-dimensional encodings.
+
+The location of the schema resource is not rigidly fixed to a specific path structure. A client programmatically discovers the correct endpoint at runtime by
+inspecting the collection description and resolving the target URL populated within the link object containing the schema link relation type.
+
+==== Request
+
+A client fetches the dynamically discovered schema definition associated with the collection to programmatically determine the structural properties,
+sequential order, semantic definition, variable classification type, and statistical boundaries of the internal cell variables before initiating a data stream.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/schema HTTP/1.1
+Host: example.com
+Accept: application/schema+json
+----
+
+==== Response
+
+The server returns a logical JSON Schema document profiling the relative humidity field variable using the key `rh`. It populates standard OGC semantic
+annotations to explicitly detail the sequential structure, semantic definition link, percentage unit in UCUM (the default unit language), continuous variable type, and observed
+value statistics.
+
+[source,json]
+----
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/ogcapi/collections/climate:era5:relativeHumidity/schema",
+  "title": "ERA5 Relative Humidity Range Type Schema",
+  "type": "object",
+  "properties": {
+    "rh": {
+      "title": "Relative Humidity",
+      "type": "number",
+      "description": "The ratio of the partial pressure of water vapor to the equilibrium saturation vapor pressure of water, calculated with respect to the ambient air temperature",
+      "x-ogc-propertySeq": 1,
+      "x-ogc-definition": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+      "x-ogc-unit": "%",
+      "x-ogc-variableType": "continuous",
+      "x-ogc-statistics": {
+        "min": 0.0,
+        "max": 100.0,
+        "avg": 62.45,
+        "stdDev": 18.23
+      }
+    }
+  }
+}
+----
+
+=== Core Data Request
+
+This example demonstrates baseline data retrieval requests targeting the coverage endpoint without explicit subsetting or field selection parameters.
+Under the Core requirements class, if a client requests the entire multi-dimensional dataset without bounds, the server can automatically apply
+downsampling based on configured server <<server-limits-recommendations, limits>>. Alternatively, if a client explicitly forbids downsampling via a strict
+handling preference, the server rejects requests that exceed native data limits with an HTTP 413 error.
+
+==== Automatic Server-Side Downsampling
+
+When a request for the complete coverage volume is received without a strict handling preference header, a server may automatically scale the
+returned array resolution to fit within its internal data transmission safety thresholds.
+
+===== Request
+
+A client requests the full extent of the coverage data cube, negotiating a CoverageJSON response without indicating strict handling constraints.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/coverage HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server returns a `200 OK` status along with an automatically downsampled CoverageJSON payload. Per the spatial-temporal reference and interpolation
+reporting rules, the server populates response headers detailing the exact domain envelope, active reference coordinates, and applied scaling algorithms.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: -180.0,-90.0,180.0,90.0
+Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
+Content-Interpolation: [ogc-interpolation:linear]
+----
+
+The returned response body carries the self-contained coverage document serialized using the default structural parameters of the CoverageJSON standard format layout.
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": -180.0, "stop": 180.0, "num": 3 },
+      "y": { "start": -90.0, "stop": 90.0, "num": 3 },
+      "t": { "values": [ "2023-04-01T00:00:00Z", "2023-04-01T12:00:00Z" ] },
+      "z": { "values": [ 500.0, 1000.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Pressure" },
+            "direction": "down",
+            "unit": { "symbol": "hPa" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "rh": {
+      "type": "Parameter",
+      "description": {
+        "en": "Relative Humidity"
+      },
+      "unit": {
+        "symbol": "%"
+      },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": {
+          "en": "Relative Humidity"
+        }
+      }
+    }
+  },
+  "ranges": {
+    "rh": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [2, 2, 3, 3],
+      "values": [
+        55.4, 56.1, 57.8, 60.2, 61.5, 62.9, 64.1, 65.3, 66.0,
+        52.1, 53.0, 54.5, 58.0, 59.2, 60.1, 61.3, 62.4, 63.0,
+        48.7, 49.3, 50.1, 53.4, 54.1, 55.6, 57.0, 58.2, 59.1,
+        45.2, 46.0, 47.1, 49.9, 50.5, 51.8, 53.1, 54.0, 55.2
+      ]
+    }
+  }
+}
+----
+
+==== Strict Handling Enforced (Exceeding Server Limits)
+
+If a client demands the whole coverage extraction at native resolution but fails to provide a `Range:` header, a bounding box
+(`bbox`), a temporal interval (`datetime`), or any dimensionality slicing parameters, the server will reject the request if the
+native payload size breaks safe thresholds.
+
+===== Request
+
+A client requests the full extent of the coverage data cube but explicitly appends the strict handling header to forbid
+automatic server downsampling.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/coverage HTTP/1.1
+Host: example.com
+Prefer: handling=strict
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+Because the strict directive prevents the server from downsampling the dense 4D array to a safe transmission volume, the server
+aborts the request and returns an HTTP `413 Content Too Large` error status.
+
+[source,http]
+----
+HTTP/1.1 413 Content Too Large
+Content-Type: application/problem+json
+
+{
+  "type": "http://example.com/prob/content-too-large",
+  "title": "Payload Too Large",
+  "status": 413,
+  "detail": "The requested native coverage volume exceeds server data limits. Apply axis subsetting or accept automatic downsampling by omitting the strict handling header."
+}
+----
+
+=== Axis Subsetting (Slicing and Trimming)
+
+This section provides multiple examples of axis subsetting operations, demonstrating how a client uses trimming parameters to
+narrow bounding intervals or slicing parameters to lock a dimension to a single coordinate point.
+
+==== Spatial and Temporal Trimming
+
+This example illustrates a complex trimming request where multiple independent dimensions are restricted to smaller bounding
+intervals simultaneously. The client narrows the horizontal spatial footprint and the temporal window to a precise localized box,
+while keeping the atmospheric pressure domain fully intact.
+
+A client can execute this trimming operation using global query parameters (`bbox` and `datetime`) or axis-specific `subset`
+expressions. Both methods are functionally equivalent and yield the exact same 4D spatial-temporal data slice from the server.
+
+===== Request
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?bbox=10,40,20,50&datetime=2023-04-01T00:00:00Z/2023-04-02T00:00:00Z HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+or equivalently:
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?subset=Lat(40:50),Lon(10:20),time("2023-04-01T00:00:00Z":"2023-04-02T00:00:00Z") HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server trims the coverage on the latitude, longitude and temporal dimensions, preserving all four dimensions, and returns a `200 OK` status.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 10.0,40.0,20.0,50.0
+Content-Datetime: 2023-04-01T00:00:00Z/2023-04-02T00:00:00Z
+Content-Interpolation: [ogc-interpolation:nearest-neighbor]
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 10.0, "stop": 20.0, "num": 3 },
+      "y": { "start": 40.0, "stop": 50.0, "num": 3 },
+      "t": { "values": [ "2023-04-01T00:00:00Z", "2023-04-02T00:00:00Z" ] },
+      "z": { "values": [ 500.0, 1000.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Pressure" },
+            "direction": "down",
+            "unit": { "symbol": "hPa" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "rh": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    }
+  },
+  "ranges": {
+    "rh": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [2, 2, 3, 3],
+      "values": [
+        55.4, 56.1, 57.8, 60.2, 61.5, 62.9, 64.1, 65.3, 66.0,
+        52.1, 53.0, 54.5, 58.0, 59.2, 60.1, 61.3, 62.4, 63.0,
+        48.7, 49.3, 50.1, 53.4, 54.1, 55.6, 57.0, 58.2, 59.1,
+        45.2, 46.0, 47.1, 49.9, 50.5, 51.8, 53.1, 54.0, 55.2
+      ]
+    }
+  }
+}
+----
+
+==== Simultaneous Temporal and Atmospheric Pressure Slicing
+
+This example demonstrates a double slicing operation across multiple coordinate dimensions. Slicing reduces the dimensionality of the coverage by
+collapsing both requested non-spatial axes down to a single coordinate value. The resulting coverage is reduced from a 4D array down to a flat, two-dimensional spatial domain.
+
+===== Request
+
+A client issues a query utilizing explicit subset points to collapse the temporal dimension (`time`) and the atmospheric pressure axis (`pressure`) to single snapshots,
+using the exact names defined in the collection's domain specification.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?subset=time("2023-04-01T12:00:00Z"),pressure(850) HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server extracts the single 2D spatial plane intersection where the specific time snapshot and pressure level meet. The `t` and `z` parameters are
+omitted from the domain axes array loop, resulting in a flat 2D cell response payload.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: -180.0,-90.0,180.0,90.0
+Content-Datetime: 2023-04-01T12:00:00Z
+Content-Interpolation: [ogc-interpolation:nearest-neighbor]
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": -180.0, "stop": 180.0, "num": 3 },
+      "y": { "start": -90.0, "stop": 90.0, "num": 3 }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }]
+  },
+  "parameters": {
+    "rh": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    }
+  },
+  "ranges": {
+    "rh": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        55.4, 56.1, 57.8, 60.2, 61.5, 62.9, 64.1, 65.3, 66.0
+      ]
+    }
+  }
+}
+----
+
+=== Sparse Dimensions Slicing and Flattening
+
+This section provides comprehensive examples demonstrating how servers manage sparse dimensional domains where data points
+do not uniformly fill every spatial-temporal intersection. The examples illustrate two primary functional behaviors: slicing sparse
+dimensions (mosaicking and filling observational gaps across single-coordinate requests) and flattening sparse dimensions (collapsing
+higher dimensions when negotiating formats with limited multi-dimensional array support).
+
+==== Temporal Slicing of Sparse Satellite Imagery
+
+This example demonstrates a temporal slicing operation against a sparse Earth Observation satellite dataset (`sentinel2-l2a`). Because
+orbital paths mean specific geographic areas are only captured every few days, a global slice on a single day leaves heavy regional
+observational voids. Under <<req_sparse-dimensions-collapse-temporal_slice-sparse-dimension, temporal slicing requirements>>,
+the server populates empty spatial portions by mosaicking data from the closest or last previous available timestamps.
+
+===== Request
+
+A client requests a spatial sub-interval window while slicing a single temporal instant where regional data gaps exist natively.
+
+[source,http]
+----
+GET /ogcapi/collections/sentinel2-l2a/coverage?bbox=30,40,50,70&datetime=2026-07-01T00:00:00Z HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server resolves the temporal slice. It automatically populates native spatial data gaps by harvesting nearby non-empty cell values
+along the temporal timeline. The response drops the sliced time axis and yields a flat 2D spatial grid layout containing the visible red,
+green, and blue bands, which are the fields described as the `defaultFields` in the collection description.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 30.0,40.0,50.0,70.0
+Content-Datetime: 2026-07-01T00:00:00Z
+Content-Interpolation: dimensions=time([ogc-interpolation:nearest-neighbor])
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 30.0, "stop": 50.0, "num": 3 },
+      "y": { "start": 40.0, "stop": 70.0, "num": 3 }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }]
+  },
+  "parameters": {
+    "B04": {
+      "type": "Parameter",
+      "description": { "en": "Band 4 (red) - wavelength: 0.6265-0.7025 um" },
+      "unit": { "symbol": "1" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/Reflectance",
+        "label": { "en": "Surface Reflectance" },
+        "wavelengthMin": 0.6265,
+        "wavelengthMax": 0.7025,
+        "wavelengthUnit": "um"
+      }
+    },
+    "B03": {
+      "type": "Parameter",
+      "description": { "en": "Band 3 (green) - wavelength: 0.515-0.605 um" },
+      "unit": { "symbol": "1" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/Reflectance",
+        "label": { "en": "Surface Reflectance" },
+        "wavelengthMin": 0.515,
+        "wavelengthMax": 0.605,
+        "wavelengthUnit": "um"
+      }
+    },
+    "B02": {
+      "type": "Parameter",
+      "description": { "en": "Band 2 (blue) - wavelength: 0.3986-0.5946 um" },
+      "unit": { "symbol": "1" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/Reflectance",
+        "label": { "en": "Surface Reflectance" },
+        "wavelengthMin": 0.3986,
+        "wavelengthMax": 0.5946,
+        "wavelengthUnit": "um"
+      }
+    }
+  },
+  "ranges": {
+    "B04": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        0.1542, 0.1610, 0.1712, 0.1345, 0.1522, 0.1801, 0.1211, 0.1432, 0.1604
+      ]
+    },
+    "B03": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        0.1312, 0.1504, 0.1622, 0.1234, 0.1411, 0.1705, 0.1102, 0.1342, 0.1511
+      ]
+    },
+    "B02": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        0.1204, 0.1412, 0.1534, 0.1122, 0.1305, 0.1611, 0.1014, 0.1222, 0.1405
+      ]
+    }
+  }
+}
+----
+
+==== Temporal Flattening into a 2D Spatial Format
+
+This example illustrates a temporal flattening operation under <<req_sparse-dimensions-collapse-temporal_flattening-sparse-dimension,
+temporal flattening requirements>> against the satellite imagery dataset. The client requests a broad temporal trim interval but negotiates
+a flat, image-based payload format (GeoTIFF) which carries no native multi-dimensional time axis. The server implicitly
+flattens the time dimension by mosaicking the temporal array stack, preserving only  the latest non-empty observations stacked on top.
+
+===== Request
+
+A client executes a broad temporal trim alongside a spatial bounding box, negotiating an image-based output encoding.
+
+[source,http]
+----
+GET /ogcapi/collections/sentinel2-l2a/coverage?bbox=30,40,50,70&datetime=2026-07-01T00:00:00Z/2026-07-31T23:59:59Z HTTP/1.1
+Host: example.com
+Accept: image/tiff; application=geotiff
+----
+
+===== Response
+
+The server collapses the temporal axis by mosaicking the overlapping time steps into a single raster sheet based on temporal priority,
+delivering a 2D georeferenced GeoTIFF data stream to the client.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: image/tiff; application=geotiff
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 30.0,40.0,50.0,70.0
+Content-Datetime: 2026-07-01T00:00:00Z/2026-07-31T23:59:59Z
+Content-Interpolation: dimensions=time([ogc-interpolation:nearest-neighbor])
+----
+
+_[Binary 2D GeoTIFF Image Stream]_
+
+==== Spatial Slicing of Sparse Weather Station Observations
+
+This example demonstrates a spatial slicing operation under <<req_sparse-dimensions-collapse-spatial_slice-sparse-dimension,
+spatial slicing requirements>> targeting a sparse weather station network (`global:temperature:surface`). Because physical observation
+stations sit at static points, requesting data sliced down to an absolute geographic coordinate center point over a continuous time
+trim range creates a sparse timeline where specific intervals contain data gaps. The server resolves target blanks by substituting
+records from the nearest non-empty geographic neighbors. Because the Grid schema mandates the presence of horizontal coordinates, the
+spatial dimensions are preserved as single-value arrays.
+
+===== Request
+
+A client slices the horizontal space to a targeted coordinate position while trimming the primary time timeline across a full month index.
+
+[source,http]
+----
+GET /ogcapi/collections/global:temperature:surface/coverage?subset=Lat(30),Lon(40)&datetime=2026-07-01T00:00:00Z/2026-07-31T23:00:00Z HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server narrows the geographic space down to the targeted coordinates. Where the primary station contains missing entries, data is
+harvested from the closest available neighbor station. The horizontal axes are retained as single-value coordinate steps to satisfy
+format schema constraints.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 40.0,30.0,40.0,30.0
+Content-Datetime: 2026-07-01T00:00:00Z/2026-07-31T23:00:00Z
+Content-Interpolation: dimensions=Lat([ogc-interpolation:nearest-neighbor]),Lon([ogc-interpolation:nearest-neighbor])
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "PointSeries",
+    "axes": {
+      "x": { "values": [40.0]},
+      "y": { "values": [30.0]},
+      "t": { "values": [ "2026-07-01T00:00:00Z", "2026-07-01T01:00:00Z", "2026-07-01T02:00:00Z" ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }]
+  },
+  "parameters": {
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "y", "x"],
+      "shape": [3, 1, 1],
+      "values": [
+        24.5, 24.2, 23.9
+      ]
+    }
+  }
+}
+----
+
+==== Spatial Flattening into a 1D Temporal Profile
+
+This example showcases a spatial flattening operation under <<req_sparse-dimensions-collapse-spatial_flattening-sparse-dimension,
+spatial flattening requirements>> against the sparse observational network. A client trims a broad spatial bounding window alongside
+a temporal trim range, but explicitly requests an alternative tabular text representation via content negotiation. The server collapses the
+multi-dimensional geographic fields, combining cell values across space via spatial nearest-neighbor mapping into a flat 1D time-series CSV profile.
+
+===== Request
+
+A client requests a multi-dimensional sub-volume block but negotiates a flat, 1D temporal profile representation by requesting a comma-separated values stream.
+
+[source,http]
+----
+GET /ogcapi/collections/global:temperature:surface/coverage?bbox=30,40,50,70&datetime=2026-07-01T00:00:00Z/2026-07-01T02:00:00Z HTTP/1.1
+Host: example.com
+Accept: text/csv
+----
+
+===== Response
+
+The server processes the query parameters, collapses the spatial coordinates down to a single location sequence using station proximity mapping,
+and delivers a flat 1D time-series CSV text table where each row provides the temperature at a particular temporal instant.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: text/csv; header=present
+Content-Datetime: 2026-07-01T00:00:00Z/2026-07-01T02:00:00Z
+Content-Interpolation: dimensions=Lat([ogc-interpolation:nearest-neighbor]),Lon([ogc-interpolation:nearest-neighbor])
+----
+
+[source,csv]
+----
+time,temperature
+2026-07-01T00:00:00Z,21.3
+2026-07-01T01:00:00Z,21.1
+2026-07-01T02:00:00Z,20.8
+----
+
+=== Multi-Slicing
+
+This section provides multiple examples of axis subsetting operations, demonstrating how a client uses slicing parameters to
+lock a dimension to a single coordinate point or select multiple non-contiguous coordinates along a single axis.
+
+==== Multi-Slicing on an Atmospheric Pressure Axis
+
+This example demonstrates a multi-slicing operation targeting the atmospheric pressure coordinate of our 4D ERA5 dataset. The client
+requests relative humidity data across the entire spatial-temporal domain, but specifies exactly two atomspheric pressure levels: the
+500 hPa and 1000 hPa planes, bypassing all intermediate pressure levels. The query targets the parameter key exactly by the canonical
+naming identifier stipulated within the collection description.
+
+===== Request
+
+A client targets the coverage endpoint, passing a comma-separated list of target values inside the atmospheric pressure subset expression.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?subset=pressure(500,1000) HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server processes the multi-slice parameter and restricts the atmospheric pressure dimension to only the two requested indices. The resulting
+CoverageJSON document preserves the 4D grid structure, containing exactly two coordinates for the atmospheric pressure dimension.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: -180.0,-90.0,180.0,90.0
+Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": -180.0, "stop": 180.0, "num": 3 },
+      "y": { "start": -90.0, "stop": 90.0, "num": 3 },
+      "t": { "values": [ "2023-04-01T00:00:00Z", "2023-04-01T12:00:00Z" ] },
+      "z": { "values": [ 500.0, 1000.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Pressure" },
+            "direction": "down",
+            "unit": { "symbol": "hPa" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "rh": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    }
+  },
+  "ranges": {
+    "rh": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [2, 2, 3, 3],
+      "values": [
+        55.4, 56.1, 57.8, 60.2, 61.5, 62.9, 64.1, 65.3, 66.0,
+        52.1, 53.0, 54.5, 58.0, 59.2, 60.1, 61.3, 62.4, 63.0,
+        48.7, 49.3, 50.1, 53.4, 54.1, 55.6, 57.0, 58.2, 59.1,
+        45.2, 46.0, 47.1, 49.9, 50.5, 51.8, 53.1, 54.0, 55.2
+      ]
+    }
+  }
+}
+----
+
+==== Multi-Slicing on a Non-Spatial Categorical Dimension
+
+This example showcases a multi-slicing operation against an ecological biodiversity observation coverage (`biodiversity:species:density`).
+The coverage consists of 3D domain with a single field named `density`.
+
+===== Request
+
+A client passes the comma-separated taxonomic identifiers inside the axis-explicit `subset` query parameter, using the canonical axis name defined in the collection description.
+
+[source,http]
+----
+GET /ogcapi/collections/biodiversity:species:density/coverage?bbox=10,40,20,50&subset=species("Gadus morhua","Clupea harengus") HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server slices the multi-dimensional grid, restricting the output to only the coordinate positions matching Atlantic Cod and Atlantic Herring.
+The numeric coordinates populate the `z` axis to satisfy the parser checks, while the extension member carries the corresponding string literals.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 10.0,40.0,20.0,50.0
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 10.0, "stop": 20.0, "num": 3 },
+      "y": { "start": 40.0, "stop": 50.0, "num": 3 },
+      "z": { "values": [ 0.0, 1.0 ] }
+    },
+    "zAxisText:values": [ "Gadus morhua", "Clupea harengus" ],
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Taxonomic Species" },
+            "direction": "none",
+            "unit": { "symbol": "1" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "density": {
+      "type": "Parameter",
+      "description": { "en": "Population Density" },
+      "unit": { "symbol": "1" },
+      "observedProperty": {
+        "id": "http://vocab.nerc.ac.uk/collection/P02/current/EBOV/",
+        "label": { "en": "Biological population density" }
+      }
+    }
+  },
+  "ranges": {
+    "density": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["z", "y", "x"],
+      "shape": [2, 3, 3],
+      "values": [
+        12.4, 15.1, 14.8, 8.2, 9.5, 11.9, 0.0, 2.1, 4.3,
+        88.1, 92.4, 76.5, 43.2, 51.0, 62.4, 12.1, 14.5, 18.0
+      ]
+    }
+  }
+}
+----
+
+=== Position Query
+
+The Position Query requirements class specifies the ability to query the value(s) for a specific direct position by slicing on every dimension of the coverage, therefore
+reducing the dimensionality of the response to zero. Information about the domain or range, other metadata, as well as complex format structures are not necessary and can
+negatively affect the bandwidth usage and performance for very large numbers of these queries. This requirements class introduces a simple JSON representation which needs to be
+supported by the server. Implementations could also implement additional representations, for example GeoJSON.
+
+==== Mandated Simple JSON Representation
+
+The simple JSON serialization format is mandated when all dimensions are sliced. When a single field is requested for a targeted position that intersects a single cell,
+the raw primitive value is returned directly. When multiple fields are requested for that same intersected cell, the server delivers a flat key-value object mapping each field
+name to its corresponding value. If the queried position intersects multiple cells, the response is an array containing those values or objects.
+
+===== Returning Single Field
+
+A client targets a digital elevation model (`dem`) collection, slicing across all spatial axes down to an absolute geographic node coordinate position.
+
+====== Request
+
+[source,http]
+----
+GET /ogcapi/collections/dem/coverage?subset=Lat(45.4844),Lon(-75.72205) HTTP/1.1
+Host: example.com
+Accept: application/json
+----
+
+====== Response
+
+The server locates the exact coordinate point intercept. Because a single field is returned, the payload strips out all dictionary object wrappers and provides the raw numeric elevation scalar token directly.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
+
+[source,json]
+----
+68.869
+----
+
+===== Returning Multiple Fields
+
+A client targets an ERA5 atmospheric data collection (`climate:era5`) that combines multiple multi-dimensional fields.
+The query uses explicit subset parameters to slice down the temporal axis, atmospheric pressure layer, and spatial coordinate framework simultaneously to retrieve concurrent
+properties.
+
+====== Request
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?subset=Lat(45.4844),Lon(-75.72205),time("2026-07-03T04:00:00Z"),pressure(850) HTTP/1.1
+Host: example.com
+Accept: application/json
+----
+
+====== Response
+
+The server collapses the multi-dimensional layout down to zero dimensions, packaging the concurrent field values as a single flat key-value object matching the intersected cell.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
+
+[source,json]
+----
+{
+  "relativeHumidity": 65.2,
+  "temperature": 14.8
+}
+----
+
+==== Alternative Representations (CoverageJSON and GeoJSON)
+
+Servers can support alternative data encodings like CoverageJSON or GeoJSON for zero-dimensional responses to position queries.
+In these representations, the geometries and referencing information relect the region of validity for the field values being returned.
+
+===== CoverageJSON Zero-Dimensional Single-Point Domain
+
+When a point query negotiates a CoverageJSON payload, the document structures its layout using a clean, non-gridded single-point spatial profile. The domain maps exactly one value for each spatial axis, collapsing array dimension parameters down to a flat data shape.
+
+====== Request
+
+A client slices the multi-dimensional collection down to a single position, negotiating a CoverageJSON response profile.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?subset=Lat(45.4844),Lon(-75.72205),time("2026-07-03T04:00:00Z"),pressure(850) HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+====== Response
+
+The server returns a `200 OK` status. The payload contains a valid, playground-compliant CoverageJSON document utilizing a `Point` domain type wrapper that maps single-element spatial arrays alongside a 1D scalar data structure.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Point",
+    "axes": {
+      "x": { "values": [ -75.72205 ] },
+      "y": { "values": [ 45.4844 ] },
+      "t": { "values": [ "2026-07-03T04:00:00Z" ] },
+      "z": { "values": [ 850.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Pressure" },
+            "direction": "down",
+            "unit": { "symbol": "hPa" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "relativeHumidity": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    },
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "relativeHumidity": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": [],
+      "shape": [],
+      "values": [ 65.2 ]
+    },
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": [],
+      "shape": [],
+      "values": [ 14.8 ]
+    }
+  }
+}
+----
+
+===== GeoJSON Feature with Active Interpolation
+
+When the server performs mathematical interpolation across adjacent array grid cells, it resolves a synthetic parameter value tied directly to the client's query coordinates.
+The corresponding GeoJSON output maps this result onto a precise point geometry.
+
+====== Request
+
+A client requests slicing on a specific spatial, time and pressure level position.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?subset=Lat(45.4844),Lon(-75.72205),time("2026-07-03T04:00:00Z"),pressure(850) HTTP/1.1
+Host: example.com
+Accept: application/geo+json
+----
+
+====== Response
+
+Because interpolation was performed, the server maps the calculated value directly onto the requested position, outputting a valid GeoJSON Point feature.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/geo+json
+Content-Interpolation: [ogc-interpolation:linear]
+----
+
+[source,json]
+----
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [ -75.72205, 45.4844 ]
+  },
+  "properties": {
+    "relativeHumidity": 65.2,
+    "temperature": 14.8,
+    "time": "2026-07-03T04:00:00Z",
+    "pressure": 850.0
+  }
+}
+----
+
+===== GeoJSON Feature Without Interpolation (Native Cell Polygon)
+
+When interpolation is omitted or explicitly disabled, the server snaps the point query to the nearest native raster cell node. The returned parameters reflect the unmodified properties of that specific cell, and the GeoJSON structure accurately exposes the native spatial boundary box footprint of the matching grid cell polygon.
+
+====== Request
+
+A client targets the coordinate node position but explicitly appends a preference header to disable spatial parameter interpolation.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?subset=Lat(45.48),Lon(-75.72),time("2026-07-03T04:00:00Z"),pressure(850) HTTP/1.1
+Host: example.com
+Prefer: interpolation=Lat([ogc-interpolation:none]),Lon([ogc-interpolation:none])
+Accept: application/geo+json
+----
+
+====== Response
+
+The server disables interpolation pipelines, isolates the single grid cell element intersecting the coordinates, and returns its raw values bounded by a GeoJSON Polygon representing the physical cell surface boundaries.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/geo+json
+Preference-Applied: interpolation=Lat([ogc-interpolation:none]),Lon([ogc-interpolation:none])
+----
+
+[source,json]
+----
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-75.75, 45.45],
+        [-75.70, 45.45],
+        [-75.70, 45.50],
+        [-75.75, 45.50],
+        [-75.75, 45.45]
+      ]
+    ]
+  },
+  "properties": {
+    "relativeHumidity": 64.8,
+    "temperature": 15.1,
+    "time": "2026-07-03T04:00:00Z",
+    "pressure": 850.0
+  }
+}
+----
+
+===== GeoJSON Feature Collection for an Intersecting MultiSurfaceCoverage
+
+When a point query targets a coverage backed by an irregular multi-polygon data store (such as overlapping administrative or environmental zones), the position can
+simultaneously intersect multiple distinct cells. The server returns the independent field data values for each matching cell, packaged cleanly as a GeoJSON
+FeatureCollection where each feature geometry preserves the true, irregular polygon footprint of its respective cell.
+
+====== Request
+
+A client queries a localized coordinate position intersecting multiple environmental polygon boundaries inside a MultiSurfaceCoverage dataset collection (`env:zones`).
+
+[source,http]
+----
+GET /ogcapi/collections/env:zones/coverage?subset=Lat(45.4844),Lon(-75.72205) HTTP/1.1
+Host: example.com
+Accept: application/geo+json
+----
+
+====== Response
+
+The server identifies two distinct overlapping cells intersecting the requested position coordinates. It returns a `200 OK` status accompanied by a GeoJSON
+FeatureCollection carrying both independent cell polygon geometries and their associated field values.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/geo+json
+----
+
+[source,json]
+----
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-75.7350, 45.4800],
+            [-75.7250, 45.4920],
+            [-75.7150, 45.4880],
+            [-75.7100, 45.4750],
+            [-75.7220, 45.4720],
+            [-75.7350, 45.4800]
+          ]
+        ]
+      },
+      "properties": {
+        "zoneID": "ZONE_A",
+        "nitrateLevel": 14.2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-75.7300, 45.4900],
+            [-75.7100, 45.4950],
+            [-75.7020, 45.4820],
+            [-75.7180, 45.4780],
+            [-75.7280, 45.4810],
+            [-75.7300, 45.4900]
+          ]
+        ]
+      },
+      "properties": {
+        "zoneID": "ZONE_B",
+        "nitrateLevel": 22.5
+      }
+    }
+  ]
+}
+----
+
+===== Omit Geometry via Field Selection
+
+Clients can intentionally strip spatial shape objects out of the response feature payload using field selection parameter modifiers.
+Within this context, a special `geometry` property is identified with the primary geometry role (`"x-ogc-role": "primary-geometry"`) in the collection schema, rather than
+behaving like a normal field that would be returned in a typical gridded data format.
+
+====== Request
+
+A client slices the data layers down to the target position, appending a field selection query parameter to explicitly omit the spatial geometry layout from the properties list.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?subset=Lat(45.48),Lon(-75.72),time("2026-07-03T04:00:00Z"),pressure(850)&exclude-properties=geometry HTTP/1.1
+Host: example.com
+Accept: application/geo+json
+----
+
+====== Response
+
+The server extracts the target point cell data but strips the spatial coordinate block completely out of the feature payload wrapper. The `geometry` property is set strictly to `null`.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/geo+json
+----
+
+[source,json]
+----
+{
+  "type": "Feature",
+  "geometry": null,
+  "properties": {
+    "relativeHumidity": 64.8,
+    "temperature": 15.1,
+    "time": "2026-07-03T04:00:00Z",
+    "pressure": 850.0
+  }
+}
+----
+
+=== Scaling (Resampling)
+
+This section demonstrates how a client requests a downsampled (lowered resolution) version of a dense multi-dimensional coverage
+grid to protect bandwidth and fit local client processing constraints. Under the Scaling requirements classes, the server
+dynamically resamples the underlying array fields using a specified resolution parameter.
+
+==== Multi-Axis Scaling with Mixed Spatial and Temporal Metrics
+
+This example illustrates a query where a client requests the resampling of multiple dimensions simultaneously. The client requests a
+60-degree grid spacing interval across both the spatial `Lon` and `Lat` axes to downsample a natively dense dataset, while requesting
+the primary `time` dimension to be resampled from hourly (P1H) down to a daily (P1D) interval utilizing the standard ISO 8601 period notation string structure.
+
+===== Request
+
+A client targets the coverage endpoint of the ERA5 collection, submitting a multi-axis resolution query parameter string.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(60),Lon(60),time(P1D) HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server processes the multi-axis constraints, downsamples the fields, and returns a `200 OK` status. The response headers include
+the `Content-Interpolation:` token to explicitly report the applied linear and nearest-neighbor resampling algorithms.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: -180.0,-90.0,180.0,90.0
+Content-Datetime: 2023-04-01T00:00:00Z/2023-04-02T00:00:00Z
+Content-Interpolation: Lon([ogc-interpolation:linear]),Lat([ogc-interpolation:linear]),time([ogc-interpolation:nearest-neighbor])
+----
+
+The returned CoverageJSON payload explicitly reflects the requested resampled grid spacing inside its domain definition axes
+and array shape boundaries. Because the cell bounds are defined as zero-thickness _Value-Is-Point_ semantics, the axis coordinates map directly to exact point samples.
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": -180.0, "stop": 180.0, "num": 7 },
+      "y": { "start": -90.0, "stop": 90.0, "num": 4 },
+      "t": { "values": [ "2023-04-01T00:00:00Z", "2023-04-02T00:00:00Z" ] },
+      "z": { "values": [ 500.0, 1000.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Pressure" },
+            "direction": "down",
+            "unit": { "symbol": "hPa" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "relativeHumidity": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    },
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "relativeHumidity": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [ 2, 2, 4, 7 ],
+      "values": [
+        55.4, 56.1, 57.8, 60.2, 61.5, 62.9, 64.1,
+        52.1, 53.0, 54.5, 58.0, 59.2, 60.1, 61.3,
+        48.7, 49.3, 50.1, 53.4, 54.1, 55.6, 57.0,
+        45.2, 46.0, 47.1, 49.9, 50.5, 51.8, 53.1,
+
+        54.2, 55.0, 56.3, 59.1, 60.2, 61.4, 62.9,
+        51.0, 52.1, 53.4, 56.8, 58.0, 59.0, 60.1,
+        47.5, 48.2, 49.0, 52.1, 53.0, 54.2, 55.9,
+        44.0, 44.9, 45.8, 48.5, 49.2, 50.3, 51.9,
+
+        53.1, 54.2, 55.0, 58.0, 59.1, 60.0, 61.5,
+        50.1, 51.0, 52.2, 55.4, 56.9, 57.8, 59.0,
+        46.2, 47.0, 48.1, 51.0, 52.1, 53.0, 54.8,
+        43.1, 43.8, 44.5, 47.2, 48.0, 49.1, 50.5,
+
+        52.0, 53.1, 54.2, 57.1, 58.0, 59.2, 60.4,
+        49.2, 50.1, 51.0, 54.3, 55.8, 56.9, 58.1,
+        45.1, 46.2, 47.0, 50.1, 51.0, 52.1, 53.9,
+        42.0, 42.9, 43.8, 46.1, 47.2, 48.0, 49.4
+      ]
+    },
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [ 2, 2, 4, 7 ],
+      "values": [
+        14.2, 14.5, 14.8, 13.1, 13.4, 13.9, 12.0,
+        15.1, 15.3, 15.6, 14.0, 14.2, 14.7, 13.1,
+        11.2, 11.4, 11.9, 10.1, 10.4, 10.8, 9.2,
+        12.4, 12.6, 12.9, 11.3, 11.5, 11.8, 10.2,
+
+        13.9, 14.1, 14.4, 12.8, 13.0, 13.5, 11.7,
+        14.8, 15.0, 15.2, 13.7, 13.9, 14.3, 12.8,
+        10.9, 11.1, 11.5, 9.8,  10.1, 10.4, 8.9,
+        12.1, 12.3, 12.5, 11.0, 11.2, 11.5, 9.9,
+
+        13.5, 13.8, 14.0, 12.4, 12.7, 13.1, 11.4,
+        14.4, 14.7, 14.9, 13.3, 13.5, 14.0, 12.4,
+        10.5, 10.8, 11.1, 9.5,  9.7,  10.1, 8.5,
+        11.8, 12.0, 12.2, 10.6, 10.8, 11.1, 9.5,
+
+        13.1, 13.4, 13.7, 12.1, 12.3, 12.8, 11.0,
+        14.0, 14.3, 14.5, 13.0, 13.2, 13.6, 12.1,
+        10.2, 10.4, 10.8, 9.2,  9.4,  9.8,  8.2,
+        11.4, 11.6, 11.9, 10.3, 10.5, 10.8, 9.2
+      ]
+    }
+  }
+}
+----
+
+==== Explicit grid size scaling via width and height
+
+A client targets the coverage endpoint of the `climate:era5` collection to resample the horizontal grid mapping plane to
+specific cell dimensions, requesting a grid of 400 columns along the longitude axis and 300 rows along the latitude axis.
+
+===== Request
+
+A client issues a retrieval query applying explicit cell limits over the 2D spatial axes grid area.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?bbox=-90,0,-45,45&width=400&height=300 HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server scales the execution loops to output a 400x300 horizontal point matrix, returning a `200 OK` status code.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: -90.0,0.0,-45.0,45.0
+----
+
+_[Data Payload Omitted]_
+
+==== Selective native dimension scaling via empty constraints
+
+A client downsamples the spatial resolution of the `climate:era5` collection to 0.5 degrees, but requires
+the primary temporal dimension to remain completely unmodified at its native resolution.
+
+===== Request
+
+A client uses the empty parenthesis syntax modifier inside the resolution parameter string to lock the native temporal resolution.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(0.5),Lon(0.5),time() HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server downsamples the spatial dimensions while preserving the temporal dimension at its native resolution, returning a `200 OK` status.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: -180.0,-90.0,180.0,90.0
+Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
+Content-Interpolation: Lon([ogc-interpolation:linear]),Lat([ogc-interpolation:linear]),time([ogc-interpolation:none])
+----
+_[Data Payload Omitted]_
+
+==== Non-gridded point cloud scaling via spatial-distance over a 3D CRS
+
+This example illustrates a request against a non-gridded LiDAR point cloud collection (`urban:pointcloud`). The dataset leverages a
+3D geographic coordinate reference system with height above ellipsoid (`EPSG:4979`). A client downsamples the sample
+density to a resolution with a maximum of 0.5 meters vectorial distance between adjacent points, negotiating a LAZ file.
+
+===== Request
+
+A client applies the `spatial-distance` parameter key over the 3D envelope, requesting a compact compressed binary stream output.
+
+[source,http]
+----
+GET /ogcapi/collections/urban:pointcloud/coverage?bbox=-75.75,45.45,100.0,-75.70,45.50,150.0&resolution=spatial-distance(0.5) HTTP/1.1
+Host: example.com
+Accept: application/x-laz HTTP/1.1
+----
+
+===== Response
+
+The server streams the thinned 3D coordinate point matrix block directly to the client as an optimized binary compressed LAZ payload.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/x-laz
+Content-Crs: http://www.opengis.net/def/crs/EPSG/0/4979
+Content-Bbox: -75.75,45.45,100.0,-75.70,45.50,150.0
+----
+_[Binary Compressed LAZ Stream Data Payload Omitted]_
+
+=== Interpolation Preferences
+
+This section provides multiple examples demonstrating how a client uses the standard HTTP `Prefer:` header to control server-side
+interpolation. These examples cover the different levels of granularity supported by the standard, including global default fallbacks,
+per-dimension preferences, per-field overrides, and explicit field-dimension intersections.
+
+==== Global Default Fallback with Per-Dimension Overrides
+
+A client targets the ERA5 collection to downsample the multi-dimensional cell layout using a resolution parameter. The client
+passes a `Prefer:` header to establish a global linear interpolation baseline for all fields and dimensions, while explicitly adding
+a per-dimension override to enforce nearest-neighbor mapping across the primary temporal dimension.
+
+===== Request
+
+A client issues a scaling query combining a global fallback directive with a targeted temporal axis override inside the HTTP header.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(90),Lon(180),time(PT12H) HTTP/1.1
+Host: example.com
+Prefer: interpolation=[ogc-interpolation:linear], interpolation=time([ogc-interpolation:nearest-neighbor])
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server honors the global baseline and the dimension-specific override, downsamples the fields, and returns a `200 OK` status. The response
+headers include the `Preference-Applied:` token to confirm compliance alongside the compact `Content-Interpolation:` token to report the applied logic.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Preference-Applied: interpolation=[ogc-interpolation:linear], interpolation=time([ogc-interpolation:nearest-neighbor])
+Content-Interpolation: [ogc-interpolation:linear]; dimensions=time([ogc-interpolation:nearest-neighbor])
+----
+_[Data Payload Omitted]_
+
+==== Per-Field Interpolation Override
+
+This example illustrates a field-specific query targeting a mixed environmental dataset (`climate:landuse`). The coverage carries
+a continuous field (`temperature`) and a non-continuous categorical field (`landCover`). While a server following standard
+recommendations should automatically select nearest-neighbor logic for categorical fields to prevent value corruption, a client
+can be proactive by explicitly requesting nearest-neighbor interpolation exclusively on the `landCover` field.
+
+===== Request
+
+A client uses the `properties-interpolation` parameter modifier inside the `Prefer:` header string to explicitly target a field.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:landuse/coverage?resolution=Lat(90),Lon(180) HTTP/1.1
+Host: example.com
+Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server confirms the preference for the land cover field while maintaining its continuous default linear interpolation logic for the
+unspecified temperature field. Because the respective methods are uniform across all dimensions within each field, the server leverages
+global field shorthand notation to deliver a condensed response header.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Preference-Applied: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])
+Content-Interpolation: [ogc-interpolation:linear]; properties=landCover([ogc-interpolation:nearest-neighbor])
+----
+_[Data Payload Omitted]_
+
+==== Explicit Field-Dimension Intersection Override
+
+This example showcases the maximum level of granularity permitted by the standard. A client requests the ERA5 collection
+but demands that the `temperature` field use exact linear interpolation specifically for the spatial `Lat` and `Lon` dimensions
+and the primary temporal dimension, but explicitly forbids interpolation along the atmospheric pressure axis.
+
+===== Request
+
+A client maps unique interpolation methods to specific field-dimension combinations using a global fallback alongside a targeted
+parenthetical field override syntax structure.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(90),Lon(180),time(PT12H) HTTP/1.1
+Host: example.com
+Prefer: interpolation=[ogc-interpolation:linear], properties-interpolation=temperature(pressure:[ogc-interpolation:none])
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server verifies compliance, performing linear interpolation for the temperature field along the requested space and time axes, but dropping interpolation
+pipelines for the atmospheric pressure axis. The `Preference-Applied:` header reports only on the client's explicit preference tokens. The
+`Content-Interpolation:` header leverages a global default fallback notation to compactly report that linear interpolation was performed globally across all fields
+and dimensions, except for the explicit temperature field and pressure dimension intersection override.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Preference-Applied: interpolation=[ogc-interpolation:linear], properties-interpolation=temperature(pressure:[ogc-interpolation:none])
+Content-Interpolation: [ogc-interpolation:linear]; properties=temperature(pressure:[ogc-interpolation:none])
+----
+_[Data Payload Omitted]_
+
+==== Server Ignores Unsupported Interpolation Preference
+
+This example illustrates a scenario where a client requests an interpolation method that the implementation cannot fulfill. Per the
+standard's compliance rules, a server is permitted to ignore unsupported interpolation method preferences and fallback to its default
+resampling logic. In this event, the accepted axes or fields are reported inside the `Preference-Applied:` response header, signaling
+to the client exactly which preference was fulfilled.
+
+===== Request
+
+A client requests cubic interpolation across the spatial axes, but the server implementation only supports linear and nearest-neighbor methods.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(90),Lon(180) HTTP/1.1
+Host: example.com
+Prefer: interpolation=Lat([ogc-interpolation:cubic]),Lon([ogc-interpolation:cubic])
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server processes the scaling query but ignores the unsupported cubic preference, performing its default linear interpolation
+method instead. The `Preference-Applied:` header is omitted entirely for the ignored spatial axes, while the `Content-Interpolation:`
+header leverages global fallback shorthand notation to compactly declare the linear interpolation method performed uniformly across all fields.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Interpolation: [ogc-interpolation:linear]
+----
+_[Data Payload Omitted]_
+
+=== Field selection
+
+The Field Selection requirements class provides the ability to return specific targeted subsets of fields from a coverage resource
+using either inclusive selection via the `properties` query parameter or exclusive omission via the `exclude-properties` query
+parameter. This mechanism allows clients to optimize bandwidth consumption by requesting only needed fields.
+
+==== Field selection via the `properties` query parameter
+
+This example illustrates an inclusive field selection query targeting the bands of a multi-band satellite imagery dataset
+(`sentinel2-l2a`) to compute a Normalized Difference Vegetation Index (NDVI). A client uses the `properties` query parameter to
+request the near-infrared and red fields, dictating the precise structural order in which those fields must be serialized inside
+the response payload.
+
+===== Request
+
+A client targets the coverage endpoint, passing a comma-separated list of chosen field identifiers matching the top-level property
+keys defined in the collection schema.
+
+[source,http]
+----
+GET /ogcapi/collections/sentinel2-l2a/coverage?bbox=30,40,50,70&properties=B08,B04 HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server extracts only the requested fields, returning a `200 OK` status. Per the standard rules, the serialized CoverageJSON
+payload drops all unlisted variables, and the fields inside the `parameters` and `ranges` blocks follow the exact ordering layout
+sequence dictated by the client's query string.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 30.0,40.0,50.0,70.0
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 30.0, "stop": 50.0, "num": 3 },
+      "y": { "start": 40.0, "stop": 70.0, "num": 3 }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }]
+  },
+  "parameters": {
+    "B08": {
+      "type": "Parameter",
+      "description": { "en": "Band 8 (nir) - wavelength: 0.6901-0.9801 um" },
+      "unit": { "symbol": "1" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/Reflectance",
+        "label": { "en": "Surface Reflectance" },
+        "wavelengthMin": 0.6901,
+        "wavelengthMax": 0.9801,
+        "wavelengthUnit": "um"
+      }
+    },
+    "B04": {
+      "type": "Parameter",
+      "description": { "en": "Band 4 (red) - wavelength: 0.6265-0.7025 um" },
+      "unit": { "symbol": "1" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/Reflectance",
+        "label": { "en": "Surface Reflectance" },
+        "wavelengthMin": 0.6265,
+        "wavelengthMax": 0.7025,
+        "wavelengthUnit": "um"
+      }
+    }
+  },
+  "ranges": {
+    "B08": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        0.6842, 0.7110, 0.6912, 0.6545, 0.7222, 0.6801, 0.6311, 0.6432, 0.7004
+      ]
+    },
+    "B04": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        0.1542, 0.1610, 0.1712, 0.1345, 0.1522, 0.1801, 0.1211, 0.1432, 0.1604
+      ]
+    }
+  }
+}
+----
+
+==== Excluding fields via the `exclude-properties` query parameter
+
+This example illustrates an exclusive field selection query against the atmospheric `climate:era5` collection. A client
+uses the `exclude-properties` query parameter to suppress the delivery of a field (`relativeHumidity`), requesting that
+all other available fields be returned.
+
+===== Request
+
+A client targets the coverage endpoint, passing the targeted field to be omitted inside the exclusion parameter.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?bbox=10,40,20,50&exclude-properties=relativeHumidity HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server omits the excluded relative humidity data array while transmitting all remaining companion fields. The sequence order
+of the remaining fields inside the output document strictly follows the original sequence defined in the collection's logical schema.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+Content-Bbox: 10.0,40.0,20.0,50.0
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 10.0, "stop": 20.0, "num": 3 },
+      "y": { "start": 40.0, "stop": 50.0, "num": 3 }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
+      }
+    }]
+  },
+  "parameters": {
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [3, 3],
+      "values": [
+        14.2, 14.5, 14.8, 13.1, 13.4, 13.9, 12.0, 12.3, 12.9
+      ]
+    }
+  }
+}
+----
+
+==== Client error under mutually exclusive selection parameters
+
+This example demonstrates the error handling behavior when a client mixes conflicting field selection query parameters. Per the specification
+constraints, inclusive parameter listing and exclusive parameter listing are mutually exclusive options.
+
+===== Request
+
+A client issues an invalid query attempting to simultaneously leverage both inclusive and exclusive selectors inside the same request string.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?properties=temperature&exclude-properties=relativeHumidity HTTP/1.1
+Host: example.com
+Accept: application/json
+----
+
+===== Response
+
+The server detects the co-occurrence of both parameters, aborts processing, and returns a `400 Bad Request` status code accompanied
+by a standard JSON error message payload.
+
+[source,http]
+----
+HTTP/1.1 400 Bad Request
+Content-Type: application/problem+json
+----
+
+[source,json]
+----
+{
+  "type": "http://www.opengis.net/def/exceptions/ogcapi-coverages-1/1.0/conflicting-parameters",
+  "title": "Invalid Field Selection Parameters",
+  "status": 400,
+  "detail": "The 'properties' and 'exclude-properties' query parameters are mutually exclusive and cannot be combined in a single request."
+}
+----
+
+=== Output CRS selection
+
+The Coordinate Reference System (CRS) Selection requirements class provides the ability to request a coverage in a specific target CRS instead of the collection's native CRS. The available target options are advertised to the client within the `crs` array of the collection description. A client uses the `crs` query parameter to specify a target CRS identifier chosen from this supported list.
+
+==== Spatial reprojection to a projected CRS
+
+This example illustrates a request against our 4D atmospheric `climate:era5` collection, which has a geographic `CRS84` coordinate reference system as its native CRS. A client requests the data to be reprojected into the World Mercator coordinate reference system (`EPSG:3395`) to obtain conformal projected metric coordinates for navigational modeling.
+
+===== Request
+
+A client targets the coverage endpoint, passing a supported target coordinate reference system identifier inside the `crs` query parameter.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/coverage?crs=[EPSG:3395]&bbox-crs=[EPSG:3395]&bbox=1113194,5621521,2226389,6446275 HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server reprojects the coordinates, calculates the transformed cell bounding coordinates, and returns a `200 OK` status. The response headers include the `Content-Crs:` and `Content-Bbox:` elements explicitly mapped to the output projected coordinate system space.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/EPSG/0/3395
+Content-Bbox: 1113194.0,5621521.0,2226389.0,6446275.0
+----
+
+The returned CoverageJSON payload reflects this spatial reprojection inside the `x` and `y` axes of the domain configuration block, preserving the temporal and pressure dimensions.
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 1113194.0, "stop": 2226389.0, "num": 3 },
+      "y": { "start": 5621521.0, "stop": 6446275.0, "num": 3 },
+      "t": { "values": [ "2023-04-01T00:00:00Z", "2023-04-01T12:00:00Z" ] },
+      "z": { "values": [ 500.0, 1000.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "ProjectedCRS",
+        "id": "http://www.opengis.net/def/crs/EPSG/0/3395"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{
+            "name": { "en": "Pressure" },
+            "direction": "down",
+            "unit": { "symbol": "hPa" }
+          }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "relativeHumidity": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    },
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "relativeHumidity": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [2, 2, 3, 3],
+      "values": [
+        55.4, 56.1, 57.8, 60.2, 61.5, 62.9, 64.1, 65.3, 66.0,
+        52.1, 53.0, 54.5, 58.0, 59.2, 60.1, 61.3, 62.4, 63.0,
+        48.7, 49.3, 50.1, 53.4, 54.1, 55.6, 57.0, 58.2, 59.1,
+        45.2, 46.0, 47.1, 49.9, 50.5, 51.8, 53.1, 54.0, 55.2
+      ]
+    },
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [2, 2, 3, 3],
+      "values": [
+        14.2, 14.5, 14.8, 13.1, 13.4, 13.9, 12.0, 12.3, 12.9,
+        15.1, 15.3, 15.6, 14.0, 14.2, 14.7, 13.1, 13.4, 13.8,
+        11.2, 11.4, 11.9, 10.1, 10.4, 10.8, 9.2,  9.5,  9.9,
+        12.4, 12.6, 12.9, 11.3, 11.5, 11.8, 10.2, 10.5, 10.9
+      ]
+    }
+  }
+}
+----
+
+=== Coverage tiles
+
+The Coverage Tiles requirements class bridges the OGC API - Coverages standard with the OGC API - Tiles and OGC 2D Tile Matrix
+Set (2DTMS) standards. This class allows a client to fetch pre-aligned blocks of cells by targeting specific matrix, row,
+and column coordinates defined by a 2DTMS, rather than submitting arbitrary spatial subset bounding boxes.
+
+A request for tiled coverage data is equivalent to a specific spatial subset operation defined by the boundaries of the requested tile.
+The response payload structures the dimensions to align with the selected tiling scheme, while either including or slicing additional
+dimensions like time or pressure.
+
+==== Discovering available tilesets
+
+A client discovers available tilesets by following the `http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage` link relation
+advertised in the collection description.
+
+===== Request
+
+The client issues a GET request to the resource listing tilesets located at a `.../tiles` sub-resource of the collection.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/tiles HTTP/1.1
+Host: example.com
+Accept: application/json
+----
+
+===== Response
+
+The server returns a listing of the available coverage tilesets, indicating the supported 2D Tile Matrix Sets.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
+
+[source,json]
+----
+{
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/json",
+      "title": "Available coverage tilesets for climate:era5",
+      "href": "/ogcapi/collections/climate:era5/tiles"
+    }
+  ],
+  "tilesets": [
+    {
+      "title": "ERA5 Atmospheric Tileset (Mercator)",
+      "tileMatrixSetURI": "http://www.opengis.net/def/tilematrixset/OGC/1.0/WorldMercatorWGS84Quad",
+      "crs": "http://www.opengis.net/def/crs/EPSG/0/3395",
+      "dataType": "coverage",
+      "links": [
+        {
+          "rel": "http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme",
+          "type": "application/json",
+          "title": "WorldMercatorWGS84Quad definition",
+          "href": "/ogcapi/tileMatrixSets/WorldMercatorWGS84Quad"
+        },
+        {
+          "rel": "self",
+          "type": "application/json",
+          "title": "WorldMercatorWGS84Quad coverage tileset",
+          "href": "/ogcapi/collections/climate:era5/tiles/WorldMercatorWGS84Quad"
+        }
+      ]
+    },
+    {
+      "title": "ERA5 Atmospheric Tileset (GNOSIS Global Grid)",
+      "tileMatrixSetURI": "http://www.opengis.net/def/tilematrixset/OGC/1.0/GNOSISGlobalGrid",
+      "crs": "http://www.opengis.net/def/crs/EPSG/0/4326",
+      "dataType": "coverage",
+      "links": [
+        {
+          "rel": "http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme",
+          "type": "application/json",
+          "title": "GNOSISGlobalGrid definition",
+          "href": "/ogcapi/tileMatrixSets/GNOSISGlobalGrid"
+        },
+        {
+          "rel": "self",
+          "type": "application/json",
+          "title": "GNOSISGlobalGrid coverage tileset",
+          "href": "/ogcapi/collections/climate:era5/tiles/GNOSISGlobalGrid"
+        }
+      ]
+    },
+  ]
+}
+----
+
+==== Retrieving a tileset metadata resource
+
+Before requesting tiled coverage data, a client requests the metadata for a specific tileset to discover the available zoom levels,
+tile bounds, data layers, and properties schemas.
+
+===== Request
+
+The client requests the specific 2D Tile Matrix Set sub-resource.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/tiles/WorldMercatorWGS84Quad HTTP/1.1
+Host: example.com
+Accept: application/json
+----
+
+===== Response
+
+The server returns the tileset metadata detailing the limits, matrix layouts, component layers, and their property schemas.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+----
+
+[source,json]
+----
+{
+  "title": "ERA5 WorldMercatorWGS84Quad Coverage Tileset",
+  "tileMatrixSetURI": "http://www.opengis.net/def/tilematrixset/OGC/1.0/WorldMercatorWGS84Quad",
+  "crs": "http://www.opengis.net/def/crs/EPSG/0/3395",
+  "dataType": "coverage",
+  "tileMatrixSetLimits": [
+    { "tileMatrix": "0", "minTileRow": 0,"maxTileRow": 0, "minTileCol": 0,"maxTileCol": 0 },
+    { "tileMatrix": "1", "minTileRow": 0,"maxTileRow": 1, "minTileCol": 0,"maxTileCol": 1 },
+    { "tileMatrix": "2", "minTileRow": 0,"maxTileRow": 3, "minTileCol": 0,"maxTileCol": 3 }
+  ],
+  "layers": [
+    {
+      "id": "climate:era5",
+      "dataType": "coverage",
+      "minScaleDenominator": 139770566.00718,
+      "minCellSize": 39135.7584820102,
+      "maxTileMatrix": "2",
+      "links": [
+        {
+          "rel": "http://www.opengis.net/def/rel/ogc/1.0/geodata",
+          "href": "/ogcapi/collections/climate:era5"
+        }
+      ],
+      "propertiesSchema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "relativeHumidity": {
+            "title": "Relative Humidity",
+            "type": "number",
+            "x-ogc-propertySeq": 1,
+            "x-ogc-definition": "https://qudt.org/vocab/quantitykind/RelativeHumidity"
+          },
+          "temperature": {
+            "title": "Air Temperature",
+            "type": "number",
+            "x-ogc-propertySeq": 2,
+            "x-ogc-definition": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature"
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    {
+      "rel": "item",
+      "type": "application/prs.coverage+json",
+      "title": "Tiled coverage data URL template",
+      "href": "/ogcapi/collections/climate:era5/tiles/WorldMercatorWGS84Quad/{tileMatrix}/{tileRow}/{tileCol}"
+    }
+  ]
+}
+----
+
+==== Retrieving tiled coverage data by slicing dimensions
+
+This example demonstrates fetching tiled coverage data down to a 2D spatial slice. Additional temporal and atmospheric pressure
+dimensions are collapsed to a single coordinate point using query parameters.
+
+For the geographic variable width _GNOSISGlobalGrid_ 2D Tile Matrix Set, coordinates are expressed in decimal degrees (`EPSG:4326`). Because cells
+are defined as point-centered observations (_Value-is-Point_), the space partition natively requires an extra bounding edge node row
+and column. This expands the production grid shape from the standard 256x256 layout to a 257x257 array footprint containing exactly
+66,049 values per field.
+
+[NOTE]
+For the purpose of a shorter example to include in this annex, the response payload shown below is truncated to assume a tile matrix width
+and height of 16x16 cells instead of the native 256x256 dimensions. Due to the point-centered grid structure, adding the bounding edge node
+row and column results in a complete 17x17 array footprint containing exactly 289 values per field.
+
+===== Request
+
+A client requests a tile from the GNOSIS Global Grid ERA5 tileset at zoom level `2`, row `1`, and column `2`, slicing on the additional temporal and pressure dimensions.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/tiles/GNOSISGlobalGrid/2/1/2?datetime=2023-04-01T00:00:00Z&subset=pressure(500) HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server processes the space partition for that 2DTMS index position, scales the output to the requested 16x16 cell footprint, and slices the non-spatial fields, returning a `200 OK` status.
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/EPSG/0/4326
+Content-Bbox: -90.0,45.0,-45.0,67.5
+Content-Datetime: 2023-04-01T00:00:00Z
+Content-Interpolation: [ogc-interpolation:linear]
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": -90.0, "stop": -45.0, "num": 17 },
+      "y": { "start": 0.0, "stop": 45.0, "num": 17 }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "GeographicCRS",
+        "id": "http://www.opengis.net/def/crs/EPSG/0/4326"
+      }
+    }]
+  },
+  "parameters": {
+    "relativeHumidity": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    },
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "relativeHumidity": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [17, 17],
+      "values": [
+        55.4,56.1,57.2,58.0,59.1,60.3,61.2,62.4,63.5,64.1,65.2,66.4,67.3,68.1,69.2,70.0,71.1,
+        55.8,56.5,57.4,58.2,59.5,60.5,61.6,62.8,63.9,64.5,65.6,66.8,67.7,68.5,69.6,70.4,71.5,
+        56.2,56.9,57.8,58.6,59.9,60.9,62.0,63.2,64.3,64.9,66.0,67.2,68.1,68.9,70.0,70.8,71.9,
+        56.6,57.3,58.2,59.0,60.3,61.3,62.4,63.6,64.7,65.3,66.4,67.6,68.5,69.3,70.4,71.2,72.3,
+        57.0,57.7,58.6,59.4,60.7,61.7,62.8,64.0,65.1,65.7,66.8,68.0,68.9,69.7,70.8,71.6,72.7,
+        57.4,58.1,59.0,59.8,61.1,62.1,63.2,64.4,65.5,66.1,67.2,68.4,69.3,70.1,71.2,72.0,73.1,
+        57.8,58.5,59.4,60.2,61.5,62.5,63.6,64.8,65.9,66.5,67.6,68.8,69.7,70.5,71.6,72.4,73.5,
+        58.2,58.9,59.8,60.6,61.9,62.9,64.0,65.2,66.3,66.9,68.0,69.2,70.1,70.9,72.0,72.8,73.9,
+        58.6,59.3,60.2,61.0,62.3,63.3,64.4,65.6,66.7,67.3,68.4,69.6,70.5,71.3,72.4,73.2,74.3,
+        59.0,59.7,60.6,61.4,62.7,63.7,64.8,66.0,67.1,67.7,68.8,70.0,70.9,71.7,72.8,73.6,74.7,
+        59.4,60.1,61.0,61.8,63.1,64.1,65.2,66.4,67.5,68.1,69.2,70.4,71.3,72.1,73.2,74.0,75.1,
+        59.8,60.5,61.4,62.2,63.5,64.5,65.6,66.8,67.9,68.5,69.6,70.8,71.7,72.5,73.6,74.4,75.5,
+        60.2,60.9,61.8,62.6,63.9,64.9,66.0,67.2,68.3,68.9,70.0,71.2,72.1,72.9,74.0,74.8,75.9,
+        60.6,61.3,62.2,63.0,64.3,65.3,66.4,67.6,68.7,69.3,70.4,71.6,72.5,73.3,74.4,75.2,76.3,
+        61.0,61.7,62.6,63.4,64.7,65.7,66.8,68.0,69.1,69.7,70.8,72.0,72.9,73.7,74.8,75.6,76.7,
+        61.4,62.1,63.0,63.8,65.1,66.1,67.2,68.4,69.5,70.1,71.2,72.4,73.3,74.1,75.2,76.0,77.1,
+        61.8,62.5,63.4,64.2,65.5,66.5,67.6,68.8,69.9,70.5,71.6,72.8,73.7,74.5,75.6,76.4,77.5
+      ]
+    },
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["y", "x"],
+      "shape": [17, 17],
+      "values": [
+        14.2,14.5,14.8,15.1,15.6,16.0,16.4,16.9,17.2,17.5,18.1,18.4,18.9,19.2,19.6,20.1,20.4,
+        14.4,14.7,15.0,15.3,15.8,16.2,16.6,17.1,17.4,17.7,18.3,18.6,19.1,19.4,19.8,20.3,20.6,
+        14.6,14.9,15.2,15.5,16.0,16.4,16.8,17.3,17.6,17.9,18.5,18.8,19.3,19.6,20.0,20.5,20.8,
+        14.8,15.1,15.4,15.7,16.2,16.6,17.0,17.5,17.8,18.1,18.7,19.0,19.5,19.8,20.2,20.7,21.0,
+        15.0,15.3,15.6,15.9,16.4,16.8,17.2,17.7,18.0,18.3,18.9,19.2,19.7,20.0,20.4,20.9,21.2,
+        15.2,15.5,15.8,16.1,16.6,17.0,17.4,17.9,18.2,18.5,19.1,19.4,19.9,20.2,20.6,21.1,21.4,
+        15.4,15.7,16.0,16.3,16.8,17.2,17.6,18.1,18.4,18.7,19.3,19.6,20.1,20.4,20.8,21.3,21.6,
+        15.6,15.9,16.2,16.5,17.0,17.4,17.8,18.3,18.6,18.9,19.5,19.8,20.3,20.6,21.0,21.5,21.8,
+        15.8,16.1,16.4,16.7,17.2,17.6,18.0,18.5,18.8,19.1,19.7,20.0,20.5,20.8,21.2,21.7,22.0,
+        16.0,16.3,16.6,16.9,17.4,17.8,18.2,18.7,19.0,19.3,19.9,20.2,20.7,20.1,21.4,21.9,22.2,
+        16.2,16.5,16.8,17.1,17.6,18.0,18.4,18.9,19.2,19.5,20.1,20.4,20.9,20.3,21.6,22.1,22.4,
+        16.4,16.7,17.0,17.3,17.8,18.2,18.6,19.1,19.4,19.7,20.3,20.6,21.1,20.5,21.8,22.3,22.6,
+        16.6,16.9,17.2,17.5,18.0,18.4,18.8,19.3,19.6,19.9,20.5,20.8,21.3,20.7,22.0,22.5,22.8,
+        16.8,17.1,17.4,17.7,18.2,18.6,19.0,19.5,19.8,20.1,20.7,21.0,21.5,20.9,22.2,22.7,23.0,
+        17.0,17.3,17.6,17.9,18.4,18.8,19.2,19.7,20.0,20.3,20.9,21.2,21.7,21.1,22.4,22.9,23.2,
+        17.2,17.5,17.8,18.1,18.6,19.0,19.4,19.9,20.2,20.5,21.1,21.4,21.9,21.3,22.6,23.1,23.4,
+        17.4,17.7,18.0,18.3,18.8,19.2,19.6,20.1,20.4,20.7,21.3,21.6,22.1,21.5,22.8,23.3,23.6
+      ]
+    }
+  }
+}
+----
+
+==== Retrieving multi-dimensional tiled coverage data
+
+This example demonstrates retrieving multi-dimensional tiled coverage data from a World Mercator 2D Tile Matrix Set, without slicing on the other non-spatial dimensions.
+The server delivers a complete 4D tiled data payload containing two time steps and two pressure layers, producing a spatial sub-matrix for each coordinate combination.
+
+For the projected 2D Tile Matrix Set like _WorldMercatorWGS84Quad_ (`EPSG:3395`), the coordinates are expressed in metric meters.
+For the example collection, cells are defined as point-centered observations (_Value-is-Point_).
+For the official tiling scheme defines a standard matrix envelope of 256x256 cells, the space partition for point-centered data natively requires an extra bounding edge node
+row and column, expanding the production grid shape to a 257x257 array footprint per coordinate combination.
+
+[NOTE]
+For the purpose of a shorter example to include in this annex, the response payload shown below is truncated to assume a tile matrix width
+and height of 16x16 cells instead of the native 256x256 dimensions. Due to the point-centered grid structure, adding the bounding edge node
+row and column results in a complete 17x17 spatial array footprint. The full 4D matrix block populates a total array size of 1,156 values
+per field (2 times x 2 pressure levels x 17 rows x 17 columns).
+
+===== Request
+
+The client requests a tile from the Mercator ERA5 tileset, without any subsetting query parameter therefore preserving the temporal and pressure dimensions within the tile data.
+
+[source,http]
+----
+GET /ogcapi/collections/climate:era5/tiles/WorldMercatorWGS84Quad/2/1/2 HTTP/1.1
+Host: example.com
+Accept: application/prs.coverage+json
+----
+
+===== Response
+
+The server returns the multi-dimensional tiled coverage data. The spatial axes cover 17x17 grid cells in the projected coordinate reference system (`EPSG:3395`).
+
+[source,http]
+----
+HTTP/1.1 200 OK
+Content-Type: application/prs.coverage+json
+Content-Crs: http://www.opengis.net/def/crs/EPSG/0/3395
+Content-Bbox: 19567.8792410051,-14394.8559659283,10038322.0506356,9982320.105097
+Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
+Content-Interpolation: [ogc-interpolation:linear]
+----
+
+[source,json]
+----
+{
+  "type": "Coverage",
+  "domain": {
+    "type": "Domain",
+    "domainType": "Grid",
+    "axes": {
+      "x": { "start": 19567.8792410051, "stop": 10038322.0506356, "num": 17 },
+      "y": { "start": -14394.8559659283, "stop": 9982320.105097, "num": 17 },
+      "t": { "values": [ "2023-04-01T00:00:00Z", "2023-04-01T12:00:00Z" ] },
+      "z": { "values": [ 500.0, 1000.0 ] }
+    },
+    "referencing": [{
+      "coordinates": ["x", "y"],
+      "system": {
+        "type": "ProjectedCRS",
+        "id": "http://www.opengis.net/def/crs/EPSG/0/3395"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }, {
+      "coordinates": ["z"],
+      "system": {
+        "type": "CoordinateSystem",
+        "cs": {
+          "csAxes": [{ "name": { "en": "Pressure" }, "direction": "down", "unit": { "symbol": "hPa" } }]
+        }
+      }
+    }]
+  },
+  "parameters": {
+    "relativeHumidity": {
+      "type": "Parameter",
+      "description": { "en": "Relative Humidity" },
+      "unit": { "symbol": "%" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/RelativeHumidity",
+        "label": { "en": "Relative Humidity" }
+      }
+    },
+    "temperature": {
+      "type": "Parameter",
+      "description": { "en": "Air Temperature" },
+      "unit": { "symbol": "Cel" },
+      "observedProperty": {
+        "id": "https://qudt.org/vocab/quantitykind/ThermodynamicTemperature",
+        "label": { "en": "Air Temperature" }
+      }
+    }
+  },
+  "ranges": {
+    "relativeHumidity": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t", "z", "y", "x"],
+      "shape": [2, 2, 17, 17],
+      "values": [
+        55.4,56.1,57.2,58.0,59.1,60.3,61.2,62.4,63.5,64.1,65.2,66.4,67.3,68.1,69.2,70.0,71.1,
+        55.8,56.5,57.4,58.2,59.5,60.5,61.6,62.8,63.9,64.5,65.6,66.8,67.7,68.5,69.6,70.4,71.5,
+        56.2,56.9,57.8,58.6,59.9,60.9,62.0,63.2,64.3,64.9,66.0,67.2,68.1,68.9,70.0,70.8,71.9,
+        56.6,57.3,58.2,59.0,60.3,61.3,62.4,63.6,64.7,65.3,66.4,67.6,68.5,69.3,70.4,71.2,72.3,
+        57.0,57.7,58.6,59.4,60.7,61.7,62.8,64.0,65.1,65.7,66.8,68.0,68.9,69.7,70.8,71.6,72.7,
+        57.4,58.1,59.0,59.8,61.1,62.1,63.2,64.4,65.5,66.1,67.2,68.4,69.3,70.1,71.2,72.0,73.1,
+        57.8,58.5,59.4,60.2,61.5,62.5,63.6,64.8,65.9,66.5,67.6,68.8,69.7,70.5,71.6,72.4,73.5,
+        58.2,58.9,59.8,60.6,61.9,62.9,64.0,65.2,66.3,66.9,68.0,69.2,70.1,70.9,72.0,72.8,73.9,
+        58.6,59.3,60.2,61.0,62.3,63.3,64.4,65.6,66.7,67.3,68.4,69.6,70.5,71.3,72.4,73.2,74.3,
+        59.0,59.7,60.6,61.4,62.7,63.7,64.8,66.0,67.1,67.7,68.8,70.0,70.9,71.7,72.8,73.6,74.7,
+        59.4,60.1,61.0,61.8,63.1,64.1,65.2,66.4,67.5,68.1,69.2,70.4,71.3,72.1,73.2,74.0,75.1,
+        59.8,60.5,61.4,62.2,63.5,64.5,65.6,66.8,67.9,68.5,69.6,70.8,71.7,72.5,73.6,74.4,75.5,
+        60.2,60.9,61.8,62.6,63.9,64.9,66.0,67.2,68.3,68.9,70.0,71.2,72.1,72.9,74.0,74.8,75.9,
+        60.6,61.3,62.2,63.0,64.3,65.3,66.4,67.6,68.7,69.3,70.4,71.6,72.5,73.3,74.4,75.2,76.3,
+        61.0,61.7,62.6,63.4,64.7,65.7,66.8,68.0,69.1,69.7,70.8,72.0,72.9,73.7,74.8,75.6,76.7,
+        61.4,62.1,63.0,63.8,65.1,66.1,67.2,68.4,69.5,70.1,71.2,72.4,73.3,74.1,75.2,76.0,77.1,
+        61.8,62.5,63.4,64.2,65.5,66.5,67.6,68.8,69.9,70.5,71.6,72.8,73.7,74.5,75.6,76.4,77.5,
+
+        45.4,46.1,47.2,48.0,49.1,50.3,51.2,52.4,53.5,54.1,55.2,56.4,57.3,58.1,59.2,60.0,61.1,
+        45.8,46.5,47.4,48.2,49.5,50.5,51.6,52.8,53.9,54.5,55.6,56.8,57.7,58.5,59.6,60.4,61.5,
+        46.2,46.9,47.8,48.6,49.9,50.9,52.0,53.2,54.3,54.9,56.0,57.2,58.1,58.9,60.0,60.8,61.9,
+        46.6,47.3,48.2,49.0,50.3,51.3,52.4,53.6,54.7,55.3,56.4,57.6,58.5,59.3,60.4,61.2,62.3,
+        47.0,47.7,48.6,49.4,50.7,51.7,52.8,54.0,55.1,55.7,56.8,58.0,58.9,59.7,60.8,61.6,62.7,
+        47.4,48.1,49.0,49.8,51.1,52.1,53.2,54.4,55.5,56.1,57.2,58.4,59.3,60.1,61.2,62.0,63.1,
+        47.8,48.5,49.4,50.2,51.5,52.5,53.6,54.8,55.9,56.5,57.6,58.8,59.7,60.5,61.6,62.4,63.5,
+        48.2,48.9,49.8,50.6,51.9,52.9,54.0,55.2,56.3,56.9,58.0,59.2,60.1,60.9,62.0,62.8,63.9,
+        48.6,49.3,50.2,51.0,52.3,53.3,54.4,55.6,56.7,57.3,58.4,59.6,60.5,61.3,62.4,63.2,64.3,
+        49.0,49.7,50.6,51.4,52.7,53.7,54.8,56.0,57.1,57.7,58.8,60.0,60.9,61.7,62.8,63.6,64.7,
+        49.4,50.1,51.0,51.8,53.1,54.1,55.2,56.4,57.5,58.1,59.2,60.4,61.3,62.1,63.2,64.0,65.1,
+        49.8,50.5,51.4,52.2,53.5,54.5,55.6,56.8,57.9,58.5,59.6,60.8,61.7,62.5,63.6,64.4,65.5,
+        50.2,50.9,51.8,52.6,53.9,54.9,56.0,57.2,58.3,58.9,60.0,61.2,62.1,62.9,64.0,64.8,65.9,
+        50.6,51.3,52.2,53.0,54.3,55.3,56.4,57.6,58.7,59.3,60.4,61.6,62.5,63.3,64.4,65.2,66.3,
+        51.0,51.7,52.6,53.4,54.7,55.7,56.8,58.0,59.1,59.7,60.8,62.0,62.9,63.7,64.8,65.6,66.7,
+        51.4,52.1,53.0,53.8,55.1,56.1,57.2,58.4,59.5,60.1,61.2,62.4,63.3,64.1,65.2,66.0,67.1,
+        51.8,52.5,53.4,54.2,55.5,56.5,57.6,58.8,59.9,60.5,61.6,62.8,63.7,64.5,65.6,66.4,67.5,
+
+        45.4,46.1,47.2,48.0,49.1,50.3,51.2,52.4,53.5,54.1,55.2,56.4,57.3,58.1,59.2,60.0,61.1,
+        45.8,46.5,47.4,48.2,49.5,50.5,51.6,52.8,53.9,54.5,55.6,56.8,57.7,58.5,59.6,60.4,61.5,
+        46.2,46.9,47.8,48.6,49.9,50.9,52.0,53.2,54.3,54.9,56.0,57.2,58.1,58.9,60.0,60.8,61.9,
+        46.6,47.3,48.2,49.0,50.3,51.3,52.4,53.6,54.7,55.3,56.4,57.6,58.5,59.3,60.4,61.2,62.3,
+        47.0,47.7,48.6,49.4,50.7,51.7,52.8,54.0,55.1,55.7,56.8,58.0,58.9,59.7,60.8,61.6,62.7,
+        47.4,48.1,49.0,49.8,51.1,52.1,53.2,54.4,55.5,56.1,57.2,58.4,59.3,60.1,61.2,62.0,63.1,
+        47.8,48.5,49.4,50.2,51.5,52.5,53.6,54.8,55.9,56.5,57.6,58.8,59.7,60.5,61.6,62.4,63.5,
+        48.2,48.9,49.8,50.6,51.9,52.9,54.0,55.2,56.3,56.9,58.0,59.2,60.1,60.9,62.0,62.8,63.9,
+        48.6,49.3,50.2,51.0,52.3,53.3,54.4,55.6,56.7,57.3,58.4,59.6,60.5,61.3,62.4,63.2,64.3,
+        49.0,49.7,50.6,51.4,52.7,53.7,54.8,56.0,57.1,57.7,58.8,60.0,60.9,61.7,62.8,63.6,64.7,
+        49.4,50.1,51.0,51.8,53.1,54.1,55.2,56.4,57.5,58.1,59.2,60.4,61.3,62.1,63.2,64.0,65.1,
+        49.8,50.5,51.4,52.2,53.5,54.5,55.6,56.8,57.9,58.5,59.6,60.8,61.7,62.5,63.6,64.4,65.5,
+        50.2,50.9,51.8,52.6,53.9,54.9,56.0,57.2,58.3,58.9,60.0,61.2,62.1,62.9,64.0,64.8,65.9,
+        50.6,51.3,52.2,53.0,54.3,55.3,56.4,57.6,58.7,59.3,60.4,61.6,62.5,63.3,64.4,65.2,66.3,
+        51.0,51.7,52.6,53.4,54.7,55.7,56.8,58.0,59.1,59.7,60.8,62.0,62.9,63.7,64.8,65.6,66.7,
+        51.4,52.1,53.0,53.8,55.1,56.1,57.2,58.4,59.5,60.1,61.2,62.4,63.3,64.1,65.2,66.0,67.1,
+        51.8,52.5,53.4,54.2,55.5,56.5,57.6,58.8,59.9,60.5,61.6,62.8,63.7,64.5,65.6,66.4,67.5,
+
+        35.4,36.1,37.2,38.0,39.1,40.3,41.2,42.4,43.5,44.1,45.2,46.4,47.3,48.1,49.2,50.0,51.1,
+        35.8,36.5,37.4,38.2,39.5,40.5,41.6,42.8,43.9,44.5,45.6,46.8,47.7,48.5,49.6,50.4,51.5,
+        36.2,36.9,37.8,38.6,39.9,40.9,42.0,43.2,44.3,44.9,46.0,47.2,48.1,48.9,50.0,50.8,51.9,
+        36.6,37.3,38.2,39.0,40.3,41.3,42.4,43.6,44.7,45.3,46.4,47.6,48.5,49.3,50.4,51.2,52.3,
+        37.0,37.7,38.6,39.4,40.7,41.7,42.8,44.0,45.1,45.7,46.8,48.0,48.9,49.7,50.8,51.6,52.7,
+        37.4,38.1,39.0,39.8,41.1,42.1,43.2,44.4,45.5,46.1,47.2,48.4,49.3,50.1,51.2,52.0,53.1,
+        37.8,38.5,39.4,40.2,41.5,42.5,43.6,44.8,45.9,46.5,47.6,48.8,49.7,50.5,51.6,52.4,53.5,
+        38.2,38.9,39.8,40.6,41.9,42.9,44.0,45.2,46.3,46.9,48.0,49.2,50.1,50.9,52.0,52.8,53.9,
+        38.6,39.3,40.2,41.0,42.3,43.3,44.4,45.6,46.7,47.3,48.4,49.6,50.5,51.3,52.4,53.2,54.3,
+        39.0,39.7,40.6,41.4,42.7,43.7,44.8,46.0,47.1,47.7,48.8,50.0,50.9,51.7,52.8,53.6,54.7,
+        39.4,40.1,41.0,41.8,43.1,44.1,45.2,46.4,47.5,48.1,49.2,50.4,51.3,52.1,53.2,54.0,55.1,
+        39.8,40.5,41.4,42.2,43.5,44.5,45.6,46.8,47.9,48.5,49.6,50.8,51.7,52.5,53.6,54.4,55.5,
+        40.2,40.9,41.8,42.6,43.9,44.9,46.0,47.2,48.3,48.9,50.0,51.2,52.1,52.9,54.0,54.8,55.9,
+        40.6,41.3,42.2,43.0,44.3,45.3,46.4,47.6,48.7,49.3,50.4,51.6,52.5,53.3,54.4,55.2,56.3,
+        41.0,41.7,42.6,43.4,44.7,45.7,46.8,48.0,49.1,49.7,50.8,52.0,52.9,53.7,54.8,55.6,56.7,
+        41.4,42.1,43.0,43.8,45.1,46.1,47.2,48.4,49.5,50.1,51.2,52.4,53.3,54.1,55.2,56.0,57.1,
+        41.4,42.1,43.0,43.8,45.1,46.1,47.2,48.4,49.5,50.1,51.2,52.4,53.3,54.1,55.2,56.0,57.1
+      ]
+    },
+    "temperature": {
+      "type": "NdArray",
+      "dataType": "float",
+      "axisNames": ["t","z","y","x"],
+      "shape": [2,2,17,17],
+      "values": [
+        14.2,14.5,14.8,15.1,15.6,16.0,16.4,16.9,17.2,17.5,18.1,18.4,18.9,19.2,19.6,20.1,20.4,
+        14.4,14.7,15.0,15.3,15.8,16.2,16.6,17.1,17.4,17.7,18.3,18.6,19.1,19.4,19.8,20.3,20.6,
+        14.6,14.9,15.2,15.5,16.0,16.4,16.8,17.3,17.6,17.9,18.5,18.8,19.3,19.6,20.0,20.5,20.8,
+        14.8,15.1,15.4,15.7,16.2,16.6,17.0,17.5,17.8,18.1,18.7,19.0,19.5,19.8,20.2,20.7,21.0,
+        15.0,15.3,15.6,15.9,16.4,16.8,17.2,17.7,18.0,18.3,18.9,19.2,19.7,20.0,20.4,20.9,21.2,
+        15.2,15.5,15.8,16.1,16.6,17.0,17.4,17.9,18.2,18.5,19.1,19.4,19.9,20.2,20.6,21.1,21.4,
+        15.4,15.7,16.0,16.3,16.8,17.2,17.6,18.1,18.4,18.7,19.3,19.6,20.1,20.4,20.8,21.3,21.6,
+        15.6,15.9,16.2,16.5,17.0,17.4,17.8,18.3,18.6,18.9,19.5,19.8,20.3,20.6,21.0,21.5,21.8,
+        15.8,16.1,16.4,16.7,17.2,17.6,18.0,18.5,18.8,19.1,19.7,20.0,20.5,20.8,21.2,21.7,22.0,
+        16.0,16.3,16.6,16.9,17.4,17.8,18.2,18.7,19.0,19.3,19.9,20.2,20.7,20.1,21.4,21.9,22.2,
+        16.2,16.5,16.8,17.1,17.6,18.0,18.4,18.9,19.2,19.5,20.1,20.4,20.9,20.3,21.6,22.1,22.4,
+        16.4,16.7,17.0,17.3,17.8,18.2,18.6,19.1,19.4,19.7,20.3,20.6,21.1,20.5,21.8,22.3,22.6,
+        16.6,16.9,17.2,17.5,18.0,18.4,18.8,19.3,19.6,19.9,20.5,20.8,21.3,20.7,22.0,22.5,22.8,
+        16.8,17.1,17.4,17.7,18.2,18.6,19.0,19.5,19.8,20.1,20.7,21.0,21.5,20.9,22.2,22.7,23.0,
+        17.0,17.3,17.6,17.9,18.4,18.8,19.2,19.7,20.0,20.3,20.9,21.2,21.7,21.1,22.4,22.9,23.2,
+        17.2,17.5,17.8,18.1,18.6,19.0,19.4,19.9,20.2,20.5,21.1,21.4,21.9,21.3,22.6,23.1,23.4,
+        17.4,17.7,18.0,18.3,18.8,19.2,19.6,20.1,20.4,20.7,21.3,21.6,22.1,21.5,22.8,23.3,23.6,
+
+        13.2,13.5,13.8,14.1,14.6,15.0,15.4,15.9,16.2,16.5,17.1,17.4,17.9,18.2,18.6,19.1,19.4,
+        13.4,13.7,14.0,14.3,14.8,15.2,15.6,16.1,16.4,17.7,17.3,17.6,18.1,18.4,18.8,19.3,19.6,
+        13.6,13.9,14.2,14.5,15.0,15.4,15.8,16.3,16.6,17.9,17.5,17.8,18.3,18.6,19.0,19.5,19.8,
+        13.8,14.1,14.4,14.7,15.2,15.6,16.0,16.5,16.8,18.1,17.7,18.0,18.5,18.8,19.2,19.7,20.0,
+        14.0,14.3,14.6,14.9,15.4,15.8,16.2,16.7,17.0,18.3,17.9,18.2,18.7,19.0,19.4,19.9,20.2,
+        14.2,14.5,14.8,15.1,15.6,16.0,16.4,16.9,17.2,18.5,18.1,18.4,18.9,19.2,19.6,20.1,20.4,
+        14.4,14.7,15.0,15.3,15.8,16.2,16.6,17.1,17.4,18.7,18.3,18.6,19.1,19.4,19.8,20.3,20.6,
+        14.6,14.9,15.2,15.5,16.0,16.4,16.8,17.3,17.6,18.9,18.5,18.8,19.3,19.6,20.0,20.5,20.8,
+        14.8,15.1,15.4,15.7,16.2,16.6,17.0,17.5,17.8,19.1,18.7,19.0,19.5,19.8,20.2,20.7,21.0,
+        15.0,15.3,15.6,15.9,16.4,16.8,17.2,17.7,18.0,19.3,18.9,19.2,19.7,19.1,20.4,20.9,21.2,
+        15.2,15.5,15.8,16.1,16.6,17.0,17.4,17.9,18.2,19.5,19.1,19.4,19.9,19.3,20.6,21.1,21.4,
+        15.4,15.7,16.0,16.3,16.8,17.2,17.6,18.1,18.4,19.7,19.3,19.6,20.1,20.5,20.8,21.3,21.6,
+        15.6,15.9,16.2,16.5,17.0,17.4,17.8,18.3,18.6,19.9,19.5,19.8,20.3,20.7,21.0,21.5,21.8,
+        15.8,16.1,16.4,16.7,17.2,17.6,18.0,18.5,18.8,20.1,19.7,20.0,20.5,20.9,21.2,21.7,22.0,
+        16.0,16.3,16.6,16.9,17.4,17.8,18.2,18.7,19.0,20.3,19.9,20.2,20.7,21.1,21.4,21.9,22.2,
+        16.2,16.5,16.8,17.1,17.6,18.0,18.4,18.9,19.2,20.5,20.1,20.4,20.9,21.3,21.6,22.1,22.4,
+        16.4,16.7,17.0,17.3,17.8,18.2,18.6,19.1,19.4,20.7,20.3,20.6,21.1,21.5,21.8,22.3,22.6,
+
+        12.2,12.5,12.8,13.1,13.6,14.0,14.4,14.9,15.2,15.5,16.1,16.4,16.9,17.2,17.6,18.1,18.4,
+        12.4,12.7,13.0,13.3,13.8,14.2,14.6,15.1,15.4,15.7,16.3,16.6,17.1,17.4,17.8,18.3,18.6,
+        12.6,12.9,13.2,13.5,14.0,14.4,14.8,15.3,15.6,15.9,16.5,16.8,17.3,17.6,18.0,18.5,18.8,
+        12.8,13.1,13.4,13.7,14.2,14.6,15.0,15.5,15.8,16.1,16.7,17.0,17.5,17.8,18.2,18.7,19.0,
+        13.0,13.3,13.6,13.9,14.4,14.8,15.2,15.7,16.0,16.3,16.9,17.2,17.7,18.0,18.4,18.9,19.2,
+        13.2,13.5,13.8,14.1,14.6,15.0,15.4,15.9,16.2,16.5,17.1,17.4,17.9,18.2,18.6,19.1,19.4,
+        13.4,13.7,14.0,14.3,14.8,15.2,15.6,16.1,16.4,16.7,17.3,17.6,18.1,18.4,18.8,19.3,19.6,
+        13.6,13.9,14.2,14.5,15.0,15.4,15.8,16.3,16.6,16.9,17.5,17.8,18.3,18.6,19.0,19.5,19.8,
+        13.8,14.1,14.4,14.7,15.2,15.6,16.0,16.5,16.8,17.1,17.7,18.0,18.5,18.8,19.2,19.7,21.0,
+        14.0,14.3,14.6,14.9,15.4,15.8,16.2,16.7,17.0,17.3,17.9,18.2,18.7,19.0,19.4,19.9,21.2,
+        14.2,14.5,14.8,15.1,15.6,16.0,16.4,16.9,17.2,17.5,18.1,18.4,18.9,19.2,19.6,20.1,21.4,
+        14.4,14.7,15.0,15.3,15.8,16.2,16.6,17.1,17.4,17.7,18.3,18.6,19.1,19.4,19.8,20.3,21.6,
+        14.6,14.9,15.2,15.5,16.0,16.4,16.8,17.3,17.6,17.9,18.5,18.8,19.3,19.6,20.0,20.5,21.8,
+        14.8,15.1,15.4,15.7,16.2,16.6,17.0,17.5,17.8,18.1,18.7,19.0,19.5,19.8,20.2,20.7,22.0,
+        15.0,15.3,15.6,15.9,16.4,16.8,17.2,17.7,18.0,18.3,18.9,19.2,19.7,20.0,20.4,20.9,22.2,
+        15.2,15.5,15.8,16.1,16.6,17.0,17.4,17.9,18.2,18.5,19.1,19.4,19.9,20.2,20.6,21.1,22.4,
+        15.4,15.7,16.0,16.3,16.8,17.2,17.6,18.1,18.4,18.7,19.3,19.6,20.1,20.4,20.8,21.3,22.6,
+
+        11.2,11.5,11.8,12.1,12.6,13.0,13.4,13.9,14.2,14.5,15.1,15.4,15.9,16.2,16.6,17.1,17.4,
+        11.4,11.7,12.0,12.3,12.8,13.2,13.6,14.1,14.4,14.7,15.3,15.6,16.1,16.4,16.8,17.3,17.6,
+        11.6,11.9,12.2,12.5,13.0,13.4,13.8,14.3,14.6,14.9,15.5,15.8,16.3,16.4,17.0,17.5,17.8,
+        11.8,12.1,12.4,12.7,13.2,13.6,14.0,14.5,14.8,15.1,15.7,16.0,16.5,16.6,17.2,17.7,18.0,
+        12.0,12.3,12.6,12.7,13.4,13.8,14.2,14.7,15.0,15.3,15.9,16.2,16.7,16.8,17.4,17.9,18.2,
+        12.2,12.5,12.8,12.9,13.6,14.0,14.4,14.9,15.2,15.5,16.1,16.4,16.9,17.0,17.6,18.1,18.4,
+        12.4,12.7,13.0,13.1,13.8,14.2,14.6,15.1,15.4,15.7,16.3,16.6,17.1,17.2,17.8,18.3,18.6,
+        12.6,12.9,13.2,13.3,14.0,14.4,14.8,15.3,15.6,15.9,16.5,16.8,17.3,17.4,18.0,18.5,18.8,
+        12.8,13.1,13.4,13.5,14.2,14.6,15.0,15.5,15.8,16.1,17.7,17.0,17.5,17.6,18.2,18.7,19.0,
+        13.0,13.3,13.6,13.7,14.4,14.8,15.2,15.7,16.0,16.3,17.9,17.2,17.7,17.8,18.4,18.9,19.2,
+        13.2,13.5,13.8,13.9,14.6,15.0,15.4,15.9,16.2,16.5,18.1,17.4,17.9,18.0,18.6,19.1,19.4,
+        13.4,13.7,14.0,14.1,14.8,15.2,15.6,16.1,16.4,16.7,18.3,17.6,18.1,18.2,18.8,19.3,19.6,
+        13.6,13.9,14.2,14.3,15.0,15.4,15.8,16.3,16.6,16.9,18.5,17.8,18.3,18.4,19.0,19.5,19.8,
+        13.8,14.1,14.4,14.5,15.2,15.6,16.0,16.5,16.8,17.1,18.7,18.0,18.5,18.6,19.2,19.7,20.0,
+        14.0,14.3,14.6,14.7,15.4,15.8,16.2,16.7,17.0,17.3,18.9,18.2,18.7,18.8,19.4,19.9,20.2,
+        14.2,14.5,14.8,14.9,15.6,16.0,16.4,16.9,17.2,17.5,19.1,18.4,18.9,19.0,19.6,20.1,20.4,
+        14.4,14.7,15.0,15.1,15.8,16.2,16.6,17.1,17.4,17.7,19.3,18.6,19.1,19.2,19.8,20.3,21.0
+      ]
+    }
+  }
+}
+----

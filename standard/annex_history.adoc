@@ -13,4 +13,5 @@
 |2025-05-21 |0.0.8    |J. St-Louis                                  |all                       |splitting scaling req. classes, new resolutions query parameter; other changes and clarifications
 |2026-05-16 |0.0.9    |J. St-Louis                                  |all                       |splitting subsetting req. classes; changed resolutions to resolution singular; other changes and clarifications
 |2026-06-03 |1.0.0rc1 |J. St-Louis                                  |all                       |version presented to the SWG at OGC Connect Helsinki for OAB review approval
+|2026-07-04 |1.0.0rc2 |J. St-Louis                                  |all                       |merged interpolation recommendations; split large subset and resolution requirements; Prefer: handling=strict (without resolution query parameter) for native resolution; added Abstract Test Suite; improved examples annex; version ready for OAB review
 |===

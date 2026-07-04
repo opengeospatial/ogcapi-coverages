@@ -16,4 +16,6 @@ the <<rc_sparse-dimensions-collapse-spatial,Collapsing sparse dimensions>>, or
 the <<rc_position_query,Position Query>> requirements classes
 for Spatial, Temporal and/or General dimensions.
 
+See also examples of <<_interpolation_preferences, interpolation preferences>> in an annex.
+
 include::requirements/interpolation_recommendations.adoc[]

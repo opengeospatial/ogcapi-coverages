@@ -33,6 +33,8 @@ In addition to the `subset` parameter, server implementations must also support 
 While the `subset` parameter allows to more explicitly reference a particular spatial axis and avoiding related confusion, the `bbox` parameter may feel simpler and more familiar to some users.
 Both the `subset` and the `bbox` parameters are aligned with the spatial subsetting capabilities of OGC API - Maps.
 
+See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
+
 include::requirements/requirements_class_coverage_subset_spatial.adoc[]
 
 [[rc_sparse-dimensions-collapse-spatial]]
@@ -52,6 +54,8 @@ When this requirements class is implemented for a particular coverage, negotiati
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
+
+See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
 
 include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spatial.adoc[]
 
@@ -81,6 +85,8 @@ In addition to the `subset` parameter, server implementations must also support 
 While the `subset` parameter allows to more explicitly reference the primary temporal dimension, the `datetime` parameter may feel simpler and more familiar to some users.
 Both the `subset` and the `bbox` parameters are aligned with the temporal subsetting capabilities of OGC API - Maps.
 
+See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
+
 include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 
 [[rc_sparse-dimensions-collapse-temporal]]
@@ -101,6 +107,8 @@ When this requirements class is implemented for a particular coverage, negotiati
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
+
+See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
 
 include::requirements/requirements_class_coverage_sparse_dimensions_collapse_temporal.adoc[]
 
@@ -130,6 +138,8 @@ For gridded coverage cells whose geometry is a point along a dimension, this wil
 
 For gridded coverage cells whose geometry is a region, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of the region excludes its boundary**).
 
+See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
+
 include::requirements/requirements_class_coverage_subset_general.adoc[]
 
 [[rc_sparse-dimensions-collapse-general]]
@@ -150,6 +160,8 @@ When this requirements class is implemented for a particular coverage, negotiati
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
+See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
+
 include::requirements/requirements_class_coverage_sparse_dimensions_collapse_general.adoc[]
 
 [[rc_multi_slicing]]
@@ -169,6 +181,8 @@ Another common practical use case for this conformance class is to request speci
 
 This capability is also useful for requesting a subset of the data for multiple categories along a categorical dimension, for example `subset=species("wildcats", "frogs")`.
 
+See also examples of <<_multi_slicing, multi-slicing requests>> in an annex.
+
 include::requirements/requirements_class_coverage_multi_slicing.adoc[]
 
 [[rc_position_query]]
@@ -186,6 +200,8 @@ Implementations could also implement additional representations, for example Geo
 
 NOTE: This requirements class defines an operation corresponding directly to the definition of a coverage -- returning a set of values
 (or multiple sets of values in the case of a multifunction coverage) for a given position.
+
+See also examples of <<_position_query, position query requests>> in an annex.
 
 include::requirements/requirements_class_coverage_position_query.adoc[]
 

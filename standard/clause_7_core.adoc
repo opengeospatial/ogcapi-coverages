@@ -17,9 +17,12 @@ This _Coverages API_ is presented as one such access mechanism for collections o
 a function returning homogeneous values for any <<term-direct-position,direct position>> part of its <<term-domain,domain>>.
 
 This requirement class depends on the https://docs.ogc.org/DRAFTS/20-024.html#rc-collections-section[_collections_ requirements class] of _OGC API - Common - Part 2_ which defines
-the `/collections` and `/collections/{collectionId}` resources, as well as its https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[_uniform multi-dimension collection_ requirements class].
+the `/collections` and `/collections/{collectionId}` resources, as well as its https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[_uniform additional dimensions collections_ requirements class].
 introducing additional requirements standardizing the description of multidimensional data cubes and <<term-grid,gridded>> data.
 Each collection accessible as a coverage needs to include a link to the `/collections/{resourceId}/coverage` resource using the `[ogc-rel:coverage]` link relation type, which is used to retrieve the coverage data.
+
+See also examples of <<_landing_page, landing page>>, <<_conformance_declaration_2, conformance declaration>>, <<_list_of_collections, list of collections>>,
+<<collection-description-example,collection description>>, <<_schema_resource_range_type,schema>> and <<_core_data_request, coverage data>> requests in an annex.
 
 ==== Description of the coverage fields
 

@@ -8,8 +8,6 @@ or alternatively a client can also use `exclude-properties` to return all fields
 The available fields for the coverage, for example individual imagery bands, are defined in the schema resource (corresponding to the CIS _range type_).
 The order of the fields as listed in the value of the parameter also determines the order in which those fields will be ordered in the response, if the negotiated format has such a concept of field order.
 
-=== Field Selection Examples
-
-See also <<field-selection-examples, examples of field selection requests>> in an annex.
+See also <<_field_selection, examples of field selection requests>> in an annex.
 
 include::requirements/requirements_class_fieldselection.adoc[]

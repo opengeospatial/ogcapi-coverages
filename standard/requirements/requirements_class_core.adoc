@@ -6,7 +6,7 @@
 |Target type   |Web API
 |Dependency    |https://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
 |Dependency    |https://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
-|Dependency    |https://www.opengis.net/spec/ogcapi-common-2/1.0/req/umd-collection
+|Dependency    |https://www.opengis.net/spec/ogcapi-common-2/1.0/req/uad-collections
 |Dependency    |https://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas
 |Dependency    |https://www.opengis.net/spec/ogcapi-common-3/1.0/req/returnables-and-receivables
 |===

@@ -27,7 +27,7 @@
 |Publication Date: 2026-xx-xx
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/is/ogcapi-coverages-1/1.0
 |Internal reference number of this OGC(R) document: 19-087
-|Version: 1.0.0rc1
+|Version: 1.0.0rc2
 |Category: OGC(R) Implementation Specification
 |Editors: Charles Heazel, Jérôme Jacovella-St-Louis
 |===

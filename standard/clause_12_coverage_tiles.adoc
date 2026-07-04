@@ -15,8 +15,6 @@ Note that the number of <<term-cell,cells>> in the response for a _Value-Is-Poin
 .The cells returned for a tile response of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25])
 image::figures/spanCoverageTiles.png[]
 
-=== Coverage Tiles Examples
-
-See also <<coverage-tiles-examples, examples of coverage tile requests>> in an annex.
+See also <<_coverage_tiles, examples of coverage tile requests>> in an annex.
 
 include::requirements/requirements_class_coverage_tiles.adoc[]
