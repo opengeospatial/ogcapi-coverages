@@ -40,7 +40,11 @@ Below is an example fragment of a conformance information page of an API impleme
   "conformsTo": [
     "https://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core",
     "https://www.opengis.net/spec/ogcapi-common-1/1.0/conf/landing-page",
+    "https://www.opengis.net/spec/ogcapi-common-1/1.0/conf/json",
     "https://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections",
+    "https://www.opengis.net/spec/ogcapi-common-2/1.0/conf/uad-collections",
+    "https://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas",
+    "https://www.opengis.net/spec/ogcapi-common-3/1.0/req/returnables-and-receivables",
     "https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/core"
   ]
 }
