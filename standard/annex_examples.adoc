@@ -669,7 +669,7 @@ Content-Interpolation: [ogc-interpolation:nearest-neighbor]
 ==== Simultaneous Temporal and Atmospheric Pressure Slicing
 
 This example demonstrates a double slicing operation across multiple coordinate dimensions. Slicing reduces the dimensionality of the coverage by
-collapsing both requested non-spatial axes down to a single coordinate value. The resulting coverage is reduced from a 4D array down to a flat, two-dimensional spatial domain.
+reducing both sliced dimensions down to a single coordinate value. The resulting coverage is reduced from a 4D array down to a flat, two-dimensional spatial domain.
 
 ===== Request
 
@@ -1137,7 +1137,7 @@ Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
 }
 ----
 
-==== Multi-Slicing on a Non-Spatial Categorical Dimension
+==== Multi-Slicing on a Categorical Dimension
 
 This example showcases a multi-slicing operation against an ecological biodiversity observation coverage (`biodiversity:species:density`).
 The coverage consists of 3D domain with a single field named `density`.
@@ -2553,7 +2553,8 @@ Accept: application/vnd.cov+json
 
 ===== Response
 
-The server processes the space partition for that 2DTMS index position, scales the output to the requested 16x16 cell footprint, and slices the non-spatial fields, returning a `200 OK` status.
+The server processes the space partition for that 2DTMS index position, scales the output to the implied 17x17 cells footprint, and slices on the temporal and pressure
+dimensions, returning a `200 OK` status.
 
 [source,http]
 ----
