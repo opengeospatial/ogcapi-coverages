@@ -209,7 +209,7 @@ Content-Type: application/json
           "rel": "https://www.opengis.net/def/rel/ogc/1.0/coverage",
           "title": "Coverage for Relative Humidity (as Coverage JSON)",
           "href": "/ogcapi/collections/climate:era5:relativeHumidity/coverage",
-          "type": "application/prs.coverage+json"
+          "type": "application/vnd.cov+json"
         },
         {
           "rel": "http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage",
@@ -331,7 +331,7 @@ The server returns the collection description document detailing the 4D domain e
       "rel": "https://www.opengis.net/def/rel/ogc/1.0/coverage",
       "title": "Coverage for Relative Humidity (as Coverage JSON)",
       "href": "/ogcapi/collections/climate:era5:relativeHumidity/coverage",
-      "type": "application/prs.coverage+json"
+      "type": "application/vnd.cov+json"
     },
     {
       "rel": "http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage",
@@ -418,7 +418,7 @@ A client requests the full extent of the coverage data cube, negotiating a Cover
 ----
 GET /ogcapi/collections/climate:era5:relativeHumidity/coverage HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -429,7 +429,7 @@ reporting rules, the server populates response headers detailing the exact domai
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: -180.0,-90.0,180.0,90.0
 Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
@@ -527,7 +527,7 @@ automatic server downsampling.
 GET /ogcapi/collections/climate:era5:relativeHumidity/coverage HTTP/1.1
 Host: example.com
 Prefer: handling=strict
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -568,7 +568,7 @@ expressions. Both methods are functionally equivalent and yield the exact same 4
 ----
 GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?bbox=10,40,20,50&datetime=2023-04-01T00:00:00Z/2023-04-02T00:00:00Z HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 or equivalently:
@@ -577,7 +577,7 @@ or equivalently:
 ----
 GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?subset=Lat(40:50),Lon(10:20),time("2023-04-01T00:00:00Z":"2023-04-02T00:00:00Z") HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -587,7 +587,7 @@ The server trims the coverage on the latitude, longitude and temporal dimensions
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: 10.0,40.0,20.0,50.0
 Content-Datetime: 2023-04-01T00:00:00Z/2023-04-02T00:00:00Z
@@ -675,7 +675,7 @@ using the exact names defined in the collection's domain specification.
 ----
 GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?subset=time("2023-04-01T12:00:00Z"),pressure(850) HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -686,7 +686,7 @@ omitted from the domain axes array loop, resulting in a flat 2D cell response pa
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: -180.0,-90.0,180.0,90.0
 Content-Datetime: 2023-04-01T12:00:00Z
@@ -759,7 +759,7 @@ A client requests a spatial sub-interval window while slicing a single temporal 
 ----
 GET /ogcapi/collections/sentinel2-l2a/coverage?bbox=30,40,50,70&datetime=2026-07-01T00:00:00Z HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -771,7 +771,7 @@ green, and blue bands, which are the fields described as the `defaultFields` in 
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: 30.0,40.0,50.0,70.0
 Content-Datetime: 2026-07-01T00:00:00Z
@@ -919,7 +919,7 @@ A client slices the horizontal space to a targeted coordinate position while tri
 ----
 GET /ogcapi/collections/global:temperature:surface/coverage?subset=Lat(30),Lon(40)&datetime=2026-07-01T00:00:00Z/2026-07-31T23:00:00Z HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -931,7 +931,7 @@ format schema constraints.
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: 40.0,30.0,40.0,30.0
 Content-Datetime: 2026-07-01T00:00:00Z/2026-07-31T23:00:00Z
@@ -1048,7 +1048,7 @@ A client targets the coverage endpoint, passing a comma-separated list of target
 ----
 GET /ogcapi/collections/climate:era5:relativeHumidity/coverage?subset=pressure(500,1000) HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1059,7 +1059,7 @@ CoverageJSON document preserves the 4D grid structure, containing exactly two co
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: -180.0,-90.0,180.0,90.0
 Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
@@ -1145,7 +1145,7 @@ A client passes the comma-separated taxonomic identifiers inside the axis-explic
 ----
 GET /ogcapi/collections/biodiversity:species:density/coverage?bbox=10,40,20,50&subset=species("Gadus morhua","Clupea harengus") HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1156,7 +1156,7 @@ The numeric coordinates populate the `z` axis to satisfy the parser checks, whil
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: 10.0,40.0,20.0,50.0
 ----
@@ -1311,7 +1311,7 @@ A client slices the multi-dimensional collection down to a single position, nego
 ----
 GET /ogcapi/collections/climate:era5/coverage?subset=Lat(45.4844),Lon(-75.72205),time("2026-07-03T04:00:00Z"),pressure(850) HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ====== Response
@@ -1321,7 +1321,7 @@ The server returns a `200 OK` status. The payload contains a valid, playground-c
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 ----
 
 [source,json]
@@ -1636,7 +1636,7 @@ A client targets the coverage endpoint of the ERA5 collection, submitting a mult
 ----
 GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(60),Lon(60),time(P1D) HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1647,7 +1647,7 @@ the `Content-Interpolation:` token to explicitly report the applied linear and n
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: -180.0,-90.0,180.0,90.0
 Content-Datetime: 2023-04-01T00:00:00Z/2023-04-02T00:00:00Z
@@ -1788,7 +1788,7 @@ A client issues a retrieval query applying explicit cell limits over the 2D spat
 ----
 GET /ogcapi/collections/climate:era5/coverage?bbox=-90,0,-45,45&width=400&height=300 HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1798,7 +1798,7 @@ The server scales the execution loops to output a 400x300 horizontal point matri
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: -90.0,0.0,-45.0,45.0
 ----
@@ -1818,7 +1818,7 @@ A client uses the empty parenthesis syntax modifier inside the resolution parame
 ----
 GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(0.5),Lon(0.5),time() HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1828,7 +1828,7 @@ The server downsamples the spatial dimensions while preserving the temporal dime
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: -180.0,-90.0,180.0,90.0
 Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
@@ -1887,7 +1887,7 @@ A client issues a scaling query combining a global fallback directive with a tar
 GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(90),Lon(180),time(PT12H) HTTP/1.1
 Host: example.com
 Prefer: interpolation=[ogc-interpolation:linear], interpolation=time([ogc-interpolation:nearest-neighbor])
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1898,7 +1898,7 @@ headers include the `Preference-Applied:` token to confirm compliance alongside 
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Preference-Applied: interpolation=[ogc-interpolation:linear], interpolation=time([ogc-interpolation:nearest-neighbor])
 Content-Interpolation: [ogc-interpolation:linear]; dimensions=time([ogc-interpolation:nearest-neighbor])
 ----
@@ -1920,7 +1920,7 @@ A client uses the `properties-interpolation` parameter modifier inside the `Pref
 GET /ogcapi/collections/climate:landuse/coverage?resolution=Lat(90),Lon(180) HTTP/1.1
 Host: example.com
 Prefer: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1932,7 +1932,7 @@ global field shorthand notation to deliver a condensed response header.
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Preference-Applied: properties-interpolation=landCover([ogc-interpolation:nearest-neighbor])
 Content-Interpolation: [ogc-interpolation:linear]; properties=landCover([ogc-interpolation:nearest-neighbor])
 ----
@@ -1954,7 +1954,7 @@ parenthetical field override syntax structure.
 GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(90),Lon(180),time(PT12H) HTTP/1.1
 Host: example.com
 Prefer: interpolation=[ogc-interpolation:linear], properties-interpolation=temperature(pressure:[ogc-interpolation:none])
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -1967,7 +1967,7 @@ and dimensions, except for the explicit temperature field and pressure dimension
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Preference-Applied: interpolation=[ogc-interpolation:linear], properties-interpolation=temperature(pressure:[ogc-interpolation:none])
 Content-Interpolation: [ogc-interpolation:linear]; properties=temperature(pressure:[ogc-interpolation:none])
 ----
@@ -1989,7 +1989,7 @@ A client requests cubic interpolation across the spatial axes, but the server im
 GET /ogcapi/collections/climate:era5/coverage?resolution=Lat(90),Lon(180) HTTP/1.1
 Host: example.com
 Prefer: interpolation=Lat([ogc-interpolation:cubic]),Lon([ogc-interpolation:cubic])
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -2001,7 +2001,7 @@ header leverages global fallback shorthand notation to compactly declare the lin
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Interpolation: [ogc-interpolation:linear]
 ----
 _[Data Payload Omitted]_
@@ -2028,7 +2028,7 @@ keys defined in the collection schema.
 ----
 GET /ogcapi/collections/sentinel2-l2a/coverage?bbox=30,40,50,70&properties=B08,B04 HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -2040,7 +2040,7 @@ sequence dictated by the client's query string.
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: 30.0,40.0,50.0,70.0
 ----
@@ -2127,7 +2127,7 @@ A client targets the coverage endpoint, passing the targeted field to be omitted
 ----
 GET /ogcapi/collections/climate:era5/coverage?bbox=10,40,20,50&exclude-properties=relativeHumidity HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -2138,7 +2138,7 @@ of the remaining fields inside the output document strictly follows the original
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/OGC/1.3/CRS84
 Content-Bbox: 10.0,40.0,20.0,50.0
 ----
@@ -2240,7 +2240,7 @@ A client targets the coverage endpoint, passing a supported target coordinate re
 ----
 GET /ogcapi/collections/climate:era5/coverage?crs=[EPSG:3395]&bbox-crs=[EPSG:3395]&bbox=1113194,5621521,2226389,6446275 HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -2250,7 +2250,7 @@ The server reprojects the coordinates, calculates the transformed cell bounding 
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/EPSG/0/3395
 Content-Bbox: 1113194.0,5621521.0,2226389.0,6446275.0
 ----
@@ -2511,7 +2511,7 @@ Content-Type: application/json
   "links": [
     {
       "rel": "item",
-      "type": "application/prs.coverage+json",
+      "type": "application/vnd.cov+json",
       "title": "Tiled coverage data URL template",
       "href": "/ogcapi/collections/climate:era5/tiles/WorldMercatorWGS84Quad/{tileMatrix}/{tileRow}/{tileCol}"
     }
@@ -2542,7 +2542,7 @@ A client requests a tile from the GNOSIS Global Grid ERA5 tileset at zoom level 
 ----
 GET /ogcapi/collections/climate:era5/tiles/GNOSISGlobalGrid/2/1/2?datetime=2023-04-01T00:00:00Z&subset=pressure(500) HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -2552,7 +2552,7 @@ The server processes the space partition for that 2DTMS index position, scales t
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/EPSG/0/4326
 Content-Bbox: -90.0,45.0,-45.0,67.5
 Content-Datetime: 2023-04-01T00:00:00Z
@@ -2677,7 +2677,7 @@ The client requests a tile from the Mercator ERA5 tileset, without any subsettin
 ----
 GET /ogcapi/collections/climate:era5/tiles/WorldMercatorWGS84Quad/2/1/2 HTTP/1.1
 Host: example.com
-Accept: application/prs.coverage+json
+Accept: application/vnd.cov+json
 ----
 
 ===== Response
@@ -2687,7 +2687,7 @@ The server returns the multi-dimensional tiled coverage data. The spatial axes c
 [source,http]
 ----
 HTTP/1.1 200 OK
-Content-Type: application/prs.coverage+json
+Content-Type: application/vnd.cov+json
 Content-Crs: http://www.opengis.net/def/crs/EPSG/0/3395
 Content-Bbox: 19567.8792410051,-14394.8559659283,10038322.0506356,9982320.105097
 Content-Datetime: 2023-04-01T00:00:00Z/2023-04-01T12:00:00Z
