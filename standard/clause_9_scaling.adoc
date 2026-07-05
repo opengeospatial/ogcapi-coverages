@@ -14,7 +14,7 @@ imply that the resulting data will be suited for purpose, particularly if the <<
 Although the servers are encouraged to perform the best possible interpolation (see <<interpolation-guidance-recommendation>>),
 the client has no control over how the quality of the interpolation that the server will decide to perform when <<term-upsampling,upsampling>> or <<term-downsampling,downsampling>> data.
 
-See also examples of <<_scaling, scaling requests>> in an annex.
+See also examples of <<scaling-examples, scaling requests>> in an annex.
 
 include::requirements/requirements_class_coverage_scaling_spatial.adoc[]
 
@@ -30,7 +30,7 @@ imply that the resulting data will be suited for purpose, particularly if the <<
 Although the servers are encouraged to perform the best possible interpolation (see <<interpolation-guidance-recommendation>>),
 the client has no control over how the quality of the interpolation that the server will decide to perform when <<term-upsampling,upsampling>> or <<term-downsampling,downsampling>> data.
 
-See also examples of <<_scaling, scaling requests>> in an annex.
+See also examples of <<scaling-examples, scaling requests>> in an annex.
 
 include::requirements/requirements_class_coverage_scaling_temporal.adoc[]
 
@@ -52,6 +52,6 @@ imply that the resulting data will be suited for purpose, particularly if the <<
 Although the servers are encouraged to perform the best possible interpolation (see <<interpolation-guidance-recommendation>>),
 the client has no control over how the quality of the interpolation that the server will decide to perform when <<term-upsampling,upsampling>> or <<term-downsampling,downsampling>> data.
 
-See also examples of <<_scaling, scaling requests>> in an annex.
+See also examples of <<scaling-examples, scaling requests>> in an annex.
 
 include::requirements/requirements_class_coverage_scaling_general.adoc[]

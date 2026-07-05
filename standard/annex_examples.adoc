@@ -12,12 +12,14 @@ JPEG-XL, or LAZ (for point clouds) — based on client request negotiation, and 
 Supporting binary encodings will provide more efficient bandwidth utilization and processing performance.
 https://ubjson.org/[Universal Binary JSON] can be considered as a simple mechanism to turn JSON data into a more efficient binary payload.
 
-=== Landing Page
+=== Common OGC API Resources
+
+==== Landing Page
 
 The landing page provides the main entry point to the API, advertising conformance classes and routing clients
 to the collections catalog through explicit link relations.
 
-==== Request
+===== Request
 
 A client requests the top-level API landing page.
 
@@ -28,7 +30,7 @@ Host: example.com
 Accept: application/json
 ----
 
-==== Response
+====== Response
 
 The server returns the landing page payload. The metadata block contains a `links` array that routes clients to the collections list.
 
@@ -78,12 +80,12 @@ Content-Type: application/json
 }
 ----
 
-=== Conformance declaration
+==== Conformance Declaration
 
 The conformance declaration page lists the requirements classes supported by the server implementation, allowing clients
 to dynamically verify the capabilities of the coverage endpoint.
 
-==== Request
+===== Request
 
 A client requests the top-level conformance resource.
 
@@ -94,7 +96,7 @@ Host: example.com
 Accept: application/json
 ----
 
-==== Response
+===== Response
 
 The server returns the conformance payload containing the target requirements class URIs defined by the standard.
 
@@ -143,12 +145,12 @@ Content-Type: application/json
 }
 ----
 
-=== List of Collections
+==== List of Collections
 
 The collections index enumerates all available data resources, detailing the dimensions, variables, and
 available tilesets for each collection.
 
-==== Request
+===== Request
 
 A client requests the collections metadata catalog index.
 
@@ -159,7 +161,7 @@ Host: example.com
 Accept: application/json
 ----
 
-==== Response
+===== Response
 
 The server returns the collections array. The collection description can include direct links to the coverage resource and tilesets,
 which might save clients an extra fetch operation for the collection description.
@@ -231,8 +233,11 @@ Content-Type: application/json
 }
 ----
 
+[[coverage-description-example]]
+=== Describing the coverage
+
 [[collection-description-example]]
-=== Collection Description (Domain)
+==== Collection Description (Domain)
 
 This example demonstrates how a multi-dimensional coverage collection describes its domain structure within the collection description.
 The dataset represents a 4D atmospheric datacube with spatial axes, a temporal axis, and an atmospheric pressure coordinate axis.
@@ -244,7 +249,7 @@ collapse to zero. The temporal grid stores instantaneous snapshots, represented 
 structured as an array of arrays of 2 values to define the absolute lower and upper bounds for each pressure level; because these represent exact point-in-space measurements,
 the bounds collapse to match the exact coordinate of each level.
 
-==== Request
+===== Request
 
 A client retrieves the collection description for a specific coverage collection to inspect its multi-dimensional domain, grid description, and boundary extents.
 
@@ -255,7 +260,7 @@ Host: example.com
 Accept: application/json
 ----
 
-==== Response
+===== Response
 
 The server returns the collection description document detailing the 4D domain extent, supported output coordinate reference systems, and the grid description.
 
@@ -343,7 +348,7 @@ The server returns the collection description document detailing the 4D domain e
 }
 ----
 
-=== Schema Resource (Range Type)
+==== Schema Resource (Range Type)
 
 This example illustrates how a multi-dimensional coverage collection describes its range type using a standard schema resource per OGC API - Common - Part 3:
 Schemas and the Coverages Core requirements class. The resource presents a logical schema defining the fields of the range associated with each coverage cell.
@@ -353,7 +358,7 @@ both JSON-based and binary multi-dimensional encodings.
 The location of the schema resource is not rigidly fixed to a specific path structure. A client programmatically discovers the correct endpoint at runtime by
 inspecting the collection description and resolving the target URL populated within the link object containing the schema link relation type.
 
-==== Request
+===== Request
 
 A client fetches the dynamically discovered schema definition associated with the collection to programmatically determine the structural properties,
 sequential order, semantic definition, variable classification type, and statistical boundaries of the internal cell variables before initiating a data stream.
@@ -365,7 +370,7 @@ Host: example.com
 Accept: application/schema+json
 ----
 
-==== Response
+===== Response
 
 The server returns a logical JSON Schema document profiling the relative humidity field variable using the key `rh`. It populates standard OGC semantic
 annotations to explicitly detail the sequential structure, semantic definition link, percentage unit in UCUM (the default unit language), continuous variable type, and observed
@@ -1616,6 +1621,7 @@ Content-Type: application/geo+json
 }
 ----
 
+[[scaling-examples]]
 === Scaling (Resampling)
 
 This section demonstrates how a client requests a downsampled (lowered resolution) version of a dense multi-dimensional coverage
