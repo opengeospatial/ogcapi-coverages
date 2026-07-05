@@ -266,7 +266,7 @@ interpolation preferences.
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/core/preference-handling-resolution*
-^|A | If an Implementation supporting the a <<rc_scaling_spatial, Scaling requirements class>> takes advantage of the <<downsampling-permission, downsampling permission>>,
+^|A | If an Implementation supporting the <<rc_scaling_spatial, Scaling requirements class>> takes advantage of the <<downsampling-permission, downsampling permission>>,
 that Implementation SHALL support the `Prefer: handling` request header defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4].
 ^|B | When a value of `handling=lenient` is specified, the downsampling permission SHALL be applicable, allowing to return a downsampled resolution for a dimension for which a
 resolution was not explicitly specified (using the `resolution`, `width` or `height` query parameter).
