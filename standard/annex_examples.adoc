@@ -272,11 +272,13 @@ The server returns the collection description document detailing the 4D domain e
       "grid": [
         {
           "cellsCount": 2049,
+          "firstCoordinate": -180.0,
           "resolution": 0.17578125,
           "relativeBounds": [ 0.0, 0.0 ]
         },
         {
           "cellsCount": 1025,
+          "firstCoordinate": -90.0,
           "resolution": 0.17578125,
           "relativeBounds": [ 0.0, 0.0 ]
         }
@@ -286,6 +288,7 @@ The server returns the collection description document detailing the 4D domain e
       "interval": [ [ "2023-04-01T00:00:00Z", "2023-04-06T23:00:00Z" ] ],
       "grid": {
         "cellsCount": 144,
+        "firstCoordinate": "2023-04-01T00:00:00Z",
         "resolution": "PT1H",
         "relativeBounds": [ "PT0H", "PT0H" ]
       }
