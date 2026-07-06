@@ -146,9 +146,10 @@ requirements classes), while varying the `Prefer: handling` configuration +
 *When:* Requests are made to the coverage resource using the `Prefer: handling=strict` request header +
 *Then:* +
 - Assert that the implementation accepts requests using a `Prefer: handling=strict` request header. +
-- Assert that the implementation accepts either returns the coverage data at the native resolution for all dimensions or returns an HTTP `413` error code if
+- Assert that the implementation either returns the coverage data at the native resolution for all dimensions or returns an HTTP `413` error code if
 the response payload size at the native resolution exceeds <<server-limits-recommendations,advertised server limits>> when no `resolution`, `width` or `height` query parameter explicitly requests otherwise. +
-- Assert that the implementation defaults to a `lenient` handling, where the server is allowed to default to a downsampled resolution instead of a `413` error per the <<downsampling-permission, downsampling permission>>.
+- Assert that the implementation defaults to a `lenient` handling, where the server is allowed to default to a downsampled resolution instead of a `413` error per the <<downsampling-permission, downsampling permission>>,
+by verifying that if a 413 response is not returned for a request with `Prefer: handling=lenient`, a 413 response is not returned either without a `Prefer: handling` request header.
 |===
 
 === Conformance Class: Spatial subsetting
