@@ -755,9 +755,9 @@ Abstract Test A.{counter:ats-summary}: /conf/position-query/position-query
 |test purpose: |Verify point-based slicing and JSON content negotiation structure for zero-dimensional coverage requests.
 |test method: |
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Position Query requirements class +
-*When:* Requesting coverage resources that slice all dimensions down to zero dimensions using the `subset` and/or `bbox` and/or `datetime` parameters while requesting JSON encoding +
+*When:* Requesting coverage resources that slice all dimensions down to zero dimensions using the `subset` and/or `datetime` parameters while requesting JSON encoding +
 *Then:* +
-- Assert that the Implementation supports reducing the dimensionality of the response to zero dimensions via the `subset` and/or `bbox` and/or `datetime` query parameters. +
+- Assert that the Implementation supports reducing the dimensionality of the response to zero dimensions via the `subset` and/or `datetime` query parameters. +
 - Assert that a negotiated JSON response structure contains an object where properties match the default or selected field names mapped to their values. +
 - Assert that, if the backing coverage is a multi-function data store, a negotiated JSON response is structured as an array of these field-value objects. +
 - Assert that, if only a single field is returned, a negotiated JSON response evaluates to the value of the field directly (or an array of values for multi-functions) rather than a wrapping object.

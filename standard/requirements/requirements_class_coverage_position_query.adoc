@@ -9,13 +9,13 @@
 
 === Requirements
 
-==== Position query for subsetting parameters (`subset`, `bbox`, `datetime`)
+==== Position query for subsetting parameters (`subset`, `datetime`)
 
 [[req_coverage_position_query_position_query]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/position-query/position-query*
-^|A |The coverage retrieval operation SHALL support the ability to slice on all dimensions using the `subset` and/or `bbox` and/or `datetime` query parameters effectively reducing the dimensionality
+^|A |The coverage retrieval operation SHALL support the ability to slice on all dimensions using the `subset` and/or `datetime` query parameters effectively reducing the dimensionality
 of the response to zero dimensions (a point).
 ^|B |The Implementation SHALL support negotiating a JSON response (through request header `Accept: application/json`) for such point query which in a common scenario consists of an object with one
 property being the name of the field (for each default or selected field) and its associated values.
@@ -24,7 +24,7 @@ property being the name of the field (for each default or selected field) and it
 Field Selection requirements class), the response SHALL be the value of the field directly (rather than an object with the field name), or in the case of the coverage multi-function, an array of values.
 |===
 
-NOTE: This position query requirements class relies on the definition of the `subset`, `bbox` and `datetime` parameter defined in the
+NOTE: This position query requirements class relies on the definition of the `subset` and `datetime` query parameters defined in the
 <<rc_subsetting_spatial,Spatial Subsetting>>, <<rc_subsetting_temporal,Temporal Subsetting>> and <<rc_subsetting_general,General Subsetting>> requirement classes.
 However, this requirement class does not specify a dependency on these requirements classes to allow implementing only the "Core" requirements class (returning the entire coverage), as well
 as the ability to query specific points, without providing the ability to return fragments of the coverage larger than a single point.
