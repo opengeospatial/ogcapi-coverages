@@ -3,6 +3,18 @@ This document uses the terms defined in Sub-clause 5 of https://docs.ogc.org/is/
 
 For the purposes of this document, the following additional terms and definitions apply.
 
+[[term-anchor-coordinates]]
+=== Anchor coordinates
+
+coordinates relative to which the <<term-cell-bounds,bounds>> of <<term-grid-cells,grid cells>> in a <<term-coverage,coverage>> are expressed
+
+NOTE: The position of anchor coordinates are chosen in a consistent way for all cells. For example, the anchor coordinates could be arbitrarily chosen to be
+the lower coordinate of the cells, the higher coordinate of the cells, or the centers of the cells, independently of whether the cell bounds are single points or
+span an area.
+
+NOTE: The anchor coordinates include the `firstCoordinate` of a regular grid's description, and the anchor coordinates of an irregular grid
+are all explicitly listed as the `coordinates` in its description.
+
 [[term-boundary]]
 === Boundary
 
@@ -38,16 +50,7 @@ NOTE: A continuous dimension allows the coverage function to be evaluated at any
 
 <<term-boundary,boundary>> of the <<term-cell,cell>>
 
-NOTE: In the case of a <<term-grid-cell,cell>>, the boundary can be expressed as a low and high value for each dimension
-
-[[term-coordinate-anchors]]
-=== Coordinate anchors
-
-coordinates relative to which the <<term-cell-bounds,bounds>> of <<term-grid-cells,grid cells>> in a <<term-coverage,coverage>> are expressed
-
-NOTE: The position of coordinate anchors are chosen in a consistent way for all cells. For example, the anchors could be arbitrarily chosen to be
-the lower coordinate of the cells, the higher coordinate of the cells, or the centers of the cells, independently of whether the cell bounds are single points or
-span an area.
+NOTE: In the case of a <<term-grid-cell,cell>>, the boundary can be expressed as a low and high value for each dimension.
 
 [[term-coverage]]
 === Coverage
@@ -169,7 +172,7 @@ one or more dimensions of a <<term-coverage,coverage>> <<term-domain,domain>>
 
 [[grid-resolution]]
 === Resolution [of a grid]
-distance between the <<term-coordinate-anchors,coordinate anchors>> of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
+distance between the <<term-anchor-coordinates,anchor coordinates>> of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
 
 NOTE: The `resolution` query parameter defined in this Standard allows clients to request data <<term-resampling,resampled>> to a particular resolution, whether the output is
 returned in a gridded or non-gridded coverage format. However, that output data may not be suitable for purposes requiring data at the true resolution being requested.
