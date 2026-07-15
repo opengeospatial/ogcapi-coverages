@@ -1112,7 +1112,7 @@ Abstract Test A.{counter:ats-summary}: /conf/crs/crs-definition
 - Assert that the server returns an HTTP `400` status code if the parameter value for `crs` is invalid for the requested coverage.
 |===
 
-=== Conformance Class: Coverage Tiles
+=== Conformance Class: Tiled Coverage Data
 
 [cols="20h,80d",width="100%"]
 |===
@@ -1130,7 +1130,7 @@ Abstract Test A.{counter:ats-summary}: /conf/tiles/tilesets
 |requirement: |/req/tiles/tilesets
 |test purpose: |Verify the discovery, metadata structure, template routing, compliance, and coordinate space trimming of coverage tilesets.
 |test method: |
-*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Coverage Tiles requirements class +
+*Given:* An API Implementation claiming conformance to the OGC API - Coverages - Tiled Coverage Data requirements class +
 *When:* Requesting coverage tileset list, tileset metadata, and individual tile resources +
 *Then:* +
 - Assert that the coverage has at least one associated coverage tileset list resource conforming to OGC API - Tiles - Part 1: Core. +

@@ -1,6 +1,6 @@
 get:
    tags:
-     - Coverage Tiles
+     - Tiled Coverage Data
    summary: Retrieve the list of available coverage tilesets for the specified collection.
    operationId: .collection.coverage.getTileSetsList
    parameters:

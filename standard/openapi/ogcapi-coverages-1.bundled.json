@@ -338,127 +338,10 @@
         }
       }
     },
-    "/collections/{collectionId}/scenes": {
-      "get": {
-        "tags": [
-          "Scenes"
-        ],
-        "summary": "Retrieve the list of scenes comprising this collection",
-        "description": "The list of scenes comprising this collection.",
-        "operationId": "getCollectionScenes",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/f-metadata"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/ScenesList"
-          },
-          "default": {
-            "$ref": "#/components/responses/Exception"
-          }
-        }
-      }
-    },
-    "/collections/{collectionId}/scenes/{sceneId}": {
-      "get": {
-        "tags": [
-          "Scenes"
-        ],
-        "summary": "Retrieve metadata for a particular scene",
-        "description": "Retrieve metadata for a particular scene",
-        "operationId": "getScene",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/sceneId"
-          },
-          {
-            "$ref": "#/components/parameters/f-metadata"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Scene"
-          },
-          "default": {
-            "$ref": "#/components/responses/Exception"
-          }
-        }
-      }
-    },
-    "/collections/{collectionId}/scenes/{sceneId}/coverage": {
-      "get": {
-        "tags": [
-          "Scenes"
-        ],
-        "summary": "Retrieve the coverage for scene {sceneId} of {collectionId}",
-        "description": "Coverage for scene {sceneId} of collection identified by {collectionId}.\nUse content negotiation to request required format.",
-        "operationId": "getSceneCoverage",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/sceneId"
-          },
-          {
-            "$ref": "#/components/parameters/subset"
-          },
-          {
-            "$ref": "#/components/parameters/bbox"
-          },
-          {
-            "$ref": "#/components/parameters/datetime"
-          },
-          {
-            "$ref": "#/components/parameters/properties"
-          },
-          {
-            "$ref": "#/components/parameters/exclude-properties"
-          },
-          {
-            "$ref": "#/components/parameters/resolution"
-          },
-          {
-            "$ref": "#/components/parameters/width"
-          },
-          {
-            "$ref": "#/components/parameters/height"
-          },
-          {
-            "$ref": "#/components/parameters/subset-crs"
-          },
-          {
-            "$ref": "#/components/parameters/bbox-crs"
-          },
-          {
-            "$ref": "#/components/parameters/crs"
-          },
-          {
-            "$ref": "#/components/parameters/f-coverage"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Coverage"
-          },
-          "default": {
-            "$ref": "#/components/responses/Exception"
-          }
-        }
-      }
-    },
     "/collections/{collectionId}/tiles": {
       "get": {
         "tags": [
-          "Coverage Tiles"
+          "Tiled Coverage Data"
         ],
         "summary": "Retrieve the list of available coverage tilesets for the specified collection.",
         "operationId": ".collection.coverage.getTileSetsList",
@@ -489,7 +372,7 @@
     "/collections/{collectionId}/tiles/{tileMatrixSetId}": {
       "get": {
         "tags": [
-          "Coverage Tiles"
+          "Tiled Coverage Data"
         ],
         "summary": "Retrieve the coverage tileset metadata for the specified collection and tiling scheme (tile matrix set)",
         "operationId": ".collection.coverage.getTileSet",
@@ -523,9 +406,9 @@
     "/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
       "get": {
         "tags": [
-          "Coverage Tiles"
+          "Tiled Coverage Data"
         ],
-        "summary": "Retrieve coverage tiles",
+        "summary": "Retrieve tiled coverage data",
         "operationId": ".collection.coverage.getTile",
         "parameters": [
           {
@@ -542,138 +425,6 @@
           },
           {
             "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/subset"
-          },
-          {
-            "$ref": "#/components/parameters/crs"
-          },
-          {
-            "$ref": "#/components/parameters/subset-crs"
-          },
-          {
-            "$ref": "#/components/parameters/tileMatrixSetId"
-          },
-          {
-            "$ref": "#/components/parameters/f-coverageTile"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/CoverageTile"
-          },
-          "204": {
-            "$ref": "#/components/responses/EmptyTile"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "406": {
-            "$ref": "#/components/responses/NotAcceptable"
-          },
-          "500": {
-            "$ref": "#/components/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/collections/{collectionId}/scenes/{sceneId}/tiles": {
-      "get": {
-        "tags": [
-          "Coverage Tiles"
-        ],
-        "summary": "Retrieve the list of available coverage tilesets for the specified coverage scene.",
-        "operationId": ".collection.scene.coverage.getTileSetsList",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/sceneId"
-          },
-          {
-            "$ref": "#/components/parameters/f-metadata"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/TileSetsList"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "406": {
-            "$ref": "#/components/responses/NotAcceptable"
-          },
-          "500": {
-            "$ref": "#/components/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}": {
-      "get": {
-        "tags": [
-          "Coverage Tiles"
-        ],
-        "summary": "Retrieve the coverage scene tileset metadata for the specified collection, scene and tiling scheme (tile matrix set)",
-        "operationId": ".collection.scene.coverage.getTileSet",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/sceneId"
-          },
-          {
-            "$ref": "#/components/parameters/tileMatrixSetId"
-          },
-          {
-            "$ref": "#/components/parameters/f-metadata"
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/TileSet"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "406": {
-            "$ref": "#/components/responses/NotAcceptable"
-          },
-          "500": {
-            "$ref": "#/components/responses/ServerError"
-          }
-        }
-      }
-    },
-    "/collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
-      "get": {
-        "tags": [
-          "Coverage Tiles"
-        ],
-        "summary": "Retrieve coverage scene tiles",
-        "operationId": ".collection.scene.coverage.getTile",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/tileMatrix"
-          },
-          {
-            "$ref": "#/components/parameters/tileRow"
-          },
-          {
-            "$ref": "#/components/parameters/tileCol"
-          },
-          {
-            "$ref": "#/components/parameters/datetime"
-          },
-          {
-            "$ref": "#/components/parameters/collectionId-coverage"
-          },
-          {
-            "$ref": "#/components/parameters/sceneId"
           },
           {
             "$ref": "#/components/parameters/subset"
@@ -3053,15 +2804,6 @@
         "style": "form",
         "explode": false
       },
-      "sceneId": {
-        "name": "sceneId",
-        "in": "path",
-        "description": "Local identifier of a scene",
-        "required": true,
-        "schema": {
-          "type": "string"
-        }
-      },
       "resolution": {
         "name": "resolution",
         "in": "query",
@@ -3222,14 +2964,15 @@
       "f-coverageTile": {
         "name": "f",
         "in": "query",
-        "description": "The format of the coverage tile response (e.g. tiff). Accepted values are 'tiff' (GeoTIFF), 'netcdf', or 'png'.",
+        "description": "The format of the tiled coverage data response (e.g. tiff). Accepted values are 'tiff' (GeoTIFF), 'netcdf', or 'png'.",
         "required": false,
         "schema": {
           "type": "string",
           "enum": [
             "png",
             "geotiff",
-            "netcdf"
+            "netcdf",
+            "covjson"
           ]
         },
         "style": "form",
@@ -3512,144 +3255,6 @@
             "schema": {
               "type": "string",
               "format": "binary"
-            }
-          },
-          "text/html": {
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "Scene": {
-        "description": "Information about a particular scene of a coverage.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/collectionDesc"
-            },
-            "example": {
-              "id": "elevation",
-              "title": "Elevation",
-              "description": "Elevation in the city of Bonn.",
-              "extent": {
-                "spatial": {
-                  "bbox": [
-                    [
-                      7.01,
-                      50.63,
-                      7.22,
-                      50.78
-                    ]
-                  ]
-                }
-              },
-              "links": [
-                {
-                  "href": "http://data.example.org/collections/elevation/coverage/domainset",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-domainset",
-                  "type": "application/json",
-                  "title": "Elevation"
-                },
-                {
-                  "href": "http://data.example.org/collections/elevation/coverage/rangetype",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage-rangetype",
-                  "type": "application/json",
-                  "title": "Elevation"
-                },
-                {
-                  "href": "http://data.example.org/collections/elevation/coverage",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
-                  "type": "application/json",
-                  "title": "Elevation"
-                },
-                {
-                  "href": "http://data.example.org/collections/buildings/coverage.html",
-                  "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
-                  "type": "text/html",
-                  "title": "Elevation"
-                },
-                {
-                  "href": "https://creativecommons.org/publicdomain/zero/1.0/",
-                  "rel": "license",
-                  "type": "text/html",
-                  "title": "CC0-1.0"
-                },
-                {
-                  "href": "https://creativecommons.org/publicdomain/zero/1.0/rdf",
-                  "rel": "license",
-                  "type": "application/rdf+xml",
-                  "title": "CC0-1.0"
-                }
-              ]
-            }
-          },
-          "text/html": {
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ScenesList": {
-        "description": "The individual scenes comprising the coverage",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "links",
-                "scenes"
-              ],
-              "properties": {
-                "scenes": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "required": [
-                      "id"
-                    ],
-                    "properties": {
-                      "id": {
-                        "oneOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "integer"
-                          }
-                        ]
-                      },
-                      "links": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/link"
-                        }
-                      }
-                    }
-                  }
-                },
-                "links": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/link"
-                  }
-                },
-                "timeStamp": {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                "numberMatched": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "example": 1
-                },
-                "numberReturned": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "example": 1
-                }
-              }
             }
           },
           "text/html": {

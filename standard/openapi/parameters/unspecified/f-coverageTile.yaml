@@ -1,6 +1,6 @@
 name: f
 in: query
-description: The format of the coverage tile response (e.g. tiff). Accepted values are 'tiff' (GeoTIFF), 'netcdf', or 'png'.
+description: The format of the tiled coverage data response (e.g. tiff). Accepted values are 'tiff' (GeoTIFF), 'netcdf', or 'png'.
 required: false
 schema:
   type: string
@@ -8,5 +8,6 @@ schema:
     - png
     - geotiff
     - netcdf
+    - covjson
 style: form
 explode: false

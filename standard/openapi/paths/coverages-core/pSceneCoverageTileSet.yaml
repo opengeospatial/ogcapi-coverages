@@ -1,6 +1,6 @@
 get:
    tags:
-     - Coverage Tiles
+     - Tiled Coverage Data
    summary: Retrieve the coverage scene tileset metadata for the specified collection, scene and tiling scheme (tile matrix set)
    operationId: .collection.scene.coverage.getTileSet
    parameters:

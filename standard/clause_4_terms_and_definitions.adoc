@@ -1,7 +1,15 @@
 == Terms and Definitions
-This document uses the terms defined in Sub-clause 5 of https://docs.ogc.org/is/19-072/19-072.html[OGC API - Common - Part 1: Core] (OGC 19-072), which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+This document uses the terms defined in Sub-clause 5 of https://docs.ogc.org/is/19-072/19-072.html[OGC API - Common - Part 1: Core] (OGC 19-072), which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this Standard.
 
 For the purposes of this document, the following additional terms and definitions apply.
+
+[[term-boundary]]
+=== Boundary
+
+set that represents the limit of an entity
+
+[.source]
+<<ISO19107:2019>>
 
 [[term-cell]]
 === Cell
@@ -11,8 +19,8 @@ smallest identifiable constituent element of a <<term-coverage,coverage>>'s <<te
 NOTE: Cells represent the atomic units of any coverage type across its multi-dimensional domain.
 
 NOTE: This definition intentionally generalizes and diverges from the more rigid geometric constraints found in ISO 19123-1 / OGC 07-011r2.
-While that abstract standard ties cells to strict, space-partitioning geometric tessellations, this standard treats a cell as a functional, data-bearing component.
-This allows the framework to natively accommodate domains containing internal gaps, variable structural geometries, or overlapping footprints.
+While that abstract standard ties cells to strict, space-partitioning geometric tessellations, this OGC API - Coverages Standard treats a cell as a functional, data-bearing component.
+This allows to natively accommodate domains containing internal gaps, variable structural geometries, or overlapping footprints.
 
 [[term-collapse-sparse-dimension]]
 === Collapse [of a sparse dimension]
@@ -25,12 +33,28 @@ dimension of a <<term-coverage,coverage>> whose <<term-variable-type,variable ty
 
 NOTE: A continuous dimension allows the coverage function to be evaluated at any arbitrary <<term-direct-position,direct position>> along its axis.
 
+[[term-cell-bounds]]
+=== Cell bounds
+
+<<term-boundary,boundary>> of the <<term-cell,cell>>
+
+NOTE: In the case of a <<term-grid-cell,cell>>, the boundary can be expressed as a low and high value for each dimension
+
+[[term-coordinate-anchors]]
+=== Coordinate anchors
+
+coordinates relative to which the <<term-cell-bounds,bounds>> of <<term-grid-cells,grid cells>> in a <<term-coverage,coverage>> are expressed
+
+NOTE: The position of coordinate anchors are chosen in a consistent way for all cells. For example, the anchors could be arbitrarily chosen to be
+the lower coordinate of the cells, the higher coordinate of the cells, or the centers of the cells, independently of whether the cell bounds are single points or
+span an area.
+
 [[term-coverage]]
 === Coverage
 function which returns values from its <<term-range,range>> for any <<term-direct-position,direct position>> within its <<term-domain,domain>>
 
-NOTE: Although a coverage is most often thought of as a regularly gridded data, the internal model of the coverage function may also consist of other things such as
-iregularly gridded data, a point cloud, or a collection of curves, surfaces, or solids (with associated properties), or a purely mathematical function.
+NOTE: Although a coverage is most often thought of as regularly gridded data, the internal model of the coverage function may also consist of other things such as
+irregularly gridded data, a point cloud, or a collection of curves, surfaces, or solids (with associated properties), or a purely mathematical function.
 
 [.source]
 <<OGC07-011r2>>
@@ -41,8 +65,9 @@ position described by a single coordinate tuple within a coordinate reference sy
 
 NOTE: A direct position is an ordered sequence of coordinates whose dimensions and properties are established by the axes of the coordinate reference system.
 
-NOTE: This specification maintains the coordinate-centric definition from ISO 19123:2005 / OGC 07-011 to ensure the coverage function remains compatible with any underlying
-data structures. Newer ISO 19123-1 redefines a direct position relative to instantiated geometric objects within the coverage, which is not implied by this standard.
+NOTE: This Standard maintains the coordinate-centric definition from ISO 19123:2005 / OGC 07-011 to ensure the coverage function remains compatible with any underlying
+data structures. The newer version ISO 19123-1:2023 redefines a direct position relative to instantiated geometric objects within the coverage, which is not implied by
+this Coverages API Standard.
 
 <<OGC07-011>>
 
@@ -50,7 +75,7 @@ data structures. Newer ISO 19123-1 redefines a direct position relative to insta
 === Discrete dimension
 dimension of a <<term-coverage,coverage>> <<term-domain,domain>> whose <<term-variable-type,variable type>> is discrete
 
-NOTE: A discrete dimension restricts evaluation of the coverage function to the bounds of the defined <<term-cell,cells>> along its axis.
+NOTE: A discrete dimension restricts evaluation of the coverage function to the <<term-cell-bounds,bounds>> of the defined <<term-cell,cells>> along its axis.
 
 [[term-domain]]
 === Domain [of a coverage]
@@ -59,8 +84,8 @@ complete set of <<term-direct-position,direct positions>> for which a <<term-cov
 NOTE: The <<term-domain,domain>> of a coverage establishes its valid multi-dimensional extent and coordinate space, which may be represented as a continuous mathematical space
 or a collection of bounded <<term-cell,cells>>.
 
-NOTE: This standard generalizes the definition of a domain to maintain consistency with the coverage function model.
-While ISO 19123-1 / OGC 07-011r2 defines a domain as a _set of geometric objects_, this standard focuses on the underlying coordinate space to maintain
+NOTE: This Coverages API Standard generalizes the definition of a domain to maintain consistency with the coverage function model.
+While ISO 19123-1 / OGC 07-011r2 defines a domain as a _set of geometric objects_, this Coverages API Standard focuses on the underlying coordinate space to maintain
 compatibility with purely mathematical functions and continuous coordinate spaces.
 
 [[term-downsampling]]
@@ -79,16 +104,16 @@ domain space.
 
 covering of a multi-dimensional region using quadrilateral shapes (in the 2D case) or their n-dimensional generalization (in the n-D case) with no overlaps and gaps
 
+NOTE: While the mathematical grid framework partitions space as a continuous tessellation with no gaps or overlaps, the individual <<term-grid-cell,grid cells>> mapped to this
+framework are governed by their own defined <<term-cell-bounds,bounds>>. This ensures this Standard natively supports discrete point-based data (which introduce internal spatial gaps) or sensor
+footprints (which may physically overlap) within the overall grid structure.
+
 NOTE: While networks using non-quadrilateral structures - such as triangular or hexagonal tessellations - represent valid configurations of a grid, they are excluded from the
-primary grid representation model of this standard. In the context of this Standard and the
+primary grid representation model of this Standard. In the context of this Standard and the
 https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[OGC API - Common - Part 2 "Uniform Additional Dimensions" requirements class],
 a grid is represented by independently defining the coordinate steps or intervals along each individual axis. This does not preclude an implementation from utilizing a
-non-quadrilateral underlying data store (such as a hierarchical hexagonal framework) and dynamically mapping its constituent cell bounds to the orthogonal axis-by-axis
-structure presented by the Web API.
-
-NOTE: While the mathematical grid framework partitions space as a continuous tessellation with no gaps or overlaps, the individual <<term-grid-cell,grid cells>> mapped to this
-framework are governed by their own defined bounds. This ensures this standard natively supports discrete point-based data (which introduce internal spatial gaps) or sensor
-footprints (which may physically overlap) within the overall grid structure.
+non-quadrilateral underlying data store (such as a hierarchical hexagonal framework) and dynamically mapping its constituent <<term-cell-bounds,cell bounds>> to the orthogonal axis-by-axis
+structure accessible through the implementation's external interface.
 
 [.source]
 <<OGC07-011r2>>
@@ -96,12 +121,12 @@ footprints (which may physically overlap) within the overall grid structure.
 [[term-grid-cell]]
 === Grid cell
 
-<<term-cell,cell>> whose bounds are defined relative to the intersections of the curves forming a <<term-grid,grid>>
+<<term-cell,cell>> whose <<term-cell-bounds,bounds>> are defined relative to the intersections of the curves forming a <<term-grid,grid>>
 
 NOTE: Depending on the coverage structure, the physical bounds of a grid cell may be defined as a zero-dimensional position at an intersection,
 the space between intersecting curves, or an arbitrary variation of either case.
 
-NOTE: Grid cells are not required to form a strict geometric tessellation; they may contain gaps or physically overlap depending on how their individual bounds are defined.
+NOTE: Grid cells are not required to form a strict geometric tessellation; they may contain gaps or physically overlap depending on how their individual <<term-cell-bounds,bounds>> are defined.
 
 [[term-interpolation-method]]
 === Interpolation method [in the context of this Standard]
@@ -122,7 +147,9 @@ about the resolution inherent to the coverage to help evaluate its suitability f
 
 [[term-range]]
 === Range [of a coverage]
-set of values associated by a function, the <<term-coverage,coverage>>, with the <<term-domain,domain>> of a coverage
+set of values associated by a function (the <<term-coverage,coverage>>) with the <<term-domain,domain>> of a coverage
+
+NOTE: This is consistent with the more generic definition of range in ISO 19107:2019 (co-domain, acceptable target values of a function).
 
 [.source]
 <<OGC07-011r2>>
@@ -142,10 +169,10 @@ one or more dimensions of a <<term-coverage,coverage>> <<term-domain,domain>>
 
 [[grid-resolution]]
 === Resolution [of a grid]
-distance between the coordinate anchors of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
+distance between the <<term-coordinate-anchors,coordinate anchors>> of adjacent <<term-cell,cells>> on a <<term-regular-grid,regular grid>> along each dimension
 
-NOTE: The `resolution` query parameter defined in this standard allows clients to request data <<term-resampling,resampled>> to a particular resolution, whether the output is
-returned in a gridded or non-gridded coverage format, but that output data may not be suitable for purposes requiring data at the true resolution being requested.
+NOTE: The `resolution` query parameter defined in this Standard allows clients to request data <<term-resampling,resampled>> to a particular resolution, whether the output is
+returned in a gridded or non-gridded coverage format. However, that output data may not be suitable for purposes requiring data at the true resolution being requested.
 
 [[term-resolution]]
 === Resolution [of data]
@@ -153,7 +180,10 @@ smallest difference between observations or measurements that can be meaningfull
 
 [[term-sparse-dimension]]
 === Sparse dimension
-dimension along which different extents of the other dimensions are filled at different positions, leaving no data present at several intersections with that sparse dimension
+dimension along which different extents of the other dimensions are filled at different positions, leaving data vacancies (no data) at several intersections with that sparse dimension
+
+NOTE: For example, satellite imagery datasets will only have data available for a particular spatial region of the Earth for a given time based on the current orbital position
+of the satellite at that time.
 
 === [Geometric] Sensor model
 mathematical description of the relationship between the three-dimensional object space and the corresponding dimensions of the associated <<term-coverage,coverage>> produced by a
@@ -175,7 +205,7 @@ or selecting specific <<term-field,fields>> (in the context of subsetting the <<
 
 [[term-transformation-grid]]
 === Transformation grid
-<<term-grid,grid>> whose <<term-direct-position,direct positions>> are given by some transformation algorithm not further specified in this standard
+<<term-grid,grid>> whose <<term-direct-position,direct positions>> are given by some transformation algorithm not further specified in this Standard
 
 [[term-trimming]]
 === Trimming
@@ -192,8 +222,18 @@ extracting a subset of data between a lower and upper bound along one or more di
 [[term-variable-type]]
 === Variable type
 
-type of variable which may inform correct interpretation and <<term-interpolation-method,interpolation method>>
-(one of `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`)
+class of variable, distinguishing between continuous vs. discrete, numerical vs. categorical, and ordinal vs. nominal.
+
+NOTE: The valid resulting combinations are `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`.
+
+NOTE: Nominal variables are unordered, while ordinal variables imply a specific order.
+
+NOTE: Numerical variables are identified with integer or real numbers and could be quantitative or qualitative,
+while categorical variables are identified with textual strings and limited to qualitative.
+
+NOTE: Continuous variables are infinite and identified with real numbers, while discrete variables are a finite set identified with integer or textual strings.
+
+NOTE: The variable type informs correct interpretation and <<term-interpolation-method,interpolation method>>.
 
 NOTE: The variable type `continuous` represents a continuous spectrum of values, while `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, and `categoricalNominal`
 represent discrete variable types.

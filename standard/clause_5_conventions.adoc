@@ -57,7 +57,7 @@ The following https://www.iana.org/assignments/link-relations/link-relations.xh
 
 * **self**: The target IRI conveys an identifier for the link’s context.
 
-* **item**: The target IRI points to a resource that is a member of the collection represented by the context (used by the templated link pointing to coverage tiles in a coverage tileset. Not used in the document representing the list of collections because the context is an item of the array of collection in that case, so `self` is used instead).
+* **item**: The target IRI points to a resource that is a member of the collection represented by the context (used by the templated link pointing to individual coverage tiles in a coverage tileset. Not used in the document representing the list of collections because the context is an item of the array of collection in that case, so `self` is used instead).
 
 * **service-desc**: The target IRI contains a service description for the context that is primarily intended for consumption by machines. (Web API definitions are considered service descriptions)
 

@@ -1,6 +1,6 @@
 get:
    tags:
-     - Coverage Tiles
+     - Tiled Coverage Data
    summary: Retrieve coverage scene tiles
    operationId: .collection.scene.coverage.getTile
    parameters:

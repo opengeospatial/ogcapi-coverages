@@ -2351,9 +2351,9 @@ The returned CoverageJSON payload reflects this spatial reprojection inside the 
 }
 ----
 
-=== Coverage tiles
+=== Tiled Coverage Data
 
-The Coverage Tiles requirements class bridges the OGC API - Coverages standard with the OGC API - Tiles and OGC 2D Tile Matrix
+The Tiled Coverage Data requirements class bridges the OGC API - Coverages standard with the OGC API - Tiles and OGC 2D Tile Matrix
 Set (2DTMS) standards. This class allows a client to fetch pre-aligned blocks of cells by targeting specific matrix, row,
 and column coordinates defined by a 2DTMS, rather than submitting arbitrary spatial subset bounding boxes.
 

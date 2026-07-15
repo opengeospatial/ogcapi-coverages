@@ -4,24 +4,24 @@ The framework, concepts, and methodology for testing, and the criteria to claim 
 
 The one Standardization Target for this standard is Web APIs.
 
-_OGC API - Common_ provides a common foundation for OGC API standards.
-Some conformance classes of this standard have a dependency on, or are designed to be easily integrated with, conformance classes defined in _OGC API - Common_ _Part 1_ and/or _Part 2_,
-as well as within a Web API conforming to additional OGC API standards.
+The _OGC API - Common_ Standard provides a common foundation for other OGC API standards.
+Some conformance classes of this OGC API - Coverages Standard have a dependency on, or are designed to be easily integrated with, conformance classes defined in _OGC API - Common_ _Part 1_ and/or _Part 2_,
+as well as within a Web API conforming to additional OGC API Standards.
 
-This standard identifies twenty-eight Conformance Classes. Each Conformance Class has an associated Requirements Class.
+This Standard identifies twenty-eight Conformance Classes. Each Conformance Class has an associated Requirements Class.
 The Requirements Classes define the functional requirements which will be tested through the associated Conformance Class.
-Only the Core requirements class is mandatory, all others are optional.
+Only the Core requirements class is mandatory, all other requirement classes are optional.
 
 The Requirements Classes for _OGC API - Coverages_ are:
 
 === Requirements classes defining resources
 
 * <<rc_core,*Core*>>
-* <<rc_tiles,*Coverage Tiles*>>
+* <<rc_tiles,*Tiled Coverage Data*>>
 
-The _Core_ Requirements Class is the minimal useful service interface for an OGC Coverages API. The requirements specified in this Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
+The _Core_ Requirements Class is the minimal useful service interface for an implementation of OGC API - Coverages Standard. The requirements specified in the Core Requirements Class are mandatory for all implementations of _OGC API - Coverages_.
 
-The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Tiles_ building blocks with the Coverages API to request coverage tiles.
+The _Tiled Coverage Data_ Requirements Class defines how to combine the _OGC API - Tiles_ requirements with the Coverages API to request tiled coverage data.
 
 === Requirements classes defining query parameters
 
@@ -35,7 +35,7 @@ The _Coverage Tiles_ Requirements Class defines how to combine the _OGC API - Ti
 * <<rc_field-selection,*Field Selection*>>
 * <<rc_crs,*Coordinate Reference System by Reference*>>
 
-The _Spatial, Temporal, and General Subsetting_ Requirements Class provides capabilities to select a <<term-subsetting,subset>> of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
+The _Spatial, Temporal, and General Subsetting_ Requirements Classes provide capabilities to select a <<term-subsetting,subset>> of a coverage using a multi-dimensional "bounding box" which is suitable for any coordinate reference system and any dimension.
 
 The _Multi Slicing_ Requirements Class extends the subsetting Requirements Class with the ability to request multiple <<term-slicing,slices>> at specific coordinates, including for <<term-irregular-grid, irregular grids>> and <<term-variable-type,categorical>> values.
 
@@ -65,11 +65,11 @@ The _Position Query_ Requirements Classes defines a simple JSON representation f
 which is usually zero-dimensional (if not including the geometry of resulting <<term-cell,cell(s)>>),
 having lost all its dimensionality through complete <<term-slicing,slicing>>.
 
-The <<encodings-section,Encoding Requirements Classes>> address support for formats commonly used for encoding coverage data.
+The <<encodings-section,Representations Requirements Classes>> address support for formats commonly used for encoding coverage data.
 
 === Requirements class related to API definition
 
-The <<rc_api_operations,*API Operations*>> Requirements Class defines additonal requirements in addition to those defined in _OGC API - Common - Part 1: Core_ to facilitate identifying coverage
+The <<rc_api_operations,*API Operations*>> Requirements Class defines additional requirements in addition to those defined in _OGC API - Common - Part 1: Core_ to facilitate identifying coverage
 resources from an API definition.
 
 === Summary of conformance URIs
@@ -93,7 +93,7 @@ resources from an API definition.
 | <<rc_scaling_general,General Scaling>>        | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/scaling-general
 | <<rc_field-selection,Field Selection>>        | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/field-selection
 | <<rc_crs,CRS>>                                | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/crs
-| <<rc_tiles,Coverage Tiles>>                   | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
+| <<rc_tiles,Tiled Coverage Data>>              | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/tiles
 | <<rc_html,HTML>>                              | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/html
 | <<rc_geotiff,GeoTIFF>>                        | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/geotiff
 | <<rc_cog,Cloud Optimized GeoTIFF>>            | https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cog

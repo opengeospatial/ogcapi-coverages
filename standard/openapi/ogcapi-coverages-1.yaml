@@ -44,14 +44,14 @@ paths:
       $ref: 'paths/coverages-core/pSchema.yaml'
 
    # Scenes
-   /collections/{collectionId}/scenes:
-      $ref: 'paths/coverages-core/pScenesList.yaml'
-   /collections/{collectionId}/scenes/{sceneId}:
-      $ref: 'paths/coverages-core/pScene.yaml'
-   /collections/{collectionId}/scenes/{sceneId}/coverage:
-      $ref: 'paths/coverages-core/pSceneCoverage.yaml'
+   #/collections/{collectionId}/scenes:
+   #   $ref: 'paths/coverages-core/pScenesList.yaml'
+   #/collections/{collectionId}/scenes/{sceneId}:
+   #   $ref: 'paths/coverages-core/pScene.yaml'
+   #/collections/{collectionId}/scenes/{sceneId}/coverage:
+   #   $ref: 'paths/coverages-core/pSceneCoverage.yaml'
 
-   # Coverage Tiles
+   # Tiled Coverage Data
    /collections/{collectionId}/tiles:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTileSetsList.yaml'
    /collections/{collectionId}/tiles/{tileMatrixSetId}:
@@ -59,12 +59,12 @@ paths:
    /collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
       $ref: 'paths/tiles-core/collection-tiles/coverage-tiles/pCollectionCoverageTile.yaml'
 
-   /collections/{collectionId}/scenes/{sceneId}/tiles:
-      $ref: 'paths/coverages-core/pSceneCoverageTileSetsList.yaml'
-   /collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}:
-      $ref: 'paths/coverages-core/pSceneCoverageTileSet.yaml'
-   /collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
-      $ref: 'paths/coverages-core/pSceneCoverageTile.yaml'
+   #/collections/{collectionId}/scenes/{sceneId}/tiles:
+   #   $ref: 'paths/coverages-core/pSceneCoverageTileSetsList.yaml'
+   #/collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}:
+   #   $ref: 'paths/coverages-core/pSceneCoverageTileSet.yaml'
+   #/collections/{collectionId}/scenes/{sceneId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+   #   $ref: 'paths/coverages-core/pSceneCoverageTile.yaml'
 
 components:
    schemas:
@@ -149,8 +149,6 @@ components:
          $ref: 'parameters/common-geodata/bbox.yaml'
 
       # Coverages - Core
-      sceneId:
-         $ref: 'parameters/coverages-core/sceneId.yaml'
       resolution:
          $ref: 'parameters/coverages-core/resolution.yaml'
       properties:
@@ -173,6 +171,10 @@ components:
       # Coverages - Core (unspecified)
       f-coverage:
          $ref: 'parameters/unspecified/f-coverage.yaml'
+
+      # Coverages - Scenes
+      #sceneId:
+      #   $ref: 'parameters/coverages-core/sceneId.yaml'
 
       # Tiles - Core
       tileMatrix:
@@ -212,10 +214,12 @@ components:
       # Coverages - Core
       Coverage:
          $ref: 'responses/coverages-core/rCoverage.yaml'
-      Scene:
-         $ref: 'responses/coverages-core/rScene.yaml'
-      ScenesList:
-         $ref: 'responses/coverages-core/rScenesList.yaml'
+
+      # Coverages - Scenes
+      #Scene:
+      #   $ref: 'responses/coverages-core/rScene.yaml'
+      #ScenesList:
+      #   $ref: 'responses/coverages-core/rScenesList.yaml'
 
       # Dynamic enumeration of resources specific to this implementation
       Enumeration:

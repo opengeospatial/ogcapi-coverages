@@ -1,9 +1,9 @@
 [[encodings-section]]
-== Requirements Classes for Encodings
+== Requirements Classes for Representations
 
 This standard does not mandate any particular encoding or format in which to return the `../coverage` resource.
 Coverages can be encoded in any suitable data format.
-However, it does define requirements class for encodings which are expected to be commonly supported in implementations of this standard.
+However, it does define requirements class for representations which are expected to be commonly supported in implementations of this standard.
 These requirements classes include:
 
 * <<rc_encoding-html,HTML>>

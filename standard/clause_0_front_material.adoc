@@ -14,7 +14,7 @@ Implementations of the OGC API - Coverages Standard are designed for a clien
 - Select a particular output coordinate reference system.
 
 A server that implements OGC API - Coverages provides information about which coverages are offered.
-OGC API - Coverages addresses use cases similar to those addressed by the
+OGC API - Coverages use cases are similar to those addressed by the
 http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC 17-089r1 OGC® Web Coverage Service (WCS) Interface Standard].
 
 [big]*ii.    Keywords*
@@ -25,7 +25,7 @@ ogcdoc, OGC document, geographic information, spatial data, spatial things, data
 
 [big]*iii.   Preface*
 
-Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
 
 Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
 
@@ -55,16 +55,16 @@ The following organizations submitted this Document to the Open Geospatial Conso
 
 [big]*vi.     Submitters*
 
-All questions regarding this submission should be directed to the editor or the submitters:
+All questions or concerns regarding this OGC Standard should be submitted as issues to the https://github.com/opengeospatial/ogcapi-coverages]OGC API - Coverages repository].
 
 |===
-^|Name                                                          ^|Affiliation
-|Charles Heazel (Editor)                                         |HeazelTech
-|Jérôme Jacovella-St-Louis <jerome@ecere.com> (Editor)           |https://ecere.ca[Ecere Corporation]
-|Stephan Meissl <stephan.meissl@eox.at>                          |https://eox.at[EOX IT Services GmbH]
-|Tom Kralidis <tom.kralidis@ec.gc.ca>                           |Meteorological Service of Canada
-|Joan Masó Pau <joan.maso@ieee.org>                              |Universitat Autònoma de Barcelona (CREAF)
-|Francis Charette-Migneault <francis.charette-migneault@luqia.ca>|https://luqia.ca[Technologies Luqia]
+^|Name                                ^|Affiliation
+|Charles Heazel (Editor)               |HeazelTech
+|Jérôme Jacovella-St-Louis (Editor)    |https://ecere.ca[Ecere Corporation]
+|Stephan Meissl                        |https://eox.at[EOX IT Services GmbH]
+|Tom Kralidis                          |Meteorological Service of Canada
+|Joan Masó Pau                         |Universitat Autònoma de Barcelona (CREAF)
+|Francis Charette-Migneault            |https://luqia.ca[Technologies Luqia]
 |===
 
 [big]*vii.     Acknowledgements*
@@ -73,7 +73,10 @@ Some of the work leading to the creation of this OGC Standard was undertaken as 
 GeoConnections 2020-2021 and 2025-2027 projects GNS20-21IFP02 (Modular OGC API Workflows) and
 GNS25-27IFP2 (Advancing and Implementing OGC Standards for GeoDataCubes, DGGSs, Data Stores for Digital Twins and Cartographic Symbology).
 
-Financial support provided by GeoConnections, a national collaborative initiative led by Natural Resources Canada.
+Financial support for the above mentioned activities was provided by GeoConnections, a national collaborative initiative led by Natural Resources Canada.
 GeoConnections supports the modernization of the Canadian Geospatial Data Infrastructure (CGDI).
 The CGDI is the collection of geospatial data, standards, policies, applications, and governance that facilitate its
 access, use, integration, and preservation.
+
+Additional support was provided through OGC Testbed activities related to GeoDataCubes, in particular Testbed 17 (https://docs.ogc.org/per/21-027.html[OGC 21-026]),
+Testbed 19 (https://docs.ogc.org/per/23-047.html[OGC 23-047]) and Testbed 20 (https://docs.ogc.org/per/24-035.html[OGC 24-035]).

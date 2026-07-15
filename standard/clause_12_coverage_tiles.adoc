@@ -1,9 +1,9 @@
 [[rc_tiles]]
-== Requirements Class "Coverage Tiles"
+== Requirements Class "Tiled Coverage Data"
 
 === Overview
 
-The "Coverage Tiles" Requirements Class defines how to combine the https://docs.ogc.org/is/20-057/20-057.html[_OGC API - Tiles_] building blocks with the _Coverages API_ to request coverage tiles.
+The "Tiled Coverage Data" Requirements Class defines how to combine the https://docs.ogc.org/is/20-057/20-057.html[_OGC API - Tiles_] building blocks with the _Coverages API_ to request coverage tiles.
 Coverages parameters such as for <<term-subsetting,subsetting>> additional dimensions not covered by the Tiles https://docs.ogc.org/is/17-083r4/17-083r4.html[2D Tile Matrix Set]
 (such as <<rc_subsetting_temporal,time>>, <<rc_subsetting_spatial,elevation above the ellipsoid>> or <<rc_subsetting_general,pressure>>),
 or for <<rc_fieldselection,field selection>>, can be used together with the resource path for requesting individual tiles.
@@ -15,6 +15,6 @@ Note that the number of <<term-cell,cells>> in the response for a _Value-Is-Poin
 .The cells returned for a tile response of a gridded coverage for _Value-is-Point_ (relativeBounds: [0, 0]) and _Value-is-Area_ (relativeBounds: [0, 0.25])
 image::figures/spanCoverageTiles.png[]
 
-See also <<_coverage_tiles, examples of coverage tile requests>> in an annex.
+See also <<_tiled_coverage_data, examples of tiled coverage data requests>> in an annex.
 
 include::requirements/requirements_class_coverage_tiles.adoc[]
