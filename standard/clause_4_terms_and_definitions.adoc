@@ -229,17 +229,14 @@ class of variable, distinguishing between continuous vs. discrete, numerical vs.
 
 NOTE: The valid resulting combinations are `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`.
 
+NOTE: Continuous variables (`continuous`) represent an infinite spectrum of values (such as spatial coordinates or temporal instants), while discrete variables
+(`numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, and `categoricalNominal`) represent a finite or countable set of distinct values.
+
 NOTE: Nominal variables are unordered, while ordinal variables imply a specific order.
 
-NOTE: Numerical variables are identified with integer or real numbers and could be quantitative or qualitative,
-while categorical variables are identified with textual strings and limited to qualitative.
-
-NOTE: Continuous variables are infinite and identified with real numbers, while discrete variables are a finite set identified with integer or textual strings.
+NOTE: Numerical variables are identified with integer or real numbers, while categorical variables are identified with textual strings.
 
 NOTE: The variable type informs correct interpretation and <<term-interpolation-method,interpolation method>>.
-
-NOTE: The variable type `continuous` represents a continuous spectrum of values, while `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, and `categoricalNominal`
-represent discrete variable types.
 
 NOTE: Each dimension of the domain and field of the range of a coverage have a specific variable type.
 
