@@ -228,17 +228,12 @@ extracting a subset of data between a lower and upper bound along one or more di
 class of variable, distinguishing between continuous vs. discrete, numerical vs. categorical, and ordinal vs. nominal.
 
 NOTE: The valid resulting combinations are `continuous`, `numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, or `categoricalNominal`.
-
-NOTE: Continuous variables (`continuous`) represent an infinite spectrum of values (such as spatial coordinates or temporal instants), while discrete variables
+Continuous variables (`continuous`) represent an infinite spectrum of values (such as spatial coordinates or temporal instants), while discrete variables
 (`numericalOrdinal`, `numericalNominal`, `categoricalOrdinal`, and `categoricalNominal`) represent a finite or countable set of distinct values.
-
-NOTE: Nominal variables are unordered, while ordinal variables imply a specific order.
-
-NOTE: Numerical variables are identified with integer or real numbers, while categorical variables are identified with textual strings.
-
-NOTE: The variable type informs correct interpretation and <<term-interpolation-method,interpolation method>>.
-
-NOTE: Each dimension of the domain and field of the range of a coverage have a specific variable type.
+Nominal variables are unordered, while ordinal variables imply a specific order.
+Numerical variables are identified with integer or real numbers, while categorical variables are identified with textual strings.
+The variable type informs correct interpretation and <<term-interpolation-method,interpolation method>>.
+Each dimension of the domain and field of the range of a coverage have a specific variable type.
 
 [.source]
 <<OGC20-024>>
