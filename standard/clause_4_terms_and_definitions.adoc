@@ -50,7 +50,7 @@ NOTE: A continuous dimension allows the coverage function to be evaluated at any
 
 <<term-boundary,boundary>> of the <<term-cell,cell>>
 
-NOTE: In the case of a <<term-grid-cell,cell>>, the boundary can be expressed as a low and high value for each dimension.
+NOTE: In the case of a <<term-grid-cell,grid cell>>, the bounds can be expressed as a low and high value for each dimension.
 
 [[term-coverage]]
 === Coverage
