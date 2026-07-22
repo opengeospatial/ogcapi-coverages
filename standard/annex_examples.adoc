@@ -240,7 +240,7 @@ Content-Type: application/json
 ==== Collection Description (Domain)
 
 This example demonstrates how a multi-dimensional coverage collection describes its domain structure within the collection description.
-The dataset represents a 4D atmospheric datacube with spatial axes, a temporal axis, and an atmospheric pressure coordinate axis.
+The dataset represents a 4D atmospheric data cube with spatial axes, a temporal axis, and an atmospheric pressure coordinate axis.
 
 The example incorporates explicit grid topology descriptions, including `relativeBounds` for regular grid dimensions (representing the cell-centered offset distance to the
 cell edge) and `boundsCoordinates` for irregular grid intervals. For the spatial longitude axis, the 2049 cells at a 0.17578125-degree resolution span exactly 360.0 degrees

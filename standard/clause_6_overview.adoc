@@ -4,35 +4,40 @@
 [[general-overview]]
 === General
 
-_OGC API - Coverages - Part 1: Core_, hereafter sometimes referred to as the _Coverages API_, specifies the fundamental API building blocks for retrieving <<term-coverage,coverage>> data.
+_OGC API - Coverages - Part 1: Core_, hereafter sometimes referred to as the _Coverages API_, specifies the fundamental Web API resource paths, responses, schemas and parameters
+for retrieving <<term-coverage,coverage>> data organized as a mandatory "Core" requirements class and additional optional requirements classes.
 The spatial data community uses the term _coverage_ for homogeneous collections of values located in space/time such as: spatio-temporal sensor, image, simulation, and statistical data.
 The _W3C/OGC Spatial Data on the Web Best Practices_ provide an overview of https://www.w3.org/TR/sdw-bp/#coverages[Coverages: describing properties that vary with location (and time)].
 
-The OGC API family of standards enable access to resources using the HTTP protocol and its associated operations (GET, PUT, POST, etc.).
-_OGC API - Common_ defines a set of capabilities which are shared by several OGC API standards.
-Some of these other OGC API standards define capabilities to access data using a particular mechanism tailored to a specific resource type.
-These standards can be integrated within the framework defined by _OGC API - Common_, including the concept of a landing page, API definition and conformance declaration (_Part 1_),
-as well as providing access to one or more collections of geospatial data (_Part 2_).
-OGC API standards also re-use common Web API building blocks such as resource paths (including associated path parameters),
-response definitions for specific representations, schemas for request payloads and responses, or query parameters.
-This common framework ensures consistency and allow for the integration of multiple OGC API standards within a single Web API implementation.
+Implementations of the OGC API family of standards enable access to resources using the HTTP protocol and its associated operations (GET, PUT, POST, etc.).
+_OGC API - Common_ defines a set of capabilities which are shared by several OGC API Standards.
+Some of these other OGC API Standards define capabilities to access data using a particular mechanism tailored to a specific resource type.
+These OGC Standards can be integrated within the framework defined by _OGC API - Common_, including:
 
-This _OGC API - Coverages_ standard defines an API with two goals:
+* the concept of a landing page, providing an API definition and declaring conformance (https://docs.ogc.org/is/19-072/19-072.html[_Part 1_]),
+* providing access to one or more collections of geospatial data (https://docs.ogc.org/DRAFTS/20-024.html[_Part 2_]),
+* providing a representation-agnostic schema for the fields/properties of the data (https://docs.ogc.org/is/23-058r2/23-058r2.html[_Part 3_]).
+
+OGC API Standards also re-use common Web API elements such as resource paths (including associated path parameters), HTTP methods, request and response headers,
+response definitions for specific representations, schemas for request payloads and responses, and query parameters.
+This common framework ensures consistency and supports the integration of multiple OGC API Standards within a single Web API implementation.
+
+This _OGC API - Coverages_ Standard defines an API with two goals:
 
 * Provide access to <<term-coverage,*_Coverages_*>> conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 * Provide functionality comparable to that of the <<web-coverage-service-overview,OGC Web Coverage Service (WCS) standard>>.
 
-This API standard allows efficient access to multidimensional geospatial data cubes, particularly when additional optional requirements classes complementing the functionality
-defined in the "Core" requirements class allowing to subset the fields, area, time and resolution of interest, are implemented.
+Conformant Implementations of this Coverages API Standard enable efficient access to multidimensional <<term-geospatial-data-cube,geospatial data cubes>>, particularly when additional optional requirements classes complementing the functionality
+defined in the "Core" requirements class allowing to subset the <<rc_field-selection,fields>>, <<rc_subsetting_spatial,area>>, <<rc_subsetting_temporal,time>> and <<rc_scaling_spatial,resolution of interest>>, are implemented.
 
 This data cube functionality can be further extended by integrating it with advanced processing capabilities
 as defined by https://docs.ogc.org/is/18-062r2/18-062r2.html[_OGC API - Processes - Part 1: Core_] and https://docs.ogc.org/DRAFTS/21-009.html[_OGC API - Processes - Part 3: Workflows and Chaining_ (draft)]
 (the _collection input_ and _collection output_ requirements classes in particular).
 
-A future part extension to this standard is also foreseen for deriving new coverage fields based
+A future part extension to this Coverages API Standard is also foreseen for deriving new coverage fields based
 on a simple expression language such as the https://docs.ogc.org/DRAFTS/21-065.html[_OGC Common Query Language (CQL2)_], together with standardized mathematical and aggregation functions.
 
-Resources exposed through an OGC API may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>>
+Resources exposed through an OGC API endpoint may be accessed through a Universal Resource Identifier <<rfc3986,(URI).>>
 URIs are composed of three sections:
 
 * Dataset distribution API: The endpoint corresponding to a dataset distribution, where the landing page resource as defined in _OGC API - Common - Part 1: Core_ is available (subsequently referred to as Base URI or `{root}`)
@@ -54,14 +59,14 @@ The following table summarizes the resource paths defined in this standard, as w
 ^|Resource URI                                   ^|Description
 2+|https://docs.ogc.org/is/19-072/19-072.html[**_OGC API - Common - Part 1_**]
 |`{root}/` +
-(see <<_landing_page,example B.1.1>>) |Landing page for this dataset distribution
+(see <<_landing_page,example B.1.1>>) |Landing page for a dataset distribution
 |`{root}/api` +
 (see https://github.com/opengeospatial/ogcapi-coverages/tree/master/standard/openapi[example OpenAPI definition])  |API description (e.g., Open API Specification) and documentation (e.g., HTML)
 |`{root}/conformance` +
 (see <<_conformance_declaration_2,example B.1.2>>)                         |Declaration of supported conformance classes
 2+|https://docs.ogc.org/DRAFTS/20-024.html[**_OGC API - Common - Part 2_**]
 |`{root}/collections` +
-(see <<_list_of_collections,example B.1.3>>)                        |The list of all collections available, some or all of which may be accessible using this _Coverages API_. Each of these collections contains a minimal subset of the object collection resource object described immediately below.
+(see <<_list_of_collections,example B.1.3>>)                        |The list of all collections available, some or all of which may be accessible using the resource endpoint defined by the Coverages API Standard. Each of these collections contains a minimal subset of the object collection resource object described immediately below.
 |`{root}/collections/{collectionId}` +
 (see <<collection-description-example,example B.2.1>>)         |Description for the collection with the unique identifier `{collectionId}`, which may be accessible as a coverage. The resource includes elements such as an `id`, `title`, `description`, available `crs` and `extent`. This `extent` describes the <<term-domain,domain>> of the coverage for each dimension, including the overall envelope, detailed sub-intervals where data is available, and/or a <<term-regular-grid,regular>> or <<term-irregular-grid,irregular>> <<term-grid,`grid`>>. This object also includes links to resources pertaining to this collection. For coverages, a link to the record schema described below will be included. This resource is comparable to a WCS *_DescribeCoverage_* response, with the exception that the schema, corresponding to Coverage Implementation Schema (CIS) _range type_, needs to be retrieved separately.
 2+|https://docs.ogc.org/is/23-058r2/23-058r2.html[**_OGC API - Common - Part 3_**]

@@ -8,7 +8,7 @@ All other requirement classes are optional.
 
 The requirement class depends on _OGC API - Common - Part 2: Geospatial data_, which defines how to list available collections of geospatial data and associate access mechanisms for these collections.
 
-The only strict depedency from _OGC API - Common - Part 1: Core_ for this Standard is the "Core" requirements class, which simply defines the shared principles of OGC APIs.
+The only strict dependency from _OGC API - Common - Part 1: Core_ for this Standard is the "Core" requirements class, which simply defines the shared principles of OGC APIs.
 However, implementations are strongly encouraged to also implement the "Landing Page" requirements class from OGC API - Common - Part 1 which specifies a resource (`/conformance`), for declaring conformance to
 the requirements classes they support, making clients and test suites aware of the supported capabilities of the API.
 The "Landing Page" requirements class additionally requires providing a definition for the Web API.
@@ -17,7 +17,7 @@ This _Coverages API_ is presented as one such access mechanism for collections o
 a function returning homogeneous values for any <<term-direct-position,direct position>> part of its <<term-domain,domain>>.
 
 This requirement class depends on the https://docs.ogc.org/DRAFTS/20-024.html#rc-collections-section[_collections_ requirements class] of _OGC API - Common - Part 2_ which defines
-the `/collections` and `/collections/{collectionId}` resources, as well as its https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[_uniform additional dimensions collections_ requirements class].
+the `/collections` and `/collections/{collectionId}` resources, as well as its https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[_uniform additional dimensions collections_ requirements class]
 introducing additional requirements standardizing the description of multidimensional data cubes and <<term-grid,gridded>> data.
 Each collection accessible as a coverage needs to include a link to the `/collections/{resourceId}/coverage` resource using the `[ogc-rel:coverage]` link relation type, which is used to retrieve the coverage data.
 

@@ -34,6 +34,13 @@ NOTE: This definition intentionally generalizes and diverges from the more rigid
 While that abstract standard ties cells to strict, space-partitioning geometric tessellations, this OGC API - Coverages Standard treats a cell as a functional, data-bearing component.
 This allows to natively accommodate domains containing internal gaps, variable structural geometries, or overlapping footprints.
 
+[[term-cell-bounds]]
+=== Cell bounds
+
+<<term-boundary,boundary>> of the <<term-cell,cell>>
+
+NOTE: In the case of a <<term-grid-cell,grid cell>>, the bounds can be expressed as a low and high value for each dimension.
+
 [[term-collapse-sparse-dimension]]
 === Collapse [of a sparse dimension]
 mosaic operation filling empty values of a sparse dimension <<term-slicing,slice>> with neighboring non-empty values,
@@ -45,13 +52,6 @@ dimension of a <<term-coverage,coverage>> whose <<term-variable-type,variable ty
 
 NOTE: A continuous dimension allows the coverage function to be evaluated at any arbitrary <<term-direct-position,direct position>> along its axis.
 
-[[term-cell-bounds]]
-=== Cell bounds
-
-<<term-boundary,boundary>> of the <<term-cell,cell>>
-
-NOTE: In the case of a <<term-grid-cell,grid cell>>, the bounds can be expressed as a low and high value for each dimension.
-
 [[term-coverage]]
 === Coverage
 function which returns values from its <<term-range,range>> for any <<term-direct-position,direct position>> within its <<term-domain,domain>>
@@ -61,6 +61,16 @@ irregularly gridded data, a point cloud, or a collection of curves, surfaces, or
 
 [.source]
 <<OGC07-011r2>>
+
+[[term-data-cube]]
+=== Data cube
+
+multi-dimensional collection of data
+
+NOTE: Even though it is called a _cube_, it can be 1-dimensional, 2-dimensional, 3-dimensional, or higher-dimensional.
+The dimensions may be coordinates or enumerations, e.g., categories.
+
+NOTE: The term is also sometimes used to refer to a service or platform providing access to such data cube, or to a federation of such services or platforms.
 
 [[term-direct-position]]
 === Direct position
@@ -101,6 +111,11 @@ component of a <<term-coverage,coverage>>'s <<term-range,range>> that maps a sin
 
 NOTE: Analytically, a field represents a continuous or discrete phenomenon - such as temperature, elevation, or a classification - that extends across the multi-dimensional
 domain space.
+
+[[term-geospatial-data-cube]]
+=== Geospatial data cube (GeoDataCube)
+
+a <<term-data-cube,data cube>> for which one or more dimensions are geospatial (e.g., latitude and longitude, or projected easting and northing; elevation above the WGS84 ellipsoid)
 
 [[term-grid]]
 === Grid
