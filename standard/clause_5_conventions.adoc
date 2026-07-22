@@ -2,17 +2,17 @@
 This section provides details of conventions used in this document.
 
 === Identifiers
-The normative provisions in this standard are denoted by the URI `http://www.opengis.net/spec/ogcapi-coverages-1/1.0`.
+The normative provisions in this standard are denoted by the URI `https://www.opengis.net/spec/ogcapi-coverages-1/1.0`.
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
 
 === Examples
 
-Most of the examples provided in this standard are encoded in JSON. JSON was chosen because it is widely understood by implementers and easy to include in a text document. This convention should NOT be interpreted as a requirement that JSON must be used. Implementors are free to use any format they desire as long as there is a Conformance Class for that format and the API advertises its support for that Conformance Class.
+Most of the examples in this Standard are expressed as JSON. JSON was chosen because it is widely understood by implementers and easy to include in a text document. This convention should NOT be interpreted as a requirement that JSON must be used. Implementors are free to use any format they desire as long as there is a Conformance Class for that format and the API implementation advertises its support for that Conformance Class.
 
 === Schema
 
-JSON Schema is used throughout this standard to define the structure of resources. These schema are typically represented using YAML encoding. This convention is for the ease of the user. It does not prohibit the use of another schema language or encoding. Nor does it indicate that JSON schema is required. Implementations should use a schema language and encoding appropriate for the format of the resource.
+JSON Schema (version 2020-12) is used throughout this Standard to define the structure of resources. These schema are typically represented using YAML encoding. This convention is for the ease of the user. It does not prohibit the use of another schema language or encoding. Nor does it indicate that JSON schema is required. Implementations should use a schema language and encoding appropriate for the format of the resource.
 
 === UML Notation
 
@@ -24,31 +24,12 @@ Diagrams using the Unified Modeling Language (UML) adhere to the following conve
 
 Further, in any class where an attribute name or association role name is identical to a name in some superclass the local definition overrides the superclass definition.
 
-=== Namespace Prefix Conventions
-
-UML diagrams and XML code fragments adhere to the namespace conventions shown in <<namespace-mapping-conventions>>. The namespace prefixes used in this document are not normative and are merely chosen for convenience. The namespaces to which the prefixes correspond are normative, however.
-
-Whenever a data item from a CIS-external namespace is referenced this constitutes a normative dependency on the data structure imported together with all requirements defined in the namespace referenced.
-
-[#namespace-mapping-conventions,reftext='{table-caption} {counter:table-num}']
-.Namespace mapping conventions
-[width="90%",cols="^2,^2,6,6",options="header"]
-|====
-|*UML prefix* |*GML prefix* ^|*Namespace URL* ^|*Description*
-|CIS |cis |http://www.opengis.net/cis/1.1 |Coverage Implementation Schema 1.1
-|CIS10 |cis10 |http://www.opengis.net/gmlcov/1.0 |Coverage Implementation Schema 1.0
-|GML |gml |http://www.opengis.net/gml/3.2 |GML 3.2.1
-|GML33 |gml33 |http://www.opengis.net/gml/3.3 |GML 3.3
-|SWE Common |swe |http://www.opengis.net/swe/2.0 |SWE Common 2.0
-|SML |sml |http://www.opengis.net/sensorml/2.0 |SensorML 2.0
-|====
-
 [[conventions-link-relations]]
 === Link relations
 
 To express relationships between a target IRI from a context point of view (simple cases for the 'context' is the actual page contain the link or a item of an array in the actual page), https://tools.ietf.org/rfc/rfc8288.txt[RFC 8288 (Web Linking)] is used.
 
-Note that the CURIE based on the pattern `[ogc-rel:<relation>]` is also considered equivalent.
+Note that the CURIE (Compact URI) based on the pattern `[ogc-rel:<relation>]` is also considered equivalent.
 For example, `[ogc-rel:coverage]` corresponds to https://www.opengis.net/def/rel/ogc/1.0/coverage.
 
 The following https://www.iana.org/assignments/link-relations/link-relations.xhtml[IANA link relation types] are used in this document:
@@ -63,7 +44,7 @@ The following https://www.iana.org/assignments/link-relations/link-relations.xh
 
 * **service-doc**: The target IRI contains service documentation for the context that is primarily intended for human consumption.
 
-The following link relation types specified in the _Two Dimensional Tile Matrix Set and Tileset Metadata_ standard are used:
+The following link relation types specified in the _Two Dimensional Tile Matrix Set and Tileset Metadata_ Standard are used:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme**: The target IRI points to a resource that describes the TileMatrixSet according to the 2D-TMS standard.
 
@@ -71,13 +52,13 @@ The following link relation types specified in the _Two Dimensional Tile Matrix 
 
 * **http://www.opengis.net/def/rel/ogc/1.0/geodata**: The target IRI points to a geospatial resource (e.g. a single collection). (Use `http://www.opengis.net/def/rel/ogc/1.0/data` to point to a list of geospatial resources)
 
-The following link relation types specified in the _OGC API - Tiles_ standard are used:
+The following link relation types specified in the _OGC API - Tiles_ Standard are used:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage**: The target IRI points to a resource that describes how to provide tile sets of the context resource in coverage format.
 
-* **http://www.opengis.net/def/rel/ogc/1.0/tiling-schemes**: The target IRI points to a resource that lists one or more TileMatrixSets according to the 2D-TMS standard.
+* **http://www.opengis.net/def/rel/ogc/1.0/tiling-schemes**: The target IRI points to a resource that lists one or more TileMatrixSets according to the OGC 2D-TMS standard.
 
-The following link relation types specified in the _OGC API - Features - Part 5_ draft standard are used:
+The following link relation types specified in the _OGC API - Features - Part 5 / OGC API - Common - Part 3: Schemas_ Standard are used:
 
 * **http://www.opengis.net/def/rel/ogc/1.0/schema**: The target IRI points to a resource representing the schema of the coverage fields or properties, including the title, type and description of each field, as well as semantic annotations. This corresponds to the _range type_ of the Coverage Implementation Schema (CIS). However, an `application/json` representation of such target resource is expected to be described using JSON Schema rather than CIS JSON.
 
@@ -95,7 +76,8 @@ Used in combination with _OGC API - Features Part 1: Core_ or _OGC API - Common�
 
 * **http://www.opengis.net/def/rel/ogc/1.0/data-meta**: The target IRI points to a resource representing general metadata for the context resource (e.g. collection of geospatial data) (e.g., <<ISO_19115-1,ISO-19115>> -- not the domain/application metadata as defined in CIS).
 
-Each resource representation includes an array of links. Implementations are free to add additional links for all resources provided by the Web API.
+Each resource representation includes an array of links. Implementations are free to add additional links for all resources provided by that specific Web API instance,
+including but not limited to those defined in the Coverages API requirements classes.
 
 [[conventions-interpolation-methods]]
 === Interpolation methods
@@ -130,7 +112,7 @@ https://www.opengis.net/def/interpolation. The interpolation methods referenced 
 
 where, as an example, the equivalent CURIE form for linear interpolation is `[ogc-interpolation:linear]`.
 
-This list is not exhaustive -- additional interpolation methods may be proposed for addition to the OGC definition server,
+This list is not exhaustive -- additional interpolation methods may be proposed for addition to the https://www.opengis.net/def[OGC Definition Server],
 and different URIs may be understood by specific implementations when an adequate URI has not yet been registered for other
 supported interpolation methods.
 
