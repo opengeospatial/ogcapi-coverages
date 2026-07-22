@@ -6,7 +6,7 @@ For the purposes of this document, the following additional terms and definition
 [[term-anchor-coordinates]]
 === Anchor coordinates
 
-coordinates relative to which the <<term-cell-bounds,bounds>> of <<term-grid-cells,grid cells>> in a <<term-coverage,coverage>> are expressed
+coordinates relative to which the <<term-cell-bounds,bounds>> of <<term-grid-cell,grid cells>> in a <<term-coverage,coverage>> are expressed
 
 NOTE: The position of anchor coordinates are chosen in a consistent way for all cells. For example, the anchor coordinates could be arbitrarily chosen to be
 the lower coordinate of the cells, the higher coordinate of the cells, or the centers of the cells, independently of whether the cell bounds are single points or
