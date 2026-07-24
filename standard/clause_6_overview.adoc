@@ -45,9 +45,10 @@ URIs are composed of three sections:
 * Access Paths: Unique paths to Resources
 * Query: Parameters to adjust the representation of a Resource or Resources, such as requesting a particular subset or downsampled resolution of the data
 
-Access Paths are used to build resource identifiers. Most of these paths are fixed, with the exception of the _OGC API - Common - Part 1_ `/api` service description / documentation.
+Access Paths are used to build resource identifiers. While typical paths are often used, most of the resource paths are flexible, with the exception of the
+`/collections` and `/collections/{collectionId}` defined by _OGC API - Common - Part 2_. Clients therefore need to rely on links to resolve the resource identifiers.
 
-All resources are also accessible by following links starting from the landing page, with a specific link relation type used from one resource to another, as detailed in <<conventions-link-relations>>.
+All resources are accessible by following links starting from the landing page, with a specific link relation type used from one resource to another, as detailed in <<conventions-link-relations>>.
 
 === Resource Paths
 
