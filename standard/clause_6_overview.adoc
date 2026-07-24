@@ -27,8 +27,9 @@ This _OGC API - Coverages_ Standard defines an API with two goals:
 * Provide access to <<term-coverage,*_Coverages_*>> conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 * Provide functionality comparable to that of the <<web-coverage-service-overview,OGC Web Coverage Service (WCS) standard>>.
 
-Conformant Implementations of this Coverages API Standard enable efficient access to multidimensional <<term-geospatial-data-cube,geospatial data cubes>>, particularly when additional optional requirements classes complementing the functionality
-defined in the "Core" requirements class allowing to subset the <<rc_field-selection,fields>>, <<rc_subsetting_spatial,area>>, <<rc_subsetting_temporal,time>> and <<rc_scaling_spatial,resolution of interest>>, are implemented.
+Conformant Implementations of this Coverages API Standard enable efficient access to multidimensional <<term-geospatial-data-cube,geospatial data cubes>>, particularly when
+implementing additional optional requirements classes, complementing the functionality defined in the <<rc_core, "Core" requirements class>>,
+allowing to subset the <<rc_field-selection,fields>>, <<rc_subsetting_spatial,area>>, <<rc_subsetting_temporal,time>> and <<rc_scaling_spatial,resolution of interest>>.
 
 This data cube functionality can be further extended by integrating it with advanced processing capabilities
 as defined by https://docs.ogc.org/is/18-062r2/18-062r2.html[_OGC API - Processes - Part 1: Core_] and https://docs.ogc.org/DRAFTS/21-009.html[_OGC API - Processes - Part 3: Workflows and Chaining_ (draft)]
