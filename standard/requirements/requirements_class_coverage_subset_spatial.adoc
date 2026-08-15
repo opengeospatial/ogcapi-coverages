@@ -1,11 +1,25 @@
 [[rc_subsetting-spatial-table]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-spatial
-|Target type |Web API
-|Dependency  |https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|===
+
+[requirements_class]
+.Spatial Subsetting
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/subsetting-spatial
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+requirement:: /req/subsetting-spatial/subset
+requirement:: /req/subsetting-spatial/3d-axis
+requirement:: /req/subsetting-spatial/subset-invalid-axis
+requirement:: /req/subsetting-spatial/out-of-bounds
+requirement:: /req/subsetting-spatial/wrap-around
+requirement:: /req/subsetting-spatial/subset-bbox-exclusivity
+requirement:: /req/subsetting-spatial/wildcard-limits
+requirement:: /req/subsetting-spatial/multiple-subset
+requirement:: /req/subsetting-spatial/subset-scaling-exclusivity
+requirement:: /req/subsetting-spatial/subset-crs
+requirement:: /req/subsetting-spatial/bbox-definition
+requirement:: /req/subsetting-spatial/bbox-crs
+====
 
 === Requirements
 
@@ -16,10 +30,15 @@ The `subset` query parameter selects a spatial region consisting of any <<term-c
 Individual cells may occupy an area on the ground (the value of the cell represents an area), an infinitely small point (the value of the cell represents a point), or some other configuration.
 
 [[req_subsetting-spatial_subset]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset*
-^|A a|The coverage request operation SHALL support a parameter `subset` to subset one or more of the spatial dimensions of the coverage (as described in the `spatial` section of the description's extent)
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/subset
+part::
++
+--
+The coverage request operation SHALL support a parameter `subset` to subset one or more of the spatial dimensions of the coverage (as described in the `spatial` section of the description's extent)
 with the following characteristics (using an Augmented Backus-Naur Form (ABNF) fragment):
 
 [source,ABNF]
@@ -35,77 +54,88 @@ where:
 
 * `axisName` is one of the abbreviations identifying an axis described in the following requirements parts, starting by a lowercase or uppercase letter A-Z.
 * `number` is an integer or decimal real number.
-^|B |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
-^|C |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single coordinate is provided for an axis, the coverage response SHALL be the result of a <<term-slicing,slicing>> operation for the dimension corresponding to that axis, reducing the dimensionality.
-^|D |With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if an interval is provided for an axis, the coverage response SHALL be the result of a <<term-trimming,trimming>> operation for the dimension corresponding to that axis, preserving the dimensionality.
-^|E |For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
-^|F |For a projected subsetting CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as Earth-Centered Earth-Fixed EPSG:4978), axis names `x` and `y` SHALL be supported. These are to be interpreted as the best matching spatial axes in the subsetting CRS definition.
-^|G |For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
-|===
+--
+part:: With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, only that part of the coverage that falls within the bounds of the subset expression SHALL be returned.
+part:: With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if a single coordinate is provided for an axis, the coverage response SHALL be the result of a <<term-slicing,slicing>> operation for the dimension corresponding to that axis, reducing the dimensionality.
+part:: With the exception of considerations for the requirements described in <<rc_sparse-dimensions-collapse-spatial>>, if an interval is provided for an axis, the coverage response SHALL be the result of a <<term-trimming,trimming>> operation for the dimension corresponding to that axis, preserving the dimensionality.
+part:: For a geographic subsetting CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the subsetting CRS definition.
+part:: For a projected subsetting CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as Earth-Centered Earth-Fixed EPSG:4978), axis names `x` and `y` SHALL be supported. These are to be interpreted as the best matching spatial axes in the subsetting CRS definition.
+part:: For a spatial axis, coordinates SHALL be interpreted as values for the named axis of the CRS specified in the `subset-crs` parameter value or in https://www.opengis.net/def/crs/OGC/1.3/CRS84 (https://www.opengis.net/def/crs/OGC/1.3/CRS84h for vertical dimension) if the `subset-crs` parameter is missing.
+====
 
 [[req_subsetting-spatial_3d-axis]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/3d-axis*
-^|A |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/3d-axis
+part:: If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or
 projected CRS that includes a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h), and the axis name `z` SHALL be supported for a
 3D Cartesian coordinate reference system (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
-|===
+====
 
 [[req_subsetting-spatial_invalid-axis]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-invalid-axis*
-^|A |A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to one of the axes of the subsetting CRS,
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/subset-invalid-axis
+part:: A 400 error status code SHALL be returned if an axis name in the `subset` parameter value does not correspond to one of the axes of the subsetting CRS,
 to an alias (see <<spatial-aliases-recommendation,recommendation>>), or to any other axis supported in the context of other requirements classes (such as temporal and general subsetting).
-|===
+====
 
 [[req_subsetting-spatial_out-of-bounds]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/out-of-bounds*
-^|A |If the _intervalOrSingle_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/out-of-bounds
+part:: If the _intervalOrSingle_ values fall entirely outside the range of valid values defined for the identified axis, a 204 or 404 status code SHALL be returned.
+====
 
 [[req_subsetting-spatial_wrap-around]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/wrap-around*
-^|A |For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/wrap-around
+part:: For an axis that can wrap around, such as subsetting across the dateline (anti-meridian) in a geographic CRS, a `low` value greater than `high` SHALL
 be supported to indicate an extent crossing that wrapping point.
-|===
+====
 
 [[req_subsetting-spatial_subset-bbox-exclusivity]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-bbox-exclusivity*
-^|A |If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/subset-bbox-exclusivity
+part:: If the subset parameter is used with a spatial dimension while the `bbox` parameter is also specified, the server SHALL return a 400 client error.
+====
 
 [[req_subsetting-spatial_wildcard-limits]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/wildcard-limits*
-^|A |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
-^|B |If an upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/wildcard-limits
+part:: If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
+part:: If an upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+====
 
 [[req_subsetting-spatial_multiple-subset]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/multiple-subset*
-^|A |Multiple `subset` query parameters SHALL be interpreted as if all dimension subsetting values were provided in a single `subset` parameter (comma-separated)^1^.
-2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/multiple-subset
+part:: Multiple `subset` query parameters SHALL be interpreted as if all dimension subsetting values were provided in a single `subset` parameter (comma-separated).
+For example, `subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500)` is equivalent to `subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)`
+====
 
 [[req_subsetting-spatial_subset-scaling-exclusivity]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-scaling-exclusivity*
-^|A |As Slicing and Scaling are mutually exclusive, an implementation of the Coverages API SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/subset-scaling-exclusivity
+part:: As Slicing and Scaling are mutually exclusive, an implementation of the Coverages API SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
 (`resolution` query parameter defined in the corresponding Scaling requirements class) is also used.
 For example, `subset=time("2020-01-01T15:00")&resolution=time(P1H)` (slicing) would be an invalid request, while `subset=time("2020-01-01T15:00":"2020-01-31T15:00")&resolution=time(P1H)` (trimming).
-|===
+====
 
 NOTE: When the _intervalOrSingle_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,
 the service is expected to return the non-empty portion of the coverage resulting from the subset.
@@ -118,16 +148,17 @@ NOTE: See also the <<spatial-aliases-recommendation,recommendation>> to support 
 ==== Query parameter `subset-crs`
 
 [[req_subsetting-spatial_subset-crs]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-crs*
-^|A |The coverage retrieval operation SHALL support a parameter `subset-crs` identifying the CRS in which the `subset` parameter is specified with a URI or safe CURIE.
-^|B |For data referenced to Earth, https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be supported as a value.
-^|C |If the `subset-crs` is not indicated, https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
-^|D |The native CRS (`storageCrs`) SHALL be supported as a value. Other requirements classes may allow additional values (see `crs` parameter definition).
-^|E |CRSs expressed as URIs or as safe CURIEs SHALL be supported.
-^|F |If no `subset` parameter refers to an axis of the CRS value specified for the `subset-crs` parameter, this parameter SHALL be ignored.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/subset-crs
+part:: The coverage retrieval operation SHALL support a parameter `subset-crs` identifying the CRS in which the `subset` parameter is specified with a URI or safe CURIE.
+part:: For data referenced to Earth, https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be supported as a value.
+part:: If the `subset-crs` is not indicated, https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
+part:: The native CRS (`storageCrs`) SHALL be supported as a value. Other requirements classes may allow additional values (see `crs` parameter definition).
+part:: CRSs expressed as URIs or as safe CURIEs SHALL be supported.
+part:: If no `subset` parameter refers to an axis of the CRS value specified for the `subset-crs` parameter, this parameter SHALL be ignored.
+====
 
 [[bbox-parameter]]
 ==== Query parameter `bbox`
@@ -141,11 +172,15 @@ For example, for https://www.opengis.net/def/crs/OGC/1.3/CRS84h this would be fr
 first height above the ellipsoid to the second height.
 
 [[req_subsetting-spatial_bbox-definition]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-definition*
-^|A|The coverage resource SHALL support a `bbox` parameter representing a spatial area to subset.
-^|B|The bounding box SHALL be provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth):
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/bbox-definition
+part:: The coverage resource SHALL support a `bbox` parameter representing a spatial area to subset.
+part::
++
+--
+The bounding box SHALL be provided as four or six numbers, depending on whether the coordinate reference system includes a vertical axis (height or depth):
 
 * Lower left corner, coordinate axis 1
 * Lower left corner, coordinate axis 2
@@ -153,13 +188,13 @@ first height above the ellipsoid to the second height.
 * Upper right corner, coordinate axis 1
 * Upper right corner, coordinate axis 2
 * Maximum value, coordinate axis 3 (optional)
-
-^|C|If the bounding box consists of four numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (https://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
-^|D|If the bounding box consists of six numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude/ellipsoidal height (https://www.opengis.net/def/crs/OGC/0/CRS84h) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
-^|E|Only the portion of the coverage within the specified bounding box SHALL be part of the response, performing a trim subsetting operation.
-^|F|If a `bbox` parameter is specified requesting a coverage without any spatial dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
-^|G|For a bounding box specified in a geographic CRS, a bounding box where the first longitude value is larger than the second longitude value SHALL be interpreted as crossing the anti-meridian.
-|===
+--
+part:: If the bounding box consists of four numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (https://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+part:: If the bounding box consists of six numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude/ellipsoidal height (https://www.opengis.net/def/crs/OGC/0/CRS84h) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
+part:: Only the portion of the coverage within the specified bounding box SHALL be part of the response, performing a trim subsetting operation.
+part:: If a `bbox` parameter is specified requesting a coverage without any spatial dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
+part:: For a bounding box specified in a geographic CRS, a bounding box where the first longitude value is larger than the second longitude value SHALL be interpreted as crossing the anti-meridian.
+====
 
 The bounding box for WGS 84 longitude/latitude is, in most cases, the sequence of minimum longitude, minimum latitude, maximum longitude and maximum latitude.
 However, in cases where the box spans the anti-meridian (180th meridian) the first value (west-most box edge) is larger than the third value (east-most box edge).
@@ -178,13 +213,14 @@ A `bbox-crs` query parameter is defined to qualify the `bbox` convenience query 
 spatial dimensions of the `subset` query parameter.
 
 [[req_subsetting-spatial_bbox-crs]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-crs*
-^|A|The coverage resource SHALL support a `bbox-crs` parameter specifying the CRS used for the `bbox` parameter.
-^|B|For data referenced to Earth, an implementation SHALL support https://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
-^|C|If the `bbox-crs` is not indicated https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
-^|D|The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes might require support for additional values (see `crs` parameter definition).
-^|E|The CRS expressed as URIs or as safe CURIEs SHALL be supported.
-^|F|If the `bbox` parameter is not used, the `bbox-crs` SHALL be ignored.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/subsetting-spatial/bbox-crs
+part:: The coverage resource SHALL support a `bbox-crs` parameter specifying the CRS used for the `bbox` parameter.
+part:: For data referenced to Earth, an implementation SHALL support https://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
+part:: If the `bbox-crs` is not indicated https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
+part:: The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes might require support for additional values (see `crs` parameter definition).
+part:: The CRS expressed as URIs or as safe CURIEs SHALL be supported.
+part:: If the `bbox` parameter is not used, the `bbox-crs` SHALL be ignored.
+====

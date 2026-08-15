@@ -1,35 +1,43 @@
 [[rc_table_scaling_temporal]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-temporal
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|===
+
+[requirements_class]
+.Temporal Scaling
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-temporal
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+requirement:: /req/scaling-temporal/resolution
+requirement:: /req/scaling-temporal/native-resolution
+requirement:: /req/scaling-temporal/resolution-invalid-axis
+requirement:: /req/scaling-temporal/multi-field-resolution
+====
 
 === Requirements
 
 ==== Query parameter `resolution`
 
 [[req_scaling-temporal_resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-temporal/resolution*
-^|A |For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for the primary temporal dimension using <<ISO_8601-1,ISO 8601>> period notation.
-^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|C |Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
-^|D |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|E |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|F |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-temporal/resolution
+part:: For data with a temporal aspect, the coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for the primary temporal dimension using <<ISO_8601-1,ISO 8601>> period notation.
+part:: The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
+part:: Axis name `time` SHALL be supported if the collection describes a temporal dimension in its extent.
+part:: For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+part:: For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+part:: For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+====
 
 [[req_scaling-temporal_native-resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-temporal/native-resolution*
-^|A |The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension, or for all dimensions.
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-temporal/native-resolution
+part:: The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension, or for all dimensions.
 For example, `resolution=` and `resolution=time()` SHALL both be considered as requesting the native resolution for the primary temporal dimension.
-|===
+====
 
 IMPORTANT: Clients wishing to ensure they always retrieve a <<term-native-resolution,native resolution>> coverage from a server supporting a Scaling requirements class
 irrespective of the <<downsampling-permission, downsampling permission>> can include in their coverage data request a `resolution` query parameter specifying all dimensions
@@ -40,18 +48,20 @@ Alternatively, to ensure such a request also works with servers not implementing
 can specify instead the `Prefer: handling=strict` request header (see <<req_core-preference-handling-resolution>>).
 
 [[req_scaling-temporal_invalid-axis]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-temporal/resolution-invalid-axis*
-^|A |A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time` (see <<spatial-aliases-recommendation, recommendation>>), or any other axis supported in the context of other requirements classes (such as <<rc_scaling_spatial,spatial>> and <<rc_scaling_general,general>> scaling).
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-temporal/resolution-invalid-axis
+part:: A 400 error status code SHALL be returned for an axis name other than `time`, an alias for `time` (see <<spatial-aliases-recommendation, recommendation>>), or any other axis supported in the context of other requirements classes (such as <<rc_scaling_spatial,spatial>> and <<rc_scaling_general,general>> scaling).
+====
 
 [[req_scaling-temporal_multi-field-resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-temporal/multi-field-resolution*
-^|A |When returning the native resolution for the primary temporal dimension for multiple <<term-field,fields>> with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-temporal/multi-field-resolution
+part:: When returning the native resolution for the primary temporal dimension for multiple <<term-field,fields>> with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
+====
 
 NOTE: This `resolution` query parameter also supports combining resolutions for other dimensions specified by
 the <<rc_table_scaling_general, general>> and <<rc_table_scaling_spatial, spatial>> requirements classes.

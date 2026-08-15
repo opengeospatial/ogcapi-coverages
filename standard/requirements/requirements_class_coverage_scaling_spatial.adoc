@@ -1,36 +1,47 @@
 [[rc_table_scaling_spatial]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-spatial
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|===
+
+[requirements_class]
+.Spatial Scaling
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/scaling-spatial
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+requirement:: /req/scaling-spatial/resolution
+requirement:: /req/scaling-spatial/native-resolution
+requirement:: /req/scaling-spatial/3d-axis
+requirement:: /req/scaling-spatial/resolution-invalid-axis
+requirement:: /req/scaling-spatial/spatial-distance
+requirement:: /req/scaling-spatial/multi-field-resolution
+requirement:: /req/scaling-spatial/width-and-height
+====
 
 === Requirements
 
 ==== Query parameter `resolution`
 
 [[req_scaling-spatial_resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/resolution*
-^|A |The coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for one or more of the spatial dimensions in positive units of the spatial CRS.
-^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
-^|C |For a geographic output CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the output CRS definition.
-^|D |For a projected output CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as Earth-Centered Earth-Fixed EPSG:4978), axis names `x` and `y` SHALL be supported. These are to be interpreted as the best matching spatial axes in the output CRS definition.
-^|E |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
-^|F |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|G |For a non-gridded coverage (e.g., a point cloud), when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/resolution
+part:: The coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for one or more of the spatial dimensions in positive units of the spatial CRS.
+part:: The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
+part:: For a geographic output CRS, axis names `Lat` and `Lon` SHALL be supported which are to be interpreted as the best matching spatial axis in the output CRS definition.
+part:: For a projected output CRS, axis names `E` and `N` SHALL be supported. For a 3D Cartesian CRS (such as Earth-Centered Earth-Fixed EPSG:4978), axis names `x` and `y` SHALL be supported. These are to be interpreted as the best matching spatial axes in the output CRS definition.
+part:: For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
+part:: For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+part:: For a non-gridded coverage (e.g., a point cloud), when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
+====
 
 [[req_scaling-spatial_native-resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/native-resolution*
-^|A |The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension, or for all dimensions.
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/native-resolution
+part:: The server SHALL support an empty resolution value as referring to the <<term-native-resolution,native resolution>> for that particular dimension, or for all dimensions.
 For example, `resolution=` and `resolution=Lat(),Lon()` SHALL both be considered as requesting the native spatial resolution.
-|===
+====
 
 IMPORTANT: Clients wishing to ensure they always retrieve a <<term-native-resolution,native resolution>> coverage from a server supporting a Scaling requirements class
 irrespective of the <<downsampling-permission, downsampling permission>> can include in their coverage data request a `resolution` query parameter specifying all dimensions
@@ -41,32 +52,36 @@ Alternatively, to ensure such a request also works with servers not implementing
 can specify instead the `Prefer: handling=strict` request header (see <<req_core-preference-handling-resolution>>).
 
 [[req_scaling-spatial_3d-axis]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/3d-axis*
-^|A |If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or projected CRS containing a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h) to represent the vertical dimension, and the axis name `z` SHALL be supported for a 3D Cartesian CRS (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/3d-axis
+part:: If a third spatial dimension is supported (if the data's spatial extent bounding box is three-dimensional), the axis name `h` SHALL be supported for a geographic or projected CRS containing a vertical dimension representing elevation above the ellipsoid (e.g., in EPSG:4979 or OGC:CRS84h) to represent the vertical dimension, and the axis name `z` SHALL be supported for a 3D Cartesian CRS (e.g., in EPSG:4978), which are to be interpreted as the corresponding vertical or third axis in the CRS definition.
+====
 
 [[req_scaling-spatial_invalid-axis]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/resolution-invalid-axis*
-^|A |A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to one of the axes of the output CRS, to an alias (see <<spatial-aliases-recommendation,recommendation>>), or to any other axis supported in the context of other requirements classes (such as <<rc_scaling_spatial,temporal>> and <<rc_scaling_general,general>> scaling).
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/resolution-invalid-axis
+part:: A 400 error status code SHALL be returned if an axis name in the `resolution` parameter value does not correspond to one of the axes of the output CRS, to an alias (see <<spatial-aliases-recommendation,recommendation>>), or to any other axis supported in the context of other requirements classes (such as <<rc_scaling_spatial,temporal>> and <<rc_scaling_general,general>> scaling).
+====
 
 [[req_scaling-spatial_spatial-distance]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/spatial-distance*
-^|A |For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of ΔN^2^ + ΔE^2^ + Δh^2^) between two samples.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/spatial-distance
+part:: For a non-gridded coverage (e.g., a point cloud), the server SHALL support a special dimension named `spatial-distance` representing the minimum vectorial distance (e.g., square root of ΔN^2^ + ΔE^2^ + Δh^2^) between two samples.
+====
 
 [[req_scaling-spatial_multi-field-resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/multi-field-resolution*
-^|A |When returning the native resolution for one or more dimension for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/multi-field-resolution
+part:: When returning the native resolution for one or more dimension for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
+====
 
 NOTE: This `resolution` query parameter also supports combining resolutions for other dimensions specified by
 the <<rc_table_scaling_temporal, Temporal>> and <<rc_table_scaling_general, General>> Scaling requirements classes.
@@ -76,13 +91,14 @@ NOTE: See also the <<spatial-aliases-recommendation,recommendation>> to support 
 ==== Query parameters `width` and `height`
 
 [[req_scaling-spatial_width-and-height]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/scaling-spatial/width-and-height*
-^|A |For coverages with a spatial dimension corresponding to the horizontal spatial axis as represented on a 2D map, such as longitude or easting, the operation SHALL support a parameter `width` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
-^|B |For coverages with a spatial dimension corresponding to the vertical spatial axis as represented on a 2D map, such as latitude or northing, the operation SHALL support a parameter `height` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
-^|C |The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by provided scaling  parameters, the original number of sample values for unspecified axes, and any defined server limits.
-^|D |When `width` and/or `height` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/scaling-spatial/width-and-height
+part:: For coverages with a spatial dimension corresponding to the horizontal spatial axis as represented on a 2D map, such as longitude or easting, the operation SHALL support a parameter `width` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
+part:: For coverages with a spatial dimension corresponding to the vertical spatial axis as represented on a 2D map, such as latitude or northing, the operation SHALL support a parameter `height` for the coverage resource taking an integer parameter corresponding to the number of cells that should be returned along that axis.
+part:: The returned coverage SHALL contain exactly the specified number of sample values along each axis which is specified by provided scaling  parameters, the original number of sample values for unspecified axes, and any defined server limits.
+part:: When `width` and/or `height` is used together with subsetting, the requested number of samples SHALL be mapped to the subset dimensions specified, even if those dimensions fall partially outside the extent of the coverage.
+====
 
 NOTE: See also the <<downsampling-permission,recommendations and permissions>> related to scaling and interpolation shared by the Spatial, Temporal and General Scaling requirements classes.

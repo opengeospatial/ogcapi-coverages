@@ -33,9 +33,9 @@ In addition to the `subset` parameter, server implementations must also support 
 While the `subset` parameter supports more explicitly referencing a particular spatial axis and avoiding related confusion, the `bbox` parameter may feel simpler and more familiar to some users.
 Both the `subset` and the `bbox` parameters are aligned with the spatial subsetting capabilities of OGC API - Maps.
 
-See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
+See also examples of <<axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
 
-include::requirements/requirements_class_coverage_subset_spatial.adoc[]
+include::../requirements/requirements_class_coverage_subset_spatial.adoc[]
 
 [[rc_sparse-dimensions-collapse-spatial]]
 == Requirements Class "Collapsing Sparse Spatial Dimensions (CSSD)"
@@ -55,9 +55,9 @@ When the CSSD requirements class is implemented for a particular coverage, negot
 NOTE: If the capability for collapsing sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
-See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
+See also examples of <<sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
 
-include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spatial.adoc[]
+include::../requirements/requirements_class_coverage_sparse_dimensions_collapse_spatial.adoc[]
 
 [[rc_subsetting_temporal]]
 == Requirements Class "Temporal Subsetting"
@@ -85,9 +85,9 @@ In addition to the `subset` parameter, server implementations must also support 
 While the `subset` parameter allows to more explicitly reference the primary temporal dimension, the `datetime` parameter may feel simpler and more familiar to some users.
 Both the `subset` and the `bbox` parameters are aligned with the temporal subsetting capabilities of OGC API - Maps.
 
-See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
+See also examples of <<axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
 
-include::requirements/requirements_class_coverage_subset_temporal.adoc[]
+include::../requirements/requirements_class_coverage_subset_temporal.adoc[]
 
 [[rc_sparse-dimensions-collapse-temporal]]
 == Requirements Class "Collapsing Sparse Temporal Dimension (CSTD)"
@@ -108,9 +108,9 @@ When the CSTD requirements class is implemented for a particular coverage, negot
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
-See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
+See also examples of <<sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
 
-include::requirements/requirements_class_coverage_sparse_dimensions_collapse_temporal.adoc[]
+include::../requirements/requirements_class_coverage_sparse_dimensions_collapse_temporal.adoc[]
 
 [[rc_subsetting_general]]
 == Requirements Class "General Subsetting"
@@ -138,9 +138,9 @@ For gridded coverage cells whose geometry is a point along a dimension, this wil
 
 For gridded coverage cells whose geometry is a region, this will **exclude** the cells boundaries falling exactly on the boundary of the subset (**the interior of the region excludes its boundary**).
 
-See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
+See also examples of <<axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
 
-include::requirements/requirements_class_coverage_subset_general.adoc[]
+include::../requirements/requirements_class_coverage_subset_general.adoc[]
 
 [[rc_sparse-dimensions-collapse-general]]
 == Requirements Class "Collapsing Sparse General Dimensions (CSGD)"
@@ -160,9 +160,9 @@ When the CSGD requirements class is implemented for a particular coverage, negot
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
-See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
+See also examples of <<sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
 
-include::requirements/requirements_class_coverage_sparse_dimensions_collapse_general.adoc[]
+include::../requirements/requirements_class_coverage_sparse_dimensions_collapse_general.adoc[]
 
 [[rc_multi_slicing]]
 == Requirements Class "Multi Slicing"
@@ -181,9 +181,9 @@ Another common practical use case for the Multi Slicing requirements class is to
 
 This capability is also useful for requesting a subset of the data for multiple categories along a categorical dimension, as in this example: `subset=species("wildcats", "frogs")`.
 
-See also examples of <<_multi_slicing, multi-slicing requests>> in an annex.
+See also examples of <<multi_slicing, multi-slicing requests>> in an annex.
 
-include::requirements/requirements_class_coverage_multi_slicing.adoc[]
+include::../requirements/requirements_class_coverage_multi_slicing.adoc[]
 
 [[rc_position_query]]
 == Requirements Class "Position Query"
@@ -201,9 +201,9 @@ Implementations of the Position Query requirements class could also implement ad
 NOTE: This requirements class defines an operation corresponding directly to the definition of a coverage -- returning a set of values
 (or multiple sets of values in the case of a multifunction coverage) for a given position.
 
-See also examples of <<_position_query, position query requests>> in an annex.
+See also examples of <<position_query, position query requests>> in an annex.
 
-include::requirements/requirements_class_coverage_position_query.adoc[]
+include::../requirements/requirements_class_coverage_position_query.adoc[]
 
 === Examples
 

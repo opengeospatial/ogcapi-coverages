@@ -1,35 +1,40 @@
 [[rc_table_multi_slicing]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/multi-slicing
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|===
+
+[requirements_class]
+.Multi Slicing
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/multi-slicing
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+requirement:: /req/multi-slicing/multi-slicing
+====
 
 === Requirements
 
 ==== Multi slicing for query parameter `subset`
 
 [[req_multi-slicing_multi-slicing]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/multi-slicing/multi-slicing*
-^|A |The coverage retrieval operation SHALL support a comma-separated list of coordinate values for the `subset` query parameter for each dimension supported by the
+[requirement]
+====
+[%metadata]
+identifier:: /req/multi-slicing/multi-slicing
+part:: The coverage retrieval operation SHALL support a comma-separated list of coordinate values for the `subset` query parameter for each dimension supported by the
 <<rc_subsetting_spatial,Spatial Subsetting>>, <<rc_subsetting_temporal,Temporal Subsetting>> and <<rc_subsetting_general,General Subsetting>> requirements classes
-^|B |For the dimensions for which a multi-slice subset query parameter is specified, the coverage response SHALL only contain values for the coordinates explicitly listed.
-|===
+part:: For the dimensions for which a multi-slice subset query parameter is specified, the coverage response SHALL only contain values for the coordinates explicitly listed.
+====
 
 [[per_multi-slicing_nodata]]
-[width="90%",cols="2,6a"]
-|===
-^|*Permission {counter:per-id}* |*/per/multi-slicing/nodata*
-^|A |For responses in an encoding unsuitable for sparse data or <<term-irregular-grid, irregular grids>> (such as GeoTIFF 1.x),
+[permission]
+====
+[%metadata]
+identifier:: /per/multi-slicing/nodata
+part:: For responses in an encoding unsuitable for sparse data or <<term-irregular-grid, irregular grids>> (such as GeoTIFF 1.x),
 a regular grid encompassing the overall interval of all slices with null values for coordinates not explicitly requested MAY be used.
-|===
+====
 
 The requirements classes for <<rc_sparse-dimensions-collapse-spatial, collapsing sparse dimensions>> and the recommendations regarding supporting the `Prefer:` header
-(<<scaling-spatial-preference>>) for requesting a particular <<conventions-interpolation-methods,interpolation method>> also apply for multi-slicing, exactly as if
+(<<rec_core_prefer-header-interpolation>>) for requesting a particular <<conventions-interpolation-methods,interpolation method>> also apply for multi-slicing, exactly as if
 each slice was requested separately.
 
 NOTE: See also the <<interpolation-guidance-recommendation,recommendations and permissions>> related to interpolation.

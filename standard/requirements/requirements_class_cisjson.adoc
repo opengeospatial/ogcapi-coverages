@@ -1,12 +1,15 @@
 [[rc_cisjson]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cisjson
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|Dependency  |http://www.opengis.net/spec/CIS/1.1/req/json-coverage
-|===
+
+[requirements_class]
+.CIS JSON
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cisjson
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+inherit:: http://www.opengis.net/spec/CIS/1.1/req/json-coverage
+requirement:: /req/cisjson/coverage
+====
 
 ==== Requirements
 
@@ -15,34 +18,41 @@
 ===== CIS JSON Coverage representation
 
 [[req_cisjson_coverage]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cisjson/coverage*
-^|A |If a particular collection is suitable for a CIS JSON representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a CIS JSON response using the `application/json` media type.
-^|B |The response SHALL be a CIS JSON document which validates against the CIS JSON schema https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/cis/coverage-schema.yaml[coverage-schema.yaml].
-^|C |The coverage object response SHALL be of type _CoverageByDomainAndRange_ (not _CoverageByPartitioning_, an implementation can instead consider supporting an eventual "Scenes" extension to present individual parts of a coverage).
-^|D |For a gridded coverage, the DomainSet SHALL be defined taking into consideration the geometry of the coverage cells, as per the following equation:
+[requirement]
+====
+[%metadata]
+identifier:: /req/cisjson/coverage
+part:: If a particular collection is suitable for a CIS JSON representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a CIS JSON response using the `application/json` media type.
+part:: The response SHALL be a CIS JSON document which validates against the CIS JSON schema https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/cis/coverage-schema.yaml[coverage-schema.yaml].
+part:: The coverage object response SHALL be of type _CoverageByDomainAndRange_ (not _CoverageByPartitioning_, an implementation can instead consider supporting an eventual "Scenes" extension to present individual parts of a coverage).
+part::
++
+--
+For a gridded coverage, the DomainSet SHALL be defined taking into consideration the geometry of the coverage cells, as per the following equation:
 
 **span** = (_RegularAxis_ `upperBound` - _RegularAxis_ `lowerBound`) / _RegularAxis_ `resolution` - (_IndexAxis_ `upperBound` - _IndexAxis_ `lowerBound`)
 
 where a _span_  of 1 indicates a coverage whose cell values represent an _area_, and a _span_ of 0 indicates a coverage whose cell values represent a _point_.
-|===
+--
+====
 
 ===== Profiling CIS components to include
 
 [[rec_cisjson_profile]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/cisjson/profile*
-^|A |The coverage request operation SHOULD support a `profile` query parameter enabling the selection of one or more specific CIS coverage components to include (domainset, rangetype, rangeset and/or metadata).
-^|B |If supported, the response SHOULD only contain the selected element(s). For example, `../coverage?profile=domainset,rangetype` should only return the domain set and range type for the coverage.
-^|C |If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
-^|D |An implementation SHOULD return the metadata when explicitly requested to do so with the `profile` query parameter.
-|===
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/cisjson/profile
+part:: The coverage request operation SHOULD support a `profile` query parameter enabling the selection of one or more specific CIS coverage components to include (domainset, rangetype, rangeset and/or metadata).
+part:: If supported, the response SHOULD only contain the selected element(s). For example, `../coverage?profile=domainset,rangetype` should only return the domain set and range type for the coverage.
+part:: If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
+part:: An implementation SHOULD return the metadata when explicitly requested to do so with the `profile` query parameter.
+====
 
 [[per_cisjson-cis-metadata]]
-[width="90%",cols="2,6"]
-|===
-^|*Permission {counter:per-id}* |*/per/cisjson/cis-metadata*
-^|A |An implementation MAY omit the CIS domain-specific metadata by default as part of the coverage response.
-|===
+[permission]
+====
+[%metadata]
+identifier:: /per/cisjson/cis-metadata
+part:: An implementation MAY omit the CIS domain-specific metadata by default as part of the coverage response.
+====

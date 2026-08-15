@@ -22,8 +22,8 @@ the `/collections` and `/collections/{collectionId}` resources, as well as its h
 The UAD rqeuirements class introduces additional requirements that standardize the description of multidimensional data cubes and <<term-grid,gridded>> data.
 Each collection accessible as a coverage needs to include a link to the `/collections/{resourceId}/coverage` resource using the `[ogc-rel:coverage]` link relation type, which is used to retrieve the coverage data.
 
-See also examples of <<_landing_page, landing page>>, <<_conformance_declaration_2, conformance declaration>>, <<_list_of_collections, list of collections>>,
-<<collection-description-example,collection description>>, <<_schema_resource_range_type,schema>> and <<_core_data_request, coverage data>> requests in an annex.
+See also examples of <<landing_page, landing page>>, <<conformance_declaration, conformance declaration>>, <<list_of_collections, list of collections>>,
+<<collection-description-example,collection description>>, <<schema_resource_range_type,schema>> and <<core_data_request, coverage data>> requests in an annex.
 
 ==== Description of the coverage fields
 
@@ -201,4 +201,4 @@ For example, such additional processing might happen when re-projecting data wit
 This is notably the case when the source data is partitioned across different scenes, each using a different CRS (as with UTM zones).
 Therefore, the advertised grid resolution does not necessarily imply suitability for purpose for usage with specific resolution requirements.
 
-include::requirements/requirements_class_core.adoc[]
+include::../requirements/requirements_class_core.adoc[]

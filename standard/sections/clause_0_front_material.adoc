@@ -1,4 +1,20 @@
-[big]*i.     Abstract*
+
+////
+NOTE: Uncomment ISO section if necessary
+
+*ISO Declaration*
+
+ISO (the International Organization for Standardization) is a worldwide federation of national standards bodies (ISO member bodies). The work of preparing International Standards is normally carried out through ISO technical committees. Each member body interested in a subject for which a technical committee has been established has the right to be represented on that committee. International organizations, governmental and non-governmental, in liaison with ISO, also take part in the work. ISO collaborates closely with the International Electrotechnical Commission (IEC) on all matters of electrotechnical standardization.
+
+International Standards are drafted in accordance with the rules given in the ISO/IEC Directives, Part 2.
+
+The main task of technical committees is to prepare International Standards. Draft International Standards adopted by the technical committees are circulated to the member bodies for voting. Publication as an International Standard requires approval by at least 75 % of the member bodies casting a vote.
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. ISO shall not be held responsible for identifying any or all such patent rights.
+////
+
+[abstract]
+== Abstract
 
 The OGC API - Coverages - Part 1: Core Standard defines a Web API for requesting coverage data over the Web.
 A coverage is a function which returns values from its range for any direct position within its domain.
@@ -17,19 +33,13 @@ A server that implements OGC API - Coverages provides information about whic
 OGC API - Coverages use cases are similar to those addressed by the
 http://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC 17-089r1 OGC® Web Coverage Service (WCS) Interface Standard].
 
-[big]*ii.    Keywords*
-
-The following are keywords to be used by search engines and document catalogues.
-
-ogcdoc, OGC document, geographic information, spatial data, spatial things, dataset, distribution, API, json, html, OpenAPI, REST, Coverages
-
-[big]*iii.   Preface*
+== Preface
 
 Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
 
 Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
 
-[big]*iv.   Security Considerations*
+== Security considerations
 
 Implementations of OGC API - Coverages should apply standard web security practices, including the use of Transport Layer Security (TLS/HTTPS), user authentication, and
 granular access control mechanisms to protect sensitive data resources.
@@ -42,23 +52,12 @@ resource exhaustion across server memory and CPU channels.
 To protect the infrastructure from resource exhaustion, implementations should explicitly advertise and enforce server processing limits, returning appropriate HTTP `4xx` error
 codes when client requests violate those configured structural boundaries.
 
-[big]*v.    Submitting organizations*
+== Submitters
 
-The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
-
-* Heazeltech LLC
-* Ecere Corporation
-* Technologies Luqia
-* EOX IT Services GmbH
-* Meteorological Service of Canada
-* Universitat Autònoma de Barcelona (CREAF)
-
-[big]*vi.     Submitters*
-
-All questions or concerns regarding this OGC Standard should be submitted as issues to the https://github.com/opengeospatial/ogcapi-coverages]OGC API - Coverages repository].
+All questions or concerns regarding this OGC Standard should be submitted as issues to the https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages repository].
 
 |===
-^|Name                                ^|Affiliation
+|*Name* |*Affiliation*
 |Charles Heazel (Editor)               |HeazelTech
 |Jérôme Jacovella-St-Louis (Editor)    |https://ecere.ca[Ecere Corporation]
 |Stephan Meissl                        |https://eox.at[EOX IT Services GmbH]
@@ -67,7 +66,19 @@ All questions or concerns regarding this OGC Standard should be submitted as iss
 |Francis Charette-Migneault            |https://luqia.ca[Technologies Luqia]
 |===
 
-[big]*vii.     Acknowledgements*
+== Contributors
+
+Additional contributors to this Standard include the following:
+
+Joan Masó Pau, Universitat Autònoma de Barcelona (CREAF)
+
+Francis Charette-Migneault, https://luqia.ca[Technologies Luqia]
+
+Stephan Meissl, https://eox.at[EOX IT Services GmbH]
+
+Peter Baumann, rasdaman GmbH
+
+== Acknowledgements
 
 Some of the work leading to the creation of this OGC Standard was undertaken as part of
 GeoConnections 2020-2021 and 2025-2027 projects GNS20-21IFP02 (Modular OGC API Workflows) and

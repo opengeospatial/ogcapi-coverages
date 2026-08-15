@@ -1,47 +1,55 @@
 [[rc_table_field-selection]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/field-selection
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|===
+
+[requirements_class]
+.Field Selection
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/field-selection
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+requirement:: /req/field-selection/properties
+requirement:: /req/field-selection/exclude-properties
+requirement:: /req/field-selection/mismatched-resolution
+====
 
 === Requirements
 
 ==== Query parameter `properties`
 
 [[req_field-selection_properties]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/field-selection/properties*
-^|A |The coverage retrieval operation SHALL support a `properties` query parameter where the value is a comma-separated list of field names to be returned.
-^|B |An implementation SHALL support selecting a field using the identifier corresponding to the top-level property keys of the coverage fields schema and return 400 status code for an unrecognized selected field.
-^|C |Only the selected fields of the coverage SHALL be returned in the coverage response.
-^|D |If the coverage response can self-describe its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
-^|E |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/field-selection/properties
+part:: The coverage retrieval operation SHALL support a `properties` query parameter where the value is a comma-separated list of field names to be returned.
+part:: An implementation SHALL support selecting a field using the identifier corresponding to the top-level property keys of the coverage fields schema and return 400 status code for an unrecognized selected field.
+part:: Only the selected fields of the coverage SHALL be returned in the coverage response.
+part:: If the coverage response can self-describe its list of fields (as with the CIS _range type_), the field description SHALL be adjusted accordingly to the new selected fields.
+part:: If the negotiated format of the response has a concept of field order, then the fields SHALL be in the same order as the requested list of selected fields.
+====
 
 ==== Query parameter `exclude-properties`
 
 [[req_field-selection_exclude-properties]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/field-selection/exclude-properties*
-^|A |The coverage retrieval operation SHALL support an `exclude-properties` query parameter where the value is a comma-separated list of fields not to be returned.
-^|B |An implementation SHALL support enumerating fields not to return using the identifier corresponding to the top-level property keys of the coverage fields schema and return 400 status code for an unrecognized selected field.
-^|C |All but the excluded fields SHALL be returned from the coverage data request (including fields potentially not included in the `defaultFields` of the collection description).
-^|D |An implementation SHALL return a 4xx error when using both the `properties` and `exclude-properties` query parameters in the same request.
-^|E |If the negotiated format of the response has a concept of field order, then the fields SHALL be in the sequence order of the `x-ogc-propertySeq` of the fields listed in the logical schema (ignoring the excluded fields).
-^|F |An implementation SHALL interpret an empty value for the `exclude-properties` query parameter as a request for all fields listed in the logical schema (e.g., in the case where the `defaultFields` are a subset of the fields available).
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/field-selection/exclude-properties
+part:: The coverage retrieval operation SHALL support an `exclude-properties` query parameter where the value is a comma-separated list of fields not to be returned.
+part:: An implementation SHALL support enumerating fields not to return using the identifier corresponding to the top-level property keys of the coverage fields schema and return 400 status code for an unrecognized selected field.
+part:: All but the excluded fields SHALL be returned from the coverage data request (including fields potentially not included in the `defaultFields` of the collection description).
+part:: An implementation SHALL return a 4xx error when using both the `properties` and `exclude-properties` query parameters in the same request.
+part:: If the negotiated format of the response has a concept of field order, then the fields SHALL be in the sequence order of the `x-ogc-propertySeq` of the fields listed in the logical schema (ignoring the excluded fields).
+part:: An implementation SHALL interpret an empty value for the `exclude-properties` query parameter as a request for all fields listed in the logical schema (e.g., in the case where the `defaultFields` are a subset of the fields available).
+====
 
 ==== Mismatched resolution without scaling support
 
-[[req_field-selection_mismatched-resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/field-selection/mismatched-resolution*
-^|A |For requests including multiple fields which have different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those
+[[req_field-selection_mis
+[requirement]
+====
+[%metadata]
+identifier:: /req/field-selection/mismatched-resolution
+part:: For requests including multiple fields which have different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those
 different fields together at these different resolutions, an implementation SHALL return a 4xx error if it does not support the Scaling requirements class.
-|===
+====

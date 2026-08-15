@@ -1,13 +1,17 @@
 [[rc_cog]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cog
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/geotiff
-|Dependency  |http://www.opengis.net/spec/COG/1.0/req/optimized_geotiff
-|Dependency  |http://www.opengis.net/spec/COG/1.0/req/http-range
-|===
+
+[requirements_class]
+.Cloud Optimized GeoTIFF
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cog
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+inherit:: http://www.opengis.net/spec/COG/1.0/req/optimized_geotiff
+inherit:: http://www.opengis.net/spec/COG/1.0/req/http-range
+requirement:: /req/cog/http-range
+requirement:: /req/cog/cloud-optimized
+====
 
 // [[GeoTIFF]] OGC 19-008: *OGC GeoTIFF Standard*, Version 1.1, http://docs.opengeospatial.org/is/19-008r4/19-008r4.html
 // [[[TIFF_V6,TIFF V6.0]]], Adobe Developers Association: TIFF Specification Revision 6.0. (1992) https://www.itu.int/itudoc/itu-t/com16/tiff-fx/docs/tiff6.pdf[https://www.itu.int/itudoc/itu-t/com16/tiff-fx/docs/tiff6.pdf]
@@ -19,18 +23,20 @@
 ===== Cloud Optimized GeoTIFF access
 
 [[req_cog_http-range]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cog/http-range*
-^|A |The coverage resource (`/coverage`), as defined in the Coverages API Core requirements class, SHALL support HTTP range requests as specified in
+[requirement]
+====
+[%metadata]
+identifier:: /req/cog/http-range
+part:: The coverage resource (`/coverage`), as defined in the Coverages API Core requirements class, SHALL support HTTP range requests as specified in
 the https://docs.ogc.org/is/21-026/21-026.html#HTTPRangeSupportRequirements[`/req/http-range` requirement class of COG].
-^|B |An implementation SHALL only be expected to support HTTP range requests on the coverage resource when used with no query parameters, or with the <<req_core-native-resolution,native resolution>> (empty values for all dimensions).
-|===
+part:: An implementation SHALL only be expected to support HTTP range requests on the coverage resource when used with no query parameters, or with only the <<req_scaling-spatial_native-resolution,native resolution>> (empty values for all dimensions) specified.
+====
 
 [[req_cog_cloud-optimized]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/cog/cloud-optimized*
-^|A |The coverage resource, as defined in the Core requirement class, SHALL support content negotiation of a https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] using the cloud-optimized profile,
+[requirement]
+====
+[%metadata]
+identifier:: /req/cog/cloud-optimized
+part:: The coverage resource, as defined in the Core requirement class, SHALL support content negotiation of a https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] using the cloud-optimized profile,
 (`Accept-Profile:`/`Content-Profile:` `http://www.opengis.net/def/profile/geotiff/cloud-optimized`, `Accept:`/`Content-Type:` `image/tiff; application=geotiff` media type).
-|===
+====

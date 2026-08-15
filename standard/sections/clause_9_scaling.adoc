@@ -16,7 +16,7 @@ the client has no control over how the quality of the interpolation that the ser
 
 See also examples of <<scaling-examples, scaling requests>> in an annex.
 
-include::requirements/requirements_class_coverage_scaling_spatial.adoc[]
+include::../requirements/requirements_class_coverage_scaling_spatial.adoc[]
 
 [[rc_scaling_temporal]]
 == Requirements Class "Temporal Scaling"
@@ -32,7 +32,7 @@ the client has no control over how the quality of the interpolation that the ser
 
 See also examples of <<scaling-examples, scaling requests>> in an annex.
 
-include::requirements/requirements_class_coverage_scaling_temporal.adoc[]
+include::../requirements/requirements_class_coverage_scaling_temporal.adoc[]
 
 [[rc_scaling_general]]
 == Requirements Class "General Scaling"
@@ -54,4 +54,4 @@ the client has no control over how the quality of the interpolation that the ser
 
 See also examples of <<scaling-examples, scaling requests>> in an annex.
 
-include::requirements/requirements_class_coverage_scaling_general.adoc[]
+include::../requirements/requirements_class_coverage_scaling_general.adoc[]

@@ -1,15 +1,25 @@
 [[rc_core-table]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|Target type   |Web API
-|Dependency    |https://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
-|Dependency    |https://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
-|Dependency    |https://www.opengis.net/spec/ogcapi-common-2/1.0/req/uad-collections
-|Dependency    |https://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas
-|Dependency    |https://www.opengis.net/spec/ogcapi-common-3/1.0/req/returnables-and-receivables
-|===
+
+[requirements_class]
+.Core
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-common-1/1.0/req/core
+inherit:: https://www.opengis.net/spec/ogcapi-common-2/1.0/req/collections
+inherit:: https://www.opengis.net/spec/ogcapi-common-2/1.0/req/uad-collections
+inherit:: https://www.opengis.net/spec/ogcapi-common-3/1.0/req/schemas
+inherit:: https://www.opengis.net/spec/ogcapi-common-3/1.0/req/returnables-and-receivables
+requirement:: /req/core/conformance-success
+requirement:: /req/core/collection-description
+requirement:: /req/core/coverage-fields-schema
+requirement:: /req/core/get-coverage
+requirement:: /req/core/response-headers
+requirement:: /req/core/preference-applied
+requirement:: /req/core/preference-handling-interpolation
+requirement:: /req/core/preference-handling-resolution
+====
 
 === Requirements
 
@@ -21,16 +31,18 @@ the deployed API must declare the conformance classes it implements and conforms
 The conformance declaration response mainly consists of a list of links.
 
 [[req_core_conformance_success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/conformance-success*
-^|A |If the API instance has a mechanism to advertise conformance classes, the list of conformance classes SHALL include the
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/conformance-success
+part:: If the API instance has a mechanism to advertise conformance classes, the list of conformance classes SHALL include the
 ones defined in this Standard and listed in <<table_conformance_urls>> that are supported by this API implementation instance.
-^|B |If some conformance classes of this Standard are only supported by particular collections,
+part:: If some conformance classes of this Standard are only supported by particular collections,
 requirements classes supported by these collections SHALL be listed in a resource linked to from the
 collection description as described in
 the https://docs.ogc.org/DRAFTS/20-024.html#per_collections_conformance[OGC API - Common - Part 2 per-collection conformance permission].
-|===
+====
 
 In the JSON format, the conformance resource is an array of links following the link schema defined in OGC API — Common — Part 1: Core.
 Below is an example fragment of a conformance information page of an API implementation conformant to OGC API — Coverages.
@@ -62,23 +74,25 @@ For irregular grids, a list of `coordinates` is specified, with optional `bounds
 The collection description also includes a link to the logical schema describing the coverage <<term-field,fields>> available as JSON Schema using the link relation type https://www.opengis.net/def/rel/ogc/1.0/schema.
 
 [[req_core-collection_description]]
-[width="90%",cols="2,6"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/collection-description*
-^|A |For every collection accessible using the _Coverages API_, the description  SHALL
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/collection-description
+part:: For every collection accessible using the _Coverages API_, the description  SHALL
 include in its `links` array a link to a coverage resource, typically at `/collections/{collectionId}/coverage`, using the link relation type `[ogc-rel:coverage]`.
 This `links` array SHALL be present within the elements of the `collections` array of the `/collections` resource, as well as at the `/collections/{collectionId}` resource.
-^|B |At least one collection SHALL be accessible as a coverage.
-^|C |If the default output CRS for accessing a collection as a coverage is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, the default output CRS SHALL be specified in the
+part:: At least one collection SHALL be accessible as a coverage.
+part:: If the default output CRS for accessing a collection as a coverage is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, the default output CRS SHALL be specified in the
 `storageCrs` property of that collection's description. The default CRS is the CRS used for returning the coverage data when the `crs` query parameter is not specified and/or
 when the CRS requirements class is not supported. This `storageCrs` property also indicates the native CRS, which is usually the CRS in which the entire collection is most
 efficiently available. The native CRS is also called a _storage CRS_, since it is often (but not necessarily) the CRS in which data is stored in the server's data store.
 This `storageCrs` SHALL be specified as a URI or safe CURIE in the case where such a URI is available from an authoritative register, or as a full description of the CRS otherwise using a
 https://docs.opengeospatial.org/is/18-010r7/18-010r7.html[WKT2CRS] string, a https://proj.org/en/stable/specifications/projjson.html[PROJJSON] object, or
 a https://github.com/opengeospatial/CRS-JSON-Encoding[CRS-JSON] object.
-^|D |If a `storageCrs` property is used that is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, an overall bounding box (and optional inner bounding boxes for sparse data)
+part:: If a `storageCrs` property is used that is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, an overall bounding box (and optional inner bounding boxes for sparse data)
 SHALL be provided in a `storageCrsBbox` property within the `spatial` dimension of the `extent` following the same schema as the CRS84 `bbox`.
-|===
+====
 
 NOTE: A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `https://www.opengis.net/def/{objectType}/{authority}/0/{id}`. If `-{objectType}` is missing, the default object type is _crs_.
 
@@ -88,12 +102,14 @@ NOTE: A property indicating for which planetary body a CRS is applicable is bein
 for Earth-referenced data collections to be described using OGC:CRS84.
 
 [[rec_core-coverage_dimensions_variable_type]]
-[width="90%",cols="2,6"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/coverage-dimensions-variable-type*
-^|A |Additional dimensions beyond space and time based on a variable SHOULD include a <<term-variable-type, `variableType`>> property with values `continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`,
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/coverage-dimensions-variable-type
+part:: Additional dimensions beyond space and time based on a variable SHOULD include a <<term-variable-type, `variableType`>> property with values `continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`,
 or `numericalNominal` providing useful information relevant to how to properly perform interpolation along that dimension.
-|===
+====
 
 ==== Collection schema
 
@@ -105,16 +121,18 @@ This logical schema describing the fields is available via an HTTP GET request, 
 with the resource typically available at `/collections/{collectionId}/schema`. The client can negotiate a JSON Schema using the media type `application/schema+json`.
 
 [[req_core-coverage_fields_schema]]
-[width="90%",cols="2,6"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/coverage-fields-schema*
-^|A |The content of the schema response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
-^|B |If the coverage contains multiple fields and is available in an order-dependent representation (e.g., GeoTIFF), each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
-^|C |If some fields are available at different resolutions than others, each field SHALL include an `x-ogc-resolution` property with an object property mapping a value for each dimension
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/coverage-fields-schema
+part:: The content of the schema response SHALL include a list of the fields for the coverage, including an identifier (the property key), a `title`, a `type` and an optional `description`.
+part:: If the coverage contains multiple fields and is available in an order-dependent representation (e.g., GeoTIFF), each field SHALL include an `x-ogc-propertySeq` property with an integer value establishing a sequential order for the fields.
+part:: If some fields are available at different resolutions than others, each field SHALL include an `x-ogc-resolution` property with an object property mapping a value for each dimension
 which differs from the resolution specified in the collection's grid description to the name of the dimension (e.g., "Lon" for longitude, "E" for easting, "time" for the primary temporal dimension).
-^|D |If an implementation supports field selection, and not all fields described in the collection schema are returned by default, a `defaultFields` property in the collection description SHALL
+part:: If an implementation supports field selection, and not all fields described in the collection schema are returned by default, a `defaultFields` property in the collection description SHALL
 list all fields being returned by default in the order that they are returned in the response of the coverage (for formats where this is applicable).
-|===
+====
 
 ////
 TODO: Review and include an example
@@ -135,28 +153,32 @@ NOTE: A meta-schema for JSON Schema suitable for this resource is available at
 https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/tms/propertiesSchema.yaml .
 
 [[rec_core_coverage-schema-variable-type]]
-[width="90%",cols="2,6"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/coverage-schema-variable-type*
-^|A |The logical schema for the collection SHOULD include an <<term-variable-type, `x-ogc-variableType`>> for each field with possible values `continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`,
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/coverage-schema-variable-type
+part:: The logical schema for the collection SHOULD include an <<term-variable-type, `x-ogc-variableType`>> for each field with possible values `continuous`, `categoricalOrdinal`, `categoricalNominal`, `numericalOrdinal`,
 or `numericalNominal` providing useful information relevant to how to properly perform interpolation for that field.
-|===
+====
 
 ==== Coverage data retrieval
 
 [[req_core_get-coverage]]
-[width="90%",cols="2,6"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/get-coverage*
-^|A |An implementation SHALL support the HTTP GET operation to retrieve the coverage (from the coverage resource linked to as `[ogc-rel:coverage]`, typically `/collections/{collectionId}/coverage`).
-^|B |A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
-^|C |The content of that response SHALL be the coverage data, along with the supported self-description capabilities of the negotiated content type.
-^|D |The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
-^|E |If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource (when the `type` property is present).
-^|F |The coverage response SHALL be in the native CRS (`storageCrs`) specified in the collection description, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
-^|G |If the coverage response format has a concept of field order (for lack of descriptive field metadata, as in GeoTIFF 1.0), that order SHALL match the fields being requested, either based on the selected fields
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/get-coverage
+part:: An implementation SHALL support the HTTP GET operation to retrieve the coverage (from the coverage resource linked to as `[ogc-rel:coverage]`, typically `/collections/{collectionId}/coverage`).
+part:: A successful execution of the operation SHALL be reported as a response with a HTTP status code `200`.
+part:: The content of that response SHALL be the coverage data, along with the supported self-description capabilities of the negotiated content type.
+part:: The response SHALL be encoded using the format(s) negotiated through the HTTP protocol.
+part:: If no format is negotiated, then the response SHALL be encoded using the format associated with the media type described in the link object which links to this resource, contained within the coverage (collection) resource (when the `type` property is present).
+part:: The coverage response SHALL be in the native CRS (`storageCrs`) specified in the collection description, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if none is specified, unless overridden by a specific query parameter (see <<rc_crs>>).
+part:: If the coverage response format has a concept of field order (for lack of descriptive field metadata, as in GeoTIFF 1.0), that order SHALL match the fields being requested, either based on the selected fields
 (see Field Selection requirements class), the `defaultFields` if specified in the collection description, or otherwise the `x-ogc-propertySeq` in the collection schema.
-|===
+====
 
 ==== Recommendation to support the `HEAD` method
 
@@ -165,39 +187,45 @@ the interpolation methods used (see <<rec_core_interpolation-applied, headers fo
 might end up discarded.
 
 [[rec_core_head-method]]
-[width="90%",cols="2,6"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/head-method*
-^|A |An implementation SHOULD support the HTTP 1.1 method `HEAD` for all resources that support the method `GET`,
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/head-method
+part:: An implementation SHOULD support the HTTP 1.1 method `HEAD` for all resources that support the method `GET`,
 in particular the `/collections/{collectionId}/coverage` resource which is likely to return a large amount of data.
-|===
+====
 
 ==== Recommendation to use RFC 7807 for JSON error reports
 
 [[rec_core_json-errors]]
-[width="90%",cols="2,6"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/json-errors*
-^|A | For error situations, an implementation SHOULD return error responses based on https://www.rfc-editor.org/rfc/rfc7807.txt[RFC 7807],
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/json-errors
+part:: For error situations, an implementation SHOULD return error responses based on https://www.rfc-editor.org/rfc/rfc7807.txt[RFC 7807],
 with a `Content-Type: application/problem+json` as also recommended in
 https://docs.ogc.org/is/19-072/19-072.html#mediatype-problems[OGC API - Common - Part 1],
 or a corresponding HTML representation when the content negotiation favors HTML over JSON (e.g., from a browser request).
-|===
+====
 
 ==== Response headers for spatiotemporal referencing
 
 [[req_core_response-headers]]
-[width="90%",cols="2,6"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/response-headers*
-^|A |If the content is referenced to a CRS which is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, the coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/response-headers
+part:: If the content is referenced to a CRS which is not https://www.opengis.net/def/crs/OGC/1.3/CRS84, the coverage response headers SHALL include a `Content-Crs:` header with the URI of the CRS of the coverage response
 (this does not preclude the possibility of including the `Content-Crs:` for the default https://www.opengis.net/def/crs/OGC/1.3/CRS84 case).
-^|B |If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual spatial extent of the coverage.
-^|C |If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain
+part:: If the returned coverage has a spatial extent, the headers of the response SHALL include a `Content-Bbox:` header with the actual spatial extent of the coverage.
+part:: If applicable, the `Content-Bbox:` coordinates SHALL be in the response CRS (indicated in `Content-Crs:`, or https://www.opengis.net/def/crs/OGC/1.3/CRS84 if it is not present) and SHALL contain
 four or six comma-separated numbers representing the lower-left and upper right corners of the response honoring the CRS coordinates order.
-^|D |If the coverage includes a temporal dimension which can be expressed in RFC3339 format, the headers of the response SHALL include a `Content-Datetime:` header in that format with the actual datetime instant
+part:: If the coverage includes a temporal dimension which can be expressed in RFC3339 format, the headers of the response SHALL include a `Content-Datetime:` header in that format with the actual datetime instant
 (if returning a temporal slice) or datetime interval (if the response includes a temporal dimension, or multiple temporal slices were flattened due to a limitation of the response format) of the returned coverage.
-|===
+====
 
 ==== Response headers indicating the interpolation methods applied
 
@@ -208,75 +236,82 @@ These recommendations are applicable whenever the server performs interpolation 
 <<rc_sparse-dimensions-collapse-spatial, Collapsing Sparse Dimensions requirements classes>>.
 
 [[rec_core_interpolation-applied]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/interpolation-applied*
-^|A | An implementation SHOULD indicate which <<conventions-interpolation-methods, interpolation methods>> were applied in relation
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/interpolation-applied
+part:: An implementation SHOULD indicate which <<conventions-interpolation-methods, interpolation methods>> were applied in relation
 to any of the Scaling or Collapsing Sparse Dimensions requirements classes.
 This can be done either for all dimensions and fields, or for individual dimension and field combination, using a response header
-`Content-Interpolation:`, with the syntax illustrated in the following examples.
-
-A single interpolation method used for all fields and dimensions:
-
-`Content-Interpolation: [ogc-interpolation:cubic]`
-
-An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific dimensions:
-
-`Content-Interpolation: [ogc-interpolation:cubic]; dimensions=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear])`
-
-An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific fields:
-
-`Content-Interpolation: [ogc-interpolation:cubic]; properties=temperature([ogc-interpolation:linear])`
-
+`Content-Interpolation:`, with the syntax illustrated in the following examples. +
++
+A single interpolation method used for all fields and dimensions: +
++
+`Content-Interpolation: [ogc-interpolation:cubic]` +
++
+An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific dimensions: +
++
+`Content-Interpolation: [ogc-interpolation:cubic]; dimensions=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear])` +
++
+An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific fields: +
++
+`Content-Interpolation: [ogc-interpolation:cubic]; properties=temperature([ogc-interpolation:linear])` +
++
 An interpolation method used for most fields and dimensions, with a specific interpolation method used for specific combinations
-of fields and dimensions:
-
-`Content-Interpolation: [ogc-interpolation:cubic]; properties=temperature(pressure:[ogc-interpolation:linear])`
-
+of fields and dimensions: +
++
+`Content-Interpolation: [ogc-interpolation:cubic]; properties=temperature(pressure:[ogc-interpolation:linear])` +
++
 An explicit list of interpolation method for each dimension:
-
++
 `Content-Interpolation: dimensions=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear]),time([ogc-interpolation:cubic])`
-|===
+====
 
 ==== Response header for indicating a preference has been applied
 
 [[req_core-preference-applied]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/preference-applied*
-^|A | If an implementation supports <<interpolation-preference, client preferences for interpolation>>,
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/preference-applied
+part:: If an implementation supports <<interpolation-preference, client preferences for interpolation>>,
 an implementation SHALL use a response header `Preference-Applied:` when it applied the preference specified by the client, for example,
 `Preference-Applied: interpolation=Lat([ogc-interpolation:linear]),Lon([ogc-interpolation:linear]),time([ogc-interpolation:linear]),pressure([ogc-interpolation:linear])` and
 `Preference-Applied: properties-interpolation=landcover([ogc-interpolation:nearest-neighbor])`.
-|===
+====
 
 ==== Strict or lenient request handling
 
 [[req_core-preference-handling-interpolation]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/preference-handling-interpolation*
-^|A | If an implementation supports <<interpolation-preference, client preferences for interpolation>>,
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/preference-handling-interpolation
+part:: If an implementation supports <<interpolation-preference, client preferences for interpolation>>,
 an implementation SHALL support the `Prefer: handling` request header defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4] where a value of
 `handling=lenient` would simply ignore an unsupported interpolation method preference, while a
 value of `handling=strict` SHALL return a 4xx error if the server is not able to fulfill the interpolation method preference of the client
-^|B | If no handling preference is specified, an implementation SHALL default to lenient handling for the purpose of
+part:: If no handling preference is specified, an implementation SHALL default to lenient handling for the purpose of
 interpolation preferences.
-|===
+====
 
 [[req_core-preference-handling-resolution]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/core/preference-handling-resolution*
-^|A | If an implementation supporting the <<rc_scaling_spatial, Scaling requirements class>> takes advantage of the <<downsampling-permission, downsampling permission>>,
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/preference-handling-resolution
+part:: If an implementation supporting the <<rc_scaling_spatial, Scaling requirements class>> takes advantage of the <<downsampling-permission, downsampling permission>>,
 that implementation SHALL support the `Prefer: handling` request header defined in https://www.rfc-editor.org/rfc/rfc7240#section-4.4[RFC 7240 Section 4.4].
-^|B | When a value of `handling=lenient` is specified, the downsampling permission SHALL be applicable, allowing to return a downsampled resolution for a dimension for which a
+part:: When a value of `handling=lenient` is specified, the downsampling permission SHALL be applicable, allowing to return a downsampled resolution for a dimension for which a
 resolution was not explicitly specified (using the `resolution`, `width` or `height` query parameter).
-^|C | When a value of `handling=strict` is specified, the downsampling permission SHALL NOT be applicable, and an implementation SHALL always return
+part:: When a value of `handling=strict` is specified, the downsampling permission SHALL NOT be applicable, and an implementation SHALL always return
 the native resolution for any dimensions for which a specific resolution was not explicitly requested, or a 413 _Content too large_ error if the response payload would exceed
 the <<server-limits-recommendations, advertised server limits>>.
-^|D | If no handling preference is specified, an implementation SHALL default to lenient handling for the purpose of the downsampling permission.
-|===
+part:: If no handling preference is specified, an implementation SHALL default to lenient handling for the purpose of the downsampling permission.
+====
 
 NOTE: The handling parameter of the `Prefer:` request header applies to the request as a whole, rather than to any specific preference or other aspect of the request.
 
@@ -295,15 +330,17 @@ A server can advertise these limits using the service metadata described in http
 NOTE: The service metadata might be embedded directly within an OpenAPI API definition, meaning that the `service-meta` and `service-desc` links may point to the same JSON document.
 
 [[rec_core-limits]]
-[width="90%",cols="2,6"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/limits*
-^|A |An implementation SHOULD advertise maximum limits for individual dimensions and/or combined data size that it is willing to return in a `coverage` object property of
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/limits
+part:: An implementation SHOULD advertise maximum limits for individual dimensions and/or combined data size that it is willing to return in a `coverage` object property of
 an `x-OGC-limits` property of the service metadata `info` object property of a JSON document linked to from the landing page using the `service-meta` link relation.
-^|B |An implementation SHOULD include in this `coverage` property of the service metadata `x-OGC-limits`: `maxCellsPerDimension` and `maxCells` integer properties for
+part:: An implementation SHOULD include in this `coverage` property of the service metadata `x-OGC-limits`: `maxCellsPerDimension` and `maxCells` integer properties for
 implementations supporting gridded coverages, and/or a `maxPoints` integer property for implementations supporting point clouds coverages. If absent, the server imposes no limit.
-^|C |An implementation SHOULD return a 4xx error (e.g., 400 Generic client error, or 413 Content too large) for coverage requests exceeding any of those limits.
-|===
+part:: An implementation SHOULD return a 4xx error (e.g., 400 Generic client error, or 413 Content too large) for coverage requests exceeding any of those limits.
+====
 
 The following is an example of how to include server coverage limits within the service metadata:
 

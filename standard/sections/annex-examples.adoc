@@ -14,6 +14,7 @@ https://ubjson.org/[Universal Binary JSON] can be considered as a simple mechani
 
 === Common OGC API Resources
 
+[[landing_page]]
 ==== Landing Page
 
 The landing page provides the main entry point to the API, advertising conformance classes and routing clients
@@ -80,6 +81,7 @@ Content-Type: application/json
 }
 ----
 
+[[conformance_declaration]]
 ==== Conformance Declaration
 
 The conformance declaration page lists the requirements classes supported by the server implementation, allowing clients
@@ -145,6 +147,7 @@ Content-Type: application/json
 }
 ----
 
+[[list_of_collections]]
 ==== List of Collections
 
 The collections index enumerates all available data resources, detailing the dimensions, variables, and
@@ -348,6 +351,7 @@ The server returns the collection description document detailing the 4D domain e
 }
 ----
 
+[[schema_resource_range_type]]
 ==== Schema Resource (Range Type)
 
 This example illustrates how a multi-dimensional coverage collection describes its range type using a standard schema resource per OGC API - Common - Part 3:
@@ -403,6 +407,7 @@ value statistics.
 }
 ----
 
+[[core_data_request]]
 === Core Data Request
 
 This example demonstrates baseline data retrieval requests targeting the coverage endpoint without explicit subsetting or field selection parameters.
@@ -553,6 +558,7 @@ Content-Type: application/problem+json
 }
 ----
 
+[[axis_subsetting_slicing_and_trimming]]
 === Axis Subsetting (Slicing and Trimming)
 
 This section provides multiple examples of axis subsetting operations, demonstrating how a client uses trimming parameters to
@@ -742,6 +748,7 @@ Content-Interpolation: [ogc-interpolation:nearest-neighbor]
 }
 ----
 
+[[sparse_dimensions_slicing_and_flattening]]
 === Sparse Dimensions Slicing and Flattening
 
 This section provides comprehensive examples demonstrating how servers manage sparse dimensional domains where data points
@@ -1033,6 +1040,7 @@ time,temperature
 2026-07-01T02:00:00Z,20.8
 ----
 
+[[multi_slicing]]
 === Multi-Slicing
 
 This section provides multiple examples of axis subsetting operations, demonstrating how a client uses slicing parameters to
@@ -1225,6 +1233,7 @@ Content-Bbox: 10.0,40.0,20.0,50.0
 }
 ----
 
+[[position_query]]
 === Position Query
 
 The Position Query requirements class specifies the ability to query the value(s) for a specific direct position by slicing on every dimension of the coverage, therefore
@@ -1781,6 +1790,7 @@ and array shape boundaries. Because the cell bounds are defined as zero-thicknes
 }
 ----
 
+[[explicit_grid_size_scaling_via_width_and_height]]
 ==== Explicit grid size scaling via width and height
 
 A client targets the coverage endpoint of the `climate:era5` collection to resample the horizontal grid mapping plane to
@@ -1872,6 +1882,7 @@ Content-Bbox: -75.75,45.45,100.0,-75.70,45.50,150.0
 ----
 _[Binary Compressed LAZ Stream Data Payload Omitted]_
 
+[[interpolation_preferences]]
 === Interpolation Preferences
 
 This section provides multiple examples demonstrating how a client uses the standard HTTP `Prefer:` header to control server-side
@@ -2012,12 +2023,14 @@ Content-Interpolation: [ogc-interpolation:linear]
 ----
 _[Data Payload Omitted]_
 
+[[field_selection]]
 === Field selection
 
 The Field Selection requirements class provides the ability to return specific targeted subsets of fields from a coverage resource
 using either inclusive selection via the `properties` query parameter or exclusive omission via the `exclude-properties` query
 parameter. This mechanism allows clients to optimize bandwidth consumption by requesting only needed fields.
 
+[[field_selection_via_the_properties_query_parameter]]
 ==== Field selection via the `properties` query parameter
 
 This example illustrates an inclusive field selection query targeting the bands of a multi-band satellite imagery dataset
@@ -2119,6 +2132,7 @@ Content-Bbox: 30.0,40.0,50.0,70.0
 }
 ----
 
+[[excluding_fields_via_the_exclude_properties_query_parameter]]
 ==== Excluding fields via the `exclude-properties` query parameter
 
 This example illustrates an exclusive field selection query against the atmospheric `climate:era5` collection. A client
@@ -2230,6 +2244,7 @@ Content-Type: application/problem+json
 }
 ----
 
+[[output_crs_selection]]
 === Output CRS selection
 
 The Coordinate Reference System (CRS) Selection requirements class provides the ability to request a coverage in a specific target CRS instead of the collection's native CRS. The available target options are advertised to the client within the `crs` array of the collection description. A client uses the `crs` query parameter to specify a target CRS identifier chosen from this supported list.
@@ -2351,6 +2366,7 @@ The returned CoverageJSON payload reflects this spatial reprojection inside the 
 }
 ----
 
+[[tiled_coverage_data]]
 === Tiled Coverage Data
 
 The Tiled Coverage Data requirements class bridges the OGC API - Coverages standard with the OGC API - Tiles and OGC 2D Tile Matrix
@@ -2361,6 +2377,7 @@ A request for tiled coverage data is equivalent to a specific spatial subset ope
 The response payload structures the dimensions to align with the selected tiling scheme, while either including or slicing additional
 dimensions like time or pressure.
 
+[[discovering_available_tilesets]]
 ==== Discovering available tilesets
 
 A client discovers available tilesets by following the `http://www.opengis.net/def/rel/ogc/1.0/tilesets-coverage` link relation
@@ -2443,6 +2460,7 @@ Content-Type: application/json
 }
 ----
 
+[[retrieving_a_tileset_metadata_resource]]
 ==== Retrieving a tileset metadata resource
 
 Before requesting tiled coverage data, a client requests the metadata for a specific tileset to discover the available zoom levels,
@@ -2525,6 +2543,7 @@ Content-Type: application/json
 }
 ----
 
+[[retrieving_tiled_coverage_data_by_slicing_dimensions]]
 ==== Retrieving tiled coverage data by slicing dimensions
 
 This example demonstrates fetching tiled coverage data down to a 2D spatial slice. Additional temporal and atmospheric pressure
@@ -2660,6 +2679,7 @@ Content-Interpolation: [ogc-interpolation:linear]
 }
 ----
 
+[[retrieving_multi_dimensional_tiled_coverage_data]]
 ==== Retrieving multi-dimensional tiled coverage data
 
 This example demonstrates retrieving multi-dimensional tiled coverage data from a World Mercator 2D Tile Matrix Set, without slicing on the other non-spatial dimensions.

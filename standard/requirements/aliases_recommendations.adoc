@@ -7,16 +7,17 @@ Generic clients intended to be interoperable with all Implementations of this St
 <<subset-spatial-parameter-subset-requirements,`subset`>> and <<req_scaling-spatial_resolution,`resolution`>> query parameters.
 
 [[rec_spatial-aliases]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/spatial-aliases*
-^|A |Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous with the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
-^|B |`e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous with `E`.
-^|C |`n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous with `N`.
-^|D |`Z` (lowercase/uppercase) or `H` (lowercase/uppercase) SHOULD be interpreted as synonymous with whichever vertical axis (height above the ellipsoid `h` or 3D Cartesian axis `z`) is applicable to the coordinate reference system.
-^|E |`lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lon`.
-^|F |`lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lat`.
-|===
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/spatial-aliases
+part:: Axis abbreviations as defined in the CRS definition SHOULD be interpreted as synonymous with the corresponding prescribed axis names, providing they do not conflict with other prescribed axis names or the aliases described below.
+part:: `e` (in lowercase), `X` (lowercase/uppercase) or `Easting` (lowercase/uppercase) SHOULD be interpreted as synonymous with `E`.
+part:: `n` (in lowercase), `Y` (lowercase/uppercase) or `Northing` (lowercase/uppercase) SHOULD be interpreted as synonymous with `N`.
+part:: `Z` (lowercase/uppercase) or `H` (lowercase/uppercase) SHOULD be interpreted as synonymous with whichever vertical axis (height above the ellipsoid `h` or 3D Cartesian axis `z`) is applicable to the coordinate reference system.
+part:: `lon` (in lowercase), `Long` (lowercase/uppercase) or `Longitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lon`.
+part:: `lat` (in lowercase) or `Latitude` (lowercase/uppercase) SHOULD be interpreted as synonymous with `Lat`.
+====
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed spatial axis names (`Lat`, `Lon`, `h`, `E`, `N`, `x`, `y`, `z`) and not rely on any of the aliases.
 
@@ -29,10 +30,11 @@ but should always use `time` to refer to the primary temporal dimension as speci
 and <<req_scaling-temporal_resolution,`resolution`>> query parameters.
 
 [[rec_temporal-aliases]]
-[width="90%",cols="2,6a"]
-|===
-^|*Recommendation {counter:rec-id}* |*/rec/core/temporal-aliases*
-^|A | The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
-|===
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/core/temporal-aliases
+part:: The axis names `t` (lowercase/uppercase) and `Time` case variation SHOULD be interpreted as aliases for `time` (the primary temporal dimension).
+====
 
 IMPORTANT: To ensure interoperability, clients should always use the prescribed primary temporal axis name (`time`) and not rely on any of the aliases.

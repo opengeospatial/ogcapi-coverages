@@ -1,12 +1,15 @@
 [[rc_html]]
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class*
-2+|http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/html
-|Target type |Web API
-|Dependency  |http://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-|Dependency  |<<HTML5,HTML5>>
-|===
+
+[requirements_class]
+.HTML
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/html
+subject:: Web API
+inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
+inherit:: <<HTML5,HTML5>>
+requirement:: /req/html/coverage
+====
 
 ==== Requirements
 
@@ -15,10 +18,11 @@
 ===== Coverage
 
 [[req_html_coverage-success]]
-[width="90%",cols="2,6a"]
-|===
-^|*Requirement {counter:req-id}* |*/req/html/coverage*
-^|A |The coverage resource, as defined in the Coverages API Core requirements class, SHALL support negotiating an HTML response using the `text/html` media type.
-^|B |The response SHALL be a valid HTML document
-^|C |The response SHALL represent the coverage.
-|===
+[requirement]
+====
+[%metadata]
+identifier:: /req/html/coverage
+part:: The coverage resource, as defined in the Coverages API Core requirements class, SHALL support negotiating an HTML response using the `text/html` media type.
+part:: The response SHALL be a valid HTML document
+part:: The response SHALL represent the coverage.
+====

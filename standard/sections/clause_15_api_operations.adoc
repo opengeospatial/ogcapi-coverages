@@ -32,4 +32,4 @@ A server implementation can use the content in the `openapi/` directory to gener
 The schema files include reusable paths, parameters, responses, and schemas that can be integrated as-is. An implementation should only include the paths and query parameters
 (such as the subsetting or scaling parameters) that are actually implemented by the deployment.
 
-include::requirements/requirements_class_api_operations.adoc[]
+include::../requirements/requirements_class_api_operations.adoc[]

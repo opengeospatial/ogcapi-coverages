@@ -6,7 +6,7 @@
 The following recommendations related to dimension aliases are applicable for all requirements classes involving the `subset` (<<rc_subsetting_spatial, Subsetting>>,
 <<rc_multi_slicing, Multi-slicing>>) or `resolution` (<<rc_scaling_spatial, Scaling>>) query parameters.
 
-include::requirements/aliases_recommendations.adoc[]
+include::../requirements/aliases_recommendations.adoc[]
 
 === Recommendations and permissions about interpolation and scaling
 
@@ -16,6 +16,6 @@ the <<rc_sparse-dimensions-collapse-spatial,Collapsing sparse dimensions>>, or
 the <<rc_position_query,Position Query>> requirements classes
 for Spatial, Temporal and/or General dimensions.
 
-See also examples of <<_interpolation_preferences, interpolation preferences>> in an annex.
+See also examples of <<interpolation_preferences, interpolation preferences>> in an annex.
 
-include::requirements/interpolation_recommendations.adoc[]
+include::../requirements/interpolation_recommendations.adoc[]
