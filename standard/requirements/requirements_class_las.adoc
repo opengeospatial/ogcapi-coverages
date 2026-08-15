@@ -18,6 +18,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/las/coverage*
-^|A |If a particular collection such as point cloud is suitable for a LAS representation, the coverage resource as defined in the Core requirement class SHALL support negotiating a https://portal.ogc.org/files/?artifact_id=74523[LAS] response using the `application/vnd.las` media type.
+^|A |If a particular collection such as point cloud is suitable for a LAS representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a https://portal.ogc.org/files/?artifact_id=74523[LAS] response using the `application/vnd.las` media type.
 ^|B |The response SHALL be a LAS point cloud which validates against the OGC LAS Community Standard, using a Point Data Record Format suitable for the data being returned.
 |===

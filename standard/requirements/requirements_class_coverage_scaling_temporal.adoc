@@ -50,10 +50,10 @@ can specify instead the `Prefer: handling=strict` request header (see <<req_core
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-temporal/multi-field-resolution*
-^|A |When returning the native resolution for the primary temporal dimension for multiple <<term-field,fields>> with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
+^|A |When returning the native resolution for the primary temporal dimension for multiple <<term-field,fields>> with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
 |===
 
-NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by
+NOTE: This `resolution` query parameter also supports combining resolutions for other dimensions specified by
 the <<rc_table_scaling_general, general>> and <<rc_table_scaling_spatial, spatial>> requirements classes.
 
 NOTE: See also the <<temporal-aliases-recommendation,recommendation>> to support primary temporal dimension name aliases applicable to this requirements class.

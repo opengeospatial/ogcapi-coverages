@@ -65,11 +65,11 @@ can specify instead the `Prefer: handling=strict` request header (see <<req_core
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-spatial/multi-field-resolution*
-^|A |When returning the native resolution for one or more dimension for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
+^|A |When returning the native resolution for one or more dimension for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
 |===
 
-NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by
-the <<rc_table_scaling_temporal, temporal>> and <<rc_table_scaling_general, general>> requirements classes.
+NOTE: This `resolution` query parameter also supports combining resolutions for other dimensions specified by
+the <<rc_table_scaling_temporal, Temporal>> and <<rc_table_scaling_general, General>> Scaling requirements classes.
 
 NOTE: See also the <<spatial-aliases-recommendation,recommendation>> to support spatial dimension name aliases applicable to this requirements class.
 

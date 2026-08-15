@@ -131,7 +131,7 @@ primary grid representation model of this Standard. In the context of this Stand
 https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[OGC API - Common - Part 2 "Uniform Additional Dimensions" requirements class],
 a grid is represented by independently defining the coordinate steps or intervals along each individual axis. This does not preclude an implementation from utilizing a
 non-quadrilateral underlying data store (such as a hierarchical hexagonal framework) and dynamically mapping its constituent <<term-cell-bounds,cell bounds>> to the orthogonal axis-by-axis
-structure accessible through the implementation's external interface.
+structure accessible through an implementation's external interface.
 
 [.source]
 <<OGC07-011r2>>
@@ -260,6 +260,8 @@ CIS::  Coverage Implementation Schema
 CRS::  Coordinate Reference System
 
 SWE::  Sensors Web Enablement
+
+TRS::  Temporal Reference System
 
 UCUM:: Unified Code for Units of Measure
 

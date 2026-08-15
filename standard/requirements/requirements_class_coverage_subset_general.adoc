@@ -12,7 +12,7 @@
 [[subset-general-parameter-subset-requirements]]
 ==== Query parameter `subset`
 
-When implementing this General Subsetting requirements class, the `subset` query parameter allows to retrieve a <<term-subsetting,subset>> of a coverage by <<term-slicing,slicing>> or <<term-trimming,trimming>> along dimensions other than the spatial and primary temporal dimensions.
+When implementing the General Subsetting requirements class, the `subset` query parameter supports retrieving a <<term-subsetting,subset>> of a coverage by <<term-slicing,slicing>> or <<term-trimming,trimming>> along dimensions other than the spatial and primary temporal dimensions.
 For a non-primary temporal dimension which can be mapped to UTC and the Gregorian calendar, then the server needs to support link:https://tools.ietf.org/html/rfc3339[RFC 3339] notation (extended with support for an hour value of 24).
 Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
 For any other dimension, the syntax for coordinates along that dimension is defined by the `trs`, or `definition` and `unit` specified for each dimension
@@ -87,7 +87,7 @@ where:
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-general/subset-scaling-exclusivity*
-^|A |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same additional dimension for which a scaling operation (`resolution` query parameter defined in the corresponding General Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
+^|A |An implementation SHALL return a 4xx error if a slicing operation is performed on the same additional dimension for which a scaling operation (`resolution` query parameter defined in the corresponding General Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
 |===
 
 NOTE: When the _intervalOrPoint_ values fall partially outside of the range of valid values defined by the CRS for the identified axis,

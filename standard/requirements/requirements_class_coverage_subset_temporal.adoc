@@ -12,7 +12,7 @@
 [[subset-temporal-parameter-subset-requirements]]
 ==== Query parameter `subset`
 
-The `subset` query parameter allows to retrieve a temporal subset of a coverage by <<term-slicing,slicing>> or <<term-trimming,trimming>> the primary temporal dimension named `time`.
+The `subset` query parameter supports retrieving a temporal subset of a coverage by <<term-slicing,slicing>> or <<term-trimming,trimming>> the primary temporal dimension named `time`.
 If this primary temporal dimension can be mapped to UTC and the Gregorian calendar, then the server needs to support link:https://tools.ietf.org/html/rfc3339[RFC 3339] notation (extended with support for an hour value of 24).
 Implementations may also allow clients to omit any time components such as seconds, minutes, hours.
 If this primary temporal dimension cannot be mapped to UTC / Gregorian calendar (e.g., geological time), then the collection description `temporal`
@@ -95,7 +95,7 @@ where:
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/subset-scaling-exclusivity*
-^|A |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same temporal dimension for which a scaling operation (`resolution` query parameter defined in the corresponding Temporal Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
+^|A |An implementation SHALL return a 4xx error if a slicing operation is performed on the same temporal dimension for which a scaling operation (`resolution` query parameter defined in the corresponding Temporal Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
 |===
 
 NOTE: When the _intervalOrSingle_ values fall partially outside of the range of valid values defined by the TRS for the identified axis,
@@ -112,9 +112,9 @@ NOTE: See also the <<temporal-aliases-recommendation,recommendation>> to support
 [width="90%",cols="2,6a"]
 |===
 ^|*Permission {counter:per-id}* |*/per/subsetting-temporal/subset-components-omission*
-^|A | Implementations MAY support the omission of any number of the last time components of by link:https://tools.ietf.org/html/rfc3339[RFC 3339] temporal instants.
-In such cases, the implementations will interpret these omitted components as 0 for the start of an interval or a slicing instant, and as the latest possible values for the ending instant of a temporal interval.
-^|B | Implementations MAY support the omission of the `Z` and time zone offset. In such cases, the implementations will interpret the temporal instant as UTC.
+^|A | An implementation MAY support the omission of any number of the last time components of by link:https://tools.ietf.org/html/rfc3339[RFC 3339] temporal instants.
+In such cases, an implementations will interpret these omitted components as 0 for the start of an interval or a slicing instant, and as the latest possible values for the ending instant of a temporal interval.
+^|B | An implementation MAY support the omission of the `Z` and time zone offset. In such cases, an implementation will interpret the temporal instant as UTC.
 |===
 
 [[datetime-parameter-subset-requirements]]
@@ -131,7 +131,7 @@ For example, the query parameter `datetime=2020-01-01` is equivalent to `subset=
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-temporal/datetime*
-^|A |The implementation SHALL support a `datetime` parameter expressed corresponding to either a `date-time` instant or a time interval, conforming to the following syntax (using link:https://tools.ietf.org/html/rfc5234[ABNF]):
+^|A |An implementation SHALL support a `datetime` parameter expressed corresponding to either a `date-time` instant or a time interval, conforming to the following syntax (using link:https://tools.ietf.org/html/rfc5234[ABNF]):
 
 [source,ABNF]
 ----
@@ -148,7 +148,7 @@ Interval ends SHALL be evaluated using implicit duration thickness based on the 
 that temporal instant without applying implicit thickness.
 Otherwise, the syntax of `date-time` depends on the `trs` specified in the `temporal` property of the collection description's `extent`.
 ^|B |Only the portions of the coverage within the specified interval SHALL be part of coverage response, performing a trim operation for an interval or a slicing operation for an instant.
-^|C |The implementation SHALL support a double-dot (`..`) or an empty string for the start/end as indicating an unbounded or half-bounded interval (only having a start or end).
+^|C |An implementation SHALL support a double-dot (`..`) or an empty string for the start/end as indicating an unbounded or half-bounded interval (only having a start or end).
 ^|D |If a `datetime` parameter is specified requesting a coverage without any temporal dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
 |===
 

@@ -17,7 +17,7 @@
 ^|*Requirement {counter:req-id}* |*/req/position-query/position-query*
 ^|A |The coverage retrieval operation SHALL support the ability to slice on all dimensions using the `subset` and/or `datetime` query parameters effectively reducing the dimensionality
 of the response to zero dimensions (a point).
-^|B |The Implementation SHALL support negotiating a JSON response (through request header `Accept: application/json`) for such point query which in a common scenario consists of an object with one
+^|B |An implementation SHALL support negotiating a JSON response (through request header `Accept: application/json`) for such point query which in a common scenario consists of an object with one
 property being the name of the field (for each default or selected field) and its associated values.
 ^|C |In the case where the coverage is a multi-function (for example, a multi-polygon feature collection backing data store), the response SHALL instead be an array of such objects.
 ^|D |In the case where a single field is being returned (whether the coverage consists of a single field, the default list of fields is a single field, or the client requests a single field through the
@@ -26,14 +26,14 @@ Field Selection requirements class), the response SHALL be the value of the fiel
 
 NOTE: This position query requirements class relies on the definition of the `subset` and `datetime` query parameters defined in the
 <<rc_subsetting_spatial,Spatial Subsetting>>, <<rc_subsetting_temporal,Temporal Subsetting>> and <<rc_subsetting_general,General Subsetting>> requirement classes.
-However, this requirement class does not specify a dependency on these requirements classes to allow implementing only the "Core" requirements class (returning the entire coverage), as well
+However, the Position Query requirements class does not specify a dependency on these other requirements classes to allow implementing only the "Core" requirements class (returning the entire coverage), as well
 as the ability to query specific points, without providing the ability to return fragments of the coverage larger than a single point.
 
 [[rec_coverage_position_query_interpolation]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/position-query/interpolation*
-^|A |In the case where the requested position does not fall within the defined bounds (region of validity) of an individual cell, the Implementation SHOULD
+^|A |In the case where the requested position does not fall within the defined bounds (region of validity) of an individual cell, an implementation SHOULD
 decide whether to perform an interpolation or not, and select the best suitable interpolation, based on the <<term-variable-type,variable type>> of each <<term-field,field>> being returned,
 as well as the variable type of each dimension being sliced on.
 |===

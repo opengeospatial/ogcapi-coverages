@@ -15,14 +15,14 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-general/resolution*
-^|A |For data with additional dimensions beyond spatial and a primary temporal dimension, the coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for the additional dimensions in the units specified for those dimensions. For a dimension whose values are expressed as a single number, the resolution value will always be a positive number.
+^|A |For data with additional dimensions beyond the spatial and a primary temporal dimensions, the coverage retrieval operation SHALL support a `resolution` query parameter specifying the <<term-resolution,resolution>> for the additional dimensions in the units specified for those dimensions. For a dimension whose values are expressed as a single number, the resolution value will always be a positive number.
 ^|B |The server SHALL support as a value for this parameter a comma-separated list of dimensions names followed by a resolution value in parentheses.
 ^|C |The server SHALL support as axis name all of the additional dimensions listed in the collection description's extent other than `spatial` and `temporal`.
-^|D |For dimensions whose semantic definition implies a hierarchical taxonomy supporting multiple levels of classification (such as geological eras or biological species), the Implementation SHALL support the name of taxon levels as the resolution (which could be explicitly listed in the `availableResolutions` of that dimension grid definition).
+^|D |For dimensions whose semantic definition implies a hierarchical taxonomy supporting multiple levels of classification (such as geological eras or biological species), an implementation SHALL support the name of taxon levels as the resolution (which could be explicitly listed in the `availableResolutions` of that dimension grid definition).
 ^|E |For a regularly gridded coverage, the resolution (the distance between two samples along that dimension) for each of the listed dimension(s) SHALL correspond to the specified value.
 ^|F |For an irregularly gridded coverage, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
 ^|G |For a non-gridded coverage, when explicitly listing each dimension, the distance between two samples along each of the listed dimension(s) SHALL be at minimum the value specified as the resolution for the corresponding dimension.
-^|H |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, the implementation SHALL support an <<ISO_8601-1,ISO 8601>> period notation.
+^|H |For additional dimensions where a `trs` of `https://www.opengis.net/def/crs/OGC/0/GregorianDateTime` is specified, an implementation SHALL support an <<ISO_8601-1,ISO 8601>> period notation.
 |===
 
 [[req_scaling-general_native-resolution]]
@@ -52,7 +52,7 @@ can specify instead the `Prefer: handling=strict` request header (see <<req_core
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/scaling-general/multi-field-resolution*
-^|A |When returning the native resolution for one or more additional dimensions for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the Implementation SHALL use the finest resolution for all fields.
+^|A |When returning the native resolution for one or more additional dimensions for multiple <<term-field,fields>> with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, an implementation SHALL use the finest resolution for all fields.
 |===
 
 NOTE: This `resolution` query parameter also allows to combine resolutions for other dimensions specified by

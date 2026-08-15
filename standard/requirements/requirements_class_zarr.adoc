@@ -19,7 +19,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/zarr/coverage*
-^|A |Coverage responses for the coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://zarr-specs.readthedocs.io/en/latest/v2/v2.0.html[Zarr] response packaged in a https://www.iso.org/standard/60101.html[Zip] file using the `application/zarr+zip` media type.
+^|A |Coverage responses for the coverage resource, as defined in the Coverages API Core requirements class, SHALL support negotiating a https://zarr-specs.readthedocs.io/en/latest/v2/v2.0.html[Zarr] response packaged in a https://www.iso.org/standard/60101.html[Zip] file using the `application/zarr+zip` media type.
 ^|B |The Zarr response SHALL use the appropriate data types most closely matching the coverage fields.
 ^|C |The response SHALL contain all selected fields.
 ^|D |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.

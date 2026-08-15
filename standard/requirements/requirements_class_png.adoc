@@ -18,9 +18,9 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/png/coverage*
-^|A |Two-dimensional coverage responses for the coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://www.w3.org/TR/png/[PNG] response using the `image/png` media type.
+^|A |Two-dimensional coverage responses for the coverage resource, as defined in the Coverages API Core requirements class, SHALL support negotiating a https://www.w3.org/TR/png/[PNG] response using the `image/png` media type.
 ^|B |The PNG response SHALL use 16-bit values for fields requiring more than 8-bit to encode accurately.
-^|C |The Implementation SHALL return a 400 error for requests for any number of fields other than 1 or 3.
+^|C |An implementation SHALL return a 400 error for requests for any number of fields other than 1 or 3.
 ^|D |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.
 ^|E | A `Values-Scale:` response header with a numeric real value SHALL be returned indicating the factor by which values were multiplied before an offset was added to result in the encoded 8-bit or 16-bit PNG unsigned integer values.
 ^|F | A `Values-Offset:` response header with a numeric real value SHALL be returned indicating the offset which was added after multiplying values by the scale factor to result in the encoded 8-bit or 16-bit PNG unsigned integer values.
@@ -30,6 +30,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Recommendation {counter:rec-id}* |*/rec/png/scale-offset*
-^|A |The Implementation SHOULD support a `values-scale` query parameter on coverage resources when requesting a PNG output to indicate the value scale factor, as described in the `Values-Scale:` response header part of the content requirement.
-^|B |The Implementation SHOULD support a `values-offset` query parameter on coverage resources when requesting a PNG output to indicate the value offset, as described in the `Values-Offset:` response header part of the content requirement.
+^|A |An implementation SHOULD support a `values-scale` query parameter on coverage resources when requesting a PNG output to indicate the value scale factor, as described in the `Values-Scale:` response header part of the content requirement.
+^|B |An implementation SHOULD support a `values-offset` query parameter on coverage resources when requesting a PNG output to indicate the value offset, as described in the `Values-Offset:` response header part of the content requirement.
 |===

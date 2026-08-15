@@ -757,7 +757,7 @@ Abstract Test A.{counter:ats-summary}: /conf/position-query/position-query
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Position Query requirements class +
 *When:* Requesting coverage resources that slice all dimensions down to zero dimensions using the `subset` and/or `datetime` parameters while requesting JSON encoding +
 *Then:* +
-- Assert that the Implementation supports reducing the dimensionality of the response to zero dimensions via the `subset` and/or `datetime` query parameters. +
+- Assert that the implementation supports reducing the dimensionality of the response to zero dimensions via the `subset` and/or `datetime` query parameters. +
 - Assert that a negotiated JSON response structure contains an object where properties match the default or selected field names mapped to their values. +
 - Assert that, if the backing coverage is a multi-function data store, a negotiated JSON response is structured as an array of these field-value objects. +
 - Assert that, if only a single field is returned, a negotiated JSON response evaluates to the value of the field directly (or an array of values for multi-functions) rather than a wrapping object.
@@ -790,7 +790,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class +
 *When:* Requesting a coverage resource using a valid `resolution` parameter specifying positive unit spacing values targeting spatial dimensions +
 *Then:* +
-- Assert that the Implementation accepts a `resolution` parameter specifying positive unit spacing values formatted as a comma-separated list of dimensions names followed by values in parentheses. +
+- Assert that the implementation accepts a `resolution` parameter specifying positive unit spacing values formatted as a comma-separated list of dimensions names followed by values in parentheses. +
 - Assert that axis names `Lat` and `Lon` are supported for geographic output CRSs and map to the corresponding spatial axes. +
 - Assert that axis names `E` and `N` are supported for projected output CRSs, and axis names `x` and `y` are supported for 3D Cartesian CRSs. +
 - Assert that for a regularly gridded coverage, the distance between sample points matches the explicitly requested values. +
@@ -861,7 +861,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class serving multiple fields with different native resolutions +
 *When:* A native resolution coverage request targets multiple fields simultaneously using an output format that cannot store un-aligned mixed resolutions together +
 *Then:* +
-- Assert that when returning multiple fields with varying native resolutions in an output format that does not support mixed-resolution fields, the Implementation resamples all fields to the finest resolution.
+- Assert that when returning multiple fields with varying native resolutions in an output format that does not support mixed-resolution fields, the implementation resamples all fields to the finest resolution.
 |===
 
 **Abstract Test A.{counter:ats-id}:** Width and Height Parameters
@@ -874,8 +874,8 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-spatial/width-and-height
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Spatial Scaling requirements class +
 *When:* Requesting coverage resources using the `width` and/or `height` query parameters +
 *Then:* +
-- Assert that the Implementation accepts an integer value for the `width` parameter to scale the horizontal spatial axis. +
-- Assert that the Implementation accepts an integer value for the `height` parameter to scale the vertical spatial axis. +
+- Assert that the implementation accepts an integer value for the `width` parameter to scale the horizontal spatial axis. +
+- Assert that the implementation accepts an integer value for the `height` parameter to scale the vertical spatial axis. +
 - Assert that the returned coverage contains exactly the requested number of sample values along the specified scaled axes, adhering to original counts for unspecified axes and any defined server processing limits. +
 - Assert that when `width` or `height` parameters are used together with spatial subsetting, the requested number of grid samples maps directly to the subset window, even if the subset boundaries fall partially outside the coverage extent.
 |===
@@ -904,7 +904,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/multi-field-resolu
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class +
 *When:* Requesting a coverage resource using a valid `resolution` parameter specifying positive unit spacing values using ISO 8601 period notation targeting the `time` axis +
 *Then:* +
-- Assert that the Implementation accepts a `resolution` parameter specifying ISO 8601 period values formatted as a comma-separated list of dimension names followed by values in parentheses. +
+- Assert that the implementation accepts a `resolution` parameter specifying ISO 8601 period values formatted as a comma-separated list of dimension names followed by values in parentheses. +
 - Assert that the axis name `time` is supported if the collection describes a temporal dimension in its extent. +
 - Assert that for a regularly gridded coverage, the distance between sample points matches the explicitly requested ISO 8601 duration value. +
 - Assert that for irregularly gridded or non-gridded coverages, the sampling distance along the targeted dimensions matches or exceeds the specified parameter values.
@@ -946,7 +946,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-temporal/multi-field-resolu
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Temporal Scaling requirements class serving multiple fields with different native temporal resolutions +
 *When:* A native resolution coverage request targets multiple fields simultaneously using an output format that cannot store un-aligned mixed resolutions together +
 *Then:* +
-- Assert that when returning the native resolution for the primary temporal dimension for multiple fields with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the Implementation uses the finest resolution for all fields.
+- Assert that when returning the native resolution for the primary temporal dimension for multiple fields with different temporal resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the implementation uses the finest resolution for all fields.
 |===
 
 === Conformance Class: General Scaling
@@ -973,7 +973,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-general/multi-field-resolut
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class +
 *When:* Requesting a coverage resource using a valid `resolution` parameter specifying numerical values or valid textual resolution values targeting additional dimensions +
 *Then:* +
-- Assert that the Implementation accepts a `resolution` parameter specifying positive numerical values, taxon level names, or ISO 8601 period strings formatted as a comma-separated list of dimension names followed by values in parentheses. +
+- Assert that the implementation accepts a `resolution` parameter specifying positive numerical values, taxon level names, or ISO 8601 period strings formatted as a comma-separated list of dimension names followed by values in parentheses. +
 - Assert that all extra dimensions declared in the collection description (excluding spatial dimensions and the primary temporal dimension) are supported as valid axis names. +
 - Assert that for dimensions whose semantic definition implies a hierarchical taxonomy supporting multiple levels of classification (such as geological eras or biological species), the requested taxon level names are supported, matching any specified `availableResolutions` values. +
 - Assert that for a regularly gridded coverage, the distance between sample points matches the explicitly requested resolution values. +
@@ -1017,7 +1017,7 @@ Abstract Test A.{counter:ats-summary}: /conf/scaling-general/multi-field-resolut
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - General Scaling requirements class serving multiple fields with different native resolutions across an additional dimension +
 *When:* A native resolution coverage request targets multiple fields simultaneously using an output format that cannot store un-aligned mixed resolutions together +
 *Then:* +
-- Assert that when returning the native resolution for one or more additional dimensions for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the Implementation uses the finest resolution for all fields.
+- Assert that when returning the native resolution for one or more additional dimensions for multiple fields with different resolutions (as specified in the schema's `x-ogc-resolution`) in output formats which do not support returning those different fields together at these different resolutions, the implementation uses the finest resolution for all fields.
 |===
 
 
@@ -1044,8 +1044,8 @@ Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resoluti
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class +
 *When:* Requesting coverage resources using the `properties` query parameter +
 *Then:* +
-- Assert that the Implementation accepts the `properties` parameter containing a comma-separated list of field names. +
-- Assert that the Implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
+- Assert that the implementation accepts the `properties` parameter containing a comma-separated list of field names. +
+- Assert that the implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
 - Assert that the coverage response contains exclusively the fields requested via the parameter values. +
 - Assert that if the output format supports a self-describing field catalog (such as a CIS range type structure), the embedded field metadata is modified to reflect only the selected properties. +
 - Assert that if the negotiated encoding retains a structured band or property layout sequence, fields are ordered precisely matching the index order of the requested list.
@@ -1061,8 +1061,8 @@ Abstract Test A.{counter:ats-summary}: /conf/field-selection/mismatched-resoluti
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - Field Selection requirements class +
 *When:* Requesting coverage resources using the `exclude-properties` query parameter +
 *Then:* +
-- Assert that the Implementation accepts the `exclude-properties` parameter containing a comma-separated list of field names. +
-- Assert that the Implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
+- Assert that the implementation accepts the `exclude-properties` parameter containing a comma-separated list of field names. +
+- Assert that the implementation resolves field identifiers against top-level keys in the coverage fields schema and returns an HTTP `400` status code for unrecognized field names. +
 - Assert that the coverage response returns all fields except those explicitly specified in the exclusion list, including available fields that sit outside the default collection output configuration. +
 - Assert that the server returns an HTTP `4xx` error code if both the `properties` parameter and the `exclude-properties` parameter are specified in the same request. +
 - Assert that if the negotiated encoding retains a structured property layout sequence, the remaining non-excluded fields are ordered matching the original `x-ogc-propertySeq` indices defined in the logical schema. +
@@ -1103,7 +1103,7 @@ Abstract Test A.{counter:ats-summary}: /conf/crs/crs-definition
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - CRS by Reference requirements class +
 *When:* Requesting coverage resources using the `crs` query parameter +
 *Then:* +
-- Assert that the Implementation accepts the `crs` parameter containing a URI or safe CURIE identifier referencing a registered CRS. +
+- Assert that the implementation accepts the `crs` parameter containing a URI or safe CURIE identifier referencing a registered CRS. +
 - Assert that all CRSs advertised in the `crs` property of the collection metadata description are accepted as valid output CRSs. +
 - Assert that if the `crs` property list is absent, the collection's `storageCrs` is supported (defaulting to `[OGC:CRS84]` if not specified). +
 - Assert that the advertised output CRS list contains the collection's designated default output CRS (`storageCrs` or `[OGC:CRS84]`). +
@@ -1141,7 +1141,7 @@ Abstract Test A.{counter:ats-summary}: /conf/tiles/tilesets
 - Assert that the response payload for a specific tile contains a coverage subset trimmed on the designated 2D Tile Matrix Set axes matching the exact spatial window of the tile. +
 - Assert that a tile response is scaled to match the tile's pixel size dimensions, adding one cell if the coverage cells do not completely span the interval between sample centers.
 - Assert that the tiled coverage data resources support the relevant query parameters (`subset`, `resolution`, `datetime`, `properties`, `exclude-properties`) and associated
-requirements defined in requirements classes of this OGC API - Coverages standard to which the Implementation declares conformance,
+requirements defined in requirements classes of this OGC API - Coverages standard to which the implementation declares conformance,
 with the exception of aspects related to the dimensions inherent to the spatial dimensions of the 2D Tile Matrix Set (e.g., latitude and longitude, or easting and northing)
 for which subsetting and scaling is already implied by a tile identifier.
 |===
@@ -1167,7 +1167,7 @@ Abstract Test A.{counter:ats-summary}: /conf/html/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - HTML Encoding requirements class +
 *When:* Requesting a coverage resource negotiating an HTML response through the `text/html` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns an HTML response when requested via the `text/html` media type. +
+- Assert that the implementation successfully negotiates and returns an HTML response when requested via the `text/html` media type. +
 - Assert that the returned payload is a valid HTML document. +
 - Assert that the HTML document provides a valid representation of the coverage resource.
 |===
@@ -1194,7 +1194,7 @@ Abstract Test A.{counter:ats-summary}: /conf/geotiff/raster-type
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoTIFF requirements class +
 *When:* A two-dimensional coverage resource request is executed requesting a GeoTIFF response through the `image/tiff; application=geotiff` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a GeoTIFF response when requested via the `image/tiff; application=geotiff` media type. +
+- Assert that the implementation successfully negotiates and returns a GeoTIFF response when requested via the `image/tiff; application=geotiff` media type. +
 - Assert that the returned payload is a valid GeoTIFF document that complies with the GeoTIFF and TIFF standards. +
 - Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.
 |===
@@ -1273,7 +1273,7 @@ Abstract Test A.{counter:ats-summary}: /conf/netcdf/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - NetCDF requirements class +
 *When:* Requesting a coverage resource negotiating a netCDF response through the `application/x-netcdf` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a netCDF response when requested via the `application/x-netcdf` media type. +
+- Assert that the implementation successfully negotiates and returns a netCDF response when requested via the `application/x-netcdf` media type. +
 - Assert that the returned payload is a valid netCDF document that complies with the OGC netCDF standard. +
 - Assert that for dimensions lacking a well-defined netCDF `standard_name`, the corresponding variable name matches the dimension name listed in the collection description's extent.
 |===
@@ -1299,7 +1299,7 @@ Abstract Test A.{counter:ats-summary}: /conf/cisjson/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - CIS JSON requirements class +
 *When:* Requesting a coverage resource negotiating a JSON response through the `application/json` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a JSON response. +
+- Assert that the implementation successfully negotiates and returns a JSON response. +
 - Assert that the returned payload is a valid CIS JSON document that complies with the official `coverage-schema.yaml` specification. +
 - Assert that the structural root of the JSON coverage object matches the `CoverageByDomainAndRange` type. +
 - Assert that for a gridded coverage, the calculated span—defined as the grid resolution interval difference divided by resolution minus the index index coordinate
@@ -1328,7 +1328,7 @@ Abstract Test A.{counter:ats-summary}: /conf/coveragejson/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - CoverageJSON requirements class, where the targeted collection is suitable for a CoverageJSON representation +
 *When:* Requesting a coverage resource negotiating a CoverageJSON response through the `application/vnd.cov+json` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.cov+json` media type. +
+- Assert that the implementation successfully negotiates and returns a response when requested via the `application/vnd.cov+json` media type. +
 - Assert that the returned payload is a valid CoverageJSON document that complies with the CoverageJSON community standard.
 |===
 
@@ -1354,7 +1354,7 @@ Abstract Test A.{counter:ats-summary}: /conf/las/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - LAS requirements class, where the targeted collection is suitable for a LAS representation +
 *When:* Requesting a coverage resource negotiating a LAS response through the `application/vnd.las` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.las` media type. +
+- Assert that the implementation successfully negotiates and returns a response when requested via the `application/vnd.las` media type. +
 - Assert that the returned payload is a valid LAS point cloud dataset that complies with the OGC LAS Community Standard. +
 - Assert that the point cloud dataset is encoded using a Point Data Record Format suitable for the properties and flags of the underlying data being returned.
 |===
@@ -1381,7 +1381,7 @@ Abstract Test A.{counter:ats-summary}: /conf/laszip/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - LASzip requirements class, where the targeted collection is suitable for a LASzip representation +
 *When:* Requesting a coverage resource negotiating a LASzip response through the `application/vnd.laszip` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a response when requested via the `application/vnd.laszip` media type. +
+- Assert that the implementation successfully negotiates and returns a response when requested via the `application/vnd.laszip` media type. +
 - Assert that the returned payload is a valid compressed LASzip dataset. +
 - Assert that the decompressed data maps to a valid point cloud structure complying with the OGC LAS Community Standard. +
 - Assert that the dataset utilizes a Point Data Record Format suitable for the properties and attributes of the data being returned.
@@ -1409,7 +1409,7 @@ Abstract Test A.{counter:ats-summary}: /conf/png/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - PNG requirements class +
 *When:* A two-dimensional coverage resource request is executed requesting a PNG response through the `image/png` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a PNG response when requested via the `image/png` media type. +
+- Assert that the implementation successfully negotiates and returns a PNG response when requested via the `image/png` media type. +
 - Assert that the PNG document uses 16-bit values for fields whose accurate representation requires more than 8 bits of dynamic range. +
 - Assert that the server returns an HTTP `400` status code if the request specifies a total number of selected fields other than exactly 1 or 3. +
 - Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence. +
@@ -1439,7 +1439,7 @@ Abstract Test A.{counter:ats-summary}: /conf/jpegxl/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - JPEG XL requirements class +
 *When:* A two-dimensional coverage resource request is executed requesting a JPEG XL response through the `image/jxl` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a JPEG XL response when requested via the `image/jxl` media type. +
+- Assert that the implementation successfully negotiates and returns a JPEG XL response when requested via the `image/jxl` media type. +
 - Assert that the JPEG XL document encodes values using the data type (e.g., 8-bit or 16-bit integer, 32-bit floating point) that most closely matches the native precision of the coverage field. +
 - Assert that the returned payload contains all selected fields requested by the client. +
 - Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.
@@ -1466,7 +1466,7 @@ Abstract Test A.{counter:ats-summary}: /conf/jpeg2000/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - JPEG 2000 requirements class +
 *When:* Requesting a two-dimensional coverage resource negotiating a JPEG 2000 response through the `image/jp2` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a JPEG 2000 response when requested via the `image/jp2` media type. +
+- Assert that the implementation successfully negotiates and returns a JPEG 2000 response when requested via the `image/jp2` media type. +
 - Assert that the JPEG 2000 document encodes values using the data type (e.g., 8-bit or 16-bit integer, 32-bit floating point) that most closely matches the native precision of the coverage field. +
 - Assert that the returned payload contains all selected fields requested by the client. +
 - Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence. +
@@ -1494,7 +1494,7 @@ Abstract Test A.{counter:ats-summary}: /conf/zarr/coverage
 *Given:* An API Implementation claiming conformance to the OGC API - Coverages - GeoZarr requirements class +
 *When:* Requesting a coverage resource negotiating a Zarr response through the `application/zarr+zip` media type +
 *Then:* +
-- Assert that the Implementation successfully negotiates and returns a Zarr response packaged inside a Zip container when requested via the `application/zarr+zip` media type. +
+- Assert that the implementation successfully negotiates and returns a Zarr response packaged inside a Zip container when requested via the `application/zarr+zip` media type. +
 - Assert that the Zarr dataset encodes values using the data types that most closely match the native precision of the coverage fields. +
 - Assert that the returned payload contains all selected fields requested by the client. +
 - Assert that if the response contains multiple fields, the fields are encoded as bands ordered precisely following the `x-ogc-propertySeq` sequence.

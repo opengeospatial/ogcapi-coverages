@@ -3,12 +3,13 @@
 
 === Overview
 
-The "Tiled Coverage Data" Requirements Class defines how to combine the https://docs.ogc.org/is/20-057/20-057.html[_OGC API - Tiles_] building blocks with the _Coverages API_ to request coverage tiles.
+The "Tiled Coverage Data" Requirements Class defines how to combine the https://docs.ogc.org/is/20-057/20-057.html[_OGC API - Tiles_] requirements classes with an implementation
+of the _Coverages API_ to request tiled coverage data.
 Coverages parameters such as for <<term-subsetting,subsetting>> additional dimensions not covered by the Tiles https://docs.ogc.org/is/17-083r4/17-083r4.html[2D Tile Matrix Set]
 (such as <<rc_subsetting_temporal,time>>, <<rc_subsetting_spatial,elevation above the ellipsoid>> or <<rc_subsetting_general,pressure>>),
 or for <<rc_fieldselection,field selection>>, can be used together with the resource path for requesting individual tiles.
 
-The tiles response for a coverage corresponds to a subsetting request for the tile extent.
+The tiles response to a Coverages API request corresponds to a subsetting request for the tile extent.
 Note that the number of <<term-cell,cells>> in the response for a _Value-Is-Point_ coverage is one more than the tile pixel size of the TileMatrixSet.
 
 [#span-coverage-tiles,reftext='{figure-caption} {counter:fig-num}']

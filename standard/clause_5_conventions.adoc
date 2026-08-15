@@ -123,6 +123,6 @@ For simplicity, this document in general only refers to the HTTP protocol. This 
 === Use of CURIEs
 
 Everywhere a URI is expected in a server response, a safe CURIE can be returned instead.
-Everywhere a URI is expected in a query parameter, the implementation also needs to support a safe CURIE.
+Everywhere a URI is expected in a query parameter, an implementation also needs to support a safe CURIE.
 A CURIE `{authority}[-{objectType}]:{id}` would map to the following OGC URI: `https://www.opengis.net/def/{objectType}/{authority}/0/{id}`.
 If `-{objectType}` is missing, the default object type is `crs`.

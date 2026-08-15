@@ -19,7 +19,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/jpegxl/coverage*
-^|A |Two-dimensional coverage responses for the coverage resource, as defined in the Core requirement class, SHALL support negotiating a https://jpeg.org/jpegxl/[JPEG XL] response using the `image/jxl` media type.
+^|A |Two-dimensional coverage responses for the coverage resource, as defined in the Coverages API Core requirements class, SHALL support negotiating a https://jpeg.org/jpegxl/[JPEG XL] response using the `image/jxl` media type.
 ^|B |The JPEG XL response SHALL use the appropriate data types most closely matching the coverage field (e.g., 8 bit or 16-bit integer, 32-bit floating point).
 ^|C |The response SHALL contain all selected fields.
 ^|D |If the response contains multiple fields, the fields SHALL be encoded as bands ordered following the `x-ogc-propertySeq` sequence.

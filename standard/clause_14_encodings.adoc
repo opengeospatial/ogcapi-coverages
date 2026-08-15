@@ -1,7 +1,7 @@
 [[encodings-section]]
 == Requirements Classes for Representations
 
-This standard does not mandate any particular encoding or format in which to return the `../coverage` resource.
+The Coverages API Standard does not mandate any particular encoding or format in which to return the `../coverage` resource.
 Coverages can be encoded in any suitable data format.
 However, it does define requirements class for representations which are expected to be commonly supported in implementations of this standard.
 These requirements classes include:
@@ -19,10 +19,10 @@ These requirements classes include:
 * <<rc_encoding-jpeg2000,JPEG 2000>>
 * <<rc_encoding-zarr,(Geo)Zarr>>
 
-None of these encodings is mandatory. An implementor of this standard may choose to implement none of them, selecting different encodings instead.
+None of these formats is mandatory. An implementor of the Coverages API Standard may choose to implement none of them, selecting different formats/encodings instead.
 
-The media type used to encode a response to a request shall be determined based on HTTP content negotiation, as specified in _OGC API - Common_.
-If not using content negotiation, the encoding must follow the media type described in the link to the resource from the collection.
+The media type used to format/encode a response to a request shall be determined based on HTTP content negotiation, as specified in _OGC API - Common_.
+If not using content negotiation, the format/encoding must follow the media type described in the link to the resource from the collection.
 
 For most efficient usage, a coverage should be available in binary form, for which a number of encodings requirements classes are defined below.
 
@@ -53,7 +53,7 @@ A table of the media types corresponding to each encoding requirements class def
 
 ==== Overview
 
-The HTML requirements class defines at a high level the ability to retrieve an HTML response for the coverage resource intended primarily for users accessing the API from a Web browser.
+The HTML requirements class defines at a high level the ability to retrieve an HTML response for the coverage resource intended primarily for users accessing a Coverages API endpoint from a Web browser.
 
 The exact content of the HTML response is not prescribed, leaving the flexibility for implementations to choose a preferred approach, such as embedding a static or interactive view of a coverage.
 
@@ -113,24 +113,24 @@ Specifically for the `../coverage` resource, the media type `application/json` i
 The CIS Standard defines four aspects of a coverage which are described in separate properties: the domain set, the range type, the rangeset, and the domain-specific metadata.
 By default, all of these aspects should be returned as part of a coverage response, with the domain-specific metadata being optional if none is available.
 
-This CIS JSON requirements class defines a permission for implementations to support a `profile` query parameter which can be used by a client to retrieve only some of these aspects of the coverage e.g.,
+This Coverages API CIS JSON requirements class defines a permission for implementations to support a `profile` query parameter which can be used by a client to retrieve only some of these aspects of the coverage e.g.,
 `profile=domainset,rangetype`. Information equivalent to the CIS _DomainSet_ is already included in the collection description resource `extent` property,
 whereas information equivalent to the CIS _RangeType_ is included in the schema resource associated with the collection resource.
 This profiling capability also allows clients to retrieve a subset of the domainset when using `profile=domainset` together with
 one or more subsetting parameters (`subset`, `bbox` or `datetime`).
 
-The CIS standard defines a number of alternative way in which a coverage encoding can be structured.
+The CIS standard defines a number of alternative methods in which a coverage encoding can be structured.
 In order to maximize interoperability, this requirements class specifies that the response will be a _CoverageByDomainAndRange_ consisting of either a DomainSet described by a
 _GeneralGridCoverage_ (for coverages consisting of one or more dimensions of <<term-regular-grid, regular>> and/or <<term-irregular-grid, irregular grids>>) or a _DirectMultiPoint_ coverage (for point clouds), excluding
 a _CoverageByPartitioning_ defined by a PartitionSet, unless a prior arrangement (not specified by this Standard) is established with the client.
 
 Similarly, this requirement class also specifies that the CIS JSON response will be self-contained (not linking to data available in separate resources),
 unless a prior arrangement (not specified by this Standard) is established with the client.
-Implementations wishing to present different constituent parts of a coverage as separate resources can consider implementing an eventual _Scenes_ extension, where
+Implementations of this requirements class wishing to present different constituent parts of a coverage as separate resources can consider implementing an eventual _Scenes_ extension, where
 both a coverage for the overall collection, as well as a coverage for individual scenes, can be retrieved by a client.
 
 Since the description of the coverage domain and range is easily available at the `/collections/{collectionId}` and `/collections/{collectionId}/schema` resources,
-implementations and clients are likely to prefer keeping to single-part encodings, and would select a binary encoding such as those defined in the other encoding requirements classes for efficient access.
+implementations and clients are likely to prefer keeping to single-part encodings and would select a binary encoding such as those defined in the other encoding requirements classes for efficient access.
 
 This requirements class also clarifies how to describe the _DomainSet_ of coverages based on whether the _RangeSet_ values correspond to cells whose geometry are a single point or an area,
 ensuring that the extent interval in the collection resource always fully cover the spatial extent described by the coverage and that this extent description is consistent with other
@@ -177,8 +177,8 @@ include::requirements/requirements_class_laszip.adoc[]
 
 The PNG requirements class defines support for encoding a coverage response according to the https://www.w3.org/TR/2003/REC-PNG-20031110/[W3C Portable Network Graphics (PNG) Specification] (https://www.iso.org/standard/29581.html[ISO/IEC 15948:2003]).
 
-Because PNG encoding is limited to an integer data values, this requirements class defines additional parameters and response headers allowing a client to request
-a specific scale factor and offset to be used to quantize coverage values, and allowing the implementation to inform the client of the scale factor and offset
+Since PNG encoding is limited to an integer data values, this PNG reponse format requirements class defines additional parameters and response headers allowing a client to request
+a specific scale factor and offset to be used to quantize coverage values, and allowing an implementation to inform the client of the scale factor and offset
 used for that quantization.
 
 include::requirements/requirements_class_png.adoc[]

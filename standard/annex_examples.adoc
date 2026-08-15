@@ -1981,7 +1981,7 @@ _[Data Payload Omitted]_
 
 ==== Server Ignores Unsupported Interpolation Preference
 
-This example illustrates a scenario where a client requests an interpolation method that the implementation cannot fulfill. Per the
+This example illustrates a scenario where a client requests an interpolation method that an implementation cannot fulfill. Per the
 standard's compliance rules, a server is permitted to ignore unsupported interpolation method preferences and fallback to its default
 resampling logic. In this event, the accepted axes or fields are reported inside the `Preference-Applied:` response header, signaling
 to the client exactly which preference was fulfilled.

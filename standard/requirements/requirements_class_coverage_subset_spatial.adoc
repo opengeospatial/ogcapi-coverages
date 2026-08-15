@@ -87,14 +87,14 @@ be supported to indicate an extent crossing that wrapping point.
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/wildcard-limits*
 ^|A |If a lower limit of the subset interval is populated with an asterisk `*`, then the minimum extent of the coverage along that axis SHALL be selected.
-^|B |If a upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
+^|B |If an upper limit of the subset interval is populated with an asterisk `*`, then the maximum extent of the coverage along that axis SHALL be selected.
 |===
 
 [[req_subsetting-spatial_multiple-subset]]
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/multiple-subset*
-^|A |Multiple `subset` query parameters SHALL be interpreted, as if all dimension subsetting values were provided in a single `subset` parameter (comma-separated)^1^.
+^|A |Multiple `subset` query parameters SHALL be interpreted as if all dimension subsetting values were provided in a single `subset` parameter (comma-separated)^1^.
 2+|1 Example: subset=Lat(-90:90)&subset=Lon(-180:180)&subset=time("2018-02-12T23:20:52Z")&subset=atm_pressure_hpa(500) is equivalent to subset=Lat(-90:90),Lon(-180:180),time("2018-02-12T23:20:52Z"),atm_pressure_hpa(500)
 |===
 
@@ -102,8 +102,8 @@ be supported to indicate an extent crossing that wrapping point.
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/subset-scaling-exclusivity*
-^|A |The Implementation SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
-(`resolution` query parameter defined in the corresponding Scaling requirements class) is also used, as Slicing and Scaling are mutually exclusive.
+^|A |As Slicing and Scaling are mutually exclusive, an implementation of the Coverages API SHALL return a 4xx error if a slicing operation is performed on the same dimension for which a scaling operation
+(`resolution` query parameter defined in the corresponding Scaling requirements class) is also used.
 For example, `subset=time("2020-01-01T15:00")&resolution=time(P1H)` (slicing) would be an invalid request, while `subset=time("2020-01-01T15:00":"2020-01-31T15:00")&resolution=time(P1H)` (trimming).
 |===
 
@@ -133,9 +133,12 @@ NOTE: See also the <<spatial-aliases-recommendation,recommendation>> to support 
 ==== Query parameter `bbox`
 
 The `bbox` convenience query parameter maps to a trimming operation (which could also be expressed using `subset`).
-The parameter value consists of four coordinates which are to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
-or six coordinates to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`) by default (unless a `bbox-crs` parameter is specified).
-The equivalent `subset` parameter is simply the trimming operation from the first latitude to the second latitude, the first longitude to the second longitude, and the first height above the ellipsoid to the second height (if applicable).
+By default, the parameter value consists of four coordinates which are to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84 (`longitude,latitude,longitude,latitude`)
+or six coordinates to be interpreted as https://www.opengis.net/def/crs/OGC/1.3/CRS84h (`longitude,latitude,h,longitude,latitude,h`). The exception is if a `bbox-crs` parameter is specified,
+in which case the the value of that `bbox-crs` dictates the CRS in which to interpret the `bbox` coordinates.
+The equivalent `subset` parameter is simply the trimming operation between the first and second coordinates of the two or three spatial axes specified.
+For example, for https://www.opengis.net/def/crs/OGC/1.3/CRS84h this would be from the first latitude to the second latitude, from the first longitude to the second longitude, and from the
+first height above the ellipsoid to the second height.
 
 [[req_subsetting-spatial_bbox-definition]]
 [width="90%",cols="2,6a"]
@@ -153,7 +156,7 @@ The equivalent `subset` parameter is simply the trimming operation from the firs
 
 ^|C|If the bounding box consists of four numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude (https://www.opengis.net/def/crs/OGC/1.3/CRS84) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
 ^|D|If the bounding box consists of six numbers, the coordinate reference system of the values SHALL be interpreted as WGS 84 longitude/latitude/ellipsoidal height (https://www.opengis.net/def/crs/OGC/0/CRS84h) unless a different coordinate reference system is specified in a parameter `bbox-crs`.
-^|E|Only the portion of the coverage within the specified boundings box SHALL be part of the response, performing a trim subsetting operation.
+^|E|Only the portion of the coverage within the specified bounding box SHALL be part of the response, performing a trim subsetting operation.
 ^|F|If a `bbox` parameter is specified requesting a coverage without any spatial dimension, the parameter SHALL either be ignored, or a 4xx client error generated.
 ^|G|For a bounding box specified in a geographic CRS, a bounding box where the first longitude value is larger than the second longitude value SHALL be interpreted as crossing the anti-meridian.
 |===
@@ -166,7 +169,7 @@ However, in cases where the box spans the anti-meridian (180th meridian) the fir
 The bounding box of the New Zealand Exclusive Economic Zone in WGS84 (from 160.6°E to 170°W and from 55.95°S to 25.89°S) would be represented in JSON as `[ 160.6, -55.95, -170, -25.89 ]` and in a query as `bbox=160.6,-55.95,-170,-25.89`.
 =================
 
-If the vertical axis is included, the third and the sixth number are the bottom and the top of the 3-dimensional bounding box.
+If the vertical axis is included, the third and sixth numbers are the bottom and the top of the 3-dimensional bounding box.
 
 [[bbox-crs-parameter]]
 ==== Query parameter `bbox-crs`
@@ -179,9 +182,9 @@ spatial dimensions of the `subset` query parameter.
 |===
 ^|*Requirement {counter:req-id}* |*/req/subsetting-spatial/bbox-crs*
 ^|A|The coverage resource SHALL support a `bbox-crs` parameter specifying the CRS used for the `bbox` parameter.
-^|B|For data referenced to Earth, the implementation SHALL support https://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
+^|B|For data referenced to Earth, an implementation SHALL support https://www.opengis.net/def/crs/OGC/1.3/CRS84 as a value.
 ^|C|If the `bbox-crs` is not indicated https://www.opengis.net/def/crs/OGC/1.3/CRS84 SHALL be assumed.
-^|D|The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes may allow additional values (see `crs` parameter definition).
+^|D|The native CRS (`storageCrs`) SHALL be supported as a value. Other conformance classes might require support for additional values (see `crs` parameter definition).
 ^|E|The CRS expressed as URIs or as safe CURIEs SHALL be supported.
 ^|F|If the `bbox` parameter is not used, the `bbox-crs` SHALL be ignored.
 |===

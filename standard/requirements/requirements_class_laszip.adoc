@@ -19,6 +19,6 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/laszip/coverage*
-^|A |If a particular collection such as point cloud is suitable for a LASzip representation, the coverage resource as defined in the Core requirement class SHALL support negotiating a LASzip: lossless compression of LiDAR data[LASzip] response using the `application/vnd.laszip` media type.
-^|B |The response SHALL be a LASzip point cloud which validates against the LASzip format, which can be used to losslessly compress point cloud data encoded in the OGC LAS Community Standard, using a Point Data Record Format suitable for the data being returned.
+^|A |If a particular collection such as point cloud is suitable for a LASzip representation, the coverage resource as defined in the Coverages API Core requirement class SHALL support negotiating a LASzip: lossless compression of LiDAR data[LASzip] response using the `application/vnd.laszip` media type.
+^|B |The response SHALL be a LASzip point cloud which validates against the LASzip format, which can be used for lossless compression of point cloud data encoded in the OGC LAS Community Standard, using a Point Data Record Format suitable for the data being returned.
 |===

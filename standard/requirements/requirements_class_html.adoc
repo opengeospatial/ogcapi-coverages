@@ -18,7 +18,7 @@
 [width="90%",cols="2,6a"]
 |===
 ^|*Requirement {counter:req-id}* |*/req/html/coverage*
-^|A |The coverage resource, as defined in the "Core" requirement class, SHALL support negotiating an HTML response using the `text/html` media type.
+^|A |The coverage resource, as defined in the Coverages API Core requirements class, SHALL support negotiating an HTML response using the `text/html` media type.
 ^|B |The response SHALL be a valid HTML document
 ^|C |The response SHALL represent the coverage.
 |===

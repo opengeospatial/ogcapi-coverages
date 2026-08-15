@@ -3,7 +3,7 @@
 
 === Overview
 
-The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along one or more spatial dimensions.
+The "Spatial Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, supporting retrieval of only a <<term-subsetting,subset>> of the coverage along one or more spatial dimensions.
 With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 A client wishing to preserve dimensionality while requesting a single coordinate value may duplicate this value into an interval, for example: `subset=lon(20:20)`.
 
@@ -12,8 +12,8 @@ When subsetting a coverage for a single value, a slicing operation is performed,
 
 When subsetting a coverage, the geometry of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage) must be considered.
 
-If the value for the cells of a gridded coverage represent an area, the geometry of the cells extends over that whole area.
-If the value for the cells of a gridded coverage coverage represent a point, the geometry of the cells is only that infinitely small point.
+If the value for the cells of a gridded coverage represents an area, the geometry of the cells extends over that whole area.
+If the value for the cells of a gridded coverage represents a point, the geometry of the cells is only that infinitely small point.
 
 The values to include in the response will be all **individual <<term-cell,cells>> (such as <<term-grid-cell,gridded coverage cells>>) whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
@@ -30,7 +30,7 @@ image::figures/spanSubset.png[]
 image::figures/spanSubsetNonAligned.png[]
 
 In addition to the `subset` parameter, server implementations must also support a convenience `bbox` parameter, which maps directly to an equivalent `subset` parameter performing a trimming operation.
-While the `subset` parameter allows to more explicitly reference a particular spatial axis and avoiding related confusion, the `bbox` parameter may feel simpler and more familiar to some users.
+While the `subset` parameter supports more explicitly referencing a particular spatial axis and avoiding related confusion, the `bbox` parameter may feel simpler and more familiar to some users.
 Both the `subset` and the `bbox` parameters are aligned with the spatial subsetting capabilities of OGC API - Maps.
 
 See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting requests>> in an annex.
@@ -38,7 +38,7 @@ See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting request
 include::requirements/requirements_class_coverage_subset_spatial.adoc[]
 
 [[rc_sparse-dimensions-collapse-spatial]]
-== Requirements Class "Collapsing Sparse Spatial Dimensions"
+== Requirements Class "Collapsing Sparse Spatial Dimensions (CSSD)"
 
 === Overview
 
@@ -47,12 +47,12 @@ another dimension.
 
 For example, weather stations capturing observations at different times.
 
-Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along spatial dimension(s)
+Implementing the CSSD requirements class simplifies the use of sparse data by <<term-collapse-sparse-dimension,collapsing>> the values along spatial dimension(s)
 around a specified position of interest.
 
-When this requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
+When the CSSD requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
-NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
+NOTE: If the capability for collapsing sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
 
 See also examples of <<_sparse_dimensions_slicing_and_flattening, sparse dimensions slicing and flattening requests>> in an annex.
@@ -64,18 +64,18 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_spa
 
 === Overview
 
-The "Temporal Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along the primary temporal dimension.
+The "Temporal Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, supporting retrieval of a <<term-subsetting,subset>> of the coverage along the primary temporal dimension.
 With the `subset` parameter, a subset operation may be a <<term-trimming,trimming>> operation (preserving dimensionality) or <<term-slicing,slicing>> operation (reducing dimensions), depending on whether a single coordinate or an interval is used.
 
-When subsetting a coverage within a lower and upper bound, a trimming operation is performed, and the response will preserve the dimension being subset.
-When subsetting a coverage for a single value, a slicing operation is performed, and the response will not contain that dimension being subset.
+When subsetting a coverage within a lower and upper bound, a trimming operation is performed -- the response will preserve the dimension being subset.
+When subsetting a coverage for a single value, a slicing operation is performed -- the response will not contain that dimension being subset.
 
 When subsetting a temporal coverage, the time of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage) must be considered.
 
-If the value for the temporal cells of a gridded coverage represent an interval, the time of the cells extends over that whole interval.
-If the value for the temporal cells of a gridded coverage represent an instant, the time of the cells is only that infinitely small instant.
+If the value for the temporal cells of a gridded coverage represents an interval, such as precipitations measured over an hour, the time of the cells extends over that whole interval.
+If the value for the temporal cells of a gridded coverage represents an instant, such as a satellite image captured at a precise moment, the time of the cells is only that infinitely small instant.
 
-The values to include in the response will be all **individual <<term-cell,cells>> whose time's interior** intersects the **interior or the boundary of the subsetting temporal extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
+The values included in the response will be all **individual <<term-cell,cells>> whose time's interior** intersects the **interior or the boundary of the subsetting temporal extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
 For gridded coverage cells whose time is a point, this will **include** all cells falling exactly on the boundary of the subset (**the interior of an instant is the instant itself**).
 
@@ -90,7 +90,7 @@ See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting request
 include::requirements/requirements_class_coverage_subset_temporal.adoc[]
 
 [[rc_sparse-dimensions-collapse-temporal]]
-== Requirements Class "Collapsing Sparse Temporal Dimension"
+== Requirements Class "Collapsing Sparse Temporal Dimension (CSTD)"
 
 === Overview
 
@@ -100,10 +100,10 @@ another dimension.
 For example, satellite imagery with scenes captured over a certain spatial extent at a certain time conditioned by
 the orbit of the satellite.
 
-Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a temporal dimension
+Implementing the CSTD requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a temporal dimension
 around a specified time of interest.
 
-When this requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
+When the CSTD requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
@@ -117,7 +117,7 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_tem
 
 === Overview
 
-The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, allowing to retrieve only a <<term-subsetting,subset>> of the coverage along one or more dimensions beyond spatial and the primary temporal dimension.
+The "General Subsetting" Requirements Class specifies the `subset` parameter for the coverage resource, supporting retrieval of a <<term-subsetting,subset>> of the coverage along one or more dimensions beyond the spatial and the primary temporal dimensions.
 These additional dimensions are named as described as additional property keys besides `"spatial"` and `"temporal"` in the `"extent"` section of the collection description,
 as specified by the
 https://docs.ogc.org/DRAFTS/20-024.html#rc-uad-collections-section[Uniform Additional Dimensions requirements class of OGC API - Common - Part 2: Geospatial Data].
@@ -129,8 +129,8 @@ When subsetting a coverage for a single value, a slicing operation is performed,
 
 When subsetting a coverage, the n-dimensional geometry of its individual <<term-cell,cells>> (such as the <<term-grid-cell,grid cells>> of a gridded coverage) must be considered.
 
-If the value for the cells of a gridded coverage represent a region, the geometry of the cells extends over that whole region.
-If the value for the cells of a gridded coverage represent a point along the dimension, the geometry of the cells is only that infinitely small point.
+If the value for the cells of a gridded coverage represents a region, the geometry of the cells extends over that whole region.
+If the value for the cells of a gridded coverage represents a point along the dimension, the geometry of the cells is only that infinitely small point.
 
 The values to include in the response will be all **individual <<term-cell,cells>> whose geometry's interior** intersects the **interior or the boundary of the subsetting extent**, in line with the https://en.wikipedia.org/wiki/DE-9IM[DE9-IM] model.
 
@@ -143,19 +143,19 @@ See also examples of <<_axis_subsetting_slicing_and_trimming, subsetting request
 include::requirements/requirements_class_coverage_subset_general.adoc[]
 
 [[rc_sparse-dimensions-collapse-general]]
-== Requirements Class "Collapsing Sparse General Dimensions"
+== Requirements Class "Collapsing Sparse General Dimensions (CSGD)"
 
 === Overview
 
 Some collections are <<term-sparse-dimension, sparse>> by nature, with data not filling the entire extent of some dimensions at each point along
 another dimension.
 
-For example, a 3D coverage with data only available at some pressure level for particular spatial regions.
+For example, a 3D coverage with data available only at some pressure level for particular spatial regions.
 
-Implementing this requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a general dimension
+Implementing the CSGD requirements class simplifies the use of such data by <<term-collapse-sparse-dimension,collapsing>> the values along a general dimension
 around a specified position of interest.
 
-When this requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
+When the CSGD requirements class is implemented for a particular coverage, negotiating a response in a format with limited multidimensionality support, such as image-based format like GeoTIFF, also implies a reduced dimensionality.
 
 NOTE: If the capability to collapse sparse dimensions is only implemented for some collections,
 the list of supported conformance classes will differ for each collection, as described in the <<req_core_conformance_success, conformance declaration>>.
@@ -169,17 +169,17 @@ include::requirements/requirements_class_coverage_sparse_dimensions_collapse_gen
 
 === Overview
 
-The "Multi Slicing" Requirements Class specifies the ability to use a comma-separated list of arbitrary values with the `subset` parameter for the coverage resource,
-allowing to retrieve specific <<term-slicing,slices>> from the coverage along a particular dimension. This requirements class is automatically applicable for subsetting with the dimensions supported by any of the
+The "Multi Slicing" Requirements Class defines requirements for specifying a comma-separated list of arbitrary values with the `subset` parameter for the coverage resource.
+This supports retrieving specific <<term-slicing,slices>> from the coverage along a particular dimension. The Multi Slicing requirements class is automatically applicable for subsetting with the dimensions supported by any of the
 spatial, temporal and general subsetting requirements classes.
 
-While slicing generally reduces the dimensionality of the results, since this operation always returns multiple slices, the dimensionality is preserved.
+Although slicing generally reduces the dimensionality of the results, since this operation always returns multiple slices, the dimensionality is preserved.
 
-For example, this requirements class, in combination with General Subsetting, is useful to request specific pressure levels: `subset=pressure(200,300,500,700,850)`.
+For example, the Multi Slicing, in combination with General Subsetting, is useful to request specific pressure levels: `subset=pressure(200,300,500,700,850)`.
 
-Another common practical use case for this conformance class is to request specific temporal slices which may be at irregular intervals, for example: `subset=time("2025-10-01", "2025-10-04", "2025-10-05")`.
+Another common practical use case for the Multi Slicing requirements class is to request specific temporal slices which may be at irregular intervals, for example: `subset=time("2025-10-01", "2025-10-04", "2025-10-05")`.
 
-This capability is also useful for requesting a subset of the data for multiple categories along a categorical dimension, for example `subset=species("wildcats", "frogs")`.
+This capability is also useful for requesting a subset of the data for multiple categories along a categorical dimension, as in this example: `subset=species("wildcats", "frogs")`.
 
 See also examples of <<_multi_slicing, multi-slicing requests>> in an annex.
 
@@ -190,13 +190,13 @@ include::requirements/requirements_class_coverage_multi_slicing.adoc[]
 
 === Overview
 
-The "Position Query" Requirements Class specifies the ability to query the value(s) for a specific point <<term-direct-position,direct position>> by slicing on every dimension of the coverage therefore
+The "Position Query" Requirements Class specifies the ability to query the value(s) for a specific point <<term-direct-position,direct position>> by slicing on every dimension of the coverage, therefore
 reducing the dimensionality of the response to zero. In the common use case, the response consists of a single numerical value.
 Raster or gridded coverage formats are typically not well suited to express such responses.
 In these cases, information about the domain or range, other metadata, as well as the more complex format structures are also not necessary and can negatively affect the
-bandiwdth usage and performance for a very large numbers of these queries.
+bandwidth usage and performance for a very large number of these queries.
 This requirements class introduces a simple JSON representation which needs to be supported by the server.
-Implementations could also implement additional representations, for example GeoJSON.
+Implementations of the Position Query requirements class could also implement additional representations, for example GeoJSON.
 
 NOTE: This requirements class defines an operation corresponding directly to the definition of a coverage -- returning a set of values
 (or multiple sets of values in the case of a multifunction coverage) for a given position.
