@@ -57,20 +57,20 @@ codes when client requests violate those configured structural boundaries.
 All questions or concerns regarding this OGC Standard should be submitted as issues to the https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages repository].
 
 |===
-|*Name* |*Affiliation*
+|*Name*                                |*Affiliation*
 |Charles Heazel (Editor)               |HeazelTech
 |Jérôme Jacovella-St-Louis (Editor)    |https://ecere.ca[Ecere Corporation]
+|Joan Masó Pau (Editor)                |https://www.creaf.cat/[Universitat Autònoma de Barcelona (CREAF)]
 |Stephan Meissl                        |https://eox.at[EOX IT Services GmbH]
 |Tom Kralidis                          |Meteorological Service of Canada
-|Joan Masó Pau                         |Universitat Autònoma de Barcelona (CREAF)
 |Francis Charette-Migneault            |https://luqia.ca[Technologies Luqia]
+|Keith Pomakis                         |https://www.cubewerx.com[CubeWerx Inc.]
+|Graham Wilkes                         |https://natural-resources.canada.ca[Natural Resources Canada]
 |===
 
 == Contributors
 
 Additional contributors to this Standard include the following:
-
-Joan Masó Pau, Universitat Autònoma de Barcelona (CREAF)
 
 Francis Charette-Migneault, https://luqia.ca[Technologies Luqia]
 
