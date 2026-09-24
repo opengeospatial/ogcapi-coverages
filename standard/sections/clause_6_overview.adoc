@@ -24,7 +24,7 @@ This common framework ensures consistency and supports the integration of multip
 
 This _OGC API - Coverages_ Standard defines an API with two goals:
 
-* Provide access to <<term-coverage,*_Coverages_*>> conformant to the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
+* Provide access to <<term-coverage,*_Coverages_*>> conformant to the https://docs.ogc.org/as/07-011/07-011.pdf[OGC Abstract Specification Topic 6: Schema for coverage geometry and functions].
 * Provide functionality comparable to that of the https://docs.opengeospatial.org/is/17-089r1/17-089r1.html[OGC Web Coverage Service (WCS) standard].
 
 Conformant Implementations of this Coverages API Standard enable efficient access to multidimensional <<term-geospatial-data-cube,geospatial data cubes>>, particularly when

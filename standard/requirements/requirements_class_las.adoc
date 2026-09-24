@@ -7,7 +7,7 @@
 identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/las
 subject:: Web API
 inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-inherit:: https://portal.ogc.org/files/?artifact_id=74523[OGC 17-030r1 LAS Specification 1.4 Community Standard]
+inherit:: https://docs.ogc.org/cs/17-030r1/17-030r1.pdf[OGC 17-030r1 LAS Specification 1.4 Community Standard]
 requirement:: /req/las/coverage
 ====
 
@@ -22,6 +22,6 @@ requirement:: /req/las/coverage
 ====
 [%metadata]
 identifier:: /req/las/coverage
-part:: If a particular collection such as point cloud is suitable for a LAS representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a https://portal.ogc.org/files/?artifact_id=74523[LAS] response using the `application/vnd.las` media type.
+part:: If a particular collection such as point cloud is suitable for a LAS representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a https://docs.ogc.org/cs/17-030r1/17-030r1.pdf[LAS] response using the `application/vnd.las` media type.
 part:: The response SHALL be a LAS point cloud which validates against the OGC LAS Community Standard, using a Point Data Record Format suitable for the data being returned.
 ====

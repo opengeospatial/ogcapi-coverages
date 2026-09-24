@@ -84,7 +84,7 @@ include::../requirements/requirements_class_cog.adoc[]
 
 ==== Overview
 
-The netCDF requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/?artifact_id=43732[OGC netCDF standard].
+The netCDF requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/is/10-090r3/10-090r3.pdf[OGC netCDF standard].
 This representation provides a compact way to return multi-dimensional data in a binary format.
 
 include::../requirements/requirements_class_netcdf.adoc[]
@@ -154,7 +154,7 @@ include::../requirements/requirements_class_coveragejson.adoc[]
 
 ==== Overview
 
-The LAS requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/?artifact_id=74523[OGC LAS Community Standard].
+The LAS requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/cs/17-030r1/17-030r1.pdf[OGC LAS Community Standard].
 
 This requirements class is particularly well suited for distributing point cloud coverages.
 
@@ -166,7 +166,7 @@ include::../requirements/requirements_class_las.adoc[]
 ==== Overview
 
 The LASzip requirements class defines support for encoding a coverage response according to the
-https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASzip] compression extension of the https://portal.ogc.org/files/?artifact_id=74523[OGC LAS Community Standard].
+https://docs.ogc.org/cs/24-070r1/24-070r1.pdf[OGC LAZ Community Standard], adding compression to the https://docs.ogc.org/cs/17-030r1/17-030r1.pdf[OGC LAS Community Standard].
 
 This requirements class is particularly well suited for distributing point cloud coverages.
 
@@ -213,7 +213,7 @@ include::../requirements/requirements_class_jpeg2000.adoc[]
 
 ==== Overview
 
-The (Geo)Zarr requirements class defines support for encoding a coverage response according to the https://portal.ogc.org/files/100727[OGC Zarr Community Standard], within a https://www.iso.org/standard/60101.html[Zip] archive, with
+The (Geo)Zarr requirements class defines support for encoding a coverage response according to the https://docs.ogc.org/cs/21-050r1/21-050r1.pdf[OGC Zarr Community Standard], within a https://www.iso.org/standard/60101.html[Zip] archive, with
 eventual support for https://www.ogc.org/requests/ogc-to-form-geozarr-standards-working-group-public-comment-sought-on-draft-charter/[GeoZarr].
 
 include::../requirements/requirements_class_zarr.adoc[]

@@ -1,6 +1,6 @@
 == Scope
 This https://docs.opengeospatial.org/DRAFTS/19-087.html[_OGC API - Coverages_] Standard establishes an access mechanism
-for coverages as defined by the https://portal.ogc.org/files/?artifact_id=19820[OGC Abstract Specification Topic 6] / https://www.iso.org/standard/40121.html[ISO 19123]
+for coverages as defined by the https://docs.ogc.org/as/07-011/07-011.pdf[OGC Abstract Specification Topic 6] / https://www.iso.org/standard/40121.html[ISO 19123]
 _Schema for coverage geometry and functions_ through a Web API which can be described by an API description language such as the https://www.openapis.org/[OpenAPI specification].
 
 === API Scope

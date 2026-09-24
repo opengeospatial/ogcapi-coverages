@@ -7,7 +7,7 @@
 identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/netcdf
 subject:: Web API
 inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-inherit:: https://portal.ogc.org/files/?artifact_id=43732[OGC 10-090r3 Network Common Data Form Core Encoding Standard 1.0]
+inherit:: https://docs.ogc.org/is/10-090r3/10-090r3.pdf[OGC 10-090r3 Network Common Data Form Core Encoding Standard 1.0]
 requirement:: /req/netcdf/coverage
 ====
 
@@ -22,12 +22,12 @@ requirement:: /req/netcdf/coverage
 ====
 [%metadata]
 identifier:: /req/netcdf/coverage
-part:: The coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a https://portal.ogc.org/files/?artifact_id=43732[netCDF] response using the `application/x-netcdf` media type.
+part:: The coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a https://docs.ogc.org/is/10-090r3/10-090r3.pdf[netCDF] response using the `application/x-netcdf` media type.
 part:: The response SHALL be a netCDF document which validates against the OGC netCDF standard.
 part:: For dimensions that do not have a well-defined netCDF `standard_name`, the name of the corresponding variable SHALL match the name of the dimension in the collection description's extent.
 ====
 
-NOTE: The https://portal.ogc.org/files/?artifact_id=50294[OGC netCDF Enhanced Data Model Extension] can be fully encoded using the
+NOTE: The https://docs.ogc.org/is/11-038r2/11-038r2.pdf[OGC netCDF Enhanced Data Model Extension] can be fully encoded using the
 https://docs.ogc.org/is/18-043r3/18-043r3.html[OGC Hierarchical Data Format Version 5 (HDF5®) Standard].
 
 [[rec_netcdf_profile-handling]]

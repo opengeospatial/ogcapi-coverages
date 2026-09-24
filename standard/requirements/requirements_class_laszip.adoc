@@ -7,8 +7,8 @@
 identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/laszip
 subject:: Web API
 inherit:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/core
-inherit:: https://portal.ogc.org/files/?artifact_id=74523[OGC 17-030r1 LAS Specification 1.4 Community Standard]
-inherit:: https://www.cs.unc.edu/~isenburg/lastools/download/laszip.pdf[LASzip: lossless compression of LiDAR data]
+inherit:: https://docs.ogc.org/cs/17-030r1/17-030r1.pdf[OGC 17-030r1 LAS Specification 1.4 Community Standard]
+inherit:: https://docs.ogc.org/cs/24-070r1/24-070r1.pdf[OGC 24-070r1 LAZ 1.4 Community Standard]
 requirement:: /req/laszip/coverage
 ====
 
