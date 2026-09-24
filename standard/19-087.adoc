@@ -15,7 +15,7 @@
 :fullname_3: Joan Masó
 :docsubtype: implementation
 :keywords: coverages, datacube, ogcdoc, OGC document, API, openapi, html, geographic information, spatial data
-:submitting-organizations: Heazeltech LLC; Ecere Corporation; Technologies Luqia; EOX IT Services GmbH; Meteorological Service of Canada; Universitat Autònoma de Barcelona (CREAF); CubeWerx Inc.; Natural Resources Canada
+:submitting-organizations: Heazeltech LLC; Ecere Corporation; Technologies Luqia; EOX IT Services GmbH; Meteorological Service of Canada; Universitat Autònoma de Barcelona (CREAF); CubeWerx Inc.; Natural Resources Canada; Constructor University
 :mn-document-class: ogc
 :mn-output-extensions: html,pdf
 :local-cache-only:

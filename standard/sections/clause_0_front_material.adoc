@@ -66,6 +66,7 @@ All questions or concerns regarding this OGC Standard should be submitted as iss
 |Francis Charette-Migneault            |https://luqia.ca[Technologies Luqia]
 |Keith Pomakis                         |https://www.cubewerx.com[CubeWerx Inc.]
 |Graham Wilkes                         |https://natural-resources.canada.ca[Natural Resources Canada]
+|Peter Baumann                         |https://constructor.university[Constructor University]
 |===
 
 == Contributors
@@ -76,7 +77,7 @@ Francis Charette-Migneault, https://luqia.ca[Technologies Luqia]
 
 Stephan Meissl, https://eox.at[EOX IT Services GmbH]
 
-Peter Baumann, rasdaman GmbH
+Peter Baumann, https://constructor.university[Constructor University]
 
 == Acknowledgements
 
