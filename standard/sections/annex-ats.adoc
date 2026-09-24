@@ -1588,6 +1588,7 @@ identifier:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/conf/cisjson
 target:: https://www.opengis.net/spec/ogcapi-coverages-1/1.0/req/cisjson
 classification:: Target Type:Web API
 abstract-test:: /conf/cisjson/coverage
+abstract-test:: /conf/cisjson/mediatype-version
 ====
 
 .CIS JSON Coverage Response
@@ -1601,13 +1602,31 @@ test-method::
 +
 --
 *Given:* An API implementation claiming conformance to the OGC API - Coverages - CIS JSON requirements class +
-*When:* Requesting a coverage resource negotiating a JSON response through the `application/json` media type +
+*When:* Requesting a coverage resource negotiating a CIS JSON response through the `application/cis+json` media type +
 *Then:* +
 - Assert that the implementation successfully negotiates and returns a JSON response. +
 - Assert that the returned payload is a valid CIS JSON document that complies with the official `coverage-schema.yaml` specification. +
 - Assert that the structural root of the JSON coverage object matches the `CoverageByDomainAndRange` type. +
 - Assert that for a gridded coverage, the calculated span—defined as the grid resolution interval difference divided by resolution minus the index index coordinate
 distance—evaluates to 1 if the grid cell values represent an area, and evaluates to 0 if the grid cell values represent a point.
+--
+====
+
+.CIS JSON Content-Type Version Parameter
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/cisjson/mediatype-version
+target:: /req/cisjson/mediatype-version
+test-purpose:: Verify that the `version` media type parameter is included in a CIS JSON response
+test-method::
++
+--
+*Given:* An API implementation claiming conformance to the OGC API - Coverages - CIS JSON requirements class +
+*When:* Requesting a coverage resource negotiating a CIS JSON response through the `application/cis+json` media type +
+*Then:* +
+- Assert that the implementation includes a valid `version` media type parameter for the `application/cis+json` value of the `Content-Type:`
+response header which corresponds to the CIS JSON schema used for the response.
 --
 ====
 

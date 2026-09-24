@@ -22,7 +22,7 @@ requirement:: /req/cisjson/coverage
 ====
 [%metadata]
 identifier:: /req/cisjson/coverage
-part:: If a particular collection is suitable for a CIS JSON representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a CIS JSON response using the `application/json` media type.
+part:: If a particular collection is suitable for a CIS JSON representation, the coverage resource as defined in the Coverages API Core requirements class SHALL support negotiating a CIS JSON response using the `application/cis+json` media type.
 part:: The response SHALL be a CIS JSON document which validates against the CIS JSON schema https://github.com/opengeospatial/ogcapi-coverages/blob/master/standard/openapi/schemas/cis/coverage-schema.yaml[coverage-schema.yaml].
 part:: The coverage object response SHALL be of type _CoverageByDomainAndRange_ (not _CoverageByPartitioning_, an implementation can instead consider supporting an eventual "Scenes" extension to present individual parts of a coverage).
 part::
@@ -36,17 +36,37 @@ where a _span_  of 1 indicates a coverage whose cell values represent an _area_,
 --
 ====
 
-===== Profiling CIS components to include
+===== Selecting CIS JSON representation version
 
-[[rec_cisjson_profile]]
+[[req_cisjson_mediatype-version]]
+[requirement]
+====
+[%metadata]
+identifier:: /req/cisjson/mediatype-version
+part:: The coverage request operation SHALL include in the `Content-Type:` header response a `version` parameter specifying the version of CIS JSON being returned
+(e.g., `Content-Type: application/cis+json; version=1.1` for CIS JSON 1.1).
+====
+
+
+[[rec_cisjson_mediatype-version]]
 [recommendation]
 ====
 [%metadata]
-identifier:: /rec/cisjson/profile
-part:: The coverage request operation SHOULD support a `profile` query parameter enabling the selection of one or more specific CIS coverage components to include (domainset, rangetype, rangeset and/or metadata).
-part:: If supported, the response SHOULD only contain the selected element(s). For example, `../coverage?profile=domainset,rangetype` should only return the domain set and range type for the coverage.
+identifier:: /rec/cisjson/mediatype-version
+part:: The coverage request operation SHOULD support the `version` media type parameter for `application/cis+json` enabling the selection of a specific version of CIS JSON to return.
+====
+
+===== Selecting CIS components to include
+
+[[rec_cisjson_mediatype-components]]
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/cisjson/mediatype-comonents
+part:: The coverage request operation SHOULD support the `components` media type parameter for `application/cis+json` enabling the selection of one or more specific CIS coverage components to include (`domainset`, `rangetype`, `rangeset` and/or `metadata`).
+part:: If supported, the response SHOULD only contain the selected element(s). For example, a request using `Accept: application/cis+json;version=1.1;components="domainset,rangetype"` should only return the domain set and range type for the coverage.
 part:: If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
-part:: An implementation SHOULD return the metadata when explicitly requested to do so with the `profile` query parameter.
+part:: An implementation SHOULD return the metadata when explicitly requested to do so with the `component` media type parameter.
 ====
 
 [[per_cisjson-cis-metadata]]

@@ -38,7 +38,7 @@ A table of the media types corresponding to each encoding requirements class def
 |HTML                    |text/html
 |GeoTIFF (including COG) |image/tiff; application=geotiff
 |netCDF                  |application/x-netcdf
-|CIS JSON                |application/json
+|CIS JSON                |application/cis+json
 |CoverageJSON            |application/vnd.cov+json
 |LAS                     |application/vnd.las
 |LASzip                  |application/vnd.laszip
@@ -94,9 +94,10 @@ include::../requirements/requirements_class_netcdf.adoc[]
 
 ==== Overview
 
-The CIS JSON requirements class defines support for encoding a coverage response according to the http://www.opengis.net/doc/IS/cis/1.1.1[OGC Coverage Implementation Schema (CIS) 1.1].
+The CIS JSON requirements class defines support for encoding a coverage response according to the http://www.opengis.net/doc/IS/cis/1.1.1[OGC Coverage Implementation Schema (CIS) 1.1] or a later version,
+with the version negotiated via the `version` parameter of the `application/cis+json` media type.
 
-The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS) 1.1] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage,
+The http://www.opengis.net/doc/IS/cis/1.1.1[Coverage Implementation Schema (CIS)] defines a logical model and physical encodings (e.g., CIS JSON) which can be used to retrieve the coverage,
 including a self-description, according to this https://github.com/opengeospatial/ogcapi-coverages[OGC API - Coverages] Web API standard.
 
 A high-level view of the CIS data model is provided in <<abstract-coverage-figure>>.
@@ -105,19 +106,19 @@ A high-level view of the CIS data model is provided in <<abstract-coverage-figur
 .Abstract Coverage
 image::figures/Abstract_Coverage.png[]
 
-The CIS JSON structures are defined using JSON Schema at https://schemas.opengis.net/cis/1.1/json/coverage-schema.json.
-A draft corrigendum is available at https://github.com/opengeospatial/coverage-implementation-schema/blob/main/standard/schemas/1.1/json/coverage-schema.json, with updated examples
+The CIS JSON structures are defined using JSON Schema (https://schemas.opengis.net/cis/1.1/json/coverage-schema.json for version 1.1).
+A draft corrigendum for version 1.1.1 is available at https://github.com/opengeospatial/coverage-implementation-schema/blob/main/standard/schemas/1.1/json/coverage-schema.json, with updated examples
 available at https://github.com/opengeospatial/coverage-implementation-schema/tree/main/standard/schemas/1.1/json/examples .
 
-Specifically for the `../coverage` resource, the media type `application/json` is reserved for use with CIS JSON until a dedicated media type is registered.
+The media type `application/cis+json` is planned to be registered for CIS JSON.
 
 The CIS Standard defines four aspects of a coverage which are described in separate properties: the domain set, the range type, the rangeset, and the domain-specific metadata.
 By default, all of these aspects should be returned as part of a coverage response, with the domain-specific metadata being optional if none is available.
 
-This Coverages API CIS JSON requirements class defines a permission for implementations to support a `profile` query parameter which can be used by a client to retrieve only some of these aspects of the coverage e.g.,
-`profile=domainset,rangetype`. Information equivalent to the CIS _DomainSet_ is already included in the collection description resource `extent` property,
+This Coverages API CIS JSON requirements class includes a recommendation for implementations to support a `components` media type parameter which can be used by a client to retrieve only some of these aspects of the coverage e.g.,
+`Accept: application/cis+json; components="domainset,rangetype"`. Information equivalent to the CIS _DomainSet_ is already included in the collection description resource `extent` property,
 whereas information equivalent to the CIS _RangeType_ is included in the schema resource associated with the collection resource.
-This profiling capability also allows clients to retrieve a subset of the domainset when using `profile=domainset` together with
+This capability also allows clients to retrieve a subset of the domainset when using `Accept: application/cis+json; components="domainset"` together with
 one or more subsetting parameters (`subset`, `bbox` or `datetime`).
 
 The CIS standard defines a number of alternative methods in which a coverage encoding can be structured.
