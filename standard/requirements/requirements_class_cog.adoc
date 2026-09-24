@@ -37,6 +37,23 @@ part:: An implementation SHALL only be expected to support HTTP range requests o
 ====
 [%metadata]
 identifier:: /req/cog/cloud-optimized
-part:: The coverage resource, as defined in the Core requirement class, SHALL support content negotiation of a https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] using the cloud-optimized profile,
-(`Accept-Profile:`/`Content-Profile:` `http://www.opengis.net/def/profile/geotiff/cloud-optimized`, `Accept:`/`Content-Type:` `image/tiff; application=geotiff` media type).
+part:: The coverage resource, as defined in the Core requirement class, SHALL support content negotiation of a
+https://docs.ogc.org/is/19-008r4/19-008r4.html[GeoTIFF] using the cloud-optimized profile, with request headers for profile and media types:
++
+--
+[source,http]
+----
+Accept-Profile: http://www.opengis.net/def/profile/geotiff/cloud-optimized
+Accept: image/tiff; application=geotiff
+----
+--
+and corresponding response headers:
++
+--
+[source,http]
+----
+Content-Profile: http://www.opengis.net/def/profile/geotiff/cloud-optimized
+Content-Type: image/tiff; application=geotiff
+----
+--
 ====
