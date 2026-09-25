@@ -66,7 +66,7 @@ identifier:: /rec/cisjson/mediatype-comonents
 part:: The coverage request operation SHOULD support the `components` media type parameter for `application/cis+json` enabling the selection of one or more specific CIS coverage components to include (`domainset`, `rangetype`, `rangeset` and/or `metadata`).
 part:: If supported, the response SHOULD only contain the selected element(s). For example, a request using `Accept: application/cis+json;version=1.1;components="domainset,rangetype"` should only return the domain set and range type for the coverage.
 part:: If both this capability and subsetting are supported, the subsetting SHOULD be applied to both the domainset and the rangeset components of the response.
-part:: An implementation SHOULD return the metadata when explicitly requested to do so with the `component` media type parameter.
+part:: An implementation SHOULD return the metadata when explicitly requested to do so with the `components` media type parameter.
 ====
 
 [[per_cisjson-cis-metadata]]
