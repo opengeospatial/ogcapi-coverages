@@ -23,7 +23,7 @@
 :pdf-uri: ./19-087.pdf
 :xml-uri: ./19-087.xml
 :doc-uri: ./19-087.doc
-:edition: 1.0.0rc3
+:edition: 1.0.0rc4
 
 include::sections/clause_0_front_material.adoc[]
 

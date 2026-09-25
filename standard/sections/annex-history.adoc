@@ -15,4 +15,5 @@
 |2026-06-03 |1.0.0rc1 |J. St-Louis, J. Maso                         |all                       |version presented to the SWG at OGC Connect Helsinki for OAB review approval
 |2026-07-04 |1.0.0rc2 |J. St-Louis, J. Maso                         |all                       |version ready for the OAB review
 |2026-08-15 |1.0.0rc3 |C. Reed, J. St-Louis, J. Maso                |all                       |applied Carl Reed's comments, conversion to metanorma, version ready for the public comments period
+|2026-09-24 |1.0.0rc4 |J. St-Louis                                  |all                       |version ready to present to the TC at OGC Connect Cape Town
 |===
