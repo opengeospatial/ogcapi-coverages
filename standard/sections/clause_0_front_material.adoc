@@ -63,7 +63,7 @@ All questions or concerns regarding this OGC Standard should be submitted as iss
 |Joan Masó Pau (Editor)                |https://www.creaf.cat/[Universitat Autònoma de Barcelona (CREAF)]
 |Stephan Meissl                        |https://eox.at[EOX IT Services GmbH]
 |Tom Kralidis                          |Meteorological Service of Canada
-|Francis Charette-Migneault            |https://luqia.ca[Technologies Luqia]
+|Francis Charette-Migneault            |https://www.luqia.ca/[Technologies Luqia]
 |Keith Pomakis                         |https://www.cubewerx.com[CubeWerx Inc.]
 |Graham Wilkes                         |https://natural-resources.canada.ca[Natural Resources Canada]
 |Peter Baumann                         |https://constructor.university[Constructor University]
@@ -73,7 +73,7 @@ All questions or concerns regarding this OGC Standard should be submitted as iss
 
 Additional contributors to this Standard include the following:
 
-Francis Charette-Migneault, https://luqia.ca[Technologies Luqia]
+Francis Charette-Migneault, https://www.luqia.ca/[Technologies Luqia]
 
 Stephan Meissl, https://eox.at[EOX IT Services GmbH]
 
